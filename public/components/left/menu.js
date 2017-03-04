@@ -50,14 +50,10 @@ class MainMenu extends Component {
                 mainMenu = <Business _changeLeftMenu={this.props._changeLeftMenu}/>
                 break;
             case 2:
-                mainMenu = <SystemConfiguration _changeLeftMenu={this.props._changeLeftMenu}/>
+                mainMenu = <DataManager _changeLeftMenu={this.props._changeLeftMenu}/>
                 break;
             case 3:
-                mainMenu = <SystemConfiguration _changeLeftMenu={this.props._changeLeftMenu}/>
-                break;
-            case 4:
-                mainMenu = <SystemConfiguration _changeLeftMenu={this.props._changeLeftMenu}/>
-                break
+                mainMenu = <NotifyManager _changeLeftMenu={this.props._changeLeftMenu}/>
                 break;
         }
         return (
@@ -139,22 +135,115 @@ class Business extends Component {
                 </li>
                 <li className="left active" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
                     href="javascript:void(0)"><i
-                    className="icon-satellite-dish2"></i> <span>{"用户平台"}</span></a></li>
+                    className="icon-satellite-dish2"></i> <span>{"用户管理"}</span></a></li>
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                    href="javascript:void(0)"><i
+                    className="icon-history"></i> <span>{"评价管理"}</span></a></li>
                 <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
                     href="javascript:void(0)"><i
                     className="icon-history"></i> <span>{"投诉举报"}</span></a></li>
                 <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
                     href="javascript:void(0)"><i
-                    className="icon-history"></i> <span>{"投诉举报"}</span></a></li>
+                    className="icon-history"></i> <span>{"纠错记录"}</span></a></li>
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                    href="javascript:void(0)"><i
+                    className="icon-satellite-dish2"></i> <span>{"二维码管理"}</span></a></li>
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                    href="javascript:void(0)"><i
+                    className="icon-satellite-dish2"></i> <span>{"扫码员管理"}</span></a></li>
+
                 <li className="navigation-header left"><span>{"商家管理"}</span> <i className="icon-menu" title=""
-                                                                                data-original-title="统计分析"></i>
+                                                                                data-original-title="商家管理"></i>
+                </li>
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                    href="javascript:void(0)"><i
+                    className="icon-history"></i> <span>{"兑账记录"}</span></a></li>
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                    href="javascript:void(0)"><i
+                    className="icon-satellite-dish2"></i> <span>{"加盟商管理"}</span></a></li>
+
+
+            </ul>
+        )
+    }
+}
+
+class DataManager extends Component {
+    _leftMenuClick(path) {
+        browserHistory.push(path)
+    }
+
+    componentDidMount() {
+        $('.navigation-main').find('li').has('ul').children('a').on('click', function (e) {
+            e.preventDefault();
+
+            // Collapsible
+            $(this).parent('li').not('.disabled').not($('.sidebar-xs').not('.sidebar-xs-indicator').find('.navigation-main').children('li')).toggleClass('active').children('ul').slideToggle(250);
+
+            // Accordion
+            if ($('.navigation-main').hasClass('navigation-accordion')) {
+                $(this).parent('li').not('.disabled').not($('.sidebar-xs').not('.sidebar-xs-indicator').find('.navigation-main').children('li')).siblings(':has(.has-ul)').removeClass('active').children('ul').slideUp(250);
+            }
+        });
+    }
+
+    render() {
+        return (
+            <ul className="navigation navigation-main navigation-accordion">
+                <li className="navigation-header left"><span>{"垃圾分类"}</span> <i className="icon-menu" title=""
+                                                                                data-original-title="垃圾分类"></i>
                 </li>
                 <li className="left active" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
                     href="javascript:void(0)"><i
-                    className="icon-satellite-dish2"></i> <span>{"系统监控"}</span></a></li>
+                    className="icon-satellite-dish2"></i> <span>{"垃圾分类"}</span></a></li>
                 <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
                     href="javascript:void(0)"><i
-                    className="icon-history"></i> <span>{"垃圾投放"}</span></a></li>
+                    className="icon-satellite-dish2"></i> <span>{"垃圾称量"}</span></a></li>
+                <li className="navigation-header left"><span>{"其他数据"}</span> <i className="icon-menu" title=""
+                                                                                data-original-title="垃圾分类"></i>
+                </li>
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                    href="javascript:void(0)"><i
+                    className="icon-history"></i> <span>{"车辆运输"}</span></a></li>
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                    href="javascript:void(0)"><i
+                    className="icon-history"></i> <span>{"区域设置"}</span></a></li>
+
+
+            </ul>
+        )
+    }
+}
+
+class NotifyManager extends Component {
+    _leftMenuClick(path) {
+        browserHistory.push(path)
+    }
+
+    componentDidMount() {
+        $('.navigation-main').find('li').has('ul').children('a').on('click', function (e) {
+            e.preventDefault();
+
+            // Collapsible
+            $(this).parent('li').not('.disabled').not($('.sidebar-xs').not('.sidebar-xs-indicator').find('.navigation-main').children('li')).toggleClass('active').children('ul').slideToggle(250);
+
+            // Accordion
+            if ($('.navigation-main').hasClass('navigation-accordion')) {
+                $(this).parent('li').not('.disabled').not($('.sidebar-xs').not('.sidebar-xs-indicator').find('.navigation-main').children('li')).siblings(':has(.has-ul)').removeClass('active').children('ul').slideUp(250);
+            }
+        });
+    }
+
+    render() {
+        return (
+            <ul className="navigation navigation-main navigation-accordion">
+                <li className="navigation-header left"><span>{"系统通知"}</span> <i className="icon-menu" title=""
+                                                                                data-original-title="系统通知"></i>
+                </li>
+                <li className="left active" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                    href="javascript:void(0)"><i
+                    className="icon-satellite-dish2"></i> <span>{"新闻政策"}</span></a></li>
+
 
             </ul>
         )

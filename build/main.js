@@ -35164,7 +35164,7 @@
 	                ),
 	                _react2['default'].createElement(
 	                    'li',
-	                    { className: 'dropdown dropdown-user topmenu', onClick: this._menuChange.bind(this, 3, false) },
+	                    { className: 'dropdown dropdown-user topmenu', onClick: this._menuChange.bind(this, 2, false) },
 	                    _react2['default'].createElement(
 	                        'a',
 	                        { className: 'dropdown-toggle', 'data-toggle': 'dropdown' },
@@ -35178,13 +35178,13 @@
 	                            'span',
 	                            {
 	                                style: this.span_style },
-	                            "数据录入"
+	                            "数据管理"
 	                        )
 	                    )
 	                ),
 	                _react2['default'].createElement(
 	                    'li',
-	                    { className: 'dropdown dropdown-user topmenu', onClick: this._menuChange.bind(this, 4, false) },
+	                    { className: 'dropdown dropdown-user topmenu', onClick: this._menuChange.bind(this, 3, false) },
 	                    _react2['default'].createElement(
 	                        'a',
 	                        { className: 'dropdown-toggle', 'data-toggle': 'dropdown' },
@@ -46883,14 +46883,10 @@
 	                    mainMenu = _react2['default'].createElement(Business, { _changeLeftMenu: this.props._changeLeftMenu });
 	                    break;
 	                case 2:
-	                    mainMenu = _react2['default'].createElement(SystemConfiguration, { _changeLeftMenu: this.props._changeLeftMenu });
+	                    mainMenu = _react2['default'].createElement(DataManager, { _changeLeftMenu: this.props._changeLeftMenu });
 	                    break;
 	                case 3:
-	                    mainMenu = _react2['default'].createElement(SystemConfiguration, { _changeLeftMenu: this.props._changeLeftMenu });
-	                    break;
-	                case 4:
-	                    mainMenu = _react2['default'].createElement(SystemConfiguration, { _changeLeftMenu: this.props._changeLeftMenu });
-	                    break;
+	                    mainMenu = _react2['default'].createElement(NotifyManager, { _changeLeftMenu: this.props._changeLeftMenu });
 	                    break;
 	            }
 	            return _react2['default'].createElement(
@@ -47011,6 +47007,342 @@
 	        _classCallCheck(this, Business);
 
 	        _get(Object.getPrototypeOf(Business.prototype), 'constructor', this).apply(this, arguments);
+	    }
+
+	    _createClass(Business, [{
+	        key: '_leftMenuClick',
+	        value: function _leftMenuClick(path) {
+	            _reactRouter.browserHistory.push(path);
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            $('.navigation-main').find('li').has('ul').children('a').on('click', function (e) {
+	                e.preventDefault();
+
+	                // Collapsible
+	                $(this).parent('li').not('.disabled').not($('.sidebar-xs').not('.sidebar-xs-indicator').find('.navigation-main').children('li')).toggleClass('active').children('ul').slideToggle(250);
+
+	                // Accordion
+	                if ($('.navigation-main').hasClass('navigation-accordion')) {
+	                    $(this).parent('li').not('.disabled').not($('.sidebar-xs').not('.sidebar-xs-indicator').find('.navigation-main').children('li')).siblings(':has(.has-ul)').removeClass('active').children('ul').slideUp(250);
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2['default'].createElement(
+	                'ul',
+	                { className: 'navigation navigation-main navigation-accordion' },
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'navigation-header left' },
+	                    _react2['default'].createElement(
+	                        'span',
+	                        null,
+	                        "用户中心"
+	                    ),
+	                    ' ',
+	                    _react2['default'].createElement('i', { className: 'icon-menu', title: '',
+	                        'data-original-title': '用户中心' })
+	                ),
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'left active', onClick: this._leftMenuClick.bind(this, '/dashboard') },
+	                    _react2['default'].createElement(
+	                        'a',
+	                        {
+	                            href: 'javascript:void(0)' },
+	                        _react2['default'].createElement('i', {
+	                            className: 'icon-satellite-dish2' }),
+	                        ' ',
+	                        _react2['default'].createElement(
+	                            'span',
+	                            null,
+	                            "用户管理"
+	                        )
+	                    )
+	                ),
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'left', onClick: this._leftMenuClick.bind(this, '/dashboard') },
+	                    _react2['default'].createElement(
+	                        'a',
+	                        {
+	                            href: 'javascript:void(0)' },
+	                        _react2['default'].createElement('i', {
+	                            className: 'icon-history' }),
+	                        ' ',
+	                        _react2['default'].createElement(
+	                            'span',
+	                            null,
+	                            "评价管理"
+	                        )
+	                    )
+	                ),
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'left', onClick: this._leftMenuClick.bind(this, '/dashboard') },
+	                    _react2['default'].createElement(
+	                        'a',
+	                        {
+	                            href: 'javascript:void(0)' },
+	                        _react2['default'].createElement('i', {
+	                            className: 'icon-history' }),
+	                        ' ',
+	                        _react2['default'].createElement(
+	                            'span',
+	                            null,
+	                            "投诉举报"
+	                        )
+	                    )
+	                ),
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'left', onClick: this._leftMenuClick.bind(this, '/dashboard') },
+	                    _react2['default'].createElement(
+	                        'a',
+	                        {
+	                            href: 'javascript:void(0)' },
+	                        _react2['default'].createElement('i', {
+	                            className: 'icon-history' }),
+	                        ' ',
+	                        _react2['default'].createElement(
+	                            'span',
+	                            null,
+	                            "纠错记录"
+	                        )
+	                    )
+	                ),
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'left', onClick: this._leftMenuClick.bind(this, '/dashboard') },
+	                    _react2['default'].createElement(
+	                        'a',
+	                        {
+	                            href: 'javascript:void(0)' },
+	                        _react2['default'].createElement('i', {
+	                            className: 'icon-satellite-dish2' }),
+	                        ' ',
+	                        _react2['default'].createElement(
+	                            'span',
+	                            null,
+	                            "二维码管理"
+	                        )
+	                    )
+	                ),
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'left', onClick: this._leftMenuClick.bind(this, '/dashboard') },
+	                    _react2['default'].createElement(
+	                        'a',
+	                        {
+	                            href: 'javascript:void(0)' },
+	                        _react2['default'].createElement('i', {
+	                            className: 'icon-satellite-dish2' }),
+	                        ' ',
+	                        _react2['default'].createElement(
+	                            'span',
+	                            null,
+	                            "扫码员管理"
+	                        )
+	                    )
+	                ),
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'navigation-header left' },
+	                    _react2['default'].createElement(
+	                        'span',
+	                        null,
+	                        "商家管理"
+	                    ),
+	                    ' ',
+	                    _react2['default'].createElement('i', { className: 'icon-menu', title: '',
+	                        'data-original-title': '商家管理' })
+	                ),
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'left', onClick: this._leftMenuClick.bind(this, '/dashboard') },
+	                    _react2['default'].createElement(
+	                        'a',
+	                        {
+	                            href: 'javascript:void(0)' },
+	                        _react2['default'].createElement('i', {
+	                            className: 'icon-history' }),
+	                        ' ',
+	                        _react2['default'].createElement(
+	                            'span',
+	                            null,
+	                            "兑账记录"
+	                        )
+	                    )
+	                ),
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'left', onClick: this._leftMenuClick.bind(this, '/dashboard') },
+	                    _react2['default'].createElement(
+	                        'a',
+	                        {
+	                            href: 'javascript:void(0)' },
+	                        _react2['default'].createElement('i', {
+	                            className: 'icon-satellite-dish2' }),
+	                        ' ',
+	                        _react2['default'].createElement(
+	                            'span',
+	                            null,
+	                            "加盟商管理"
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Business;
+	})(_react.Component);
+
+	var DataManager = (function (_Component4) {
+	    _inherits(DataManager, _Component4);
+
+	    function DataManager() {
+	        _classCallCheck(this, DataManager);
+
+	        _get(Object.getPrototypeOf(DataManager.prototype), 'constructor', this).apply(this, arguments);
+	    }
+
+	    _createClass(DataManager, [{
+	        key: '_leftMenuClick',
+	        value: function _leftMenuClick(path) {
+	            _reactRouter.browserHistory.push(path);
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            $('.navigation-main').find('li').has('ul').children('a').on('click', function (e) {
+	                e.preventDefault();
+
+	                // Collapsible
+	                $(this).parent('li').not('.disabled').not($('.sidebar-xs').not('.sidebar-xs-indicator').find('.navigation-main').children('li')).toggleClass('active').children('ul').slideToggle(250);
+
+	                // Accordion
+	                if ($('.navigation-main').hasClass('navigation-accordion')) {
+	                    $(this).parent('li').not('.disabled').not($('.sidebar-xs').not('.sidebar-xs-indicator').find('.navigation-main').children('li')).siblings(':has(.has-ul)').removeClass('active').children('ul').slideUp(250);
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2['default'].createElement(
+	                'ul',
+	                { className: 'navigation navigation-main navigation-accordion' },
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'navigation-header left' },
+	                    _react2['default'].createElement(
+	                        'span',
+	                        null,
+	                        "垃圾分类"
+	                    ),
+	                    ' ',
+	                    _react2['default'].createElement('i', { className: 'icon-menu', title: '',
+	                        'data-original-title': '垃圾分类' })
+	                ),
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'left active', onClick: this._leftMenuClick.bind(this, '/dashboard') },
+	                    _react2['default'].createElement(
+	                        'a',
+	                        {
+	                            href: 'javascript:void(0)' },
+	                        _react2['default'].createElement('i', {
+	                            className: 'icon-satellite-dish2' }),
+	                        ' ',
+	                        _react2['default'].createElement(
+	                            'span',
+	                            null,
+	                            "垃圾分类"
+	                        )
+	                    )
+	                ),
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'left', onClick: this._leftMenuClick.bind(this, '/dashboard') },
+	                    _react2['default'].createElement(
+	                        'a',
+	                        {
+	                            href: 'javascript:void(0)' },
+	                        _react2['default'].createElement('i', {
+	                            className: 'icon-satellite-dish2' }),
+	                        ' ',
+	                        _react2['default'].createElement(
+	                            'span',
+	                            null,
+	                            "垃圾称量"
+	                        )
+	                    )
+	                ),
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'navigation-header left' },
+	                    _react2['default'].createElement(
+	                        'span',
+	                        null,
+	                        "其他数据"
+	                    ),
+	                    ' ',
+	                    _react2['default'].createElement('i', { className: 'icon-menu', title: '',
+	                        'data-original-title': '垃圾分类' })
+	                ),
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'left', onClick: this._leftMenuClick.bind(this, '/dashboard') },
+	                    _react2['default'].createElement(
+	                        'a',
+	                        {
+	                            href: 'javascript:void(0)' },
+	                        _react2['default'].createElement('i', {
+	                            className: 'icon-history' }),
+	                        ' ',
+	                        _react2['default'].createElement(
+	                            'span',
+	                            null,
+	                            "车辆运输"
+	                        )
+	                    )
+	                ),
+	                _react2['default'].createElement(
+	                    'li',
+	                    { className: 'left', onClick: this._leftMenuClick.bind(this, '/dashboard') },
+	                    _react2['default'].createElement(
+	                        'a',
+	                        {
+	                            href: 'javascript:void(0)' },
+	                        _react2['default'].createElement('i', {
+	                            className: 'icon-history' }),
+	                        ' ',
+	                        _react2['default'].createElement(
+	                            'span',
+	                            null,
+	                            "区域设置"
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return DataManager;
+	})(_react.Component);
+
+	var NotifyManager = (function (_Component5) {
+	    _inherits(NotifyManager, _Component5);
+
+	    function NotifyManager() {
+	        _classCallCheck(this, NotifyManager);
+
+	        _get(Object.getPrototypeOf(NotifyManager.prototype), 'constructor', this).apply(this, arguments);
 	    }
 
 	    // class PerformanceMonitoringMenu extends Component {
@@ -47187,7 +47519,7 @@
 	    //     }
 	    // }
 
-	    _createClass(Business, [{
+	    _createClass(NotifyManager, [{
 	        key: '_leftMenuClick',
 	        value: function _leftMenuClick(path) {
 	            _reactRouter.browserHistory.push(path);
@@ -47219,11 +47551,11 @@
 	                    _react2['default'].createElement(
 	                        'span',
 	                        null,
-	                        "用户中心"
+	                        "系统通知"
 	                    ),
 	                    ' ',
 	                    _react2['default'].createElement('i', { className: 'icon-menu', title: '',
-	                        'data-original-title': '用户中心' })
+	                        'data-original-title': '系统通知' })
 	                ),
 	                _react2['default'].createElement(
 	                    'li',
@@ -47238,87 +47570,7 @@
 	                        _react2['default'].createElement(
 	                            'span',
 	                            null,
-	                            "用户平台"
-	                        )
-	                    )
-	                ),
-	                _react2['default'].createElement(
-	                    'li',
-	                    { className: 'left', onClick: this._leftMenuClick.bind(this, '/dashboard') },
-	                    _react2['default'].createElement(
-	                        'a',
-	                        {
-	                            href: 'javascript:void(0)' },
-	                        _react2['default'].createElement('i', {
-	                            className: 'icon-history' }),
-	                        ' ',
-	                        _react2['default'].createElement(
-	                            'span',
-	                            null,
-	                            "投诉举报"
-	                        )
-	                    )
-	                ),
-	                _react2['default'].createElement(
-	                    'li',
-	                    { className: 'left', onClick: this._leftMenuClick.bind(this, '/dashboard') },
-	                    _react2['default'].createElement(
-	                        'a',
-	                        {
-	                            href: 'javascript:void(0)' },
-	                        _react2['default'].createElement('i', {
-	                            className: 'icon-history' }),
-	                        ' ',
-	                        _react2['default'].createElement(
-	                            'span',
-	                            null,
-	                            "投诉举报"
-	                        )
-	                    )
-	                ),
-	                _react2['default'].createElement(
-	                    'li',
-	                    { className: 'navigation-header left' },
-	                    _react2['default'].createElement(
-	                        'span',
-	                        null,
-	                        "商家管理"
-	                    ),
-	                    ' ',
-	                    _react2['default'].createElement('i', { className: 'icon-menu', title: '',
-	                        'data-original-title': '统计分析' })
-	                ),
-	                _react2['default'].createElement(
-	                    'li',
-	                    { className: 'left active', onClick: this._leftMenuClick.bind(this, '/dashboard') },
-	                    _react2['default'].createElement(
-	                        'a',
-	                        {
-	                            href: 'javascript:void(0)' },
-	                        _react2['default'].createElement('i', {
-	                            className: 'icon-satellite-dish2' }),
-	                        ' ',
-	                        _react2['default'].createElement(
-	                            'span',
-	                            null,
-	                            "系统监控"
-	                        )
-	                    )
-	                ),
-	                _react2['default'].createElement(
-	                    'li',
-	                    { className: 'left', onClick: this._leftMenuClick.bind(this, '/dashboard') },
-	                    _react2['default'].createElement(
-	                        'a',
-	                        {
-	                            href: 'javascript:void(0)' },
-	                        _react2['default'].createElement('i', {
-	                            className: 'icon-history' }),
-	                        ' ',
-	                        _react2['default'].createElement(
-	                            'span',
-	                            null,
-	                            "垃圾投放"
+	                            "新闻政策"
 	                        )
 	                    )
 	                )
@@ -47326,7 +47578,7 @@
 	        }
 	    }]);
 
-	    return Business;
+	    return NotifyManager;
 	})(_react.Component);
 
 	exports['default'] = MainMenu;

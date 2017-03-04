@@ -99,13 +99,13 @@ class TopMenus extends Component {
                         style={this.span_style}>{"客户服务"}</span>
                     </a>
                 </li>
-                <li className="dropdown dropdown-user topmenu" onClick={this._menuChange.bind(this, 3, false)}>
+                <li className="dropdown dropdown-user topmenu" onClick={this._menuChange.bind(this, 2, false)}>
                     <a className="dropdown-toggle" data-toggle="dropdown">
                         <i className="con-database-insert" style={{fontSize: "12px"}}> </i> <span
-                        style={this.span_style}>{"数据录入"}</span>
+                        style={this.span_style}>{"数据管理"}</span>
                     </a>
                 </li>
-                <li className="dropdown dropdown-user topmenu" onClick={this._menuChange.bind(this, 4, false)}>
+                <li className="dropdown dropdown-user topmenu" onClick={this._menuChange.bind(this, 3, false)}>
                     <a className="dropdown-toggle" data-toggle="dropdown">
                         <i className="icon-bubble-notification" style={{fontSize: "12px"}}> </i> <span
                         style={this.span_style}>{"系统通知"}</span>
