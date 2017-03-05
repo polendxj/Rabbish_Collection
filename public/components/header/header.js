@@ -101,7 +101,7 @@ class TopMenus extends Component {
                 </li>
                 <li className="dropdown dropdown-user topmenu" onClick={this._menuChange.bind(this, 2, false)}>
                     <a className="dropdown-toggle" data-toggle="dropdown">
-                        <i className="con-database-insert" style={{fontSize: "12px"}}> </i> <span
+                        <i className="icon-database-insert" style={{fontSize: "12px"}}> </i> <span
                         style={this.span_style}>{"数据管理"}</span>
                     </a>
                 </li>

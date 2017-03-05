@@ -11,6 +11,8 @@ import App from './containers/App'
 import Dashboard from './containers/Dashboard'
 import LoginContainer from './containers/Login'
 import Developing from './containers/Developing'
+import CitySettingContainer from './containers/CitySettingContainer'
+import CitySettingRegisterContainer from './containers/CitySettingRegisterContainer'
 import configureStore from './store/configureStore'
 
 let store = configureStore()
@@ -24,6 +26,8 @@ render(
                 <Route path="dashboard" component={Dashboard}/>
                 <Route path="/Developing" component={Developing}/>
                 <Route path="/login" component={LoginContainer}/>
+                <Route path="/DataManage/CitySetting" component={CitySettingContainer}/>
+                <Route path="/DataManage/CitySetting/Register" component={CitySettingRegisterContainer}/>
             </Route>
         </Router>
     </Provider>,

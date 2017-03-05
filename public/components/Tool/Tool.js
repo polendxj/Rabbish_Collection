@@ -143,7 +143,7 @@ export class ListMiddleModal extends Component {
 
     render() {
         return (
-            <div id="ListModal" className="modal fade">
+            <div id={this.props.id ? this.props.id : "ListModal"} className="modal fade">
                 <div className="modal-dialog modal-dialog modal-lg">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -156,7 +156,8 @@ export class ListMiddleModal extends Component {
                         </div>
 
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-link" data-dismiss="modal">
+                            <button type="button" className="btn btn-link" data-dismiss="modal"
+                                    style={{display: this.props.hideCancel ? 'none' : 'inline-block'}}>
                                 {Current_Lang.label.cancel}
                             </button>
                             <button type="button" className="btn btn-primary" data-dismiss="modal"
@@ -459,7 +460,7 @@ export function DecodeBase64(data) {
     function _utf8_decode(utftext) {
         var string = "";
         var i = 0;
-        var c = 0, c1 = 0, c2 = 0,c3=0;
+        var c = 0, c1 = 0, c2 = 0, c3 = 0;
         while (i < utftext.length) {
             c = utftext.charCodeAt(i);
             if (c < 128) {
@@ -715,44 +716,44 @@ export function uuid() {
     return uuid;
 }
 
-export function streamingTemplateFilter(flag,value) { //0-streamingType       1-environment   2-format    3-resolution    4-encoding
+export function streamingTemplateFilter(flag, value) { //0-streamingType       1-environment   2-format    3-resolution    4-encoding
     var streamingType = {"1": "VCS", "2": "ICS"};
     var environment = {"1": "QAM", "2": "IP"};
-    var format = {"1": "PNG", "2": "JPG","3":"ES","4":"TS"};
-    var resolution = {"0":Current_Lang.others.autoAdapt,"1": "HD 720P", "2": "SD 576P","3":"SD 480P"};
+    var format = {"1": "PNG", "2": "JPG", "3": "ES", "4": "TS"};
+    var resolution = {"0": Current_Lang.others.autoAdapt, "1": "HD 720P", "2": "SD 576P", "3": "SD 480P"};
     var encoding = {"1": "H.264/AAC", "2": "MPEG2/MPEG1-L2"};
-    var result="- -";
-    switch (flag){
+    var result = "- -";
+    switch (flag) {
         case 0:
-            result=streamingType[value];
+            result = streamingType[value];
             break;
         case 1:
-            result=environment[value];
+            result = environment[value];
             break;
         case 2:
-            result=format[value];
+            result = format[value];
             break;
         case 3:
-            result=resolution[value];
+            result = resolution[value];
             break;
         case 4:
-            result=encoding[value];
+            result = encoding[value];
             break;
     }
     return result;
 }
 
 export function resolutionFilter(value) { //0-streamingType       1-environment   2-format    3-resolution    4-encoding
-    var result=0;
-    switch (value){
+    var result = 0;
+    switch (value) {
         case 720:
-            result="HD 720P";
+            result = "HD 720P";
             break;
         case 576:
-            result="SD 576P";
+            result = "SD 576P";
             break;
         case 480:
-            result="SD 480P";
+            result = "SD 480P";
             break;
 
     }

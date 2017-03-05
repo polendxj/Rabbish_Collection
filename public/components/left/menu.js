@@ -205,7 +205,7 @@ class DataManager extends Component {
                 <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
                     href="javascript:void(0)"><i
                     className="icon-history"></i> <span>{"车辆运输"}</span></a></li>
-                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/DataManage/CitySetting')}><a
                     href="javascript:void(0)"><i
                     className="icon-history"></i> <span>{"区域设置"}</span></a></li>
 
