@@ -12,7 +12,7 @@ import {saveAdmin} from '../actions/Admin'
 
 export default class AdminRegisterContainer extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.breadCrumbs = [
             {text: Current_Lang.menus.userCenter, link: ''},
             {text: Current_Lang.menus.userManagement, link: ''},

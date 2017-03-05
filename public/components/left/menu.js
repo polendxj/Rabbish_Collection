@@ -2,8 +2,7 @@
  * Created by Administrator on 2016/8/19.
  */
 import React, {Component, PropTypes} from 'react';
-import {browserHistory} from 'react-router'
-import {roleApplicationUse} from '../../components/Tool/Tool'
+import {browserHistory} from 'react-router';
 
 class MainMenu extends Component {
     constructor() {
@@ -133,22 +132,22 @@ class Business extends Component {
                 <li className="navigation-header left"><span>{"用户中心"}</span> <i className="icon-menu" title=""
                                                                                 data-original-title="用户中心"></i>
                 </li>
-                <li className="left active" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                <li className="left active" onClick={this._leftMenuClick.bind(this, '/CustomerService/UserManage')}><a
                     href="javascript:void(0)"><i
                     className="icon-satellite-dish2"></i> <span>{"用户管理"}</span></a></li>
-                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/ReviewManage')}><a
                     href="javascript:void(0)"><i
                     className="icon-history"></i> <span>{"评价管理"}</span></a></li>
-                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/ComplaintManage')}><a
                     href="javascript:void(0)"><i
                     className="icon-history"></i> <span>{"投诉举报"}</span></a></li>
-                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/DataManage/CorrectionManage')}><a
                     href="javascript:void(0)"><i
                     className="icon-history"></i> <span>{"纠错记录"}</span></a></li>
                 <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
                     href="javascript:void(0)"><i
                     className="icon-satellite-dish2"></i> <span>{"二维码管理"}</span></a></li>
-                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/SweepCodeUserManage')}><a
                     href="javascript:void(0)"><i
                     className="icon-satellite-dish2"></i> <span>{"扫码员管理"}</span></a></li>
 
@@ -170,7 +169,7 @@ class Business extends Component {
 
 class DataManager extends Component {
     _leftMenuClick(path) {
-        browserHistory.push(path)
+        browserHistory.push(path);
     }
 
     componentDidMount() {
@@ -190,19 +189,20 @@ class DataManager extends Component {
     render() {
         return (
             <ul className="navigation navigation-main navigation-accordion">
-                <li className="navigation-header left"><span>{"垃圾分类"}</span> <i className="icon-menu" title=""
-                                                                                data-original-title="垃圾分类"></i>
+                <li className="navigation-header left" onClick={this._leftMenuClick.bind(this, '/dashboard')}>
+                    <span>{"垃圾分类"}</span>
+                    <i className="icon-menu" title="" data-original-title="垃圾分类" />
                 </li>
-                <li className="left active" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                <li className="left active" onClick={this._leftMenuClick.bind(this, '/DataManage/RubbishClass')}><a
                     href="javascript:void(0)"><i
                     className="icon-satellite-dish2"></i> <span>{"垃圾分类"}</span></a></li>
-                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/DataManage/ManualRecord')}><a
                     href="javascript:void(0)"><i
                     className="icon-satellite-dish2"></i> <span>{"垃圾称量"}</span></a></li>
                 <li className="navigation-header left"><span>{"其他数据"}</span> <i className="icon-menu" title=""
                                                                                 data-original-title="垃圾分类"></i>
                 </li>
-                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/DataManage/TransitLine')}><a
                     href="javascript:void(0)"><i
                     className="icon-history"></i> <span>{"车辆运输"}</span></a></li>
                 <li className="left" onClick={this._leftMenuClick.bind(this, '/DataManage/CitySetting')}><a

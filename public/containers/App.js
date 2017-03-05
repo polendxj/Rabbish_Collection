@@ -76,9 +76,9 @@ class App extends Component {
     render() {
         // sessionStorage['auth']=""
         const {fetching}=this.props
-        var auth = sessionStorage['auth']
+        var auth = sessionStorage['auth'];
 
-        var result = ""
+        var result = "";
         if (auth) {
             if (this.loadingLang == 2 || this.loadingLang == 0) {
                 result =
@@ -119,8 +119,8 @@ class ContentPanel extends Component {
     }
 
     render() {
-        const {fetching, data}=this.props
-        var auth = sessionStorage['auth']
+        const {fetching, data}=this.props;
+        var auth = sessionStorage['auth'];
         return (
             <div className="page-container" style={{height: "2000px"}}>
                 <div className="page-content" style={{backgroundColor: "white"}}>
