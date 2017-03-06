@@ -36,55 +36,14 @@ baseURL = require('./config/config').production_csm_url
 consulURL = require('./config/config').consul_url
 allApp = []
 
-var SysManagerCSR = require('./routes/SysManagerCSR')
-var SysManagerSO = require('./routes/SysManagerSO')
-var SysManagerLogin = require('./routes/SysManagerLogin')
-var SysManagerSGroup = require('./routes/SysManagerGroup')
-var SysManagerSubApp = require('./routes/SysManagerSubApp')
-var SysManagerCSE = require('./routes/SysManagerCSE')
-var SysManagerGW = require('./routes/SysManagerGW')
-var SysManagerMonitor = require('./routes/SysManagerMonitor')
-var SysManagerDedicated = require('./routes/SysManagerDedicated')
-var SysManagerPermission = require('./routes/SysManagerPermission')
-var Admin = require('./routes/Admin')
-var AlarmHistory = require('./routes/AlarmHistory')
-var SysManagerSED = require('./routes/SysManagerSED')
-var SysManagerThreshold = require('./routes/SysManagerThreshold')
-var JobHistory = require('./routes/JobHistory')
-var ServiceModel = require('./routes/ServiceModel')
-var SysManagerCSEGroup = require('./routes/SysManagerCSEGroup')
-var SysManagerServiceGroup = require('./routes/SysManagerServiceGroup')
-var RealtimeSessions = require('./routes/RealtimeSessions')
-var TerminalPosition = require('./routes/TerminalPosition')
-var StreamingTemplate = require('./routes/StreamingTemplate')
-var AppMenagementByConsul = require('./routes/AppMenagementByConsul')
+var CitySettingRouter = require('./routes/AreaSettiingRouter')
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser())
-app.use(SysManagerCSR)
-app.use(SysManagerSO)
-app.use(SysManagerLogin)
-app.use(SysManagerSGroup)
-app.use(SysManagerSubApp)
-app.use(SysManagerCSE)
-app.use(SysManagerGW)
-app.use(SysManagerMonitor)
-app.use(SysManagerDedicated)
-app.use(SysManagerPermission)
-app.use(Admin)
-app.use(AlarmHistory)
-app.use(SysManagerSED)
-app.use(SysManagerThreshold)
-app.use(JobHistory)
-app.use(ServiceModel)
-app.use(SysManagerCSEGroup)
-app.use(SysManagerServiceGroup)
-app.use(RealtimeSessions)
-app.use(TerminalPosition)
-app.use(StreamingTemplate)
-app.use(AppMenagementByConsul)
+app.use(CitySettingRouter)
+
 app.use(express.static(path.join(__dirname, 'build')));
 app.set('port', require('./config/config').node_port);
 app.get('*', function (request, response, next) {

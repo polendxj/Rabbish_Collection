@@ -7,6 +7,8 @@ import {bindActionCreators} from 'redux'
 import {Loading, NoData, ConfirmModal, ListMiddleModal} from '../components/Tool/Tool'
 import BreadCrumbs from '../components/right/breadCrumbs'
 import Pagenation from '../components/right/Pagenation'
+import {getListByMutilpCondition} from '../actions/CommonActions'
+import {CITY_LIST_START, CITY_LIST_END} from '../constants/index.js'
 
 export default class CitySettingContainer extends Component {
     constructor(props) {
@@ -37,8 +39,13 @@ export default class CitySettingContainer extends Component {
         this.page = this.page + 1
     }
 
+    componentDidMount() {
+        var params = {page: 0, size: 20}
+        this.props.dispatch(getListByMutilpCondition(params, CITY_LIST_START, CITY_LIST_END, city_list));
+    }
+
     render() {
-        const {data}=this.props;
+        const {fetching,data}=this.props;
         var countryInfo = <div>
             <ul className="nav nav-tabs">
                 <li
@@ -105,7 +112,7 @@ export default class CitySettingContainer extends Component {
                                 <label className="col-lg-2 control-label"
                                        style={{textAlign: 'center'}}>{"行政区名称"}</label>
                                 <div className="col-lg-9">
-                                    <input  id="name" type="text" className="form-control" placeholder="行政区名称"
+                                    <input id="name" type="text" className="form-control" placeholder="行政区名称"
                                            autoComplete="off"/>
                                 </div>
                             </div>
@@ -113,8 +120,8 @@ export default class CitySettingContainer extends Component {
                                 <label className="col-lg-2 control-label"
                                        style={{textAlign: 'center'}}>{"描 述"}</label>
                                 <div className="col-lg-9">
-                                    <textarea  id="name" type="text" className="form-control" placeholder="描 述"
-                                            autoComplete="off"></textarea>
+                                    <textarea id="name" type="text" className="form-control" placeholder="描 述"
+                                              autoComplete="off"></textarea>
                                 </div>
                             </div>
                             <div className="form-group">
@@ -202,8 +209,8 @@ export default class CitySettingContainer extends Component {
                                 <label className="col-lg-2 control-label"
                                        style={{textAlign: 'center'}}>{"小区名称"}</label>
                                 <div className="col-lg-9">
-                                    <input  id="name" type="text" className="form-control" placeholder="名称"
-                                            autoComplete="off"/>
+                                    <input id="name" type="text" className="form-control" placeholder="名称"
+                                           autoComplete="off"/>
                                 </div>
                             </div>
                             <div className="form-group">
@@ -228,8 +235,8 @@ export default class CitySettingContainer extends Component {
                                 <label className="col-lg-2 control-label"
                                        style={{textAlign: 'center'}}>{"描 述"}</label>
                                 <div className="col-lg-9">
-                                    <textarea  id="name" type="text" className="form-control" placeholder="描 述"
-                                            autoComplete="off"></textarea>
+                                    <textarea id="name" type="text" className="form-control" placeholder="描 述"
+                                              autoComplete="off"></textarea>
                                 </div>
                             </div>
                             <div className="form-group">
@@ -311,11 +318,11 @@ export default class CitySettingContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"区域设置列表"}</legend>
                         <div style={{marginTop: '-80px'}}>
-                            <Pagenation counts={data ? data.length : 3} page={this.page}
+                            <Pagenation counts={data ? data.data.length : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>
-                        <CitySettingComponent />
+                        <CitySettingComponent data={data} />
 
                     </fieldset>
                 </div>
@@ -335,7 +342,7 @@ export default class CitySettingContainer extends Component {
 class CitySettingComponent extends Component {
     render() {
         var tableHeight = ($(window).height() - 240);
-
+        console.log(data)
         return (
             <div className="table-responsive" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                 <table className="table table-bordered">
@@ -456,114 +463,6 @@ class CitySettingComponent extends Component {
                         </td>
                     </tr>
                     </tbody>
-                    <tbody>
-                    <tr>
-                        <td style={{textAlign: 'center'}}>
-                            崇州
-                        </td>
-                        <td style={{verticalAlign: "top"}}>
-                            <div className="table-responsive">
-                                <table className="table text-center table-hover">
-                                    <tbody>
-                                    <tr className="active">
-                                        <td style={{borderTop: "0 red solid", cursor: "pointer"}}>田家庵</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{cursor: "pointer"}}>重阳</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{cursor: "pointer"}}>谢家集</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{cursor: "pointer"}}>金牛区</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </td>
-                        <td>
-                            <div className="table-responsive pre-scrollable">
-                                <table className="table table-bordered table-striped text-center">
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>金源世家</td>
-                                        <td>居民小区</td>
-                                        <td>成都市武侯区大四喜街道9002号38弄</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>西南交通大学</td>
-                                        <td>政府机构</td>
-                                        <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>西南交通大学</td>
-                                        <td>政府机构</td>
-                                        <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>西南交通大学</td>
-                                        <td>政府机构</td>
-                                        <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>西南交通大学</td>
-                                        <td>政府机构</td>
-                                        <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>西南交通大学</td>
-                                        <td>政府机构</td>
-                                        <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>西南交通大学</td>
-                                        <td>政府机构</td>
-                                        <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                    </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td>西南交通大学</td>
-                                        <td>政府机构</td>
-                                        <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </td>
-                        <td>
-                            <ul className="icons-list">
-                                <li className="dropdown">
-                                    <a href="#" className="dropdown-toggle"
-                                       data-toggle="dropdown" aria-expanded="false"><i
-                                        className="icon-menu7"></i></a>
-                                    <ul className="dropdown-menu dropdown-menu-right">
-                                        {/*<li style={{display: roleApplicationUse('adminDetail') ? 'block' : 'none'}}  onClick={this._detail.bind(this, '/UserManager/Admin/Detail/:' + val.adminId)}>
-                                         <a href="javascript:void(0)"><i className="icon-pencil5"></i>
-                                         账户详情</a></li>*/}
-                                        <li>
-                                            <a href="javascript:void(0)" data-toggle="modal"
-                                               data-target="#countryModal"><i className=" icon-office"></i>
-                                                {"行政区设置"}</a></li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-toggle="modal"
-                                               data-target="#homeModal"><i className="icon-home4"></i>
-                                                {"小区设置"}</a></li>
-                                        <li>
-                                            <a href="javascript:void(0)"><i className=" icon-trash"></i>
-                                                {"删除城市"}</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                    </tbody>
                 </table>
             </div>
 
@@ -572,8 +471,11 @@ class CitySettingComponent extends Component {
 }
 
 function mapStateToProps(state) {
-    const {}=state
-    return {}
+    const {getCityList}=state
+    return {
+        fetching: getCityList.fetching,
+        data: getCityList.data
+    }
 }
 
 

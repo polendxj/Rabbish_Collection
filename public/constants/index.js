@@ -237,3 +237,10 @@ export const START_APP_BY_CONSUL_LIST = 'START_APP_BY_CONSUL_LIST'
 export const END_APP_BY_CONSUL_LIST = 'END_APP_BY_CONSUL_LIST'
 export const START_APP_BY_CONSUL_DETAIL = 'START_APP_BY_CONSUL_DETAIL'
 export const END_APP_BY_CONSUL_DETAIL = 'END_APP_BY_CONSUL_DETAIL'
+
+
+/*-------------------reubbish constants*/
+export const CITY_LIST_START = 'CITY_LIST_START';
+export const CITY_LIST_END = 'CITY_LIST_END';
+
+

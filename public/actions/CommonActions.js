@@ -10,24 +10,10 @@ import {ErrorModal, SuccessModal, ConfirmModalSuccess} from '../components/Tool/
  * Params    startRow:search page start index    searchColumns:by what columns to search(is a array)    searchValues:by what values to search(is a array)    sortColumn:sort by what column    orderType:asc or desc
  *           startDispatch:if need start loading    endDispatch:finish loading and loaded   interfaceURL:loading URL
  * */
-export function getListByMutilpCondition(startRow, searchColumns, searchValues, sortColumn, orderType, startDispatch, endDispatch, interfaceURL, customerColumn, customerValue) {
+export function getListByMutilpCondition(params, startDispatch, endDispatch, interfaceURL) {
     return dispatch=> {
         if (startDispatch) {
             dispatch(startFetch(startDispatch))
-        }
-        var params = {
-            startRow: startRow * page_size,
-            endRow: page_size,
-            page: '',
-            searchColumn: searchValues && searchValues.length > 0 ? searchColumns : ["ALL"],
-            searchValue: searchValues,
-            sortColumn: sortColumn,
-            orderType: orderType
-        }
-        if (customerColumn && customerColumn.length > 0) {
-            customerColumn.forEach(function (val, key) {
-                params[val] = customerValue[key];
-            })
         }
         fetch(interfaceURL,
             {

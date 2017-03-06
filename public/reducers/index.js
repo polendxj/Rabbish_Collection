@@ -44,6 +44,10 @@ import {
 } from '../reducers/SystemManagerServiceGroupReducer'
 import {getTerminalPositionList, terminalPositionSave,terminalPositionDetail} from '../reducers/TerminalPositionReducer'
 
+/*rebish reducer start*/
+import {getCityList} from '../reducers/CitySettingReducer'
+/*end*/
+
 import {reducer as reduxFormReducer} from 'redux-form'
 
 const rootReducer = combineReducers({
@@ -112,6 +116,7 @@ const rootReducer = combineReducers({
     getStreamingTemplateDetail,
     getAppByConsulDetail,
     getAppByConsulList,
+    getCityList,
     form: reduxFormReducer,
     routing: routerReducer
 })

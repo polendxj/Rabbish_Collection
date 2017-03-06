@@ -5,14 +5,15 @@ var fetch = require('node-fetch');
 var querystring = require('querystring');
 var ExceptionUtils = require('../utils/ExceptionUtils');
 
-var Request = function (url, method, data, req,resp,callback) {
+var Request = function (url, method, data, req, resp, callback) {
     ExceptionUtils.uncaughtException(function () {
         fetch(url,
             {
                 method: method,
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
-                    'Cookie': "JSESSIONID=" + req.cookies.JSESSIONID
+                    'Cookie': "JSESSIONID=" + req.cookies.JSESSIONID,
+                    'token': "aaaaa"
                 },
                 body: data,
                 timeout: 5000
@@ -21,7 +22,7 @@ var Request = function (url, method, data, req,resp,callback) {
                 return ExceptionUtils.not200Exception(res, data)
             })
             .then(function (json) {
-                ExceptionUtils.notFalseException(json, resp,callback)
+                ExceptionUtils.notFalseException(json, resp, callback)
             })
             .catch(function (ex) {
                 resp.sendStatus(500)
