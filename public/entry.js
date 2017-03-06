@@ -27,6 +27,8 @@ import ComplaintContainer from './containers/complaint/ComplaintContainer';
 import UserListContainer from './containers/userManage/UserListContainer';
 import UserRegisterContainer from './containers/userManage/UserRegisterContainer';
 import CorrectionListContainer from './containers/correction/CorrectionListContainer';
+import StoreListContainer from './containers/store/StoreListContainer';
+import StoreSettlementListContainer from './containers/storeSettlement/StoreSettlementListContainer';
 
 let store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
@@ -54,6 +56,8 @@ render(
                 <Route path="/CustomerService/UserManage" component={UserListContainer}/>
                 <Route path="/CustomerService/UserManage/Register" component={UserRegisterContainer}/>
                 <Route path="/DataManage/CorrectionManage" component={CorrectionListContainer}/>
+                <Route path="/CustomerService/StoreManage" component={StoreListContainer}/>
+                <Route path="/CustomerService/StoreSettlementManage" component={StoreSettlementListContainer}/>
             </Route>
         </Router>
     </Provider>,

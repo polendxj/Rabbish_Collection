@@ -238,17 +238,17 @@ class ComplaintListComponent extends Component {
                                                 </small>
                                             </div>
                                         </td>
-                                        <td style={{width:"120px"}}>
+                                        <td style={{width:"85px"}}>
                                             <div>
                                                 <div >
                                                     <div className="thumbnail" style={{marginBottom:0,width:"85px"}}>
                                                         <div className="thumb">
                                                             <img src={val.photo} alt="" style={{height:"80px",width:"80px"}}/>
                                                             <div className="caption-overflow">
-                                                    <span style={{top:0,marginTop:0}}>
-                                                        <a href={val.photo} data-popup="lightbox"
-                                                           className="btn" style={{height:"80px",width:"80px"}}></a>
-                                                    </span>
+                                                                <span style={{top:0,marginTop:0}}>
+                                                                    <a href={val.photo} data-popup="lightbox"
+                                                                       className="btn" style={{height:"80px",width:"80px"}}></a>
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>
