@@ -45,7 +45,7 @@ export default class CitySettingContainer extends Component {
     }
 
     render() {
-        const {fetching,data}=this.props;
+        const {fetching, data}=this.props;
         var countryInfo = <div>
             <ul className="nav nav-tabs">
                 <li
@@ -322,7 +322,7 @@ export default class CitySettingContainer extends Component {
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>
-                        <CitySettingComponent data={data} />
+                        <CitySettingComponent data={data}/>
 
                     </fieldset>
                 </div>
@@ -341,8 +341,148 @@ export default class CitySettingContainer extends Component {
 
 class CitySettingComponent extends Component {
     render() {
+        const {data}=this.props;
         var tableHeight = ($(window).height() - 240);
-        console.log(data)
+        var tbody = [];
+        if (data) {
+            if (data.data.length > 0) {
+                data.data.forEach(function (val, key) {
+                    tbody.push(
+                        <tbody>
+                        <tr>
+                            <td style={{textAlign: 'center'}}>
+                                {val.name}
+                            </td>
+                            <td style={{verticalAlign: "top"}}>
+                                <div className="table-responsive">
+                                    <table className="table text-center table-hover">
+                                        <tbody>
+                                        <tr className="active">
+                                            <td style={{borderTop: "0 red solid", cursor: "pointer"}}>田家庵</td>
+                                        </tr>
+                                        <tr>
+                                            <td style={{cursor: "pointer"}}>重阳</td>
+                                        </tr>
+                                        <tr>
+                                            <td style={{cursor: "pointer"}}>谢家集</td>
+                                        </tr>
+                                        <tr>
+                                            <td style={{cursor: "pointer"}}>金牛区</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                            <td>
+                                <div className="table-responsive pre-scrollable">
+                                    <table className="table table-bordered table-striped text-center">
+                                        <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>金源世家</td>
+                                            <td>居民小区</td>
+                                            <td>成都市武侯区大四喜街道9002号38弄</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>西南交通大学</td>
+                                            <td>政府机构</td>
+                                            <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>西南交通大学</td>
+                                            <td>政府机构</td>
+                                            <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>西南交通大学</td>
+                                            <td>政府机构</td>
+                                            <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>西南交通大学</td>
+                                            <td>政府机构</td>
+                                            <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>西南交通大学</td>
+                                            <td>政府机构</td>
+                                            <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td>西南交通大学</td>
+                                            <td>政府机构</td>
+                                            <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>西南交通大学</td>
+                                            <td>政府机构</td>
+                                            <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                            <td>
+                                <ul className="icons-list">
+                                    <li className="dropdown">
+                                        <a href="#" className="dropdown-toggle"
+                                           data-toggle="dropdown" aria-expanded="false"><i
+                                            className="icon-menu7"></i></a>
+                                        <ul className="dropdown-menu dropdown-menu-right">
+                                            {/*<li style={{display: roleApplicationUse('adminDetail') ? 'block' : 'none'}}  onClick={this._detail.bind(this, '/UserManager/Admin/Detail/:' + val.adminId)}>
+                                             <a href="javascript:void(0)"><i className="icon-pencil5"></i>
+                                             账户详情</a></li>*/}
+                                            <li>
+                                                <a href="javascript:void(0)" data-toggle="modal"
+                                                   data-target="#countryModal"><i className=" icon-office"></i>
+                                                    {"行政区设置"}</a></li>
+                                            <li>
+                                                <a href="javascript:void(0)" data-toggle="modal"
+                                                   data-target="#homeModal"><i className="icon-home4"></i>
+                                                    {"小区设置"}</a></li>
+                                            <li>
+                                                <a href="javascript:void(0)"><i className=" icon-trash"></i>
+                                                    {"删除城市"}</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    )
+                })
+
+            } else {
+                tbody.push(
+                    <tbody>
+                    <tr>
+                        <td colSpan="100" style={{textAlign: 'center'}}>
+                            <NoData/>
+                        </td>
+                    </tr>
+                    </tbody>
+                )
+            }
+        } else {
+            tbody.push(
+                <tbody>
+                <tr>
+                    <td colSpan="100" style={{textAlign: 'center'}}>
+                        <Loading/>
+                    </td>
+                </tr>
+                </tbody>
+            )
+        }
+
+
         return (
             <div className="table-responsive" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                 <table className="table table-bordered">
@@ -355,114 +495,7 @@ class CitySettingComponent extends Component {
                             className="icon-arrow-down12"></i></th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td style={{textAlign: 'center'}}>
-                            崇州
-                        </td>
-                        <td style={{verticalAlign: "top"}}>
-                            <div className="table-responsive">
-                                <table className="table text-center table-hover">
-                                    <tbody>
-                                    <tr className="active">
-                                        <td style={{borderTop: "0 red solid", cursor: "pointer"}}>田家庵</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{cursor: "pointer"}}>重阳</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{cursor: "pointer"}}>谢家集</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{cursor: "pointer"}}>金牛区</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </td>
-                        <td>
-                            <div className="table-responsive pre-scrollable">
-                                <table className="table table-bordered table-striped text-center">
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>金源世家</td>
-                                        <td>居民小区</td>
-                                        <td>成都市武侯区大四喜街道9002号38弄</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>西南交通大学</td>
-                                        <td>政府机构</td>
-                                        <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>西南交通大学</td>
-                                        <td>政府机构</td>
-                                        <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>西南交通大学</td>
-                                        <td>政府机构</td>
-                                        <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>西南交通大学</td>
-                                        <td>政府机构</td>
-                                        <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>西南交通大学</td>
-                                        <td>政府机构</td>
-                                        <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>西南交通大学</td>
-                                        <td>政府机构</td>
-                                        <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                    </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td>西南交通大学</td>
-                                        <td>政府机构</td>
-                                        <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </td>
-                        <td>
-                            <ul className="icons-list">
-                                <li className="dropdown">
-                                    <a href="#" className="dropdown-toggle"
-                                       data-toggle="dropdown" aria-expanded="false"><i
-                                        className="icon-menu7"></i></a>
-                                    <ul className="dropdown-menu dropdown-menu-right">
-                                        {/*<li style={{display: roleApplicationUse('adminDetail') ? 'block' : 'none'}}  onClick={this._detail.bind(this, '/UserManager/Admin/Detail/:' + val.adminId)}>
-                                         <a href="javascript:void(0)"><i className="icon-pencil5"></i>
-                                         账户详情</a></li>*/}
-                                        <li>
-                                            <a href="javascript:void(0)" data-toggle="modal"
-                                               data-target="#countryModal"><i className=" icon-office"></i>
-                                                {"行政区设置"}</a></li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-toggle="modal"
-                                               data-target="#homeModal"><i className="icon-home4"></i>
-                                                {"小区设置"}</a></li>
-                                        <li>
-                                            <a href="javascript:void(0)"><i className=" icon-trash"></i>
-                                                {"删除城市"}</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                    </tbody>
+                    {tbody}
                 </table>
             </div>
 
