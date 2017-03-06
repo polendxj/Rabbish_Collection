@@ -154,10 +154,10 @@ class Business extends Component {
                 <li className="navigation-header left"><span>{"商家管理"}</span> <i className="icon-menu" title=""
                                                                                 data-original-title="商家管理"></i>
                 </li>
-                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/StoreSettlementManage')}><a
                     href="javascript:void(0)"><i
                     className="icon-history"></i> <span>{"兑账记录"}</span></a></li>
-                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/StoreManage')}><a
                     href="javascript:void(0)"><i
                     className="icon-satellite-dish2"></i> <span>{"加盟商管理"}</span></a></li>
 

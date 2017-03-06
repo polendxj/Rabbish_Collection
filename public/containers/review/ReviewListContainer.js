@@ -233,8 +233,8 @@ class ReviewListComponent extends Component {
                                             {val.reply == "" ? "回复评论" : "收起评论"}</a>
                                     </small>
                                 </div>
-                                <div className="heading-elements">
-                                    <i className="icon-cross" style={{fontSize: "36px",cursor:"pointer"}} onClick={this._delete.bind(this,val.id,val.title)}></i>
+                                <div className="heading-elements" style={{height:"18px",top:"25px",right:"10px"}}>
+                                    <i className="icon-cross" style={{fontSize: "18px",cursor:"pointer"}} onClick={this._delete.bind(this,val.id,val.title)}></i>
                                 </div>
                             </div>
                             <div id={"collapse-" + val.id}

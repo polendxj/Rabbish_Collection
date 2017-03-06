@@ -7,52 +7,52 @@ import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
-import {Loading, NoData, ConfirmModal,ErrorModal,roleApplicationUse} from '../../components/Tool/Tool'
+import {Loading, NoData, ConfirmModal, ErrorModal, roleApplicationUse} from '../../components/Tool/Tool'
 
-export default class CorrectionListContainer extends Component {
+export default class StoreSettlementListContainer extends Component {
     constructor(props) {
         super(props);
-        this.page=0;
+        this.page = 0;
         this.breadCrumbs = [
             {text: "客户服务", link: ''},
-            {text: "纠错记录", link: ''},
-            {text: "纠错记录列表", link: ''}
+            {text: "兑账记录", link: ''},
+            {text: "兑账记录列表", link: ''}
         ];
         this.operation = [
             {icon: "", text: "", action: ""}
         ];
         this.dataList = [
-            {id: "1", unit: "花样年美岸",type:1, description:"上的飞机数量的",createTime:"2017-02-04 16:25:07"},
-            {id: "2", unit: "红树湾",type:2, description:"速度fog热",createTime:"2017-02-04 16:25:38"}
+            {id: "1", storeName: "红旗超市", points: 1000, amount: 100, settleTime: "2017-02-04 16:25:07"},
+            {id: "2", storeName: "711连锁", points: 200, amount: 50, settleTime: "2017-02-06 13:25:38"}
         ];
-        this.searchColumn="TYPE";
+        this.searchColumn = "TYPE";
     }
 
     componentDidMount() {
-        var self=this;
+        var self = this;
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
-            if($(this).find('a').text().trim()=="按单位/小区搜索"){
-                self.searchColumn="TYPE";
-            }else{
-                self.searchColumn="ADMIN_NAME";
+            if ($(this).find('a').text().trim() == "按单位/小区搜索") {
+                self.searchColumn = "TYPE";
+            } else {
+                self.searchColumn = "ADMIN_NAME";
             }
         })
     }
 
-    _search(){
+    _search() {
 
     }
 
-    _delete(id,name) {
+    _delete(id, name) {
         var that = this;
-        if(sessionStorage['adminId']==id){
-            ErrorModal(Current_Lang.status.minor,Current_Lang.alertTip.accountOperating)
+        if (sessionStorage['adminId'] == id) {
+            ErrorModal(Current_Lang.status.minor, Current_Lang.alertTip.accountOperating);
             return
         }
         ConfirmModal(Current_Lang.status.minor, Current_Lang.alertTip.confirmDelete + name + Current_Lang.alertTip.confirmMa, function () {
-            that.props.dispatch(deleteAdmin(id, 0,that.searchColumn, $("#search_value").val()))
+            that.props.dispatch(deleteAdmin(id, 0, that.searchColumn, $("#search_value").val()))
         })
 
     }
@@ -85,7 +85,7 @@ export default class CorrectionListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{Current_Lang.label.searching}</legend>
                         <ul className="list-inline list-inline-condensed no-margin-bottom"
-                            style={{textAlign: 'right',marginTop:'-59px'}}>
+                            style={{textAlign: 'right', marginTop: '-59px'}}>
                             <li className="dropdown"
                                 style={{borderBottom: '0 lightgray solid'}}>
                                 <a href="#" className="btn btn-link btn-sm dropdown-toggle"
@@ -120,14 +120,14 @@ export default class CorrectionListContainer extends Component {
                     </fieldset>
                     <fieldset className="content-group">
                         <legend className="text-bold">{"纠错记录列表区"}</legend>
-                        <div style={{marginTop:'-80px'}}>
+                        <div style={{marginTop: '-80px'}}>
                             <Pagenation counts={2} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>
-                        <CorrectionListComponent data={this.dataList} fetching={false}
-                                            _delete={this._delete}
-                                            _updateStatus={this._updateStatus}/>
+                        <StoreSettlementListComponent data={this.dataList} fetching={false}
+                                                      _delete={this._delete}
+                                                      _updateStatus={this._updateStatus}/>
 
                     </fieldset>
                 </div>
@@ -136,7 +136,7 @@ export default class CorrectionListContainer extends Component {
     }
 }
 
-class CorrectionListComponent extends Component{
+class StoreSettlementListComponent extends Component {
     constructor(props) {
         super(props)
     }
@@ -145,8 +145,8 @@ class CorrectionListComponent extends Component{
         browserHistory.push(path)
     }
 
-    _delete(id,name) {
-        this.props._delete(id,name)
+    _delete(id, name) {
+        this.props._delete(id, name)
     }
 
     render() {
@@ -168,12 +168,12 @@ class CorrectionListComponent extends Component{
                 </tr>)
             } else {
                 data.forEach(function (val, key) {
-                    tb.push(<tr key={key} style={{backgroundColor:key%2==0?"#F8F8F8":""}}>
-                        <td className="text-center">{key+1}</td>
-                        <td className="text-center">{val.unit}</td>
-                        <td className="text-center">{val.type}</td>
-                        <td className="text-left">{val.description}</td>
-                        <td className="text-center">{val.createTime}</td>
+                    tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
+                        <td className="text-center">{key + 1}</td>
+                        <td className="text-center">{val.storeName}</td>
+                        <td className="text-center">{val.points}</td>
+                        <td className="text-center">{val.amount}</td>
+                        <td className="text-center">{val.settleTime}</td>
                         <td className="text-center">
                             {<ul className="icons-list">
                                 <li className="dropdown">
@@ -181,10 +181,8 @@ class CorrectionListComponent extends Component{
                                        data-toggle="dropdown" aria-expanded="false"><i
                                         className="icon-menu7"></i></a>
                                     <ul className="dropdown-menu dropdown-menu-right">
-                                        <li style={{display:'block'}} onClick={this._detail.bind(this, '/DataManage/RubbishClass/ModifyRubbishClass/:' + val.id)}>
-                                            <a href="javascript:void(0)"><i className="icon-pencil5"></i>
-                                                {"修改"}</a></li>
-                                        <li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.name)}><a
+                                        <li style={{display: 'block'}}
+                                            onClick={this._delete.bind(this, val.id, val.name)}><a
                                             href="javascript:void(0)"><i className="icon-trash"></i>
                                             {"删除"}</a></li>
                                     </ul>
@@ -196,20 +194,20 @@ class CorrectionListComponent extends Component{
                 }.bind(this))
             }
         }
-        var tableHeight = ($(window).height()-240);
+        var tableHeight = ($(window).height() - 240);
         return (
-            <div className="table-responsive" style={{height:tableHeight+'px',overflowY:'scroll'}}>
-                <table className="table table-bordered table-hover" style={{marginBottom:'85px'}}>
+            <div className="table-responsive" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+                <table className="table table-bordered table-hover" style={{marginBottom: '85px'}}>
                     <thead>
-                    <tr style={{fontWeight:'bold'}}>
-                        <th className="text-center" style={{width: "20px"}}></th>
-                        <th className="col-md-3 text-bold text-center">{"单位/小区"}</th>
-                        <th className="col-md-2 text-bold text-center">{"错误类型"}</th>
-                        <th className="col-md-5 text-bold text-left">{"错误描述"}</th>
-                        <th className="col-md-2 text-bold text-center">{"创建时间"}</th>
-                        <th className="text-center" style={{width: "20px"}}><i
-                            className="icon-arrow-down12"></i></th>
-                    </tr>
+                        <tr style={{fontWeight: 'bold'}}>
+                            <th className="text-center" style={{width: "20px"}}></th>
+                            <th className="col-md-3 text-bold text-center">{"商户名称"}</th>
+                            <th className="col-md-2 text-bold text-center">{"结算积分"}</th>
+                            <th className="col-md-5 text-bold text-center">{"结算金额"}</th>
+                            <th className="col-md-2 text-bold text-center">{"结算时间"}</th>
+                            <th className="text-center" style={{width: "20px"}}><i
+                                className="icon-arrow-down12"></i></th>
+                        </tr>
                     </thead>
                     <tbody>
                     {tb}
@@ -232,4 +230,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps)(CorrectionListContainer)
+export default connect(mapStateToProps)(StoreSettlementListContainer)
