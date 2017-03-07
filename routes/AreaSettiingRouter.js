@@ -9,7 +9,7 @@ var RequestApi = require('../utils/RequestApi')
 var router = express()
 
 router.post('/rsapp/city', function (req, resp) {
-    var data = querystring.stringify(JSON.parse(req.body.data))
+    var data = querystring.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/city' + "?" + data, 'GET', "", req, resp, function (city) {
         if (city.status) {
             if (city.data.length > 0) {

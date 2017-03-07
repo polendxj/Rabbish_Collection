@@ -36,13 +36,25 @@ baseURL = require('./config/config').production_csm_url
 consulURL = require('./config/config').consul_url
 allApp = []
 
-var CitySettingRouter = require('./routes/AreaSettiingRouter')
+var CitySettingRouter = require('./routes/AreaSettiingRouter');
+var ClassConfRouter = require('./routes/ClassConfRouter');
+var ManualRecordRouter = require('./routes/ManualRecordRouter');
+var TransitLineRouter = require('./routes/TransitLineRouter');
+var CorrectionRouter = require('./routes/CorrectionRouter');
+var ComplaintRouter = require('./routes/ComplaintRouter');
+var StoreSettlementRouter = require('./routes/StoreSettlementRouter');
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser())
 app.use(CitySettingRouter)
+app.use(ClassConfRouter)
+app.use(ManualRecordRouter)
+app.use(TransitLineRouter)
+app.use(CorrectionRouter)
+app.use(ComplaintRouter)
+app.use(StoreSettlementRouter)
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.set('port', require('./config/config').node_port);
