@@ -107,7 +107,7 @@ export function getDetail(jsonObj, startDispatch, endDispatch, interfaceURL) {
     }
 }
 
-export function saveObject(data, startDispatch, endDispatch, interfaceURL, listRouter, flag) {
+export function saveObject(data, startDispatch, endDispatch, interfaceURL, listRouter, flag, callback) {
     return dispatch=> {
         if (startDispatch) {
             dispatch(startFetch(startDispatch))
@@ -123,20 +123,23 @@ export function saveObject(data, startDispatch, endDispatch, interfaceURL, listR
             })
             .then(response=>response.json())
             .then(function (json) {
-                if (json.result == 'SUCCESS') {
+                if (json.status) {
                     dispatch(endFetch(endDispatch, json))
                     if (!flag) {
                         ConfirmModalSuccess(Current_Lang.alertTip.registerSuccess, Current_Lang.alertTip.needContinueAdd, function () {
                             browserHistory.push(listRouter)
                         })
-                    } else if(flag=="update") {
+                    } else if (flag == "update") {
                         SuccessModal(Current_Lang.alertTip.tip, Current_Lang.alertTip.updateSuccess)
                         browserHistory.push(listRouter)
-                    }else{
+                    } else {
                         SuccessModal(Current_Lang.alertTip.tip, Current_Lang.alertTip.updateSuccess)
                     }
+                    if (callback) {
+                        callback();
+                    }
                 } else {
-                    ErrorModal(Current_Lang.status.minor, Current_Lang.status.someError + json.message)
+                    ErrorModal(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message)
                 }
             })
 
@@ -165,10 +168,10 @@ export function saveObjectByPut(data, startDispatch, endDispatch, interfaceURL, 
                         ConfirmModalSuccess(Current_Lang.alertTip.registerSuccess, Current_Lang.alertTip.needContinueAdd, function () {
                             browserHistory.push(listRouter)
                         })
-                    } else if(flag=="update") {
+                    } else if (flag == "update") {
                         SuccessModal(Current_Lang.alertTip.tip, Current_Lang.alertTip.updateSuccess)
                         browserHistory.push(listRouter)
-                    }else{
+                    } else {
                         SuccessModal(Current_Lang.alertTip.tip, Current_Lang.alertTip.updateSuccess)
                     }
                 } else {

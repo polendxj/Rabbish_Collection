@@ -9,6 +9,7 @@ import BreadCrumbs from '../components/right/breadCrumbs'
 import Pagenation from '../components/right/Pagenation'
 import {getListByMutilpCondition} from '../actions/CommonActions'
 import {CITY_LIST_START, CITY_LIST_END} from '../constants/index.js'
+import classnames from 'classnames'
 
 export default class CitySettingContainer extends Component {
     constructor(props) {
@@ -340,6 +341,16 @@ export default class CitySettingContainer extends Component {
 }
 
 class CitySettingComponent extends Component {
+    componentDidMount() {
+        var tBodyTimer = setInterval(function () {
+            if (this.props.data) {
+                console.log(this.props.data)
+                clearInterval(tBodyTimer);
+            }
+
+        }.bind(this), 500)
+    }
+
     render() {
         const {data}=this.props;
         var tableHeight = ($(window).height() - 240);
@@ -347,8 +358,51 @@ class CitySettingComponent extends Component {
         if (data) {
             if (data.data.length > 0) {
                 data.data.forEach(function (val, key) {
+                    var country = [];
+                    var organization=[];
+                    if(val.country){
+                        val.country.forEach(function (c, ck) {
+                            country.push(
+                                <tr key={"city" + key+"country" + ck} className={classnames({active: ck == 0})}>
+                                    <td style={{borderTop: "0 red solid", cursor: "pointer"}}>{c.name}</td>
+                                </tr>
+                            )
+                        })
+                        if(val.country[val.countryIndex].organization){
+                            console.log(val.country[val.countryIndex])
+                            val.country[val.countryIndex].organization.content.forEach(function (o, ok) {
+                                organization.push(
+                                    <tr>
+                                        <td style={{width:"50px"}}>{ok+1}</td>
+                                        <td style={{width:"200px"}}>{o.name}</td>
+                                        <td style={{width:"150px"}}>{o.type}</td>
+                                        <td>{o.address}</td>
+                                    </tr>
+                                )
+                            })
+                        }else{
+                            organization.push(
+                                <tr>
+                                    <td colSpan="20"><NoData text="无任何小区信息"/></td>
+                                </tr>
+                            )
+                        }
+                    }else{
+                        country.push(
+                            <tr key={"city" + key+"country" + "none"} >
+                                <td style={{borderTop: "0 red solid", cursor: "pointer"}}>
+                                    <NoData text="无行政区" />
+                                </td>
+                            </tr>
+                        )
+                        organization.push(
+                            <tr>
+                                <td colSpan="20"><NoData text="无任何小区信息"/></td>
+                            </tr>
+                        )
+                    }
                     tbody.push(
-                        <tbody>
+                        <tbody key={"city" + key}>
                         <tr>
                             <td style={{textAlign: 'center'}}>
                                 {val.name}
@@ -357,74 +411,16 @@ class CitySettingComponent extends Component {
                                 <div className="table-responsive">
                                     <table className="table text-center table-hover">
                                         <tbody>
-                                        <tr className="active">
-                                            <td style={{borderTop: "0 red solid", cursor: "pointer"}}>田家庵</td>
-                                        </tr>
-                                        <tr>
-                                            <td style={{cursor: "pointer"}}>重阳</td>
-                                        </tr>
-                                        <tr>
-                                            <td style={{cursor: "pointer"}}>谢家集</td>
-                                        </tr>
-                                        <tr>
-                                            <td style={{cursor: "pointer"}}>金牛区</td>
-                                        </tr>
+                                        {country}
                                         </tbody>
                                     </table>
                                 </div>
                             </td>
                             <td>
                                 <div className="table-responsive pre-scrollable">
-                                    <table className="table table-bordered table-striped text-center">
+                                    <table className="table table-bordered  text-center">
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>金源世家</td>
-                                            <td>居民小区</td>
-                                            <td>成都市武侯区大四喜街道9002号38弄</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>西南交通大学</td>
-                                            <td>政府机构</td>
-                                            <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>西南交通大学</td>
-                                            <td>政府机构</td>
-                                            <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>西南交通大学</td>
-                                            <td>政府机构</td>
-                                            <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>西南交通大学</td>
-                                            <td>政府机构</td>
-                                            <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>西南交通大学</td>
-                                            <td>政府机构</td>
-                                            <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>西南交通大学</td>
-                                            <td>政府机构</td>
-                                            <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>西南交通大学</td>
-                                            <td>政府机构</td>
-                                            <td>成都市郫县西南交通大学犀浦校区10000号，三山街交汇处</td>
-                                        </tr>
+                                        {organization}
                                         </tbody>
                                     </table>
                                 </div>
@@ -461,7 +457,7 @@ class CitySettingComponent extends Component {
 
             } else {
                 tbody.push(
-                    <tbody>
+                    <tbody key={"loading"}>
                     <tr>
                         <td colSpan="100" style={{textAlign: 'center'}}>
                             <NoData/>
@@ -472,7 +468,7 @@ class CitySettingComponent extends Component {
             }
         } else {
             tbody.push(
-                <tbody>
+                <tbody key={"nodata"}>
                 <tr>
                     <td colSpan="100" style={{textAlign: 'center'}}>
                         <Loading/>
