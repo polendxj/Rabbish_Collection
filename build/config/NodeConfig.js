@@ -7,6 +7,7 @@ var node_service = ''
 var page_size = 50
 
 var timeout_time = 5
+var city_list = node_service + "/rsapp/city"
 
 var cs_login = node_service + '/auth/login'
 
