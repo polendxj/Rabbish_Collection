@@ -46,6 +46,12 @@ import {getTerminalPositionList, terminalPositionSave,terminalPositionDetail} fr
 
 /*rebish reducer start*/
 import {getCityList} from '../reducers/CitySettingReducer'
+import {getClassConfList} from '../reducers/ClassConfReducer'
+import {getManualRecordList} from '../reducers/ManualRecordReducer'
+import {getTransitLineList} from '../reducers/TransitLineReducer'
+import {getCorrectionList} from '../reducers/CorrectionReducer'
+import {getComplaintList} from '../reducers/ComplaintReducer'
+import {getStoreSettlementList} from '../reducers/StoreSettlementReducer'
 /*end*/
 
 import {reducer as reduxFormReducer} from 'redux-form'
@@ -117,6 +123,12 @@ const rootReducer = combineReducers({
     getAppByConsulDetail,
     getAppByConsulList,
     getCityList,
+    getClassConfList,
+    getManualRecordList,
+    getTransitLineList,
+    getCorrectionList,
+    getComplaintList,
+    getStoreSettlementList,
     form: reduxFormReducer,
     routing: routerReducer
 })

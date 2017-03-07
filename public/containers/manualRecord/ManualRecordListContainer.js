@@ -7,7 +7,9 @@ import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
-import {Loading, NoData, ConfirmModal,ErrorModal,roleApplicationUse} from '../../components/Tool/Tool'
+import {Loading, NoData, ConfirmModal,ErrorModal,roleApplicationUse,timeStamp2Time} from '../../components/Tool/Tool';
+import {MANUALRECORD_LIST_START, MANUALRECORD_LIST_END} from '../../constants/index.js'
+import {getListByMutilpCondition} from '../../actions/CommonActions';
 
 export default class ManualRecordListContainer extends Component {
     constructor(props) {
@@ -22,40 +24,13 @@ export default class ManualRecordListContainer extends Component {
             {icon: "icon-add-to-list", text: Current_Lang.others.add, action: "/DataManage/ManualRecord/Register"}
         ];
         this.searchColumn="DRIVER";
-        this.dataList = [
-            {
-                id: "1",
-                classConfName: "厨余垃圾",
-                weight:24.5,
-                description:"厨余垃圾",
-                startTime:"2017-01-08 12:32:33",
-                endTime:"2017-02-08 15:41:01",
-                recordTime:"2017-02-08 15:41:01"
-            },
-            {
-                id: "2",
-                classConfName: "厨余垃圾",
-                weight:14.5,
-                description:"厨余垃圾",
-                startTime:"2017-01-06 11:22:33",
-                endTime:"2017-02-08 15:41:01",
-                recordTime:"2017-02-08 15:41:01"
-            },
-            {
-                id: "3",
-                classConfName: "可回收垃圾",
-                weight:33.5,
-                description:"可回收垃圾",
-                startTime:"2017-02-02 13:11:23",
-                endTime:"2017-02-08 15:41:01",
-                recordTime:"2017-02-08 15:41:01"
-            }
-        ];
     }
 
     componentDidMount() {
         var self=this;
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
+        var params = {page: 0, size: 20};
+        this.props.dispatch(getListByMutilpCondition(params, MANUALRECORD_LIST_START, MANUALRECORD_LIST_END, manualRecord_list));
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
             if($(this).find('a').text().trim()=="按垃圾分类搜索"){
@@ -98,7 +73,7 @@ export default class ManualRecordListContainer extends Component {
     }
 
     render() {
-        const {selected, form, fetching, data} =this.props;
+        const {fetching, data} =this.props;
         return (
             <div>
                 <BreadCrumbs
@@ -146,11 +121,11 @@ export default class ManualRecordListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"垃圾称量列表区"}</legend>
                         <div style={{marginTop:'-80px'}}>
-                            <Pagenation counts={3} page={this.page}
+                            <Pagenation counts={data ? data.data.content.length : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>
-                        <ManualRecordListComponent data={this.dataList} fetching={false}
+                        <ManualRecordListComponent data={data} fetching={fetching}
                                             _delete={this._delete}
                                             _updateStatus={this._updateStatus}/>
 
@@ -163,7 +138,7 @@ export default class ManualRecordListContainer extends Component {
 
 class ManualRecordListComponent extends Component{
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     _detail(path) {
@@ -177,29 +152,16 @@ class ManualRecordListComponent extends Component{
     render() {
         const {data, fetching}=this.props;
         let tb = [];
-        if (fetching) {
-            tb.push(<tr key={'loading'}>
-                <td colSpan="8" style={{textAlign: 'center'}}>
-                    <Loading />
-                </td>
-            </tr>)
-        } else if (data) {
-            if (data.length == 0) {
-                tb.push(<tr key={'noData'}>
-                    <td colSpan="8" style={{textAlign: 'center'}}>
-                        <NoData />
-                    </td>
-
-                </tr>)
-            } else {
-                data.forEach(function (val, key) {
+        console.log("recordData",data);
+        if (data) {
+            if (data.data.content.length > 0) {
+                data.data.content.forEach(function (val, key) {
                     tb.push(<tr key={key} style={{backgroundColor:key%2==0?"#F8F8F8":""}}>
                         <td className="text-center">{key+1}</td>
-                        <td className="text-center">{val.classConfName}</td>
+                        <td className="text-center">{val.classConf.name}</td>
                         <td className="text-center">{val.weight}</td>
-                        <td className="text-center">{val.startTime}</td>
-                        <td className="text-center">{val.endTime}</td>
-                        <td className="text-center">{val.recordTime}</td>
+                        <td className="text-center">{timeStamp2Time(val.startTime)}</td>
+                        <td className="text-center">{timeStamp2Time(val.endTime)}</td>
                         <td className="text-center">{val.description}</td>
                         <td className="text-center">
                             {<ul className="icons-list">
@@ -211,7 +173,7 @@ class ManualRecordListComponent extends Component{
                                         <li style={{display:'block'}} onClick={this._detail.bind(this, '/DataManage/TransitLine/ModifyTransitLine/:' + val.id)}>
                                             <a href="javascript:void(0)"><i className="icon-pencil5"></i>
                                                 {"修改"}</a></li>
-                                        <li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.classConfName,val.weight)}><a
+                                        <li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.classConf.name,val.weight)}><a
                                             href="javascript:void(0)"><i className="icon-trash"></i>
                                             {"删除"}</a></li>
                                     </ul>
@@ -221,7 +183,20 @@ class ManualRecordListComponent extends Component{
                         </td>
                     </tr>)
                 }.bind(this))
+            }else{
+                tb.push(<tr key={'noData'}>
+                    <td colSpan="8" style={{textAlign: 'center'}}>
+                        <NoData />
+                    </td>
+
+                </tr>)
             }
+        }else{
+            tb.push(<tr key={'loading'}>
+                <td colSpan="8" style={{textAlign: 'center'}}>
+                    <Loading />
+                </td>
+            </tr>)
         }
         var tableHeight = ($(window).height()-240);
         return (
@@ -230,12 +205,11 @@ class ManualRecordListComponent extends Component{
                     <thead>
                     <tr style={{fontWeight:'bold'}}>
                         <th className="text-center" style={{width: "20px"}}></th>
-                        <th className="col-md-1 text-bold text-center">{"分类"}</th>
-                        <th className="col-md-1 text-bold text-center">{"重量"}</th>
+                        <th className="col-md-2 text-bold text-center">{"分类名称"}</th>
+                        <th className="col-md-2 text-bold text-center">{"重量"}</th>
                         <th className="col-md-2 text-bold text-center">{"起始时间"}</th>
                         <th className="col-md-2 text-bold text-center">{"结束时间"}</th>
-                        <th className="col-md-2 text-bold text-center">{"记录时间"}</th>
-                        <th className="col-md-4 text-bold text-center">{"描述"}</th>
+                        <th className="col-md-4 text-bold text-center">{"错误描述"}</th>
                         <th className="text-center" style={{width: "20px"}}><i
                             className="icon-arrow-down12"></i>
                         </th>
@@ -252,12 +226,10 @@ class ManualRecordListComponent extends Component{
 }
 
 function mapStateToProps(state) {
-    const {changeSearch1Type, form, getAdminList}=state;
+    const {getManualRecordList}=state;
     return {
-        selected: changeSearch1Type.selected,
-        form: form,
-        fetching: getAdminList.fetching,
-        data: getAdminList.data
+        fetching: getManualRecordList.fetching,
+        data: getManualRecordList.data
     }
 }
 

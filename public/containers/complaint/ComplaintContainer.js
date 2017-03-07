@@ -7,7 +7,9 @@ import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
-import {Loading, NoData, ConfirmModal, ErrorModal, roleApplicationUse} from '../../components/Tool/Tool'
+import {Loading, NoData, ConfirmModal, ErrorModal, roleApplicationUse,timeStamp2Time} from '../../components/Tool/Tool'
+import {COMPLAINT_LIST_START, COMPLAINT_LIST_END} from '../../constants/index.js'
+import {getListByMutilpCondition} from '../../actions/CommonActions';
 
 export default class ComplaintContainer extends Component {
     constructor(props) {
@@ -26,45 +28,12 @@ export default class ComplaintContainer extends Component {
             }
         ];
         this.searchColumn = "DRIVER";
-        this.dataList = [
-            {
-                id: "001",
-                name: "付大海",
-                title: "asfasd",
-                content: "啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发",
-                photo: "/assets/images/placeholder.jpg",
-                commitTime: "2017-01-08 12:32:33",
-                dealTime: "2017-01-09 12:32:33",
-                dealName: "管理员1",
-                suggestion: "已交给处理人员处理，请您耐心等候！"
-            },
-            {
-                id: "002",
-                name: "寇建波",
-                title: "afasdf",
-                content: "没事佛啊佛为附件",
-                photo: "/assets/images/placeholder.jpg",
-                commitTime: "2017-01-06 11:22:33",
-                dealTime: "2017-01-09 12:32:33",
-                dealName: "管理员2",
-                suggestion: "已交给处理人员处理，请您耐心等候！"
-            },
-            {
-                id: "003",
-                name: "熊荣东",
-                title: "asdfak",
-                content: "吗我额就开机即可",
-                photo: "/assets/images/placeholder.jpg",
-                commitTime: "2017-02-02 13:11:23",
-                dealTime: "2017-01-09 12:32:33",
-                dealName: "",
-                suggestion: ""
-            }
-        ];
     }
 
     componentDidMount() {
         var self = this;
+        var params = {page: 0, size: 20};
+        this.props.dispatch(getListByMutilpCondition(params, COMPLAINT_LIST_START, COMPLAINT_LIST_END, complaint_list));
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
@@ -108,7 +77,7 @@ export default class ComplaintContainer extends Component {
     }
 
     render() {
-        const {selected, form, fetching, data} =this.props;
+        const {fetching, data} =this.props;
         return (
             <div>
                 <BreadCrumbs
@@ -156,11 +125,11 @@ export default class ComplaintContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"投诉举报列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
-                            <Pagenation counts={3} page={this.page}
+                            <Pagenation counts={data ? data.data.content.length : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>
-                        <ComplaintListComponent data={this.dataList} fetching={false}
+                        <ComplaintListComponent data={data} fetching={fetching}
                                                 _delete={this._delete}
                                                 _updateStatus={this._updateStatus}/>
 
@@ -199,22 +168,9 @@ class ComplaintListComponent extends Component {
     render() {
         const {data, fetching}=this.props;
         let tb = [];
-        if (fetching) {
-            tb.push(<tr key={'loading'}>
-                <td colSpan="8" style={{textAlign: 'center'}}>
-                    <Loading />
-                </td>
-            </tr>)
-        } else if (data) {
-            if (data.length == 0) {
-                tb.push(<tr key={'noData'}>
-                    <td colSpan="8" style={{textAlign: 'center'}}>
-                        <NoData />
-                    </td>
-
-                </tr>)
-            } else {
-                data.forEach(function (val, key) {
+        if (data) {
+            if (data.data.content.length > 0) {
+                data.data.content.forEach(function (val, key) {
                     tb.push(
                         <div key={key} className="panel panel-white text-left">
                             <div className="panel-heading" style={{padding: "15px 20px 10px 20px"}}>
@@ -230,7 +186,7 @@ class ComplaintListComponent extends Component {
                                                     {val.name}&nbsp;&nbsp;
                                                     <i className="icon-alarm" style={{fontSize: "3px"}}/>
                                                     &nbsp;
-                                                    {val.commitTime}&nbsp;&nbsp;
+                                                    {timeStamp2Time(val.commitTime)}&nbsp;&nbsp;
                                                     <a className="collapsed" data-toggle="collapse" href={"#collapse-" + val.id}>
                                                         <i className="icon-bubble2" style={{fontSize: "4px"}}></i>
                                                         &nbsp;
@@ -287,15 +243,28 @@ class ComplaintListComponent extends Component {
                                                 {val.dealName}&nbsp;&nbsp;
                                                 <i className="icon-alarm" style={{fontSize: "3px"}}></i>
                                                 &nbsp;
-                                                {val.dealTime}
+                                                {timeStamp2Time(val.dealTime)}
                                             </small>
                                         </div>}
                                 </div>
                             </div>
                         </div>
                     )
-                }.bind(this))
+                }.bind(this));
+            }else{
+                tb.push(<tr key={'noData'}>
+                    <td colSpan="8" style={{textAlign: 'center'}}>
+                        <NoData />
+                    </td>
+
+                </tr>)
             }
+        }else{
+            tb.push(<tr key={'loading'}>
+                <td colSpan="8" style={{textAlign: 'center'}}>
+                    <Loading />
+                </td>
+            </tr>)
         }
         var tableHeight = ($(window).height() - 240);
         return (
@@ -310,12 +279,10 @@ class ComplaintListComponent extends Component {
 }
 
 function mapStateToProps(state) {
-    const {changeSearch1Type, form, getAdminList}=state;
+    const {getComplaintList}=state;
     return {
-        selected: changeSearch1Type.selected,
-        form: form,
-        fetching: getAdminList.fetching,
-        data: getAdminList.data
+        fetching: getComplaintList.fetching,
+        data: getComplaintList.data
     }
 }
 

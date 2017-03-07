@@ -7,7 +7,9 @@ import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
-import {Loading, NoData, ConfirmModal,ErrorModal,roleApplicationUse} from '../../components/Tool/Tool'
+import {Loading, NoData, ConfirmModal,ErrorModal,roleApplicationUse,timeStamp2Time} from '../../components/Tool/Tool';
+import {CLASSCONF_LIST_START, CLASSCONF_LIST_END} from '../../constants/index.js'
+import {getListByMutilpCondition} from '../../actions/CommonActions';
 
 export default class RubbishClassListContainer extends Component {
     constructor(props) {
@@ -30,6 +32,8 @@ export default class RubbishClassListContainer extends Component {
 
     componentDidMount() {
         var self=this;
+        var params = {page: 0, size: 20};
+        this.props.dispatch(getListByMutilpCondition(params, CLASSCONF_LIST_START, CLASSCONF_LIST_END, classConf_list));
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
@@ -73,7 +77,8 @@ export default class RubbishClassListContainer extends Component {
     }
 
     render() {
-        const {selected, form, fetching, data} =this.props;
+        const {fetching, data} =this.props;
+        console.log(data);
         return (
             <div>
                 <BreadCrumbs
@@ -121,11 +126,11 @@ export default class RubbishClassListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"垃圾分类列表区"}</legend>
                         <div style={{marginTop:'-80px'}}>
-                            <Pagenation counts={2} page={this.page}
+                            <Pagenation counts={data ? data.data.length : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>
-                        <RubbishClassListComponent data={this.dataList} fetching={false}
+                        <RubbishClassListComponent data={data} fetching={fetching}
                                             _delete={this._delete}
                                             _updateStatus={this._updateStatus}/>
 
@@ -152,27 +157,15 @@ class RubbishClassListComponent extends Component{
     render() {
         const {data, fetching}=this.props;
         let tb = [];
-        if (fetching) {
-            tb.push(<tr key={'loading'}>
-                <td colSpan="8" style={{textAlign: 'center'}}>
-                    <Loading />
-                </td>
-            </tr>)
-        } else if (data) {
-            if (data.length == 0) {
-                tb.push(<tr key={'noData'}>
-                    <td colSpan="8" style={{textAlign: 'center'}}>
-                        <NoData />
-                    </td>
-
-                </tr>)
-            } else {
-                data.forEach(function (val, key) {
+        console.log("data",data);
+        if (data) {
+            if (data.data.length > 0) {
+                data.data.forEach(function (val, key) {
                     tb.push(<tr key={key} style={{backgroundColor:key%2==0?"#F8F8F8":""}}>
                         <td className="text-center">{key+1}</td>
                         <td className="text-center">{val.name}</td>
                         <td className="text-left">{val.description}</td>
-                        <td className="text-center">{val.updateTime}</td>
+                        <td className="text-center">{timeStamp2Time(val.updateTime)}</td>
                         <td className="text-center">
                             {<ul className="icons-list">
                                 <li className="dropdown">
@@ -193,8 +186,25 @@ class RubbishClassListComponent extends Component{
                         </td>
                     </tr>)
                 }.bind(this))
+            }else{
+                tb.push(
+                    <tbody>
+                    <tr>
+                        <td colSpan="100" style={{textAlign: 'center'}}>
+                            <NoData/>
+                        </td>
+                    </tr>
+                    </tbody>
+                )
             }
+        }else{
+            tb.push(<tr key={'loading'}>
+                <td colSpan="8" style={{textAlign: 'center'}}>
+                    <Loading />
+                </td>
+            </tr>)
         }
+
         var tableHeight = ($(window).height()-240);
         return (
             <div className="table-responsive" style={{height:tableHeight+'px',overflowY:'scroll'}}>
@@ -220,12 +230,10 @@ class RubbishClassListComponent extends Component{
 }
 
 function mapStateToProps(state) {
-    const {changeSearch1Type, form, getAdminList}=state;
+    const {getClassConfList}=state;
     return {
-        selected: changeSearch1Type.selected,
-        form: form,
-        fetching: getAdminList.fetching,
-        data: getAdminList.data
+        fetching: getClassConfList.fetching,
+        data: getClassConfList.data
     }
 }
 

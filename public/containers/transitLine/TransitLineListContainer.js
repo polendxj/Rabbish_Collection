@@ -7,7 +7,9 @@ import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
-import {Loading, NoData, ConfirmModal,ErrorModal,roleApplicationUse} from '../../components/Tool/Tool'
+import {Loading, NoData, ConfirmModal,ErrorModal,roleApplicationUse} from '../../components/Tool/Tool';
+import {TRANSITLINE_LIST_START, TRANSITLINE_LIST_END} from '../../constants/index.js'
+import {getListByMutilpCondition} from '../../actions/CommonActions';
 
 export default class TransitLineListContainer extends Component {
     constructor(props) {
@@ -22,46 +24,13 @@ export default class TransitLineListContainer extends Component {
             {icon: "icon-add-to-list", text: Current_Lang.others.add, action: "/DataManage/TransitLine/Register"}
         ];
         this.searchColumn="DRIVER";
-        this.dataList = [
-            {
-                id: "1",
-                licensePlateNum: "川A123EE",
-                driver:"皮恒浩",
-                contact:"13381233533",
-                drivingLicenseNum:"510109198110056734",
-                startLocation:"崇州东",
-                stoppedLocation:"崇州市区",
-                endLocation:"崇州西",
-                createTime:"2017-02-08 15:41:01"
-            },
-            {
-                id: "2",
-                licensePlateNum: "川A234BB",
-                driver:"白丹",
-                contact:"13381233533",
-                drivingLicenseNum:"510109198110056734",
-                startLocation:"成都东",
-                stoppedLocation:"成都市区",
-                endLocation:"犀浦",
-                createTime:"2017-02-08 11:21:35"
-            },
-            {
-                id: "3",
-                licensePlateNum: "川A254VF",
-                driver:"方舟",
-                contact:"15183487432",
-                drivingLicenseNum:"510109198110056734",
-                startLocation:"成都东",
-                stoppedLocation:"成都市区",
-                endLocation:"犀浦",
-                createTime:"2017-02-08 12:21:35"
-            }
-        ];
     }
 
     componentDidMount() {
         var self=this;
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
+        var params = {page: 0, size: 20};
+        this.props.dispatch(getListByMutilpCondition(params, TRANSITLINE_LIST_START, TRANSITLINE_LIST_END, transitLine_list));
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
             if($(this).find('a').text().trim()=="按司机姓名搜索"){
@@ -73,7 +42,7 @@ export default class TransitLineListContainer extends Component {
     }
 
     _delete(id,name) {
-        var that = this
+        var that = this;
         if(sessionStorage['adminId']==id){
             ErrorModal(Current_Lang.status.minor,Current_Lang.alertTip.accountOperating)
             return
@@ -183,22 +152,9 @@ class TransitLineListComponent extends Component{
     render() {
         const {data, fetching}=this.props;
         let tb = [];
-        if (fetching) {
-            tb.push(<tr key={'loading'}>
-                <td colSpan="8" style={{textAlign: 'center'}}>
-                    <Loading />
-                </td>
-            </tr>)
-        } else if (data) {
-            if (data.length == 0) {
-                tb.push(<tr key={'noData'}>
-                    <td colSpan="8" style={{textAlign: 'center'}}>
-                        <NoData />
-                    </td>
-
-                </tr>)
-            } else {
-                data.forEach(function (val, key) {
+        if (data) {
+            if (data.data.content.length > 0) {
+                data.data.content.forEach(function (val, key) {
                     tb.push(<tr key={key} style={{backgroundColor:key%2==0?"#F8F8F8":""}}>
                         <td className="text-center">{key+1}</td>
                         <td className="text-center">{val.licensePlateNum}</td>
@@ -228,8 +184,21 @@ class TransitLineListComponent extends Component{
 
                         </td>
                     </tr>)
-                }.bind(this))
+                });
+            }else{
+                tb.push(<tr key={'noData'}>
+                    <td colSpan="8" style={{textAlign: 'center'}}>
+                        <NoData />
+                    </td>
+
+                </tr>)
             }
+        }else{
+            tb.push(<tr key={'loading'}>
+                <td colSpan="8" style={{textAlign: 'center'}}>
+                    <Loading />
+                </td>
+            </tr>)
         }
         var tableHeight = ($(window).height()-240);
         return (
@@ -262,12 +231,10 @@ class TransitLineListComponent extends Component{
 }
 
 function mapStateToProps(state) {
-    const {changeSearch1Type, form, getAdminList}=state;
+    const {getTransitLineList}=state;
     return {
-        selected: changeSearch1Type.selected,
-        form: form,
-        fetching: getAdminList.fetching,
-        data: getAdminList.data
+        fetching: getTransitLineList.fetching,
+        data: getTransitLineList.data
     }
 }
 
