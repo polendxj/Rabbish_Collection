@@ -34,14 +34,14 @@ export default class AdminListComponent extends Component {
         let tb = []
         if (fetching) {
             tb.push(<tr key={'loading'}>
-                <td colSpan="8" style={{textAlign: 'center'}}>
+                <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />
                 </td>
             </tr>)
         } else if (data) {
             if (data.length == 0) {
                 tb.push(<tr key={'noData'}>
-                    <td colSpan="8" style={{textAlign: 'center'}}>
+                    <td colSpan="100" style={{textAlign: 'center'}}>
                         <NoData />
                     </td>
 

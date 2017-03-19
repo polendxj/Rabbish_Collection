@@ -43,6 +43,14 @@ var TransitLineRouter = require('./routes/TransitLineRouter');
 var CorrectionRouter = require('./routes/CorrectionRouter');
 var ComplaintRouter = require('./routes/ComplaintRouter');
 var StoreSettlementRouter = require('./routes/StoreSettlementRouter');
+var StoreRouter = require('./routes/StoreRouter');
+var ReviewRouter = require('./routes/ReviewRouter');
+var GeneralUserRouter = require('./routes/GeneralUserRouter');
+var AdminUserRouter = require('./routes/AdminUserRouter');
+var OrganizationRouter = require('./routes/OrganizationRouter');
+var ReplyRouter = require('./routes/ReplyRouter');
+var NoticeRouter = require('./routes/NoticeRouter');
+var StatisticRouter = require('./routes/StatisticRouter');
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
@@ -55,6 +63,14 @@ app.use(TransitLineRouter)
 app.use(CorrectionRouter)
 app.use(ComplaintRouter)
 app.use(StoreSettlementRouter)
+app.use(StoreRouter)
+app.use(ReviewRouter)
+app.use(GeneralUserRouter)
+app.use(AdminUserRouter)
+app.use(OrganizationRouter)
+app.use(ReplyRouter)
+app.use(NoticeRouter)
+app.use(StatisticRouter)
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.set('port', require('./config/config').node_port);

@@ -11,6 +11,7 @@ import {Loading, NoData, ConfirmModal,ErrorModal,roleApplicationUse} from '../..
 export default class UnauthorizedStore extends Component{
     constructor(props) {
         super(props);
+        this._detail = this._detail.bind(this);
     }
 
     _lockUser(){
@@ -25,35 +26,21 @@ export default class UnauthorizedStore extends Component{
 
     }
 
-    _detail(path,val) {
-        browserHistory.push(path)
+    _detail(val) {
+        this.props._detail(val);
+    }
+    _showVerify(val){
+        this.props._showVerify(val);
     }
     _account(path,val){
         browserHistory.push(path)
     }
 
-    _delete(id,classConfName,weight) {
-        this.props._delete(id,classConfName,weight)
-    }
-
     render() {
         const {data, fetching}=this.props;
         let tb = [];
-        if (fetching) {
-            tb.push(<tr key={'loading'}>
-                <td colSpan="8" style={{textAlign: 'center'}}>
-                    <Loading />
-                </td>
-            </tr>)
-        } else if (data) {
-            if (data.length == 0) {
-                tb.push(<tr key={'noData'}>
-                    <td colSpan="8" style={{textAlign: 'center'}}>
-                        <NoData />
-                    </td>
-
-                </tr>)
-            } else {
+        if (data) {
+            if (data.length > 0) {
                 data.forEach(function (val, key) {
                     tb.push(<tr key={key} style={{backgroundColor:key%2==0?"#F8F8F8":""}}>
                         <td className="text-center">{key+1}</td>
@@ -70,12 +57,13 @@ export default class UnauthorizedStore extends Component{
                                 </div>
                             </div>
                         </td>
-                        <td className="text-center">{val.storeName}</td>
+                        <td className="text-center">{val.name}</td>
+                        <td className="text-center">{val.manager}</td>
                         <td className="text-center">{val.alipayAccount}</td>
                         <td className="text-center">{val.city}</td>
-                        <td className="text-center">{val.country}</td>
-                        <td className="text-center">{val.manager}</td>
+                        <td className="text-center">{val.county}</td>
                         <td className="text-center">{val.contact}</td>
+                        <td className="text-center">{val.address}</td>
                         <td className="text-center">
                             {<ul className="icons-list">
                                 <li className="dropdown">
@@ -85,20 +73,36 @@ export default class UnauthorizedStore extends Component{
                                     <ul className="dropdown-menu dropdown-menu-right">
                                         <li>
                                             <a href="javascript:void(0)" data-toggle="modal"
-                                               data-target="#detailModal"><i className=" icon-office"></i>
+                                               data-target="#detailModal" onClick={this._detail.bind(this, val)}><i className=" icon-office"></i>
                                                 {"详情"}</a>
                                         </li>
-                                        <li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.classConfName,val.weight)}><a
-                                            href="javascript:void(0)"><i className="icon-trash"></i>
-                                            {"删除"}</a></li>
+                                        <li>
+                                            <a href="javascript:void(0)" data-toggle="modal"
+                                               data-target="#verifyModal" onClick={this._showVerify.bind(this, val)}><i
+                                                className=" icon-office"></i>
+                                                {"审核"}</a>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>}
 
                         </td>
                     </tr>)
-                }.bind(this))
+                }.bind(this));
+            }else{
+                tb.push(<tr key={'noData'}>
+                    <td colSpan="100" style={{textAlign: 'center'}}>
+                        <NoData />
+                    </td>
+
+                </tr>)
             }
+        }else{
+            tb.push(<tr key={'loading'}>
+                <td colSpan="100" style={{textAlign: 'center'}}>
+                    <Loading />
+                </td>
+            </tr>)
         }
         var tableHeight = ($(window).height()-240);
         return (
@@ -109,11 +113,12 @@ export default class UnauthorizedStore extends Component{
                         <th className="text-center" style={{width: "20px"}}></th>
                         <th className="col-md-1 text-bold text-center">{"店铺图标"}</th>
                         <th className="col-md-2 text-bold text-center">{"店铺名称"}</th>
-                        <th className="col-md-2 text-bold text-center">{"支付宝账号"}</th>
-                        <th className="col-md-1 text-bold text-center">{"城市"}</th>
-                        <th className="col-md-2 text-bold text-center">{"区县"}</th>
                         <th className="col-md-2 text-bold text-center">{"负责人"}</th>
+                        <th className="col-md-1 text-bold text-center">{"支付宝账号"}</th>
+                        <th className="col-md-1 text-bold text-center">{"城市"}</th>
+                        <th className="col-md-1 text-bold text-center">{"区县"}</th>
                         <th className="col-md-2 text-bold text-center">{"联系方式"}</th>
+                        <th className="col-md-2 text-bold text-center">{"地址"}</th>
                         <th className="text-center" style={{width: "20px"}}><i
                             className="icon-arrow-down12"></i>
                         </th>

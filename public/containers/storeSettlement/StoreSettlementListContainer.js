@@ -74,7 +74,6 @@ export default class StoreSettlementListContainer extends Component {
 
     render() {
         const {fetching, data} =this.props;
-        console.log("data",data);
         return (
             <div>
                 <BreadCrumbs
@@ -164,7 +163,7 @@ class StoreSettlementListComponent extends Component {
                         <td className="text-center">{timeStamp2Time(val.settletime)}</td>
                         <td className="text-center">
                             {<ul className="icons-list">
-                                <li className="dropdown">t
+                                <li className="dropdown">
                                     <a href="#" className="dropdown-toggle"
                                        data-toggle="dropdown" aria-expanded="false"><i
                                         className="icon-menu7"></i></a>
@@ -182,14 +181,14 @@ class StoreSettlementListComponent extends Component {
                 }.bind(this));
             }else{
                 tb.push(<tr key={'noData'}>
-                    <td colSpan="8" style={{textAlign: 'center'}}>
+                    <td colSpan="100" style={{textAlign: 'center'}}>
                         <NoData />
                     </td>
                 </tr>)
             }
         }else {
             tb.push(<tr key={'loading'}>
-                <td colSpan="8" style={{textAlign: 'center'}}>
+                <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />
                 </td>
             </tr>)

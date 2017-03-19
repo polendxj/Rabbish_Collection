@@ -41,12 +41,13 @@ export default class CitySettingContainer extends Component {
     }
 
     componentDidMount() {
-        var params = {page: 0, size: 20}
+        var params = {page: 0, size: 20};
         this.props.dispatch(getListByMutilpCondition(params, CITY_LIST_START, CITY_LIST_END, city_list));
     }
 
     render() {
         const {fetching, data}=this.props;
+        console.log("citySetting",data);
         var countryInfo = <div>
             <ul className="nav nav-tabs">
                 <li

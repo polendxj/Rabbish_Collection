@@ -8,7 +8,7 @@ import {browserHistory} from 'react-router'
 import {bindActionCreators} from 'redux'
 import {Loading, ListModal, serverStatus, ErrorModal, DecodeBase64, streamingTemplateFilter} from '../../components/Tool/Tool';
 import BreadCrumbs from '../../components/right/breadCrumbs';
-import {saveServiceGroup} from '../../actions/SystemManagerServiceGroupAction';
+import {saveObject} from '../../actions/CommonActions';
 import {commonRefresh} from '../../actions/Common';
 
 export default class RubbishClassRegisterContainer extends Component {
@@ -31,8 +31,7 @@ export default class RubbishClassRegisterContainer extends Component {
     }
 
     _save(params) {
-        this.props.dispatch(saveServiceGroup(params))
-
+        this.props.dispatch(saveObject(params,"","",classConf_register,"/DataManage/RubbishClass"));
     }
 
     render() {
@@ -56,108 +55,29 @@ export default class RubbishClassRegisterContainer extends Component {
 class RegisterRubbishClassComponent extends Component{
     constructor(props) {
         super(props)
-        this._syncData = this._syncData.bind(this);
         this._save = this._save.bind(this)
-        this._search = this._search.bind(this)
-        this.initApp = [];
-        this.selectedApp = "";
     }
 
     _search() {
         this.props._startRefresh();
     }
 
-    _syncData() {
-        this.selectedCSE = $.extend([], this.confirmSelected);
-
-        this.props._startRefresh()
-    }
-
-    componentDidUpdate() {
-        if ($("#allCSEList").find('tr').length > 0) {
-            // $('.datatable-basic').DataTable();
-            // $('.dataTables_length').remove();
-        }
-
-    }
+    componentDidUpdate() {}
 
     _save() {
-        var cseListIDS = [];
-        var singleAppID = true;
-        var army = this.selectedCSE[0];
-        this.selectedCSE.forEach(function (val, key) {
-            if (val.node.appId != army.node.appId) {
-                singleAppID = false
-            }
-        })
-        if (singleAppID) {
-            this.selectedCSE.forEach(function (val, key) {
-                cseListIDS.push(val.node.cssId)
-            })
-            var params = {
-                groupId: $("#name").val(),
-                description: $("#description").val(),
-                cseList: cseListIDS,
-                mode: 'new'
-            }
-            this.props._save(params)
-        } else {
-            ErrorModal(Current_Lang.status.minor, Current_Lang.alertTip.cseGroupHaveDiffCSE);
-        }
+        var params = {
+            name: $("#name").val(),
+            description: $("#description").val(),
+            parentid:1
+        };
+        this.props._save(params);
 
     }
 
-    _appOnChange() {
-        this.props._startRefresh();
-    }
 
-    componentDidMount() {
-        var self = this;
-        $("#cse_group_text").parent().parent().on('click', 'li', function () {
-            $("#cse_group_text").text($(this).find('a').text())
-        })
-        $("#app_id_text").parent().parent().on('click', 'li', function () {
-            $("#app_id_text").text($(this).find('a').text())
-        })
-        $("#cse_status_text").parent().parent().on('click', 'li', function () {
-            $("#cse_status_text").text($(this).find('a').text())
-        })
-        $('[data-popup="tooltip"]').tooltip();
-
-        var getFirstAppID = setInterval(function () {
-            if ($("#common_app option:selected").val()) {
-                clearInterval(getFirstAppID)
-                self.selectedApp = self.initApp[$("#common_app option:selected").index()];
-                this.props._startRefresh()
-            }
-        }.bind(this), 500)
-
-
-        $("#common_app").on("change", function () {
-            self.selectedApp = self.initApp[$("#common_app option:selected").index()];
-            self.props._startRefresh()
-        })
-        $("#streamingProfile").on("change", function () {
-            if ($("#streamingProfile option:selected").text().indexOf("QAM") >= 0) {
-                $(".erm").show();
-            } else {
-                $(".erm").hide();
-            }
-
-            self.props._startRefresh()
-        })
-
-    }
+    componentDidMount() {}
 
     render() {
-        const {allCSE, cseGroup, appList, streamingTemplate}=this.props;
-        if ($("#streamingProfile option:selected").text().indexOf("QAM") >= 0) {
-            $(".erm").show();
-        } else {
-            $(".erm").hide();
-        }
-        var self = this;
-
         var tableHeight = ($(window).height() - 130);
         return (
             <div>
@@ -212,9 +132,8 @@ class RegisterRubbishClassComponent extends Component{
 }
 
 function mapStateToProps(state) {
-    const {changeSearch1Type, form, adminSave,commonReducer}=state
+    const {commonReducer}=state
     return {
-        form: form,
         refresh: commonReducer.refresh
     }
 }

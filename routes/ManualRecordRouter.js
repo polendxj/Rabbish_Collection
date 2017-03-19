@@ -16,12 +16,10 @@ router.post('/rsapp/manualRecord', function (req, resp) {
                 var count = 0;
                 manualRecord.data.content.forEach(function (m, k) {
                     (function (m) {
-                        console.log("m",m.classid);
                         RequestApi.Request(baseURL + '/rsapp/classConf/' + m.classid, 'GET', "", req, resp, function (classConf) {
                             m["classConf"]=classConf.data;
                             count++;
                             if (count == manualRecord.data.content.length) {
-                                console.log("mm",count == manualRecord.data.content.length);
                                 resp.send(manualRecord);
                             }
                         })
@@ -33,7 +31,11 @@ router.post('/rsapp/manualRecord', function (req, resp) {
         } else {
             resp.send(manualRecord)
         }
-    })
+    });
+    router.post('/rsapp/manualRecord/register', function (req, resp) {
+        var data = JSON.stringify(JSON.parse(req.body.data));
+        RequestApi.Request(baseURL + '/rsapp/manualRecord', 'POST',data, req, resp);
+    });
 });
 
 module.exports = router;

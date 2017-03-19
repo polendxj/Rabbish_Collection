@@ -172,6 +172,28 @@ export class ListMiddleModal extends Component {
     }
 }
 
+export class VerifyModal extends Component {
+
+    render() {
+        return (
+            <div id={this.props.id ? this.props.id : "ListModal"} className="modal fade">
+                <div className="modal-dialog modal-dialog modal-lg">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <button type="button" className="close" data-dismiss="modal">&times;</button>
+                            <h5 className="modal-title">{this.props.tip}</h5>
+                        </div>
+
+                        <div className="modal-body">
+                            {this.props.content}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
 export class CustomeListMiddleModal extends Component {
     _ensureBtn() {
         this.props.doAction(this.props.data)
@@ -278,7 +300,7 @@ export function CreateNodeChart(nodes, links, payload) {
     var svg = d3.select('#' + payload)
         .append('svg')
         .attr("preserveAspectRatio", "xMidYMid meet")
-        .attr("viewBox", "0 0 300 300")
+        .attr("viewBox", "0 0 300 300");
     // [
     // {id: 'dadsada', reflexive: false},
     // {id: 1, reflexive: false},
@@ -301,7 +323,7 @@ export function CreateNodeChart(nodes, links, payload) {
         .size([width, height])
         .linkDistance(150)
         .charge(-500)
-        .on('tick', tick)
+        .on('tick', tick);
 
     svg.append('svg:defs').append('svg:marker')
         .attr('id', 'end-arrow')
@@ -382,7 +404,7 @@ export function CreateNodeChart(nodes, links, payload) {
             })
             .style('marker-end', function (d) {
                 return d.right ? 'url(#end-arrow)' : '';
-            })
+            });
         circle = circle.data(nodes, function (d) {
             return d.id;
         });
@@ -411,7 +433,7 @@ export function CreateNodeChart(nodes, links, payload) {
                 if (!mousedown_node || d === mousedown_node) return;
                 // enlarge target node
                 d3.select(this).attr('transform', 'scale(1.1)');
-            })
+            });
         // show node IDs
         g.append('svg:text')
             .attr('x', 0)
@@ -524,7 +546,7 @@ export function EncodeBase64(form) {
 }
 
 function makeArray(n) {
-    this.length = n
+    this.length = n;
     for (var i = 1; i <= n; i++) {
         this[i] = null;
     }
@@ -627,14 +649,14 @@ export function warningLevelColorFilter(targetType) {
 }
 
 export function roleApplicationUse() {
-    var result = true
-    var rules = JSON.parse(sessionStorage['rules'])
+    var result = true;
+    var rules = JSON.parse(sessionStorage['rules']);
     if (rules.permissionId == "SV") {
         result = true;
     } else {
         result = false;
     }
-    return result
+    return result;
 
     // if (type) {
     //
@@ -670,7 +692,7 @@ export function buildSort(tableID) {
 }
 
 export function findSortInfo(tableID) {
-    var result = ""
+    var result = "";
     $("#" + tableID).find("th").each(function (idx) {
         if ($("#" + tableID).find("th").eq(idx).children('i').hasClass('icon-arrow-up5')) {
             result = 'ASC';
@@ -760,12 +782,95 @@ export function resolutionFilter(value) { //0-streamingType       1-environment 
     return result;
 }
 export function timeStamp2Time(time) {
-    var date = new Date(time);
-    var Y = date.getFullYear() + '-';
-    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-    var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ';
-    var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
-    var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
-    var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
-    return Y + M + D + h + m + s;
+    var timeStr = "";
+    if(time){
+        var date = new Date(time);
+        var Y = date.getFullYear() + '-';
+        var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+        var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ';
+        var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+        var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+        var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+        timeStr = Y + M + D + h + m + s;
+    }
+    return timeStr;
+}
+export function userType(type) {
+    var userType = "";
+    switch (type){
+        case 1:
+            userType="管理员";break;
+        case 2:
+            userType="扫码员";break;
+        case 3:
+            userType="商户用户";break;
+        case 4:
+            userType="住宅用户";break;
+        case 5:
+            userType="机关单位、学校";break;
+        default:break;
+    }
+    return userType;
+}
+export function noticeType(type) {
+    var noticeType = "";
+    switch (type){
+        case 1:
+            noticeType="公告";break;
+        case 2:
+            noticeType="新闻";break;
+        case 3:
+            noticeType="政策法规";break;
+        default:break;
+    }
+    return noticeType;
+}
+export function organizationType(type) {
+    var organizationType = "";
+    switch (type){
+        case 1:
+            organizationType="小区";break;
+        case 2:
+            organizationType="政府机构/学校";break;
+        default:break;
+    }
+    return organizationType;
+}
+export function array2Json(list) {
+    var params = {};
+    list.forEach(function (val) {
+        if(isNumber(val.value)){
+            params[val.name] = parseInt(val.value);
+        }else{
+            params[val.name] = val.value;
+        }
+    });
+    return params;
+}
+function isNumber(value) {
+    var patrn = /^(-)?\d+(\.\d+)?$/;
+    if (patrn.exec(value) == null || value == "") {
+        return false
+    } else {
+        return true
+    }
+}
+export function filterCityById(cityList,id) {
+    var city = "";
+    for(var val of cityList){
+        if(val.id==id){
+            city = val;
+            break;
+        }
+    }
+    return city;
+}
+export function filterByApprove(data,approved) {
+    var list = [];
+    data.forEach(function (val,key) {
+        if(val.approved == approved){
+            list.push(val);
+        }
+    });
+    return list;
 }

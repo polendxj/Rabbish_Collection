@@ -185,7 +185,7 @@ class ManualRecordListComponent extends Component{
                 }.bind(this))
             }else{
                 tb.push(<tr key={'noData'}>
-                    <td colSpan="8" style={{textAlign: 'center'}}>
+                    <td colSpan="100" style={{textAlign: 'center'}}>
                         <NoData />
                     </td>
 
@@ -193,7 +193,7 @@ class ManualRecordListComponent extends Component{
             }
         }else{
             tb.push(<tr key={'loading'}>
-                <td colSpan="8" style={{textAlign: 'center'}}>
+                <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />
                 </td>
             </tr>)

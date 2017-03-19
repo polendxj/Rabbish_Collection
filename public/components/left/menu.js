@@ -97,7 +97,7 @@ class Statistic extends Component {
                 <li className="left active" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
                     href="javascript:void(0)"><i
                     className="icon-satellite-dish2"></i> <span>{"系统监控"}</span></a></li>
-                <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/Statistic/RubbishPutIn')}><a
                     href="javascript:void(0)"><i
                     className="icon-history"></i> <span>{"垃圾投放"}</span></a></li>
 
@@ -144,12 +144,15 @@ class Business extends Component {
                 <li className="left" onClick={this._leftMenuClick.bind(this, '/DataManage/CorrectionManage')}><a
                     href="javascript:void(0)"><i
                     className="icon-history"></i> <span>{"纠错记录"}</span></a></li>
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/OrganizationManage')}><a
+                    href="javascript:void(0)"><i
+                    className="icon-satellite-dish2"></i> <span>{"小区/单位管理"}</span></a></li>
                 <li className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
                     href="javascript:void(0)"><i
                     className="icon-satellite-dish2"></i> <span>{"二维码管理"}</span></a></li>
-                <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/SweepCodeUserManage')}><a
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/AdminUserManage')}><a
                     href="javascript:void(0)"><i
-                    className="icon-satellite-dish2"></i> <span>{"扫码员管理"}</span></a></li>
+                    className="icon-satellite-dish2"></i> <span>{"管理员管理"}</span></a></li>
 
                 <li className="navigation-header left"><span>{"商家管理"}</span> <i className="icon-menu" title=""
                                                                                 data-original-title="商家管理"></i>
@@ -240,7 +243,7 @@ class NotifyManager extends Component {
                 <li className="navigation-header left"><span>{"系统通知"}</span> <i className="icon-menu" title=""
                                                                                 data-original-title="系统通知"></i>
                 </li>
-                <li className="left active" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                <li className="left active" onClick={this._leftMenuClick.bind(this, '/SystemNotice/NoticeManage')}><a
                     href="javascript:void(0)"><i
                     className="icon-satellite-dish2"></i> <span>{"新闻政策"}</span></a></li>
 

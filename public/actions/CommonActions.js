@@ -43,7 +43,7 @@ export function deleteObject(obj, startRow, searchColumns, searchValues, sortCol
             })
             .then(response=>response.json())
             .then(function (json) {
-                if (json.result == 'SUCCESS') {
+                if (json.status){
                     if (startDispatch) {
                         dispatch(startFetch(startDispatch))
                     }
@@ -96,7 +96,7 @@ export function getDetail(jsonObj, startDispatch, endDispatch, interfaceURL) {
             })
             .then(response=>response.json())
             .then(function (json) {
-                if (json.result == 'SUCCESS') {
+                if (json.status) {
                     dispatch(endFetch(endDispatch, json))
                 } else {
                     // dispatch(endDeleteCsr(json))
@@ -132,7 +132,9 @@ export function saveObject(data, startDispatch, endDispatch, interfaceURL, listR
                     } else if (flag == "update") {
                         SuccessModal(Current_Lang.alertTip.tip, Current_Lang.alertTip.updateSuccess)
                         browserHistory.push(listRouter)
-                    } else {
+                    }else if (flag == "noAlert"){
+                        browserHistory.push(listRouter)
+                    }else {
                         SuccessModal(Current_Lang.alertTip.tip, Current_Lang.alertTip.updateSuccess)
                     }
                     if (callback) {

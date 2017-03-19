@@ -9,7 +9,7 @@ import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
 import {Loading, NoData, ConfirmModal, ErrorModal, roleApplicationUse,timeStamp2Time} from '../../components/Tool/Tool'
 import {COMPLAINT_LIST_START, COMPLAINT_LIST_END} from '../../constants/index.js'
-import {getListByMutilpCondition} from '../../actions/CommonActions';
+import {getListByMutilpCondition, saveObject} from '../../actions/CommonActions';
 
 export default class ComplaintContainer extends Component {
     constructor(props) {
@@ -28,6 +28,7 @@ export default class ComplaintContainer extends Component {
             }
         ];
         this.searchColumn = "DRIVER";
+        this._deal = this._deal.bind(this);
     }
 
     componentDidMount() {
@@ -43,6 +44,14 @@ export default class ComplaintContainer extends Component {
                 self.searchColumn = "LINE";
             }
         })
+    }
+
+    _deal(id,params){
+        var that = this;
+        var listParams = {page: 0, size: 20};
+        this.props.dispatch(saveObject(params,"","",complaint_update+"?id="+id,"/CustomerService/ComplaintManage","noAlert",function () {
+            that.props.dispatch(getListByMutilpCondition(listParams, COMPLAINT_LIST_START, COMPLAINT_LIST_END, complaint_list));
+        }));
     }
 
     _delete(id, title) {
@@ -78,6 +87,7 @@ export default class ComplaintContainer extends Component {
 
     render() {
         const {fetching, data} =this.props;
+        console.log("data",data);
         return (
             <div>
                 <BreadCrumbs
@@ -125,12 +135,13 @@ export default class ComplaintContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"投诉举报列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
-                            <Pagenation counts={data ? data.data.content.length : 0} page={this.page}
+                            <Pagenation counts={data&&data.status ? data.data.content.length : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>
                         <ComplaintListComponent data={data} fetching={fetching}
                                                 _delete={this._delete}
+                                                _deal={this._deal}
                                                 _updateStatus={this._updateStatus}/>
 
                     </fieldset>
@@ -157,6 +168,13 @@ class ComplaintListComponent extends Component {
 
     }
 
+    _deal(id){
+        var params = {
+            suggestion:$("#suggestion").val()
+        };
+        this.props._deal(id,params);
+    }
+
     _detail(path) {
         browserHistory.push(path)
     }
@@ -169,99 +187,104 @@ class ComplaintListComponent extends Component {
         const {data, fetching}=this.props;
         let tb = [];
         if (data) {
-            if (data.data.content.length > 0) {
-                data.data.content.forEach(function (val, key) {
-                    tb.push(
-                        <div key={key} className="panel panel-white text-left">
-                            <div className="panel-heading" style={{padding: "15px 20px 10px 20px"}}>
-                                <table style={{width:"100%"}}>
-                                    <tr>
-                                        <td>
-                                            <div className="panel-title">
-                                                <div style={{paddingRight: "10px"}}>
-                                                    {"[" + val.title + "]" + val.content}
-                                                </div>
-                                                <div style={{height: "10px"}}></div>
-                                                <small className="display-block" style={{fontSize: "6px"}}>
-                                                    {val.name}&nbsp;&nbsp;
-                                                    <i className="icon-alarm" style={{fontSize: "3px"}}/>
-                                                    &nbsp;
-                                                    {timeStamp2Time(val.commitTime)}&nbsp;&nbsp;
-                                                    <a className="collapsed" data-toggle="collapse" href={"#collapse-" + val.id}>
-                                                        <i className="icon-bubble2" style={{fontSize: "4px"}}></i>
+            if(data.status){
+                if (data.data.content.length > 0) {
+                    data.data.content.forEach(function (val, key) {
+                        var dealFlag = (val.suggestion == "" || val.suggestion==null);
+                        tb.push(
+                            <div key={key} className="panel panel-white text-left">
+                                <div className="panel-heading" style={{padding: "15px 20px 10px 20px"}}>
+                                    <table style={{width:"100%"}}>
+                                        <tr>
+                                            <td>
+                                                <div className="panel-title">
+                                                    <div style={{paddingRight: "10px"}}>
+                                                        {"[" + val.title + "] " + val.content}
+                                                    </div>
+                                                    <div style={{height: "10px"}}></div>
+                                                    <small className="display-block" style={{fontSize: "6px"}}>
+                                                        {val.userName}&nbsp;&nbsp;
+                                                        <i className="icon-alarm" style={{fontSize: "3px"}}/>
                                                         &nbsp;
-                                                        {val.dealName == "" ? "回复处理意见" : "收起处理意见"}</a>
-                                                </small>
-                                            </div>
-                                        </td>
-                                        <td style={{width:"85px"}}>
-                                            <div>
-                                                <div >
-                                                    <div className="thumbnail" style={{marginBottom:0,width:"85px"}}>
-                                                        <div className="thumb">
-                                                            <img src={val.photo} alt="" style={{height:"80px",width:"80px"}}/>
-                                                            <div className="caption-overflow">
+                                                        {timeStamp2Time(val.commitTime)}&nbsp;&nbsp;
+                                                        <a className="collapsed" data-toggle="collapse" href={"#collapse-" + val.id}>
+                                                            <i className="icon-bubble2" style={{fontSize: "4px"}}></i>
+                                                            &nbsp;
+                                                            {dealFlag ? "回复处理意见" : "收起处理意见"}</a>
+                                                    </small>
+                                                </div>
+                                            </td>
+                                            <td style={{width:"85px"}}>
+                                                <div>
+                                                    <div >
+                                                        <div className="thumbnail" style={{marginBottom:0,width:"85px"}}>
+                                                            <div className="thumb">
+                                                                <img src={val.photo} alt="" style={{height:"80px",width:"80px"}}/>
+                                                                <div className="caption-overflow">
                                                                 <span style={{top:0,marginTop:0}}>
                                                                     <a href={val.photo} data-popup="lightbox"
                                                                        className="btn" style={{height:"80px",width:"80px"}}></a>
                                                                 </span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div id={"collapse-" + val.id}
-                                 className={val.dealName == "" ? "panel-collapse collapse" : "panel-collapse collapse in"}
-                                 style={{paddingLeft: val.dealName == "" ? 0 : "20px"}}>
-                                <div className="panel-body"
-                                     style={{padding: val.dealName == "" ? 0 : "15px 20px 10px 20px"}}>
-                                    {val.dealName == "" ?
-                                        <div>
-                                            <div className="form-group has-feedback" style={{margin: 0}}>
-                                                <input id="name" style={{border: 0}} type="text"
-                                                       className="form-control"
-                                                       placeholder={"回复该投诉"} autoComplete="off"/>
-                                                <div className="form-control-feedback" style={{pointerEvents: "auto"}}>
-                                                    <i className="icon-arrow-right8" style={{
-                                                        fontWeight: "bold",
-                                                        fontSize: "14px",
-                                                        cursor: "pointer"
-                                                    }}/>
-                                                </div>
-                                            </div>
-                                        </div> :
-                                        <div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div id={"collapse-" + val.id}
+                                     className={dealFlag ? "panel-collapse collapse" : "panel-collapse collapse in"}
+                                     style={{paddingLeft: dealFlag ? 0 : "20px"}}>
+                                    <div className="panel-body"
+                                         style={{padding: dealFlag ? 0 : "15px 20px 10px 20px"}}>
+                                        {dealFlag ?
                                             <div>
-                                                {val.suggestion}
-                                            </div>
-                                            <div style={{height: "10px"}}></div>
-                                            <small className="display-block" style={{fontSize: "6px"}}>
-                                                {val.dealName}&nbsp;&nbsp;
-                                                <i className="icon-alarm" style={{fontSize: "3px"}}></i>
-                                                &nbsp;
-                                                {timeStamp2Time(val.dealTime)}
-                                            </small>
-                                        </div>}
+                                                <div className="form-group has-feedback" style={{margin: 0}}>
+                                                    <input id="suggestion" style={{border: 0}} type="text"
+                                                           className="form-control"
+                                                           placeholder={"回复该投诉"} autoComplete="off"/>
+                                                    <div className="form-control-feedback" style={{pointerEvents: "auto"}}
+                                                         onClick={this._deal.bind(this, val.id)}>
+                                                        <i className="icon-arrow-right8" style={{
+                                                            fontWeight: "bold",
+                                                            fontSize: "14px",
+                                                            cursor: "pointer"
+                                                        }}/>
+                                                    </div>
+                                                </div>
+                                            </div> :
+                                            <div>
+                                                <div>
+                                                    {val.suggestion}
+                                                </div>
+                                                <div style={{height: "10px"}}></div>
+                                                <small className="display-block" style={{fontSize: "6px"}}>
+                                                    {val.dealUserName}&nbsp;&nbsp;
+                                                    <i className="icon-alarm" style={{fontSize: "3px"}}></i>
+                                                    &nbsp;
+                                                    {timeStamp2Time(val.dealTime)}
+                                                </small>
+                                            </div>}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )
-                }.bind(this));
+                        )
+                    }.bind(this));
+                }else{
+                    tb.push(<tr key={'noData'}>
+                        <td colSpan="100" style={{textAlign: 'center'}}>
+                            <NoData />
+                        </td>
+                    </tr>)
+                }
             }else{
-                tb.push(<tr key={'noData'}>
-                    <td colSpan="8" style={{textAlign: 'center'}}>
-                        <NoData />
-                    </td>
-
-                </tr>)
+                tb.push(ErrorModal(Current_Lang.status.minor,"获取数据错误"))
             }
         }else{
             tb.push(<tr key={'loading'}>
-                <td colSpan="8" style={{textAlign: 'center'}}>
+                <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />
                 </td>
             </tr>)

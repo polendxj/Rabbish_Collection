@@ -7,7 +7,7 @@ import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
-import {Loading, NoData, ConfirmModal,ErrorModal,roleApplicationUse} from '../../components/Tool/Tool';
+import {Loading, NoData, ConfirmModal,ErrorModal,roleApplicationUse,timeStamp2Time} from '../../components/Tool/Tool';
 import {TRANSITLINE_LIST_START, TRANSITLINE_LIST_END} from '../../constants/index.js'
 import {getListByMutilpCondition} from '../../actions/CommonActions';
 
@@ -73,7 +73,8 @@ export default class TransitLineListContainer extends Component {
     }
 
     render() {
-        const {selected, form, fetching, data} =this.props;
+        const {fetching, data} =this.props;
+        console.log("transitData",data);
         return (
             <div>
                 <BreadCrumbs
@@ -121,14 +122,12 @@ export default class TransitLineListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"车辆运输列表区"}</legend>
                         <div style={{marginTop:'-80px'}}>
-                            <Pagenation counts={3} page={this.page}
+                            <Pagenation counts={data&&data.status ? data.data.content.length : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>
-                        <TransitLineListComponent data={this.dataList} fetching={false}
-                                            _delete={this._delete}
-                                            _updateStatus={this._updateStatus}/>
-
+                        <TransitLineListComponent data={data} fetching={fetching}
+                                            _delete={this._delete}/>
                     </fieldset>
                 </div>
             </div>
@@ -153,49 +152,52 @@ class TransitLineListComponent extends Component{
         const {data, fetching}=this.props;
         let tb = [];
         if (data) {
-            if (data.data.content.length > 0) {
-                data.data.content.forEach(function (val, key) {
-                    tb.push(<tr key={key} style={{backgroundColor:key%2==0?"#F8F8F8":""}}>
-                        <td className="text-center">{key+1}</td>
-                        <td className="text-center">{val.licensePlateNum}</td>
-                        <td className="text-center">{val.driver}</td>
-                        <td className="text-center">{val.contact}</td>
-                        <td className="text-center">{val.drivingLicenseNum}</td>
-                        <td className="text-center">{val.startLocation}</td>
-                        <td className="text-center">{val.stoppedLocation}</td>
-                        <td className="text-center">{val.endLocation}</td>
-                        <td className="text-center">{val.createTime}</td>
-                        <td className="text-center">
-                            {<ul className="icons-list">
-                                <li className="dropdown">
-                                    <a href="#" className="dropdown-toggle"
-                                       data-toggle="dropdown" aria-expanded="false"><i
-                                        className="icon-menu7"></i></a>
-                                    <ul className="dropdown-menu dropdown-menu-right">
-                                        <li style={{display:'block'}} onClick={this._detail.bind(this, '/DataManage/TransitLine/ModifyTransitLine/:' + val.id)}>
-                                            <a href="javascript:void(0)"><i className="icon-pencil5"></i>
-                                                {"修改"}</a></li>
-                                        <li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.driver)}><a
-                                            href="javascript:void(0)"><i className="icon-trash"></i>
-                                            {"删除"}</a></li>
-                                    </ul>
-                                </li>
-                            </ul>}
+            if(data.status){
+                if (data.data.content.length > 0) {
+                    data.data.content.forEach(function (val, key) {
+                        tb.push(<tr key={key} style={{backgroundColor:key%2==0?"#F8F8F8":""}}>
+                            <td className="text-center">{key+1}</td>
+                            <td className="text-center">{val.licensePlateNum}</td>
+                            <td className="text-center">{val.driver}</td>
+                            <td className="text-center">{val.contact}</td>
+                            <td className="text-center">{val.drivingLicenseNum}</td>
+                            <td className="text-center">{val.startLocation}</td>
+                            <td className="text-center">{val.stoppedLocation}</td>
+                            <td className="text-center">{val.endLocation}</td>
+                            <td className="text-center">{timeStamp2Time(val.createTime)}</td>
+                            <td className="text-center">
+                                {<ul className="icons-list">
+                                    <li className="dropdown">
+                                        <a href="#" className="dropdown-toggle"
+                                           data-toggle="dropdown" aria-expanded="false"><i
+                                            className="icon-menu7"></i></a>
+                                        <ul className="dropdown-menu dropdown-menu-right">
+                                            <li style={{display:'block'}} onClick={this._detail.bind(this, '/DataManage/TransitLine/ModifyTransitLine/:' + val.id)}>
+                                                <a href="javascript:void(0)"><i className="icon-pencil5"></i>
+                                                    {"修改"}</a></li>
+                                            <li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.driver)}><a
+                                                href="javascript:void(0)"><i className="icon-trash"></i>
+                                                {"删除"}</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>}
 
+                            </td>
+                        </tr>)
+                    }.bind(this));
+                }else{
+                    tb.push(<tr key={'noData'}>
+                        <td colSpan="100" style={{textAlign: 'center'}}>
+                            <NoData />
                         </td>
                     </tr>)
-                });
+                }
             }else{
-                tb.push(<tr key={'noData'}>
-                    <td colSpan="8" style={{textAlign: 'center'}}>
-                        <NoData />
-                    </td>
-
-                </tr>)
+                tb.push(ErrorModal(Current_Lang.status.minor,"获取数据错误"))
             }
         }else{
             tb.push(<tr key={'loading'}>
-                <td colSpan="8" style={{textAlign: 'center'}}>
+                <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />
                 </td>
             </tr>)

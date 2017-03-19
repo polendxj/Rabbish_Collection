@@ -6,10 +6,9 @@ import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {browserHistory} from 'react-router'
 import {bindActionCreators} from 'redux'
-import {Loading, ListModal, serverStatus, ErrorModal, DecodeBase64, streamingTemplateFilter} from '../../components/Tool/Tool';
+import {array2Json} from '../../components/Tool/Tool';
 import BreadCrumbs from '../../components/right/breadCrumbs';
-import {saveServiceGroup} from '../../actions/SystemManagerServiceGroupAction';
-import {commonRefresh} from '../../actions/Common';
+import {saveObject} from '../../actions/CommonActions';
 
 export default class TransitLineRegisterContainer extends Component {
     constructor(props) {
@@ -22,21 +21,15 @@ export default class TransitLineRegisterContainer extends Component {
         this.operation = [
             {icon: "icon-undo2", text:"返回车辆运输列表", action: "/DataManage/TransitLine"}
         ];
-        this._save = this._save.bind(this)
-        this._startRefresh=this._startRefresh.bind(this)
-    }
-
-    _startRefresh(){
-        this.props.dispatch(commonRefresh())
+        this._save = this._save.bind(this);
     }
 
     _save(params) {
-        this.props.dispatch(saveServiceGroup(params))
-
+        this.props.dispatch(saveObject(params,"","",transitLine_register,"/DataManage/TransitLine"));
     }
 
     render() {
-        const {data, form,refresh}=this.props;
+        const {data, form}=this.props;
         return (
             <div>
                 <BreadCrumbs
@@ -56,104 +49,25 @@ export default class TransitLineRegisterContainer extends Component {
 class RegisterTransitLineComponent extends Component{
     constructor(props) {
         super(props);
-        this._syncData = this._syncData.bind(this);
         this._save = this._save.bind(this)
-        this._search = this._search.bind(this)
-        this.initApp = [];
-        this.selectedApp = "";
-    }
-
-    _search() {
-        this.props._startRefresh();
-    }
-
-    _syncData() {
-        this.selectedCSE = $.extend([], this.confirmSelected);
-
-        this.props._startRefresh()
     }
 
     _save() {
-        var cseListIDS = [];
-        var singleAppID = true;
-        var army = this.selectedCSE[0];
-        this.selectedCSE.forEach(function (val, key) {
-            if (val.node.appId != army.node.appId) {
-                singleAppID = false
-            }
-        })
-        if (singleAppID) {
-            this.selectedCSE.forEach(function (val, key) {
-                cseListIDS.push(val.node.cssId)
-            })
-            var params = {
-                groupId: $("#name").val(),
-                description: $("#description").val(),
-                cseList: cseListIDS,
-                mode: 'new'
-            }
-            this.props._save(params)
-        } else {
-            ErrorModal(Current_Lang.status.minor, Current_Lang.alertTip.cseGroupHaveDiffCSE);
-        }
-
-    }
-
-    _appOnChange() {
-        this.props._startRefresh();
+        var formFields = $("#transitLineForm").serializeArray();
+        var params = array2Json(formFields);
+        this.props._save(params);
     }
 
     componentDidMount() {
-        var self = this;
-        $("#cse_group_text").parent().parent().on('click', 'li', function () {
-            $("#cse_group_text").text($(this).find('a').text())
-        })
-        $("#app_id_text").parent().parent().on('click', 'li', function () {
-            $("#app_id_text").text($(this).find('a').text())
-        })
-        $("#cse_status_text").parent().parent().on('click', 'li', function () {
-            $("#cse_status_text").text($(this).find('a').text())
-        })
-        $('[data-popup="tooltip"]').tooltip();
-
-        var getFirstAppID = setInterval(function () {
-            if ($("#common_app option:selected").val()) {
-                clearInterval(getFirstAppID)
-                self.selectedApp = self.initApp[$("#common_app option:selected").index()];
-                this.props._startRefresh()
-            }
-        }.bind(this), 500)
-
-
-        $("#common_app").on("change", function () {
-            self.selectedApp = self.initApp[$("#common_app option:selected").index()];
-            self.props._startRefresh()
-        })
-        $("#streamingProfile").on("change", function () {
-            if ($("#streamingProfile option:selected").text().indexOf("QAM") >= 0) {
-                $(".erm").show();
-            } else {
-                $(".erm").hide();
-            }
-
-            self.props._startRefresh()
-        })
 
     }
 
     render() {
-        const {allCSE, cseGroup, appList, streamingTemplate}=this.props;
-        if ($("#streamingProfile option:selected").text().indexOf("QAM") >= 0) {
-            $(".erm").show();
-        } else {
-            $(".erm").hide();
-        }
-        var self = this;
 
         var tableHeight = ($(window).height() - 130);
         return (
             <div>
-                <form className="form-horizontal" action="#">
+                <form id="transitLineForm" className="form-horizontal" action="#">
                     <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                         <div className="col-sm-8 col-sm-offset-2">
                             <fieldset className="content-group">
@@ -167,7 +81,7 @@ class RegisterTransitLineComponent extends Component{
                                                marginTop: '8px'
                                            }}>{"车牌号"}</label>
                                     <div className="col-lg-9">
-                                        <input id="licensePlateNum" type="text" className="form-control"
+                                        <input id="licensePlateNum" name="licensePlateNum" type="text" className="form-control"
                                                placeholder={"车牌号"}
                                                autoComplete="off"/>
                                     </div>
@@ -179,7 +93,7 @@ class RegisterTransitLineComponent extends Component{
                                                textAlign: 'center',
                                            }}>{"司机姓名"}</label>
                                     <div className="col-lg-9">
-                                        <input id="driver" type="text" className="form-control"
+                                        <input id="driver" name="driver" type="text" className="form-control"
                                                placeholder={"司机姓名"}
                                                autoComplete="off"/>
                                     </div>
@@ -190,7 +104,7 @@ class RegisterTransitLineComponent extends Component{
                                                textAlign: 'center',
                                            }}>{"联系方式"}</label>
                                     <div className="col-lg-9">
-                                        <input id="contact" type="text" className="form-control"
+                                        <input id="contact" name="contact" type="text" className="form-control"
                                                placeholder={"联系方式"}
                                                autoComplete="off"/>
                                     </div>
@@ -201,7 +115,7 @@ class RegisterTransitLineComponent extends Component{
                                                textAlign: 'center',
                                            }}>{"驾照"}</label>
                                     <div className="col-lg-9">
-                                        <input id="drivingLicenseNum" type="text" className="form-control"
+                                        <input id="drivingLicenseNum" name="drivingLicenseNum" type="text" className="form-control"
                                                placeholder={"驾照"}
                                                autoComplete="off"/>
                                     </div>
@@ -212,7 +126,7 @@ class RegisterTransitLineComponent extends Component{
                                                textAlign: 'center',
                                            }}>{"起点"}</label>
                                     <div className="col-lg-9">
-                                        <input id="startLocation" type="text" className="form-control"
+                                        <input id="startLocation" name="startLocation" type="text" className="form-control"
                                                placeholder={"起点"}
                                                autoComplete="off"/>
                                     </div>
@@ -223,7 +137,7 @@ class RegisterTransitLineComponent extends Component{
                                                textAlign: 'center',
                                            }}>{"经停地点"}</label>
                                     <div className="col-lg-9">
-                                        <input id="stoppedLocation" type="text" className="form-control"
+                                        <input id="stoppedLocation" name="stoppedLocation" type="text" className="form-control"
                                                placeholder={"经停地点"}
                                                autoComplete="off"/>
                                     </div>
@@ -234,7 +148,7 @@ class RegisterTransitLineComponent extends Component{
                                                textAlign: 'center',
                                            }}>{"终点"}</label>
                                     <div className="col-lg-9">
-                                        <input id="endLocation" type="text" className="form-control"
+                                        <input id="endLocation" name="endLocation" type="text" className="form-control"
                                                placeholder={"终点"}
                                                autoComplete="off"/>
                                     </div>

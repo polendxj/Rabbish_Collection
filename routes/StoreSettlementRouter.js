@@ -13,5 +13,9 @@ router.post('/rsapp/storeSettlement', function (req, resp) {
     console.log(data);
     RequestApi.Request(baseURL + '/rsapp/storeSettlement' + "?" + data, 'GET', "", req, resp);
 });
+router.post('/rsapp/storeSettlement/register', function (req, resp) {
+    var data = JSON.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/storeSettlement', 'POST', data, req, resp);
+});
 
 module.exports = router;

@@ -9,18 +9,19 @@ import {bindActionCreators} from 'redux'
 import {Loading, ListModal, serverStatus, ErrorModal, DecodeBase64, streamingTemplateFilter} from '../../components/Tool/Tool';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import {saveServiceGroup} from '../../actions/SystemManagerServiceGroupAction';
+import {saveObject} from '../../actions/CommonActions';
 import {commonRefresh} from '../../actions/Common';
 
-export default class SweepCodeUserRegisterContainer extends Component {
+export default class AdminUserRegisterContainer extends Component {
     constructor(props) {
         super(props)
         this.breadCrumbs = [
             {text: "客户服务", link: ''},
-            {text: "扫码员管理", link: ''},
-            {text: "扫码员注册", link: ''}
+            {text: "管理员管理", link: ''},
+            {text: "管理员注册", link: ''}
         ];
         this.operation = [
-            {icon: "icon-undo2", text:"返回扫码员列表", action: "/CustomerService/SweepCodeUserManage"}
+            {icon: "icon-undo2", text:"返回管理员列表", action: "/CustomerService/AdminUserManage"}
         ];
         this._save = this._save.bind(this);
         this._startRefresh=this._startRefresh.bind(this)
@@ -31,8 +32,7 @@ export default class SweepCodeUserRegisterContainer extends Component {
     }
 
     _save(params) {
-        this.props.dispatch(saveServiceGroup(params))
-
+        this.props.dispatch(saveObject(params,"","",adminUser_register,"/CustomerService/AdminUserManage"));
     }
 
     render() {
@@ -45,15 +45,14 @@ export default class SweepCodeUserRegisterContainer extends Component {
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>
-                    <RegisterSweepCodeUserComponent _save={this._save} _startRefresh={this._startRefresh}/>
-
+                    <RegisterAdminUserComponent _save={this._save} _startRefresh={this._startRefresh}/>
                 </div>
             </div>
         )
     }
 }
 
-class RegisterSweepCodeUserComponent extends Component{
+class RegisterAdminUserComponent extends Component{
     constructor(props) {
         super(props);
         this._syncData = this._syncData.bind(this);
@@ -74,29 +73,14 @@ class RegisterSweepCodeUserComponent extends Component{
     }
 
     _save() {
-        var cseListIDS = [];
-        var singleAppID = true;
-        var army = this.selectedCSE[0];
-        this.selectedCSE.forEach(function (val, key) {
-            if (val.node.appId != army.node.appId) {
-                singleAppID = false
-            }
-        })
-        if (singleAppID) {
-            this.selectedCSE.forEach(function (val, key) {
-                cseListIDS.push(val.node.cssId)
-            })
-            var params = {
-                groupId: $("#name").val(),
-                description: $("#description").val(),
-                cseList: cseListIDS,
-                mode: 'new'
-            }
-            this.props._save(params)
-        } else {
-            ErrorModal(Current_Lang.status.minor, Current_Lang.alertTip.cseGroupHaveDiffCSE);
-        }
-
+        var params = {
+            name: $("#name").val(),
+            phone: $("#phone").val(),
+            password: $("#password").val(),
+            type: $("#type").val(),
+            authcode:""
+        };
+        this.props._save(params);
     }
 
     _appOnChange() {
@@ -104,56 +88,40 @@ class RegisterSweepCodeUserComponent extends Component{
     }
 
     componentDidMount() {
-        var self = this;
-        $("#cse_group_text").parent().parent().on('click', 'li', function () {
-            $("#cse_group_text").text($(this).find('a').text())
-        })
-        $("#app_id_text").parent().parent().on('click', 'li', function () {
-            $("#app_id_text").text($(this).find('a').text())
-        })
-        $("#cse_status_text").parent().parent().on('click', 'li', function () {
-            $("#cse_status_text").text($(this).find('a').text())
-        })
-        $('[data-popup="tooltip"]').tooltip();
+        $(".form-validate-jquery").validate({
+            ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
+            errorClass: 'validation-error-label',
+            successClass: 'validation-valid-label',
+            highlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+            unhighlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
 
-        var getFirstAppID = setInterval(function () {
-            if ($("#common_app option:selected").val()) {
-                clearInterval(getFirstAppID);
-                self.selectedApp = self.initApp[$("#common_app option:selected").index()];
-                this.props._startRefresh()
+            validClass: "validation-valid-label",
+            success: function(label) {
+                label.addClass("validation-valid-label").text("Success.")
+            },
+            rules: {
+                password: {
+                    minlength: 5
+                },
+                repeat_password: {
+                    equalTo: "#password"
+                }
             }
-        }.bind(this), 500);
-
-
-        $("#common_app").on("change", function () {
-            self.selectedApp = self.initApp[$("#common_app option:selected").index()];
-            self.props._startRefresh()
-        })
-        $("#streamingProfile").on("change", function () {
-            if ($("#streamingProfile option:selected").text().indexOf("QAM") >= 0) {
-                $(".erm").show();
-            } else {
-                $(".erm").hide();
-            }
-
-            self.props._startRefresh()
-        })
-
+        });
     }
 
     render() {
         const {allCSE, cseGroup, appList, streamingTemplate}=this.props;
-        if ($("#streamingProfile option:selected").text().indexOf("QAM") >= 0) {
-            $(".erm").show();
-        } else {
-            $(".erm").hide();
-        }
         var self = this;
 
         var tableHeight = ($(window).height() - 130);
         return (
             <div>
-                <form className="form-horizontal" action="#">
+                <form className="form-horizontal form-validate-jquery" action="#">
                     <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                         <div className="col-sm-8 col-sm-offset-2">
                             <fieldset className="content-group">
@@ -164,23 +132,39 @@ class RegisterSweepCodeUserComponent extends Component{
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"用户类型"}</label>
                                     <div className="col-lg-9">
-                                        <select disabled className="form-control" name="userType" id="type" value={2}>
+                                        <select className="form-control" name="userType" id="type">
                                             <option value={1}>{"管理员"}</option>
                                             <option value={2}>{"扫码员"}</option>
-                                            <option value={3}>{"商户用户"}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
-                                           style={{
-                                               textAlign: 'center',
-                                               marginTop: '8px'
-                                           }}>{"姓名"}</label>
+                                           style={{textAlign: 'center', marginTop: '8px'}}>{"昵称"}
+                                    </label>
                                     <div className="col-lg-9">
                                         <input id="name" type="text" className="form-control"
-                                               placeholder={"姓名"}
-                                               autoComplete="off"/>
+                                               placeholder={"昵称"} required="required" autoComplete="off"/>
+                                    </div>
+                                </div>
+
+                                <div className="form-group">
+                                    <label className="col-lg-2 control-label"
+                                           style={{textAlign: 'center', marginTop: '8px'}}>{"密码"}
+                                    </label>
+                                    <div className="col-lg-9">
+                                        <input id="password" type="password" name="password" className="form-control"
+                                               placeholder={"密码"} required="required" autoComplete="off"/>
+                                    </div>
+                                </div>
+
+                                <div className="form-group">
+                                    <label className="col-lg-2 control-label"
+                                           style={{textAlign: 'center', marginTop: '8px'}}>{"确认密码"}
+                                    </label>
+                                    <div className="col-lg-9">
+                                        <input id="confirmPassword" name="repeat_password" type="password" className="form-control"
+                                               placeholder={"确认密码"} required="required" autoComplete="off"/>
                                     </div>
                                 </div>
 
@@ -188,36 +172,12 @@ class RegisterSweepCodeUserComponent extends Component{
                                     <label className="col-lg-2 control-label"
                                            style={{
                                                textAlign: 'center',
-                                           }}>{"密码"}</label>
-                                    <div className="col-lg-9">
-                                        <input id="password" type="text" className="form-control"
-                                               placeholder={"密码"}
-                                               autoComplete="off"/>
-                                    </div>
-                                </div>
-                                <div className="form-group" >
-                                    <label className="col-lg-2 control-label"
-                                           style={{
-                                               textAlign: 'center',
-                                           }}>{"确认密码"}</label>
-                                    <div className="col-lg-9">
-                                        <input id="confirmPassword" type="text" className="form-control"
-                                               placeholder={"确认密码"}
-                                               autoComplete="off"/>
-                                    </div>
-                                </div>
-                                <div className="form-group" >
-                                    <label className="col-lg-2 control-label"
-                                           style={{
-                                               textAlign: 'center',
-                                           }}>{"手机号"}</label>
+                                           }}>{"手机号码"}</label>
                                     <div className="col-lg-9">
                                         <input id="phone" type="text" className="form-control"
-                                               placeholder={"手机号"}
-                                               autoComplete="off"/>
+                                               placeholder={"手机号码"} required="required" autoComplete="off"/>
                                     </div>
                                 </div>
-
                             </fieldset>
 
                             <div className="form-group" >
@@ -245,4 +205,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(SweepCodeUserRegisterContainer)
+export default connect(mapStateToProps)(AdminUserRegisterContainer)

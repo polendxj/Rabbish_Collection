@@ -58,5 +58,34 @@ router.post('/rsapp/city', function (req, resp) {
         }
     })
 });
+router.post('/rsapp/cityOfOrganization', function (req, resp) {
+    var data = querystring.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/city' + "?" + data, 'GET', "", req, resp, function (city) {
+        if (city.status) {
+            if (city.data.length > 0) {
+                var count = 0;
+                city.data.forEach(function (c, k) {
+                    c["organization"] = [];
+                    c["organizationIndex"] = 0;
+                })
+                city.data.forEach(function (c, k) {
+                    (function (c) {
+                        RequestApi.Request(baseURL + '/rsapp/organization' + "?cityid=" + c.id, 'GET', "", req, resp, function (organization) {
+                            c["organization"] = organization.data;
+                            count++;
+                            if (count == city.data.length) {
+                                resp.send(city);
+                            }
+                        })
+                    })(c)
+                })
+            } else {
+                resp.send(city);
+            }
+        } else {
+            resp.send(city)
+        }
+    })
+});
 
 module.exports = router

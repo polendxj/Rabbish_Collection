@@ -12,5 +12,9 @@ router.post('/rsapp/transitLine', function (req, resp) {
     var data = querystring.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/transitLine' + "?" + data, 'GET', "", req, resp);
 });
+router.post('/rsapp/transitLine/register', function (req, resp) {
+    var data = JSON.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/transitLine', 'POST',data, req, resp);
+});
 
 module.exports = router;

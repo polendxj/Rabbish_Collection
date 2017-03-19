@@ -7,12 +7,15 @@ import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
-import {Loading, NoData, ConfirmModal,ErrorModal,roleApplicationUse} from '../../components/Tool/Tool'
+import {commonRefresh} from '../../actions/Common';
+import {Loading, NoData, ConfirmModal, ErrorModal, userType,ListMiddleModal,timeStamp2Time} from '../../components/Tool/Tool';
+import {GENERALUSER_LIST_START, GENERALUSER_LIST_END} from '../../constants/index.js'
+import {getListByMutilpCondition, deleteObject, saveObject} from '../../actions/CommonActions';
 
 export default class UserListContainer extends Component {
     constructor(props) {
         super(props);
-        this.page=0;
+        this.page = 0;
         this.breadCrumbs = [
             {text: "客户服务", link: ''},
             {text: "用户管理", link: ''},
@@ -21,67 +24,57 @@ export default class UserListContainer extends Component {
         this.operation = [
             {icon: "icon-add-to-list", text: Current_Lang.others.add, action: "/CustomerService/UserManage/Register"}
         ];
-        this.searchColumn="DRIVER";
-        this.dataList = [
-            {
-                id: "1",
-                name: "付大海",
-                phone:"15112023452",
-                address:"内江",
-                rqcode:"5346364564564345",
-                status:2,
-                createTime:"2017-01-08 12:32:33",
-                updateTime:"2017-02-08 15:41:01"
-            },
-            {
-                id: "2",
-                name: "寇建波",
-                phone:"15112023452",
-                address:"成都",
-                rqcode:"5346364564564345",
-                status:1,
-                createTime:"2017-01-06 11:22:33",
-                updateTime:"2017-02-08 15:41:01"
-            },
-            {
-                id: "3",
-                name: "熊荣东",
-                phone:"15112023452",
-                address:"德阳",
-                rqcode:"5346364564564345",
-                status:1,
-                createTime:"2017-02-02 13:11:23",
-                updateTime:"2017-02-08 15:41:01"
-            }
-        ];
+        this.searchColumn = "DRIVER";
+        this.detailData = "";
+        this._delete = this._delete.bind(this);
+        this._detail = this._detail.bind(this);
+        this._resetPassword = this._resetPassword.bind(this);
+        this._startRefresh = this._startRefresh.bind(this);
+        this._lockOrUnlockUser = this._lockOrUnlockUser.bind(this);
     }
 
     componentDidMount() {
-        var self=this;
+        var params = {page: 0, size: 20};
+        this.props.dispatch(getListByMutilpCondition(params, GENERALUSER_LIST_START, GENERALUSER_LIST_END, generalUser_list));
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
-            if($(this).find('a').text().trim()=="按姓名搜索"){
-                self.searchColumn="DRIVER";
-            }else{
-                self.searchColumn="LINE";
+            if ($(this).find('a').text().trim() == "按姓名搜索") {
+                self.searchColumn = "DRIVER";
+            } else {
+                self.searchColumn = "LINE";
             }
         })
     }
 
-    _delete(id,classConfName,weight) {
+    _startRefresh() {
+        this.props.dispatch(commonRefresh())
+    }
+
+    _detail(val) {
+        this.detailData = val;
+        this._startRefresh();
+    }
+    _resetPassword(params){
+        this.props.dispatch(saveObject(params, "", "", reset_password, "/CustomerService/UserManage", "update"));
+    }
+    _delete(userid, realName) {
         var that = this;
-        if(sessionStorage['adminId']==id){
-            ErrorModal(Current_Lang.status.minor,Current_Lang.alertTip.accountOperating)
-            return
-        }
-        ConfirmModal(Current_Lang.status.minor, Current_Lang.alertTip.confirmDelete + classConfName + "（"+weight+"）" + Current_Lang.alertTip.confirmMa, function () {
-            that.props.dispatch(deleteAdmin(id, 0,that.searchColumn, $("#search_value").val()))
+        ConfirmModal(Current_Lang.status.minor, Current_Lang.alertTip.confirmDelete + realName + Current_Lang.alertTip.confirmMa, function () {
+            that.props.dispatch(deleteObject(userid, "", "", "", "", "", GENERALUSER_LIST_START, GENERALUSER_LIST_END, generalUser_delete, generalUser_list))
         })
 
     }
 
-    _search(){
+    _lockOrUnlockUser(params) {
+        var that = this;
+        var listParams = {page: 0, size: 20};
+        this.props.dispatch(saveObject(params, "", "", generalUser_userStatus, "/CustomerService/UserManage", "update", function () {
+            that.props.dispatch(getListByMutilpCondition(listParams, GENERALUSER_LIST_START, GENERALUSER_LIST_END, generalUser_list));
+        }));
+    }
+
+    _search() {
 
     }
 
@@ -101,7 +94,165 @@ export default class UserListContainer extends Component {
     }
 
     render() {
-        const {selected, form, fetching, data} =this.props;
+        const {fetching, data} =this.props;
+        console.log("userdata", data.data);
+        var detailUserInfo = "";
+        if (this.detailData == "") {
+            detailUserInfo = <Loading />;
+        } else {
+            detailUserInfo =
+                <div>
+                    <div className="form-horizontal">
+                        <fieldset className="content-group">
+                            <legend className="text-bold">
+                                {"详细信息"}
+                            </legend>
+                            <div className="form-group">
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"头像"}</label>
+                                    <div className="col-lg-8">
+                                        <div className="thumbnail"
+                                             style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
+                                            <div className="thumb">
+                                                <img src={this.detailData.headimg} alt=""
+                                                     style={{height: "160px", width: "160px"}}/>
+                                                <div className="caption-overflow" style={{width: "auto"}}>
+                                                    <span style={{top: 0, marginTop: 0}}>
+                                                        <a href={this.detailData.headimg} data-popup="lightbox"
+                                                           className="btn" style={{height: "160px", width: "160px"}}></a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"证件正面照"}</label>
+                                    <div className="col-lg-8">
+                                        <div className="thumbnail"
+                                             style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
+                                            <div className="thumb">
+                                                <img src={this.detailData.idcardimg} alt=""
+                                                     style={{height: "160px", width: "160px"}}/>
+                                                <div className="caption-overflow" style={{width: "auto"}}>
+                                                    <span style={{top: 0, marginTop: 0}}>
+                                                        <a href={this.detailData.idcardimg} data-popup="lightbox"
+                                                           className="btn" style={{height: "160px", width: "160px"}}></a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"真实姓名"}</label>
+                                    <div className="col-lg-8">
+                                        <input type="text" value={this.detailData.realName} className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"证件号码"}</label>
+                                    <div className="col-lg-8">
+                                        <input type="text" value={userType(this.detailData.idno)}
+                                               className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"别名"}</label>
+                                    <div className="col-lg-8">
+                                        <input type="text" value={this.detailData.name} className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"用户类型"}</label>
+                                    <div className="col-lg-8">
+                                        <input type="text" value={userType(this.detailData.type)}
+                                               className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"地址"}</label>
+                                    <div className="col-lg-8">
+                                        <input type="text" value={this.detailData.address} className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"小区"}</label>
+                                    <div className="col-lg-8">
+                                        <input id="name" type="text" value={this.detailData.organizationName}
+                                               className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"是否实名认证"}</label>
+                                    <div className="col-lg-8">
+                                        <div className="text-muted text-size-small">
+                                            {this.detailData.certificated == 1 ?
+                                                <span className="label bg-success" style={{marginTop:"6px"}}>{"已认证"}</span> :
+                                                <span className="label bg-danger" style={{marginTop:"6px"}}>{"未认证"}</span>}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"用户状态"}</label>
+                                    <div className="col-lg-8">
+                                        <div className="text-muted text-size-small">
+                                            {this.detailData.status == 1 ?
+                                                <span className="label bg-success" style={{marginTop:"6px"}}>{"有效"}</span> :
+                                                <span className="label bg-danger" style={{marginTop:"6px"}}>{"冻结"}</span>}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"创建时间"}</label>
+                                    <div className="col-lg-8">
+                                        <input type="text" value={timeStamp2Time(this.detailData.create_time)}
+                                               className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"更新时间"}</label>
+                                    <div className="col-lg-8">
+                                        <input type="text" value={timeStamp2Time(this.detailData.update_time)}
+                                               className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                </div>;
+        }
         return (
             <div>
                 <BreadCrumbs
@@ -113,7 +264,7 @@ export default class UserListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{Current_Lang.label.searching}</legend>
                         <div className="list-inline list-inline-condensed no-margin-bottom"
-                            style={{textAlign: 'right',marginTop:'-59px'}}>
+                             style={{textAlign: 'right', marginTop: '-59px'}}>
                             <li className="dropdown"
                                 style={{borderBottom: '0 lightgray solid'}}>
                                 <select className="form-control">
@@ -135,129 +286,155 @@ export default class UserListContainer extends Component {
                     </fieldset>
                     <fieldset className="content-group">
                         <legend className="text-bold">{"用户列表区"}</legend>
-                        <div style={{marginTop:'-80px'}}>
-                            <Pagenation counts={3} page={this.page}
+                        <div style={{marginTop: '-80px'}}>
+                            <Pagenation counts={data && data.status ? data.data.content.length : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>
-                        <UserListComponent data={this.dataList} fetching={false}
-                                            _delete={this._delete}
-                                            _updateStatus={this._updateStatus}/>
-
+                        <UserListComponent data={data} fetching={fetching}
+                                           _delete={this._delete}
+                                           _detail={this._detail}
+                                           _resetPassword={this._resetPassword}
+                                           _lockOrUnlockUser={this._lockOrUnlockUser}/>
                     </fieldset>
+                    <ListMiddleModal id="userDetailModal" content={detailUserInfo}
+                                     doAction={""}
+                                     tip={"用户信息"} actionText="用户详情" hide="true" hideCancel="true"/>
                 </div>
             </div>
         )
     }
 }
 
-class UserListComponent extends Component{
+class UserListComponent extends Component {
     constructor(props) {
         super(props)
     }
 
-    _lockUser(){
+    _lockOrUnlockUser(userid, status) {
+        var params = {
+            userid: userid,
+            status: 1 - status
+        };
+        this.props._lockOrUnlockUser(params);
+    }
+
+    _resetPassword(val) {
+        var params = {
+            password:"88888888",
+            type:val.type,
+            phone: val.phone,
+            authcode: ""
+        };
+        this.props._resetPassword(params);
+    }
+
+    _exportRqcode() {
 
     }
 
-    _unlockUser(){
 
+    _detail(val) {
+        this.props._detail(val);
     }
 
-    _resetPassword(){
-
-    }
-    _exportRqcode(){
-
-    }
-
-
-    _detail(path) {
-        browserHistory.push(path)
-    }
-
-    _delete(id,classConfName,weight) {
-        this.props._delete(id,classConfName,weight)
+    _delete(userid, realName) {
+        this.props._delete(userid, realName)
     }
 
     render() {
         const {data, fetching}=this.props;
         let tb = [];
-        if (fetching) {
+        if (data) {
+            if (data.status) {
+                if (data.data.content.length > 0) {
+                    data.data.content.forEach(function (val, key) {
+                        tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
+                            <td className="text-center">{key + 1}</td>
+                            <td className="text-center">{val.realName}</td>
+                            <td className="text-center">{userType(val.type)}</td>
+                            <td className="text-center">{val.phone}</td>
+                            <td className="text-center">{val.address}</td>
+                            <td className="text-center">{val.rqcode}</td>
+                            <td className="text-center">
+                                <div className="text-muted text-size-small">
+                                    {val.status == 1 ? <span className="label bg-success">{"有效"}</span> :
+                                        <span className="label bg-danger">{"冻结"}</span>}
+                                </div>
+                            </td>
+                            <td className="text-center">{val.createTime}</td>
+                            <td className="text-center">{val.updateTime}</td>
+                            <td className="text-center">
+                                {<ul className="icons-list">
+                                    <li className="dropdown">
+                                        <a href="#" className="dropdown-toggle"
+                                           data-toggle="dropdown" aria-expanded="false"><i
+                                            className="icon-menu7"></i></a>
+                                        <ul className="dropdown-menu dropdown-menu-right">
+                                            <li>
+                                                <a href="javascript:void(0)" data-toggle="modal"
+                                                   data-target="#userDetailModal"
+                                                   onClick={this._detail.bind(this, val)}><i
+                                                    className=" icon-office"></i>
+                                                    {"详情"}</a>
+                                            </li>
+                                            <li style={{display: 'block'}}
+                                                onClick={this._delete.bind(this, val.userid, val.realName)}><a
+                                                href="javascript:void(0)"><i className="icon-trash"></i>
+                                                {"删除"}</a></li>
+                                            <li style={{display: 'block'}} onClick={this._resetPassword.bind(this,val)}><a
+                                                href="javascript:void(0)"><i className="icon-reset"></i>
+                                                {"重置密码"}</a></li>
+                                            {val.status == 1 ?
+                                                <li onClick={this._lockOrUnlockUser.bind(this, val.userid, val.status)}>
+                                                    <a
+                                                        href="javascript:void(0)"><i className="icon-lock"></i>锁住账户</a>
+                                                </li> :
+                                                <li onClick={this._lockOrUnlockUser.bind(this, val.userid, val.status)}>
+                                                    <a
+                                                        href="javascript:void(0)"><i
+                                                        className="icon-unlock"></i>解锁账户</a></li>}
+                                            <li style={{display: 'block'}} onClick={this._exportRqcode.bind(this)}><a
+                                                href="javascript:void(0)"><i className="icon-redo2"></i>
+                                                {"导出二维码"}</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>}
+
+                            </td>
+                        </tr>)
+                    }.bind(this))
+                } else {
+                    tb.push(<tr key={'noData'}>
+                        <td colSpan="100" style={{textAlign: 'center'}}>
+                            <NoData />
+                        </td>
+                    </tr>)
+
+                }
+            } else {
+                tb.push(ErrorModal(Current_Lang.status.minor, "获取数据错误"))
+            }
+        } else {
             tb.push(<tr key={'loading'}>
-                <td colSpan="8" style={{textAlign: 'center'}}>
+                <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />
                 </td>
             </tr>)
-        } else if (data) {
-            if (data.length == 0) {
-                tb.push(<tr key={'noData'}>
-                    <td colSpan="8" style={{textAlign: 'center'}}>
-                        <NoData />
-                    </td>
-
-                </tr>)
-            } else {
-                data.forEach(function (val, key) {
-                    tb.push(<tr key={key} style={{backgroundColor:key%2==0?"#F8F8F8":""}}>
-                        <td className="text-center">{key+1}</td>
-                        <td className="text-center">{val.name}</td>
-                        <td className="text-center">{val.phone}</td>
-                        <td className="text-center">{val.address}</td>
-                        <td className="text-center">{val.rqcode}</td>
-                        <td className="text-center">
-                            <div className="text-muted text-size-small">
-                                {val.status == 1 ? <span className="label bg-success">{"有效"}</span> :
-                                    <span className="label bg-danger">{"冻结"}</span>}
-                            </div>
-                        </td>
-                        <td className="text-center">{val.createTime}</td>
-                        <td className="text-center">{val.updateTime}</td>
-                        <td className="text-center">
-                            {<ul className="icons-list">
-                                <li className="dropdown">
-                                    <a href="#" className="dropdown-toggle"
-                                       data-toggle="dropdown" aria-expanded="false"><i
-                                        className="icon-menu7"></i></a>
-                                    <ul className="dropdown-menu dropdown-menu-right">
-                                        <li style={{display:'block'}} onClick={this._detail.bind(this, '/CustomerService/SweepCodeUserManage/ModifySweepCodeUser/:' + val.id)}>
-                                            <a href="javascript:void(0)"><i className="icon-pencil5"></i>
-                                                {"修改"}</a></li>
-                                        <li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.classConfName,val.weight)}><a
-                                            href="javascript:void(0)"><i className="icon-trash"></i>
-                                            {"删除"}</a></li>
-                                        <li style={{display:'block'}} onClick={this._resetPassword.bind(this)}><a
-                                            href="javascript:void(0)"><i className="icon-reset"></i>
-                                            {"重置密码"}</a></li>
-                                        {val.status == 1 ?
-                                            <li onClick={this._lockUser.bind(this)}><a
-                                                href="javascript:void(0)"><i className="icon-lock"></i>锁住账户</a></li> :
-                                            <li  onClick={this._unlockUser.bind(this)}><a
-                                                href="javascript:void(0)"><i className="icon-unlock"></i>解锁账户</a></li>}
-                                        <li style={{display:'block'}} onClick={this._exportRqcode.bind(this)}><a
-                                            href="javascript:void(0)"><i className="icon-redo2"></i>
-                                            {"导出二维码"}</a></li>
-                                    </ul>
-                                </li>
-                            </ul>}
-
-                        </td>
-                    </tr>)
-                }.bind(this))
-            }
         }
-        var tableHeight = ($(window).height()-240);
+        var tableHeight = ($(window).height() - 240);
         return (
-            <div className="table-responsive" style={{height:tableHeight+'px',overflowY:'scroll'}}>
-                <table className="table table-bordered table-hover" style={{marginBottom:'85px'}}>
+            <div className="table-responsive" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+                <table className="table table-bordered table-hover" style={{marginBottom: '85px'}}>
                     <thead>
-                    <tr style={{fontWeight:'bold'}}>
+                    <tr style={{fontWeight: 'bold'}}>
                         <th className="text-center" style={{width: "20px"}}></th>
                         <th className="col-md-1 text-bold text-center">{"姓名"}</th>
+                        <th className="col-md-1 text-bold text-center">{"用户类型"}</th>
                         <th className="col-md-1 text-bold text-center">{"手机号"}</th>
                         <th className="col-md-2 text-bold text-center">{"地址"}</th>
                         <th className="col-md-2 text-bold text-center">{"二维码编号"}</th>
-                        <th className="col-md-2 text-bold text-center">{"用户状态"}</th>
+                        <th className="col-md-1 text-bold text-center">{"用户状态"}</th>
                         <th className="col-md-2 text-bold text-center">{"创建时间"}</th>
                         <th className="col-md-2 text-bold text-center">{"更新时间"}</th>
                         <th className="text-center" style={{width: "20px"}}><i
@@ -276,12 +453,11 @@ class UserListComponent extends Component{
 }
 
 function mapStateToProps(state) {
-    const {changeSearch1Type, form, getAdminList}=state;
+    const {getGeneralUserList,commonReducer}=state;
     return {
-        selected: changeSearch1Type.selected,
-        form: form,
-        fetching: getAdminList.fetching,
-        data: getAdminList.data
+        fetching: getGeneralUserList.fetching,
+        data: getGeneralUserList.data,
+        refresh: commonReducer.refresh
     }
 }
 

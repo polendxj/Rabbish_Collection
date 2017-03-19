@@ -9,7 +9,7 @@ import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
 import {Loading, NoData, ConfirmModal,ErrorModal,roleApplicationUse,timeStamp2Time} from '../../components/Tool/Tool';
 import {CLASSCONF_LIST_START, CLASSCONF_LIST_END} from '../../constants/index.js'
-import {getListByMutilpCondition} from '../../actions/CommonActions';
+import {getListByMutilpCondition, deleteObject} from '../../actions/CommonActions';
 
 export default class RubbishClassListContainer extends Component {
     constructor(props) {
@@ -23,11 +23,8 @@ export default class RubbishClassListContainer extends Component {
         this.operation = [
             {icon: "icon-add-to-list", text: Current_Lang.others.add, action: "/DataManage/RubbishClass/Register"}
         ];
-        this.dataList = [
-            {id: "1", name: "可回收",description:"可回收",updateTime:"2017-02-04 16:25:07"},
-            {id: "2", name: "厨余垃圾",description:"厨余垃圾",updateTime:"2017-02-04 16:25:38"}
-        ];
         this.searchColumn="TYPE";
+        this._delete = this._delete.bind(this);
     }
 
     componentDidMount() {
@@ -51,14 +48,9 @@ export default class RubbishClassListContainer extends Component {
 
     _delete(id,name) {
         var that = this;
-        if(sessionStorage['adminId']==id){
-            ErrorModal(Current_Lang.status.minor,Current_Lang.alertTip.accountOperating)
-            return
-        }
         ConfirmModal(Current_Lang.status.minor, Current_Lang.alertTip.confirmDelete + name + Current_Lang.alertTip.confirmMa, function () {
-            that.props.dispatch(deleteAdmin(id, 0,that.searchColumn, $("#search_value").val()))
+            that.props.dispatch(deleteObject(id, "", "", "", "", "",CLASSCONF_LIST_START, CLASSCONF_LIST_END, classConf_delete, classConf_list))
         })
-
     }
 
     _changePage(page) {
@@ -78,7 +70,6 @@ export default class RubbishClassListContainer extends Component {
 
     render() {
         const {fetching, data} =this.props;
-        console.log(data);
         return (
             <div>
                 <BreadCrumbs
@@ -157,7 +148,6 @@ class RubbishClassListComponent extends Component{
     render() {
         const {data, fetching}=this.props;
         let tb = [];
-        console.log("data",data);
         if (data) {
             if (data.data.length > 0) {
                 data.data.forEach(function (val, key) {
@@ -173,7 +163,7 @@ class RubbishClassListComponent extends Component{
                                        data-toggle="dropdown" aria-expanded="false"><i
                                         className="icon-menu7"></i></a>
                                     <ul className="dropdown-menu dropdown-menu-right">
-                                        <li style={{display:'block'}} onClick={this._detail.bind(this, '/DataManage/RubbishClass/ModifyRubbishClass/:' + val.id)}>
+                                        <li style={{display:'block'}} onClick={this._detail.bind(this, '/DataManage/RubbishClass/Update/:' + val.id)}>
                                             <a href="javascript:void(0)"><i className="icon-pencil5"></i>
                                                 {"修改"}</a></li>
                                         <li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.name)}><a
@@ -199,7 +189,7 @@ class RubbishClassListComponent extends Component{
             }
         }else{
             tb.push(<tr key={'loading'}>
-                <td colSpan="8" style={{textAlign: 'center'}}>
+                <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />
                 </td>
             </tr>)

@@ -1,0 +1,153 @@
+/**
+ * Created by Captain on 2017/3/4.
+ */
+
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {browserHistory} from 'react-router'
+import {bindActionCreators} from 'redux'
+import {Loading, ListModal, serverStatus, ErrorModal, DecodeBase64, streamingTemplateFilter} from '../../components/Tool/Tool';
+import BreadCrumbs from '../../components/right/breadCrumbs';
+import {saveObject,getDetail} from '../../actions/CommonActions';
+import {commonRefresh} from '../../actions/Common';
+import {CLASSCONF_UPDATE_START, CLASSCONF_UPDATE_END} from '../../constants/index.js'
+
+export default class RubbishClassUpdateContainer extends Component {
+    constructor(props) {
+        super(props);
+        this.breadCrumbs = [
+            {text: "数据管理", link: ''},
+            {text: "垃圾分类", link: ''},
+            {text: "垃圾分类修改", link: ''}
+        ];
+        this.operation = [
+            {icon: "icon-undo2", text:"返回垃圾分类列表", action: "/DataManage/RubbishClass"}
+        ];
+        this._save = this._save.bind(this);
+        this._startRefresh=this._startRefresh.bind(this)
+    }
+
+    componentDidMount() {
+        this.props.dispatch(getDetail(parseInt(this.props.params.id.substring(1)),CLASSCONF_UPDATE_START, CLASSCONF_UPDATE_END,classConf_detail));
+    }
+
+    componentWillUnmount() {
+
+    }
+
+    _startRefresh(){
+        this.props.dispatch(commonRefresh())
+    }
+
+    _save(id,params) {
+        this.props.dispatch(saveObject(params,"","",classConf_update+"?id="+id,"/DataManage/RubbishClass","update"));
+    }
+
+    render() {
+        const {fetching, data} =this.props;
+        return (
+            <div>
+                <BreadCrumbs
+                    breadCrumbs={this.breadCrumbs}
+                    icon={'icon-cog6'}
+                    operation={this.operation}
+                />
+                <div className="content" style={{marginTop: '20px'}}>
+                    <UpdateRubbishClassComponent data={data} fetching={fetching} _save={this._save}/>
+                </div>
+            </div>
+        )
+    }
+}
+
+class UpdateRubbishClassComponent extends Component{
+    constructor(props) {
+        super(props);
+        this._save = this._save.bind(this)
+        this.initApp = [];
+        this.selectedApp = "";
+    }
+
+    _save(id) {
+        var params = {
+            name: $("#name").val(),
+            description: $("#description").val(),
+            parentid:1
+        };
+        this.props._save(id,params);
+    }
+
+    componentWillUnmount() {
+
+    }
+
+    render() {
+        const {fetching, data} =this.props;
+        console.log("detailData",data);
+        var tableHeight = ($(window).height() - 130);
+        var detail="";
+        if(data){
+            detail = <form className="form-horizontal" action="#">
+                <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+                    <div className="col-sm-8 col-sm-offset-2">
+                        <fieldset className="content-group">
+                            <legend className="text-bold">
+                                {"垃圾分类基础信息"}
+                            </legend>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{
+                                           textAlign: 'center',
+                                           marginTop: '8px'
+                                       }}>{"分类名称"}</label>
+                                <div className="col-lg-9">
+                                    <input id="name" type="text" className="form-control" defaultValue={data.data.name}
+                                           autoComplete="off"/>
+                                </div>
+                            </div>
+
+                            <div className="form-group" >
+                                <label className="col-lg-2 control-label"
+                                       style={{
+                                           textAlign: 'center',
+                                       }}>{"分类描述"}</label>
+                                <div className="col-lg-9">
+                                    <textarea id="description" rows="5" cols="5" className="form-control"
+                                              defaultValue={data.data.description}></textarea>
+                                </div>
+                            </div>
+
+                        </fieldset>
+
+                        <div className="form-group" >
+                            <div className="col-lg-11 text-right" style={{marginTop: "50px"}}>
+                                <button type="button" className="btn btn-primary"
+                                        onClick={this._save.bind(this,data.data.id)}>{"保存"}
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        }else{
+            detail = <Loading/>
+        }
+        return (
+            <div>
+                {detail}
+            </div>
+        )
+
+    }
+}
+
+function mapStateToProps(state) {
+    const {getClassConfDetail}=state;
+    return {
+        data: getClassConfDetail.data,
+        fetching:getClassConfDetail.fetching
+    }
+}
+
+export default connect(mapStateToProps)(RubbishClassUpdateContainer)

@@ -11,7 +11,7 @@ var Request = function (url, method, data, req, resp, callback) {
             {
                 method: method,
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Content-Type": "application/json",
                     'Cookie': "JSESSIONID=" + req.cookies.JSESSIONID,
                     'token': "aaaaa"
                 },

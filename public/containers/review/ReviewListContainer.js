@@ -7,7 +7,9 @@ import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
-import {Loading, NoData, ConfirmModal, ErrorModal, roleApplicationUse} from '../../components/Tool/Tool'
+import {Loading, NoData, ConfirmModal, ErrorModal, roleApplicationUs, timeStamp2Time} from '../../components/Tool/Tool';
+import {REVIEW_LIST_START, REVIEW_LIST_END} from '../../constants/index.js'
+import {getListByMutilpCondition, saveObject, deleteObject} from '../../actions/CommonActions';
 
 export default class ReviewListContainer extends Component {
     constructor(props) {
@@ -26,44 +28,14 @@ export default class ReviewListContainer extends Component {
             }
         ];
         this.searchColumn = "DRIVER";
-        this.dataList = [
-            {
-                id: "001",
-                name: "付大海",
-                title: "asfasd",
-                content: "啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发啊发的发射点法法沙发",
-                createTime: "2017-01-08 12:32:33",
-                reply: {
-                    name: "扫码员1",
-                    content: "魔王副书记覅文件分类根据饿哦i个",
-                    createTime: "2017-01-09 12:32:35"
-                }
-            },
-            {
-                id: "002",
-                name: "寇建波",
-                title: "afasdf",
-                content: "没事佛啊佛为附件",
-                createTime: "2017-01-06 11:22:33",
-                reply: {
-                    name: "扫码员2",
-                    content: "魔王副书记覅文件分类根据饿哦i个",
-                    createTime: "2017-01-09 12:32:33"
-                }
-            },
-            {
-                id: "003",
-                name: "熊荣东",
-                title: "asdfak",
-                content: "吗我额就开机即可",
-                createTime: "2017-02-02 13:11:23",
-                reply: ""
-            }
-        ];
+        this._reply = this._reply.bind(this);
+        this._delete = this._delete.bind(this);
     }
 
     componentDidMount() {
         var self = this;
+        var params = {page: 0, size: 20};
+        this.props.dispatch(getListByMutilpCondition(params, REVIEW_LIST_START, REVIEW_LIST_END, review_list));
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
@@ -75,16 +47,20 @@ export default class ReviewListContainer extends Component {
         })
     }
 
-    _delete(id, title) {
+    _reply(params) {
         var that = this;
-        if (sessionStorage['adminId'] == id) {
-            ErrorModal(Current_Lang.status.minor, Current_Lang.alertTip.accountOperating)
-            return
-        }
-        ConfirmModal(Current_Lang.status.minor, Current_Lang.alertTip.confirmDelete + title + Current_Lang.alertTip.confirmMa, function () {
-            that.props.dispatch(deleteAdmin(id, 0, that.searchColumn, $("#search_value").val()))
-        })
+        var listParams = {page: 0, size: 20};
+        this.props.dispatch(saveObject(params, "", "", reply_register, "CustomerService/ReviewManage", "noAlert", function () {
+            that.props.dispatch(getListByMutilpCondition(listParams, REVIEW_LIST_START, REVIEW_LIST_END, review_list));
+        }));
+    }
 
+    _delete(id, replyid, title) {
+        var that = this;
+        ConfirmModal(Current_Lang.status.minor, Current_Lang.alertTip.confirmDelete + title + Current_Lang.alertTip.confirmMa, function () {
+            that.props.dispatch(deleteObject(replyid, "", "", "", "", "", "", "", reply_delete, review_list));
+            that.props.dispatch(deleteObject(id, "", "", "", "", "", REVIEW_LIST_START, REVIEW_LIST_END, review_delete, review_list));
+        })
     }
 
     _search() {
@@ -107,7 +83,8 @@ export default class ReviewListContainer extends Component {
     }
 
     render() {
-        const {selected, form, fetching, data} =this.props;
+        const {fetching, data} =this.props;
+        console.log("review", data);
         return (
             <div>
                 <BreadCrumbs
@@ -155,11 +132,12 @@ export default class ReviewListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"评价列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
-                            <Pagenation counts={3} page={this.page}
+                            <Pagenation counts={data && data.status ? data.data.content.length : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>
-                        <ReviewListComponent data={this.dataList} fetching={false}
+                        <ReviewListComponent data={data} fetching={fetching}
+                                             _reply={this._reply}
                                              _delete={this._delete}
                                              _updateStatus={this._updateStatus}/>
 
@@ -191,85 +169,113 @@ class ReviewListComponent extends Component {
         browserHistory.push(path)
     }
 
-    _delete(id, title) {
-        this.props._delete(id, title)
+    _reply(id, userid) {
+        var date = new Date().getTime();
+        var params = {
+            userid: userid,
+            reviewid: id,
+            content: $("#reply").val(),
+            createTime: date
+        }
+        this.props._reply(params);
+    }
+
+    _delete(id, replyid, title) {
+        this.props._delete(id, replyid, title)
     }
 
     render() {
         const {data, fetching}=this.props;
         let tb = [];
-        if (fetching) {
+        if (data) {
+            if (data.status) {
+                if (data.data.content.length > 0) {
+                    data.data.content.forEach(function (val, key) {
+                        var replyFlag = (val.reply == ""||typeof val.reply.replyContent=="undefined");
+                        tb.push(
+                            <div key={key} className="panel panel-white text-left">
+                                <div className="panel-heading" style={{padding: "15px 20px 10px 20px"}}>
+                                    <div className="panel-title">
+                                        <div style={{paddingRight: "50px"}}>
+                                            {"[" + val.title + "]" + val.content}
+                                        </div>
+                                        <div style={{height: "10px"}}></div>
+                                        <small className="display-block" style={{fontSize: "6px"}}>
+                                            {val.name}&nbsp;&nbsp;
+                                            <i className="icon-alarm" style={{fontSize: "3px"}}/>
+                                            &nbsp;
+                                            {timeStamp2Time(val.createTime)}&nbsp;&nbsp;
+                                            <a className="collapsed" data-toggle="collapse"
+                                               href={"#collapse-" + val.id}>
+                                                <i className="icon-bubble2" style={{fontSize: "4px"}}></i>
+                                                &nbsp;
+                                                {replyFlag ? "回复评论" : "收起评论"}</a>
+                                        </small>
+                                    </div>
+                                    <div className="heading-elements"
+                                         style={{height: "18px", top: "25px", right: "10px"}}>
+                                        <i className="icon-cross" style={{fontSize: "18px", cursor: "pointer"}}
+                                           onClick={this._delete.bind(this, val.id, val.reply.id, val.title)}></i>
+                                    </div>
+                                </div>
+                                <div id={"collapse-" + val.id}
+                                     className={replyFlag ? "panel-collapse collapse" : "panel-collapse collapse in"}
+                                     style={{paddingLeft: replyFlag ? 0 : "20px"}}>
+                                    <div className="panel-body"
+                                         style={{padding: replyFlag ? 0 : "15px 20px 10px 20px"}}>
+                                        {replyFlag ?
+                                            <div>
+                                                <div className="form-group has-feedback" style={{margin: 0}}>
+                                                    <input id="reply" style={{border: 0}} type="text"
+                                                           className="form-control"
+                                                           placeholder={"回复该评论"} autoComplete="off"/>
+                                                    <div className="form-control-feedback"
+                                                         style={{pointerEvents: "auto"}}
+                                                         onClick={this._reply.bind(this, val.id, val.userid)}>
+                                                        <i className="icon-arrow-right8" style={{
+                                                            fontWeight: "bold",
+                                                            fontSize: "14px",
+                                                            cursor: "pointer"
+                                                        }}/>
+                                                    </div>
+                                                </div>
+                                            </div> :
+                                            <div>
+                                                <div>
+                                                    {val.reply.replyContent}
+                                                </div>
+                                                <div style={{height: "10px"}}></div>
+                                                <small className="display-block" style={{fontSize: "6px"}}>
+                                                    {val.reply.name}&nbsp;&nbsp;
+                                                    <i className="icon-alarm" style={{fontSize: "3px"}}></i>
+                                                    &nbsp;
+                                                    {timeStamp2Time(val.reply.replyTime)}
+                                                </small>
+                                            </div>}
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }.bind(this));
+                } else {
+                    tb.push(<tr key={'noData'}>
+                        <td colSpan="100" style={{textAlign: 'center'}}>
+                            <NoData />
+                        </td>
+
+                    </tr>)
+                }
+            } else {
+                tb.push(ErrorModal(Current_Lang.status.minor, "获取数据错误"))
+            }
+        } else {
             tb.push(<tr key={'loading'}>
-                <td colSpan="8" style={{textAlign: 'center'}}>
+                <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />
                 </td>
             </tr>)
-        } else if (data) {
-            if (data.length == 0) {
-                tb.push(<tr key={'noData'}>
-                    <td colSpan="8" style={{textAlign: 'center'}}>
-                        <NoData />
-                    </td>
-
-                </tr>)
-            } else {
-                data.forEach(function (val, key) {
-                    tb.push(
-                        <div key={key} className="panel panel-white text-left">
-                            <div className="panel-heading" style={{padding:"15px 20px 10px 20px"}}>
-                                <div className="panel-title">
-                                    <div style={{paddingRight:"50px"}}>
-                                        {"[" + val.title + "]" + val.content}
-                                    </div>
-                                    <div style={{height:"10px"}}></div>
-                                    <small className="display-block" style={{fontSize: "6px"}}>
-                                        {val.name}&nbsp;&nbsp;
-                                        <i className="icon-alarm" style={{fontSize: "3px"}}/>
-                                        &nbsp;
-                                        {val.createTime}&nbsp;&nbsp;
-                                        <a className="collapsed" data-toggle="collapse" href={"#collapse-" + val.id}>
-                                            <i className="icon-bubble2" style={{fontSize: "4px"}}></i>
-                                            &nbsp;
-                                            {val.reply == "" ? "回复评论" : "收起评论"}</a>
-                                    </small>
-                                </div>
-                                <div className="heading-elements" style={{height:"18px",top:"25px",right:"10px"}}>
-                                    <i className="icon-cross" style={{fontSize: "18px",cursor:"pointer"}} onClick={this._delete.bind(this,val.id,val.title)}></i>
-                                </div>
-                            </div>
-                            <div id={"collapse-" + val.id}
-                                 className={val.reply == "" ? "panel-collapse collapse" : "panel-collapse collapse in"}
-                                 style={{paddingLeft: val.reply == ""?0:"20px"}}>
-                                <div className="panel-body" style={{padding:val.reply == ""?0:"15px 20px 10px 20px"}}>
-                                    {val.reply == "" ?
-                                        <div>
-                                            <div className="form-group has-feedback" style={{margin:0}}>
-                                                <input id="name" style={{border:0}} type="text" className="form-control"
-                                                       placeholder={"回复该评论"} autoComplete="off"/>
-                                                    <div className="form-control-feedback" style={{pointerEvents:"auto"}}>
-                                                        <i className="icon-arrow-right8" style={{fontWeight:"bold",fontSize: "14px",cursor:"pointer"}} />
-                                                    </div>
-                                            </div>
-                                        </div> :
-                                        <div>
-                                            <div>
-                                                {val.reply.content}
-                                            </div>
-                                            <div style={{height:"10px"}}></div>
-                                            <small className="display-block" style={{fontSize: "6px"}}>
-                                                {val.reply.name}&nbsp;&nbsp;
-                                                <i className="icon-alarm" style={{fontSize: "3px"}}></i>
-                                                &nbsp;
-                                                {val.reply.createTime}
-                                            </small>
-                                        </div>}
-                                </div>
-                            </div>
-                        </div>
-                    )
-                }.bind(this))
-            }
         }
+
         var tableHeight = ($(window).height() - 240);
         return (
             <div className="table-responsive" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
@@ -283,12 +289,10 @@ class ReviewListComponent extends Component {
 }
 
 function mapStateToProps(state) {
-    const {changeSearch1Type, form, getAdminList}=state;
+    const {getReviewList}=state;
     return {
-        selected: changeSearch1Type.selected,
-        form: form,
-        fetching: getAdminList.fetching,
-        data: getAdminList.data
+        fetching: getReviewList.fetching,
+        data: getReviewList.data
     }
 }
 

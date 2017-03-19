@@ -6,10 +6,11 @@ import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {browserHistory} from 'react-router'
 import {bindActionCreators} from 'redux'
-import {Loading, ListModal, serverStatus, ErrorModal, DecodeBase64, streamingTemplateFilter} from '../../components/Tool/Tool';
+import {array2Json} from '../../components/Tool/Tool';
 import BreadCrumbs from '../../components/right/breadCrumbs';
-import {saveServiceGroup} from '../../actions/SystemManagerServiceGroupAction';
-import {commonRefresh} from '../../actions/Common';
+import {ORGANIZATION_LIST_START, ORGANIZATION_LIST_END} from '../../constants/index.js';
+import {getListByMutilpCondition,saveObject} from '../../actions/CommonActions';
+var sha1 = require('js-sha1');
 
 export default class UserRegisterContainer extends Component {
     constructor(props) {
@@ -23,20 +24,17 @@ export default class UserRegisterContainer extends Component {
             {icon: "icon-undo2", text:"返回用户列表", action: "/CustomerService/UserManage"}
         ];
         this._save = this._save.bind(this);
-        this._startRefresh=this._startRefresh.bind(this)
     }
-
-    _startRefresh(){
-        this.props.dispatch(commonRefresh())
+    componentDidMount() {
+        var params = {page: 0, size: 10000};
+        this.props.dispatch(getListByMutilpCondition(params, ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, organization_list));
     }
-
     _save(params) {
-        this.props.dispatch(saveServiceGroup(params))
-
+        this.props.dispatch(saveObject(params,"","",generalUser_register,"/CustomerService/UserManage"));
     }
 
     render() {
-        const {data, form,refresh}=this.props;
+        const {data}=this.props;
         return (
             <div>
                 <BreadCrumbs
@@ -45,7 +43,7 @@ export default class UserRegisterContainer extends Component {
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>
-                    <RegisterUserComponent _save={this._save} _startRefresh={this._startRefresh}/>
+                    <RegisterUserComponent data={data} _save={this._save}/>
 
                 </div>
             </div>
@@ -56,104 +54,39 @@ export default class UserRegisterContainer extends Component {
 class RegisterUserComponent extends Component{
     constructor(props) {
         super(props);
-        this._syncData = this._syncData.bind(this);
         this._save = this._save.bind(this);
-        this._search = this._search.bind(this);
-        this.initApp = [];
-        this.selectedApp = "";
     }
-
-    _search() {
-        this.props._startRefresh();
-    }
-
-    _syncData() {
-        this.selectedCSE = $.extend([], this.confirmSelected);
-
-        this.props._startRefresh()
-    }
-
     _save() {
-        var cseListIDS = [];
-        var singleAppID = true;
-        var army = this.selectedCSE[0];
-        this.selectedCSE.forEach(function (val, key) {
-            if (val.node.appId != army.node.appId) {
-                singleAppID = false
-            }
-        })
-        if (singleAppID) {
-            this.selectedCSE.forEach(function (val, key) {
-                cseListIDS.push(val.node.cssId)
-            })
-            var params = {
-                groupId: $("#name").val(),
-                description: $("#description").val(),
-                cseList: cseListIDS,
-                mode: 'new'
-            }
-            this.props._save(params)
-        } else {
-            ErrorModal(Current_Lang.status.minor, Current_Lang.alertTip.cseGroupHaveDiffCSE);
-        }
-
+        var formFields = $("#generalUserForm").serializeArray();
+        var params = array2Json(formFields);
+        var password = sha1.hex(params.password);
+        params.password = password;
+        params.authcode = "";
+        console.log("aa1",params);
+        console.log("aa1",password);
+        this.props._save(params);
     }
-
-    _appOnChange() {
-        this.props._startRefresh();
-    }
-
     componentDidMount() {
-        var self = this;
-        $("#cse_group_text").parent().parent().on('click', 'li', function () {
-            $("#cse_group_text").text($(this).find('a').text())
-        })
-        $("#app_id_text").parent().parent().on('click', 'li', function () {
-            $("#app_id_text").text($(this).find('a').text())
-        })
-        $("#cse_status_text").parent().parent().on('click', 'li', function () {
-            $("#cse_status_text").text($(this).find('a').text())
-        })
-        $('[data-popup="tooltip"]').tooltip();
-
-        var getFirstAppID = setInterval(function () {
-            if ($("#common_app option:selected").val()) {
-                clearInterval(getFirstAppID);
-                self.selectedApp = self.initApp[$("#common_app option:selected").index()];
-                this.props._startRefresh()
-            }
-        }.bind(this), 500);
-
-
-        $("#common_app").on("change", function () {
-            self.selectedApp = self.initApp[$("#common_app option:selected").index()];
-            self.props._startRefresh()
-        })
-        $("#streamingProfile").on("change", function () {
-            if ($("#streamingProfile option:selected").text().indexOf("QAM") >= 0) {
-                $(".erm").show();
-            } else {
-                $(".erm").hide();
-            }
-
-            self.props._startRefresh()
-        })
 
     }
 
     render() {
-        const {allCSE, cseGroup, appList, streamingTemplate}=this.props;
-        if ($("#streamingProfile option:selected").text().indexOf("QAM") >= 0) {
-            $(".erm").show();
-        } else {
-            $(".erm").hide();
+        const {data}=this.props;
+        console.log("orgina",data);
+        const options = [];
+        if (data) {
+            if(data.status){
+                data.data.content.forEach(function (val, key) {
+                    options.push(
+                        <option key={"option"+key} value={val.id}>{val.name}</option>
+                    )
+                })
+            }
         }
-        var self = this;
-
         var tableHeight = ($(window).height() - 130);
         return (
             <div>
-                <form className="form-horizontal" action="#">
+                <form id="generalUserForm" className="form-horizontal" action="#">
                     <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                         <div className="col-sm-8 col-sm-offset-2">
                             <fieldset className="content-group">
@@ -164,10 +97,19 @@ class RegisterUserComponent extends Component{
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"用户类型"}</label>
                                     <div className="col-lg-9">
-                                        <select disabled className="form-control" name="userType" id="type" value={3}>
-                                            <option value={1}>{"管理员"}</option>
-                                            <option value={2}>{"扫码员"}</option>
+                                        <select className="form-control" name="type" defaultValue={3}>
                                             <option value={3}>{"商户用户"}</option>
+                                            <option value={4}>{"住宅用户"}</option>
+                                            <option value={5}>{"机关单位、学校"}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="col-lg-2 control-label"
+                                           style={{textAlign: 'center'}}>{"单位、小区"}</label>
+                                    <div className="col-lg-9">
+                                        <select className="form-control" name="organizationid">
+                                            {options}
                                         </select>
                                     </div>
                                 </div>
@@ -176,10 +118,36 @@ class RegisterUserComponent extends Component{
                                            style={{
                                                textAlign: 'center',
                                                marginTop: '8px'
-                                           }}>{"姓名"}</label>
+                                           }}>{"真实姓名"}</label>
                                     <div className="col-lg-9">
-                                        <input id="name" type="text" className="form-control"
-                                               placeholder={"姓名"}
+                                        <input name="realName" type="text" className="form-control"
+                                               placeholder={"真实姓名"}
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+
+                                <div className="form-group">
+                                    <label className="col-lg-2 control-label"
+                                           style={{
+                                               textAlign: 'center',
+                                               marginTop: '8px'
+                                           }}>{"身份证号码"}</label>
+                                    <div className="col-lg-9">
+                                        <input name="idno" type="text" className="form-control"
+                                               placeholder={"身份证号码"}
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+
+                                <div className="form-group">
+                                    <label className="col-lg-2 control-label"
+                                           style={{
+                                               textAlign: 'center',
+                                               marginTop: '8px'
+                                           }}>{"头像URL"}</label>
+                                    <div className="col-lg-9">
+                                        <input name="headimg" type="text" className="form-control"
+                                               placeholder={"头像URL"}
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -190,7 +158,7 @@ class RegisterUserComponent extends Component{
                                                textAlign: 'center',
                                            }}>{"密码"}</label>
                                     <div className="col-lg-9">
-                                        <input id="password" type="text" className="form-control"
+                                        <input name="password" type="text" className="form-control"
                                                placeholder={"密码"}
                                                autoComplete="off"/>
                                     </div>
@@ -212,7 +180,7 @@ class RegisterUserComponent extends Component{
                                                textAlign: 'center',
                                            }}>{"手机号"}</label>
                                     <div className="col-lg-9">
-                                        <input id="phone" type="text" className="form-control"
+                                        <input name="phone" type="text" className="form-control"
                                                placeholder={"手机号"}
                                                autoComplete="off"/>
                                     </div>
@@ -223,7 +191,7 @@ class RegisterUserComponent extends Component{
                                                textAlign: 'center',
                                            }}>{"地址"}</label>
                                     <div className="col-lg-9">
-                                        <input id="address" type="text" className="form-control"
+                                        <input name="address" type="text" className="form-control"
                                                placeholder={"地址"}
                                                autoComplete="off"/>
                                     </div>
@@ -234,7 +202,7 @@ class RegisterUserComponent extends Component{
                                                textAlign: 'center',
                                            }}>{"二维码编号"}</label>
                                     <div className="col-lg-9">
-                                        <input id="rqcode" type="text" className="form-control"
+                                        <input name="rqcode" type="text" className="form-control"
                                                placeholder={"二维码编号"}
                                                autoComplete="off"/>
                                     </div>
@@ -260,10 +228,9 @@ class RegisterUserComponent extends Component{
 }
 
 function mapStateToProps(state) {
-    const {changeSearch1Type, form, adminSave,commonReducer}=state
+    const {getOrganizationList}=state;
     return {
-        form: form,
-        refresh: commonReducer.refresh
+        data: getOrganizationList.data
     }
 }
 

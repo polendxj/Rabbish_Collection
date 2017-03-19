@@ -7,14 +7,27 @@ import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
-import {Loading, NoData, ConfirmModal,ErrorModal,roleApplicationUse,timeStamp2Time} from '../../components/Tool/Tool';
-import {CORRECTION_LIST_START, CORRECTION_LIST_END} from '../../constants/index.js'
+import {
+    Loading,
+    NoData,
+    ConfirmModal,
+    ErrorModal,
+    roleApplicationUse,
+    timeStamp2Time
+} from '../../components/Tool/Tool';
+import {
+    CORRECTION_LIST_START,
+    CORRECTION_LIST_END,
+    ORGANIZATION_LIST_START,
+    ORGANIZATION_LIST_END
+} from '../../constants/index.js'
 import {getListByMutilpCondition} from '../../actions/CommonActions';
+import {commonRefresh} from '../../actions/Common';
 
 export default class CorrectionListContainer extends Component {
     constructor(props) {
         super(props);
-        this.page=0;
+        this.page = 0;
         this.breadCrumbs = [
             {text: "客户服务", link: ''},
             {text: "纠错记录", link: ''},
@@ -23,36 +36,65 @@ export default class CorrectionListContainer extends Component {
         this.operation = [
             {icon: "", text: "", action: ""}
         ];
-        this.searchColumn="TYPE";
+        this.searchColumn = "ORGANIZATION";
+        this._search = this._search.bind(this);
+        this._startRefresh = this._startRefresh.bind(this);
     }
 
     componentDidMount() {
-        var self=this;
+        var self = this;
         var params = {page: 0, size: 20};
+        var organizationParams = {page: 0, size: 10000};
         this.props.dispatch(getListByMutilpCondition(params, CORRECTION_LIST_START, CORRECTION_LIST_END, correction_list));
+        this.props.dispatch(getListByMutilpCondition(organizationParams, ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, organization_list));
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
-            if($(this).find('a').text().trim()=="按单位/小区搜索"){
-                self.searchColumn="TYPE";
-            }else{
-                self.searchColumn="ADMIN_NAME";
+            if ($(this).find('a').text().trim() == "按单位/小区搜索") {
+                self.searchColumn = "ORGANIZATION";
+            } else {
+                self.searchColumn = "TIMERANGER";
             }
-        })
+            self._startRefresh();
+        });
+        $('.daterange-organization').daterangepicker({
+            maxDate : moment(), //最大时间
+            opens: "left",
+            applyClass: 'bg-slate-600',
+            cancelClass: 'btn-default',
+            ranges: rangesLocale,
+            locale: dateLocale
+        });
     }
 
-    _search(){
-
+    _startRefresh() {
+        this.props.dispatch(commonRefresh())
     }
 
-    _delete(id,name) {
-        var that = this;
-        if(sessionStorage['adminId']==id){
-            ErrorModal(Current_Lang.status.minor,Current_Lang.alertTip.accountOperating)
-            return
+    _search() {
+        var params = "";
+        if (this.searchColumn == "ORGANIZATION") {
+            params = {
+                page: 0,
+                size: 20,
+                organizationid: $("#organizationSelect").val()
+            };
+        } else {
+            var rangeTime = $(".daterange-organization").val();
+            params = {
+                page: 0,
+                size: 20,
+                startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
+                endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+            };
         }
+        this.props.dispatch(getListByMutilpCondition(params, CORRECTION_LIST_START, CORRECTION_LIST_END, correction_list));
+    }
+
+    _delete(id, name) {
+        var that = this;
         ConfirmModal(Current_Lang.status.minor, Current_Lang.alertTip.confirmDelete + name + Current_Lang.alertTip.confirmMa, function () {
-            that.props.dispatch(deleteAdmin(id, 0,that.searchColumn, $("#search_value").val()))
+            that.props.dispatch(deleteAdmin(id, 0, that.searchColumn, $("#search_value").val()))
         })
 
     }
@@ -73,7 +115,17 @@ export default class CorrectionListContainer extends Component {
     }
 
     render() {
-        const {fetching, data} =this.props;
+        const {fetching, data, organizationList} =this.props;
+        var organizationOptions = [];
+        if (organizationList) {
+            if (organizationList.status) {
+                organizationList.data.content.forEach(function (organization, idx) {
+                    organizationOptions.push(
+                        <option key={"organization-" + idx} value={organization.id}>{organization.name}</option>
+                    )
+                })
+            }
+        }
         return (
             <div>
                 <BreadCrumbs
@@ -85,7 +137,7 @@ export default class CorrectionListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{Current_Lang.label.searching}</legend>
                         <ul className="list-inline list-inline-condensed no-margin-bottom"
-                            style={{textAlign: 'right',marginTop:'-59px'}}>
+                            style={{textAlign: 'right', marginTop: '-59px'}}>
                             <li className="dropdown"
                                 style={{borderBottom: '0 lightgray solid'}}>
                                 <a href="#" className="btn btn-link btn-sm dropdown-toggle"
@@ -100,14 +152,21 @@ export default class CorrectionListContainer extends Component {
                                 </a>
                                 <ul className="dropdown-menu">
                                     <li><a href="#">{"按单位/小区搜索"}</a></li>
-                                    <li><a href="#">{"按类型搜索"}</a></li>
+                                    <li><a href="#">{"按时间范围搜索"}</a></li>
                                 </ul>
                             </li>
-                            <li>
-                                <input id="search_value" style={{
-                                    border: '0 red solid',
-                                    borderRadius: '0'
-                                }} type="text" className="form-control" placeholder={"请输入搜索内容"}/>
+
+                            <li style={{display:this.searchColumn == "ORGANIZATION"?"inline-block":"none" }}>
+                                <select id="organizationSelect" className="form-control" style={{width: "250px"}}>
+                                    {organizationOptions}
+                                </select>
+                            </li>
+                            <li style={{display:this.searchColumn == "ORGANIZATION"?"none":"inline-block" }}>
+                                <div className="input-group" style={{width: "250px"}}>
+                                    <input type="text" className="form-control daterange-organization"/>
+                                    <span className="input-group-addon"><i
+                                        className="icon-calendar22"></i></span>
+                                </div>
                             </li>
                             <li>
                                 <button onClick={this._search.bind(this)}
@@ -120,14 +179,14 @@ export default class CorrectionListContainer extends Component {
                     </fieldset>
                     <fieldset className="content-group">
                         <legend className="text-bold">{"纠错记录列表区"}</legend>
-                        <div style={{marginTop:'-80px'}}>
+                        <div style={{marginTop: '-80px'}}>
                             <Pagenation counts={data ? data.data.content.length : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>
                         <CorrectionListComponent data={data} fetching={fetching}
-                                            _delete={this._delete}
-                                            _updateStatus={this._updateStatus}/>
+                                                 _delete={this._delete}
+                                                 _updateStatus={this._updateStatus}/>
 
                     </fieldset>
                 </div>
@@ -136,7 +195,7 @@ export default class CorrectionListContainer extends Component {
     }
 }
 
-class CorrectionListComponent extends Component{
+class CorrectionListComponent extends Component {
     constructor(props) {
         super(props)
     }
@@ -145,8 +204,8 @@ class CorrectionListComponent extends Component{
         browserHistory.push(path)
     }
 
-    _delete(id,name) {
-        this.props._delete(id,name)
+    _delete(id, name) {
+        this.props._delete(id, name)
     }
 
     render() {
@@ -155,8 +214,8 @@ class CorrectionListComponent extends Component{
         if (data) {
             if (data.data.content.length > 0) {
                 data.data.content.forEach(function (val, key) {
-                    tb.push(<tr key={key} style={{backgroundColor:key%2==0?"#F8F8F8":""}}>
-                        <td className="text-center">{key+1}</td>
+                    tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
+                        <td className="text-center">{key + 1}</td>
                         <td className="text-center">{val.type}</td>
                         <td className="text-center">{val.weight}</td>
                         <td className="text-left">{val.description}</td>
@@ -168,10 +227,12 @@ class CorrectionListComponent extends Component{
                                        data-toggle="dropdown" aria-expanded="false"><i
                                         className="icon-menu7"></i></a>
                                     <ul className="dropdown-menu dropdown-menu-right">
-                                        <li style={{display:'block'}} onClick={this._detail.bind(this, '/DataManage/RubbishClass/ModifyRubbishClass/:' + val.id)}>
+                                        <li style={{display: 'block'}}
+                                            onClick={this._detail.bind(this, '/DataManage/RubbishClass/ModifyRubbishClass/:' + val.id)}>
                                             <a href="javascript:void(0)"><i className="icon-pencil5"></i>
                                                 {"修改"}</a></li>
-                                        <li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.name)}><a
+                                        <li style={{display: 'block'}}
+                                            onClick={this._delete.bind(this, val.id, val.name)}><a
                                             href="javascript:void(0)"><i className="icon-trash"></i>
                                             {"删除"}</a></li>
                                     </ul>
@@ -181,27 +242,27 @@ class CorrectionListComponent extends Component{
                         </td>
                     </tr>)
                 }.bind(this));
-            }else{
+            } else {
                 tb.push(<tr key={'noData'}>
-                    <td colSpan="8" style={{textAlign: 'center'}}>
+                    <td colSpan="100" style={{textAlign: 'center'}}>
                         <NoData />
                     </td>
 
                 </tr>)
             }
-        }else {
+        } else {
             tb.push(<tr key={'loading'}>
-                <td colSpan="8" style={{textAlign: 'center'}}>
+                <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />
                 </td>
             </tr>)
         }
-        var tableHeight = ($(window).height()-240);
+        var tableHeight = ($(window).height() - 240);
         return (
-            <div className="table-responsive" style={{height:tableHeight+'px',overflowY:'scroll'}}>
-                <table className="table table-bordered table-hover" style={{marginBottom:'85px'}}>
+            <div className="table-responsive" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+                <table className="table table-bordered table-hover" style={{marginBottom: '85px'}}>
                     <thead>
-                    <tr style={{fontWeight:'bold'}}>
+                    <tr style={{fontWeight: 'bold'}}>
                         <th className="text-center" style={{width: "20px"}}></th>
                         <th className="col-md-2 text-bold text-center">{"错误类型"}</th>
                         <th className="col-md-2 text-bold text-center">{"重量"}</th>
@@ -222,10 +283,12 @@ class CorrectionListComponent extends Component{
 }
 
 function mapStateToProps(state) {
-    const {getCorrectionList}=state;
+    const {getOrganizationList, getCorrectionList, commonReducer}=state;
     return {
         fetching: getCorrectionList.fetching,
-        data: getCorrectionList.data
+        data: getCorrectionList.data,
+        organizationList: getOrganizationList.data,
+        refresh: commonReducer.refresh
     }
 }
 

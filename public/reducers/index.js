@@ -45,13 +45,20 @@ import {
 import {getTerminalPositionList, terminalPositionSave,terminalPositionDetail} from '../reducers/TerminalPositionReducer'
 
 /*rebish reducer start*/
-import {getCityList} from '../reducers/CitySettingReducer'
-import {getClassConfList} from '../reducers/ClassConfReducer'
+import {getCityList,getCityOfOrganizationList} from '../reducers/CitySettingReducer'
+import {getClassConfList,getClassConfDetail} from '../reducers/ClassConfReducer'
 import {getManualRecordList} from '../reducers/ManualRecordReducer'
 import {getTransitLineList} from '../reducers/TransitLineReducer'
 import {getCorrectionList} from '../reducers/CorrectionReducer'
 import {getComplaintList} from '../reducers/ComplaintReducer'
 import {getStoreSettlementList} from '../reducers/StoreSettlementReducer'
+import {getStoreList} from '../reducers/StoreReducer'
+import {getReviewList} from '../reducers/ReviewReducer'
+import {getGeneralUserList} from '../reducers/GeneralUserReducer'
+import {getOrganizationList,getOrganizationDetail} from '../reducers/OrganizationReducer'
+import {getAdminUserList,getAdminUserDetail} from '../reducers/AdminUserReducer'
+import {getNoticeList} from '../reducers/NoticeReducer'
+import {getStatisticByClassifyList,getStatisticByCityList,getStatisticByOrganizationList,getStatisticByRangeDateList} from '../reducers/StatisticReducer'
 /*end*/
 
 import {reducer as reduxFormReducer} from 'redux-form'
@@ -123,12 +130,26 @@ const rootReducer = combineReducers({
     getAppByConsulDetail,
     getAppByConsulList,
     getCityList,
+    getCityOfOrganizationList,
     getClassConfList,
     getManualRecordList,
     getTransitLineList,
     getCorrectionList,
     getComplaintList,
     getStoreSettlementList,
+    getStoreList,
+    getClassConfDetail,
+    getReviewList,
+    getGeneralUserList,
+    getOrganizationList,
+    getAdminUserList,
+    getAdminUserDetail,
+    getNoticeList,
+    getStatisticByClassifyList,
+    getStatisticByCityList,
+    getStatisticByOrganizationList,
+    getStatisticByRangeDateList,
+    getOrganizationDetail,
     form: reduxFormReducer,
     routing: routerReducer
 })
