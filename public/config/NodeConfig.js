@@ -24,6 +24,7 @@ var manualRecord_register = node_service + "/rsapp/manualRecord/register";
 var transitLine_list = node_service + "/rsapp/transitLine";
 var transitLine_register = node_service + "/rsapp/transitLine/register";
 var reset_password = node_service + "/rsapp/password/reset";
+var user_login = node_service + "/rsapp/user/login";
 var adminUser_list = node_service + "/rsapp/adminUser";
 var adminUser_register = node_service + "/rsapp/adminUser/register";
 var adminUser_delete = node_service + "/rsapp/adminUser/delete";
@@ -51,5 +52,8 @@ var statisticByClassify_list = node_service + "/rsapp/statistic/classifying/clas
 var statisticByCity_list = node_service + "/rsapp/statistic/classifying/city";
 var statisticByOrganization_list = node_service + "/rsapp/statistic/classifying/organization";
 var statisticByRangeDate_list = node_service + "/rsapp/statistic/total";
+var qrcode_generate = node_service + "/rsapp/qrcode/generate";
+var qrcode_export = node_service + "/rsapp/qrcode/export";
+var bind_qrcode = node_service + "/rsapp/user/qrcode";
 
 

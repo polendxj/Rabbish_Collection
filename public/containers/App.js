@@ -4,10 +4,11 @@ import {bindActionCreators} from 'redux'
 import {browserHistory} from 'react-router'
 import Header from '../components/header/header'
 import {changeTopMenu, changeLeftMenu} from '../actions/MenuAction'
-import {login} from '../actions/LoginAction'
 import MainMenu from '../components/left/menu'
 import Login from './Login'
 import {commonRefresh} from '../actions/Common'
+import {login} from '../actions/CommonActions';
+
 import {EncodeBase64, ErrorModal, deleteCookie, Loading} from '../components/Tool/Tool'
 
 
@@ -48,13 +49,12 @@ class App extends Component {
         }.bind(this), 1000)
     }
 
-    _checkAuth() {
-        this.props.dispatch(login({adminId: $("#userName").val(), adminPwd: EncodeBase64($("#userPassword").val())}))
-
+    _checkAuth(params) {
+        this.props.dispatch(login(params, "", "", user_login, "/dashboard"));
     }
 
     _logOut() {
-        sessionStorage['auth'] = "";
+        sessionStorage['token'] = "";
         sessionStorage['check'] = false;
         deleteCookie("JSESSIONID");
 
@@ -76,10 +76,10 @@ class App extends Component {
     render() {
         // sessionStorage['auth']=""
         const {fetching}=this.props
-        var auth = sessionStorage['auth'];
+        var token = sessionStorage['token'];
 
         var result = "";
-        if (auth) {
+        if (token) {
             if (this.loadingLang == 2 || this.loadingLang == 0) {
                 result =
                     <div>

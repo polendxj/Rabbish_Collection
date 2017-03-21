@@ -8,6 +8,10 @@ var ExceptionUtils = require('../utils/ExceptionUtils')
 var RequestApi = require('../utils/RequestApi')
 var router = express()
 
+router.post('/rsapp/user/login', function (req, resp) {
+    var data = JSON.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/user/login', 'POST',data, req, resp);
+});
 router.post('/rsapp/adminUser', function (req, resp) {
     var data = querystring.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/adminUser' + "?" + data, 'GET', "", req, resp);
@@ -22,8 +26,8 @@ router.post('/rsapp/adminUser/detail', function (req, resp) {
 });
 router.post('/rsapp/adminUser/update', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));
-    var id = req.query.id;
-    RequestApi.Request(baseURL + '/rsapp/adminUser/'+id, 'PUT',data, req, resp);
+    // var id = req.query.id;
+    RequestApi.Request(baseURL + '/rsapp/adminUser', 'PUT',data, req, resp);
 });
 router.post('/rsapp/adminUser/delete', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));

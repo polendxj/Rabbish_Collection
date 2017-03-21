@@ -28,18 +28,8 @@ export default class RubbishClassListContainer extends Component {
     }
 
     componentDidMount() {
-        var self=this;
         var params = {page: 0, size: 20};
         this.props.dispatch(getListByMutilpCondition(params, CLASSCONF_LIST_START, CLASSCONF_LIST_END, classConf_list));
-        //this.props.dispatch(getAdminList(0, 'ALL', ''));
-        $("#search_way").parent().parent().on('click', 'li', function () {
-            $("#search_way").text($(this).find('a').text());
-            if($(this).find('a').text().trim()=="按类别搜索"){
-                self.searchColumn="TYPE";
-            }else{
-                self.searchColumn="ADMIN_NAME";
-            }
-        })
     }
 
     _search(){
@@ -70,6 +60,7 @@ export default class RubbishClassListContainer extends Component {
 
     render() {
         const {fetching, data} =this.props;
+        console.log("classify",data);
         return (
             <div>
                 <BreadCrumbs
@@ -78,42 +69,6 @@ export default class RubbishClassListContainer extends Component {
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>
-                    <fieldset className="content-group">
-                        <legend className="text-bold">{Current_Lang.label.searching}</legend>
-                        <ul className="list-inline list-inline-condensed no-margin-bottom"
-                            style={{textAlign: 'right',marginTop:'-59px'}}>
-                            <li className="dropdown"
-                                style={{borderBottom: '0 lightgray solid'}}>
-                                <a href="#" className="btn btn-link btn-sm dropdown-toggle"
-                                   data-toggle="dropdown" aria-expanded="false" style={{
-                                    paddingLeft: '0',
-                                    paddingRight: '0',
-                                    fontWeight: 'bold',
-                                    color: '#193153'
-                                }}><span
-                                    style={{color: '#193153'}} id="search_way">{"按类别搜索"}</span> <span
-                                    className="caret"></span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a href="#">{"按类别搜索"}</a></li>
-                                    <li><a href="#">{"按XXX搜索"}</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <input id="search_value" style={{
-                                    border: '0 red solid',
-                                    borderRadius: '0'
-                                }} type="text" className="form-control" placeholder={"请输入搜索内容"}/>
-                            </li>
-                            <li>
-                                <button onClick={this._search.bind(this)}
-                                        style={{marginLeft: '30px'}} type="button"
-                                        className="btn btn-primary btn-icon"><i
-                                    className="icon-search4"></i></button>
-                            </li>
-
-                        </ul>
-                    </fieldset>
                     <fieldset className="content-group">
                         <legend className="text-bold">{"垃圾分类列表区"}</legend>
                         <div style={{marginTop:'-80px'}}>
@@ -154,6 +109,7 @@ class RubbishClassListComponent extends Component{
                     tb.push(<tr key={key} style={{backgroundColor:key%2==0?"#F8F8F8":""}}>
                         <td className="text-center">{key+1}</td>
                         <td className="text-center">{val.name}</td>
+                        <td className="text-center">{val.rewardPoints}</td>
                         <td className="text-left">{val.description}</td>
                         <td className="text-center">{timeStamp2Time(val.updateTime)}</td>
                         <td className="text-center">
@@ -202,9 +158,10 @@ class RubbishClassListComponent extends Component{
                     <thead>
                     <tr style={{fontWeight:'bold'}}>
                         <th className="text-center" style={{width: "20px"}}></th>
-                        <th className="col-md-3 text-bold text-center">{"分类名称"}</th>
+                        <th className="col-md-2 text-bold text-center">{"分类名称"}</th>
+                        <th className="col-md-2 text-bold text-center">{"奖励积分"}</th>
                         <th className="col-md-6 text-bold text-left">{"分类描述"}</th>
-                        <th className="col-md-3 text-bold text-center">{"更新时间"}</th>
+                        <th className="col-md-2 text-bold text-center">{"更新时间"}</th>
                         <th className="text-center" style={{width: "20px"}}><i
                             className="icon-arrow-down12"></i></th>
                     </tr>

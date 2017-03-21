@@ -130,7 +130,10 @@ export function saveObject(data, startDispatch, endDispatch, interfaceURL, listR
                             browserHistory.push(listRouter)
                         })
                     } else if (flag == "update") {
-                        SuccessModal(Current_Lang.alertTip.tip, Current_Lang.alertTip.updateSuccess)
+                        SuccessModal(Current_Lang.alertTip.tip, Current_Lang.alertTip.updateSuccess);
+                        browserHistory.push(listRouter)
+                    }else if (flag == "bindQrcode") {
+                        SuccessModal(Current_Lang.alertTip.tip, "绑定二维码成功");
                         browserHistory.push(listRouter)
                     }else if (flag == "noAlert"){
                         browserHistory.push(listRouter)
@@ -142,6 +145,42 @@ export function saveObject(data, startDispatch, endDispatch, interfaceURL, listR
                     }
                 } else {
                     ErrorModal(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message)
+                }
+            })
+
+    }
+}
+
+export function login(data, startDispatch, endDispatch, interfaceURL, listRouter, callback) {
+    return dispatch=> {
+        if (startDispatch) {
+            dispatch(startFetch(startDispatch))
+        }
+        fetch(interfaceURL,
+            {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "data=" + JSON.stringify(data)
+            })
+            .then(response=>response.json())
+            .then(function (json) {
+                console.log("json",json);
+                if (json.status) {
+                    dispatch(endFetch(endDispatch, json));
+                    sessionStorage['check'] = true;
+                    sessionStorage['token'] = json.data.token;
+                    sessionStorage['type'] = json.data.type;
+                    sessionStorage['user'] = json.data.user?json.data.user:"";
+                    browserHistory.push(listRouter);
+                    if (callback) {
+                        callback();
+                    }
+                } else {
+                    ErrorModal("错误","用户名或者密码不正确");
+                    sessionStorage['token'] = ''
                 }
             })
 

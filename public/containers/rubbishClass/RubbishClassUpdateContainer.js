@@ -6,7 +6,7 @@ import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {browserHistory} from 'react-router'
 import {bindActionCreators} from 'redux'
-import {Loading, ListModal, serverStatus, ErrorModal, DecodeBase64, streamingTemplateFilter} from '../../components/Tool/Tool';
+import {Loading, ListModal, serverStatus, ErrorModal, DecodeBase64, array2Json} from '../../components/Tool/Tool';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import {saveObject,getDetail} from '../../actions/CommonActions';
 import {commonRefresh} from '../../actions/Common';
@@ -69,11 +69,9 @@ class UpdateRubbishClassComponent extends Component{
     }
 
     _save(id) {
-        var params = {
-            name: $("#name").val(),
-            description: $("#description").val(),
-            parentid:1
-        };
+        var formFields = $("#classifyForm").serializeArray();
+        var params = array2Json(formFields);
+        params['parentid'] = this.props.data.data.parentid;
         this.props._save(id,params);
     }
 
@@ -87,7 +85,7 @@ class UpdateRubbishClassComponent extends Component{
         var tableHeight = ($(window).height() - 130);
         var detail="";
         if(data){
-            detail = <form className="form-horizontal" action="#">
+            detail = <form id="classifyForm" className="form-horizontal" action="#">
                 <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                     <div className="col-sm-8 col-sm-offset-2">
                         <fieldset className="content-group">
@@ -101,18 +99,28 @@ class UpdateRubbishClassComponent extends Component{
                                            marginTop: '8px'
                                        }}>{"分类名称"}</label>
                                 <div className="col-lg-9">
-                                    <input id="name" type="text" className="form-control" defaultValue={data.data.name}
+                                    <input name="name" type="text" className="form-control" defaultValue={data.data.name}
                                            autoComplete="off"/>
                                 </div>
                             </div>
-
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{
+                                           textAlign: 'center',
+                                           marginTop: '8px'
+                                       }}>{"奖励积分"}</label>
+                                <div className="col-lg-9">
+                                    <input name="rewardPoints" type="text" className="form-control" defaultValue={data.data.rewardPoints}
+                                           autoComplete="off"/>
+                                </div>
+                            </div>
                             <div className="form-group" >
                                 <label className="col-lg-2 control-label"
                                        style={{
                                            textAlign: 'center',
                                        }}>{"分类描述"}</label>
                                 <div className="col-lg-9">
-                                    <textarea id="description" rows="5" cols="5" className="form-control"
+                                    <textarea name="description" rows="5" cols="5" className="form-control"
                                               defaultValue={data.data.description}></textarea>
                                 </div>
                             </div>

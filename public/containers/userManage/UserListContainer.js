@@ -8,9 +8,20 @@ import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
 import {commonRefresh} from '../../actions/Common';
-import {Loading, NoData, ConfirmModal, ErrorModal, userType,ListMiddleModal,timeStamp2Time} from '../../components/Tool/Tool';
-import {GENERALUSER_LIST_START, GENERALUSER_LIST_END} from '../../constants/index.js'
+import {
+    Loading,
+    NoData,
+    ConfirmModal,
+    ErrorModal,
+    userType,
+    ListMiddleModal,
+    timeStamp2Time,
+    filterCityById,
+    filterCountryById
+} from '../../components/Tool/Tool';
+import {GENERALUSER_LIST_START, GENERALUSER_LIST_END, CITY_LIST_START, CITY_LIST_END} from '../../constants/index.js'
 import {getListByMutilpCondition, deleteObject, saveObject} from '../../actions/CommonActions';
+var sha1 = require('js-sha1');
 
 export default class UserListContainer extends Component {
     constructor(props) {
@@ -26,9 +37,14 @@ export default class UserListContainer extends Component {
         ];
         this.searchColumn = "DRIVER";
         this.detailData = "";
+        this.currentCity = "";
+        this.currentCountry = "";
+        this.currentCityId = 3;
         this._delete = this._delete.bind(this);
         this._detail = this._detail.bind(this);
         this._resetPassword = this._resetPassword.bind(this);
+        this._changeCity = this._changeCity.bind(this);
+        this._changeCountry = this._changeCountry.bind(this);
         this._startRefresh = this._startRefresh.bind(this);
         this._lockOrUnlockUser = this._lockOrUnlockUser.bind(this);
     }
@@ -36,14 +52,9 @@ export default class UserListContainer extends Component {
     componentDidMount() {
         var params = {page: 0, size: 20};
         this.props.dispatch(getListByMutilpCondition(params, GENERALUSER_LIST_START, GENERALUSER_LIST_END, generalUser_list));
-        //this.props.dispatch(getAdminList(0, 'ALL', ''));
+        this.props.dispatch(getListByMutilpCondition(params, CITY_LIST_START, CITY_LIST_END, city_list));
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
-            if ($(this).find('a').text().trim() == "按姓名搜索") {
-                self.searchColumn = "DRIVER";
-            } else {
-                self.searchColumn = "LINE";
-            }
         })
     }
 
@@ -51,13 +62,32 @@ export default class UserListContainer extends Component {
         this.props.dispatch(commonRefresh())
     }
 
+    _changeCity() {
+        var cityid = $("#citySelect").val();
+        this.currentCity = filterCityById(this.props.cityList.data, cityid);
+        if (this.currentCity.country) {
+            this.currentCountry = this.currentCity.country[0];
+            console.log("this.currentCountry", this.currentCountry);
+        }
+        this.currentCityId = cityid;
+        this._startRefresh();
+    }
+
+    _changeCountry() {
+        var countyid = $("#countrySelect").val();
+        this.currentCountry = filterCountryById(this.currentCity, countyid);
+        this._startRefresh();
+    }
+
     _detail(val) {
         this.detailData = val;
         this._startRefresh();
     }
-    _resetPassword(params){
+
+    _resetPassword(params) {
         this.props.dispatch(saveObject(params, "", "", reset_password, "/CustomerService/UserManage", "update"));
     }
+
     _delete(userid, realName) {
         var that = this;
         ConfirmModal(Current_Lang.status.minor, Current_Lang.alertTip.confirmDelete + realName + Current_Lang.alertTip.confirmMa, function () {
@@ -74,8 +104,23 @@ export default class UserListContainer extends Component {
         }));
     }
 
-    _search() {
+    _bindQrcode(userid) {
+        var params = {
+            userid: userid,
+            number: $("#qrcid").val()
+        };
+        this.props.dispatch(saveObject(params, "", "", bind_qrcode, "/CustomerService/UserManage", "bindQrcode"));
+    }
 
+    _search() {
+        var params = {
+            page: 0,
+            size: 20,
+            cityid: $("#citySelect").val(),
+            countyid: $("#countrySelect").val(),
+            organizationid: $("#organizationSelect").val()
+        };
+        this.props.dispatch(getListByMutilpCondition(params, GENERALUSER_LIST_START, GENERALUSER_LIST_END, generalUser_list));
     }
 
     _changePage(page) {
@@ -94,11 +139,81 @@ export default class UserListContainer extends Component {
     }
 
     render() {
-        const {fetching, data} =this.props;
+        const {fetching, data, cityList} =this.props;
         console.log("userdata", data.data);
+        var cityOptions = [];
+        var countryOptions = [];
+        var organizationOptions = [];
+        if (cityList) {
+            if (cityList.status) {
+                cityList.data.forEach(function (city, idx) {
+                    cityOptions.push(
+                        <option key={"city-" + idx} value={city.id}>{city.name}</option>
+                    )
+                });
+                if (this.currentCity == "") {
+                    if (cityList.data[0].country) {
+                        cityList.data[0].country.forEach(function (val, index) {
+                            countryOptions.push(
+                                <option key={"country-" + index} value={val.id}>{val.name}</option>
+                            )
+                        });
+                        if (this.currentCountry == "") {
+                            if (cityList.data[0].country.organization && cityList.data[0].country.organization.content.length > 0) {
+                                cityList.data[0].country.organization.content.forEach(function (organization, i) {
+                                    organizationOptions.push(
+                                        <option key={"organization-" + i}
+                                                value={organization.id}>{organization.name}</option>
+                                    )
+                                })
+                            }
+                        } else {
+                            if (this.currentCountry.organization && this.currentCountry.organization.content.length > 0) {
+                                this.currentCountry.organization.content.forEach(function (organization, i) {
+                                    organizationOptions.push(
+                                        <option key={"organization-" + i}
+                                                value={organization.id}>{organization.name}</option>
+                                    )
+                                })
+                            }
+                        }
+                    }
+                } else {
+                    if (this.currentCity.country) {
+                        this.currentCity.country.forEach(function (val, index) {
+                            countryOptions.push(
+                                <option key={"country-" + index} value={val.id}>{val.name}</option>
+                            )
+                        });
+                        if (this.currentCountry == "") {
+                            if (this.currentCity.country.organization && this.currentCity.country.organization.content.length > 0) {
+                                this.currentCity.country.organization.content.forEach(function (organization, i) {
+                                    organizationOptions.push(
+                                        <option key={"organization-" + i}
+                                                value={organization.id}>{organization.name}</option>
+                                    )
+                                })
+                            }
+                        } else {
+                            if (this.currentCountry.organization && this.currentCountry.organization.content.length > 0) {
+                                this.currentCountry.organization.content.forEach(function (organization, i) {
+                                    organizationOptions.push(
+                                        <option key={"organization-" + i}
+                                                value={organization.id}>{organization.name}</option>
+                                    )
+                                })
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
         var detailUserInfo = "";
+        var bindQrcodeInfo = "";
         if (this.detailData == "") {
             detailUserInfo = <Loading />;
+            bindQrcodeInfo = <Loading />;
         } else {
             detailUserInfo =
                 <div>
@@ -120,7 +235,8 @@ export default class UserListContainer extends Component {
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                                     <span style={{top: 0, marginTop: 0}}>
                                                         <a href={this.detailData.headimg} data-popup="lightbox"
-                                                           className="btn" style={{height: "160px", width: "160px"}}></a>
+                                                           className="btn"
+                                                           style={{height: "160px", width: "160px"}}></a>
                                                     </span>
                                                 </div>
                                             </div>
@@ -139,7 +255,8 @@ export default class UserListContainer extends Component {
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                                     <span style={{top: 0, marginTop: 0}}>
                                                         <a href={this.detailData.idcardimg} data-popup="lightbox"
-                                                           className="btn" style={{height: "160px", width: "160px"}}></a>
+                                                           className="btn"
+                                                           style={{height: "160px", width: "160px"}}></a>
                                                     </span>
                                                 </div>
                                             </div>
@@ -211,8 +328,10 @@ export default class UserListContainer extends Component {
                                     <div className="col-lg-8">
                                         <div className="text-muted text-size-small">
                                             {this.detailData.certificated == 1 ?
-                                                <span className="label bg-success" style={{marginTop:"6px"}}>{"已认证"}</span> :
-                                                <span className="label bg-danger" style={{marginTop:"6px"}}>{"未认证"}</span>}
+                                                <span className="label bg-success"
+                                                      style={{marginTop: "6px"}}>{"已认证"}</span> :
+                                                <span className="label bg-danger"
+                                                      style={{marginTop: "6px"}}>{"未认证"}</span>}
                                         </div>
                                     </div>
                                 </div>
@@ -222,8 +341,10 @@ export default class UserListContainer extends Component {
                                     <div className="col-lg-8">
                                         <div className="text-muted text-size-small">
                                             {this.detailData.status == 1 ?
-                                                <span className="label bg-success" style={{marginTop:"6px"}}>{"有效"}</span> :
-                                                <span className="label bg-danger" style={{marginTop:"6px"}}>{"冻结"}</span>}
+                                                <span className="label bg-success"
+                                                      style={{marginTop: "6px"}}>{"有效"}</span> :
+                                                <span className="label bg-danger"
+                                                      style={{marginTop: "6px"}}>{"冻结"}</span>}
                                         </div>
                                     </div>
                                 </div>
@@ -252,6 +373,49 @@ export default class UserListContainer extends Component {
                     </div>
 
                 </div>;
+            bindQrcodeInfo =
+                <div>
+                    <div className="form-horizontal">
+                        <fieldset className="content-group">
+                            <legend className="text-bold">
+                                {"绑定二维码"}
+                            </legend>
+                            <div className="form-group">
+                                <div className="col-lg-12">
+                                    <label className="col-lg-2 control-label"
+                                           style={{textAlign: 'center'}}>{"真实姓名"}</label>
+                                    <div className="col-lg-4">
+                                        <input type="text" value={this.detailData.realName} className="form-control"
+                                               autoComplete="off" disabled/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-lg-12">
+                                    <label className="col-lg-2 control-label"
+                                           style={{textAlign: 'center'}}>{"输入二维码"}</label>
+                                    <div className="col-lg-4">
+                                        <input id="qrcid" type="text" className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{textAlign: 'center'}}></label>
+                                <div className="col-lg-10">
+                                    <div className="text-right">
+                                        <button type="button" className="btn btn-primary"
+                                                onClick={this._bindQrcode.bind(this, this.detailData.userid)}>
+                                            {"确定"}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                </div>;
         }
         return (
             <div>
@@ -263,17 +427,39 @@ export default class UserListContainer extends Component {
                 <div className="content" style={{marginTop: '20px'}}>
                     <fieldset className="content-group">
                         <legend className="text-bold">{Current_Lang.label.searching}</legend>
-                        <div className="list-inline list-inline-condensed no-margin-bottom"
-                             style={{textAlign: 'right', marginTop: '-59px'}}>
+                        <ul className="list-inline list-inline-condensed no-margin-bottom"
+                            style={{textAlign: 'right', marginTop: '-59px'}}>
                             <li className="dropdown"
                                 style={{borderBottom: '0 lightgray solid'}}>
-                                <select className="form-control">
-                                    <option value="AK">成都</option>
+                                <a href="#" className="btn btn-link btn-sm dropdown-toggle"
+                                   data-toggle="dropdown" aria-expanded="false" style={{
+                                    paddingLeft: '0',
+                                    paddingRight: '0',
+                                    fontWeight: 'bold',
+                                    color: '#193153'
+                                }}><span
+                                    style={{color: '#193153'}} id="search_way">{"按城市搜索"}</span> <span
+                                    className="caret"></span>
+                                </a>
+                                <ul className="dropdown-menu">
+                                    <li><a href="#">{"按城市搜索"}</a></li>
+                                </ul>
+                            </li>
+                            <li style={{display: "inline-block"}}>
+                                <select id="citySelect" className="form-control" style={{width: "150px"}}
+                                        value={this.currentCityId} onChange={this._changeCity}>
+                                    {cityOptions}
                                 </select>
                             </li>
-                            <li>
-                                <select className="form-control">
-                                    <option value="AK">花样年美岸小区</option>
+                            <li style={{display: "inline-block"}}>
+                                <select id="countrySelect" className="form-control" style={{width: "150px"}}
+                                        onChange={this._changeCountry}>
+                                    {countryOptions}
+                                </select>
+                            </li>
+                            <li style={{display: "inline-block"}}>
+                                <select id="organizationSelect" className="form-control" style={{width: "150px"}}>
+                                    {organizationOptions}
                                 </select>
                             </li>
                             <li>
@@ -282,7 +468,8 @@ export default class UserListContainer extends Component {
                                         className="btn btn-primary btn-icon"><i
                                     className="icon-search4"></i></button>
                             </li>
-                        </div>
+
+                        </ul>
                     </fieldset>
                     <fieldset className="content-group">
                         <legend className="text-bold">{"用户列表区"}</legend>
@@ -297,9 +484,10 @@ export default class UserListContainer extends Component {
                                            _resetPassword={this._resetPassword}
                                            _lockOrUnlockUser={this._lockOrUnlockUser}/>
                     </fieldset>
-                    <ListMiddleModal id="userDetailModal" content={detailUserInfo}
-                                     doAction={""}
+                    <ListMiddleModal id="userDetailModal" content={detailUserInfo} doAction={""}
                                      tip={"用户信息"} actionText="用户详情" hide="true" hideCancel="true"/>
+                    <ListMiddleModal id="bindQrcodeModal" content={bindQrcodeInfo} doAction={""}
+                                     tip={"绑定二维码"} actionText="绑定二维码" hide="true" hideCancel="true"/>
                 </div>
             </div>
         )
@@ -321,8 +509,8 @@ class UserListComponent extends Component {
 
     _resetPassword(val) {
         var params = {
-            password:"88888888",
-            type:val.type,
+            password: sha1.hex("88888888"),
+            type: val.type,
             phone: val.phone,
             authcode: ""
         };
@@ -332,7 +520,6 @@ class UserListComponent extends Component {
     _exportRqcode() {
 
     }
-
 
     _detail(val) {
         this.props._detail(val);
@@ -382,7 +569,8 @@ class UserListComponent extends Component {
                                                 onClick={this._delete.bind(this, val.userid, val.realName)}><a
                                                 href="javascript:void(0)"><i className="icon-trash"></i>
                                                 {"删除"}</a></li>
-                                            <li style={{display: 'block'}} onClick={this._resetPassword.bind(this,val)}><a
+                                            <li style={{display: 'block'}}
+                                                onClick={this._resetPassword.bind(this, val)}><a
                                                 href="javascript:void(0)"><i className="icon-reset"></i>
                                                 {"重置密码"}</a></li>
                                             {val.status == 1 ?
@@ -394,6 +582,13 @@ class UserListComponent extends Component {
                                                     <a
                                                         href="javascript:void(0)"><i
                                                         className="icon-unlock"></i>解锁账户</a></li>}
+                                            <li>
+                                                <a href="javascript:void(0)" data-toggle="modal"
+                                                   data-target="#bindQrcodeModal"
+                                                   onClick={this._detail.bind(this, val)}><i
+                                                    className=" icon-office"></i>
+                                                    {"绑定二维码"}</a>
+                                            </li>
                                             <li style={{display: 'block'}} onClick={this._exportRqcode.bind(this)}><a
                                                 href="javascript:void(0)"><i className="icon-redo2"></i>
                                                 {"导出二维码"}</a></li>
@@ -453,10 +648,11 @@ class UserListComponent extends Component {
 }
 
 function mapStateToProps(state) {
-    const {getGeneralUserList,commonReducer}=state;
+    const {getGeneralUserList, getCityList, commonReducer}=state;
     return {
         fetching: getGeneralUserList.fetching,
         data: getGeneralUserList.data,
+        cityList: getCityList.data,
         refresh: commonReducer.refresh
     }
 }

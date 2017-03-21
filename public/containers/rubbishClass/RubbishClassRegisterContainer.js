@@ -6,7 +6,7 @@ import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {browserHistory} from 'react-router'
 import {bindActionCreators} from 'redux'
-import {Loading, ListModal, serverStatus, ErrorModal, DecodeBase64, streamingTemplateFilter} from '../../components/Tool/Tool';
+import {Loading, ListModal, serverStatus, ErrorModal, DecodeBase64, array2Json} from '../../components/Tool/Tool';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import {saveObject} from '../../actions/CommonActions';
 import {commonRefresh} from '../../actions/Common';
@@ -65,13 +65,9 @@ class RegisterRubbishClassComponent extends Component{
     componentDidUpdate() {}
 
     _save() {
-        var params = {
-            name: $("#name").val(),
-            description: $("#description").val(),
-            parentid:1
-        };
+        var formFields = $("#classifyForm").serializeArray();
+        var params = array2Json(formFields);
         this.props._save(params);
-
     }
 
 
@@ -81,7 +77,7 @@ class RegisterRubbishClassComponent extends Component{
         var tableHeight = ($(window).height() - 130);
         return (
             <div>
-                <form className="form-horizontal" action="#">
+                <form id="classifyForm" className="form-horizontal" action="#">
                     <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                         <div className="col-sm-8 col-sm-offset-2">
                             <fieldset className="content-group">
@@ -95,19 +91,30 @@ class RegisterRubbishClassComponent extends Component{
                                                marginTop: '8px'
                                            }}>{"分类名称"}</label>
                                     <div className="col-lg-9">
-                                        <input id="name" type="text" className="form-control"
+                                        <input name="name" type="text" className="form-control"
                                                placeholder={"分类名称"}
                                                autoComplete="off"/>
                                     </div>
                                 </div>
-
+                                <div className="form-group">
+                                    <label className="col-lg-2 control-label"
+                                           style={{
+                                               textAlign: 'center',
+                                               marginTop: '8px'
+                                           }}>{"奖励积分"}</label>
+                                    <div className="col-lg-9">
+                                        <input name="rewardPoints" type="text" className="form-control"
+                                               placeholder={"奖励积分"}
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
                                 <div className="form-group" >
                                     <label className="col-lg-2 control-label"
                                            style={{
                                                textAlign: 'center',
                                            }}>{"分类描述"}</label>
                                     <div className="col-lg-9">
-                                    <textarea id="description" rows="5" cols="5" className="form-control"
+                                    <textarea name="description" rows="5" cols="5" className="form-control"
                                               placeholder={"分类描述"}></textarea>
                                     </div>
                                 </div>

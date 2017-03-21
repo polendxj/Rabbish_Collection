@@ -258,7 +258,7 @@ class RightPanel extends Component {
                 <li className="dropdown dropdown-user">
                     <a className="dropdown-toggle" data-toggle="dropdown">
                         <img src="/assets/images/userimg.png" alt=""/>
-                        <span>{sessionStorage['auth']}</span>
+                        <span>{sessionStorage['user']}</span>
                         <i className="caret"></i>
                     </a>
 

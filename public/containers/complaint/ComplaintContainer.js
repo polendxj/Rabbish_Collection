@@ -66,10 +66,6 @@ export default class ComplaintContainer extends Component {
 
     }
 
-    _search() {
-
-    }
-
     _changePage(page) {
         this.page = page;
         this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
@@ -97,42 +93,6 @@ export default class ComplaintContainer extends Component {
                 />
                 <div className="content" style={{marginTop: '20px'}}>
                     <fieldset className="content-group">
-                        <legend className="text-bold">{Current_Lang.label.searching}</legend>
-                        <ul className="list-inline list-inline-condensed no-margin-bottom"
-                            style={{textAlign: 'right', marginTop: '-59px'}}>
-                            <li className="dropdown"
-                                style={{borderBottom: '0 lightgray solid'}}>
-                                <a href="#" className="btn btn-link btn-sm dropdown-toggle"
-                                   data-toggle="dropdown" aria-expanded="false" style={{
-                                    paddingLeft: '0',
-                                    paddingRight: '0',
-                                    fontWeight: 'bold',
-                                    color: '#193153'
-                                }}><span
-                                    style={{color: '#193153'}} id="search_way">{"按姓名搜索"}</span> <span
-                                    className="caret"></span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a href="#">{"按姓名搜索"}</a></li>
-                                    <li><a href="#">{"按XXX搜索"}</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <input id="search_value" style={{
-                                    border: '0 red solid',
-                                    borderRadius: '0'
-                                }} type="text" className="form-control" placeholder={"请输入搜索内容"}/>
-                            </li>
-                            <li>
-                                <button onClick={this._search.bind(this)}
-                                        style={{marginLeft: '30px'}} type="button"
-                                        className="btn btn-primary btn-icon"><i
-                                    className="icon-search4"></i></button>
-                            </li>
-
-                        </ul>
-                    </fieldset>
-                    <fieldset className="content-group">
                         <legend className="text-bold">{"投诉举报列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
                             <Pagenation counts={data&&data.status ? data.data.content.length : 0} page={this.page}
@@ -154,14 +114,6 @@ export default class ComplaintContainer extends Component {
 class ComplaintListComponent extends Component {
     constructor(props) {
         super(props)
-    }
-
-    _lockUser() {
-
-    }
-
-    _unlockUser() {
-
     }
 
     _resetPassword() {

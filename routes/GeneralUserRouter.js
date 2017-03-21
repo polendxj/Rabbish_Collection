@@ -26,5 +26,9 @@ router.post('/rsapp/user/lock', function (req, resp) {
     console.log("lockData",data);
     RequestApi.Request(baseURL + '/rsapp/user/lock', 'PUT',data, req, resp);
 });
+router.post('/rsapp/user/qrcode', function (req, resp) {
+    var data = JSON.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/user/qrcode', 'POST',data, req, resp);
+});
 
 module.exports = router;

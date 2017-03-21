@@ -11,6 +11,7 @@ import BreadCrumbs from '../../components/right/breadCrumbs';
 import {saveServiceGroup} from '../../actions/SystemManagerServiceGroupAction';
 import {saveObject} from '../../actions/CommonActions';
 import {commonRefresh} from '../../actions/Common';
+var sha1 = require('js-sha1');
 
 export default class AdminUserRegisterContainer extends Component {
     constructor(props) {
@@ -76,7 +77,7 @@ class RegisterAdminUserComponent extends Component{
         var params = {
             name: $("#name").val(),
             phone: $("#phone").val(),
-            password: $("#password").val(),
+            password: sha1.hex($("#password").val()),
             type: $("#type").val(),
             authcode:""
         };
@@ -126,7 +127,7 @@ class RegisterAdminUserComponent extends Component{
                         <div className="col-sm-8 col-sm-offset-2">
                             <fieldset className="content-group">
                                 <legend className="text-bold">
-                                    {"扫码员基础信息"}
+                                    {"管理员基础信息"}
                                 </legend>
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"

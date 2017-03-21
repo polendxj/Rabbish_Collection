@@ -4,18 +4,27 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {browserHistory} from 'react-router'
-import {deleteCookie} from '../components/Tool/Tool'
+import {deleteCookie,array2Json} from '../components/Tool/Tool'
+var sha1 = require('js-sha1');
 
 export default class LoginContainer extends Component {
-    _checkAuth(){
-        this.props._checkAuth()
+    _checkAuth() {
+        var formFields = $("#loginForm").serializeArray();
+        var params = array2Json(formFields);
+        console.log(params);
+        var password = sha1.hex(params.password.toString());
+        console.log(password);
+        params.password = password;
+        this.props._checkAuth(params)
     }
-    componentDidMount(){
+
+    componentDidMount() {
         deleteCookie("JSESSIONID");
     }
+
     render() {
         return (
-            <div className="page-container login-container" style={{minHeight:'533px'}}>
+            <div className="page-container login-container" style={{minHeight: '533px'}}>
 
                 <div className="page-content">
 
@@ -23,31 +32,45 @@ export default class LoginContainer extends Component {
 
                         <div className="content">
 
-                            <form action="index.html">
+                            <form id="loginForm" action="index.html">
                                 <div className="panel panel-body login-form">
                                     <div className="text-center">
-                                        <img src="../assets/images/logo_login.png" />
+                                        <img src="../assets/images/logo_login.png"/>
                                         <h5 className="content-group">
                                             流化平台管理系统
                                         </h5>
                                     </div>
 
                                     <div className="form-group has-feedback has-feedback-left">
-                                        <input id="userName" type="text" className="form-control" placeholder="Username"/>
+                                        <input id="phone" name="phone" type="text" className="form-control"
+                                               placeholder="输入手机号"/>
                                         <div className="form-control-feedback">
                                             <i className="icon-user text-muted"></i>
                                         </div>
                                     </div>
 
                                     <div className="form-group has-feedback has-feedback-left">
-                                        <input id="userPassword" type="password" className="form-control" placeholder="Password"/>
+                                        <input id="userPassword" name="password" type="password"
+                                               className="form-control" placeholder="输入密码"/>
                                         <div className="form-control-feedback">
                                             <i className="icon-lock2 text-muted"></i>
                                         </div>
                                     </div>
+                                    <div className="form-group has-feedback has-feedback-left">
+                                        <select className="form-control" name="type">
+                                            <option value={1}>{"管理员"}</option>
+                                            <option value={2}>{"扫码称重人员"}</option>
+                                            <option value={3}>{"商户用户"}</option>
+                                            <option value={4}>{"住宅用户"}</option>
+                                            <option value={5}>{"单位"}</option>
+                                            <option value={10}>{"超级管理员"}</option>
+                                        </select>
+                                    </div>
 
                                     <div className="form-group">
-                                        <button type="button" disabled={this.props.fetching} className="btn btn-primary btn-block" onClick={this._checkAuth.bind(this)}>登 录 <i
+                                        <button type="button" disabled={this.props.fetching}
+                                                className="btn btn-primary btn-block"
+                                                onClick={this._checkAuth.bind(this)}>登 录 <i
                                             className="icon-circle-right2 position-right"></i></button>
                                     </div>
 

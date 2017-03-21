@@ -23,22 +23,11 @@ export default class TransitLineListContainer extends Component {
         this.operation = [
             {icon: "icon-add-to-list", text: Current_Lang.others.add, action: "/DataManage/TransitLine/Register"}
         ];
-        this.searchColumn="DRIVER";
     }
 
     componentDidMount() {
-        var self=this;
-        //this.props.dispatch(getAdminList(0, 'ALL', ''));
         var params = {page: 0, size: 20};
         this.props.dispatch(getListByMutilpCondition(params, TRANSITLINE_LIST_START, TRANSITLINE_LIST_END, transitLine_list));
-        $("#search_way").parent().parent().on('click', 'li', function () {
-            $("#search_way").text($(this).find('a').text());
-            if($(this).find('a').text().trim()=="按司机姓名搜索"){
-                self.searchColumn="DRIVER";
-            }else{
-                self.searchColumn="LINE";
-            }
-        })
     }
 
     _delete(id,name) {
@@ -83,42 +72,6 @@ export default class TransitLineListContainer extends Component {
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>
-                    <fieldset className="content-group">
-                        <legend className="text-bold">{Current_Lang.label.searching}</legend>
-                        <ul className="list-inline list-inline-condensed no-margin-bottom"
-                            style={{textAlign: 'right',marginTop:'-59px'}}>
-                            <li className="dropdown"
-                                style={{borderBottom: '0 lightgray solid'}}>
-                                <a href="#" className="btn btn-link btn-sm dropdown-toggle"
-                                   data-toggle="dropdown" aria-expanded="false" style={{
-                                    paddingLeft: '0',
-                                    paddingRight: '0',
-                                    fontWeight: 'bold',
-                                    color: '#193153'
-                                }}><span
-                                    style={{color: '#193153'}} id="search_way">{"按司机姓名搜索"}</span> <span
-                                    className="caret"></span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a href="#">{"按司机姓名搜索"}</a></li>
-                                    <li><a href="#">{"按路线搜索"}</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <input id="search_value" style={{
-                                    border: '0 red solid',
-                                    borderRadius: '0'
-                                }} type="text" className="form-control" placeholder={"请输入搜索内容"}/>
-                            </li>
-                            <li>
-                                <button onClick={this._search.bind(this)}
-                                        style={{marginLeft: '30px'}} type="button"
-                                        className="btn btn-primary btn-icon"><i
-                                    className="icon-search4"></i></button>
-                            </li>
-
-                        </ul>
-                    </fieldset>
                     <fieldset className="content-group">
                         <legend className="text-bold">{"车辆运输列表区"}</legend>
                         <div style={{marginTop:'-80px'}}>
@@ -165,24 +118,6 @@ class TransitLineListComponent extends Component{
                             <td className="text-center">{val.stoppedLocation}</td>
                             <td className="text-center">{val.endLocation}</td>
                             <td className="text-center">{timeStamp2Time(val.createTime)}</td>
-                            <td className="text-center">
-                                {<ul className="icons-list">
-                                    <li className="dropdown">
-                                        <a href="#" className="dropdown-toggle"
-                                           data-toggle="dropdown" aria-expanded="false"><i
-                                            className="icon-menu7"></i></a>
-                                        <ul className="dropdown-menu dropdown-menu-right">
-                                            <li style={{display:'block'}} onClick={this._detail.bind(this, '/DataManage/TransitLine/ModifyTransitLine/:' + val.id)}>
-                                                <a href="javascript:void(0)"><i className="icon-pencil5"></i>
-                                                    {"修改"}</a></li>
-                                            <li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.driver)}><a
-                                                href="javascript:void(0)"><i className="icon-trash"></i>
-                                                {"删除"}</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>}
-
-                            </td>
                         </tr>)
                     }.bind(this));
                 }else{
@@ -217,9 +152,6 @@ class TransitLineListComponent extends Component{
                         <th className="col-md-1 text-bold text-center">{"经停地点"}</th>
                         <th className="col-md-1 text-bold text-center">{"终点"}</th>
                         <th className="col-md-2 text-bold text-center">{"记录时间"}</th>
-                        <th className="text-center" style={{width: "20px"}}><i
-                            className="icon-arrow-down12"></i>
-                        </th>
                     </tr>
                     </thead>
                     <tbody>

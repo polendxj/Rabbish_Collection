@@ -14,18 +14,6 @@ export default class VerifiedStore extends Component {
         this.threshold = 100;
     }
 
-    _lockUser() {
-
-    }
-
-    _unlockUser() {
-
-    }
-
-    _resetPassword() {
-
-    }
-
     _detail(val) {
         this.props._detail(val);
     }

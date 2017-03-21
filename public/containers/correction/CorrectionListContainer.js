@@ -220,26 +220,6 @@ class CorrectionListComponent extends Component {
                         <td className="text-center">{val.weight}</td>
                         <td className="text-left">{val.description}</td>
                         <td className="text-center">{timeStamp2Time(val.createTime)}</td>
-                        <td className="text-center">
-                            {<ul className="icons-list">
-                                <li className="dropdown">
-                                    <a href="#" className="dropdown-toggle"
-                                       data-toggle="dropdown" aria-expanded="false"><i
-                                        className="icon-menu7"></i></a>
-                                    <ul className="dropdown-menu dropdown-menu-right">
-                                        <li style={{display: 'block'}}
-                                            onClick={this._detail.bind(this, '/DataManage/RubbishClass/ModifyRubbishClass/:' + val.id)}>
-                                            <a href="javascript:void(0)"><i className="icon-pencil5"></i>
-                                                {"修改"}</a></li>
-                                        <li style={{display: 'block'}}
-                                            onClick={this._delete.bind(this, val.id, val.name)}><a
-                                            href="javascript:void(0)"><i className="icon-trash"></i>
-                                            {"删除"}</a></li>
-                                    </ul>
-                                </li>
-                            </ul>}
-
-                        </td>
                     </tr>)
                 }.bind(this));
             } else {
@@ -268,8 +248,6 @@ class CorrectionListComponent extends Component {
                         <th className="col-md-2 text-bold text-center">{"重量"}</th>
                         <th className="col-md-5 text-bold text-left">{"错误描述"}</th>
                         <th className="col-md-3 text-bold text-center">{"创建时间"}</th>
-                        <th className="text-center" style={{width: "20px"}}><i
-                            className="icon-arrow-down12"></i></th>
                     </tr>
                     </thead>
                     <tbody>

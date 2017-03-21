@@ -303,11 +303,13 @@ class StatisticListComponent extends Component {
         if (data) {
             if (data.status) {
                 var dataList = null;
-                if (data.data && typeof data.data.content == "undefined") {
-                    dataList = data.data;
-                } else if (typeof data.data.content != "undefined") {
-                    dataList = data.data.content;
-                }
+                if (data.data) {
+                    if(typeof data.data.content == "undefined"){
+                        dataList = data.data;
+                    }else {
+                        dataList = data.data.content;
+                    }
+                } 
                 if (dataList && dataList.length > 0) {
                     dataList.forEach(function (val, key) {
                         if (searchColumn == "CLASSIFY") {

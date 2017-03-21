@@ -101,10 +101,11 @@ class RegisterManualRecordComponent extends Component {
 
     render() {
         const {data}=this.props;
+        console.log("manualOfClass",data);
         const options = [];
         if (data) {
             if(data.status){
-                data.data.content.forEach(function (val, key) {
+                data.data.forEach(function (val, key) {
                     options.push(
                         <option key={"option"+key} value={val.id}>{val.name}</option>
                     )

@@ -25,5 +25,13 @@ router.post('/rsapp/organization/update', function (req, resp) {
     var id = req.query.id;
     RequestApi.Request(baseURL + '/rsapp/organization/'+id, 'PUT',data, req, resp);
 });
+router.post('/rsapp/qrcode/generate', function (req, resp) {
+    var data = querystring.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/qrcode/generate' + "?" + data, 'GET', "", req, resp);
+});
+router.post('/rsapp/qrcode/export', function (req, resp) {
+    var data = querystring.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/qrcode/export' + "?" + data, 'GET', "", req, resp);
+});
 
 module.exports = router;

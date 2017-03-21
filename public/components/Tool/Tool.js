@@ -801,7 +801,7 @@ export function userType(type) {
         case 1:
             userType="管理员";break;
         case 2:
-            userType="扫码员";break;
+            userType="回收员";break;
         case 3:
             userType="商户用户";break;
         case 4:
@@ -864,6 +864,18 @@ export function filterCityById(cityList,id) {
         }
     }
     return city;
+}
+export function filterCountryById(currentCity,id) {
+    var country = "";
+    if(currentCity.country){
+        for(var val of currentCity.country){
+            if(val.id==id){
+                country = val;
+                break;
+            }
+        }
+    }
+    return country;
 }
 export function filterByApprove(data,approved) {
     var list = [];

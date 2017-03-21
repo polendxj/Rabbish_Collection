@@ -12,6 +12,7 @@ import {saveServiceGroup} from '../../actions/SystemManagerServiceGroupAction';
 import {saveObject,getDetail} from '../../actions/CommonActions';
 import {commonRefresh} from '../../actions/Common';
 import {ADMINUSER_UPDATE_START, ADMINUSER_UPDATE_END} from '../../constants/index.js'
+var sha1 = require('js-sha1');
 
 export default class AdminUserRegisterContainer extends Component {
     constructor(props) {
@@ -31,8 +32,8 @@ export default class AdminUserRegisterContainer extends Component {
         this.props.dispatch(getDetail(parseInt(this.props.params.id.substring(1)),ADMINUSER_UPDATE_START, ADMINUSER_UPDATE_END,adminUser_detail));
     }
 
-    _save(id,params) {
-        this.props.dispatch(saveObject(params,"","",adminUser_update+"?id="+id,"/CustomerService/AdminUserManage","update"));
+    _save(params) {
+        this.props.dispatch(saveObject(params,"","",adminUser_update,"/CustomerService/AdminUserManage","update"));
     }
 
     render() {
@@ -62,11 +63,11 @@ class UpdateAdminUserComponent extends Component{
         var params = {
             name: $("#name").val(),
             phone: $("#phone").val(),
-            password: $("#password").val(),
+            password: sha1.hex($("#password").val()),
             type: parseInt($("#type").val()),
-            userid:userid
+            id:userid
         };
-        this.props._save(id,params);
+        this.props._save(params);
     }
     componentDidMount() {
 
@@ -83,7 +84,7 @@ class UpdateAdminUserComponent extends Component{
                     <div className="col-sm-8 col-sm-offset-2">
                         <fieldset className="content-group">
                             <legend className="text-bold">
-                                {"扫码员基础信息"}
+                                {"管理员基础信息"}
                             </legend>
                             <div className="form-group">
                                 <label className="col-lg-2 control-label"

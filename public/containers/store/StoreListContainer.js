@@ -68,9 +68,9 @@ export default class StoreListContainer extends Component {
         this.props.dispatch(commonRefresh())
     }
     _changeCity() {
-        var citieid = $("#citySelect").val();
-        this.currentCity = filterCityById(this.props.cityList.data, citieid);
-        this.currentCityId = citieid;
+        var cityid = $("#citySelect").val();
+        this.currentCity = filterCityById(this.props.cityList.data, cityid);
+        this.currentCityId = cityid;
         this._startRefresh();
     }
     _detail(val) {
@@ -123,8 +123,8 @@ export default class StoreListContainer extends Component {
         var that = this;
         var params = {};
         params['userid'] = id;
-        params['points'] = $("#settlementAmount").val();
-        params['amount'] = $("#settlementPoints").val();
+        params['points'] = parseInt($("#settlementAmount").val());
+        params['amount'] = parseInt($("#settlementPoints").val());
         $("#storeSettlementModal").modal("hide");
         this.props.dispatch(saveObject(params,"","",storeSettlement_register,"","x",function(){
             var param = {page: 0, size: 20};

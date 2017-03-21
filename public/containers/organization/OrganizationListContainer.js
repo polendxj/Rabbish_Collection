@@ -8,55 +8,74 @@ import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
 import {commonRefresh} from '../../actions/Common';
-import {Loading, NoData, ConfirmModal,ErrorModal,filterCityById,timeStamp2Time,organizationType} from '../../components/Tool/Tool';
-import {ORGANIZATION_LIST_START, ORGANIZATION_LIST_END,CITY_LIST_START,CITY_LIST_END} from '../../constants/index.js'
-import {getListByMutilpCondition, deleteObject} from '../../actions/CommonActions';
+import {
+    Loading,
+    NoData,
+    ConfirmModal,
+    ListMiddleModal,
+    ErrorModal,
+    filterCityById,
+    timeStamp2Time,
+    organizationType
+} from '../../components/Tool/Tool';
+import {ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, CITY_LIST_START, CITY_LIST_END} from '../../constants/index.js'
+import {getListByMutilpCondition, saveObject} from '../../actions/CommonActions';
 
 export default class OrganizationListContainer extends Component {
     constructor(props) {
         super(props);
-        this.page=0;
+        this.page = 0;
         this.breadCrumbs = [
             {text: "客户服务", link: ''},
             {text: "小区单位管理", link: ''},
             {text: "小区单位列表", link: ''}
         ];
         this.operation = [
-            {icon: "icon-add-to-list", text: Current_Lang.others.add, action: "/CustomerService/OrganizationManage/Register"}
+            {
+                icon: "icon-add-to-list",
+                text: Current_Lang.others.add,
+                action: "/CustomerService/OrganizationManage/Register"
+            }
         ];
         this.currentCity = "";
         this.currentCityId = 3;
-        this.searchColumn="TYPE";
-        this._delete = this._delete.bind(this);
+        this.searchColumn = "TYPE";
+        this.currentOrganization = "";
+        this._generate = this._generate.bind(this);
+        this._export = this._export.bind(this);
+        this._showGenerateModal = this._showGenerateModal.bind(this);
         this._changeCity = this._changeCity.bind(this);
         this._startRefresh = this._startRefresh.bind(this);
     }
 
     componentDidMount() {
-        var self=this;
+        var self = this;
         var params = {page: 0, size: 20};
         this.props.dispatch(getListByMutilpCondition(params, ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, organization_list));
         this.props.dispatch(getListByMutilpCondition(params, CITY_LIST_START, CITY_LIST_END, city_list));
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
-            if($(this).find('a').text().trim()=="按类别搜索"){
-                self.searchColumn="TYPE";
-            }else{
-                self.searchColumn="ADMIN_NAME";
+            if ($(this).find('a').text().trim() == "按类别搜索") {
+                self.searchColumn = "TYPE";
+            } else {
+                self.searchColumn = "ADMIN_NAME";
             }
         })
     }
+
     _startRefresh() {
         this.props.dispatch(commonRefresh())
     }
+
     _changeCity() {
         var citieid = $("#citySelect").val();
         this.currentCity = filterCityById(this.props.cityList.data, citieid);
         this.currentCityId = citieid;
         this._startRefresh();
     }
-    _search(){
+
+    _search() {
         var params = {
             page: 0,
             size: 20,
@@ -65,14 +84,23 @@ export default class OrganizationListContainer extends Component {
         };
         this.props.dispatch(getListByMutilpCondition(params, ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, organization_list));
     }
-
-    _delete(id,name) {
-        var that = this;
-        ConfirmModal(Current_Lang.status.minor, Current_Lang.alertTip.confirmDelete + name + Current_Lang.alertTip.confirmMa, function () {
-            that.props.dispatch(deleteObject(id, "", "", "", "", "",ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, classConf_delete, organization_list))
-        })
+    _showGenerateModal(val){
+        this.currentOrganization = val;
+        this._startRefresh();
     }
-
+    _generate(id){
+        var params={
+            generateNum:parseInt($("#personAmount").val()),
+            organizationid: id
+        }
+        this.props.dispatch(saveObject(params,"","",qrcode_generate,"/CustomerService/OrganizationManage"));
+    }
+    _export(id){
+        var params={
+            organizationid: id
+        };
+        this.props.dispatch(saveObject(params,"","",qrcode_export,"/CustomerService/OrganizationManage"));
+    }
     _changePage(page) {
         this.page = page;
         this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
@@ -89,7 +117,8 @@ export default class OrganizationListContainer extends Component {
     }
 
     render() {
-        const {fetching, data,cityList} =this.props;
+        const {fetching, data, cityList} =this.props;
+        console.log("cityList",cityList);
         var cityOptions = [];
         var countryOptions = [];
         if (cityList) {
@@ -119,6 +148,44 @@ export default class OrganizationListContainer extends Component {
                 }
             }
         }
+        var generateInfo = <div>
+            <div className="form-horizontal">
+                <fieldset className="content-group">
+                    <legend className="text-bold">
+                        {"批量生成二维码"}
+                    </legend>
+                    <div className="form-group">
+                        <label className="col-lg-2 control-label"
+                               style={{textAlign: 'center'}}>{"小区名称"}</label>
+                        <div className="col-lg-9">
+                            <input id="organizationName" type="text" value={this.currentOrganization.name} className="form-control"
+                                   autoComplete="off" disabled/>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="col-lg-2 control-label"
+                               style={{textAlign: 'center'}}>{"预估人数"}</label>
+                        <div className="col-lg-9">
+                            <input id="personAmount" type="text" className="form-control" placeholder="输入预估人数"
+                                   autoComplete="off"/>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="col-lg-2 control-label"
+                               style={{textAlign: 'center'}}></label>
+                        <div className="col-lg-9">
+                            <div className="text-right">
+                                <button type="button" className="btn btn-primary" onClick={this._generate.bind(this,this.currentOrganization.id)}>{Current_Lang.label.save}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+            </div>
+
+        </div>;
         return (
             <div>
                 <BreadCrumbs
@@ -130,7 +197,7 @@ export default class OrganizationListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{Current_Lang.label.searching}</legend>
                         <ul className="list-inline list-inline-condensed no-margin-bottom"
-                            style={{textAlign: 'right',marginTop:'-59px'}}>
+                            style={{textAlign: 'right', marginTop: '-59px'}}>
                             <li className="dropdown"
                                 style={{borderBottom: '0 lightgray solid'}}>
                                 <a href="#" className="btn btn-link btn-sm dropdown-toggle"
@@ -169,33 +236,38 @@ export default class OrganizationListContainer extends Component {
                     </fieldset>
                     <fieldset className="content-group">
                         <legend className="text-bold">{"垃圾分类列表区"}</legend>
-                        <div style={{marginTop:'-80px'}}>
-                            <Pagenation counts={data&&data.data ? data.data.content.length : 0} page={this.page}
+                        <div style={{marginTop: '-80px'}}>
+                            <Pagenation counts={data && data.data ? data.data.content.length : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>
                         <OrganizationListComponent data={data} fetching={fetching}
-                                            _delete={this._delete}
-                                            _updateStatus={this._updateStatus}/>
+                                                   _showGenerateModal={this._showGenerateModal}
+                                                   _export={this._export}/>
 
                     </fieldset>
+                    <ListMiddleModal id="generateModal" content={generateInfo}
+                                     doAction={""}
+                                     tip={"批量生成二维码"} actionText="批量生成二维码" hide="true" hideCancel="true"/>
                 </div>
             </div>
         )
     }
 }
 
-class OrganizationListComponent extends Component{
+class OrganizationListComponent extends Component {
     constructor(props) {
         super(props)
     }
-
     _detail(path) {
         browserHistory.push(path)
     }
+    _showGenerateModal(val) {
+        this.props._showGenerateModal(val);
+    }
 
-    _delete(id,name) {
-        this.props._delete(id,name)
+    _export(id) {
+        this.props._export(id);
     }
 
     render() {
@@ -203,10 +275,10 @@ class OrganizationListComponent extends Component{
         let tb = [];
         if (data) {
             if (data.status) {
-                if (data.data&&data.data.content.length > 0) {
+                if (data.data && data.data.content.length > 0) {
                     data.data.content.forEach(function (val, key) {
-                        tb.push(<tr key={key} style={{backgroundColor:key%2==0?"#F8F8F8":""}}>
-                            <td className="text-center">{key+1}</td>
+                        tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
+                            <td className="text-center">{key + 1}</td>
                             <td className="text-center">{val.name}</td>
                             <td className="text-center">{organizationType(val.type)}</td>
                             <td className="text-center">{val.city}</td>
@@ -221,12 +293,19 @@ class OrganizationListComponent extends Component{
                                            data-toggle="dropdown" aria-expanded="false"><i
                                             className="icon-menu7"></i></a>
                                         <ul className="dropdown-menu dropdown-menu-right">
-                                            <li style={{display:'block'}} onClick={this._detail.bind(this, '/CustomerService/OrganizationManage/Update/:' + val.id)}>
+                                            <li style={{display: 'block'}}
+                                                onClick={this._detail.bind(this, '/CustomerService/OrganizationManage/Update/:' + val.id)}>
                                                 <a href="javascript:void(0)"><i className="icon-pencil5"></i>
                                                     {"修改"}</a></li>
-                                            <li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.name)}><a
+                                            <li>
+                                                <a href="javascript:void(0)" data-toggle="modal"
+                                                   data-target="#generateModal" onClick={this._showGenerateModal.bind(this,val)}><i
+                                                    className=" icon-office"></i>
+                                                    {"批量生成二维码"}</a>
+                                            </li>
+                                            <li style={{display: 'block'}} onClick={this._export.bind(this,val.id)}><a
                                                 href="javascript:void(0)"><i className="icon-trash"></i>
-                                                {"删除"}</a></li>
+                                                {"批量导出二维码"}</a></li>
                                         </ul>
                                     </li>
                                 </ul>}
@@ -234,7 +313,7 @@ class OrganizationListComponent extends Component{
                             </td>
                         </tr>)
                     }.bind(this));
-                }else{
+                } else {
                     tb.push(<tr key={'noData'}>
                         <td colSpan="100" style={{textAlign: 'center'}}>
                             <NoData />
@@ -242,10 +321,10 @@ class OrganizationListComponent extends Component{
 
                     </tr>)
                 }
-            }else{
+            } else {
                 tb.push(ErrorModal(Current_Lang.status.minor, "获取数据错误"));
             }
-        }else{
+        } else {
             tb.push(<tr key={'loading'}>
                 <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />
@@ -253,12 +332,12 @@ class OrganizationListComponent extends Component{
             </tr>)
         }
 
-        var tableHeight = ($(window).height()-240);
+        var tableHeight = ($(window).height() - 240);
         return (
-            <div className="table-responsive" style={{height:tableHeight+'px',overflowY:'scroll'}}>
-                <table className="table table-bordered table-hover" style={{marginBottom:'85px'}}>
+            <div className="table-responsive" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+                <table className="table table-bordered table-hover" style={{marginBottom: '85px'}}>
                     <thead>
-                    <tr style={{fontWeight:'bold'}}>
+                    <tr style={{fontWeight: 'bold'}}>
                         <th className="text-center" style={{width: "20px"}}></th>
                         <th className="col-md-2 text-bold text-center">{"名称"}</th>
                         <th className="col-md-1 text-bold text-center">{"组织类型"}</th>
@@ -282,7 +361,7 @@ class OrganizationListComponent extends Component{
 }
 
 function mapStateToProps(state) {
-    const {getOrganizationList,getCityList,commonReducer}=state;
+    const {getOrganizationList, getCityList, commonReducer}=state;
     return {
         fetching: getOrganizationList.fetching,
         data: getOrganizationList.data,

@@ -50,7 +50,7 @@ export default class ReviewListContainer extends Component {
     _reply(params) {
         var that = this;
         var listParams = {page: 0, size: 20};
-        this.props.dispatch(saveObject(params, "", "", reply_register, "CustomerService/ReviewManage", "noAlert", function () {
+        this.props.dispatch(saveObject(params, "", "", reply_register, "/CustomerService/ReviewManage", "noAlert", function () {
             that.props.dispatch(getListByMutilpCondition(listParams, REVIEW_LIST_START, REVIEW_LIST_END, review_list));
         }));
     }
@@ -93,42 +93,6 @@ export default class ReviewListContainer extends Component {
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>
-                    <fieldset className="content-group">
-                        <legend className="text-bold">{Current_Lang.label.searching}</legend>
-                        <ul className="list-inline list-inline-condensed no-margin-bottom"
-                            style={{textAlign: 'right', marginTop: '-59px'}}>
-                            <li className="dropdown"
-                                style={{borderBottom: '0 lightgray solid'}}>
-                                <a href="#" className="btn btn-link btn-sm dropdown-toggle"
-                                   data-toggle="dropdown" aria-expanded="false" style={{
-                                    paddingLeft: '0',
-                                    paddingRight: '0',
-                                    fontWeight: 'bold',
-                                    color: '#193153'
-                                }}><span
-                                    style={{color: '#193153'}} id="search_way">{"按姓名搜索"}</span> <span
-                                    className="caret"></span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a href="#">{"按姓名搜索"}</a></li>
-                                    <li><a href="#">{"按XXX搜索"}</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <input id="search_value" style={{
-                                    border: '0 red solid',
-                                    borderRadius: '0'
-                                }} type="text" className="form-control" placeholder={"请输入搜索内容"}/>
-                            </li>
-                            <li>
-                                <button onClick={this._search.bind(this)}
-                                        style={{marginLeft: '30px'}} type="button"
-                                        className="btn btn-primary btn-icon"><i
-                                    className="icon-search4"></i></button>
-                            </li>
-
-                        </ul>
-                    </fieldset>
                     <fieldset className="content-group">
                         <legend className="text-bold">{"评价列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
@@ -176,7 +140,8 @@ class ReviewListComponent extends Component {
             reviewid: id,
             content: $("#reply").val(),
             createTime: date
-        }
+        };
+        console.log("reply",$("#reply").val());
         this.props._reply(params);
     }
 
@@ -201,7 +166,7 @@ class ReviewListComponent extends Component {
                                         </div>
                                         <div style={{height: "10px"}}></div>
                                         <small className="display-block" style={{fontSize: "6px"}}>
-                                            {val.name}&nbsp;&nbsp;
+                                            {val.userName}&nbsp;&nbsp;
                                             <i className="icon-alarm" style={{fontSize: "3px"}}/>
                                             &nbsp;
                                             {timeStamp2Time(val.createTime)}&nbsp;&nbsp;
@@ -246,7 +211,7 @@ class ReviewListComponent extends Component {
                                                 </div>
                                                 <div style={{height: "10px"}}></div>
                                                 <small className="display-block" style={{fontSize: "6px"}}>
-                                                    {val.reply.name}&nbsp;&nbsp;
+                                                    {val.reply.replyUserName}&nbsp;&nbsp;
                                                     <i className="icon-alarm" style={{fontSize: "3px"}}></i>
                                                     &nbsp;
                                                     {timeStamp2Time(val.reply.replyTime)}

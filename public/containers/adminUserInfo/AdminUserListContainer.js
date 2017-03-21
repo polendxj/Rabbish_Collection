@@ -18,6 +18,7 @@ import {
 } from '../../components/Tool/Tool';
 import {ADMINUSER_LIST_START, ADMINUSER_LIST_END} from '../../constants/index.js';
 import {getListByMutilpCondition,deleteObject,saveObject} from '../../actions/CommonActions';
+var sha1 = require('js-sha1');
 
 export default class AdminUserListContainer extends Component {
     constructor(props) {
@@ -28,13 +29,13 @@ export default class AdminUserListContainer extends Component {
             {text: "扫码员管理", link: ''},
             {text: "扫码员列表", link: ''}
         ];
-        this.operation = [
-            {
+        this.operation = sessionStorage['type']==10?
+            [{
                 icon: "icon-add-to-list",
                 text: Current_Lang.others.add,
                 action: "/CustomerService/AdminUserManage/Register"
-            }
-        ];
+            }]:
+            [{icon: "", text: "", action: ""}];
         this.searchColumn = "DRIVER";
         this._delete = this._delete.bind(this);
         this._resetPassword = this._resetPassword.bind(this);
@@ -62,7 +63,12 @@ export default class AdminUserListContainer extends Component {
     }
 
     _search() {
-
+        var params={
+            page: 0,
+            size: 20,
+            type: parseInt($("#typeSelect").val())
+        };
+        this.props.dispatch(getListByMutilpCondition(params, ADMINUSER_LIST_START, ADMINUSER_LIST_END, adminUser_list));
     }
     _resetPassword(params){
         this.props.dispatch(saveObject(params, "", "", reset_password, "/CustomerService/AdminUserManage", "update"));
@@ -106,19 +112,19 @@ export default class AdminUserListContainer extends Component {
                                     fontWeight: 'bold',
                                     color: '#193153'
                                 }}><span
-                                    style={{color: '#193153'}} id="search_way">{"按姓名搜索"}</span> <span
+                                    style={{color: '#193153'}} id="search_way">{"按类型搜索"}</span> <span
                                     className="caret"></span>
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><a href="#">{"按姓名搜索"}</a></li>
-                                    <li><a href="#">{"按XXX搜索"}</a></li>
+                                    <li><a href="#">{"按类型搜索"}</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <input id="search_value" style={{
-                                    border: '0 red solid',
-                                    borderRadius: '0'
-                                }} type="text" className="form-control" placeholder={"请输入搜索内容"}/>
+                                <select id="typeSelect" className="form-control" style={{width: "150px"}}>
+                                    <option value={""}>所有</option>
+                                    <option value={1}>管理员</option>
+                                    <option value={2}>回收员</option>
+                                </select>
                             </li>
                             <li>
                                 <button onClick={this._search.bind(this)}
@@ -126,7 +132,6 @@ export default class AdminUserListContainer extends Component {
                                         className="btn btn-primary btn-icon"><i
                                     className="icon-search4"></i></button>
                             </li>
-
                         </ul>
                     </fieldset>
                     <fieldset className="content-group">
@@ -154,7 +159,7 @@ class AdminUserListComponent extends Component {
 
     _resetPassword(val) {
         var params = {
-            password: "88888888",
+            password: sha1.hex("88888888"),
             type: val.type,
             phone: val.phone,
             authcode: ""
@@ -172,6 +177,7 @@ class AdminUserListComponent extends Component {
 
     render() {
         const {data, fetching}=this.props;
+        var loginUserType = sessionStorage['type'];
         let tb = [];
         if (data) {
             if (data.status) {
@@ -191,15 +197,15 @@ class AdminUserListComponent extends Component {
                                            data-toggle="dropdown" aria-expanded="false"><i
                                             className="icon-menu7"></i></a>
                                         <ul className="dropdown-menu dropdown-menu-right">
-                                            <li style={{display: 'block'}}
+                                            <li style={{display:loginUserType==10? 'block':'none'}}
                                                 onClick={this._detail.bind(this, '/CustomerService/AdminUserManage/Update/:' + val.userid)}>
                                                 <a href="javascript:void(0)"><i className="icon-pencil5"></i>
                                                     {"修改"}</a></li>
-                                            <li style={{display: 'block'}}
+                                            <li style={{display:loginUserType==10? 'block':'none'}}
                                                 onClick={this._delete.bind(this, val.userid, val.name)}><a
                                                 href="javascript:void(0)"><i className="icon-trash"></i>
                                                 {"删除"}</a></li>
-                                            <li style={{display: 'block'}}
+                                            <li style={{display:loginUserType==10? 'block':'none'}}
                                                 onClick={this._resetPassword.bind(this, val)}><a
                                                 href="javascript:void(0)"><i className="icon-reset"></i>
                                                 {"重置密码"}</a></li>

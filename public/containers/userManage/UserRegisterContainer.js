@@ -9,7 +9,7 @@ import {bindActionCreators} from 'redux'
 import {array2Json} from '../../components/Tool/Tool';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import {ORGANIZATION_LIST_START, ORGANIZATION_LIST_END} from '../../constants/index.js';
-import {getListByMutilpCondition,saveObject} from '../../actions/CommonActions';
+import {getListByMutilpCondition, saveObject} from '../../actions/CommonActions';
 var sha1 = require('js-sha1');
 
 export default class UserRegisterContainer extends Component {
@@ -21,16 +21,18 @@ export default class UserRegisterContainer extends Component {
             {text: "用户注册", link: ''}
         ];
         this.operation = [
-            {icon: "icon-undo2", text:"返回用户列表", action: "/CustomerService/UserManage"}
+            {icon: "icon-undo2", text: "返回用户列表", action: "/CustomerService/UserManage"}
         ];
         this._save = this._save.bind(this);
     }
+
     componentDidMount() {
         var params = {page: 0, size: 10000};
         this.props.dispatch(getListByMutilpCondition(params, ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, organization_list));
     }
+
     _save(params) {
-        this.props.dispatch(saveObject(params,"","",generalUser_register,"/CustomerService/UserManage"));
+        this.props.dispatch(saveObject(params, "", "", generalUser_register, "/CustomerService/UserManage"));
     }
 
     render() {
@@ -51,34 +53,56 @@ export default class UserRegisterContainer extends Component {
     }
 }
 
-class RegisterUserComponent extends Component{
+class RegisterUserComponent extends Component {
     constructor(props) {
         super(props);
         this._save = this._save.bind(this);
+        this._uploadImg = this._uploadImg.bind(this);
     }
-    _save() {
+
+    _uploadImg() {
+        $('#file-input').fileinput('upload');
+    }
+
+    _save(imgUrl) {
         var formFields = $("#generalUserForm").serializeArray();
         var params = array2Json(formFields);
         var password = sha1.hex(params.password);
         params.password = password;
+        params.headimg = imgUrl;
         params.authcode = "";
-        console.log("aa1",params);
-        console.log("aa1",password);
         this.props._save(params);
     }
-    componentDidMount() {
 
+    componentDidMount() {
+        var self = this;
+        $('#file-input').fileinput({
+            uploadUrl: 'http://dev.xysy.tech/rsapp/file/headimg',
+            language: 'zh',
+            showUpload: false,
+            showPreview: false,
+            browseIcon: '<i class="icon-folder-open"></i>&nbsp;',
+            removeIcon: '<i class="icon-trash"></i>',
+            enctype: 'multipart/form-data',
+            allowedFileExtensions: ['jpg', 'png', 'gif']
+        });
+        $('#file-input').on("fileuploaded", function (event, data) {
+            console.log("img", data);
+            if (data.status) {
+                self._save(data.data);
+            }
+        });
     }
 
     render() {
         const {data}=this.props;
-        console.log("orgina",data);
+        console.log("orgina", data);
         const options = [];
         if (data) {
-            if(data.status){
+            if (data.status) {
                 data.data.content.forEach(function (val, key) {
                     options.push(
-                        <option key={"option"+key} value={val.id}>{val.name}</option>
+                        <option key={"option" + key} value={val.id}>{val.name}</option>
                     )
                 })
             }
@@ -86,7 +110,7 @@ class RegisterUserComponent extends Component{
         var tableHeight = ($(window).height() - 130);
         return (
             <div>
-                <form id="generalUserForm" className="form-horizontal" action="#">
+                <form id="generalUserForm" className="form-horizontal" encType="multipart/form-data">
                     <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                         <div className="col-sm-8 col-sm-offset-2">
                             <fieldset className="content-group">
@@ -146,13 +170,12 @@ class RegisterUserComponent extends Component{
                                                marginTop: '8px'
                                            }}>{"头像URL"}</label>
                                     <div className="col-lg-9">
-                                        <input name="headimg" type="text" className="form-control"
-                                               placeholder={"头像URL"}
-                                               autoComplete="off"/>
+                                        <input type="file" name="headimg" id="file-input"
+                                               multiple data-min-file-count="1"/>
                                     </div>
                                 </div>
 
-                                <div className="form-group" >
+                                <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
                                                textAlign: 'center',
@@ -163,7 +186,7 @@ class RegisterUserComponent extends Component{
                                                autoComplete="off"/>
                                     </div>
                                 </div>
-                                <div className="form-group" >
+                                <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
                                                textAlign: 'center',
@@ -174,7 +197,7 @@ class RegisterUserComponent extends Component{
                                                autoComplete="off"/>
                                     </div>
                                 </div>
-                                <div className="form-group" >
+                                <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
                                                textAlign: 'center',
@@ -185,7 +208,7 @@ class RegisterUserComponent extends Component{
                                                autoComplete="off"/>
                                     </div>
                                 </div>
-                                <div className="form-group" >
+                                <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
                                                textAlign: 'center',
@@ -196,7 +219,7 @@ class RegisterUserComponent extends Component{
                                                autoComplete="off"/>
                                     </div>
                                 </div>
-                                <div className="form-group" >
+                                <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
                                                textAlign: 'center',
@@ -210,10 +233,10 @@ class RegisterUserComponent extends Component{
 
                             </fieldset>
 
-                            <div className="form-group" >
+                            <div className="form-group">
                                 <div className="col-lg-11 text-right" style={{marginTop: "50px"}}>
                                     <button type="button" className="btn btn-primary"
-                                            onClick={this._save.bind(this)}>{"保存"}
+                                            onClick={this._uploadImg.bind(this)}>{"保存"}
                                     </button>
                                 </div>
                             </div>

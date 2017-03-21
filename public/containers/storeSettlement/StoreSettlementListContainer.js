@@ -83,42 +83,6 @@ export default class StoreSettlementListContainer extends Component {
                 />
                 <div className="content" style={{marginTop: '20px'}}>
                     <fieldset className="content-group">
-                        <legend className="text-bold">{Current_Lang.label.searching}</legend>
-                        <ul className="list-inline list-inline-condensed no-margin-bottom"
-                            style={{textAlign: 'right', marginTop: '-59px'}}>
-                            <li className="dropdown"
-                                style={{borderBottom: '0 lightgray solid'}}>
-                                <a href="#" className="btn btn-link btn-sm dropdown-toggle"
-                                   data-toggle="dropdown" aria-expanded="false" style={{
-                                    paddingLeft: '0',
-                                    paddingRight: '0',
-                                    fontWeight: 'bold',
-                                    color: '#193153'
-                                }}><span
-                                    style={{color: '#193153'}} id="search_way">{"按单位/小区搜索"}</span> <span
-                                    className="caret"></span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a href="#">{"按单位/小区搜索"}</a></li>
-                                    <li><a href="#">{"按类型搜索"}</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <input id="search_value" style={{
-                                    border: '0 red solid',
-                                    borderRadius: '0'
-                                }} type="text" className="form-control" placeholder={"请输入搜索内容"}/>
-                            </li>
-                            <li>
-                                <button onClick={this._search.bind(this)}
-                                        style={{marginLeft: '30px'}} type="button"
-                                        className="btn btn-primary btn-icon"><i
-                                    className="icon-search4"></i></button>
-                            </li>
-
-                        </ul>
-                    </fieldset>
-                    <fieldset className="content-group">
                         <legend className="text-bold">{"纠错记录列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
                             <Pagenation counts={data ? data.data.content.length : 0} page={this.page}
@@ -161,22 +125,6 @@ class StoreSettlementListComponent extends Component {
                         <td className="text-center">{val.points}</td>
                         <td className="text-center">{val.amount}</td>
                         <td className="text-center">{timeStamp2Time(val.settletime)}</td>
-                        <td className="text-center">
-                            {<ul className="icons-list">
-                                <li className="dropdown">
-                                    <a href="#" className="dropdown-toggle"
-                                       data-toggle="dropdown" aria-expanded="false"><i
-                                        className="icon-menu7"></i></a>
-                                    <ul className="dropdown-menu dropdown-menu-right">
-                                        <li style={{display: 'block'}}
-                                            onClick={this._delete.bind(this, val.id, val.name)}><a
-                                            href="javascript:void(0)"><i className="icon-trash"></i>
-                                            {"删除"}</a></li>
-                                    </ul>
-                                </li>
-                            </ul>}
-
-                        </td>
                     </tr>)
                 }.bind(this));
             }else{
@@ -204,8 +152,6 @@ class StoreSettlementListComponent extends Component {
                             <th className="col-md-2 text-bold text-center">{"结算积分"}</th>
                             <th className="col-md-5 text-bold text-center">{"结算金额"}</th>
                             <th className="col-md-3 text-bold text-center">{"结算时间"}</th>
-                            <th className="text-center" style={{width: "20px"}}><i
-                                className="icon-arrow-down12"></i></th>
                         </tr>
                     </thead>
                     <tbody>

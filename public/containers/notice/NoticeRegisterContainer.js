@@ -13,7 +13,7 @@ import {commonRefresh} from '../../actions/Common';
 
 export default class NoticeRegisterContainer extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.breadCrumbs = [
             {text: "系统通知", link: ''},
             {text: "新闻政策", link: ''},
@@ -23,7 +23,7 @@ export default class NoticeRegisterContainer extends Component {
             {icon: "icon-undo2", text:"返回新闻政策列表", action: "/SystemNotice/NoticeManage"}
         ];
         this._save = this._save.bind(this);
-        this._startRefresh=this._startRefresh.bind(this)
+        this._startRefresh=this._startRefresh.bind(this);
     }
 
     _startRefresh(){
@@ -54,26 +54,44 @@ export default class NoticeRegisterContainer extends Component {
 
 class RegisterNoticeComponent extends Component{
     constructor(props) {
-        super(props)
-        this._save = this._save.bind(this)
+        super(props);
+        this._save = this._save.bind(this);
+        this._uploadImg = this._uploadImg.bind(this);
     }
-
+    componentDidMount() {
+        var self = this;
+        $('#file-input').fileinput({
+            uploadUrl: 'http://dev.xysy.tech/rsapp/file/news',
+            language: 'zh',
+            showUpload: false,
+            showPreview: false,
+            browseIcon: '<i class="icon-folder-open"></i>&nbsp;',
+            removeIcon: '<i class="icon-trash"></i>',
+            enctype: 'multipart/form-data',
+            allowedFileExtensions: ['jpg', 'png', 'gif']
+        });
+        $('#file-input').on("fileuploaded", function (event, data) {
+            console.log("img", data);
+            if (data.status) {
+                self._save(data.data);
+            }
+        });
+    }
+    _uploadImg() {
+        $('#file-input').fileinput('upload');
+    }
     _search() {
         this.props._startRefresh();
     }
 
-    componentDidUpdate() {}
-
-    _save() {
+    _save(url) {
         var formFields = $("#noticeForm").serializeArray();
         var params = array2Json(formFields);
+        params.img = url;
         console.log("noticeparams",params);
         this.props._save(params);
 
     }
-
-
-    componentDidMount() {}
 
     render() {
         var tableHeight = ($(window).height() - 130);
@@ -117,8 +135,8 @@ class RegisterNoticeComponent extends Component{
                                                textAlign: 'center',
                                            }}>{"图片URL"}</label>
                                     <div className="col-lg-9">
-                                        <input name="img" type="text" className="form-control"
-                                               placeholder={"图片URL"} required="required" autoComplete="off"/>
+                                        <input type="file" name="img" id="file-input"
+                                               multiple data-min-file-count="1"/>
                                     </div>
                                 </div>
                                 <div className="form-group" >
@@ -137,7 +155,7 @@ class RegisterNoticeComponent extends Component{
                             <div className="form-group" >
                                 <div className="col-lg-11 text-right" style={{marginTop: "50px"}}>
                                     <button type="button" className="btn btn-primary"
-                                            onClick={this._save.bind(this)}>{"发布"}
+                                            onClick={this._uploadImg}>{"发布"}
                                     </button>
                                 </div>
                             </div>
@@ -152,7 +170,7 @@ class RegisterNoticeComponent extends Component{
 }
 
 function mapStateToProps(state) {
-    const {commonReducer}=state
+    const {commonReducer}=state;
     return {
         refresh: commonReducer.refresh
     }
