@@ -43,7 +43,7 @@ export function deleteObject(obj, startRow, searchColumns, searchValues, sortCol
             })
             .then(response=>response.json())
             .then(function (json) {
-                if (json.status){
+                if (json.status) {
                     if (startDispatch) {
                         dispatch(startFetch(startDispatch))
                     }
@@ -107,6 +107,40 @@ export function getDetail(jsonObj, startDispatch, endDispatch, interfaceURL) {
     }
 }
 
+export function exportQrcode(startDispatch, endDispatch, interfaceURL) {
+    return dispatch=> {
+        if (startDispatch) {
+            dispatch(startFetch(startDispatch))
+        }
+        fetch(interfaceURL,
+            {
+                credentials: 'include',
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            })
+            .then(function(response){
+                return response.json();
+            })
+            .then(function (json) {
+                console.log("export",json);
+                if (json.status) {
+                } else {
+                    $("#exportModal").modal('hide');
+                    ErrorModal(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message)
+                }
+            })
+            .catch(function(ex){
+                console.log("ex",ex);
+                $("#exportModal").modal('hide');
+                window.location.href = interfaceURL;
+                SuccessModal("导出二维码成功", Current_Lang.alertTip.updateSuccess);
+            })
+
+    }
+}
+
 export function saveObject(data, startDispatch, endDispatch, interfaceURL, listRouter, flag, callback) {
     return dispatch=> {
         if (startDispatch) {
@@ -132,12 +166,12 @@ export function saveObject(data, startDispatch, endDispatch, interfaceURL, listR
                     } else if (flag == "update") {
                         SuccessModal(Current_Lang.alertTip.tip, Current_Lang.alertTip.updateSuccess);
                         browserHistory.push(listRouter)
-                    }else if (flag == "bindQrcode") {
+                    } else if (flag == "bindQrcode") {
                         SuccessModal(Current_Lang.alertTip.tip, "绑定二维码成功");
                         browserHistory.push(listRouter)
-                    }else if (flag == "noAlert"){
+                    } else if (flag == "noAlert") {
                         browserHistory.push(listRouter)
-                    }else {
+                    } else {
                         SuccessModal(Current_Lang.alertTip.tip, Current_Lang.alertTip.updateSuccess)
                     }
                     if (callback) {
@@ -167,19 +201,19 @@ export function login(data, startDispatch, endDispatch, interfaceURL, listRouter
             })
             .then(response=>response.json())
             .then(function (json) {
-                console.log("json",json);
+                console.log("json", json);
                 if (json.status) {
                     dispatch(endFetch(endDispatch, json));
                     sessionStorage['check'] = true;
                     sessionStorage['token'] = json.data.token;
                     sessionStorage['type'] = json.data.type;
-                    sessionStorage['user'] = json.data.user?json.data.user:"";
+                    sessionStorage['user'] = json.data.user ? json.data.user : "";
                     browserHistory.push(listRouter);
                     if (callback) {
                         callback();
                     }
                 } else {
-                    ErrorModal("错误","用户名或者密码不正确");
+                    ErrorModal("错误", "用户名或者密码不正确");
                     sessionStorage['token'] = ''
                 }
             })

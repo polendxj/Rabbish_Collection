@@ -19,7 +19,8 @@ import {
     organizationType
 } from '../../components/Tool/Tool';
 import {ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, CITY_LIST_START, CITY_LIST_END} from '../../constants/index.js'
-import {getListByMutilpCondition, saveObject} from '../../actions/CommonActions';
+import {getListByMutilpCondition, saveObject,exportQrcode} from '../../actions/CommonActions';
+var querystring = require('querystring');
 
 export default class OrganizationListContainer extends Component {
     constructor(props) {
@@ -44,6 +45,7 @@ export default class OrganizationListContainer extends Component {
         this._generate = this._generate.bind(this);
         this._export = this._export.bind(this);
         this._showGenerateModal = this._showGenerateModal.bind(this);
+        this._showExportModal = this._showExportModal.bind(this);
         this._changeCity = this._changeCity.bind(this);
         this._startRefresh = this._startRefresh.bind(this);
     }
@@ -91,15 +93,22 @@ export default class OrganizationListContainer extends Component {
     _generate(id){
         var params={
             generateNum:parseInt($("#personAmount").val()),
-            organizationid: id
-        }
+            organizationid: id,
+            pressOrgName: parseInt($("#generatePressOrgName").val())
+        };
         this.props.dispatch(saveObject(params,"","",qrcode_generate,"/CustomerService/OrganizationManage"));
+    }
+    _showExportModal(val){
+        this.currentOrganization = val;
+        this._startRefresh();
     }
     _export(id){
         var params={
-            organizationid: id
-        };
-        this.props.dispatch(saveObject(params,"","",qrcode_export,"/CustomerService/OrganizationManage"));
+            organizationid: id,
+            pressOrgName: parseInt($("#exportPressOrgName").val())
+        }
+        console.log("http://dev.xysy.tech/rsapp/qrcode/export?"+querystring.stringify(params));
+        this.props.dispatch(exportQrcode("","",qrcode_export+"?"+querystring.stringify(params)));
     }
     _changePage(page) {
         this.page = page;
@@ -172,10 +181,60 @@ export default class OrganizationListContainer extends Component {
                     </div>
                     <div className="form-group">
                         <label className="col-lg-2 control-label"
+                               style={{textAlign: 'center'}}>{"是否添加小区名字"}</label>
+                        <div className="col-lg-9">
+                            <select id="generatePressOrgName" className="form-control">
+                                <option value={0}>不添加</option>
+                                <option value={1}>添加</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="col-lg-2 control-label"
                                style={{textAlign: 'center'}}></label>
                         <div className="col-lg-9">
                             <div className="text-right">
                                 <button type="button" className="btn btn-primary" onClick={this._generate.bind(this,this.currentOrganization.id)}>{Current_Lang.label.save}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+            </div>
+
+        </div>;
+        var exportInfo = <div>
+            <div className="form-horizontal">
+                <fieldset className="content-group">
+                    <legend className="text-bold">
+                        {"批量导出二维码"}
+                    </legend>
+                    <div className="form-group">
+                        <label className="col-lg-2 control-label"
+                               style={{textAlign: 'center'}}>{"小区名称"}</label>
+                        <div className="col-lg-9">
+                            <input id="organizationName" type="text" value={this.currentOrganization.name} className="form-control"
+                                   autoComplete="off" disabled/>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="col-lg-2 control-label"
+                               style={{textAlign: 'center'}}>{"是否添加小区名字"}</label>
+                        <div className="col-lg-9">
+                            <select id="exportPressOrgName" className="form-control">
+                                <option value={0}>不添加</option>
+                                <option value={1}>添加</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="col-lg-2 control-label"
+                               style={{textAlign: 'center'}}></label>
+                        <div className="col-lg-9">
+                            <div className="text-right">
+                                <button type="button" className="btn btn-primary" onClick={this._export.bind(this,this.currentOrganization.id)}>{Current_Lang.label.save}
                                 </button>
                             </div>
                         </div>
@@ -243,12 +302,15 @@ export default class OrganizationListContainer extends Component {
                         </div>
                         <OrganizationListComponent data={data} fetching={fetching}
                                                    _showGenerateModal={this._showGenerateModal}
-                                                   _export={this._export}/>
+                                                   _showExportModal={this._showExportModal}/>
 
                     </fieldset>
                     <ListMiddleModal id="generateModal" content={generateInfo}
                                      doAction={""}
                                      tip={"批量生成二维码"} actionText="批量生成二维码" hide="true" hideCancel="true"/>
+                    <ListMiddleModal id="exportModal" content={exportInfo}
+                                     doAction={""}
+                                     tip={"批量导出二维码"} actionText="批量导出二维码" hide="true" hideCancel="true"/>
                 </div>
             </div>
         )
@@ -265,9 +327,8 @@ class OrganizationListComponent extends Component {
     _showGenerateModal(val) {
         this.props._showGenerateModal(val);
     }
-
-    _export(id) {
-        this.props._export(id);
+    _showExportModal(val){
+        this.props._showExportModal(val);
     }
 
     render() {
@@ -303,9 +364,12 @@ class OrganizationListComponent extends Component {
                                                     className=" icon-office"></i>
                                                     {"批量生成二维码"}</a>
                                             </li>
-                                            <li style={{display: 'block'}} onClick={this._export.bind(this,val.id)}><a
-                                                href="javascript:void(0)"><i className="icon-trash"></i>
-                                                {"批量导出二维码"}</a></li>
+                                            <li>
+                                                <a href="javascript:void(0)" data-toggle="modal"
+                                                   data-target="#exportModal" onClick={this._showExportModal.bind(this,val)}><i
+                                                    className=" icon-office"></i>
+                                                    {"批量导出二维码"}</a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>}

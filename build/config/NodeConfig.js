@@ -53,7 +53,7 @@ var statisticByCity_list = node_service + "/rsapp/statistic/classifying/city";
 var statisticByOrganization_list = node_service + "/rsapp/statistic/classifying/organization";
 var statisticByRangeDate_list = node_service + "/rsapp/statistic/total";
 var qrcode_generate = node_service + "/rsapp/qrcode/generate";
-var qrcode_export = node_service + "/rsapp/qrcode/export";
+var qrcode_export = node_service + "http://dev.xysy.tech/rsapp/qrcode/export";
 var bind_qrcode = node_service + "/rsapp/user/qrcode";
 
 
