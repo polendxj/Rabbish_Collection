@@ -839,7 +839,7 @@ export function organizationType(type) {
 export function array2Json(list) {
     var params = {};
     list.forEach(function (val) {
-        if(isNumber(val.value)){
+        if(isNumber(val.value)&&val.value.length<8){
             params[val.name] = parseInt(val.value);
         }else{
             params[val.name] = val.value;

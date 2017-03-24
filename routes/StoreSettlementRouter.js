@@ -11,7 +11,9 @@ var router = express()
 router.post('/rsapp/storeSettlement', function (req, resp) {
     var data = querystring.stringify(JSON.parse(req.body.data));
     console.log(data);
-    RequestApi.Request(baseURL + '/rsapp/storeSettlement' + "?" + data, 'GET', "", req, resp);
+    RequestApi.Request(baseURL + '/rsapp/storeSettlement' + "?" + data, 'GET', "", req, resp, function (storeSettlements) {
+        
+    });
 });
 router.post('/rsapp/storeSettlement/register', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));

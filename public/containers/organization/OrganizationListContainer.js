@@ -19,7 +19,7 @@ import {
     organizationType
 } from '../../components/Tool/Tool';
 import {ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, CITY_LIST_START, CITY_LIST_END} from '../../constants/index.js'
-import {getListByMutilpCondition, saveObject,exportQrcode} from '../../actions/CommonActions';
+import {getListByMutilpCondition, saveObject,exportQrcode,generateQrcode} from '../../actions/CommonActions';
 var querystring = require('querystring');
 
 export default class OrganizationListContainer extends Component {
@@ -96,7 +96,7 @@ export default class OrganizationListContainer extends Component {
             organizationid: id,
             pressOrgName: parseInt($("#generatePressOrgName").val())
         };
-        this.props.dispatch(saveObject(params,"","",qrcode_generate,"/CustomerService/OrganizationManage"));
+        this.props.dispatch(generateQrcode(params,"","",qrcode_generate));
     }
     _showExportModal(val){
         this.currentOrganization = val;
@@ -105,6 +105,7 @@ export default class OrganizationListContainer extends Component {
     _export(id){
         var params={
             organizationid: id,
+            bindUser: parseInt($("#bindUser").val()),
             pressOrgName: parseInt($("#exportPressOrgName").val())
         }
         console.log("http://dev.xysy.tech/rsapp/qrcode/export?"+querystring.stringify(params));
@@ -211,6 +212,16 @@ export default class OrganizationListContainer extends Component {
                     <legend className="text-bold">
                         {"批量导出二维码"}
                     </legend>
+                    <div className="form-group">
+                        <label className="col-lg-2 control-label"
+                               style={{textAlign: 'center'}}>{"是否绑定用户"}</label>
+                        <div className="col-lg-9">
+                            <select id="bindUser" className="form-control">
+                                <option value={1}>是</option>
+                                <option value={0}>否</option>
+                            </select>
+                        </div>
+                    </div>
                     <div className="form-group">
                         <label className="col-lg-2 control-label"
                                style={{textAlign: 'center'}}>{"小区名称"}</label>

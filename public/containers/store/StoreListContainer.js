@@ -390,7 +390,7 @@ export default class StoreListContainer extends Component {
                                style={{textAlign: 'center'}}></label>
                         <div className="col-lg-9">
                             <div className="text-right">
-                                <button type="button" className="btn btn-primary" onClick={this._saveStoreSettlement.bind(this,this.detailData.id)}>{Current_Lang.label.save}
+                                <button type="button" className="btn btn-primary" onClick={this._saveStoreSettlement.bind(this,this.detailData.userid)}>{Current_Lang.label.save}
                                 </button>
                             </div>
                         </div>

@@ -115,6 +115,7 @@ class StoreSettlementListComponent extends Component {
 
     render() {
         const {data, fetching}=this.props;
+        console.log("storeSettlement",data);
         let tb = [];
         if (data) {
             if (data.data.content.length > 0) {

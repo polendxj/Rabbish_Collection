@@ -106,7 +106,34 @@ export function getDetail(jsonObj, startDispatch, endDispatch, interfaceURL) {
             })
     }
 }
+export function generateQrcode(data,startDispatch, endDispatch, interfaceURL) {
+    return dispatch=> {
+        if (startDispatch) {
+            dispatch(startFetch(startDispatch))
+        }
+        fetch(interfaceURL,
+            {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "data=" + JSON.stringify(data)
+            })
+            .then(function(response){
+                return response.json();
+            })
+            .then(function (json) {
+                console.log("generate",json);
+                if (json.status) {
+                } else {
+                    $("#exportModal").modal('hide');
+                    ErrorModal(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message)
+                }
+            })
 
+    }
+}
 export function exportQrcode(startDispatch, endDispatch, interfaceURL) {
     return dispatch=> {
         if (startDispatch) {
@@ -136,6 +163,35 @@ export function exportQrcode(startDispatch, endDispatch, interfaceURL) {
                 $("#exportModal").modal('hide');
                 window.location.href = interfaceURL;
                 SuccessModal("导出二维码成功", Current_Lang.alertTip.updateSuccess);
+            })
+
+    }
+}
+
+export function getAuthcode(data, startDispatch, endDispatch, interfaceURL, callback) {
+    return dispatch=> {
+        if (startDispatch) {
+            dispatch(startFetch(startDispatch))
+        }
+        fetch(interfaceURL,
+            {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "data=" + JSON.stringify(data)
+            })
+            .then(response=>response.json())
+            .then(function (json) {
+                if (json.status) {
+                    dispatch(endFetch(endDispatch, json))
+                    if (callback) {
+                        callback();
+                    }
+                } else {
+                    ErrorModal(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message)
+                }
             })
 
     }
@@ -207,7 +263,10 @@ export function login(data, startDispatch, endDispatch, interfaceURL, listRouter
                     sessionStorage['check'] = true;
                     sessionStorage['token'] = json.data.token;
                     sessionStorage['type'] = json.data.type;
+                    sessionStorage['phone'] = json.data.phone;
                     sessionStorage['user'] = json.data.user ? json.data.user : "";
+                    sessionStorage['count'] = -1;
+                    sessionStorage['messageTime'] = "";
                     browserHistory.push(listRouter);
                     if (callback) {
                         callback();

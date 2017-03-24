@@ -8,13 +8,17 @@ var ExceptionUtils = require('../utils/ExceptionUtils')
 var RequestApi = require('../utils/RequestApi')
 var router = express()
 
+router.post('/rsapp/authcode/admin', function (req, resp) {
+    var data = JSON.parse(req.body.data).phone;
+    RequestApi.Request(baseURL + '/rsapp/authcode/admin/' + data, 'GET', "", req, resp);
+});
 router.post('/rsapp/generalUser', function (req, resp) {
     var data = querystring.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/generalUser' + "?" + data, 'GET', "", req, resp);
 });
 router.post('/rsapp/generalUser/register', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));
-    RequestApi.Request(baseURL + '/rsapp/user', 'POST',data, req, resp);
+    RequestApi.Request(baseURL + '/rsapp/generalUser', 'POST',data, req, resp);
 });
 router.post('/rsapp/generalUser/delete', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));

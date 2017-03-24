@@ -9,7 +9,7 @@ import {bindActionCreators} from 'redux'
 import {array2Json} from '../../components/Tool/Tool';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import {ORGANIZATION_LIST_START, ORGANIZATION_LIST_END} from '../../constants/index.js';
-import {getListByMutilpCondition, saveObject} from '../../actions/CommonActions';
+import {getListByMutilpCondition, saveObject,getAuthcode} from '../../actions/CommonActions';
 var sha1 = require('js-sha1');
 
 export default class UserRegisterContainer extends Component {
@@ -24,6 +24,7 @@ export default class UserRegisterContainer extends Component {
             {icon: "icon-undo2", text: "返回用户列表", action: "/CustomerService/UserManage"}
         ];
         this._save = this._save.bind(this);
+        this._sendMessage = this._sendMessage.bind(this);
     }
 
     componentDidMount() {
@@ -33,6 +34,13 @@ export default class UserRegisterContainer extends Component {
 
     _save(params) {
         this.props.dispatch(saveObject(params, "", "", generalUser_register, "/CustomerService/UserManage"));
+    }
+
+    _sendMessage(phone) {
+        var params = {
+            phone: phone
+        };
+        this.props.dispatch(getAuthcode(params, "", "", get_authcode));
     }
 
     render() {
@@ -45,7 +53,9 @@ export default class UserRegisterContainer extends Component {
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>
-                    <RegisterUserComponent data={data} _save={this._save}/>
+                    <RegisterUserComponent data={data}
+                                           _save={this._save}
+                                           _sendMessage={this._sendMessage}/>
 
                 </div>
             </div>
@@ -56,8 +66,10 @@ export default class UserRegisterContainer extends Component {
 class RegisterUserComponent extends Component {
     constructor(props) {
         super(props);
+        this.interValObj = "";
         this._save = this._save.bind(this);
         this._uploadImg = this._uploadImg.bind(this);
+        this._sendMessage = this._sendMessage.bind(this);
     }
 
     _uploadImg() {
@@ -65,13 +77,39 @@ class RegisterUserComponent extends Component {
     }
 
     _save(imgUrl) {
+        console.log("imgUrl", imgUrl);
         var formFields = $("#generalUserForm").serializeArray();
         var params = array2Json(formFields);
         var password = sha1.hex(params.password);
         params.password = password;
         params.headimg = imgUrl;
-        params.authcode = "";
         this.props._save(params);
+    }
+
+    _sendMessage() {
+        var phone = sessionStorage['phone'];
+        var count = 30;
+        sessionStorage['count'] = count;
+        sessionStorage['messageTime'] = new Date().getTime();
+        console.log("phone", phone);
+        $("#btnSendCode").attr("disabled", "true");
+        $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
+        this.interValObj = setInterval(this.setRemainTime, 1000);
+        this.props._sendMessage(phone);
+    }
+    setRemainTime() {
+        var curCount = sessionStorage['count'];
+        if (curCount == 0) {
+            clearInterval(this.interValObj);//停止计时器
+            $("#btnSendCode").removeAttr("disabled");//启用按钮
+            $("#btnSendCode").text("重新发送验证码");
+        }
+        else {
+            curCount--;
+            sessionStorage['count'] = curCount;
+            console.log(sessionStorage['count']);
+            $("#btnSendCode").text(curCount + "秒后重新发送");
+        }
     }
 
     componentDidMount() {
@@ -88,10 +126,22 @@ class RegisterUserComponent extends Component {
         });
         $('#file-input').on("fileuploaded", function (event, data) {
             console.log("img", data);
-            if (data.status) {
-                self._save(data.data);
+            if (data.response && data.response.status) {
+                self._save(data.response.data);
             }
         });
+        if(sessionStorage['messageTime']!=""){
+            var duringTime = new Date().getTime()-sessionStorage['messageTime'];
+            if(duringTime < 30*1000){
+                sessionStorage['count'] = Math.round((30*1000 - duringTime)/1000);
+                $("#btnSendCode").attr("disabled", "true");
+                $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
+                this.interValObj = setInterval(this.setRemainTime, 1000);
+            }
+        }
+    }
+    componentWillUnmount(){
+        clearInterval(this.interValObj);//停止计时器
     }
 
     render() {
@@ -120,7 +170,7 @@ class RegisterUserComponent extends Component {
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"用户类型"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <select className="form-control" name="type" defaultValue={3}>
                                             <option value={3}>{"商户用户"}</option>
                                             <option value={4}>{"住宅用户"}</option>
@@ -131,7 +181,7 @@ class RegisterUserComponent extends Component {
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"单位、小区"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <select className="form-control" name="organizationid">
                                             {options}
                                         </select>
@@ -143,7 +193,7 @@ class RegisterUserComponent extends Component {
                                                textAlign: 'center',
                                                marginTop: '8px'
                                            }}>{"真实姓名"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <input name="realName" type="text" className="form-control"
                                                placeholder={"真实姓名"}
                                                autoComplete="off"/>
@@ -156,7 +206,7 @@ class RegisterUserComponent extends Component {
                                                textAlign: 'center',
                                                marginTop: '8px'
                                            }}>{"身份证号码"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <input name="idno" type="text" className="form-control"
                                                placeholder={"身份证号码"}
                                                autoComplete="off"/>
@@ -169,8 +219,8 @@ class RegisterUserComponent extends Component {
                                                textAlign: 'center',
                                                marginTop: '8px'
                                            }}>{"头像URL"}</label>
-                                    <div className="col-lg-9">
-                                        <input type="file" name="headimg" id="file-input"
+                                    <div className="col-lg-6">
+                                        <input type="file" name="file" id="file-input"
                                                multiple data-min-file-count="1"/>
                                     </div>
                                 </div>
@@ -180,8 +230,8 @@ class RegisterUserComponent extends Component {
                                            style={{
                                                textAlign: 'center',
                                            }}>{"密码"}</label>
-                                    <div className="col-lg-9">
-                                        <input name="password" type="text" className="form-control"
+                                    <div className="col-lg-6">
+                                        <input name="password" type="password" className="form-control"
                                                placeholder={"密码"}
                                                autoComplete="off"/>
                                     </div>
@@ -191,8 +241,8 @@ class RegisterUserComponent extends Component {
                                            style={{
                                                textAlign: 'center',
                                            }}>{"确认密码"}</label>
-                                    <div className="col-lg-9">
-                                        <input id="confirmPassword" type="text" className="form-control"
+                                    <div className="col-lg-6">
+                                        <input id="confirmPassword" type="password" className="form-control"
                                                placeholder={"确认密码"}
                                                autoComplete="off"/>
                                     </div>
@@ -202,7 +252,7 @@ class RegisterUserComponent extends Component {
                                            style={{
                                                textAlign: 'center',
                                            }}>{"手机号"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <input name="phone" type="text" className="form-control"
                                                placeholder={"手机号"}
                                                autoComplete="off"/>
@@ -213,7 +263,7 @@ class RegisterUserComponent extends Component {
                                            style={{
                                                textAlign: 'center',
                                            }}>{"地址"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <input name="address" type="text" className="form-control"
                                                placeholder={"地址"}
                                                autoComplete="off"/>
@@ -223,11 +273,17 @@ class RegisterUserComponent extends Component {
                                     <label className="col-lg-2 control-label"
                                            style={{
                                                textAlign: 'center',
-                                           }}>{"二维码编号"}</label>
-                                    <div className="col-lg-9">
-                                        <input name="rqcode" type="text" className="form-control"
-                                               placeholder={"二维码编号"}
-                                               autoComplete="off"/>
+                                           }}>{"获取验证码"}</label>
+                                    <div className="col-lg-6">
+                                        <div className="input-group">
+                                            <input type="text" name="authcode" className="form-control"
+                                                   placeholder="输入验证码"/>
+                                            <span className="input-group-btn">
+                                                <button id="btnSendCode" className="btn bg-primary" type="button" onClick={this._sendMessage}>
+                                                    获取验证码
+                                                </button>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
 
