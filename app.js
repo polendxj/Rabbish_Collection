@@ -51,6 +51,7 @@ var OrganizationRouter = require('./routes/OrganizationRouter');
 var ReplyRouter = require('./routes/ReplyRouter');
 var NoticeRouter = require('./routes/NoticeRouter');
 var StatisticRouter = require('./routes/StatisticRouter');
+var SystemMonitorRouter = require('./routes/SystemMonitorRouter');
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
@@ -71,6 +72,7 @@ app.use(OrganizationRouter)
 app.use(ReplyRouter)
 app.use(NoticeRouter)
 app.use(StatisticRouter)
+app.use(SystemMonitorRouter)
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.set('port', require('./config/config').node_port);

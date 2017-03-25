@@ -141,7 +141,7 @@ class RegisterAdminUserComponent extends Component{
                                 </div>
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
-                                           style={{textAlign: 'center', marginTop: '8px'}}>{"昵称"}
+                                           style={{textAlign: 'center'}}>{"昵称"}
                                     </label>
                                     <div className="col-lg-9">
                                         <input id="name" type="text" className="form-control"
@@ -151,7 +151,7 @@ class RegisterAdminUserComponent extends Component{
 
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
-                                           style={{textAlign: 'center', marginTop: '8px'}}>{"密码"}
+                                           style={{textAlign: 'center'}}>{"密码"}
                                     </label>
                                     <div className="col-lg-9">
                                         <input id="password" type="password" name="password" className="form-control"
@@ -161,7 +161,7 @@ class RegisterAdminUserComponent extends Component{
 
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
-                                           style={{textAlign: 'center', marginTop: '8px'}}>{"确认密码"}
+                                           style={{textAlign: 'center'}}>{"确认密码"}
                                     </label>
                                     <div className="col-lg-9">
                                         <input id="confirmPassword" name="repeat_password" type="password" className="form-control"

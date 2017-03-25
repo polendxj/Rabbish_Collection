@@ -40,7 +40,7 @@ export default class UserRegisterContainer extends Component {
         var params = {
             phone: phone
         };
-        this.props.dispatch(getAuthcode(params, "", "", get_authcode));
+        // this.props.dispatch(getAuthcode(params, "", "", get_authcode));
     }
 
     render() {
@@ -99,6 +99,7 @@ class RegisterUserComponent extends Component {
     }
     setRemainTime() {
         var curCount = sessionStorage['count'];
+        console.log($("#getAuthcodeModal").hasClass("in"));
         if (curCount == 0) {
             clearInterval(this.interValObj);//停止计时器
             $("#btnSendCode").removeAttr("disabled");//启用按钮
@@ -142,6 +143,8 @@ class RegisterUserComponent extends Component {
     }
     componentWillUnmount(){
         clearInterval(this.interValObj);//停止计时器
+        sessionStorage['messageTime'] = "";
+        $("#btnSendCode").removeAttr("disabled");//启用按钮
     }
 
     render() {
@@ -170,7 +173,7 @@ class RegisterUserComponent extends Component {
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"用户类型"}</label>
-                                    <div className="col-lg-6">
+                                    <div className="col-lg-9">
                                         <select className="form-control" name="type" defaultValue={3}>
                                             <option value={3}>{"商户用户"}</option>
                                             <option value={4}>{"住宅用户"}</option>
@@ -181,7 +184,7 @@ class RegisterUserComponent extends Component {
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"单位、小区"}</label>
-                                    <div className="col-lg-6">
+                                    <div className="col-lg-9">
                                         <select className="form-control" name="organizationid">
                                             {options}
                                         </select>
@@ -190,10 +193,9 @@ class RegisterUserComponent extends Component {
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
-                                               marginTop: '8px'
+                                               textAlign: 'center'
                                            }}>{"真实姓名"}</label>
-                                    <div className="col-lg-6">
+                                    <div className="col-lg-9">
                                         <input name="realName" type="text" className="form-control"
                                                placeholder={"真实姓名"}
                                                autoComplete="off"/>
@@ -203,10 +205,9 @@ class RegisterUserComponent extends Component {
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
-                                               marginTop: '8px'
+                                               textAlign: 'center'
                                            }}>{"身份证号码"}</label>
-                                    <div className="col-lg-6">
+                                    <div className="col-lg-9">
                                         <input name="idno" type="text" className="form-control"
                                                placeholder={"身份证号码"}
                                                autoComplete="off"/>
@@ -216,10 +217,9 @@ class RegisterUserComponent extends Component {
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
-                                               marginTop: '8px'
+                                               textAlign: 'center'
                                            }}>{"头像URL"}</label>
-                                    <div className="col-lg-6">
+                                    <div className="col-lg-9">
                                         <input type="file" name="file" id="file-input"
                                                multiple data-min-file-count="1"/>
                                     </div>
@@ -228,9 +228,9 @@ class RegisterUserComponent extends Component {
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
+                                               textAlign: 'center'
                                            }}>{"密码"}</label>
-                                    <div className="col-lg-6">
+                                    <div className="col-lg-9">
                                         <input name="password" type="password" className="form-control"
                                                placeholder={"密码"}
                                                autoComplete="off"/>
@@ -239,9 +239,9 @@ class RegisterUserComponent extends Component {
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
+                                               textAlign: 'center'
                                            }}>{"确认密码"}</label>
-                                    <div className="col-lg-6">
+                                    <div className="col-lg-9">
                                         <input id="confirmPassword" type="password" className="form-control"
                                                placeholder={"确认密码"}
                                                autoComplete="off"/>
@@ -250,9 +250,9 @@ class RegisterUserComponent extends Component {
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
+                                               textAlign: 'center'
                                            }}>{"手机号"}</label>
-                                    <div className="col-lg-6">
+                                    <div className="col-lg-9">
                                         <input name="phone" type="text" className="form-control"
                                                placeholder={"手机号"}
                                                autoComplete="off"/>
@@ -261,9 +261,9 @@ class RegisterUserComponent extends Component {
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
+                                               textAlign: 'center'
                                            }}>{"地址"}</label>
-                                    <div className="col-lg-6">
+                                    <div className="col-lg-9">
                                         <input name="address" type="text" className="form-control"
                                                placeholder={"地址"}
                                                autoComplete="off"/>
@@ -272,9 +272,9 @@ class RegisterUserComponent extends Component {
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
+                                               textAlign: 'center'
                                            }}>{"获取验证码"}</label>
-                                    <div className="col-lg-6">
+                                    <div className="col-lg-9">
                                         <div className="input-group">
                                             <input type="text" name="authcode" className="form-control"
                                                    placeholder="输入验证码"/>

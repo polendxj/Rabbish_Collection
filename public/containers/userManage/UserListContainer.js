@@ -20,7 +20,7 @@ import {
     filterCountryById
 } from '../../components/Tool/Tool';
 import {GENERALUSER_LIST_START, GENERALUSER_LIST_END, CITY_LIST_START, CITY_LIST_END} from '../../constants/index.js'
-import {getListByMutilpCondition, deleteObject, saveObject} from '../../actions/CommonActions';
+import {getListByMutilpCondition, deleteObject, saveObject,getAuthcode} from '../../actions/CommonActions';
 var sha1 = require('js-sha1');
 
 export default class UserListContainer extends Component {
@@ -40,13 +40,16 @@ export default class UserListContainer extends Component {
         this.currentCity = "";
         this.currentCountry = "";
         this.currentCityId = 3;
+        this.interValObj = "";
         this._delete = this._delete.bind(this);
         this._detail = this._detail.bind(this);
+        this._showGetAuthcode = this._showGetAuthcode.bind(this);
         this._resetPassword = this._resetPassword.bind(this);
         this._changeCity = this._changeCity.bind(this);
         this._changeCountry = this._changeCountry.bind(this);
         this._startRefresh = this._startRefresh.bind(this);
         this._lockOrUnlockUser = this._lockOrUnlockUser.bind(this);
+        this._sendMessage = this._sendMessage.bind(this);
     }
 
     componentDidMount() {
@@ -55,7 +58,21 @@ export default class UserListContainer extends Component {
         this.props.dispatch(getListByMutilpCondition(params, CITY_LIST_START, CITY_LIST_END, city_list));
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
-        })
+        });
+        if(sessionStorage['messageTime']!=""){
+            var duringTime = new Date().getTime()-sessionStorage['messageTime'];
+            if(duringTime < 30*1000){
+                sessionStorage['count'] = Math.round((30*1000 - duringTime)/1000);
+                $("#btnSendCode").attr("disabled", "true");
+                $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
+                this.interValObj = setInterval(this.setRemainTime, 1000);
+            }
+        }
+    }
+    componentWillUnmount(){
+        clearInterval(this.interValObj);//停止计时器
+        sessionStorage['messageTime'] = "";
+        $("#btnSendCode").removeAttr("disabled");//启用按钮
     }
 
     _startRefresh() {
@@ -83,8 +100,24 @@ export default class UserListContainer extends Component {
         this.detailData = val;
         this._startRefresh();
     }
+    _showGetAuthcode(val){
+        this.detailData = val;
+        if(sessionStorage['messageTime']!=""){
+            var duringTime = new Date().getTime()-sessionStorage['messageTime'];
+            if(duringTime < 30*1000){
+                sessionStorage['count'] = Math.round((30*1000 - duringTime)/1000);
+            }
+        }
+        this._startRefresh();
+    }
 
-    _resetPassword(params) {
+    _resetPassword() {
+        var params = {
+            password: sha1.hex("88888888"),
+            type: this.detailData.type,
+            phone: this.detailData.phone,
+            authcode: $("#authcode").val()
+        };
         this.props.dispatch(saveObject(params, "", "", reset_password, "/CustomerService/UserManage", "update"));
     }
 
@@ -121,6 +154,39 @@ export default class UserListContainer extends Component {
             organizationid: $("#organizationSelect").val()
         };
         this.props.dispatch(getListByMutilpCondition(params, GENERALUSER_LIST_START, GENERALUSER_LIST_END, generalUser_list));
+    }
+    _sendMessage() {
+        var phone = sessionStorage['phone'];
+        var count = 30;
+        sessionStorage['count'] = count;
+        sessionStorage['messageTime'] = new Date().getTime();
+        console.log("phone", phone);
+        $("#btnSendCode").attr("disabled", "true");
+        $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
+        this.interValObj = setInterval(this.setRemainTime, 1000);
+        var params = {
+            phone: phone
+        };
+        // this.props.dispatch(getAuthcode(params, "", "", get_authcode));
+    }
+    setRemainTime() {
+        var curCount = sessionStorage['count'];
+        if(!$("#getAuthcodeModal").hasClass("in")){
+            clearInterval(this.interValObj);//停止计时器
+            $("#btnSendCode").text("获取验证码");
+        }else{
+            if (curCount == 0) {
+                clearInterval(this.interValObj);//停止计时器
+                $("#btnSendCode").removeAttr("disabled");//启用按钮
+                $("#btnSendCode").text("重新发送验证码");
+            }
+            else {
+                curCount--;
+                sessionStorage['count'] = curCount;
+                console.log(sessionStorage['count']);
+                $("#btnSendCode").text(curCount + "秒后重新发送");
+            }
+        }
     }
 
     _changePage(page) {
@@ -211,6 +277,7 @@ export default class UserListContainer extends Component {
         }
         var detailUserInfo = "";
         var bindQrcodeInfo = "";
+        var getAuthcodeInfo = "";
         if (this.detailData == "") {
             detailUserInfo = <Loading />;
             bindQrcodeInfo = <Loading />;
@@ -373,6 +440,46 @@ export default class UserListContainer extends Component {
                     </div>
 
                 </div>;
+            getAuthcodeInfo =
+                <div>
+                    <div className="form-horizontal">
+                        <fieldset className="content-group">
+                            <legend className="text-bold">
+                                {"获取验证码"}
+                            </legend>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{
+                                           textAlign: 'center'
+                                       }}>{"获取验证码"}</label>
+                                <div className="col-lg-10">
+                                    <div className="input-group">
+                                        <input type="text" id="authcode" name="authcode" className="form-control"
+                                               placeholder="输入验证码"/>
+                                        <span className="input-group-btn">
+                                                <button id="btnSendCode" className="btn bg-primary" type="button" onClick={this._sendMessage}>
+                                                    获取验证码
+                                                </button>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{textAlign: 'center'}}></label>
+                                <div className="col-lg-10">
+                                    <div className="text-right">
+                                        <button type="button" className="btn btn-primary"
+                                                onClick={this._resetPassword}>
+                                            {"确定"}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                </div>;
             bindQrcodeInfo =
                 <div>
                     <div className="form-horizontal">
@@ -481,13 +588,15 @@ export default class UserListContainer extends Component {
                         <UserListComponent data={data} fetching={fetching}
                                            _delete={this._delete}
                                            _detail={this._detail}
-                                           _resetPassword={this._resetPassword}
+                                           _showGetAuthcode={this._showGetAuthcode}
                                            _lockOrUnlockUser={this._lockOrUnlockUser}/>
                     </fieldset>
                     <ListMiddleModal id="userDetailModal" content={detailUserInfo} doAction={""}
                                      tip={"用户信息"} actionText="用户详情" hide="true" hideCancel="true"/>
                     <ListMiddleModal id="bindQrcodeModal" content={bindQrcodeInfo} doAction={""}
                                      tip={"绑定二维码"} actionText="绑定二维码" hide="true" hideCancel="true"/>
+                    <ListMiddleModal id="getAuthcodeModal" content={getAuthcodeInfo} doAction={""}
+                                     tip={"获取验证码"} actionText="获取验证码" hide="true" hideCancel="true"/>
                 </div>
             </div>
         )
@@ -507,14 +616,12 @@ class UserListComponent extends Component {
         this.props._lockOrUnlockUser(params);
     }
 
+    _showGetAuthcode(val){
+        this.props._showGetAuthcode(val);
+    }
+
     _resetPassword(val) {
-        var params = {
-            password: sha1.hex("88888888"),
-            type: val.type,
-            phone: val.phone,
-            authcode: ""
-        };
-        this.props._resetPassword(params);
+
     }
 
     _exportRqcode() {
@@ -569,10 +676,13 @@ class UserListComponent extends Component {
                                                 onClick={this._delete.bind(this, val.userid, val.realName)}><a
                                                 href="javascript:void(0)"><i className="icon-trash"></i>
                                                 {"删除"}</a></li>
-                                            <li style={{display: 'block'}}
-                                                onClick={this._resetPassword.bind(this, val)}><a
-                                                href="javascript:void(0)"><i className="icon-reset"></i>
-                                                {"重置密码"}</a></li>
+                                            <li>
+                                                <a href="javascript:void(0)" data-toggle="modal"
+                                                   data-target="#getAuthcodeModal"
+                                                   onClick={this._showGetAuthcode.bind(this,val)}><i
+                                                    className=" icon-office"></i>
+                                                    {"重置密码"}</a>
+                                            </li>
                                             {val.status == 1 ?
                                                 <li onClick={this._lockOrUnlockUser.bind(this, val.userid, val.status)}>
                                                     <a

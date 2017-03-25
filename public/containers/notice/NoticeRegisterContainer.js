@@ -107,8 +107,7 @@ class RegisterNoticeComponent extends Component{
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
-                                               marginTop: '8px'
+                                               textAlign: 'center'
                                            }}>{"分类名称"}</label>
                                     <div className="col-lg-9">
                                         <select className="form-control" name="type">
@@ -122,7 +121,7 @@ class RegisterNoticeComponent extends Component{
                                 <div className="form-group" >
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
+                                               textAlign: 'center'
                                            }}>{"标题"}</label>
                                     <div className="col-lg-9">
                                         <input name="title" type="text" className="form-control"
@@ -142,7 +141,7 @@ class RegisterNoticeComponent extends Component{
                                 <div className="form-group" >
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
+                                               textAlign: 'center'
                                            }}>{"内容"}</label>
                                     <div className="col-lg-9">
                                     <textarea name="content" rows="5" cols="5" className="form-control"

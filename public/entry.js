@@ -37,6 +37,7 @@ import StatisticListContainer from './containers/statistic/StatisticListContaine
 import OrganizationListContainer from './containers/organization/OrganizationListContainer';
 import OrganizationRegisterContainer from './containers/organization/OrganizationRegisterContainer';
 import OrganizationUpdateContainer from './containers/organization/OrganizationUpdateContainer';
+import SystemMonitorContainer from './containers/systemMonitor/SystemMonitorContainer';
 
 let store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
@@ -71,6 +72,7 @@ render(
                 <Route path="/SystemNotice/NoticeManage" component={NoticeListContainer}/>
                 <Route path="/SystemNotice/NoticeManage/Register" component={NoticeRegisterContainer}/>
                 <Route path="/Statistic/RubbishPutIn" component={StatisticListContainer}/>
+                <Route path="/Statistic/OperationData" component={SystemMonitorContainer}/>
                 <Route path="/CustomerService/OrganizationManage" component={OrganizationListContainer}/>
                 <Route path="/CustomerService/OrganizationManage/Register" component={OrganizationRegisterContainer}/>
                 <Route path="/CustomerService/OrganizationManage/Update/:id" component={OrganizationUpdateContainer}/>

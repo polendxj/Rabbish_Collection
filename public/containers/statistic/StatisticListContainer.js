@@ -124,7 +124,7 @@ export default class StatisticListContainer extends Component {
                 // endday: new Date(rangeTime.split("-")[1].trim()).getTime()
             };
             this.props.dispatch(getListByMutilpCondition(organizationParams, STATISTICBYORGANIZATION_LIST_START, STATISTICBYORGANIZATION_LIST_END, statisticByOrganization_list));
-        }else{
+        } else {
             var rangeTime = $(".daterange-organization").val();
             var rangeDateParams = {
                 page: 0,
@@ -160,7 +160,8 @@ export default class StatisticListContainer extends Component {
     }
 
     render() {
-        const {fetching, classifyData, cityData, organizationData,rangeDateData, cityList} =this.props;
+        const {fetching, classifyData, cityData, organizationData, rangeDateData, cityList} =this.props;
+        console.log("rangeDateData", rangeDateData);
         var data = "";
         if (this.searchColumn == "CLASSIFY") {
             data = classifyData;
@@ -168,7 +169,7 @@ export default class StatisticListContainer extends Component {
             data = cityData;
         } else if (this.searchColumn == "ORGANIZATION") {
             data = organizationData;
-        }else{
+        } else {
             data = rangeDateData
         }
         console.log("statisticData", data);
@@ -234,29 +235,22 @@ export default class StatisticListContainer extends Component {
                                 </ul>
                             </li>
                             <li style={{display: "inline-block"}}>
-                                <select id="citySelect" className="form-control" style={{width: "150px"}}
+                                <select id="citySelect" className="form-control"
                                         value={this.currentCityId} onChange={this._changeCity}>
                                     {cityOptions}
                                 </select>
                             </li>
                             <li style={{display: this.searchColumn == "ORGANIZATION" ? "inline-block" : "none"}}>
-                                <select id="organizationSelect" className="form-control" style={{width: "150px"}}>
+                                <select id="organizationSelect" className="form-control">
                                     {organizationOptions}
                                 </select>
                             </li>
                             <li style={{display: this.searchColumn == "CLASSIFY" ? "inline-block" : "none"}}>
-                                <div className="input-group" style={{width: "150px"}}>
-                                    <input type="text" className="form-control daterange-single"
-                                           placeholder="选择日期"/>
-                                    <span className="input-group-addon"><i className="icon-calendar22"></i></span>
-                                </div>
+                                <input type="text" className="form-control daterange-single"
+                                       placeholder="选择日期"/>
                             </li>
                             <li style={{display: this.searchColumn == "CLASSIFY" ? "none" : "inline-block"}}>
-                                <div className="input-group" style={{width: "250px"}}>
-                                    <input type="text" className="form-control daterange-organization"/>
-                                    <span className="input-group-addon"><i
-                                        className="icon-calendar22"></i></span>
-                                </div>
+                                <input type="text" className="form-control daterange-organization"/>
                             </li>
                             <li>
                                 <button onClick={this._search.bind(this)}
@@ -304,12 +298,12 @@ class StatisticListComponent extends Component {
             if (data.status) {
                 var dataList = null;
                 if (data.data) {
-                    if(typeof data.data.content == "undefined"){
+                    if (typeof data.data.content == "undefined") {
                         dataList = data.data;
-                    }else {
+                    } else {
                         dataList = data.data.content;
                     }
-                } 
+                }
                 if (dataList && dataList.length > 0) {
                     dataList.forEach(function (val, key) {
                         if (searchColumn == "CLASSIFY") {
@@ -334,7 +328,7 @@ class StatisticListComponent extends Component {
                                 <td className="text-center">{val.weight}</td>
                                 <td className="text-center">{timeStamp2Time(val.monthday)}</td>
                             </tr>)
-                        }else{
+                        } else {
                             tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                                 <td className="text-center">{key + 1}</td>
                                 <td className="text-center">{val.count}</td>

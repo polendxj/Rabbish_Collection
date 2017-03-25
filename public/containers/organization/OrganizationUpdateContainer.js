@@ -146,8 +146,7 @@ class UpdateOrganizationComponent extends Component {
                             <div className="form-group">
                                 <label className="col-lg-2 control-label"
                                        style={{
-                                           textAlign: 'center',
-                                           marginTop: '8px'
+                                           textAlign: 'center'
                                        }}>{"名称"}</label>
                                 <div className="col-lg-9">
                                     <input name="name" type="text" className="form-control"
@@ -168,8 +167,7 @@ class UpdateOrganizationComponent extends Component {
                             <div className="form-group">
                                 <label className="col-lg-2 control-label"
                                        style={{
-                                           textAlign: 'center',
-                                           marginTop: '8px'
+                                           textAlign: 'center'
                                        }}>{"地址"}</label>
                                 <div className="col-lg-9">
                                     <input name="address" type="text" className="form-control"

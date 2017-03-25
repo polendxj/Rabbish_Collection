@@ -18,7 +18,7 @@ import {
     timeStamp2Time,
     organizationType
 } from '../../components/Tool/Tool';
-import {ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, CITY_LIST_START, CITY_LIST_END} from '../../constants/index.js'
+import {ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, CITY_LIST_START, CITY_LIST_END,PROGRESS_START,PROGRESS_END} from '../../constants/index.js'
 import {getListByMutilpCondition, saveObject,exportQrcode,generateQrcode} from '../../actions/CommonActions';
 var querystring = require('querystring');
 
@@ -42,6 +42,7 @@ export default class OrganizationListContainer extends Component {
         this.currentCityId = 3;
         this.searchColumn = "TYPE";
         this.currentOrganization = "";
+        this.progressInterval = "";
         this._generate = this._generate.bind(this);
         this._export = this._export.bind(this);
         this._showGenerateModal = this._showGenerateModal.bind(this);
@@ -64,6 +65,9 @@ export default class OrganizationListContainer extends Component {
                 self.searchColumn = "ADMIN_NAME";
             }
         })
+    }
+    componentWillUnmount(){
+        clearInterval(this.progressInterval);//停止计时器
     }
 
     _startRefresh() {
@@ -91,25 +95,42 @@ export default class OrganizationListContainer extends Component {
         this._startRefresh();
     }
     _generate(id){
+        var that = this;
         var params={
             generateNum:parseInt($("#personAmount").val()),
             organizationid: id,
             pressOrgName: parseInt($("#generatePressOrgName").val())
         };
-        this.props.dispatch(generateQrcode(params,"","",qrcode_generate));
+        this.progressInterval = setInterval(function () {
+            that.props.dispatch(generateQrcode(params,PROGRESS_START,PROGRESS_END,qrcode_generate,function () {
+                console.log("progressData22",that.props.progressData);
+                if(that.props.progressData.data==100){
+                    clearInterval(that.progressInterval);
+                    window.location.href = qrcode_generate_download+"?"+querystring.stringify(params);
+                }
+            }));
+        }, 3000);
     }
     _showExportModal(val){
         this.currentOrganization = val;
         this._startRefresh();
     }
     _export(id){
+        var that = this;
         var params={
             organizationid: id,
             bindUser: parseInt($("#bindUser").val()),
             pressOrgName: parseInt($("#exportPressOrgName").val())
-        }
-        console.log("http://dev.xysy.tech/rsapp/qrcode/export?"+querystring.stringify(params));
-        this.props.dispatch(exportQrcode("","",qrcode_export+"?"+querystring.stringify(params)));
+        };
+        this.progressInterval = setInterval(function () {
+            that.props.dispatch(exportQrcode(PROGRESS_START,PROGRESS_END,qrcode_export+"?"+querystring.stringify(params),function () {
+                console.log("progressData",that.props.progressData);
+                if(that.props.progressData.data==100){
+                    clearInterval(that.progressInterval);
+                    window.location.href = qrcode_export_download+"?"+querystring.stringify(params);
+                }
+            }));
+        }, 3000);
     }
     _changePage(page) {
         this.page = page;
@@ -436,10 +457,12 @@ class OrganizationListComponent extends Component {
 }
 
 function mapStateToProps(state) {
-    const {getOrganizationList, getCityList, commonReducer}=state;
+    const {getOrganizationList, getCityList, getProgressData, commonReducer}=state;
+    console.log("getProgressData.data",getProgressData.data);
     return {
         fetching: getOrganizationList.fetching,
         data: getOrganizationList.data,
+        progressData: getProgressData.data,
         cityList: getCityList.data,
         refresh: commonReducer.refresh
     }

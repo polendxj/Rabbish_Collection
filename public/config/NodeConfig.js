@@ -55,6 +55,10 @@ var statisticByOrganization_list = node_service + "/rsapp/statistic/classifying/
 var statisticByRangeDate_list = node_service + "/rsapp/statistic/total";
 var qrcode_generate = node_service + "/rsapp/qrcode/generate";
 var qrcode_export = node_service + "http://dev.xysy.tech/rsapp/qrcode/export";
+var qrcode_export_download = node_service + "http://dev.xysy.tech/rsapp/qrcode/export/download";
+var qrcode_generate_download = node_service + "http://dev.xysy.tech/rsapp/qrcode/generate/download";
 var bind_qrcode = node_service + "/rsapp/user/qrcode";
+var operation_monitor = node_service + "/rsapp/operationData";
+var operation_organization_total = node_service + "/rsapp/organization/total";
 
 

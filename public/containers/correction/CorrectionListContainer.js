@@ -157,16 +157,12 @@ export default class CorrectionListContainer extends Component {
                             </li>
 
                             <li style={{display:this.searchColumn == "ORGANIZATION"?"inline-block":"none" }}>
-                                <select id="organizationSelect" className="form-control" style={{width: "250px"}}>
+                                <select id="organizationSelect" className="form-control">
                                     {organizationOptions}
                                 </select>
                             </li>
                             <li style={{display:this.searchColumn == "ORGANIZATION"?"none":"inline-block" }}>
-                                <div className="input-group" style={{width: "250px"}}>
-                                    <input type="text" className="form-control daterange-organization"/>
-                                    <span className="input-group-addon"><i
-                                        className="icon-calendar22"></i></span>
-                                </div>
+                                <input type="text" className="form-control daterange-organization"/>
                             </li>
                             <li>
                                 <button onClick={this._search.bind(this)}

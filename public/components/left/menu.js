@@ -94,7 +94,7 @@ class Statistic extends Component {
                 <li className="navigation-header left"><span>{"统计分析"}</span> <i className="icon-menu" title=""
                                                                        data-original-title="统计分析"></i>
                 </li>
-                <li className="left active" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
+                <li className="left active" onClick={this._leftMenuClick.bind(this, '/Statistic/OperationData')}><a
                     href="javascript:void(0)"><i
                     className="icon-satellite-dish2"></i> <span>{"系统监控"}</span></a></li>
                 <li className="left" onClick={this._leftMenuClick.bind(this, '/Statistic/RubbishPutIn')}><a

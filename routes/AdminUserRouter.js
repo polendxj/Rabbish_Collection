@@ -32,7 +32,7 @@ router.post('/rsapp/adminUser/update', function (req, resp) {
 router.post('/rsapp/adminUser/delete', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));
     console.log("adminId",data);
-    RequestApi.Request(baseURL + '/rsapp/user/'+data, 'DELETE',"", req, resp);
+    RequestApi.Request(baseURL + '/rsapp/adminUser/'+data, 'DELETE',"", req, resp);
 });
 router.post('/rsapp/password/reset', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));

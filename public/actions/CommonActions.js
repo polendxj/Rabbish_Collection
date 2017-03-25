@@ -106,7 +106,7 @@ export function getDetail(jsonObj, startDispatch, endDispatch, interfaceURL) {
             })
     }
 }
-export function generateQrcode(data,startDispatch, endDispatch, interfaceURL) {
+export function generateQrcode(data,startDispatch, endDispatch, interfaceURL,callback) {
     return dispatch=> {
         if (startDispatch) {
             dispatch(startFetch(startDispatch))
@@ -126,15 +126,18 @@ export function generateQrcode(data,startDispatch, endDispatch, interfaceURL) {
             .then(function (json) {
                 console.log("generate",json);
                 if (json.status) {
+                    dispatch(endFetch(endDispatch, json))
+                    if (callback) {
+                        callback();
+                    }
                 } else {
-                    $("#exportModal").modal('hide');
                     ErrorModal(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message)
                 }
             })
 
     }
 }
-export function exportQrcode(startDispatch, endDispatch, interfaceURL) {
+export function exportQrcode(startDispatch, endDispatch, interfaceURL,callback) {
     return dispatch=> {
         if (startDispatch) {
             dispatch(startFetch(startDispatch))
@@ -151,18 +154,15 @@ export function exportQrcode(startDispatch, endDispatch, interfaceURL) {
                 return response.json();
             })
             .then(function (json) {
-                console.log("export",json);
                 if (json.status) {
+                    console.log("export1",json);
+                    dispatch(endFetch(endDispatch, json))
+                    if (callback) {
+                        callback();
+                    }
                 } else {
-                    $("#exportModal").modal('hide');
                     ErrorModal(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message)
                 }
-            })
-            .catch(function(ex){
-                console.log("ex",ex);
-                $("#exportModal").modal('hide');
-                window.location.href = interfaceURL;
-                SuccessModal("导出二维码成功", Current_Lang.alertTip.updateSuccess);
             })
 
     }
@@ -267,6 +267,7 @@ export function login(data, startDispatch, endDispatch, interfaceURL, listRouter
                     sessionStorage['user'] = json.data.user ? json.data.user : "";
                     sessionStorage['count'] = -1;
                     sessionStorage['messageTime'] = "";
+                    sessionStorage['userMessageTime'] = "";
                     browserHistory.push(listRouter);
                     if (callback) {
                         callback();
