@@ -65,6 +65,9 @@ export default class LoginContainer extends Component {
                                             <option value={5}>{"单位"}</option>
                                             <option value={10}>{"超级管理员"}</option>
                                         </select>
+                                        <div className="form-control-feedback">
+                                            <i className="icon-vcard text-muted"></i>
+                                        </div>
                                     </div>
 
                                     <div className="form-group">

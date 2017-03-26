@@ -74,6 +74,10 @@ class TopMenus extends Component {
     _menuChange(idx, flag) {
         this._moveTopMenuBottomLine(idx, flag);
         this.props.changeTopMenu(idx);
+        if(idx==0){
+            browserHistory.push("/Statistic/RubbishPutIn");
+
+        }
     }
 
     componentDidMount() {

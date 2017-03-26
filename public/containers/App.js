@@ -124,7 +124,7 @@ class ContentPanel extends Component {
         return (
             <div className="page-container" style={{height: "2000px"}}>
                 <div className="page-content" style={{backgroundColor: "white"}}>
-                    <div className="sidebar sidebar-main" style={{borderRight: 'thin #F5F5F5 solid'}}>
+                    <div className="sidebar sidebar-main" style={{borderRight: 'thin #F5F5F5 solid',width:this.props.selected!=""?"200px":0}}>
                         <MainMenu selected={this.props.selected} _changeLeftMenu={this._changeLeftMenu}/>
                     </div>
                     <div className="content-wrapper">
