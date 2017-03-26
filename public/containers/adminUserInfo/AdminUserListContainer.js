@@ -26,8 +26,8 @@ export default class AdminUserListContainer extends Component {
         this.page = 0;
         this.breadCrumbs = [
             {text: "客户服务", link: ''},
-            {text: "扫码员管理", link: ''},
-            {text: "扫码员列表", link: ''}
+            {text: "管理/扫码员", link: ''},
+            {text: "管理/扫码员列表", link: ''}
         ];
         this.operation = sessionStorage['type']==10?
             [{
@@ -95,7 +95,7 @@ export default class AdminUserListContainer extends Component {
             <div>
                 <BreadCrumbs
                     breadCrumbs={this.breadCrumbs}
-                    icon={'icon-user'}
+                    icon={' icon-user-tie'}
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>
@@ -103,22 +103,6 @@ export default class AdminUserListContainer extends Component {
                         <legend className="text-bold">{Current_Lang.label.searching}</legend>
                         <ul className="list-inline list-inline-condensed no-margin-bottom"
                             style={{textAlign: 'right', marginTop: '-59px'}}>
-                            <li className="dropdown"
-                                style={{borderBottom: '0 lightgray solid'}}>
-                                <a href="#" className="btn btn-link btn-sm dropdown-toggle"
-                                   data-toggle="dropdown" aria-expanded="false" style={{
-                                    paddingLeft: '0',
-                                    paddingRight: '0',
-                                    fontWeight: 'bold',
-                                    color: '#193153'
-                                }}><span
-                                    style={{color: '#193153'}} id="search_way">{"按类型搜索"}</span> <span
-                                    className="caret"></span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a href="#">{"按类型搜索"}</a></li>
-                                </ul>
-                            </li>
                             <li>
                                 <select id="typeSelect" className="form-control" style={{width: "150px"}}>
                                     <option value={""}>所有</option>
@@ -127,8 +111,7 @@ export default class AdminUserListContainer extends Component {
                                 </select>
                             </li>
                             <li>
-                                <button onClick={this._search.bind(this)}
-                                        style={{marginLeft: '30px'}} type="button"
+                                <button onClick={this._search.bind(this)} type="button"
                                         className="btn btn-primary btn-icon"><i
                                     className="icon-search4"></i></button>
                             </li>

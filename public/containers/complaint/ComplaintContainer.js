@@ -88,7 +88,7 @@ export default class ComplaintContainer extends Component {
             <div>
                 <BreadCrumbs
                     breadCrumbs={this.breadCrumbs}
-                    icon={'icon-user'}
+                    icon={' icon-map4'}
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>
@@ -162,7 +162,7 @@ class ComplaintListComponent extends Component {
                                                         <a className="collapsed" data-toggle="collapse" href={"#collapse-" + val.id}>
                                                             <i className="icon-bubble2" style={{fontSize: "4px"}}></i>
                                                             &nbsp;
-                                                            {dealFlag ? "回复处理意见" : "收起处理意见"}</a>
+                                                            {dealFlag ? "回复投诉举报" : "已处理"}</a>
                                                     </small>
                                                 </div>
                                             </td>
@@ -241,7 +241,7 @@ class ComplaintListComponent extends Component {
                 </td>
             </tr>)
         }
-        var tableHeight = ($(window).height() - 240);
+        var tableHeight = ($(window).height() - 180);
         return (
             <div className="table-responsive" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                 <div style={{marginBottom: '85px'}}>

@@ -207,7 +207,9 @@ export default class StatisticListContainer extends Component {
                             <div className="col-lg-3 col-md-6">
                                 <div className="panel bg-teal-400">
                                     <div className="panel-body">
-                                        <h3 className="no-margin">3,450</h3>
+                                        <h3 className="no-margin">3,450
+
+                                        </h3>
                                         垃圾投放总量
                                         <div className="text-muted text-size-small">单位：吨</div>
                                         <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>

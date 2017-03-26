@@ -65,7 +65,7 @@ export default class RubbishClassListContainer extends Component {
             <div>
                 <BreadCrumbs
                     breadCrumbs={this.breadCrumbs}
-                    icon={'icon-user'}
+                    icon={'icon-cabinet'}
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>

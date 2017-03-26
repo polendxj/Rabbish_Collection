@@ -46,8 +46,8 @@ render(
     <Provider store={store}>
         <Router history={history}>
             <Route path="/" component={App}>
-                <IndexRoute component={Dashboard}/>
-                <Route path="dashboard" component={Dashboard}/>
+                <IndexRoute component={StatisticListContainer}/>
+                <Route path="dashboard" component={StatisticListContainer}/>
                 <Route path="/Developing" component={Developing}/>
                 <Route path="/login" component={LoginContainer}/>
                 <Route path="/DataManage/CitySetting" component={CitySettingContainer}/>

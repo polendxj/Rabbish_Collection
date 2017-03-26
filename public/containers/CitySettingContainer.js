@@ -262,7 +262,7 @@ export default class CitySettingContainer extends Component {
         return (
             <div>
                 <BreadCrumbs breadCrumbs={this.breadCrumbs}
-                             icon={'icon-dribbble3'}
+                             icon={'icon-city'}
                              operation={this.operation}/>
                 <div className="content" style={{marginTop: '20px'}}>
                     <fieldset className="content-group">

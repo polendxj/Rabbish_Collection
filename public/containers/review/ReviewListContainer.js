@@ -89,7 +89,7 @@ export default class ReviewListContainer extends Component {
             <div>
                 <BreadCrumbs
                     breadCrumbs={this.breadCrumbs}
-                    icon={'icon-user'}
+                    icon={' icon-feed'}
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>
@@ -149,6 +149,17 @@ class ReviewListComponent extends Component {
         this.props._delete(id, replyid, title)
     }
 
+    componentWillUpdate(){
+        $(".colpText").on("click",function () {
+            console.log($(this).text())
+            if($(this).text()=="收起评论") {
+                $(this).text("展开评论");
+            }else if($(this).text()=="展开评论"){
+                $(this).text("收起评论");
+            }
+        });
+    }
+
     render() {
         const {data, fetching}=this.props;
         let tb = [];
@@ -174,7 +185,7 @@ class ReviewListComponent extends Component {
                                                href={"#collapse-" + val.id}>
                                                 <i className="icon-bubble2" style={{fontSize: "4px"}}></i>
                                                 &nbsp;
-                                                {replyFlag ? "回复评论" : "收起评论"}</a>
+                                                <span className="colpText">{replyFlag ? "回复评论" : "已回复"}</span></a>
                                         </small>
                                     </div>
                                     <div className="heading-elements"
@@ -241,7 +252,7 @@ class ReviewListComponent extends Component {
             </tr>)
         }
 
-        var tableHeight = ($(window).height() - 240);
+        var tableHeight = ($(window).height() - 180);
         return (
             <div className="table-responsive" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                 <div style={{marginBottom: '85px'}}>

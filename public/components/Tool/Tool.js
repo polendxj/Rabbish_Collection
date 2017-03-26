@@ -807,7 +807,7 @@ export function userType(type) {
         case 4:
             userType="住宅用户";break;
         case 5:
-            userType="机关单位、学校";break;
+            userType="机关单位/学校";break;
         default:break;
     }
     return userType;

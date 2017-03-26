@@ -68,7 +68,7 @@ export default class TransitLineListContainer extends Component {
             <div>
                 <BreadCrumbs
                     breadCrumbs={this.breadCrumbs}
-                    icon={'icon-user'}
+                    icon={' icon-truck'}
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>

@@ -78,7 +78,7 @@ export default class StoreSettlementListContainer extends Component {
             <div>
                 <BreadCrumbs
                     breadCrumbs={this.breadCrumbs}
-                    icon={'icon-user'}
+                    icon={'icon-coin-yen'}
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>
@@ -122,10 +122,13 @@ class StoreSettlementListComponent extends Component {
                 data.data.content.forEach(function (val, key) {
                     tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
-                        <td className="text-center">{val.manager}</td>
+                        <td className="text-center">{val.storeName}</td>
+                        <td className="text-center">{val.city}</td>
+                        <td className="text-center">{val.county}</td>
                         <td className="text-center">{val.points}</td>
                         <td className="text-center">{val.amount}</td>
                         <td className="text-center">{timeStamp2Time(val.settletime)}</td>
+                        <td className="text-center">{val.manager}</td>
                     </tr>)
                 }.bind(this));
             }else{
@@ -142,17 +145,20 @@ class StoreSettlementListComponent extends Component {
                 </td>
             </tr>)
         }
-        var tableHeight = ($(window).height() - 240);
+        var tableHeight = ($(window).height() - 180);
         return (
             <div className="table-responsive" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                 <table className="table table-bordered table-hover" style={{marginBottom: '85px'}}>
                     <thead>
                         <tr style={{fontWeight: 'bold'}}>
                             <th className="text-center" style={{width: "20px"}}></th>
+                            <th className="col-md-2 text-bold text-center">{"商铺名称"}</th>
+                            <th className="col-md-2 text-bold text-center">{"城市"}</th>
+                            <th className="col-md-2 text-bold text-center">{"行政区"}</th>
+                            <th className="col-md-1 text-bold text-center">{"结算积分"}</th>
+                            <th className="col-md-1 text-bold text-center">{"结算金额"}</th>
+                            <th className="col-md-2 text-bold text-center">{"结算时间"}</th>
                             <th className="col-md-2 text-bold text-center">{"负责人"}</th>
-                            <th className="col-md-2 text-bold text-center">{"结算积分"}</th>
-                            <th className="col-md-5 text-bold text-center">{"结算金额"}</th>
-                            <th className="col-md-3 text-bold text-center">{"结算时间"}</th>
                         </tr>
                     </thead>
                     <tbody>
