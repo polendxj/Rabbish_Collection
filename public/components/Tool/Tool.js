@@ -783,7 +783,7 @@ export function resolutionFilter(value) { //0-streamingType       1-environment 
 }
 export function timeStamp2Time(time) {
     var timeStr = "";
-    if(time){
+    if (time) {
         var date = new Date(time);
         var Y = date.getFullYear() + '-';
         var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
@@ -797,51 +797,64 @@ export function timeStamp2Time(time) {
 }
 export function userType(type) {
     var userType = "";
-    switch (type){
+    switch (type) {
         case 1:
-            userType="管理员";break;
+            userType = "管理员";
+            break;
         case 2:
-            userType="回收员";break;
+            userType = "回收员";
+            break;
         case 3:
-            userType="商户用户";break;
+            userType = "商户用户";
+            break;
         case 4:
-            userType="住宅用户";break;
+            userType = "住宅用户";
+            break;
         case 5:
-            userType="机关单位、学校";break;
-        default:break;
+            userType = "机关单位、学校";
+            break;
+        default:
+            break;
     }
     return userType;
 }
 export function noticeType(type) {
     var noticeType = "";
-    switch (type){
+    switch (type) {
         case 1:
-            noticeType="公告";break;
+            noticeType = "公告";
+            break;
         case 2:
-            noticeType="新闻";break;
+            noticeType = "新闻";
+            break;
         case 3:
-            noticeType="政策法规";break;
-        default:break;
+            noticeType = "政策法规";
+            break;
+        default:
+            break;
     }
     return noticeType;
 }
 export function organizationType(type) {
     var organizationType = "";
-    switch (type){
+    switch (type) {
         case 1:
-            organizationType="小区";break;
+            organizationType = "小区";
+            break;
         case 2:
-            organizationType="政府机构/学校";break;
-        default:break;
+            organizationType = "政府机构/学校";
+            break;
+        default:
+            break;
     }
     return organizationType;
 }
 export function array2Json(list) {
     var params = {};
     list.forEach(function (val) {
-        if(isNumber(val.value)&&val.value.length<8){
+        if (isNumber(val.value) && val.value.length < 8) {
             params[val.name] = parseInt(val.value);
-        }else{
+        } else {
             params[val.name] = val.value;
         }
     });
@@ -855,21 +868,21 @@ function isNumber(value) {
         return true
     }
 }
-export function filterCityById(cityList,id) {
+export function filterCityById(cityList, id) {
     var city = "";
-    for(var val of cityList){
-        if(val.id==id){
+    for (var val of cityList) {
+        if (val.id == id) {
             city = val;
             break;
         }
     }
     return city;
 }
-export function filterCountryById(currentCity,id) {
+export function filterCountryById(currentCity, id) {
     var country = "";
-    if(currentCity.country){
-        for(var val of currentCity.country){
-            if(val.id==id){
+    if (currentCity.country) {
+        for (var val of currentCity.country) {
+            if (val.id == id) {
                 country = val;
                 break;
             }
@@ -877,20 +890,35 @@ export function filterCountryById(currentCity,id) {
     }
     return country;
 }
-export function getInitialCityIdx(id,cityList){
+export function getInitialCityIdx(id, cityList) {
     var idx = -1;
-    for(var i=0; i<cityList.length;i++){
-        if(cityList[i].id==id){
+    for (var i = 0; i < cityList.length; i++) {
+        if (cityList[i].id == id) {
             idx = i;
             break;
         }
     }
     return idx;
 }
-export function filterByApprove(data,approved) {
+export function mergeClassify(classifyList, classifyData) {
+    var mergeList = [];
+    if(classifyList&&classifyData&&classifyList.length>0&&classifyData.length>0){
+        classifyList.forEach(function (classify, idx) {
+            mergeList[idx] = {className: classify.name, count: 0, weight: 0};
+            classifyData.forEach(function (val, i) {
+                if (classify.name == val.className) {
+                    mergeList[idx].count = mergeList[idx].count+val.count;
+                    mergeList[idx].weight = mergeList[idx].weight+val.weight;
+                }
+            });
+        });
+    }
+    return mergeList;
+}
+export function filterByApprove(data, approved) {
     var list = [];
-    data.forEach(function (val,key) {
-        if(val.approved == approved){
+    data.forEach(function (val, key) {
+        if (val.approved == approved) {
             list.push(val);
         }
     });

@@ -16,7 +16,8 @@ import {
     ErrorModal,
     filterCityById,
     timeStamp2Time,
-    organizationType
+    organizationType,
+    getInitialCityIdx
 } from '../../components/Tool/Tool';
 import {ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, CITY_LIST_START, CITY_LIST_END,PROGRESS_START,PROGRESS_END} from '../../constants/index.js'
 import {getListByMutilpCondition, saveObject,exportQrcode,generateQrcode} from '../../actions/CommonActions';
@@ -39,7 +40,7 @@ export default class OrganizationListContainer extends Component {
             }
         ];
         this.currentCity = "";
-        this.currentCityId = "";
+        this.currentCityId = 1;
         this.searchColumn = "TYPE";
         this.currentOrganization = "";
         this.progressInterval = "";
@@ -153,9 +154,6 @@ export default class OrganizationListContainer extends Component {
         var cityOptions = [];
         var countryOptions = [];
         if (cityList) {
-            cityOptions.push(
-                <option key={"city--1"} value={""}>{"所有"}</option>
-            );
             countryOptions.push(
                 <option key={"country--1"} value={""}>{"所有"}</option>
             );
@@ -166,6 +164,7 @@ export default class OrganizationListContainer extends Component {
                     )
                 });
                 if (this.currentCity == "") {
+                    var idx = getInitialCityIdx(this.currentCityId, cityList.data);
                     if (cityList.data[0].country) {
                         cityList.data[0].country.forEach(function (val, index) {
                             countryOptions.push(

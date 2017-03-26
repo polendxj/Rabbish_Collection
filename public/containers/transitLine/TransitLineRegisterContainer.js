@@ -55,11 +55,28 @@ class RegisterTransitLineComponent extends Component{
     _save() {
         var formFields = $("#transitLineForm").serializeArray();
         var params = array2Json(formFields);
-        this.props._save(params);
+        if($("#transitLineForm").validate().form()){
+            this.props._save(params);
+        }
     }
 
     componentDidMount() {
+        $("#transitLineForm").validate({
+            ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
+            errorClass: 'validation-error-label',
+            successClass: 'validation-valid-label',
+            highlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+            unhighlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
 
+            validClass: "validation-valid-label",
+            success: function(label) {
+                label.addClass("validation-valid-label").text("Success.")
+            }
+        });
     }
 
     render() {
@@ -81,7 +98,7 @@ class RegisterTransitLineComponent extends Component{
                                            }}>{"车牌号"}</label>
                                     <div className="col-lg-9">
                                         <input id="licensePlateNum" name="licensePlateNum" type="text" className="form-control"
-                                               placeholder={"车牌号"}
+                                               placeholder={"车牌号"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -93,7 +110,7 @@ class RegisterTransitLineComponent extends Component{
                                            }}>{"司机姓名"}</label>
                                     <div className="col-lg-9">
                                         <input id="driver" name="driver" type="text" className="form-control"
-                                               placeholder={"司机姓名"}
+                                               placeholder={"司机姓名"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -104,7 +121,7 @@ class RegisterTransitLineComponent extends Component{
                                            }}>{"联系方式"}</label>
                                     <div className="col-lg-9">
                                         <input id="contact" name="contact" type="text" className="form-control"
-                                               placeholder={"联系方式"}
+                                               placeholder={"联系方式"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -115,7 +132,7 @@ class RegisterTransitLineComponent extends Component{
                                            }}>{"驾照"}</label>
                                     <div className="col-lg-9">
                                         <input id="drivingLicenseNum" name="drivingLicenseNum" type="text" className="form-control"
-                                               placeholder={"驾照"}
+                                               placeholder={"驾照"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -126,7 +143,7 @@ class RegisterTransitLineComponent extends Component{
                                            }}>{"起点"}</label>
                                     <div className="col-lg-9">
                                         <input id="startLocation" name="startLocation" type="text" className="form-control"
-                                               placeholder={"起点"}
+                                               placeholder={"起点"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -137,7 +154,7 @@ class RegisterTransitLineComponent extends Component{
                                            }}>{"经停地点"}</label>
                                     <div className="col-lg-9">
                                         <input id="stoppedLocation" name="stoppedLocation" type="text" className="form-control"
-                                               placeholder={"经停地点"}
+                                               placeholder={"经停地点"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -148,7 +165,7 @@ class RegisterTransitLineComponent extends Component{
                                            }}>{"终点"}</label>
                                     <div className="col-lg-9">
                                         <input id="endLocation" name="endLocation" type="text" className="form-control"
-                                               placeholder={"终点"}
+                                               placeholder={"终点"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
