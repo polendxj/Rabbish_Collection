@@ -67,10 +67,35 @@ class UpdateAdminUserComponent extends Component{
             type: parseInt($("#type").val()),
             id:userid
         };
-        this.props._save(params);
+        if($("#updateAdminUserForm").validate().form()){
+            this.props._save(params);
+        }
     }
     componentDidMount() {
+        $("#updateAdminUserForm").validate({
+            ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
+            errorClass: 'validation-error-label',
+            successClass: 'validation-valid-label',
+            highlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+            unhighlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
 
+            validClass: "validation-valid-label",
+            success: function(label) {
+                label.addClass("validation-valid-label").text("Success.")
+            },
+            rules: {
+                password: {
+                    minlength: 6
+                },
+                repeat_password: {
+                    equalTo: "#password"
+                }
+            }
+        });
     }
 
     render() {
@@ -79,7 +104,7 @@ class UpdateAdminUserComponent extends Component{
         var tableHeight = ($(window).height() - 130);
         var detail="";
         if(data){
-            detail=<form className="form-horizontal form-validate-jquery" action="#">
+            detail=
                 <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                     <div className="col-sm-8 col-sm-offset-2">
                         <fieldset className="content-group">
@@ -132,7 +157,7 @@ class UpdateAdminUserComponent extends Component{
                                            textAlign: 'center',
                                        }}>{"手机号码"}</label>
                                 <div className="col-lg-9">
-                                    <input id="phone" type="text" className="form-control"
+                                    <input id="phone" name="phone" type="text" className="form-control"
                                            defaultValue={data.data.phone} required="required" autoComplete="off"/>
                                 </div>
                             </div>
@@ -148,14 +173,13 @@ class UpdateAdminUserComponent extends Component{
 
                     </div>
                 </div>
-            </form>
         }else {
             detail = <Loading/>
         }
         return (
-            <div>
+            <form id="updateAdminUserForm" className="form-horizontal" action="#">
                 {detail}
-            </div>
+            </form>
         )
 
     }

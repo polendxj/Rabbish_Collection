@@ -39,7 +39,7 @@ export default class UserListContainer extends Component {
         this.detailData = "";
         this.currentCity = "";
         this.currentCountry = "";
-        this.currentCityId = 3;
+        this.currentCityId = "";
         this.interValObj = "";
         this._delete = this._delete.bind(this);
         this._detail = this._detail.bind(this);
@@ -50,6 +50,7 @@ export default class UserListContainer extends Component {
         this._startRefresh = this._startRefresh.bind(this);
         this._lockOrUnlockUser = this._lockOrUnlockUser.bind(this);
         this._sendMessage = this._sendMessage.bind(this);
+        this.setRemainTime = this.setRemainTime.bind(this);
     }
 
     componentDidMount() {
@@ -160,6 +161,7 @@ export default class UserListContainer extends Component {
         this.props.dispatch(getListByMutilpCondition(params, GENERALUSER_LIST_START, GENERALUSER_LIST_END, generalUser_list));
     }
     _sendMessage() {
+        var that = this;
         var phone = sessionStorage['phone'];
         var count = 30;
         sessionStorage['count'] = count;
@@ -167,20 +169,21 @@ export default class UserListContainer extends Component {
         console.log("phone", phone);
         $("#btnSendCode").attr("disabled", "true");
         $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
-        this.interValObj = setInterval(this.setRemainTime, 1000);
+        this.interValObj = setInterval(that.setRemainTime, 1000);
         var params = {
             phone: phone
         };
         // this.props.dispatch(getAuthcode(params, "", "", get_authcode));
     }
     setRemainTime() {
+        var that = this;
         var curCount = sessionStorage['count'];
         if(!$("#getAuthcodeModal").hasClass("in")){
-            clearInterval(this.interValObj);//停止计时器
+            clearInterval(that.interValObj);//停止计时器
             $("#btnSendCode").text("获取验证码");
         }else{
             if (curCount == 0) {
-                clearInterval(this.interValObj);//停止计时器
+                clearInterval(that.interValObj);//停止计时器
                 $("#btnSendCode").removeAttr("disabled");//启用按钮
                 $("#btnSendCode").text("重新发送验证码");
             }
@@ -217,6 +220,15 @@ export default class UserListContainer extends Component {
         var countryOptions = [];
         var organizationOptions = [];
         if (cityList) {
+            cityOptions.push(
+                <option key={"city--1"} value={""}>{"所有"}</option>
+            );
+            countryOptions.push(
+                <option key={"country--1"} value={""}>{"所有"}</option>
+            );
+            organizationOptions.push(
+                <option key={"organization--1"} value={""}>{"所有"}</option>
+            );
             if (cityList.status) {
                 cityList.data.forEach(function (city, idx) {
                     cityOptions.push(

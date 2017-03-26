@@ -39,7 +39,7 @@ export default class StoreListContainer extends Component {
         this.currentCity = "";
         this.currentCityId = 3;
         this.operation = [
-            {icon: "icon-add-to-list", text: Current_Lang.others.add, action: "/CustomerService/StoreManage/Register"}
+            {icon: "", text: "", action: ""}
         ];
         this.searchColumn = "DRIVER";
         this._detail = this._detail.bind(this);

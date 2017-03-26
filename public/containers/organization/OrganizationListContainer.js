@@ -39,7 +39,7 @@ export default class OrganizationListContainer extends Component {
             }
         ];
         this.currentCity = "";
-        this.currentCityId = 3;
+        this.currentCityId = "";
         this.searchColumn = "TYPE";
         this.currentOrganization = "";
         this.progressInterval = "";
@@ -153,6 +153,12 @@ export default class OrganizationListContainer extends Component {
         var cityOptions = [];
         var countryOptions = [];
         if (cityList) {
+            cityOptions.push(
+                <option key={"city--1"} value={""}>{"所有"}</option>
+            );
+            countryOptions.push(
+                <option key={"country--1"} value={""}>{"所有"}</option>
+            );
             if (cityList.status) {
                 cityList.data.forEach(function (city, idx) {
                     cityOptions.push(

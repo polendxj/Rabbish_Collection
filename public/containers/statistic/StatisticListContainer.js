@@ -14,7 +14,8 @@ import {
     ErrorModal,
     roleApplicationUse,
     timeStamp2Time,
-    filterCityById
+    filterCityById,
+    getInitialCityIdx
 } from '../../components/Tool/Tool';
 import {
     STATISTICBYCLASSIFY_LIST_START,
@@ -25,6 +26,8 @@ import {
     STATISTICBYORGANIZATION_LIST_END,
     STATISTICBYRANGEDATE_LIST_START,
     STATISTICBYRANGEDATE_LIST_END,
+    STATISTIC_SETTLEMENT_START,
+    STATISTIC_SETTLEMENT_END,
     CITY_ORGANIZATION_LIST_START,
     CITY_ORGANIZATION_LIST_END
 } from '../../constants/index.js'
@@ -44,7 +47,7 @@ export default class StatisticListContainer extends Component {
             {icon: "", text: "", action: ""}
         ];
         this.searchColumn = "CLASSIFY";
-        this.currentCityId = 3;
+        this.currentCityId = 1;
         this.currentCity = "";
         this._search = this._search.bind(this);
         this._changeCity = this._changeCity.bind(this);
@@ -59,7 +62,7 @@ export default class StatisticListContainer extends Component {
         this.props.dispatch(getListByMutilpCondition(params, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
         this.props.dispatch(getListByMutilpCondition(params, STATISTICBYORGANIZATION_LIST_START, STATISTICBYORGANIZATION_LIST_END, statisticByOrganization_list));
         this.props.dispatch(getListByMutilpCondition({cityid: 1}, STATISTICBYRANGEDATE_LIST_START, STATISTICBYRANGEDATE_LIST_END, statisticByRangeDate_list));
-        // this.props.dispatch(getListByMutilpCondition({cityid: 1}, STATISTICBYRANGEDATE_LIST_START, STATISTICBYRANGEDATE_LIST_END, statistic_settlement));
+        this.props.dispatch(getListByMutilpCondition({cityid: 1}, STATISTIC_SETTLEMENT_START, STATISTIC_SETTLEMENT_END, statistic_settlement));
         this.props.dispatch(getListByMutilpCondition(cityParams, CITY_ORGANIZATION_LIST_START, CITY_ORGANIZATION_LIST_END, cityOfOrganization_list));
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
         $("#search_way").parent().parent().on('click', 'li', function () {
@@ -80,6 +83,7 @@ export default class StatisticListContainer extends Component {
             singleDatePicker: true,
             applyClass: 'bg-slate-600',
             cancelClass: 'btn-default',
+            autoUpdateInput:false,
             locale: dateLocale
         });
         $('.daterange-organization').daterangepicker({
@@ -88,6 +92,8 @@ export default class StatisticListContainer extends Component {
             applyClass: 'bg-slate-600',
             cancelClass: 'btn-default',
             ranges: rangesLocale,
+            startDate: '01/01/2016',
+            endDate: moment(),
             locale: dateLocale
         });
     }
@@ -107,12 +113,13 @@ export default class StatisticListContainer extends Component {
             this.props.dispatch(getListByMutilpCondition(classifyParams, STATISTICBYCLASSIFY_LIST_START, STATISTICBYCLASSIFY_LIST_END, statisticByClassify_list));
         } else if (this.searchColumn == "CITY") {
             var rangeTime = $(".daterange-organization").val();
+            console.log(rangeTime);
             var cityParams = {
                 page: 0,
                 size: 20,
                 cityid: $("#citySelect").val(),
-                 startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
-                 endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
+                startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+                endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
             };
             this.props.dispatch(getListByMutilpCondition(cityParams, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
         } else if (this.searchColumn == "ORGANIZATION") {
@@ -161,8 +168,9 @@ export default class StatisticListContainer extends Component {
     }
 
     render() {
-        const {fetching, classifyData, cityData, organizationData, rangeDateData, cityList} =this.props;
+        const {fetching, classifyData, cityData, organizationData, rangeDateData,settlementData, cityList} =this.props;
         console.log("rangeDateData", rangeDateData);
+        console.log("settlementData", settlementData);
         var data = "";
         if (this.searchColumn == "CLASSIFY") {
             data = classifyData;
@@ -178,6 +186,9 @@ export default class StatisticListContainer extends Component {
         var cityOptions = [];
         var organizationOptions = [];
         if (cityList) {
+            organizationOptions.push(
+                <option key={"organization--1"} value={""}>{"所有"}</option>
+            );
             if (cityList.status) {
                 cityList.data.forEach(function (city, idx) {
                     cityOptions.push(
@@ -185,8 +196,9 @@ export default class StatisticListContainer extends Component {
                     )
                 });
                 if (this.currentCity == "") {
-                    if (cityList.data[0].organization.content.length > 0) {
-                        cityList.data[0].organization.content.forEach(function (val, index) {
+                    var idx = getInitialCityIdx(this.currentCityId,cityList.data);
+                    if (cityList.data[idx].organization.content.length > 0) {
+                        cityList.data[idx].organization.content.forEach(function (val, index) {
                             organizationOptions.push(
                                 <option key={"organization-" + index} value={val.id}>{val.name}</option>
                             )
@@ -251,7 +263,7 @@ export default class StatisticListContainer extends Component {
                                        placeholder="选择日期"/>
                             </li>
                             <li style={{display: this.searchColumn == "CLASSIFY" ? "none" : "inline-block"}}>
-                                <input type="text" className="form-control daterange-organization"/>
+                                <input type="text" className="form-control daterange-organization" style={{width:"175px"}}/>
                             </li>
                             <li>
                                 <button onClick={this._search.bind(this)}
@@ -399,7 +411,7 @@ class StatisticListComponent extends Component {
 function mapStateToProps(state) {
     const {
         getCityOfOrganizationList, getStatisticByClassifyList, getStatisticByCityList,
-        getStatisticByOrganizationList, getStatisticByRangeDateList, commonReducer
+        getStatisticByOrganizationList, getStatisticByRangeDateList,getStatisticSettlementDate, commonReducer
     }=state;
     return {
         fetching: getStatisticByClassifyList.fetching,
@@ -407,6 +419,7 @@ function mapStateToProps(state) {
         cityData: getStatisticByCityList.data,
         organizationData: getStatisticByOrganizationList.data,
         rangeDateData: getStatisticByRangeDateList.data,
+        settlementData:getStatisticSettlementDate.data,
         cityList: getCityOfOrganizationList.data,
         refresh: commonReducer.refresh
     }

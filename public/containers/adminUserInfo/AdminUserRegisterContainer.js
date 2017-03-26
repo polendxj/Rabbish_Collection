@@ -74,6 +74,7 @@ class RegisterAdminUserComponent extends Component{
     }
 
     _save() {
+        console.log($("#registerAdminUserForm").validate().form());
         var params = {
             name: $("#name").val(),
             phone: $("#phone").val(),
@@ -81,7 +82,9 @@ class RegisterAdminUserComponent extends Component{
             type: $("#type").val(),
             authcode:""
         };
-        this.props._save(params);
+        if($("#registerAdminUserForm").validate().form()){
+            this.props._save(params);
+        }
     }
 
     _appOnChange() {
@@ -89,7 +92,7 @@ class RegisterAdminUserComponent extends Component{
     }
 
     componentDidMount() {
-        $(".form-validate-jquery").validate({
+        $("#registerAdminUserForm").validate({
             ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
             errorClass: 'validation-error-label',
             successClass: 'validation-valid-label',
@@ -106,7 +109,7 @@ class RegisterAdminUserComponent extends Component{
             },
             rules: {
                 password: {
-                    minlength: 5
+                    minlength: 6
                 },
                 repeat_password: {
                     equalTo: "#password"
@@ -114,7 +117,6 @@ class RegisterAdminUserComponent extends Component{
             }
         });
     }
-
     render() {
         const {allCSE, cseGroup, appList, streamingTemplate}=this.props;
         var self = this;
@@ -122,7 +124,7 @@ class RegisterAdminUserComponent extends Component{
         var tableHeight = ($(window).height() - 130);
         return (
             <div>
-                <form className="form-horizontal form-validate-jquery" action="#">
+                <form id="registerAdminUserForm" className="form-horizontal" action="#">
                     <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                         <div className="col-sm-8 col-sm-offset-2">
                             <fieldset className="content-group">
@@ -175,7 +177,7 @@ class RegisterAdminUserComponent extends Component{
                                                textAlign: 'center',
                                            }}>{"手机号码"}</label>
                                     <div className="col-lg-9">
-                                        <input id="phone" type="text" className="form-control"
+                                        <input id="phone" name="phone" type="text" className="form-control"
                                                placeholder={"手机号码"} required="required" autoComplete="off"/>
                                     </div>
                                 </div>

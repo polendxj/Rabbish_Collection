@@ -70,6 +70,7 @@ class RegisterUserComponent extends Component {
         this._save = this._save.bind(this);
         this._uploadImg = this._uploadImg.bind(this);
         this._sendMessage = this._sendMessage.bind(this);
+        this.setRemainTime = this.setRemainTime.bind(this);
     }
 
     _uploadImg() {
@@ -78,15 +79,19 @@ class RegisterUserComponent extends Component {
 
     _save(imgUrl) {
         console.log("imgUrl", imgUrl);
+        console.log("form", $("#generalUserForm").validate().form());
         var formFields = $("#generalUserForm").serializeArray();
         var params = array2Json(formFields);
         var password = sha1.hex(params.password);
         params.password = password;
         params.headimg = imgUrl;
-        this.props._save(params);
+        if($("#generalUserForm").validate().form()){
+            this.props._save(params);
+        }
     }
 
     _sendMessage() {
+        var that = this;
         var phone = sessionStorage['phone'];
         var count = 30;
         sessionStorage['count'] = count;
@@ -94,14 +99,15 @@ class RegisterUserComponent extends Component {
         console.log("phone", phone);
         $("#btnSendCode").attr("disabled", "true");
         $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
-        this.interValObj = setInterval(this.setRemainTime, 1000);
-        this.props._sendMessage(phone);
+        this.interValObj = setInterval(that.setRemainTime, 1000);
+        // this.props._sendMessage(phone);
     }
     setRemainTime() {
         var curCount = sessionStorage['count'];
         console.log($("#getAuthcodeModal").hasClass("in"));
         if (curCount == 0) {
             clearInterval(this.interValObj);//停止计时器
+            console.log("aaa");
             $("#btnSendCode").removeAttr("disabled");//启用按钮
             $("#btnSendCode").text("重新发送验证码");
         }
@@ -131,6 +137,30 @@ class RegisterUserComponent extends Component {
                 self._save(data.response.data);
             }
         });
+        $("#generalUserForm").validate({
+            ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
+            errorClass: 'validation-error-label',
+            successClass: 'validation-valid-label',
+            highlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+            unhighlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+
+            validClass: "validation-valid-label",
+            success: function(label) {
+                label.addClass("validation-valid-label").text("Success.")
+            },
+            rules: {
+                password: {
+                    minlength: 6
+                },
+                repeat_password: {
+                    equalTo: "#password"
+                }
+            }
+        });
         if(sessionStorage['messageTime']!=""){
             var duringTime = new Date().getTime()-sessionStorage['messageTime'];
             if(duringTime < 30*1000){
@@ -146,7 +176,6 @@ class RegisterUserComponent extends Component {
         sessionStorage['messageTime'] = "";
         $("#btnSendCode").removeAttr("disabled");//启用按钮
     }
-
     render() {
         const {data}=this.props;
         console.log("orgina", data);
@@ -197,7 +226,7 @@ class RegisterUserComponent extends Component {
                                            }}>{"真实姓名"}</label>
                                     <div className="col-lg-9">
                                         <input name="realName" type="text" className="form-control"
-                                               placeholder={"真实姓名"}
+                                               placeholder={"真实姓名"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -209,7 +238,7 @@ class RegisterUserComponent extends Component {
                                            }}>{"身份证号码"}</label>
                                     <div className="col-lg-9">
                                         <input name="idno" type="text" className="form-control"
-                                               placeholder={"身份证号码"}
+                                               placeholder={"身份证号码"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -232,7 +261,7 @@ class RegisterUserComponent extends Component {
                                            }}>{"密码"}</label>
                                     <div className="col-lg-9">
                                         <input name="password" type="password" className="form-control"
-                                               placeholder={"密码"}
+                                               placeholder={"密码"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -242,8 +271,8 @@ class RegisterUserComponent extends Component {
                                                textAlign: 'center'
                                            }}>{"确认密码"}</label>
                                     <div className="col-lg-9">
-                                        <input id="confirmPassword" type="password" className="form-control"
-                                               placeholder={"确认密码"}
+                                        <input id="confirmPassword" name="repeat_password" type="password" className="form-control"
+                                               placeholder={"确认密码"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -254,7 +283,7 @@ class RegisterUserComponent extends Component {
                                            }}>{"手机号"}</label>
                                     <div className="col-lg-9">
                                         <input name="phone" type="text" className="form-control"
-                                               placeholder={"手机号"}
+                                               placeholder={"手机号"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -265,7 +294,7 @@ class RegisterUserComponent extends Component {
                                            }}>{"地址"}</label>
                                     <div className="col-lg-9">
                                         <input name="address" type="text" className="form-control"
-                                               placeholder={"地址"}
+                                               placeholder={"地址"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -277,7 +306,7 @@ class RegisterUserComponent extends Component {
                                     <div className="col-lg-9">
                                         <div className="input-group">
                                             <input type="text" name="authcode" className="form-control"
-                                                   placeholder="输入验证码"/>
+                                                   placeholder="输入验证码" required="required"/>
                                             <span className="input-group-btn">
                                                 <button id="btnSendCode" className="btn bg-primary" type="button" onClick={this._sendMessage}>
                                                     获取验证码

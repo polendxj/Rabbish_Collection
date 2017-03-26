@@ -81,7 +81,9 @@ class RegisterManualRecordComponent extends Component {
             endTime:  new Date(rangeTime.split("-")[1].trim()).getTime(),
             description: $("#description").val()
         };
-        this.props._save(params);
+        if($("#registerManualForm").validate().form()){
+            this.props._save(params);
+        }
     }
 
     _appOnChange() {
@@ -95,6 +97,22 @@ class RegisterManualRecordComponent extends Component {
             opens: "left",
             applyClass: 'bg-slate-600',
             cancelClass: 'btn-default'
+        });
+        $("#registerManualForm").validate({
+            ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
+            errorClass: 'validation-error-label',
+            successClass: 'validation-valid-label',
+            highlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+            unhighlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+
+            validClass: "validation-valid-label",
+            success: function(label) {
+                label.addClass("validation-valid-label").text("Success.")
+            }
         });
 
     }
@@ -115,7 +133,7 @@ class RegisterManualRecordComponent extends Component {
         var tableHeight = ($(window).height() - 130);
         return (
             <div>
-                <form className="form-horizontal" action="#">
+                <form id="registerManualForm" className="form-horizontal" action="#">
                     <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                         <div className="col-sm-8 col-sm-offset-2">
                             <fieldset className="content-group">
@@ -141,7 +159,7 @@ class RegisterManualRecordComponent extends Component {
                                            }}>{"重量"}</label>
                                     <div className="col-lg-9">
                                         <input id="weight" type="text" className="form-control"
-                                               placeholder={"重量"}
+                                               placeholder={"重量"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>

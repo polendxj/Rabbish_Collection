@@ -7,7 +7,8 @@ import {
     STATISTICBYCLASSIFY_LIST_START, STATISTICBYCLASSIFY_LIST_END,
     STATISTICBYCITY_LIST_START,STATISTICBYCITY_LIST_END,
     STATISTICBYORGANIZATION_LIST_START,STATISTICBYORGANIZATION_LIST_END,
-    STATISTICBYRANGEDATE_LIST_START,STATISTICBYRANGEDATE_LIST_END
+    STATISTICBYRANGEDATE_LIST_START,STATISTICBYRANGEDATE_LIST_END,
+    STATISTIC_SETTLEMENT_START,STATISTIC_SETTLEMENT_END
 } from '../constants/index'
 
 export function getStatisticByClassifyList(state = {data: "", fetching: false}, action) {
@@ -52,6 +53,18 @@ export function getStatisticByRangeDateList(state = {data: "", fetching: false},
             state = {...state, fetching: true};
             return state;
         case STATISTICBYRANGEDATE_LIST_END:
+            state = {data: action.json, fetching: false};
+            return state;
+        default:
+            return state;
+    }
+}
+export function getStatisticSettlementDate(state = {data: "", fetching: false}, action) {
+    switch (action.type) {
+        case STATISTIC_SETTLEMENT_START:
+            state = {...state, fetching: true};
+            return state;
+        case STATISTIC_SETTLEMENT_END:
             state = {data: action.json, fetching: false};
             return state;
         default:

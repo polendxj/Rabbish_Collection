@@ -72,7 +72,24 @@ class UpdateOrganizationComponent extends Component {
         this._save = this._save.bind(this);
         this._changeCity = this._changeCity.bind(this);
     }
+    componentDidMount() {
+        $("#updateOrganizationForm").validate({
+            ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
+            errorClass: 'validation-error-label',
+            successClass: 'validation-valid-label',
+            highlight: function (element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+            unhighlight: function (element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
 
+            validClass: "validation-valid-label",
+            success: function (label) {
+                label.addClass("validation-valid-label").text("Success.")
+            }
+        });
+    }
     _changeCity() {
         var citieid = $("#citySelect").val();
         this.currentCity = filterCityById(this.props.cityList.data, citieid);
@@ -81,10 +98,11 @@ class UpdateOrganizationComponent extends Component {
     }
 
     _save(id) {
-        var formFields = $("#organizationForm").serializeArray();
+        var formFields = $("#updateOrganizationForm").serializeArray();
         var params = array2Json(formFields);
-        this.props._save(id,params);
-
+        if($("#updateOrganizationForm").validate().form()){
+            this.props._save(id,params);
+        }
     }
 
     render() {
@@ -117,7 +135,7 @@ class UpdateOrganizationComponent extends Component {
             if (this.currentCityId == "") {
                 this.currentCityId = data.data.cityid;
             }
-            detail = <form id="organizationForm" className="form-horizontal" action="#">
+            detail =
                 <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                     <div className="col-sm-8 col-sm-offset-2">
                         <fieldset className="content-group">
@@ -150,7 +168,7 @@ class UpdateOrganizationComponent extends Component {
                                        }}>{"名称"}</label>
                                 <div className="col-lg-9">
                                     <input name="name" type="text" className="form-control"
-                                           defaultValue={data.data.name}
+                                           defaultValue={data.data.name} required="required"
                                            autoComplete="off"/>
                                 </div>
                             </div>
@@ -171,7 +189,7 @@ class UpdateOrganizationComponent extends Component {
                                        }}>{"地址"}</label>
                                 <div className="col-lg-9">
                                     <input name="address" type="text" className="form-control"
-                                           defaultValue={data.data.address}
+                                           defaultValue={data.data.address} required="required"
                                            autoComplete="off"/>
                                 </div>
                             </div>
@@ -187,14 +205,13 @@ class UpdateOrganizationComponent extends Component {
 
                     </div>
                 </div>
-            </form>
         } else {
             detail = <Loading/>
         }
         return (
-            <div>
+            <form id="updateOrganizationForm" className="form-horizontal" action="#">
                 {detail}
-            </div>
+            </form>
         )
 
     }

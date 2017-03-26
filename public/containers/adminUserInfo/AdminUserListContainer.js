@@ -7,12 +7,13 @@ import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
+import {commonRefresh} from '../../actions/Common';
 import {
     Loading,
     NoData,
     ConfirmModal,
     ErrorModal,
-    roleApplicationUse,
+    ListMiddleModal,
     timeStamp2Time,
     userType
 } from '../../components/Tool/Tool';
@@ -27,7 +28,7 @@ export default class AdminUserListContainer extends Component {
         this.breadCrumbs = [
             {text: "客户服务", link: ''},
             {text: "扫码员管理", link: ''},
-            {text: "扫码员列表", link: ''}
+            {text: "管理员列表", link: ''}
         ];
         this.operation = sessionStorage['type']==10?
             [{
@@ -38,7 +39,10 @@ export default class AdminUserListContainer extends Component {
             [{icon: "", text: "", action: ""}];
         this.searchColumn = "DRIVER";
         this._delete = this._delete.bind(this);
+        this._showGetAuthcode = this._showGetAuthcode.bind(this);
+        this._sendMessage = this._sendMessage.bind(this);
         this._resetPassword = this._resetPassword.bind(this);
+        this._startRefresh = this._startRefresh.bind(this);
     }
 
     componentDidMount() {
@@ -51,9 +55,25 @@ export default class AdminUserListContainer extends Component {
             } else {
                 self.searchColumn = "LINE";
             }
-        })
+        });
+        if(sessionStorage['messageTime']!=""){
+            var duringTime = new Date().getTime()-sessionStorage['messageTime'];
+            if(duringTime < 30*1000){
+                sessionStorage['count'] = Math.round((30*1000 - duringTime)/1000);
+                $("#btnSendCode").attr("disabled", "true");
+                $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
+                this.interValObj = setInterval(this.setRemainTime, 1000);
+            }
+        }
     }
-
+    componentWillUnmount(){
+        clearInterval(this.interValObj);//停止计时器
+        sessionStorage['messageTime'] = "";
+        $("#btnSendCode").removeAttr("disabled");//启用按钮
+    }
+    _startRefresh() {
+        this.props.dispatch(commonRefresh())
+    }
     _delete(userid, name) {
         var that = this;
         ConfirmModal(Current_Lang.status.minor, Current_Lang.alertTip.confirmDelete + name + Current_Lang.alertTip.confirmMa, function () {
@@ -70,9 +90,59 @@ export default class AdminUserListContainer extends Component {
         };
         this.props.dispatch(getListByMutilpCondition(params, ADMINUSER_LIST_START, ADMINUSER_LIST_END, adminUser_list));
     }
-    _resetPassword(params){
+    _showGetAuthcode(val){
+        this.detailData = val;
+        if(sessionStorage['messageTime']!=""){
+            var duringTime = new Date().getTime()-sessionStorage['messageTime'];
+            if(duringTime < 30*1000){
+                sessionStorage['count'] = Math.round((30*1000 - duringTime)/1000);
+            }
+        }
+        this._startRefresh();
+    }
+    _sendMessage() {
+        var phone = sessionStorage['phone'];
+        var count = 30;
+        sessionStorage['count'] = count;
+        sessionStorage['messageTime'] = new Date().getTime();
+        console.log("phone", phone);
+        $("#btnSendCode").attr("disabled", "true");
+        $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
+        this.interValObj = setInterval(this.setRemainTime, 1000);
+        var params = {
+            phone: phone
+        };
+        // this.props.dispatch(getAuthcode(params, "", "", get_authcode));
+    }
+    setRemainTime() {
+        var curCount = sessionStorage['count'];
+        if(!$("#getAuthcodeModal").hasClass("in")){
+            clearInterval(this.interValObj);//停止计时器
+            $("#btnSendCode").text("获取验证码");
+        }else{
+            if (curCount == 0) {
+                clearInterval(this.interValObj);//停止计时器
+                $("#btnSendCode").removeAttr("disabled");//启用按钮
+                $("#btnSendCode").text("重新发送验证码");
+            }
+            else {
+                curCount--;
+                sessionStorage['count'] = curCount;
+                console.log(sessionStorage['count']);
+                $("#btnSendCode").text(curCount + "秒后重新发送");
+            }
+        }
+    }
+    _resetPassword() {
+        var params = {
+            password: sha1.hex("88888888"),
+            type: this.detailData.type,
+            phone: this.detailData.phone,
+            authcode: $("#authcode").val()
+        };
         this.props.dispatch(saveObject(params, "", "", reset_password, "/CustomerService/AdminUserManage", "update"));
     }
+
     _changePage(page) {
         this.page = page;
         this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
@@ -90,6 +160,47 @@ export default class AdminUserListContainer extends Component {
 
     render() {
         const {fetching, data} =this.props;
+        var getAuthcodeInfo = "";
+        getAuthcodeInfo =
+            <div>
+                <div className="form-horizontal">
+                    <fieldset className="content-group">
+                        <legend className="text-bold">
+                            {"获取验证码"}
+                        </legend>
+                        <div className="form-group">
+                            <label className="col-lg-2 control-label"
+                                   style={{
+                                       textAlign: 'center'
+                                   }}>{"获取验证码"}</label>
+                            <div className="col-lg-10">
+                                <div className="input-group">
+                                    <input type="text" id="authcode" name="authcode" className="form-control"
+                                           placeholder="输入验证码"/>
+                                    <span className="input-group-btn">
+                                                <button id="btnSendCode" className="btn bg-primary" type="button" onClick={this._sendMessage}>
+                                                    获取验证码
+                                                </button>
+                                            </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label className="col-lg-2 control-label"
+                                   style={{textAlign: 'center'}}></label>
+                            <div className="col-lg-10">
+                                <div className="text-right">
+                                    <button type="button" className="btn btn-primary"
+                                            onClick={this._resetPassword}>
+                                        {"确定"}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+            </div>;
         console.log("adminuser", data);
         return (
             <div>
@@ -143,9 +254,11 @@ export default class AdminUserListContainer extends Component {
                         </div>
                         <AdminUserListComponent data={data} fetching={fetching}
                                                 _delete={this._delete}
-                                                _resetPassword={this._resetPassword}/>
+                                                _showGetAuthcode={this._showGetAuthcode}/>
 
                     </fieldset>
+                    <ListMiddleModal id="getAuthcodeModal" content={getAuthcodeInfo} doAction={""}
+                                     tip={"获取验证码"} actionText="获取验证码" hide="true" hideCancel="true"/>
                 </div>
             </div>
         )
@@ -156,7 +269,9 @@ class AdminUserListComponent extends Component {
     constructor(props) {
         super(props)
     }
-
+    _showGetAuthcode(val){
+        this.props._showGetAuthcode(val);
+    }
     _resetPassword(val) {
         var params = {
             password: sha1.hex("88888888"),
@@ -205,10 +320,13 @@ class AdminUserListComponent extends Component {
                                                 onClick={this._delete.bind(this, val.userid, val.name)}><a
                                                 href="javascript:void(0)"><i className="icon-trash"></i>
                                                 {"删除"}</a></li>
-                                            <li style={{display:loginUserType==10? 'block':'none'}}
-                                                onClick={this._resetPassword.bind(this, val)}><a
-                                                href="javascript:void(0)"><i className="icon-reset"></i>
-                                                {"重置密码"}</a></li>
+                                            <li>
+                                                <a href="javascript:void(0)" data-toggle="modal"
+                                                   data-target="#getAuthcodeModal"
+                                                   onClick={this._showGetAuthcode.bind(this,val)}><i
+                                                    className=" icon-office"></i>
+                                                    {"重置密码"}</a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>}
@@ -262,10 +380,11 @@ class AdminUserListComponent extends Component {
 }
 
 function mapStateToProps(state) {
-    const {getAdminUserList}=state;
+    const {getAdminUserList,commonReducer}=state;
     return {
         fetching: getAdminUserList.fetching,
-        data: getAdminUserList.data
+        data: getAdminUserList.data,
+        refresh: commonReducer.refresh
     }
 }
 

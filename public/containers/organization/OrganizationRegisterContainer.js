@@ -63,6 +63,24 @@ class RegisterOrganizationComponent extends Component{
         this._save = this._save.bind(this);
         this._changeCity = this._changeCity.bind(this);
     }
+    componentDidMount() {
+        $("#organizationForm").validate({
+            ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
+            errorClass: 'validation-error-label',
+            successClass: 'validation-valid-label',
+            highlight: function (element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+            unhighlight: function (element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+
+            validClass: "validation-valid-label",
+            success: function (label) {
+                label.addClass("validation-valid-label").text("Success.")
+            }
+        });
+    }
     _changeCity() {
         var citieid = $("#citySelect").val();
         this.currentCity = filterCityById(this.props.cityList.data, citieid);
@@ -72,7 +90,9 @@ class RegisterOrganizationComponent extends Component{
     _save() {
         var formFields = $("#organizationForm").serializeArray();
         var params = array2Json(formFields);
-        this.props._save(params);
+        if($("#organizationForm").validate().form()){
+            this.props._save(params);
+        }
 
     }
 
@@ -142,7 +162,7 @@ class RegisterOrganizationComponent extends Component{
                                            }}>{"名称"}</label>
                                     <div className="col-lg-9">
                                         <input name="name" type="text" className="form-control"
-                                               placeholder={"名称"}
+                                               placeholder={"名称"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -163,7 +183,7 @@ class RegisterOrganizationComponent extends Component{
                                            }}>{"地址"}</label>
                                     <div className="col-lg-9">
                                         <input name="address" type="text" className="form-control"
-                                               placeholder={"地址"}
+                                               placeholder={"地址"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>

@@ -62,22 +62,39 @@ class RegisterRubbishClassComponent extends Component{
         this.props._startRefresh();
     }
 
-    componentDidUpdate() {}
-
     _save() {
-        var formFields = $("#classifyForm").serializeArray();
+        var formFields = $("#registerClassifyForm").serializeArray();
         var params = array2Json(formFields);
-        this.props._save(params);
+        if($("#registerClassifyForm").validate().form()){
+            this.props._save(params);
+        }
     }
 
 
-    componentDidMount() {}
+    componentDidMount() {
+        $("#registerClassifyForm").validate({
+            ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
+            errorClass: 'validation-error-label',
+            successClass: 'validation-valid-label',
+            highlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+            unhighlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+
+            validClass: "validation-valid-label",
+            success: function(label) {
+                label.addClass("validation-valid-label").text("Success.")
+            }
+        });
+    }
 
     render() {
         var tableHeight = ($(window).height() - 130);
         return (
             <div>
-                <form id="classifyForm" className="form-horizontal" action="#">
+                <form id="registerClassifyForm" className="form-horizontal" action="#">
                     <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                         <div className="col-sm-8 col-sm-offset-2">
                             <fieldset className="content-group">
@@ -91,7 +108,7 @@ class RegisterRubbishClassComponent extends Component{
                                            }}>{"分类名称"}</label>
                                     <div className="col-lg-9">
                                         <input name="name" type="text" className="form-control"
-                                               placeholder={"分类名称"}
+                                               placeholder={"分类名称"} required="required"
                                                autoComplete="off"/>
                                     </div>
                                 </div>

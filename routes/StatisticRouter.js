@@ -24,5 +24,9 @@ router.post('/rsapp/statistic/total', function (req, resp) {
     var data = querystring.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/statistic/total' + "?" + data, 'GET', "", req, resp);
 });
+router.post('/rsapp/statistic/settlement', function (req, resp) {
+    var data = querystring.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/statistic/settlement' + "?" + data, 'GET', "", req, resp);
+});
 
 module.exports = router;
