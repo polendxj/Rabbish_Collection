@@ -216,11 +216,11 @@ export default class StoreListContainer extends Component {
                                         <div className="thumbnail"
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
                                             <div className="thumb">
-                                                <img src={this.detailData.logo} alt=""
+                                                <img src={imgBaseUrl+this.detailData.logo} alt=""
                                                      style={{height: "160px", width: "160px"}}/>
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                         <span style={{top: 0, marginTop: 0}}>
-                                            <a href={this.detailData.logo} data-popup="lightbox"
+                                            <a href={imgBaseUrl+this.detailData.logo} data-popup="lightbox"
                                                className="btn" style={{height: "160px", width: "160px"}}></a>
                                         </span>
                                                 </div>
@@ -235,11 +235,11 @@ export default class StoreListContainer extends Component {
                                         <div className="thumbnail"
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
                                             <div className="thumb">
-                                                <img src={this.detailData.license} alt=""
+                                                <img src={imgBaseUrl+this.detailData.license} alt=""
                                                      style={{height: "160px", width: "160px"}}/>
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                         <span style={{top: 0, marginTop: 0}}>
-                                            <a href={this.detailData.license} data-popup="lightbox"
+                                            <a href={imgBaseUrl+this.detailData.license} data-popup="lightbox"
                                                className="btn" style={{height: "160px", width: "160px"}}></a>
                                         </span>
                                                 </div>
@@ -390,7 +390,7 @@ export default class StoreListContainer extends Component {
                                style={{textAlign: 'center'}}></label>
                         <div className="col-lg-9">
                             <div className="text-right">
-                                <button type="button" className="btn btn-primary" onClick={this._saveStoreSettlement.bind(this,this.detailData.id)}>{Current_Lang.label.save}
+                                <button type="button" className="btn btn-primary" onClick={this._saveStoreSettlement.bind(this,this.detailData.userid)}>{Current_Lang.label.save}
                                 </button>
                             </div>
                         </div>

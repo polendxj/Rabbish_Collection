@@ -54,11 +54,12 @@ import {getComplaintList} from '../reducers/ComplaintReducer'
 import {getStoreSettlementList} from '../reducers/StoreSettlementReducer'
 import {getStoreList} from '../reducers/StoreReducer'
 import {getReviewList} from '../reducers/ReviewReducer'
-import {getGeneralUserList} from '../reducers/GeneralUserReducer'
-import {getOrganizationList,getOrganizationDetail} from '../reducers/OrganizationReducer'
+import {getGeneralUserList,getGeneralUserDetail} from '../reducers/GeneralUserReducer'
+import {getOrganizationList,getOrganizationDetail,getProgressData} from '../reducers/OrganizationReducer'
 import {getAdminUserList,getAdminUserDetail} from '../reducers/AdminUserReducer'
 import {getNoticeList} from '../reducers/NoticeReducer'
 import {getStatisticByClassifyList,getStatisticByCityList,getStatisticByOrganizationList,getStatisticByRangeDateList} from '../reducers/StatisticReducer'
+import {getOperationMonitor,getOrganizationMonitor} from '../reducers/SystemMonitorReducer'
 /*end*/
 
 import {reducer as reduxFormReducer} from 'redux-form'
@@ -150,6 +151,10 @@ const rootReducer = combineReducers({
     getStatisticByOrganizationList,
     getStatisticByRangeDateList,
     getOrganizationDetail,
+    getProgressData,
+    getOperationMonitor,
+    getOrganizationMonitor,
+    getGeneralUserDetail,
     form: reduxFormReducer,
     routing: routerReducer
 })

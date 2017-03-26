@@ -125,8 +125,7 @@ class RegisterManualRecordComponent extends Component {
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
-                                               marginTop: '8px'
+                                               textAlign: 'center'
                                            }}>{"分类"}</label>
                                     <div className="col-lg-9">
                                         <select id="classify" className="form-control">
@@ -138,7 +137,7 @@ class RegisterManualRecordComponent extends Component {
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
+                                               textAlign: 'center'
                                            }}>{"重量"}</label>
                                     <div className="col-lg-9">
                                         <input id="weight" type="text" className="form-control"
@@ -148,9 +147,7 @@ class RegisterManualRecordComponent extends Component {
                                 </div>
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
-                                           style={{
-                                               textAlign: 'center',
-                                           }}>{"起止时间"}</label>
+                                           style={{textAlign: 'center'}}>{"起止时间"}</label>
                                     <div className="col-lg-9">
                                         <div className="input-group">
                                             <input type="text" className="form-control daterange-manuRecord"/>
@@ -161,9 +158,7 @@ class RegisterManualRecordComponent extends Component {
                                 </div>
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
-                                           style={{
-                                               textAlign: 'center',
-                                           }}>{"分类描述"}</label>
+                                           style={{textAlign: 'center'}}>{"分类描述"}</label>
                                     <div className="col-lg-9">
                                     <textarea id="description" rows="5" cols="5" className="form-control"
                                               placeholder={"分类描述"}></textarea>

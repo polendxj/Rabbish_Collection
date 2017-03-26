@@ -4,27 +4,27 @@
 import {combineReducers} from 'redux'
 import {audioCodes, videoCodes, DecodeBase64} from '../components/Tool/Tool'
 import {
-    GENERALUSER_LIST_START, GENERALUSER_LIST_END,GENNERALUSER_DETAIL_START,GENNERALUSER_DETAIL_END
+    OPERATION_MONITOR_START, OPERATION_MONITOR_END,OPERATION_ORGANIZATION_START,OPERATION_ORGANIZATION_END
 } from '../constants/index'
 
-export function getGeneralUserList(state = {data: "", fetching: false}, action) {
+export function getOperationMonitor(state = {data: "", fetching: false}, action) {
     switch (action.type) {
-        case GENERALUSER_LIST_START:
+        case OPERATION_MONITOR_START:
             state = {...state, fetching: true};
             return state;
-        case GENERALUSER_LIST_END:
+        case OPERATION_MONITOR_END:
             state = {data: action.json, fetching: false};
             return state;
         default:
             return state;
     }
 }
-export function getGeneralUserDetail(state = {data: "", fetching: false}, action) {
+export function getOrganizationMonitor(state = {data: "", fetching: false}, action) {
     switch (action.type) {
-        case GENNERALUSER_DETAIL_START:
+        case OPERATION_ORGANIZATION_START:
             state = {...state, fetching: true};
             return state;
-        case GENNERALUSER_DETAIL_END:
+        case OPERATION_ORGANIZATION_END:
             state = {data: action.json, fetching: false};
             return state;
         default:

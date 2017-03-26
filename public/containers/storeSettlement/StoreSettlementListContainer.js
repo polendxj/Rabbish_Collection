@@ -115,6 +115,7 @@ class StoreSettlementListComponent extends Component {
 
     render() {
         const {data, fetching}=this.props;
+        console.log("storeSettlement",data);
         let tb = [];
         if (data) {
             if (data.data.content.length > 0) {
@@ -148,7 +149,7 @@ class StoreSettlementListComponent extends Component {
                     <thead>
                         <tr style={{fontWeight: 'bold'}}>
                             <th className="text-center" style={{width: "20px"}}></th>
-                            <th className="col-md-2 text-bold text-center">{"店铺名称"}</th>
+                            <th className="col-md-2 text-bold text-center">{"负责人"}</th>
                             <th className="col-md-2 text-bold text-center">{"结算积分"}</th>
                             <th className="col-md-5 text-bold text-center">{"结算金额"}</th>
                             <th className="col-md-3 text-bold text-center">{"结算时间"}</th>

@@ -19,8 +19,8 @@ import {
     filterCityById,
     filterCountryById
 } from '../../components/Tool/Tool';
-import {GENERALUSER_LIST_START, GENERALUSER_LIST_END, CITY_LIST_START, CITY_LIST_END} from '../../constants/index.js'
-import {getListByMutilpCondition, deleteObject, saveObject} from '../../actions/CommonActions';
+import {GENERALUSER_LIST_START, GENERALUSER_LIST_END,GENNERALUSER_DETAIL_START,GENNERALUSER_DETAIL_END, CITY_LIST_START, CITY_LIST_END} from '../../constants/index.js'
+import {getListByMutilpCondition, deleteObject, saveObject,getAuthcode,getDetail} from '../../actions/CommonActions';
 var sha1 = require('js-sha1');
 
 export default class UserListContainer extends Component {
@@ -40,13 +40,16 @@ export default class UserListContainer extends Component {
         this.currentCity = "";
         this.currentCountry = "";
         this.currentCityId = 3;
+        this.interValObj = "";
         this._delete = this._delete.bind(this);
         this._detail = this._detail.bind(this);
+        this._showGetAuthcode = this._showGetAuthcode.bind(this);
         this._resetPassword = this._resetPassword.bind(this);
         this._changeCity = this._changeCity.bind(this);
         this._changeCountry = this._changeCountry.bind(this);
         this._startRefresh = this._startRefresh.bind(this);
         this._lockOrUnlockUser = this._lockOrUnlockUser.bind(this);
+        this._sendMessage = this._sendMessage.bind(this);
     }
 
     componentDidMount() {
@@ -55,7 +58,21 @@ export default class UserListContainer extends Component {
         this.props.dispatch(getListByMutilpCondition(params, CITY_LIST_START, CITY_LIST_END, city_list));
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
-        })
+        });
+        if(sessionStorage['messageTime']!=""){
+            var duringTime = new Date().getTime()-sessionStorage['messageTime'];
+            if(duringTime < 30*1000){
+                sessionStorage['count'] = Math.round((30*1000 - duringTime)/1000);
+                $("#btnSendCode").attr("disabled", "true");
+                $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
+                this.interValObj = setInterval(this.setRemainTime, 1000);
+            }
+        }
+    }
+    componentWillUnmount(){
+        clearInterval(this.interValObj);//停止计时器
+        sessionStorage['messageTime'] = "";
+        $("#btnSendCode").removeAttr("disabled");//启用按钮
     }
 
     _startRefresh() {
@@ -79,12 +96,32 @@ export default class UserListContainer extends Component {
         this._startRefresh();
     }
 
-    _detail(val) {
+    _detail(val,type) {
+        if(type=="detail"){
+            this.props.dispatch(getDetail(val.userid,GENNERALUSER_DETAIL_START, GENNERALUSER_DETAIL_END,generalUser_detail));
+        }else{
+            this.detailData = val;
+            this._startRefresh();
+        }
+    }
+    _showGetAuthcode(val){
         this.detailData = val;
+        if(sessionStorage['messageTime']!=""){
+            var duringTime = new Date().getTime()-sessionStorage['messageTime'];
+            if(duringTime < 30*1000){
+                sessionStorage['count'] = Math.round((30*1000 - duringTime)/1000);
+            }
+        }
         this._startRefresh();
     }
 
-    _resetPassword(params) {
+    _resetPassword() {
+        var params = {
+            password: sha1.hex("88888888"),
+            type: this.detailData.type,
+            phone: this.detailData.phone,
+            authcode: $("#authcode").val()
+        };
         this.props.dispatch(saveObject(params, "", "", reset_password, "/CustomerService/UserManage", "update"));
     }
 
@@ -122,6 +159,39 @@ export default class UserListContainer extends Component {
         };
         this.props.dispatch(getListByMutilpCondition(params, GENERALUSER_LIST_START, GENERALUSER_LIST_END, generalUser_list));
     }
+    _sendMessage() {
+        var phone = sessionStorage['phone'];
+        var count = 30;
+        sessionStorage['count'] = count;
+        sessionStorage['messageTime'] = new Date().getTime();
+        console.log("phone", phone);
+        $("#btnSendCode").attr("disabled", "true");
+        $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
+        this.interValObj = setInterval(this.setRemainTime, 1000);
+        var params = {
+            phone: phone
+        };
+        // this.props.dispatch(getAuthcode(params, "", "", get_authcode));
+    }
+    setRemainTime() {
+        var curCount = sessionStorage['count'];
+        if(!$("#getAuthcodeModal").hasClass("in")){
+            clearInterval(this.interValObj);//停止计时器
+            $("#btnSendCode").text("获取验证码");
+        }else{
+            if (curCount == 0) {
+                clearInterval(this.interValObj);//停止计时器
+                $("#btnSendCode").removeAttr("disabled");//启用按钮
+                $("#btnSendCode").text("重新发送验证码");
+            }
+            else {
+                curCount--;
+                sessionStorage['count'] = curCount;
+                console.log(sessionStorage['count']);
+                $("#btnSendCode").text(curCount + "秒后重新发送");
+            }
+        }
+    }
 
     _changePage(page) {
         this.page = page;
@@ -139,8 +209,10 @@ export default class UserListContainer extends Component {
     }
 
     render() {
-        const {fetching, data, cityList} =this.props;
+        const {fetching, data,detailUser, cityList} =this.props;
         console.log("userdata", data.data);
+        console.log("detailUser", detailUser);
+        const detailData = detailUser.data;
         var cityOptions = [];
         var countryOptions = [];
         var organizationOptions = [];
@@ -211,10 +283,10 @@ export default class UserListContainer extends Component {
         }
         var detailUserInfo = "";
         var bindQrcodeInfo = "";
-        if (this.detailData == "") {
+        var getAuthcodeInfo = "";
+        if(detailUser== ""){
             detailUserInfo = <Loading />;
-            bindQrcodeInfo = <Loading />;
-        } else {
+        }else{
             detailUserInfo =
                 <div>
                     <div className="form-horizontal">
@@ -230,11 +302,11 @@ export default class UserListContainer extends Component {
                                         <div className="thumbnail"
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
                                             <div className="thumb">
-                                                <img src={this.detailData.headimg} alt=""
+                                                <img src={imgBaseUrl+detailData.headimg} alt=""
                                                      style={{height: "160px", width: "160px"}}/>
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                                     <span style={{top: 0, marginTop: 0}}>
-                                                        <a href={this.detailData.headimg} data-popup="lightbox"
+                                                        <a href={imgBaseUrl+detailData.headimg} data-popup="lightbox"
                                                            className="btn"
                                                            style={{height: "160px", width: "160px"}}></a>
                                                     </span>
@@ -250,11 +322,11 @@ export default class UserListContainer extends Component {
                                         <div className="thumbnail"
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
                                             <div className="thumb">
-                                                <img src={this.detailData.idcardimg} alt=""
+                                                <img src={imgBaseUrl+detailData.idcardimg} alt=""
                                                      style={{height: "160px", width: "160px"}}/>
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                                     <span style={{top: 0, marginTop: 0}}>
-                                                        <a href={this.detailData.idcardimg} data-popup="lightbox"
+                                                        <a href={imgBaseUrl+detailData.idcardimg} data-popup="lightbox"
                                                            className="btn"
                                                            style={{height: "160px", width: "160px"}}></a>
                                                     </span>
@@ -269,7 +341,7 @@ export default class UserListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"真实姓名"}</label>
                                     <div className="col-lg-8">
-                                        <input type="text" value={this.detailData.realName} className="form-control"
+                                        <input type="text" value={detailData.realName} className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -277,7 +349,7 @@ export default class UserListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"证件号码"}</label>
                                     <div className="col-lg-8">
-                                        <input type="text" value={userType(this.detailData.idno)}
+                                        <input type="text" value={detailData.idno}
                                                className="form-control"
                                                autoComplete="off"/>
                                     </div>
@@ -288,7 +360,7 @@ export default class UserListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"别名"}</label>
                                     <div className="col-lg-8">
-                                        <input type="text" value={this.detailData.name} className="form-control"
+                                        <input type="text" value={detailData.name} className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -296,7 +368,7 @@ export default class UserListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"用户类型"}</label>
                                     <div className="col-lg-8">
-                                        <input type="text" value={userType(this.detailData.type)}
+                                        <input type="text" value={userType(detailData.type)}
                                                className="form-control"
                                                autoComplete="off"/>
                                     </div>
@@ -307,7 +379,7 @@ export default class UserListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"地址"}</label>
                                     <div className="col-lg-8">
-                                        <input type="text" value={this.detailData.address} className="form-control"
+                                        <input type="text" value={detailData.address} className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -315,7 +387,7 @@ export default class UserListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"小区"}</label>
                                     <div className="col-lg-8">
-                                        <input id="name" type="text" value={this.detailData.organizationName}
+                                        <input id="name" type="text" value={detailData.organizationName}
                                                className="form-control"
                                                autoComplete="off"/>
                                     </div>
@@ -327,7 +399,7 @@ export default class UserListContainer extends Component {
                                            style={{textAlign: 'center'}}>{"是否实名认证"}</label>
                                     <div className="col-lg-8">
                                         <div className="text-muted text-size-small">
-                                            {this.detailData.certificated == 1 ?
+                                            {detailData.certificated == 1 ?
                                                 <span className="label bg-success"
                                                       style={{marginTop: "6px"}}>{"已认证"}</span> :
                                                 <span className="label bg-danger"
@@ -335,17 +407,26 @@ export default class UserListContainer extends Component {
                                         </div>
                                     </div>
                                 </div>
+                                {/*<div className="col-lg-6">*/}
+                                    {/*<label className="col-lg-4 control-label"*/}
+                                           {/*style={{textAlign: 'center'}}>{"用户状态"}</label>*/}
+                                    {/*<div className="col-lg-8">*/}
+                                        {/*<div className="text-muted text-size-small">*/}
+                                            {/*{detailData.status == 1 ?*/}
+                                                {/*<span className="label bg-success"*/}
+                                                      {/*style={{marginTop: "6px"}}>{"有效"}</span> :*/}
+                                                {/*<span className="label bg-danger"*/}
+                                                      {/*style={{marginTop: "6px"}}>{"冻结"}</span>}*/}
+                                        {/*</div>*/}
+                                    {/*</div>*/}
+                                {/*</div>*/}
                                 <div className="col-lg-6">
                                     <label className="col-lg-4 control-label"
-                                           style={{textAlign: 'center'}}>{"用户状态"}</label>
+                                           style={{textAlign: 'center'}}>{"用户积分"}</label>
                                     <div className="col-lg-8">
-                                        <div className="text-muted text-size-small">
-                                            {this.detailData.status == 1 ?
-                                                <span className="label bg-success"
-                                                      style={{marginTop: "6px"}}>{"有效"}</span> :
-                                                <span className="label bg-danger"
-                                                      style={{marginTop: "6px"}}>{"冻结"}</span>}
-                                        </div>
+                                        <input type="text" value={detailData.points}
+                                               className="form-control"
+                                               autoComplete="off"/>
                                     </div>
                                 </div>
                             </div>
@@ -354,7 +435,7 @@ export default class UserListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"创建时间"}</label>
                                     <div className="col-lg-8">
-                                        <input type="text" value={timeStamp2Time(this.detailData.create_time)}
+                                        <input type="text" value={timeStamp2Time(detailData.createTime)}
                                                className="form-control"
                                                autoComplete="off"/>
                                     </div>
@@ -363,9 +444,53 @@ export default class UserListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"更新时间"}</label>
                                     <div className="col-lg-8">
-                                        <input type="text" value={timeStamp2Time(this.detailData.update_time)}
+                                        <input type="text" value={timeStamp2Time(detailData.updateTime)}
                                                className="form-control"
                                                autoComplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                </div>;
+        }
+        if (this.detailData == "") {
+            bindQrcodeInfo = <Loading />;
+        } else {
+            getAuthcodeInfo =
+                <div>
+                    <div className="form-horizontal">
+                        <fieldset className="content-group">
+                            <legend className="text-bold">
+                                {"获取验证码"}
+                            </legend>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{
+                                           textAlign: 'center'
+                                       }}>{"获取验证码"}</label>
+                                <div className="col-lg-10">
+                                    <div className="input-group">
+                                        <input type="text" id="authcode" name="authcode" className="form-control"
+                                               placeholder="输入验证码"/>
+                                        <span className="input-group-btn">
+                                                <button id="btnSendCode" className="btn bg-primary" type="button" onClick={this._sendMessage}>
+                                                    获取验证码
+                                                </button>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{textAlign: 'center'}}></label>
+                                <div className="col-lg-10">
+                                    <div className="text-right">
+                                        <button type="button" className="btn btn-primary"
+                                                onClick={this._resetPassword}>
+                                            {"确定"}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -481,13 +606,15 @@ export default class UserListContainer extends Component {
                         <UserListComponent data={data} fetching={fetching}
                                            _delete={this._delete}
                                            _detail={this._detail}
-                                           _resetPassword={this._resetPassword}
+                                           _showGetAuthcode={this._showGetAuthcode}
                                            _lockOrUnlockUser={this._lockOrUnlockUser}/>
                     </fieldset>
                     <ListMiddleModal id="userDetailModal" content={detailUserInfo} doAction={""}
                                      tip={"用户信息"} actionText="用户详情" hide="true" hideCancel="true"/>
                     <ListMiddleModal id="bindQrcodeModal" content={bindQrcodeInfo} doAction={""}
                                      tip={"绑定二维码"} actionText="绑定二维码" hide="true" hideCancel="true"/>
+                    <ListMiddleModal id="getAuthcodeModal" content={getAuthcodeInfo} doAction={""}
+                                     tip={"获取验证码"} actionText="获取验证码" hide="true" hideCancel="true"/>
                 </div>
             </div>
         )
@@ -507,22 +634,20 @@ class UserListComponent extends Component {
         this.props._lockOrUnlockUser(params);
     }
 
+    _showGetAuthcode(val){
+        this.props._showGetAuthcode(val);
+    }
+
     _resetPassword(val) {
-        var params = {
-            password: sha1.hex("88888888"),
-            type: val.type,
-            phone: val.phone,
-            authcode: ""
-        };
-        this.props._resetPassword(params);
+
     }
 
     _exportRqcode() {
 
     }
 
-    _detail(val) {
-        this.props._detail(val);
+    _detail(val,type) {
+        this.props._detail(val,type);
     }
 
     _delete(userid, realName) {
@@ -561,7 +686,7 @@ class UserListComponent extends Component {
                                             <li>
                                                 <a href="javascript:void(0)" data-toggle="modal"
                                                    data-target="#userDetailModal"
-                                                   onClick={this._detail.bind(this, val)}><i
+                                                   onClick={this._detail.bind(this, val,"detail")}><i
                                                     className=" icon-office"></i>
                                                     {"详情"}</a>
                                             </li>
@@ -569,10 +694,13 @@ class UserListComponent extends Component {
                                                 onClick={this._delete.bind(this, val.userid, val.realName)}><a
                                                 href="javascript:void(0)"><i className="icon-trash"></i>
                                                 {"删除"}</a></li>
-                                            <li style={{display: 'block'}}
-                                                onClick={this._resetPassword.bind(this, val)}><a
-                                                href="javascript:void(0)"><i className="icon-reset"></i>
-                                                {"重置密码"}</a></li>
+                                            <li>
+                                                <a href="javascript:void(0)" data-toggle="modal"
+                                                   data-target="#getAuthcodeModal"
+                                                   onClick={this._showGetAuthcode.bind(this,val)}><i
+                                                    className=" icon-office"></i>
+                                                    {"重置密码"}</a>
+                                            </li>
                                             {val.status == 1 ?
                                                 <li onClick={this._lockOrUnlockUser.bind(this, val.userid, val.status)}>
                                                     <a
@@ -585,7 +713,7 @@ class UserListComponent extends Component {
                                             <li>
                                                 <a href="javascript:void(0)" data-toggle="modal"
                                                    data-target="#bindQrcodeModal"
-                                                   onClick={this._detail.bind(this, val)}><i
+                                                   onClick={this._detail.bind(this, val,"other")}><i
                                                     className=" icon-office"></i>
                                                     {"绑定二维码"}</a>
                                             </li>
@@ -648,10 +776,11 @@ class UserListComponent extends Component {
 }
 
 function mapStateToProps(state) {
-    const {getGeneralUserList, getCityList, commonReducer}=state;
+    const {getGeneralUserList,getGeneralUserDetail, getCityList, commonReducer}=state;
     return {
         fetching: getGeneralUserList.fetching,
         data: getGeneralUserList.data,
+        detailUser: getGeneralUserDetail.data,
         cityList: getCityList.data,
         refresh: commonReducer.refresh
     }

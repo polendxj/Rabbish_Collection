@@ -77,8 +77,7 @@ class RegisterTransitLineComponent extends Component{
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
-                                               marginTop: '8px'
+                                               textAlign: 'center'
                                            }}>{"车牌号"}</label>
                                     <div className="col-lg-9">
                                         <input id="licensePlateNum" name="licensePlateNum" type="text" className="form-control"
@@ -90,7 +89,7 @@ class RegisterTransitLineComponent extends Component{
                                 <div className="form-group" >
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
+                                               textAlign: 'center'
                                            }}>{"司机姓名"}</label>
                                     <div className="col-lg-9">
                                         <input id="driver" name="driver" type="text" className="form-control"
@@ -101,7 +100,7 @@ class RegisterTransitLineComponent extends Component{
                                 <div className="form-group" >
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
+                                               textAlign: 'center'
                                            }}>{"联系方式"}</label>
                                     <div className="col-lg-9">
                                         <input id="contact" name="contact" type="text" className="form-control"
@@ -112,7 +111,7 @@ class RegisterTransitLineComponent extends Component{
                                 <div className="form-group" >
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
+                                               textAlign: 'center'
                                            }}>{"驾照"}</label>
                                     <div className="col-lg-9">
                                         <input id="drivingLicenseNum" name="drivingLicenseNum" type="text" className="form-control"
@@ -123,7 +122,7 @@ class RegisterTransitLineComponent extends Component{
                                 <div className="form-group" >
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
+                                               textAlign: 'center'
                                            }}>{"起点"}</label>
                                     <div className="col-lg-9">
                                         <input id="startLocation" name="startLocation" type="text" className="form-control"
@@ -134,7 +133,7 @@ class RegisterTransitLineComponent extends Component{
                                 <div className="form-group" >
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
+                                               textAlign: 'center'
                                            }}>{"经停地点"}</label>
                                     <div className="col-lg-9">
                                         <input id="stoppedLocation" name="stoppedLocation" type="text" className="form-control"
@@ -145,7 +144,7 @@ class RegisterTransitLineComponent extends Component{
                                 <div className="form-group" >
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
+                                               textAlign: 'center'
                                            }}>{"终点"}</label>
                                     <div className="col-lg-9">
                                         <input id="endLocation" name="endLocation" type="text" className="form-control"

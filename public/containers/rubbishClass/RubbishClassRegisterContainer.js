@@ -87,8 +87,7 @@ class RegisterRubbishClassComponent extends Component{
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
-                                               marginTop: '8px'
+                                               textAlign: 'center'
                                            }}>{"分类名称"}</label>
                                     <div className="col-lg-9">
                                         <input name="name" type="text" className="form-control"
@@ -99,8 +98,7 @@ class RegisterRubbishClassComponent extends Component{
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
-                                               marginTop: '8px'
+                                               textAlign: 'center'
                                            }}>{"奖励积分"}</label>
                                     <div className="col-lg-9">
                                         <input name="rewardPoints" type="text" className="form-control"
@@ -111,7 +109,7 @@ class RegisterRubbishClassComponent extends Component{
                                 <div className="form-group" >
                                     <label className="col-lg-2 control-label"
                                            style={{
-                                               textAlign: 'center',
+                                               textAlign: 'center'
                                            }}>{"分类描述"}</label>
                                     <div className="col-lg-9">
                                     <textarea name="description" rows="5" cols="5" className="form-control"
