@@ -59,6 +59,7 @@ export default class StatisticListContainer extends Component {
         this.settlementOfcurrentCityId = 1;
         this.totalCurrentCityId = 1;
         this.currentCity = "";
+        this.currentCityOfCounty = "";
         this.cityOfcurrentCity = "";
         this.organizationOfcurrentCity = "";
         this.daterangeOfcurrentCity = "";
@@ -148,6 +149,7 @@ export default class StatisticListContainer extends Component {
             var settlementParams = {
                 cityid: $("#cityOfSettlementSelect").val(),
                 countyid: $("#ofSettlementSelect").val(),
+                userid: $("#userid").val(),
                 startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
                 endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
             };
@@ -201,7 +203,8 @@ export default class StatisticListContainer extends Component {
     }
     _changeCityOfSettlement() {
         var citieid = $("#cityOfSettlementSelect").val();
-        this.currentCity = filterCityById(this.props.cityList.data, citieid);
+        this.currentCityOfCounty = filterCityById(this.props.cityOfCountyList.data, citieid);
+        console.log("this.currentCityOfCounty",this.currentCityOfCounty);
         this.settlementOfcurrentCityId = citieid;
         this._startRefresh();
     }
@@ -223,10 +226,6 @@ export default class StatisticListContainer extends Component {
 
     render() {
         const {fetching, classifyData, cityData, organizationData, rangeDateData, settlementData,operationData, cityList,cityOfCountyList,totalData, classifyList} =this.props;
-        console.log("classifyData", classifyData);
-        console.log("rangeDateData", rangeDateData);
-        console.log("settlementData", settlementData);
-        console.log("operationData", operationData);
         var data = "";
         var showCity = "city";
         var classifyDataMerge = [];
@@ -423,8 +422,8 @@ export default class StatisticListContainer extends Component {
                         <option key={"city-" + idx} value={city.id}>{city.name}</option>
                     )
                 });
-                if (this.currentCity == "") {
-                    var idx = getInitialCityIdx(this.currentCityId, cityList.data);
+                if (this.currentCityOfCounty == "") {
+                    var idx = getInitialCityIdx(this.settlementOfcurrentCityId, cityList.data);
                     if (cityOfCountyList.data[idx].country) {
                         cityOfCountyList.data[idx].country.forEach(function (val, index) {
                             countyOptions.push(
@@ -433,8 +432,8 @@ export default class StatisticListContainer extends Component {
                         })
                     }
                 } else {
-                    if (this.currentCity.country) {
-                        this.currentCity.country.forEach(function (val, index) {
+                    if (this.currentCityOfCounty.country) {
+                        this.currentCityOfCounty.country.forEach(function (val, index) {
                             countyOptions.push(
                                 <option key={"country-" + index} value={val.id}>{val.name}</option>
                             )
@@ -753,6 +752,9 @@ export default class StatisticListContainer extends Component {
                                             <li >
                                                 <input id="daterange-two-4" type="text" className="form-control daterange-two"
                                                        placeholder="选择日期"/>
+                                            </li>
+                                            <li >
+                                                <input id="userid" type="text" className="form-control" placeholder="请输入用户id"/>
                                             </li>
                                             <li>
                                                 <button onClick={this._search.bind(this,"SETTLEMENT")} type="button"

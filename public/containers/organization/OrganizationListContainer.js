@@ -183,8 +183,8 @@ export default class OrganizationListContainer extends Component {
                 });
                 if (this.currentCity == "") {
                     var idx = getInitialCityIdx(this.currentCityId, cityList.data);
-                    if (cityList.data[0].country) {
-                        cityList.data[0].country.forEach(function (val, index) {
+                    if (cityList.data[idx].country) {
+                        cityList.data[idx].country.forEach(function (val, index) {
                             countryOptions.push(
                                 <option key={"country-" + index} value={val.id}>{val.name}</option>
                             )
