@@ -35,11 +35,7 @@ export default class StatisticListContainer extends Component {
     constructor(props) {
         super(props);
         this.page = 0;
-        this.breadCrumbs = [
-            {text: "统计分析", link: ''},
-            {text: "垃圾投放", link: ''},
-            {text: "垃圾投放列表", link: ''}
-        ];
+        this.breadCrumbs = [];
         this.operation = [
             {icon: "", text: "", action: ""}
         ];
@@ -111,8 +107,8 @@ export default class StatisticListContainer extends Component {
                 page: 0,
                 size: 20,
                 cityid: $("#citySelect").val(),
-                 startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
-                 endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
+                startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+                endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
             };
             this.props.dispatch(getListByMutilpCondition(cityParams, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
         } else if (this.searchColumn == "ORGANIZATION") {
@@ -206,73 +202,78 @@ export default class StatisticListContainer extends Component {
         }
         return (
             <div>
-                <BreadCrumbs
-                    breadCrumbs={this.breadCrumbs}
-                    icon={'icon-user'}
-                    operation={this.operation}
-                />
-                <div className="content" style={{marginTop: '20px'}}>
-                    <fieldset className="content-group">
-                        <legend className="text-bold">{Current_Lang.label.searching}</legend>
-                        <ul className="list-inline list-inline-condensed no-margin-bottom"
-                            style={{textAlign: 'right', marginTop: '-59px'}}>
-                            <li className="dropdown"
-                                style={{borderBottom: '0 lightgray solid'}}>
-                                <a href="#" className="btn btn-link btn-sm dropdown-toggle"
-                                   data-toggle="dropdown" aria-expanded="false" style={{
-                                    paddingLeft: '0',
-                                    paddingRight: '0',
-                                    fontWeight: 'bold',
-                                    color: '#193153'
-                                }}><span
-                                    style={{color: '#193153'}} id="search_way">{"按垃圾分类统计"}</span> <span
-                                    className="caret"></span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a href="#">{"按垃圾分类统计"}</a></li>
-                                    <li><a href="#">{"按城市统计"}</a></li>
-                                    <li><a href="#">{"按单位/小区统计"}</a></li>
-                                    <li><a href="#">{"按时间段统计"}</a></li>
-                                </ul>
-                            </li>
-                            <li style={{display: "inline-block"}}>
-                                <select id="citySelect" className="form-control"
-                                        value={this.currentCityId} onChange={this._changeCity}>
-                                    {cityOptions}
-                                </select>
-                            </li>
-                            <li style={{display: this.searchColumn == "ORGANIZATION" ? "inline-block" : "none"}}>
-                                <select id="organizationSelect" className="form-control">
-                                    {organizationOptions}
-                                </select>
-                            </li>
-                            <li style={{display: this.searchColumn == "CLASSIFY" ? "inline-block" : "none"}}>
-                                <input type="text" className="form-control daterange-single"
-                                       placeholder="选择日期"/>
-                            </li>
-                            <li style={{display: this.searchColumn == "CLASSIFY" ? "none" : "inline-block"}}>
-                                <input type="text" className="form-control daterange-organization"/>
-                            </li>
-                            <li>
-                                <button onClick={this._search.bind(this)}
-                                        style={{marginLeft: '30px'}} type="button"
-                                        className="btn btn-primary btn-icon"><i
-                                    className="icon-search4"></i></button>
-                            </li>
-                        </ul>
-                    </fieldset>
-                    <fieldset className="content-group">
-                        <legend className="text-bold">{"垃圾投放统计列表区"}</legend>
-                        <div style={{marginTop: '-80px'}}>
-                            <Pagenation counts={data && data.data ? data.data.length : 0} page={this.page}
-                                        _changePage={this._changePage} _prePage={this._prePage}
-                                        _nextPage={this._nextPage}/>
-                        </div>
-                        <StatisticListComponent data={data} fetching={fetching}
-                                                searchColumn={this.searchColumn}
-                                                _delete={this._delete}/>
+                <div className="content" style={{marginTop: '5px'}}>
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-lg-3 col-md-6">
+                                <div className="panel bg-teal-400">
+                                    <div className="panel-body">
+                                        <h3 className="no-margin">3,450</h3>
+                                        垃圾投放总量
+                                        <div className="text-muted text-size-small">单位：吨</div>
+                                        <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
 
-                    </fieldset>
+                                </div>
+                            </div>
+
+                            <div className="col-lg-3  col-md-6">
+                                <div className="panel bg-blue-400" style={{position: "static",zoom: "1"}}>
+                                    <div className="panel-body">
+                                        <h3 className="no-margin">18,390</h3>
+                                        激活用户总数
+                                        <div className="text-muted text-size-small">单位：个</div>
+                                        <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
+
+                                </div>
+                            </div>
+
+                            <div className="col-lg-3  col-md-6">
+                                <div className="panel bg-pink-400">
+                                    <div className="panel-body">
+
+                                        <h3 className="no-margin">102563 / 296256</h3>
+                                        兑换总金额 / 兑换总积分
+                                        <div className="text-muted text-size-small">单位：元</div>
+                                        <a className="heading-elements-toggle"><i class="icon-menu"></i></a></div>
+
+                                </div>
+                            </div>
+
+                            <div className="col-lg-3 col-md-6">
+                                <div className="panel bg-grey-400">
+                                    <div className="panel-body">
+
+                                        <h3 className="no-margin">1028</h3>
+                                        每日请求数
+                                        <div className="text-muted text-size-small">单位：次/平均</div>
+                                        <a className="heading-elements-toggle"><i class="icon-menu"></i></a></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row" style={{padding:"20px"}}>
+                        <div className="tabbable">
+                            <ul className="nav nav-tabs nav-justified nav-tabs-highlight">
+                                <li className="active"><a href="#basic-justified-tab1" data-toggle="tab" aria-expanded="true">垃圾分类统计</a></li>
+                                <li className=""><a href="#basic-justified-tab2" data-toggle="tab" aria-expanded="false">城市垃圾统计</a></li>
+                                <li className=""><a href="#basic-justified-tab3" data-toggle="tab" aria-expanded="false">小区/单位垃圾统计</a></li>
+                                <li className=""><a href="#basic-justified-tab4" data-toggle="tab" aria-expanded="false">结算记录统计</a></li>
+                                <li className=""><a href="#basic-justified-tab5" data-toggle="tab" aria-expanded="false">总量数据统计</a></li>
+                            </ul>
+
+                            <div className="tab-content">
+                                <div className="tab-pane active" id="basic-justified-tab1">
+                                    Easily make tabs equal widths of their parent with <code>.nav-justified</code> className.
+                                </div>
+
+                                <div className="tab-pane" id="basic-justified-tab2">
+                                    Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid laeggin.
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

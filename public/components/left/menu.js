@@ -43,18 +43,23 @@ class MainMenu extends Component {
         var mainMenu;
         switch (this.props.selected) {
             case 0:
-                mainMenu = <Statistic _changeLeftMenu={this.props._changeLeftMenu}/>
+                mainMenu = "";
+                $(".sidebar-main").hide();
                 break;
             case 1:
-                mainMenu = <Business _changeLeftMenu={this.props._changeLeftMenu}/>
+                mainMenu = <Business _changeLeftMenu={this.props._changeLeftMenu}/>;
+                $(".sidebar-main").show();
                 break;
             case 2:
-                mainMenu = <DataManager _changeLeftMenu={this.props._changeLeftMenu}/>
+                mainMenu = <DataManager _changeLeftMenu={this.props._changeLeftMenu}/>;
+                $(".sidebar-main").show();
                 break;
             case 3:
-                mainMenu = <NotifyManager _changeLeftMenu={this.props._changeLeftMenu}/>
+                mainMenu = <NotifyManager _changeLeftMenu={this.props._changeLeftMenu}/>;
+                $(".sidebar-main").show();
                 break;
         }
+        console.log(mainMenu)
         return (
             <div className="sidebar sidebar-main " style={{borderRight: '0 red solid'}}>
                 <div className="sidebar-content">
