@@ -40,7 +40,7 @@ export default class UserRegisterContainer extends Component {
         var params = {
             phone: phone
         };
-        // this.props.dispatch(getAuthcode(params, "", "", get_authcode));
+        this.props.dispatch(getAuthcode(params, "", "", get_authcode));
     }
 
     render() {
@@ -174,7 +174,7 @@ class RegisterUserComponent extends Component {
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"用户类型"}</label>
                                     <div className="col-lg-9">
-                                        <select className="form-control" name="type" defaultValue={3}>
+                                        <select className="form-control" name="type" defaultValue={4}>
                                             <option value={3}>{"商户用户"}</option>
                                             <option value={4}>{"住宅用户"}</option>
                                             <option value={5}>{"机关单位、学校"}</option>

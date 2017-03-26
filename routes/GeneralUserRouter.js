@@ -20,6 +20,24 @@ router.post('/rsapp/generalUser/register', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/generalUser', 'POST',data, req, resp);
 });
+router.post('/rsapp/generalUser/detail', function (req, resp) {
+    var data = req.body.data;
+    RequestApi.Request(baseURL + '/rsapp/generalUserInfo/'+data, 'GET',data, req, resp,function (userDetail) {
+        if (userDetail.status) {
+            if(userDetail.data&&userDetail.data!=null){
+                RequestApi.Request(baseURL + '/rsapp/organization/'+userDetail.data.organizationid, 'GET',data, req, resp,function (organization) {
+                    console.log(organization.data);
+                    userDetail['data']['organizationName'] = organization.data.name;
+                    resp.send(userDetail);
+                });
+            }else{
+                resp.send(userDetail);
+            }
+        }else{
+            resp.send(userDetail);
+        }
+    });
+});
 router.post('/rsapp/generalUser/delete', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));
     console.log("general",data);
@@ -31,8 +49,8 @@ router.post('/rsapp/user/lock', function (req, resp) {
     RequestApi.Request(baseURL + '/rsapp/user/lock', 'PUT',data, req, resp);
 });
 router.post('/rsapp/user/qrcode', function (req, resp) {
-    var data = JSON.stringify(JSON.parse(req.body.data));
-    RequestApi.Request(baseURL + '/rsapp/user/qrcode', 'POST',data, req, resp);
+    var data = querystring.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/user/qrcode'+"?"+data, 'POST',"", req, resp);
 });
 
 module.exports = router;

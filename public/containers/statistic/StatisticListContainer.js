@@ -59,6 +59,7 @@ export default class StatisticListContainer extends Component {
         this.props.dispatch(getListByMutilpCondition(params, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
         this.props.dispatch(getListByMutilpCondition(params, STATISTICBYORGANIZATION_LIST_START, STATISTICBYORGANIZATION_LIST_END, statisticByOrganization_list));
         this.props.dispatch(getListByMutilpCondition({cityid: 1}, STATISTICBYRANGEDATE_LIST_START, STATISTICBYRANGEDATE_LIST_END, statisticByRangeDate_list));
+        // this.props.dispatch(getListByMutilpCondition({cityid: 1}, STATISTICBYRANGEDATE_LIST_START, STATISTICBYRANGEDATE_LIST_END, statistic_settlement));
         this.props.dispatch(getListByMutilpCondition(cityParams, CITY_ORGANIZATION_LIST_START, CITY_ORGANIZATION_LIST_END, cityOfOrganization_list));
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
         $("#search_way").parent().parent().on('click', 'li', function () {
@@ -101,7 +102,7 @@ export default class StatisticListContainer extends Component {
                 page: 0,
                 size: 20,
                 cityid: $("#citySelect").val(),
-                //monthday: $('.daterange-single').val()
+                monthday: timeStamp2Time(new Date($('.daterange-single').val()))
             };
             this.props.dispatch(getListByMutilpCondition(classifyParams, STATISTICBYCLASSIFY_LIST_START, STATISTICBYCLASSIFY_LIST_END, statisticByClassify_list));
         } else if (this.searchColumn == "CITY") {
@@ -110,8 +111,8 @@ export default class StatisticListContainer extends Component {
                 page: 0,
                 size: 20,
                 cityid: $("#citySelect").val(),
-                // startday: new Date(rangeTime.split("-")[0].trim()).getTime(),
-                // endday: new Date(rangeTime.split("-")[1].trim()).getTime()
+                 startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+                 endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
             };
             this.props.dispatch(getListByMutilpCondition(cityParams, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
         } else if (this.searchColumn == "ORGANIZATION") {
@@ -120,8 +121,8 @@ export default class StatisticListContainer extends Component {
                 page: 0,
                 size: 20,
                 cityid: $("#citySelect").val(),
-                // startday: new Date(rangeTime.split("-")[0].trim()).getTime(),
-                // endday: new Date(rangeTime.split("-")[1].trim()).getTime()
+                startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+                endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
             };
             this.props.dispatch(getListByMutilpCondition(organizationParams, STATISTICBYORGANIZATION_LIST_START, STATISTICBYORGANIZATION_LIST_END, statisticByOrganization_list));
         } else {
@@ -130,8 +131,8 @@ export default class StatisticListContainer extends Component {
                 page: 0,
                 size: 20,
                 cityid: $("#citySelect").val(),
-                // startday: new Date(rangeTime.split("-")[0].trim()).getTime(),
-                // endday: new Date(rangeTime.split("-")[1].trim()).getTime()
+                startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+                endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
             };
             this.props.dispatch(getListByMutilpCondition(rangeDateParams, STATISTICBYRANGEDATE_LIST_START, STATISTICBYRANGEDATE_LIST_END, statisticByRangeDate_list));
         }
