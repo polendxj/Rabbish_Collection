@@ -176,8 +176,6 @@ export default class StatisticListContainer extends Component {
         } else {
             data = rangeDateData
         }
-        console.log("statisticData", data);
-        console.log("cityList", cityList);
         var cityOptions = [];
         var organizationOptions = [];
         if (cityList) {
@@ -211,6 +209,7 @@ export default class StatisticListContainer extends Component {
                 }
             }
         }
+        var tableHeight = ($(window).height() - 410);
         return (
             <div>
                 <div className="content" style={{marginTop: '5px'}}>
@@ -245,7 +244,7 @@ export default class StatisticListContainer extends Component {
                                         <h3 className="no-margin">102563 / 296256</h3>
                                         兑换总金额 / 兑换总积分
                                         <div className="text-muted text-size-small">单位：元</div>
-                                        <a className="heading-elements-toggle"><i class="icon-menu"></i></a></div>
+                                        <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
 
                                 </div>
                             </div>
@@ -257,7 +256,7 @@ export default class StatisticListContainer extends Component {
                                         <h3 className="no-margin">1028</h3>
                                         每日请求数
                                         <div className="text-muted text-size-small">单位：次/平均</div>
-                                        <a className="heading-elements-toggle"><i class="icon-menu"></i></a></div>
+                                        <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
 
                                 </div>
                             </div>
@@ -275,7 +274,48 @@ export default class StatisticListContainer extends Component {
 
                             <div className="tab-content">
                                 <div className="tab-pane active" id="basic-justified-tab1">
-                                    Easily make tabs equal widths of their parent with <code>.nav-justified</code> className.
+                                    <fieldset className="content-group">
+                                        <legend className="text-bold">搜索区</legend>
+                                        <ul className="list-inline list-inline-condensed no-margin-bottom"
+                                            style={{textAlign: 'right',marginTop:'-59px'}}>
+                                            <li className="dropdown"
+                                                style={{borderBottom: '0 lightgray solid'}}>
+                                                <select id="organizationSelect" className="form-control"><option value="1">崇阳小区</option><option value="2">蜀南花园</option></select>
+                                            </li>
+                                            <li>
+                                                <input type="text" className="form-control daterange-organization" style={{width:"175px"}}/>
+                                            </li>
+                                            <li>
+                                                <button onClick={this._search.bind(this)} type="button"
+                                                        className="btn btn-primary btn-icon"><i
+                                                    className="icon-search4"></i></button>
+                                            </li>
+
+                                        </ul>
+                                    </fieldset>
+                                    <fieldset className="content-group">
+                                        <div style={{marginTop:'-20px'}}>
+                                            <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
+                                                        _changePage={this._changePage} _prePage={this._prePage}
+                                                        _nextPage={this._nextPage}/>
+                                        </div>
+                                        <div className="table-responsive" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+                                            <table className="table table-bordered table-hover" style={{marginBottom: '85px'}}>
+                                                <thead>
+                                                <tr style={{fontWeight: 'bold'}}>
+                                                    <th className="text-center" style={{width: "20px"}}></th>
+                                                    <th className="col-md-4 text-bold text-center">{"垃圾分类名称"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{"投放次数"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{"投放重量"}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </fieldset>
                                 </div>
 
                                 <div className="tab-pane" id="basic-justified-tab2">
