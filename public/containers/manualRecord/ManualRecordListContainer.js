@@ -64,7 +64,7 @@ export default class ManualRecordListContainer extends Component {
             <div>
                 <BreadCrumbs
                     breadCrumbs={this.breadCrumbs}
-                    icon={'icon-user'}
+                    icon={'icon-piggy-bank'}
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>

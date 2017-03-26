@@ -38,9 +38,7 @@ export default class StoreListContainer extends Component {
         this.verifyFlag = false;
         this.currentCity = "";
         this.currentCityId = 3;
-        this.operation = [
-            {icon: "", text: "", action: ""}
-        ];
+        this.operation = [];
         this.searchColumn = "DRIVER";
         this._detail = this._detail.bind(this);
         this._showVerify = this._showVerify.bind(this);
@@ -253,7 +251,7 @@ export default class StoreListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"店铺名称"}</label>
                                     <div className="col-lg-8">
-                                        <input id="name" type="text" value={this.detailData.name} className="form-control"
+                                        <input disabled id="name" type="text" value={this.detailData.name} className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -261,7 +259,7 @@ export default class StoreListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"负责人"}</label>
                                     <div className="col-lg-8">
-                                        <input id="name" type="text" value={this.detailData.manager} className="form-control"
+                                        <input disabled id="name" type="text" value={this.detailData.manager} className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -271,7 +269,7 @@ export default class StoreListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"城市"}</label>
                                     <div className="col-lg-8">
-                                        <input id="name" type="text" value={this.detailData.city} className="form-control"
+                                        <input disabled id="name" type="text" value={this.detailData.city} className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -279,7 +277,7 @@ export default class StoreListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"区县"}</label>
                                     <div className="col-lg-8">
-                                        <input id="name" type="text" value={this.detailData.county} className="form-control"
+                                        <input disabled id="name" type="text" value={this.detailData.county} className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -289,7 +287,7 @@ export default class StoreListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"地址"}</label>
                                     <div className="col-lg-8">
-                                        <input id="name" type="text" value={this.detailData.address} className="form-control"
+                                        <input disabled id="name" type="text" value={this.detailData.address} className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -297,7 +295,7 @@ export default class StoreListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"联系方式"}</label>
                                     <div className="col-lg-8">
-                                        <input id="name" type="text" value={this.detailData.contact} className="form-control"
+                                        <input disabled id="name" type="text" value={this.detailData.contact} className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -307,7 +305,7 @@ export default class StoreListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"经度"}</label>
                                     <div className="col-lg-8">
-                                        <input id="name" type="text" value={this.detailData.longitude} className="form-control"
+                                        <input disabled id="name" type="text" value={this.detailData.longitude} className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -315,7 +313,7 @@ export default class StoreListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"纬度"}</label>
                                     <div className="col-lg-8">
-                                        <input id="name" type="text" value={this.detailData.latitude} className="form-control"
+                                        <input disabled id="name" type="text" value={this.detailData.latitude} className="form-control"
                                                placeholder="行政区名称"
                                                autoComplete="off"/>
                                     </div>
@@ -326,7 +324,7 @@ export default class StoreListContainer extends Component {
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"描 述"}</label>
                                     <div className="col-lg-10">
-                                    <textarea id="name" type="text" value={this.detailData.description} className="form-control"
+                                    <textarea disabled id="name" type="text" value={this.detailData.description} className="form-control"
                                               autoComplete="off"></textarea>
                                     </div>
                                 </div>
@@ -365,15 +363,15 @@ export default class StoreListContainer extends Component {
                         <label className="col-lg-2 control-label"
                                style={{textAlign: 'center'}}>{"商户名称"}</label>
                         <div className="col-lg-9">
-                            <input id="storeName" type="text" value={this.detailData.name} className="form-control"
-                                   autoComplete="off" disabled/>
+                            <input disabled id="storeName" type="text" value={this.detailData.name} className="form-control"
+                                   autoComplete="off" />
                         </div>
                     </div>
                     <div className="form-group">
                         <label className="col-lg-2 control-label"
                                style={{textAlign: 'center'}}>{"结算金额"}</label>
                         <div className="col-lg-9">
-                            <input id="settlementAmount" type="text" className="form-control" placeholder="输入结算金额"
+                            <input disabled id="settlementAmount" type="text" className="form-control" placeholder="输入结算金额"
                                    autoComplete="off"/>
                         </div>
                     </div>
@@ -381,7 +379,7 @@ export default class StoreListContainer extends Component {
                         <label className="col-lg-2 control-label"
                                style={{textAlign: 'center'}}>{"结算积分"}</label>
                         <div className="col-lg-9">
-                            <input id="settlementPoints" type="text" className="form-control" placeholder="输入结算积分"
+                            <input disabled id="settlementPoints" type="text" className="form-control" placeholder="输入结算积分"
                                    autoComplete="off"/>
                         </div>
                     </div>
@@ -405,24 +403,24 @@ export default class StoreListContainer extends Component {
             <div>
                 <BreadCrumbs
                     breadCrumbs={this.breadCrumbs}
-                    icon={'icon-user'}
+                    icon={' icon-home9'}
                     operation={this.operation}
                 />
                 <ul className="nav nav-tabs">
                     <li
                         className="active"
                         style={{fontWeight: 'bold'}}><a
-                        href="#verifiedStore" data-toggle="tab">{"已通过审核列表"}</a>
+                        href="#verifiedStore" data-toggle="tab">{"通过审核"}</a>
                     </li>
                     <li
                         style={{fontWeight: 'bold'}}><a
                         href="#unauthorizedStore"
-                        data-toggle="tab">{"未认证列表"}</a>
+                        data-toggle="tab">{"审核中"}</a>
                     </li>
                     <li
                         style={{fontWeight: 'bold'}}><a
                         href="#unverifiedStore"
-                        data-toggle="tab">{"未通过审核列表"}</a>
+                        data-toggle="tab">{"未通过审核"}</a>
                     </li>
                 </ul>
                 <div className="content" style={{marginTop: '20px'}}>
@@ -430,22 +428,6 @@ export default class StoreListContainer extends Component {
                         <legend className="text-bold">{Current_Lang.label.searching}</legend>
                         <ul className="list-inline list-inline-condensed no-margin-bottom"
                             style={{textAlign: 'right', marginTop: '-59px'}}>
-                            <li className="dropdown"
-                                style={{borderBottom: '0 lightgray solid'}}>
-                                <a href="#" className="btn btn-link btn-sm dropdown-toggle"
-                                   data-toggle="dropdown" aria-expanded="false" style={{
-                                    paddingLeft: '0',
-                                    paddingRight: '0',
-                                    fontWeight: 'bold',
-                                    color: '#193153'
-                                }}><span
-                                    style={{color: '#193153'}} id="search_way">{"按城市搜索"}</span> <span
-                                    className="caret"></span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a href="#">{"按城市搜索"}</a></li>
-                                </ul>
-                            </li>
                             <li style={{display: "inline-block"}}>
                                 <select id="citySelect" className="form-control" style={{width: "150px"}}
                                         value={this.currentCityId} onChange={this._changeCity}>
@@ -458,8 +440,7 @@ export default class StoreListContainer extends Component {
                                 </select>
                             </li>
                             <li>
-                                <button onClick={this._search.bind(this)}
-                                        style={{marginLeft: '30px'}} type="button"
+                                <button onClick={this._search.bind(this)}type="button"
                                         className="btn btn-primary btn-icon"><i
                                     className="icon-search4"></i></button>
                             </li>
@@ -467,7 +448,7 @@ export default class StoreListContainer extends Component {
                         </ul>
                     </fieldset>
                     <fieldset className="content-group">
-                        <legend className="text-bold">{"扫码员列表区"}</legend>
+                        <legend className="text-bold">{"加盟商列表"}</legend>
                         <div style={{marginTop: '-80px'}}>
                             <Pagenation counts={3} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}

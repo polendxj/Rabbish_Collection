@@ -76,7 +76,12 @@ class TopMenus extends Component {
         this.props.changeTopMenu(idx);
         if(idx==0){
             browserHistory.push("/Statistic/RubbishPutIn");
-
+        }else if(idx==1){
+            browserHistory.push("/CustomerService/UserManage");
+        }else if(idx==2){
+            browserHistory.push("/DataManage/RubbishClass");
+        }else if(idx==3){
+            browserHistory.push("/SystemNotice/NoticeManage");
         }
     }
 
@@ -87,9 +92,6 @@ class TopMenus extends Component {
     render() {
         return (
             <ul className="nav navbar-nav" style={{fontWeight: 'bold'}}>
-                <li onClick={this._menuChange.bind(this, this.selected, true)}><a
-                    className="sidebar-control sidebar-main-toggle hidden-xs"><i
-                    className="icon-paragraph-justify3"></i></a></li>
                 <li className="dropdown dropdown-user topmenu" onClick={this._menuChange.bind(this, 0, false)}>
                     <a className="dropdown-toggle" data-toggle="dropdown">
                         <i className="icon-stats-bars2" style={{fontSize: "12px"}}></i> <span
@@ -162,55 +164,9 @@ class RightPanel extends Component {
 
         var lis = [];
         var label = "";
-        switch (this.currentLang) {
-            case "CN":
-                label = <a className="dropdown-toggle" data-toggle="dropdown"><img src="/assets/images/flags/cn.png"
-                                                                                   className="position-left"
-                                                                                   alt=""/>中文<span
-                    className="caret"></span></a>
-                lis.push(<li key="1" onClick={this._changeLang.bind(this, "EN")}><a className="deutsch"><img
-                    src="/assets/images/flags/gb.png" alt=""/> English</a></li>);
-                lis.push(<li key="2" onClick={this._changeLang.bind(this, "KO")}><a className="deutsch"><img
-                    src="/assets/images/flags/kr.png" alt=""/> 한국어 </a></li>);
-                break;
-            case "EN":
-                label = <a className="dropdown-toggle" data-toggle="dropdown"><img src="/assets/images/flags/gb.png"
-                                                                                   className="position-left" alt=""/>English<span
-                    className="caret"></span></a>
-                lis.push(<li key="0" onClick={this._changeLang.bind(this, "CN")}><a className="deutsch"><img
-                    src="/assets/images/flags/cn.png" alt=""/> 中文 </a></li>);
-                lis.push(<li key="2" onClick={this._changeLang.bind(this, "KO")}><a className="deutsch"><img
-                    src="/assets/images/flags/kr.png" alt=""/> 한국어 </a></li>);
-                break;
-            case "KO":
-                label = <a className="dropdown-toggle" data-toggle="dropdown"><img src="/assets/images/flags/kr.png"
-                                                                                   className="position-left" alt=""/>한국어<span
-                    className="caret"></span></a>
-                lis.push(<li key="0" onClick={this._changeLang.bind(this, "CN")}><a className="deutsch"><img
-                    src="/assets/images/flags/cn.png" alt=""/> 中文 </a></li>);
-                lis.push(<li key="1" onClick={this._changeLang.bind(this, "EN")}><a className="deutsch"><img
-                    src="/assets/images/flags/en.png" alt=""/> English </a></li>);
-                break;
-            default:
-                label = <a className="dropdown-toggle" data-toggle="dropdown"><img src="/assets/images/flags/cn.png"
-                                                                                   className="position-left"
-                                                                                   alt=""/>中文<span
-                    className="caret"></span></a>
-                lis.push(<li key="1" onClick={this._changeLang.bind(this, "EN")}><a className="deutsch"><img
-                    src="/assets/images/flags/gb.png" alt=""/> English</a></li>);
-                lis.push(<li key="2" onClick={this._changeLang.bind(this, "KO")}><a className="deutsch"><img
-                    src="/assets/images/flags/kr.png" alt=""/> 한국어 </a></li>);
-                break;
-        }
+
         return (
             <ul className="nav navbar-nav navbar-right">
-                <li className="dropdown language-switch">
-                    {label}
-                    <ul className="dropdown-menu">
-                        {lis}
-                    </ul>
-                </li>
-
                 {/*<li className="dropdown">
                  <a href="#" className="dropdown-toggle" data-toggle="dropdown" onClick={this.toAlarmHistory.bind(this)}>
                  <i className="icon-warning"></i>
@@ -262,7 +218,7 @@ class RightPanel extends Component {
                 <li className="dropdown dropdown-user">
                     <a className="dropdown-toggle" data-toggle="dropdown">
                         <img src="/assets/images/userimg.png" alt=""/>
-                        <span>{sessionStorage['user']}</span>
+                        <span>超级管理员</span>
                         <i className="caret"></i>
                     </a>
 

@@ -213,8 +213,6 @@ export default class UserListContainer extends Component {
 
     render() {
         const {fetching, data,detailUser, cityList} =this.props;
-        console.log("userdata", data.data);
-        console.log("detailUser", detailUser);
         const detailData = detailUser.data;
         var cityOptions = [];
         var countryOptions = [];
@@ -302,7 +300,7 @@ export default class UserListContainer extends Component {
             detailUserInfo =
                 <div>
                     <div className="form-horizontal">
-                        <fieldset className="content-group">
+                        <fieldset className="content-group" >
                             <legend className="text-bold">
                                 {"详细信息"}
                             </legend>
@@ -348,12 +346,12 @@ export default class UserListContainer extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="form-group">
+                            <div className="form-group" >
                                 <div className="col-lg-6">
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"真实姓名"}</label>
                                     <div className="col-lg-8">
-                                        <input type="text" value={detailData.realName} className="form-control"
+                                        <input disabled  type="text" value={detailData.realName} className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -361,18 +359,18 @@ export default class UserListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"证件号码"}</label>
                                     <div className="col-lg-8">
-                                        <input type="text" value={detailData.idno}
+                                        <input disabled type="text" value={detailData.idno}
                                                className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
                             </div>
-                            <div className="form-group">
+                            <div className="form-group" >
                                 <div className="col-lg-6">
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"别名"}</label>
                                     <div className="col-lg-8">
-                                        <input type="text" value={detailData.name} className="form-control"
+                                        <input disabled type="text" value={detailData.name} className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -380,18 +378,18 @@ export default class UserListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"用户类型"}</label>
                                     <div className="col-lg-8">
-                                        <input type="text" value={userType(detailData.type)}
+                                        <input disabled type="text" value={userType(detailData.type)}
                                                className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
                             </div>
-                            <div className="form-group">
+                            <div className="form-group" >
                                 <div className="col-lg-6">
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"地址"}</label>
                                     <div className="col-lg-8">
-                                        <input type="text" value={detailData.address} className="form-control"
+                                        <input disabled type="text" value={detailData.address} className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -399,13 +397,13 @@ export default class UserListContainer extends Component {
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"小区"}</label>
                                     <div className="col-lg-8">
-                                        <input id="name" type="text" value={detailData.organizationName}
+                                        <input disabled id="name" type="text" value={detailData.organizationName}
                                                className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
                             </div>
-                            <div className="form-group">
+                            <div className="form-group" >
                                 <div className="col-lg-6">
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"是否实名认证"}</label>
@@ -432,31 +430,31 @@ export default class UserListContainer extends Component {
                                         {/*</div>*/}
                                     {/*</div>*/}
                                 {/*</div>*/}
-                                <div className="col-lg-6">
+                                <div className="col-lg-6" >
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"用户积分"}</label>
                                     <div className="col-lg-8">
-                                        <input type="text" value={detailData.points}
+                                        <input disabled type="text" value={detailData.points}
                                                className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
                             </div>
-                            <div className="form-group">
+                            <div className="form-group" >
                                 <div className="col-lg-6">
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"创建时间"}</label>
                                     <div className="col-lg-8">
-                                        <input type="text" value={timeStamp2Time(detailData.createTime)}
+                                        <input disabled type="text" value={timeStamp2Time(detailData.createTime)}
                                                className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
-                                <div className="col-lg-6">
+                                <div className="col-lg-6" >
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"更新时间"}</label>
                                     <div className="col-lg-8">
-                                        <input type="text" value={timeStamp2Time(detailData.updateTime)}
+                                        <input disabled type="text" value={timeStamp2Time(detailData.updateTime)}
                                                className="form-control"
                                                autoComplete="off"/>
                                     </div>
@@ -566,22 +564,7 @@ export default class UserListContainer extends Component {
                         <legend className="text-bold">{Current_Lang.label.searching}</legend>
                         <ul className="list-inline list-inline-condensed no-margin-bottom"
                             style={{textAlign: 'right', marginTop: '-59px'}}>
-                            <li className="dropdown"
-                                style={{borderBottom: '0 lightgray solid'}}>
-                                <a href="#" className="btn btn-link btn-sm dropdown-toggle"
-                                   data-toggle="dropdown" aria-expanded="false" style={{
-                                    paddingLeft: '0',
-                                    paddingRight: '0',
-                                    fontWeight: 'bold',
-                                    color: '#193153'
-                                }}><span
-                                    style={{color: '#193153'}} id="search_way">{"按城市搜索"}</span> <span
-                                    className="caret"></span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a href="#">{"按城市搜索"}</a></li>
-                                </ul>
-                            </li>
+
                             <li style={{display: "inline-block"}}>
                                 <select id="citySelect" className="form-control" style={{width: "150px"}}
                                         value={this.currentCityId} onChange={this._changeCity}>
@@ -600,8 +583,7 @@ export default class UserListContainer extends Component {
                                 </select>
                             </li>
                             <li>
-                                <button onClick={this._search.bind(this)}
-                                        style={{marginLeft: '30px'}} type="button"
+                                <button onClick={this._search.bind(this)} type="button"
                                         className="btn btn-primary btn-icon"><i
                                     className="icon-search4"></i></button>
                             </li>
@@ -677,17 +659,23 @@ class UserListComponent extends Component {
                             <td className="text-center">{key + 1}</td>
                             <td className="text-center">{val.realName}</td>
                             <td className="text-center">{userType(val.type)}</td>
+                            <td className="text-center">{val.organizationName}</td>
+                            <td className="text-center">{val.rqcode}</td>
                             <td className="text-center">{val.phone}</td>
                             <td className="text-center">{val.address}</td>
-                            <td className="text-center">{val.rqcode}</td>
+
                             <td className="text-center">
                                 <div className="text-muted text-size-small">
-                                    {val.status == 1 ? <span className="label bg-success">{"有效"}</span> :
-                                        <span className="label bg-danger">{"冻结"}</span>}
+                                    {val.certificated == 1 ? <span className="label bg-success">{"已认证"}</span> :
+                                        <span className="label label-default">{"未认证"}</span>}
                                 </div>
                             </td>
-                            <td className="text-center">{val.createTime}</td>
-                            <td className="text-center">{val.updateTime}</td>
+                            <td className="text-center">
+                                <div className="text-muted text-size-small">
+                                    {val.status == 1 ? <span className="label bg-success">{"有 效"}</span> :
+                                        <span className="label bg-danger">{"冻 结"}</span>}
+                                </div>
+                            </td>
                             <td className="text-center">
                                 {<ul className="icons-list">
                                     <li className="dropdown">
@@ -699,39 +687,36 @@ class UserListComponent extends Component {
                                                 <a href="javascript:void(0)" data-toggle="modal"
                                                    data-target="#userDetailModal"
                                                    onClick={this._detail.bind(this, val,"detail")}><i
-                                                    className=" icon-office"></i>
-                                                    {"详情"}</a>
+                                                    className=" icon-pencil5"></i>
+                                                    {"详 情"}</a>
                                             </li>
                                             <li style={{display: 'block'}}
                                                 onClick={this._delete.bind(this, val.userid, val.realName)}><a
                                                 href="javascript:void(0)"><i className="icon-trash"></i>
-                                                {"删除"}</a></li>
+                                                {"删 除"}</a></li>
                                             <li>
                                                 <a href="javascript:void(0)" data-toggle="modal"
                                                    data-target="#getAuthcodeModal"
                                                    onClick={this._showGetAuthcode.bind(this,val)}><i
-                                                    className=" icon-office"></i>
+                                                    className="icon-history"></i>
                                                     {"重置密码"}</a>
                                             </li>
                                             {val.status == 1 ?
                                                 <li onClick={this._lockOrUnlockUser.bind(this, val.userid, val.status)}>
                                                     <a
-                                                        href="javascript:void(0)"><i className="icon-lock"></i>锁住账户</a>
+                                                        href="javascript:void(0)"><i className="icon-lock4"></i>锁住账户</a>
                                                 </li> :
                                                 <li onClick={this._lockOrUnlockUser.bind(this, val.userid, val.status)}>
                                                     <a
                                                         href="javascript:void(0)"><i
-                                                        className="icon-unlock"></i>解锁账户</a></li>}
+                                                        className="icon-unlocked"></i>解锁账户</a></li>}
                                             <li>
                                                 <a href="javascript:void(0)" data-toggle="modal"
                                                    data-target="#bindQrcodeModal"
                                                    onClick={this._detail.bind(this, val,"other")}><i
-                                                    className=" icon-office"></i>
+                                                    className="icon-qrcode"></i>
                                                     {"绑定二维码"}</a>
                                             </li>
-                                            <li style={{display: 'block'}} onClick={this._exportRqcode.bind(this)}><a
-                                                href="javascript:void(0)"><i className="icon-redo2"></i>
-                                                {"导出二维码"}</a></li>
                                         </ul>
                                     </li>
                                 </ul>}
@@ -765,13 +750,13 @@ class UserListComponent extends Component {
                     <tr style={{fontWeight: 'bold'}}>
                         <th className="text-center" style={{width: "20px"}}></th>
                         <th className="col-md-1 text-bold text-center">{"姓名"}</th>
-                        <th className="col-md-1 text-bold text-center">{"用户类型"}</th>
+                        <th className="col-md-2 text-bold text-center">{"用户类型"}</th>
+                        <th className="col-md-2 text-bold text-center">{"组织名称"}</th>
+                        <th className="col-md-2 text-bold text-center">{"二维码编号"}</th>
                         <th className="col-md-1 text-bold text-center">{"手机号"}</th>
                         <th className="col-md-2 text-bold text-center">{"地址"}</th>
-                        <th className="col-md-2 text-bold text-center">{"二维码编号"}</th>
+                        <th className="col-md-1 text-bold text-center">{"认证状态"}</th>
                         <th className="col-md-1 text-bold text-center">{"用户状态"}</th>
-                        <th className="col-md-2 text-bold text-center">{"创建时间"}</th>
-                        <th className="col-md-2 text-bold text-center">{"更新时间"}</th>
                         <th className="text-center" style={{width: "20px"}}><i
                             className="icon-arrow-down12"></i>
                         </th>

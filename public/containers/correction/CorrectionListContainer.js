@@ -130,7 +130,7 @@ export default class CorrectionListContainer extends Component {
             <div>
                 <BreadCrumbs
                     breadCrumbs={this.breadCrumbs}
-                    icon={'icon-user'}
+                    icon={' icon-alarm-cancel'}
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>
@@ -165,8 +165,7 @@ export default class CorrectionListContainer extends Component {
                                 <input type="text" className="form-control daterange-organization"/>
                             </li>
                             <li>
-                                <button onClick={this._search.bind(this)}
-                                        style={{marginLeft: '30px'}} type="button"
+                                <button onClick={this._search.bind(this)}  type="button"
                                         className="btn btn-primary btn-icon"><i
                                     className="icon-search4"></i></button>
                             </li>
@@ -212,6 +211,7 @@ class CorrectionListComponent extends Component {
                 data.data.content.forEach(function (val, key) {
                     tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
+                        <td className="text-center">{val.userName}</td>
                         <td className="text-center">{val.type}</td>
                         <td className="text-center">{val.weight}</td>
                         <td className="text-left">{val.description}</td>
@@ -240,10 +240,11 @@ class CorrectionListComponent extends Component {
                     <thead>
                     <tr style={{fontWeight: 'bold'}}>
                         <th className="text-center" style={{width: "20px"}}></th>
+                        <th className="col-md-2 text-bold text-center">{"纠错用户"}</th>
                         <th className="col-md-2 text-bold text-center">{"错误类型"}</th>
                         <th className="col-md-2 text-bold text-center">{"重量"}</th>
-                        <th className="col-md-5 text-bold text-left">{"错误描述"}</th>
-                        <th className="col-md-3 text-bold text-center">{"创建时间"}</th>
+                        <th className="col-md-4 text-bold text-left">{"错误描述"}</th>
+                        <th className="col-md-2 text-bold text-center">{"创建时间"}</th>
                     </tr>
                     </thead>
                     <tbody>

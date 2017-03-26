@@ -29,8 +29,8 @@ export default class OrganizationListContainer extends Component {
         this.page = 0;
         this.breadCrumbs = [
             {text: "客户服务", link: ''},
-            {text: "小区单位管理", link: ''},
-            {text: "小区单位列表", link: ''}
+            {text: "小区、单位", link: ''},
+            {text: "小区、单位列表", link: ''}
         ];
         this.operation = [
             {
@@ -96,6 +96,9 @@ export default class OrganizationListContainer extends Component {
         this._startRefresh();
     }
     _generate(id){
+        $(".saveGroup").hide();
+        $(".progressGrouop").fadeIn();
+        $(".qrcodeLoadingText").text("二维码文件准备中，请勿关闭窗口...");
         var that = this;
         var params={
             generateNum:parseInt($("#personAmount").val()),
@@ -107,6 +110,12 @@ export default class OrganizationListContainer extends Component {
                 console.log("progressData22",that.props.progressData);
                 if(that.props.progressData.data==100){
                     clearInterval(that.progressInterval);
+                    setTimeout(function () {
+                        $("#exportModal").modal("hide");
+                        $(".progressGrouop").hide();
+                        $(".qrcodeLoadingText").text("开始下载二维码文件...");
+                        $(".saveGroup").show();
+                    },2000);
                     window.location.href = qrcode_generate_download+"?"+querystring.stringify(params);
                 }
             }));
@@ -117,6 +126,9 @@ export default class OrganizationListContainer extends Component {
         this._startRefresh();
     }
     _export(id){
+        $(".saveGroup").hide();
+        $(".progressGrouop").fadeIn();
+        $(".qrcodeLoadingText").text("二维码文件准备中，请勿关闭窗口...");
         var that = this;
         var params={
             organizationid: id,
@@ -128,6 +140,12 @@ export default class OrganizationListContainer extends Component {
                 console.log("progressData",that.props.progressData);
                 if(that.props.progressData.data==100){
                     clearInterval(that.progressInterval);
+                    setTimeout(function () {
+                        $("#generateModal").modal("hide");
+                        $(".progressGrouop").hide();
+                        $(".qrcodeLoadingText").text("开始下载二维码文件...");
+                        $(".saveGroup").show();
+                    },2000);
                     window.location.href = qrcode_export_download+"?"+querystring.stringify(params);
                 }
             }));
@@ -149,8 +167,8 @@ export default class OrganizationListContainer extends Component {
     }
 
     render() {
-        const {fetching, data, cityList} =this.props;
-        console.log("cityList",cityList);
+        const {fetching, data, cityList,progressData} =this.props;
+        console.log("progressData",progressData);
         var cityOptions = [];
         var countryOptions = [];
         if (cityList) {
@@ -216,7 +234,7 @@ export default class OrganizationListContainer extends Component {
                             </select>
                         </div>
                     </div>
-                    <div className="form-group">
+                    <div className="form-group saveGroup">
                         <label className="col-lg-2 control-label"
                                style={{textAlign: 'center'}}></label>
                         <div className="col-lg-9">
@@ -226,6 +244,15 @@ export default class OrganizationListContainer extends Component {
                             </div>
                         </div>
                     </div>
+                    <div className="form-group progressGrouop" style={{textAlign:"center",display:"none"}}>
+                        <div className="pace-demo" style={{paddingBottom: "30px"}}>
+                            <div className="theme_bar_xs"><div className="pace_progress" data-progress-text={(progressData && progressData.data?progressData.data:"1")+"%"} data-progress={progressData && progressData.data?progressData.data:"1"} style={{width: (progressData && progressData.data?progressData.data:"1")+"%"}}>{(progressData && progressData.data?progressData.data:"1")+"%"}</div></div>
+                        </div>
+                    </div>
+                    <div className="form-group progressGrouop" style={{textAlign:"center",display:"none"}}>
+                        <span className="qrcodeLoadingText">二维码文件准备中，请勿关闭窗口...</span>
+                    </div>
+
 
 
                 </fieldset>
@@ -266,7 +293,7 @@ export default class OrganizationListContainer extends Component {
                             </select>
                         </div>
                     </div>
-                    <div className="form-group">
+                    <div className="form-group saveGroup">
                         <label className="col-lg-2 control-label"
                                style={{textAlign: 'center'}}></label>
                         <div className="col-lg-9">
@@ -275,6 +302,14 @@ export default class OrganizationListContainer extends Component {
                                 </button>
                             </div>
                         </div>
+                    </div>
+                    <div className="form-group progressGrouop" style={{textAlign:"center",display:"none"}}>
+                        <div className="pace-demo" style={{paddingBottom: "30px"}}>
+                            <div className="theme_bar_xs"><div className="pace_progress" data-progress-text={(progressData && progressData.data?progressData.data:"1")+"%"} data-progress={progressData && progressData.data?progressData.data:"1"} style={{width: (progressData && progressData.data?progressData.data:"1")+"%"}}>{(progressData && progressData.data?progressData.data:"1")+"%"}</div></div>
+                        </div>
+                    </div>
+                    <div className="form-group progressGrouop" style={{textAlign:"center",display:"none"}}>
+                        <span className="qrcodeLoadingText">二维码文件准备中，请勿关闭窗口...</span>
                     </div>
 
 
@@ -286,7 +321,7 @@ export default class OrganizationListContainer extends Component {
             <div>
                 <BreadCrumbs
                     breadCrumbs={this.breadCrumbs}
-                    icon={'icon-user'}
+                    icon={'icon-office'}
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>
@@ -294,22 +329,6 @@ export default class OrganizationListContainer extends Component {
                         <legend className="text-bold">{Current_Lang.label.searching}</legend>
                         <ul className="list-inline list-inline-condensed no-margin-bottom"
                             style={{textAlign: 'right', marginTop: '-59px'}}>
-                            <li className="dropdown"
-                                style={{borderBottom: '0 lightgray solid'}}>
-                                <a href="#" className="btn btn-link btn-sm dropdown-toggle"
-                                   data-toggle="dropdown" aria-expanded="false" style={{
-                                    paddingLeft: '0',
-                                    paddingRight: '0',
-                                    fontWeight: 'bold',
-                                    color: '#193153'
-                                }}><span
-                                    style={{color: '#193153'}} id="search_way">{"按城市搜索"}</span> <span
-                                    className="caret"></span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a href="#">{"按城市搜索"}</a></li>
-                                </ul>
-                            </li>
                             <li style={{display: "inline-block"}}>
                                 <select id="citySelect" className="form-control" style={{width: "150px"}}
                                         value={this.currentCityId} onChange={this._changeCity}>
@@ -322,8 +341,7 @@ export default class OrganizationListContainer extends Component {
                                 </select>
                             </li>
                             <li>
-                                <button onClick={this._search.bind(this)}
-                                        style={{marginLeft: '30px'}} type="button"
+                                <button onClick={this._search.bind(this)} type="button"
                                         className="btn btn-primary btn-icon"><i
                                     className="icon-search4"></i></button>
                             </li>
@@ -331,7 +349,7 @@ export default class OrganizationListContainer extends Component {
                         </ul>
                     </fieldset>
                     <fieldset className="content-group">
-                        <legend className="text-bold">{"垃圾分类列表区"}</legend>
+                        <legend className="text-bold">{"小区、单位列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
                             <Pagenation counts={data && data.data ? data.data.content.length : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
