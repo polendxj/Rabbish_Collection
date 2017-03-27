@@ -43,10 +43,13 @@ export default class AdminUserListContainer extends Component {
         this._sendMessage = this._sendMessage.bind(this);
         this._resetPassword = this._resetPassword.bind(this);
         this._startRefresh = this._startRefresh.bind(this);
+        this._changePage=this._changePage.bind(this);
+        this._prePage=this._prePage.bind(this);
+        this._nextPage=this._nextPage.bind(this);
     }
 
     componentDidMount() {
-        var params = {page: 0, size: 20};
+        var params = {page: 0, size: page_size};
         this.props.dispatch(getListByMutilpCondition(params, ADMINUSER_LIST_START, ADMINUSER_LIST_END, adminUser_list));
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
@@ -85,7 +88,7 @@ export default class AdminUserListContainer extends Component {
     _search() {
         var params={
             page: 0,
-            size: 20,
+            size: page_size,
             type: parseInt($("#typeSelect").val())
         };
         this.props.dispatch(getListByMutilpCondition(params, ADMINUSER_LIST_START, ADMINUSER_LIST_END, adminUser_list));
@@ -145,17 +148,32 @@ export default class AdminUserListContainer extends Component {
 
     _changePage(page) {
         this.page = page;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params={
+            page: this.page,
+            size: page_size,
+            type: parseInt($("#typeSelect").val())
+        };
+        this.props.dispatch(getListByMutilpCondition(params, ADMINUSER_LIST_START, ADMINUSER_LIST_END, adminUser_list));
     }
 
     _prePage(page) {
         this.page = this.page - 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params={
+            page: this.page,
+            size: page_size,
+            type: parseInt($("#typeSelect").val())
+        };
+        this.props.dispatch(getListByMutilpCondition(params, ADMINUSER_LIST_START, ADMINUSER_LIST_END, adminUser_list));
     }
 
     _nextPage(page) {
         this.page = this.page + 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params={
+            page: this.page,
+            size: page_size,
+            type: parseInt($("#typeSelect").val())
+        };
+        this.props.dispatch(getListByMutilpCondition(params, ADMINUSER_LIST_START, ADMINUSER_LIST_END, adminUser_list));
     }
 
     render() {
@@ -214,22 +232,6 @@ export default class AdminUserListContainer extends Component {
                         <legend className="text-bold">{Current_Lang.label.searching}</legend>
                         <ul className="list-inline list-inline-condensed no-margin-bottom"
                             style={{textAlign: 'right', marginTop: '-59px'}}>
-                            <li className="dropdown"
-                                style={{borderBottom: '0 lightgray solid'}}>
-                                <a href="#" className="btn btn-link btn-sm dropdown-toggle"
-                                   data-toggle="dropdown" aria-expanded="false" style={{
-                                    paddingLeft: '0',
-                                    paddingRight: '0',
-                                    fontWeight: 'bold',
-                                    color: '#193153'
-                                }}><span
-                                    style={{color: '#193153'}} id="search_way">{"按类型搜索"}</span> <span
-                                    className="caret"></span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a href="#">{"按类型搜索"}</a></li>
-                                </ul>
-                            </li>
                             <li>
                                 <select id="typeSelect" className="form-control" style={{width: "150px"}}>
                                     <option value={""}>所有</option>
@@ -238,8 +240,7 @@ export default class AdminUserListContainer extends Component {
                                 </select>
                             </li>
                             <li>
-                                <button onClick={this._search.bind(this)}
-                                        style={{marginLeft: '30px'}} type="button"
+                                <button onClick={this._search.bind(this)} type="button"
                                         className="btn btn-primary btn-icon"><i
                                     className="icon-search4"></i></button>
                             </li>
@@ -248,7 +249,7 @@ export default class AdminUserListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"扫码员列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
-                            <Pagenation counts={data && data.status ? data.data.content.length : 0} page={this.page}
+                            <Pagenation counts={data && data.status ? data.data.totalPages : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>

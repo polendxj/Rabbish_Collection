@@ -30,11 +30,14 @@ export default class ReviewListContainer extends Component {
         this.searchColumn = "DRIVER";
         this._reply = this._reply.bind(this);
         this._delete = this._delete.bind(this);
+        this._prePage=this._prePage.bind(this);
+        this._changePage=this._changePage.bind(this);
+        this._nextPage=this._nextPage.bind(this);
     }
 
     componentDidMount() {
         var self = this;
-        var params = {page: 0, size: 20};
+        var params = {page: 0, size: page_size};
         this.props.dispatch(getListByMutilpCondition(params, REVIEW_LIST_START, REVIEW_LIST_END, review_list));
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
         $("#search_way").parent().parent().on('click', 'li', function () {
@@ -69,17 +72,20 @@ export default class ReviewListContainer extends Component {
 
     _changePage(page) {
         this.page = page;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {page: this.page, size: page_size};
+        this.props.dispatch(getListByMutilpCondition(params, REVIEW_LIST_START, REVIEW_LIST_END, review_list));
     }
 
     _prePage(page) {
         this.page = this.page - 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {page: this.page, size: page_size};
+        this.props.dispatch(getListByMutilpCondition(params, REVIEW_LIST_START, REVIEW_LIST_END, review_list));
     }
 
     _nextPage(page) {
         this.page = this.page + 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {page: this.page, size: page_size};
+        this.props.dispatch(getListByMutilpCondition(params, REVIEW_LIST_START, REVIEW_LIST_END, review_list));
     }
 
     render() {
@@ -96,7 +102,7 @@ export default class ReviewListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"评价列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
-                            <Pagenation counts={data && data.status ? data.data.content.length : 0} page={this.page}
+                            <Pagenation counts={data && data.status ? data.data.totalElements : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>

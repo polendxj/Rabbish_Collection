@@ -51,6 +51,9 @@ export default class UserListContainer extends Component {
         this._lockOrUnlockUser = this._lockOrUnlockUser.bind(this);
         this._sendMessage = this._sendMessage.bind(this);
         this.setRemainTime = this.setRemainTime.bind(this);
+        this._changePage=this._changePage.bind(this);
+        this._prePage=this._prePage.bind(this);
+        this._nextPage=this._nextPage.bind(this);
     }
 
     componentDidMount() {
@@ -153,7 +156,7 @@ export default class UserListContainer extends Component {
     _search() {
         var params = {
             page: 0,
-            size: 20,
+            size: page_size,
             cityid: $("#citySelect").val(),
             countyid: $("#countrySelect").val(),
             organizationid: $("#organizationSelect").val()
@@ -198,17 +201,38 @@ export default class UserListContainer extends Component {
 
     _changePage(page) {
         this.page = page;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {
+            page: this.page,
+            size: page_size,
+            cityid: $("#citySelect").val(),
+            countyid: $("#countrySelect").val(),
+            organizationid: $("#organizationSelect").val()
+        };
+        this.props.dispatch(getListByMutilpCondition(params, GENERALUSER_LIST_START, GENERALUSER_LIST_END, generalUser_list));
     }
 
     _prePage(page) {
         this.page = this.page - 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {
+            page: this.page,
+            size: page_size,
+            cityid: $("#citySelect").val(),
+            countyid: $("#countrySelect").val(),
+            organizationid: $("#organizationSelect").val()
+        };
+        this.props.dispatch(getListByMutilpCondition(params, GENERALUSER_LIST_START, GENERALUSER_LIST_END, generalUser_list));
     }
 
     _nextPage(page) {
         this.page = this.page + 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {
+            page: this.page,
+            size: page_size,
+            cityid: $("#citySelect").val(),
+            countyid: $("#countrySelect").val(),
+            organizationid: $("#organizationSelect").val()
+        };
+        this.props.dispatch(getListByMutilpCondition(params, GENERALUSER_LIST_START, GENERALUSER_LIST_END, generalUser_list));
     }
 
     render() {
@@ -593,7 +617,7 @@ export default class UserListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"用户列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
-                            <Pagenation counts={data && data.status ? data.data.content.length : 0} page={this.page}
+                            <Pagenation counts={data && data.status ? data.data.totalPages : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>
@@ -660,7 +684,7 @@ class UserListComponent extends Component {
                             <td className="text-center">{val.realName}</td>
                             <td className="text-center">{userType(val.type)}</td>
                             <td className="text-center">{val.organizationName}</td>
-                            <td className="text-center">{val.rqcode}</td>
+                            <td className="text-center">{val.number?val.number:"- -"}</td>
                             <td className="text-center">{val.phone}</td>
                             <td className="text-center">{val.address}</td>
 

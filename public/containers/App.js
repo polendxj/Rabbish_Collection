@@ -137,8 +137,8 @@ class ContentPanel extends Component {
                             width: '100%'
                         }}>
                             <div style={{float: 'left', marginLeft: '14px'}}>
-                                ⓒ 2016. <span style={{color: '#193153'}}>Copyright Powered</span> by <span
-                                style={{color: '#193153'}}>ENTRIX Co., Ltd. All Rights Reserved.</span>
+                                ⓒ 2017. <span style={{color: '#193153'}}>Copyright Powered</span> by <span
+                                style={{color: '#193153'}}>ReuseSorting Co., Ltd. All Rights Reserved.</span>
                             </div>
                         </div>
                     </div>

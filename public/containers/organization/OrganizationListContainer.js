@@ -50,11 +50,14 @@ export default class OrganizationListContainer extends Component {
         this._showExportModal = this._showExportModal.bind(this);
         this._changeCity = this._changeCity.bind(this);
         this._startRefresh = this._startRefresh.bind(this);
+        this._changePage=this._changePage.bind(this);
+        this._prePage=this._prePage.bind(this);
+        this._nextPage=this._nextPage.bind(this);
     }
 
     componentDidMount() {
         var self = this;
-        var params = {page: 0, size: 20};
+        var params = {page: 0, size: page_size};
         this.props.dispatch(getListByMutilpCondition(params, ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, organization_list));
         this.props.dispatch(getListByMutilpCondition(params, CITY_LIST_START, CITY_LIST_END, city_list));
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
@@ -85,7 +88,7 @@ export default class OrganizationListContainer extends Component {
     _search() {
         var params = {
             page: 0,
-            size: 20,
+            size: page_size,
             cityid: $("#citySelect").val(),
             countyid: $("#countrySelect").val()
         };
@@ -153,17 +156,35 @@ export default class OrganizationListContainer extends Component {
     }
     _changePage(page) {
         this.page = page;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {
+            page: this.page,
+            size: page_size,
+            cityid: $("#citySelect").val(),
+            countyid: $("#countrySelect").val()
+        };
+        this.props.dispatch(getListByMutilpCondition(params, ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, organization_list));
     }
 
     _prePage(page) {
         this.page = this.page - 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {
+            page: this.page,
+            size: page_size,
+            cityid: $("#citySelect").val(),
+            countyid: $("#countrySelect").val()
+        };
+        this.props.dispatch(getListByMutilpCondition(params, ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, organization_list));
     }
 
     _nextPage(page) {
         this.page = this.page + 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {
+            page: this.page,
+            size: page_size,
+            cityid: $("#citySelect").val(),
+            countyid: $("#countrySelect").val()
+        };
+        this.props.dispatch(getListByMutilpCondition(params, ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, organization_list));
     }
 
     render() {
@@ -351,7 +372,7 @@ export default class OrganizationListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"小区、单位列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
-                            <Pagenation counts={data && data.data ? data.data.content.length : 0} page={this.page}
+                            <Pagenation counts={data && data.data ? data.data.totalElements : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>

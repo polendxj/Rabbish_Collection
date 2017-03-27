@@ -32,13 +32,17 @@ class Logo extends Component {
         return (
             <div className="navbar-header">
                 <span id="logoText" style={this.logo_style}></span>
-                <a className="navbar-brand" href="index.html"><img src="/assets/images/logo_light.png"
+                <a className="navbar-brand" href="index.html"><img src="/assets/images/logo.png"
                                                                    style={{
-                                                                       width: "90px",
-                                                                       height: "29px",
-                                                                       marginLeft: '28px',
-                                                                       marginTop: '-5px'
+                                                                       marginTop: '-2px'
                                                                    }} alt=""/>
+                    <span style={{
+                        position: "relative",
+                        float: "right",
+                        marginRight: "0",
+                        marginTop: "-22px",
+                        marginLeft: "30px",
+                        fontSize: "16px"}}>垃圾回收运营平台</span>
 
                 </a>
                 <ul className="nav navbar-nav visible-xs-block">
@@ -74,13 +78,13 @@ class TopMenus extends Component {
     _menuChange(idx, flag) {
         this._moveTopMenuBottomLine(idx, flag);
         this.props.changeTopMenu(idx);
-        if(idx==0){
+        if (idx == 0) {
             browserHistory.push("/Statistic/RubbishPutIn");
-        }else if(idx==1){
+        } else if (idx == 1) {
             browserHistory.push("/CustomerService/UserManage");
-        }else if(idx==2){
+        } else if (idx == 2) {
             browserHistory.push("/DataManage/RubbishClass");
-        }else if(idx==3){
+        } else if (idx == 3) {
             browserHistory.push("/SystemNotice/NoticeManage");
         }
     }

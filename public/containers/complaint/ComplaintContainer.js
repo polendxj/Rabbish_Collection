@@ -29,11 +29,14 @@ export default class ComplaintContainer extends Component {
         ];
         this.searchColumn = "DRIVER";
         this._deal = this._deal.bind(this);
+        this._changePage=this._changePage.bind(this);
+        this._prePage=this._prePage.bind(this);
+        this._nextPage=this._nextPage.bind(this);
     }
 
     componentDidMount() {
         var self = this;
-        var params = {page: 0, size: 20};
+        var params = {page: 0, size: page_size};
         this.props.dispatch(getListByMutilpCondition(params, COMPLAINT_LIST_START, COMPLAINT_LIST_END, complaint_list));
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
         $("#search_way").parent().parent().on('click', 'li', function () {
@@ -48,7 +51,7 @@ export default class ComplaintContainer extends Component {
 
     _deal(id,params){
         var that = this;
-        var listParams = {page: 0, size: 20};
+        var listParams = {page: 0, size: page_size};
         this.props.dispatch(saveObject(params,"","",complaint_update+"?id="+id,"/CustomerService/ComplaintManage","noAlert",function () {
             that.props.dispatch(getListByMutilpCondition(listParams, COMPLAINT_LIST_START, COMPLAINT_LIST_END, complaint_list));
         }));
@@ -68,22 +71,24 @@ export default class ComplaintContainer extends Component {
 
     _changePage(page) {
         this.page = page;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {page: this.page, size: page_size};
+        this.props.dispatch(getListByMutilpCondition(params, COMPLAINT_LIST_START, COMPLAINT_LIST_END, complaint_list));
     }
 
     _prePage(page) {
         this.page = this.page - 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {page: this.page, size: page_size};
+        this.props.dispatch(getListByMutilpCondition(params, COMPLAINT_LIST_START, COMPLAINT_LIST_END, complaint_list));
     }
 
     _nextPage(page) {
         this.page = this.page + 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {page: this.page, size: page_size};
+        this.props.dispatch(getListByMutilpCondition(params, COMPLAINT_LIST_START, COMPLAINT_LIST_END, complaint_list));
     }
 
     render() {
         const {fetching, data} =this.props;
-        console.log("data",data);
         return (
             <div>
                 <BreadCrumbs
@@ -95,7 +100,7 @@ export default class ComplaintContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"投诉举报列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
-                            <Pagenation counts={data&&data.status ? data.data.content.length : 0} page={this.page}
+                            <Pagenation counts={data&&data.status ? data.data.totalElements : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>

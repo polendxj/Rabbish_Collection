@@ -39,11 +39,14 @@ export default class CorrectionListContainer extends Component {
         this.searchColumn = "ORGANIZATION";
         this._search = this._search.bind(this);
         this._startRefresh = this._startRefresh.bind(this);
+        this._changePage = this._changePage.bind(this);
+        this._prePage = this._prePage.bind(this);
+        this._nextPage = this._nextPage.bind(this);
     }
 
     componentDidMount() {
         var self = this;
-        var params = {page: 0, size: 20};
+        var params = {page: 0, size: page_size};
         var organizationParams = {page: 0, size: 10000};
         this.props.dispatch(getListByMutilpCondition(params, CORRECTION_LIST_START, CORRECTION_LIST_END, correction_list));
         this.props.dispatch(getListByMutilpCondition(organizationParams, ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, organization_list));
@@ -58,7 +61,7 @@ export default class CorrectionListContainer extends Component {
             self._startRefresh();
         });
         $('.daterange-organization').daterangepicker({
-            maxDate : moment(), //最大时间
+            maxDate: moment(), //最大时间
             opens: "left",
             applyClass: 'bg-slate-600',
             cancelClass: 'btn-default',
@@ -76,14 +79,14 @@ export default class CorrectionListContainer extends Component {
         if (this.searchColumn == "ORGANIZATION") {
             params = {
                 page: 0,
-                size: 20,
+                size: page_size,
                 organizationid: $("#organizationSelect").val()
             };
         } else {
             var rangeTime = $(".daterange-organization").val();
             params = {
                 page: 0,
-                size: 20,
+                size: page_size,
                 startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
                 endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
             };
@@ -101,17 +104,38 @@ export default class CorrectionListContainer extends Component {
 
     _changePage(page) {
         this.page = page;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var rangeTime = $(".daterange-organization").val();
+        var params = {
+            page: this.page,
+            size: page_size,
+            startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
+            endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+        };
+        this.props.dispatch(getListByMutilpCondition(params, CORRECTION_LIST_START, CORRECTION_LIST_END, correction_list));
     }
 
     _prePage(page) {
         this.page = this.page - 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var rangeTime = $(".daterange-organization").val();
+        var params = {
+            page: this.page,
+            size: page_size,
+            startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
+            endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+        };
+        this.props.dispatch(getListByMutilpCondition(params, CORRECTION_LIST_START, CORRECTION_LIST_END, correction_list));
     }
 
     _nextPage(page) {
         this.page = this.page + 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var rangeTime = $(".daterange-organization").val();
+        var params = {
+            page: this.page,
+            size: page_size,
+            startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
+            endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+        };
+        this.props.dispatch(getListByMutilpCondition(params, CORRECTION_LIST_START, CORRECTION_LIST_END, correction_list));
     }
 
     render() {
@@ -156,16 +180,16 @@ export default class CorrectionListContainer extends Component {
                                 </ul>
                             </li>
 
-                            <li style={{display:this.searchColumn == "ORGANIZATION"?"inline-block":"none" }}>
+                            <li style={{display: this.searchColumn == "ORGANIZATION" ? "inline-block" : "none"}}>
                                 <select id="organizationSelect" className="form-control">
                                     {organizationOptions}
                                 </select>
                             </li>
-                            <li style={{display:this.searchColumn == "ORGANIZATION"?"none":"inline-block" }}>
+                            <li style={{display: this.searchColumn == "ORGANIZATION" ? "none" : "inline-block"}}>
                                 <input type="text" className="form-control daterange-organization"/>
                             </li>
                             <li>
-                                <button onClick={this._search.bind(this)}  type="button"
+                                <button onClick={this._search.bind(this)} type="button"
                                         className="btn btn-primary btn-icon"><i
                                     className="icon-search4"></i></button>
                             </li>
@@ -175,7 +199,7 @@ export default class CorrectionListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"纠错记录列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
-                            <Pagenation counts={data ? data.data.content.length : 0} page={this.page}
+                            <Pagenation counts={data ? data.data.totalElements : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>
