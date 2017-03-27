@@ -135,7 +135,7 @@ class RegisterOrganizationComponent extends Component{
                         <div className="col-sm-8 col-sm-offset-2">
                             <fieldset className="content-group">
                                 <legend className="text-bold">
-                                    {"垃圾分类基础信息"}
+                                    {"小区单位基础信息"}
                                 </legend>
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"

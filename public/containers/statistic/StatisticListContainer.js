@@ -79,9 +79,16 @@ export default class StatisticListContainer extends Component {
 
     componentDidMount() {
         var self = this;
-        var params = {cityid: self.currentCityId, page: 0, size: 20};
-        var cityParams = {page: 0, size: 10000};
-        var monitorParams = {origin:1};
+        var params = {
+            cityid: self.currentCityId,
+            page: 0,
+            size: 20,
+            startday: "2016-01-01",
+            endday: timeStamp2Time(new Date().getTime())
+        };
+        var defaultParams = {page: 0, size: 10000};
+        var cityParams = {page: 0, size: 100};
+        var monitorParams = {origin: 1};
         this.props.dispatch(getListByMutilpCondition(params, STATISTICBYCLASSIFY_LIST_START, STATISTICBYCLASSIFY_LIST_END, statisticByClassify_list));
         this.props.dispatch(getListByMutilpCondition(params, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
         this.props.dispatch(getListByMutilpCondition(params, STATISTICBYORGANIZATION_LIST_START, STATISTICBYORGANIZATION_LIST_END, statisticByOrganization_list));
@@ -89,8 +96,8 @@ export default class StatisticListContainer extends Component {
         this.props.dispatch(getListByMutilpCondition({cityid: self.currentCityId}, STATISTIC_TOTAL_START, STATISTIC_TOTAL_END, statisticByRangeDate_list));
         this.props.dispatch(getListByMutilpCondition({cityid: self.currentCityId}, STATISTIC_SETTLEMENT_START, STATISTIC_SETTLEMENT_END, statistic_settlement));
         this.props.dispatch(getListByMutilpCondition(monitorParams, OPERATION_MONITOR_START, OPERATION_MONITOR_END, operation_monitor));
-        this.props.dispatch(getListByMutilpCondition(cityParams, CITY_ORGANIZATION_LIST_START, CITY_ORGANIZATION_LIST_END, cityOfOrganization_list));
-        this.props.dispatch(getListByMutilpCondition(cityParams, CLASSCONF_LIST_START, CLASSCONF_LIST_END, classConf_list));
+        this.props.dispatch(getListByMutilpCondition(defaultParams, CITY_ORGANIZATION_LIST_START, CITY_ORGANIZATION_LIST_END, cityOfOrganization_list));
+        this.props.dispatch(getListByMutilpCondition(defaultParams, CLASSCONF_LIST_START, CLASSCONF_LIST_END, classConf_list));
         this.props.dispatch(getListByMutilpCondition(cityParams, CITY_LIST_START, CITY_LIST_END, city_list));
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
         $('.daterange-single').daterangepicker({
@@ -147,7 +154,7 @@ export default class StatisticListContainer extends Component {
                 endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
             };
             this.props.dispatch(getListByMutilpCondition(organizationParams, STATISTICBYORGANIZATION_LIST_START, STATISTICBYORGANIZATION_LIST_END, statisticByOrganization_list));
-        }else if (type == "SETTLEMENT") {
+        } else if (type == "SETTLEMENT") {
             var rangeTime = $("#daterange-two-4").val();
             var settlementParams = {
                 cityid: $("#cityOfSettlementSelect").val(),
@@ -177,6 +184,7 @@ export default class StatisticListContainer extends Component {
         this.currentCityId = citieid;
         this._startRefresh();
     }
+
     _changeCityOfTotal() {
         var citieid = $("#cityOfTotalSelect").val();
         this.currentCity = filterCityById(this.props.cityList.data, citieid);
@@ -204,10 +212,11 @@ export default class StatisticListContainer extends Component {
         this.daterangeOfcurrentCityId = citieid;
         this._startRefresh();
     }
+
     _changeCityOfSettlement() {
         var citieid = $("#cityOfSettlementSelect").val();
         this.currentCityOfCounty = filterCityById(this.props.cityOfCountyList.data, citieid);
-        console.log("this.currentCityOfCounty",this.currentCityOfCounty);
+        console.log("this.currentCityOfCounty", this.currentCityOfCounty);
         this.settlementOfcurrentCityId = citieid;
         this._startRefresh();
     }
@@ -228,8 +237,9 @@ export default class StatisticListContainer extends Component {
     }
 
     render() {
-        const {fetching, classifyData, cityData, organizationData, rangeDateData, settlementData,operationData, cityList,cityOfCountyList,totalData, classifyList} =this.props;
-        console.log("rangeDateData",rangeDateData);
+        const {fetching, classifyData, cityData, organizationData, rangeDateData, settlementData, operationData, cityList, cityOfCountyList, totalData, classifyList} =this.props;
+        console.log("organizationData", organizationData);
+        console.log("cityData", cityData);
         var data = "";
         var showCity = "city";
         var classifyDataMerge = [];
@@ -245,10 +255,10 @@ export default class StatisticListContainer extends Component {
                     classifyDataMerge.forEach(function (val, key) {
                         classifyTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                             <td className="text-center">{key + 1}</td>
-                            <td className="text-center">
-                                {$("#ofClassifySelect").val()?$("#ofClassifySelect").find("option:selected").text():$("#citySelect").find("option:selected").text()}
-                            </td>
                             <td className="text-center">{val.className}</td>
+                            <td className="text-center">
+                                {$("#ofClassifySelect").val() ? $("#ofClassifySelect").find("option:selected").text() : $("#citySelect").find("option:selected").text()}
+                            </td>
                             <td className="text-center">{val.count}</td>
                             <td className="text-center">{val.weight.toFixed(2)}</td>
                         </tr>)
@@ -271,34 +281,22 @@ export default class StatisticListContainer extends Component {
             </tr>)
         }
         if (cityData) {
-            if (cityData.status) {
-                var cityDataList = null;
-                if (cityData.data) {
-                    if (typeof cityData.data.content == "undefined") {
-                        cityDataList = cityData.data;
-                    } else {
-                        cityDataList = cityData.data.content;
-                    }
-                }
-                if (cityDataList && cityDataList.length > 0) {
-                    cityDataList.forEach(function (val, key) {
-                        cityTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
-                            <td className="text-center">{key + 1}</td>
-                            <td className="text-center">{$("#cityOfCitySelect").find("option:selected").text()}</td>
-                            <td className="text-center">{val.count}</td>
-                            <td className="text-center">{val.weight.toFixed(2)}</td>
-                            <td className="text-center">{timeStamp2Time(val.monthday)}</td>
-                        </tr>)
-                    }.bind(this));
-                } else {
-                    cityTb.push(<tr key={'noData'}>
-                        <td colSpan="100" style={{textAlign: 'center'}}>
-                            <NoData />
-                        </td>
+            if (cityData.organizationData && cityData.organizationData.length > 0) {
+                cityData.organizationData.forEach(function (val, key) {
+                    cityTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
+                        <td className="text-center">{key + 1}</td>
+                        <td className="text-center">{val.organizationName}</td>
+                        <td className="text-center">{val.count}</td>
+                        <td className="text-center">{val.weight.toFixed(2)}</td>
+                        <td className="text-center">{val.rangeDate}</td>
                     </tr>)
-                }
+                }.bind(this));
             } else {
-                cityTb.push(ErrorModal(Current_Lang.status.minor, "获取数据错误"));
+                cityTb.push(<tr key={'noData'}>
+                    <td colSpan="100" style={{textAlign: 'center'}}>
+                        <NoData />
+                    </td>
+                </tr>)
             }
         } else {
             cityTb.push(<tr key={'loading'}>
@@ -355,14 +353,14 @@ export default class StatisticListContainer extends Component {
                     }
                 }
                 if (rangeDateDataList) {
-                        daterangeTb.push(<tr key={"rangeDate"}>
-                            <td className="text-center">{1}</td>
-                            <td className="text-center">
-                                {$("#ofDaterangeSelect").val()?$("#ofDaterangeSelect").find("option:selected").text():$("#cityOfDateRangeSelect").find("option:selected").text()}
-                            </td>
-                            <td className="text-center">{rangeDateDataList.count}</td>
-                            <td className="text-center">{rangeDateDataList.weight}</td>
-                        </tr>)
+                    daterangeTb.push(<tr key={"rangeDate"}>
+                        <td className="text-center">{1}</td>
+                        <td className="text-center">
+                            {$("#ofDaterangeSelect").val() ? $("#ofDaterangeSelect").find("option:selected").text() : $("#cityOfDateRangeSelect").find("option:selected").text()}
+                        </td>
+                        <td className="text-center">{rangeDateDataList.count}</td>
+                        <td className="text-center">{rangeDateDataList.weight}</td>
+                    </tr>)
                 } else {
                     daterangeTb.push(<tr key={'noData'}>
                         <td colSpan="100" style={{textAlign: 'center'}}>
@@ -391,14 +389,14 @@ export default class StatisticListContainer extends Component {
                     }
                 }
                 if (settlementDataList) {
-                    if(settlementDataList.cityName){
+                    if (settlementDataList.cityName) {
                         showCity = "city";
-                    }else if(settlementDataList.countyName){
+                    } else if (settlementDataList.countyName) {
                         showCity = "county";
                     }
                     settlementTb.push(<tr key={"rangeDate"}>
                         <td className="text-center">{1}</td>
-                        <td className="text-center">{showCity == "city"?settlementDataList.cityName:settlementDataList.countyName}</td>
+                        <td className="text-center">{showCity == "city" ? settlementDataList.cityName : settlementDataList.countyName}</td>
                         <td className="text-center">{settlementDataList.totalAmount}</td>
                         <td className="text-center">{settlementDataList.totalPoints}</td>
                     </tr>)
@@ -487,25 +485,26 @@ export default class StatisticListContainer extends Component {
         }
         var showOperation = "正在计算中...";
         var showTotal = "正在计算中...";
-        if(totalData){
-            if(totalData.status){
-                if(totalData.data){
+        console.log("totalData", totalData);
+        if (totalData) {
+            if (totalData.status) {
+                if (totalData.data) {
                     showTotal = "ok";
-                }else{
+                } else {
                     showTotal = "无数据";
                 }
-            }else{
+            } else {
                 showTotal = "获取数据失败";
             }
         }
-        if(operationData){
-            if(operationData.status){
-                if(operationData.data){
+        if (operationData) {
+            if (operationData.status) {
+                if (operationData.data) {
                     showOperation = "ok";
-                }else{
+                } else {
                     showOperation = "无数据";
                 }
-            }else{
+            } else {
                 showOperation = "获取数据失败";
             }
         }
@@ -518,12 +517,14 @@ export default class StatisticListContainer extends Component {
                             <div className="col-lg-3 col-md-6">
                                 <div className="panel bg-teal-400">
                                     <div className="panel-body">
-                                        <h3 className="no-margin">{showTotal == "ok"?totalData.data.weight:showTotal}/{showTotal == "ok"?totalData.data.count:showTotal}</h3>
-                                        <select id="cityOfTotalSelect" className="form-control pull-right input-xs" style={{position: "absolute", width: "100px", right: "5px", top: "5px"}}
-                                            value={this.totalCurrentCityId} onChange={this._changeCityOfTotal}>
+                                        <h3 className="no-margin">{showTotal == "ok" ? totalData.data.weight : showTotal}
+                                            / {showTotal == "ok" ? totalData.data.count : showTotal}</h3>
+                                        <select id="cityOfTotalSelect" className="form-control pull-right input-xs"
+                                                style={{position: "absolute", width: "100px", right: "5px", top: "5px"}}
+                                                value={this.totalCurrentCityId} onChange={this._changeCityOfTotal}>
                                             {cityOptions}
                                         </select>
-                                        垃圾投放总量/垃圾投放次数
+                                        垃圾投放总量 / 垃圾投放次数
                                         <div className="text-muted text-size-small">单位：吨</div>
                                         <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
 
@@ -533,7 +534,7 @@ export default class StatisticListContainer extends Component {
                             <div className="col-lg-3  col-md-6">
                                 <div className="panel bg-blue-400" style={{position: "static", zoom: "1"}}>
                                     <div className="panel-body">
-                                        <h3 className="no-margin">{showOperation == "ok"?operationData.data.totalUser:showOperation}</h3>
+                                        <h3 className="no-margin">{showOperation == "ok" ? operationData.data.totalUser : showOperation}</h3>
                                         激活用户总数
                                         <div className="text-muted text-size-small">单位：个</div>
                                         <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
@@ -545,7 +546,7 @@ export default class StatisticListContainer extends Component {
                                 <div className="panel bg-pink-400">
                                     <div className="panel-body">
 
-                                        <h3 className="no-margin">{showOperation == "ok"?operationData.data.totalXAmount:showOperation}</h3>
+                                        <h3 className="no-margin">{showOperation == "ok" ? operationData.data.totalXAmount : showOperation}</h3>
                                         兑换总金额
                                         <div className="text-muted text-size-small">单位：元</div>
                                         <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
@@ -557,7 +558,7 @@ export default class StatisticListContainer extends Component {
                                 <div className="panel bg-grey-400">
                                     <div className="panel-body">
 
-                                        <h3 className="no-margin">{showOperation == "ok"?operationData.data.requestPerDay:showOperation}</h3>
+                                        <h3 className="no-margin">{showOperation == "ok" ? operationData.data.requestPerDay : showOperation}</h3>
                                         每日请求数
                                         <div className="text-muted text-size-small">单位：次/平均</div>
                                         <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
@@ -603,7 +604,7 @@ export default class StatisticListContainer extends Component {
                                                        placeholder="选择日期"/>
                                             </li>
                                             <li>
-                                                <button onClick={this._search.bind(this,"CLASSIFY")} type="button"
+                                                <button onClick={this._search.bind(this, "CLASSIFY")} type="button"
                                                         className="btn btn-primary btn-icon"><i
                                                     className="icon-search4"></i></button>
                                             </li>
@@ -623,14 +624,14 @@ export default class StatisticListContainer extends Component {
                                                 <thead>
                                                 <tr style={{fontWeight: 'bold'}}>
                                                     <th className="text-center" style={{width: "20px"}}></th>
-                                                    <th className="col-md-3 text-bold text-center">{$("#ofClassifySelect").val()?"单位/小区":"城市"}</th>
                                                     <th className="col-md-3 text-bold text-center">{"垃圾分类名称"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{$("#ofClassifySelect").val() ? "单位/小区" : "城市"}</th>
                                                     <th className="col-md-3 text-bold text-center">{"投放次数"}</th>
                                                     <th className="col-md-3 text-bold text-center">{"投放重量"}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {classifyTb}
+                                                {classifyTb}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -651,11 +652,12 @@ export default class StatisticListContainer extends Component {
                                                 </select>
                                             </li>
                                             <li >
-                                                <input id="daterange-two-2" type="text" className="form-control daterange-two"
+                                                <input id="daterange-two-2" type="text"
+                                                       className="form-control daterange-two"
                                                        placeholder="选择日期"/>
                                             </li>
                                             <li>
-                                                <button onClick={this._search.bind(this,"CITY")} type="button"
+                                                <button onClick={this._search.bind(this, "CITY")} type="button"
                                                         className="btn btn-primary btn-icon"><i
                                                     className="icon-search4"></i></button>
                                             </li>
@@ -675,10 +677,10 @@ export default class StatisticListContainer extends Component {
                                                 <thead>
                                                 <tr style={{fontWeight: 'bold'}}>
                                                     <th className="text-center" style={{width: "20px"}}></th>
-                                                    <th className="col-md-3 text-bold text-center">{"城市"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{"单位/小区"}</th>
                                                     <th className="col-md-3 text-bold text-center">{"投放次数"}</th>
                                                     <th className="col-md-3 text-bold text-center">{"投放重量"}</th>
-                                                    <th className="col-md-3 text-bold text-center">{"日期"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{"时间段"}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -707,11 +709,12 @@ export default class StatisticListContainer extends Component {
                                                 </select>
                                             </li>
                                             <li >
-                                                <input id="daterange-two-3" type="text" className="form-control daterange-two"
+                                                <input id="daterange-two-3" type="text"
+                                                       className="form-control daterange-two"
                                                        placeholder="选择日期"/>
                                             </li>
                                             <li>
-                                                <button onClick={this._search.bind(this,"ORGANIZATION")} type="button"
+                                                <button onClick={this._search.bind(this, "ORGANIZATION")} type="button"
                                                         className="btn btn-primary btn-icon"><i
                                                     className="icon-search4"></i></button>
                                             </li>
@@ -763,14 +766,16 @@ export default class StatisticListContainer extends Component {
                                                 </select>
                                             </li>
                                             <li >
-                                                <input id="daterange-two-4" type="text" className="form-control daterange-two"
+                                                <input id="daterange-two-4" type="text"
+                                                       className="form-control daterange-two"
                                                        placeholder="选择日期"/>
                                             </li>
                                             <li >
-                                                <input id="userid" type="text" className="form-control" placeholder="请输入用户id"/>
+                                                <input id="userid" type="text" className="form-control"
+                                                       placeholder="请输入用户id"/>
                                             </li>
                                             <li>
-                                                <button onClick={this._search.bind(this,"SETTLEMENT")} type="button"
+                                                <button onClick={this._search.bind(this, "SETTLEMENT")} type="button"
                                                         className="btn btn-primary btn-icon"><i
                                                     className="icon-search4"></i></button>
                                             </li>
@@ -790,7 +795,7 @@ export default class StatisticListContainer extends Component {
                                                 <thead>
                                                 <tr style={{fontWeight: 'bold'}}>
                                                     <th className="text-center" style={{width: "20px"}}></th>
-                                                    <th className="col-md-4 text-bold text-center">{showCity == "city"?"城市名称":"区县名称"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{showCity == "city" ? "城市名称" : "区县名称"}</th>
                                                     <th className="col-md-4 text-bold text-center">{"兑换总金额"}</th>
                                                     <th className="col-md-4 text-bold text-center">{"兑换总积分数"}</th>
                                                 </tr>
@@ -821,11 +826,12 @@ export default class StatisticListContainer extends Component {
                                                 </select>
                                             </li>
                                             <li >
-                                                <input id="daterange-two-5" type="text" className="form-control daterange-two"
+                                                <input id="daterange-two-5" type="text"
+                                                       className="form-control daterange-two"
                                                        placeholder="选择日期"/>
                                             </li>
                                             <li>
-                                                <button onClick={this._search.bind(this,"DATERANGE")} type="button"
+                                                <button onClick={this._search.bind(this, "DATERANGE")} type="button"
                                                         className="btn btn-primary btn-icon"><i
                                                     className="icon-search4"></i></button>
                                             </li>
@@ -845,7 +851,7 @@ export default class StatisticListContainer extends Component {
                                                 <thead>
                                                 <tr style={{fontWeight: 'bold'}}>
                                                     <th className="text-center" style={{width: "20px"}}></th>
-                                                    <th className="col-md-4 text-bold text-center">{$("#ofDaterangeSelect").val()?"单位/小区":"城市"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{$("#ofDaterangeSelect").val() ? "单位/小区" : "城市"}</th>
                                                     <th className="col-md-4 text-bold text-center">{"投放次数"}</th>
                                                     <th className="col-md-4 text-bold text-center">{"投放重量"}</th>
                                                 </tr>
@@ -872,7 +878,7 @@ function mapStateToProps(state) {
     const {
         getCityOfOrganizationList, getStatisticByClassifyList, getStatisticByCityList,
         getStatisticByOrganizationList, getStatisticByRangeDateList, getStatisticSettlementDate,
-        getClassConfList,getCityList,getOperationMonitor,getStatisticByTotalList, commonReducer
+        getClassConfList, getCityList, getOperationMonitor, getStatisticByTotalList, commonReducer
     }=state;
     return {
         fetching: getStatisticByClassifyList.fetching,
