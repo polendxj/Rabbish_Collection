@@ -12,7 +12,7 @@ import {
     NoData,
     ConfirmModal,
     ErrorModal,
-    roleApplicationUse,
+    ListMiddleModal,
     timeStamp2Time,
     filterCityById,
     getInitialCityIdx,
@@ -51,9 +51,7 @@ export default class StatisticListContainer extends Component {
         this.operation = [
             {icon: "", text: "", action: ""}
         ];
-        this.classifyShowCol = "城市";
-        this.cityShowCol = "城市";
-        this.totalShowCol = "城市";
+        this.organizationList = "";
         this.searchColumn = "CLASSIFY";
         this.currentCityId = 1;
         this.cityOfcurrentCityId = 1;
@@ -220,7 +218,11 @@ export default class StatisticListContainer extends Component {
         this.settlementOfcurrentCityId = citieid;
         this._startRefresh();
     }
-
+    _detail(list){
+        console.log("list",list);
+        this.organizationList = list;
+        this._startRefresh();
+    }
     _changePage(page) {
         this.page = page;
         this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
@@ -285,10 +287,28 @@ export default class StatisticListContainer extends Component {
                 cityData.organizationData.forEach(function (val, key) {
                     cityTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
-                        <td className="text-center">{val.organizationName}</td>
-                        <td className="text-center">{val.count}</td>
-                        <td className="text-center">{val.weight.toFixed(2)}</td>
-                        <td className="text-center">{val.rangeDate}</td>
+                        <td className="text-center">{val.organizationTotal.organizationName}</td>
+                        <td className="text-center">{val.organizationTotal.count}</td>
+                        <td className="text-center">{val.organizationTotal.weight.toFixed(2)}</td>
+                        <td className="text-center">{val.organizationTotal.rangeDate}</td>
+                        <td className="text-center">
+                            {<ul className="icons-list">
+                                <li className="dropdown">
+                                    <a href="#" className="dropdown-toggle"
+                                       data-toggle="dropdown" aria-expanded="false"><i
+                                        className="icon-menu7"></i></a>
+                                    <ul className="dropdown-menu dropdown-menu-right">
+                                        <li>
+                                            <a href="javascript:void(0)" data-toggle="modal"
+                                               data-target="#organizationDetailModal" onClick={this._detail.bind(this, val.organizationEveryData)}><i
+                                                className=" icon-office"></i>
+                                                {"详情"}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>}
+
+                        </td>
                     </tr>)
                 }.bind(this));
             } else {
@@ -517,6 +537,38 @@ export default class StatisticListContainer extends Component {
                 showOperation = "获取数据失败";
             }
         }
+        var detailOrganizationInfo = "";
+        var detailOrganizationTb = [];
+        if(this.organizationList==""){
+            detailOrganizationInfo = <Loading />;
+        }else{
+            this.organizationList.forEach(function (val, key) {
+                detailOrganizationTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
+                    <td className="text-center">{key + 1}</td>
+                    <td className="text-center">{val.organizationName}</td>
+                    <td className="text-center">{val.count}</td>
+                    <td className="text-center">{val.weight.toFixed(2)}</td>
+                    <td className="text-center">{timeStamp2Time(val.monthday)}</td>
+                </tr>)
+            }.bind(this));
+            detailOrganizationInfo = <div>
+                <table className="table table-bordered table-striped text-center">
+                    <thead>
+                    <tr style={{fontWeight: 'bold'}}>
+                        <th className="text-center" style={{width: "20px"}}></th>
+                        <th className="col-md-3 text-center text-bold">{"单位/小区"}</th>
+                        <th className="col-md-3 text-center text-bold">{"投放次数"}</th>
+                        <th className="col-md-3 text-center text-bold">{"投放重量"}</th>
+                        <th className="col-md-3 text-center text-bold">{"日期"}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {detailOrganizationTb}
+                    </tbody>
+                </table>
+            </div>
+        }
+
         var tableHeight = ($(window).height() - 410);
         return (
             <div>
@@ -713,6 +765,8 @@ export default class StatisticListContainer extends Component {
                                                     <th className="col-md-3 text-bold text-center">{"投放次数"}</th>
                                                     <th className="col-md-3 text-bold text-center">{"投放重量"}</th>
                                                     <th className="col-md-3 text-bold text-center">{"时间段"}</th>
+                                                    <th className="text-center" style={{width: "20px"}}><i
+                                                        className="icon-arrow-down12"></i></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -896,7 +950,9 @@ export default class StatisticListContainer extends Component {
 
                                     </fieldset>
                                 </div>
-
+                                <ListMiddleModal id="organizationDetailModal" content={detailOrganizationInfo}
+                                                 doAction={""}
+                                                 tip={"详情展示"} actionText="单位/小区统计详情" hide="true" hideCancel="true"/>
                             </div>
                         </div>
                     </div>
