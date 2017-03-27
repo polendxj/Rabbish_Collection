@@ -249,7 +249,7 @@ export default class AdminUserListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"扫码员列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
-                            <Pagenation counts={data && data.status ? data.data.totalPages : 0} page={this.page}
+                            <Pagenation counts={data && data.status ? data.data.totalElements : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>

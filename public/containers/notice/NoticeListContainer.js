@@ -40,6 +40,9 @@ export default class NoticeListContainer extends Component {
         this._search = this._search.bind(this);
         this._detail = this._detail.bind(this);
         this._delete = this._delete.bind(this);
+        this._changePage=this._changePage.bind(this);
+        this._prePage=this._prePage.bind(this);
+        this._nextPage=this._nextPage.bind(this);
     }
 
     componentDidMount() {
@@ -64,7 +67,7 @@ export default class NoticeListContainer extends Component {
         if (this.searchColumn == "ORGANIZATION") {
             params = {
                 page: 0,
-                size: 20,
+                size: page_size,
                 type: $("#typeSelect").val()
             };
         }
@@ -85,17 +88,41 @@ export default class NoticeListContainer extends Component {
 
     _changePage(page) {
         this.page = page;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = "";
+        if (this.searchColumn == "ORGANIZATION") {
+            params = {
+                page: this.page,
+                size: page_size,
+                type: $("#typeSelect").val()
+            };
+        }
+        this.props.dispatch(getListByMutilpCondition(params, NOTICE_LIST_START, NOTICE_LIST_END, notice_list));
     }
 
     _prePage(page) {
         this.page = this.page - 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = "";
+        if (this.searchColumn == "ORGANIZATION") {
+            params = {
+                page: this.page,
+                size: page_size,
+                type: $("#typeSelect").val()
+            };
+        }
+        this.props.dispatch(getListByMutilpCondition(params, NOTICE_LIST_START, NOTICE_LIST_END, notice_list));
     }
 
     _nextPage(page) {
         this.page = this.page + 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = "";
+        if (this.searchColumn == "ORGANIZATION") {
+            params = {
+                page: this.page,
+                size: page_size,
+                type: $("#typeSelect").val()
+            };
+        }
+        this.props.dispatch(getListByMutilpCondition(params, NOTICE_LIST_START, NOTICE_LIST_END, notice_list));
     }
 
     render() {
@@ -219,7 +246,7 @@ export default class NoticeListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"新闻政策列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
-                            <Pagenation counts={data ? data.data.content.length : 0} page={this.page}
+                            <Pagenation counts={data ? data.data.totalElements : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>

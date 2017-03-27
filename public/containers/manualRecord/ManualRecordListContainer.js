@@ -24,10 +24,14 @@ export default class ManualRecordListContainer extends Component {
             {icon: "icon-add-to-list", text: Current_Lang.others.add, action: "/DataManage/ManualRecord/Register"}
         ];
         this.searchColumn="DRIVER";
+        this._changePage=this._changePage.bind(this);
+        this._prePage=this._prePage.bind(this);
+        this._nextPage=this._nextPage.bind(this);
+
     }
 
     componentDidMount() {
-        var params = {page: 0, size: 20};
+        var params = {page: 0, size: page_size};
         this.props.dispatch(getListByMutilpCondition(params, MANUALRECORD_LIST_START, MANUALRECORD_LIST_END, manualRecord_list));
     }
 
@@ -45,17 +49,20 @@ export default class ManualRecordListContainer extends Component {
 
     _changePage(page) {
         this.page = page;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {page: this.page, size: page_size};
+        this.props.dispatch(getListByMutilpCondition(params, MANUALRECORD_LIST_START, MANUALRECORD_LIST_END, manualRecord_list));
     }
 
     _prePage(page) {
         this.page = this.page - 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {page: this.page, size: page_size};
+        this.props.dispatch(getListByMutilpCondition(params, MANUALRECORD_LIST_START, MANUALRECORD_LIST_END, manualRecord_list));
     }
 
     _nextPage(page) {
         this.page = this.page + 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {page: this.page, size: page_size};
+        this.props.dispatch(getListByMutilpCondition(params, MANUALRECORD_LIST_START, MANUALRECORD_LIST_END, manualRecord_list));
     }
 
     render() {
@@ -71,7 +78,7 @@ export default class ManualRecordListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"垃圾称量列表区"}</legend>
                         <div style={{marginTop:'-80px'}}>
-                            <Pagenation counts={data ? data.data.content.length : 0} page={this.page}
+                            <Pagenation counts={data ? data.data.totalElements : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>

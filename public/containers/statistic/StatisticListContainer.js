@@ -664,6 +664,26 @@ export default class StatisticListContainer extends Component {
                                     </fieldset>
                                     <fieldset className="content-group">
                                         <div style={{marginTop: '-20px'}}>
+                                            <div className="table-responsive" style={{width:"600px",position:"absolute"}}>
+                                                <table className="table table-xlg text-nowrap">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td className="col-md-12" style={{borderTop:"0"}}>
+                                                            <div className="media-left media-middle">
+                                                                <a href="#" className="btn border-purple-800 text-purple-800 btn-flat btn-rounded btn-xs btn-icon"><i className=" icon-city"></i></a>
+                                                            </div>
+
+                                                            <div className="media-left">
+                                                                <h5 className="text-semibold no-margin">
+                                                                    崇州 - 投放次数 ：1,132 次 / 投放重量：10248 吨<small className="display-block no-margin">2017.3.6 - 2017.3.8</small>
+                                                                </h5>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                             <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
                                                         _changePage={this._changePage} _prePage={this._prePage}
                                                         _nextPage={this._nextPage}/>
