@@ -72,8 +72,8 @@ class RegisterNoticeComponent extends Component{
         });
         $('#file-input').on("fileuploaded", function (event, data) {
             console.log("img", data);
-            if (data.status) {
-                self._save(data.data);
+            if (data.response && data.response.status) {
+                self._save(data.response.data);
             }
         });
     }
@@ -83,14 +83,15 @@ class RegisterNoticeComponent extends Component{
     _search() {
         this.props._startRefresh();
     }
-
-    _save(url) {
+    _save(imgUrl) {
+        console.log("imgUrl", imgUrl);
+        console.log("form", $("#noticeForm").validate().form());
         var formFields = $("#noticeForm").serializeArray();
         var params = array2Json(formFields);
-        params.img = url;
-        console.log("noticeparams",params);
-        this.props._save(params);
-
+        params.img = imgUrl;
+        if($("#noticeForm").validate().form()){
+            this.props._save(params);
+        }
     }
 
     render() {
@@ -134,7 +135,7 @@ class RegisterNoticeComponent extends Component{
                                                textAlign: 'center',
                                            }}>{"图片URL"}</label>
                                     <div className="col-lg-9">
-                                        <input type="file" name="img" id="file-input"
+                                        <input type="file" name="file" id="file-input"
                                                multiple data-min-file-count="1"/>
                                     </div>
                                 </div>

@@ -12,5 +12,8 @@ router.post('/rsapp/correction', function (req, resp) {
     var data = querystring.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/correction' + "?" + data, 'GET', "", req, resp);
 });
+router.post('/rsapp/configureItem/correctionItems', function (req, resp) {
+    RequestApi.Request(baseURL + '/rsapp/configureItem/correctionItems', 'GET', "", req, resp);
+});
 
 module.exports = router;

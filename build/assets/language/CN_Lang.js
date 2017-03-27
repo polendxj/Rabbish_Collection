@@ -424,7 +424,7 @@ CN_Lang = {
         "confirm": "确 认",
         "confirmMa": " 吗? ",
         "registerSuccess": "注册成功",
-        "updateSuccess": "修改成功",
+        "updateSuccess": "设置成功",
         "tip": "提示",
         "deleteFailure": "删除失败:",
         "csrHostnameEmpty": "CSR主机名称不能为空",

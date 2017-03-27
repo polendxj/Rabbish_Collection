@@ -214,25 +214,9 @@ export default class AdminUserListContainer extends Component {
                         <legend className="text-bold">{Current_Lang.label.searching}</legend>
                         <ul className="list-inline list-inline-condensed no-margin-bottom"
                             style={{textAlign: 'right', marginTop: '-59px'}}>
-                            <li className="dropdown"
-                                style={{borderBottom: '0 lightgray solid'}}>
-                                <a href="#" className="btn btn-link btn-sm dropdown-toggle"
-                                   data-toggle="dropdown" aria-expanded="false" style={{
-                                    paddingLeft: '0',
-                                    paddingRight: '0',
-                                    fontWeight: 'bold',
-                                    color: '#193153'
-                                }}><span
-                                    style={{color: '#193153'}} id="search_way">{"按类型搜索"}</span> <span
-                                    className="caret"></span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a href="#">{"按类型搜索"}</a></li>
-                                </ul>
-                            </li>
                             <li>
-                                <select id="typeSelect" className="form-control" style={{width: "150px"}}>
-                                    <option value={""}>所有</option>
+                                <select id="typeSelect" className="form-control">
+                                    <option value={""}>所有管理员</option>
                                     <option value={1}>管理员</option>
                                     <option value={2}>回收员</option>
                                 </select>

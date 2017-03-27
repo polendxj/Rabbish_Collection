@@ -16,7 +16,8 @@ import {
     ListMiddleModal,
     filterByApprove,
     VerifyModal,
-    filterCityById
+    filterCityById,
+    getInitialCityIdx
 } from '../../components/Tool/Tool';
 import {STORE_LIST_START, STORE_LIST_END,CITY_LIST_START,CITY_LIST_END} from '../../constants/index.js'
 import VerifiedStore from './VerifiedStore';
@@ -37,7 +38,7 @@ export default class StoreListContainer extends Component {
         this.detailData = "";
         this.verifyFlag = false;
         this.currentCity = "";
-        this.currentCityId = 3;
+        this.currentCityId = 1;
         this.operation = [];
         this.searchColumn = "DRIVER";
         this._detail = this._detail.bind(this);
@@ -169,6 +170,9 @@ export default class StoreListContainer extends Component {
         var cityOptions = [];
         var countryOptions = [];
         if (cityList) {
+            countryOptions.push(
+                <option key={"country--1"} value={""}>{"所有区县"}</option>
+            );
             if (cityList.status) {
                 cityList.data.forEach(function (city, idx) {
                     cityOptions.push(
@@ -176,8 +180,9 @@ export default class StoreListContainer extends Component {
                     )
                 });
                 if (this.currentCity == "") {
-                    if (cityList.data[0].country) {
-                        cityList.data[0].country.forEach(function (val, index) {
+                    var idx = getInitialCityIdx(this.currentCityId, cityList.data);
+                    if (cityList.data[idx].country) {
+                        cityList.data[idx].country.forEach(function (val, index) {
                             countryOptions.push(
                                 <option key={"country-" + index} value={val.id}>{val.name}</option>
                             )
@@ -371,7 +376,7 @@ export default class StoreListContainer extends Component {
                         <label className="col-lg-2 control-label"
                                style={{textAlign: 'center'}}>{"结算金额"}</label>
                         <div className="col-lg-9">
-                            <input disabled id="settlementAmount" type="text" className="form-control" placeholder="输入结算金额"
+                            <input id="settlementAmount" type="text" className="form-control" placeholder="输入结算金额"
                                    autoComplete="off"/>
                         </div>
                     </div>
@@ -379,7 +384,7 @@ export default class StoreListContainer extends Component {
                         <label className="col-lg-2 control-label"
                                style={{textAlign: 'center'}}>{"结算积分"}</label>
                         <div className="col-lg-9">
-                            <input disabled id="settlementPoints" type="text" className="form-control" placeholder="输入结算积分"
+                            <input id="settlementPoints" type="text" className="form-control" placeholder="输入结算积分"
                                    autoComplete="off"/>
                         </div>
                     </div>
@@ -429,13 +434,13 @@ export default class StoreListContainer extends Component {
                         <ul className="list-inline list-inline-condensed no-margin-bottom"
                             style={{textAlign: 'right', marginTop: '-59px'}}>
                             <li style={{display: "inline-block"}}>
-                                <select id="citySelect" className="form-control" style={{width: "150px"}}
+                                <select id="citySelect" className="form-control"
                                         value={this.currentCityId} onChange={this._changeCity}>
                                     {cityOptions}
                                 </select>
                             </li>
                             <li style={{display: "inline-block"}}>
-                                <select id="countrySelect" className="form-control" style={{width: "150px"}}>
+                                <select id="countrySelect" className="form-control">
                                     {countryOptions}
                                 </select>
                             </li>

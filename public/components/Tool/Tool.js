@@ -795,6 +795,18 @@ export function timeStamp2Time(time) {
     }
     return timeStr;
 }
+export function correctionType(correctionItems,type){
+    var typeName = "";
+    if(correctionItems&&correctionItems.data&&correctionItems.data.length>0){
+        for(var item of correctionItems.data){
+            if(item.type == type){
+                typeName = item.descrip;
+                break;
+            }
+        }
+    }
+    return typeName;
+}
 export function userType(type) {
     var userType = "";
     switch (type) {
@@ -870,17 +882,19 @@ function isNumber(value) {
 }
 export function filterCityById(cityList, id) {
     var city = "";
-    for (var val of cityList) {
-        if (val.id == id) {
-            city = val;
-            break;
+    if(cityList&&cityList.length>0){
+        for (var val of cityList) {
+            if (val.id == id) {
+                city = val;
+                break;
+            }
         }
     }
     return city;
 }
 export function filterCountryById(currentCity, id) {
     var country = "";
-    if (currentCity.country) {
+    if (id!=""&&currentCity.country) {
         for (var val of currentCity.country) {
             if (val.id == id) {
                 country = val;

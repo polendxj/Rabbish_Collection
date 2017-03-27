@@ -17,7 +17,8 @@ import {
     ListMiddleModal,
     timeStamp2Time,
     filterCityById,
-    filterCountryById
+    filterCountryById,
+    getInitialCityIdx
 } from '../../components/Tool/Tool';
 import {GENERALUSER_LIST_START, GENERALUSER_LIST_END,GENNERALUSER_DETAIL_START,GENNERALUSER_DETAIL_END, CITY_LIST_START, CITY_LIST_END} from '../../constants/index.js'
 import {getListByMutilpCondition, deleteObject, saveObject,getAuthcode,getDetail} from '../../actions/CommonActions';
@@ -39,7 +40,7 @@ export default class UserListContainer extends Component {
         this.detailData = "";
         this.currentCity = "";
         this.currentCountry = "";
-        this.currentCityId = "";
+        this.currentCityId = 1;
         this.interValObj = "";
         this._delete = this._delete.bind(this);
         this._detail = this._detail.bind(this);
@@ -93,6 +94,9 @@ export default class UserListContainer extends Component {
 
     _changeCountry() {
         var countyid = $("#countrySelect").val();
+        if(this.currentCity==""){
+            this.currentCity = filterCityById(this.props.cityList.data, this.currentCityId);
+        }
         this.currentCountry = filterCountryById(this.currentCity, countyid);
         this._startRefresh();
     }
@@ -218,14 +222,11 @@ export default class UserListContainer extends Component {
         var countryOptions = [];
         var organizationOptions = [];
         if (cityList) {
-            cityOptions.push(
-                <option key={"city--1"} value={""}>{"所有"}</option>
-            );
             countryOptions.push(
-                <option key={"country--1"} value={""}>{"所有"}</option>
+                <option key={"country--1"} value={""}>{"所有区县"}</option>
             );
             organizationOptions.push(
-                <option key={"organization--1"} value={""}>{"所有"}</option>
+                <option key={"organization--1"} value={""}>{"所有小区"}</option>
             );
             if (cityList.status) {
                 cityList.data.forEach(function (city, idx) {
@@ -234,15 +235,16 @@ export default class UserListContainer extends Component {
                     )
                 });
                 if (this.currentCity == "") {
-                    if (cityList.data[0].country) {
-                        cityList.data[0].country.forEach(function (val, index) {
+                    var idx = getInitialCityIdx(this.currentCityId, cityList.data);
+                    if (cityList.data[idx].country) {
+                        cityList.data[idx].country.forEach(function (val, index) {
                             countryOptions.push(
                                 <option key={"country-" + index} value={val.id}>{val.name}</option>
                             )
                         });
                         if (this.currentCountry == "") {
-                            if (cityList.data[0].country.organization && cityList.data[0].country.organization.content.length > 0) {
-                                cityList.data[0].country.organization.content.forEach(function (organization, i) {
+                            if (cityList.data[idx].country.organization && cityList.data[idx].country.organization.content.length > 0) {
+                                cityList.data[idx].country.organization.content.forEach(function (organization, i) {
                                     organizationOptions.push(
                                         <option key={"organization-" + i}
                                                 value={organization.id}>{organization.name}</option>
@@ -566,19 +568,19 @@ export default class UserListContainer extends Component {
                             style={{textAlign: 'right', marginTop: '-59px'}}>
 
                             <li style={{display: "inline-block"}}>
-                                <select id="citySelect" className="form-control" style={{width: "150px"}}
+                                <select id="citySelect" className="form-control"
                                         value={this.currentCityId} onChange={this._changeCity}>
                                     {cityOptions}
                                 </select>
                             </li>
                             <li style={{display: "inline-block"}}>
-                                <select id="countrySelect" className="form-control" style={{width: "150px"}}
+                                <select id="countrySelect" className="form-control"
                                         onChange={this._changeCountry}>
                                     {countryOptions}
                                 </select>
                             </li>
                             <li style={{display: "inline-block"}}>
-                                <select id="organizationSelect" className="form-control" style={{width: "150px"}}>
+                                <select id="organizationSelect" className="form-control">
                                     {organizationOptions}
                                 </select>
                             </li>

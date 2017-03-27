@@ -51,6 +51,9 @@ export default class StatisticListContainer extends Component {
         this.operation = [
             {icon: "", text: "", action: ""}
         ];
+        this.classifyShowCol = "城市";
+        this.cityShowCol = "城市";
+        this.totalShowCol = "城市";
         this.searchColumn = "CLASSIFY";
         this.currentCityId = 1;
         this.cityOfcurrentCityId = 1;
@@ -226,6 +229,7 @@ export default class StatisticListContainer extends Component {
 
     render() {
         const {fetching, classifyData, cityData, organizationData, rangeDateData, settlementData,operationData, cityList,cityOfCountyList,totalData, classifyList} =this.props;
+        console.log("rangeDateData",rangeDateData);
         var data = "";
         var showCity = "city";
         var classifyDataMerge = [];
@@ -241,6 +245,9 @@ export default class StatisticListContainer extends Component {
                     classifyDataMerge.forEach(function (val, key) {
                         classifyTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                             <td className="text-center">{key + 1}</td>
+                            <td className="text-center">
+                                {$("#ofClassifySelect").val()?$("#ofClassifySelect").find("option:selected").text():$("#citySelect").find("option:selected").text()}
+                            </td>
                             <td className="text-center">{val.className}</td>
                             <td className="text-center">{val.count}</td>
                             <td className="text-center">{val.weight.toFixed(2)}</td>
@@ -277,6 +284,7 @@ export default class StatisticListContainer extends Component {
                     cityDataList.forEach(function (val, key) {
                         cityTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                             <td className="text-center">{key + 1}</td>
+                            <td className="text-center">{$("#cityOfCitySelect").find("option:selected").text()}</td>
                             <td className="text-center">{val.count}</td>
                             <td className="text-center">{val.weight.toFixed(2)}</td>
                             <td className="text-center">{timeStamp2Time(val.monthday)}</td>
@@ -349,6 +357,9 @@ export default class StatisticListContainer extends Component {
                 if (rangeDateDataList) {
                         daterangeTb.push(<tr key={"rangeDate"}>
                             <td className="text-center">{1}</td>
+                            <td className="text-center">
+                                {$("#ofDaterangeSelect").val()?$("#ofDaterangeSelect").find("option:selected").text():$("#cityOfDateRangeSelect").find("option:selected").text()}
+                            </td>
                             <td className="text-center">{rangeDateDataList.count}</td>
                             <td className="text-center">{rangeDateDataList.weight}</td>
                         </tr>)
@@ -414,7 +425,7 @@ export default class StatisticListContainer extends Component {
         var countyOptions = [];
         if (cityOfCountyList) {
             countyOptions.push(
-                <option key={"country--1"} value={""}>{"所有"}</option>
+                <option key={"country--1"} value={""}>{"所有区县"}</option>
             );
             if (cityOfCountyList.status) {
                 cityOfCountyList.data.forEach(function (city, idx) {
@@ -445,7 +456,7 @@ export default class StatisticListContainer extends Component {
         }
         if (cityList) {
             organizationOptions.push(
-                <option key={"organization--1"} value={""}>{"所有"}</option>
+                <option key={"organization--1"} value={""}>{"所有小区"}</option>
             );
             if (cityList.status) {
                 cityList.data.forEach(function (city, idx) {
@@ -612,9 +623,10 @@ export default class StatisticListContainer extends Component {
                                                 <thead>
                                                 <tr style={{fontWeight: 'bold'}}>
                                                     <th className="text-center" style={{width: "20px"}}></th>
-                                                    <th className="col-md-4 text-bold text-center">{"垃圾分类名称"}</th>
-                                                    <th className="col-md-4 text-bold text-center">{"投放次数"}</th>
-                                                    <th className="col-md-4 text-bold text-center">{"投放重量"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{$("#ofClassifySelect").val()?"单位/小区":"城市"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{"垃圾分类名称"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{"投放次数"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{"投放重量"}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -663,9 +675,10 @@ export default class StatisticListContainer extends Component {
                                                 <thead>
                                                 <tr style={{fontWeight: 'bold'}}>
                                                     <th className="text-center" style={{width: "20px"}}></th>
-                                                    <th className="col-md-4 text-bold text-center">{"投放次数"}</th>
-                                                    <th className="col-md-4 text-bold text-center">{"投放重量"}</th>
-                                                    <th className="col-md-4 text-bold text-center">{"日期"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{"城市"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{"投放次数"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{"投放重量"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{"日期"}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -832,8 +845,9 @@ export default class StatisticListContainer extends Component {
                                                 <thead>
                                                 <tr style={{fontWeight: 'bold'}}>
                                                     <th className="text-center" style={{width: "20px"}}></th>
-                                                    <th className="col-md-6 text-bold text-center">{"投放次数"}</th>
-                                                    <th className="col-md-6 text-bold text-center">{"投放重量"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{$("#ofDaterangeSelect").val()?"单位/小区":"城市"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{"投放次数"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{"投放重量"}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -850,123 +864,6 @@ export default class StatisticListContainer extends Component {
                     </div>
                 </div>
             </div>
-        )
-    }
-}
-
-class StatisticListComponent extends Component {
-    constructor(props) {
-        super(props)
-    }
-
-    _detail(path) {
-        browserHistory.push(path)
-    }
-
-    _delete(id, name) {
-        this.props._delete(id, name)
-    }
-
-    render() {
-        const {data, searchColumn, fetching}=this.props;
-        let tb = [];
-        if (data) {
-            if (data.status) {
-                var dataList = null;
-                if (data.data) {
-                    if (typeof data.data.content == "undefined") {
-                        dataList = data.data;
-                    } else {
-                        dataList = data.data.content;
-                    }
-                }
-                if (dataList && dataList.length > 0) {
-                    dataList.forEach(function (val, key) {
-                        if (searchColumn == "CLASSIFY") {
-                            tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
-                                <td className="text-center">{key + 1}</td>
-                                <td className="text-center">{val.className}</td>
-                                <td className="text-center">{val.count}</td>
-                                <td className="text-center">{val.weight}</td>
-                            </tr>)
-                        } else if (searchColumn == "CITY") {
-                            tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
-                                <td className="text-center">{key + 1}</td>
-                                <td className="text-center">{val.count}</td>
-                                <td className="text-center">{val.weight}</td>
-                                <td className="text-center">{timeStamp2Time(val.monthday)}</td>
-                            </tr>)
-                        } else if (searchColumn == "ORGANIZATION") {
-                            tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
-                                <td className="text-center">{key + 1}</td>
-                                <td className="text-center">{val.organizationName}</td>
-                                <td className="text-center">{val.count}</td>
-                                <td className="text-center">{val.weight}</td>
-                                <td className="text-center">{timeStamp2Time(val.monthday)}</td>
-                            </tr>)
-                        } else {
-                            tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
-                                <td className="text-center">{key + 1}</td>
-                                <td className="text-center">{val.count}</td>
-                                <td className="text-center">{val.weight}</td>
-                            </tr>)
-                        }
-
-                    }.bind(this));
-                } else {
-                    tb.push(<tr key={'noData'}>
-                        <td colSpan="100" style={{textAlign: 'center'}}>
-                            <NoData />
-                        </td>
-
-                    </tr>)
-                }
-            } else {
-                tb.push(ErrorModal(Current_Lang.status.minor, "获取数据错误"));
-            }
-        } else {
-            tb.push(<tr key={'loading'}>
-                <td colSpan="100" style={{textAlign: 'center'}}>
-                    <Loading />
-                </td>
-            </tr>)
-        }
-        var tableHeight = ($(window).height() - 240);
-        return (
-            <div className="table-responsive" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
-                <table className="table table-bordered table-hover" style={{marginBottom: '85px'}}>
-                    <thead>
-                    <tr style={{fontWeight: 'bold', display: searchColumn == "CLASSIFY" ? "table-row" : "none"}}>
-                        <th className="text-center" style={{width: "20px"}}></th>
-                        <th className="col-md-4 text-bold text-center">{"垃圾分类名称"}</th>
-                        <th className="col-md-4 text-bold text-center">{"投放次数"}</th>
-                        <th className="col-md-4 text-bold text-center">{"投放重量"}</th>
-                    </tr>
-                    <tr style={{fontWeight: 'bold', display: searchColumn == "CITY" ? "table-row" : "none"}}>
-                        <th className="text-center" style={{width: "20px"}}></th>
-                        <th className="col-md-4 text-bold text-center">{"投放次数"}</th>
-                        <th className="col-md-4 text-bold text-center">{"投放重量"}</th>
-                        <th className="col-md-4 text-bold text-center">{"日期"}</th>
-                    </tr>
-                    <tr style={{fontWeight: 'bold', display: searchColumn == "ORGANIZATION" ? "table-row" : "none"}}>
-                        <th className="text-center" style={{width: "20px"}}></th>
-                        <th className="col-md-3 text-bold text-center">{"小区/单位名称"}</th>
-                        <th className="col-md-3 text-bold text-center">{"投放次数"}</th>
-                        <th className="col-md-3 text-bold text-center">{"投放重量"}</th>
-                        <th className="col-md-3 text-bold text-center">{"日期"}</th>
-                    </tr>
-                    <tr style={{fontWeight: 'bold', display: searchColumn == "TIMERANGER" ? "table-row" : "none"}}>
-                        <th className="text-center" style={{width: "20px"}}></th>
-                        <th className="col-md-6 text-bold text-center">{"投放次数"}</th>
-                        <th className="col-md-6 text-bold text-center">{"投放重量"}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {tb}
-                    </tbody>
-                </table>
-            </div>
-
         )
     }
 }
