@@ -149,11 +149,11 @@ export default class NoticeListContainer extends Component {
                                         <div className="thumbnail"
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
                                             <div className="thumb">
-                                                <img src={this.detailData.img} alt=""
+                                                <img src={imgBaseUrl+this.detailData.img} alt=""
                                                      style={{height: "160px", width: "160px"}}/>
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                                     <span style={{top: 0, marginTop: 0}}>
-                                                        <a href={this.detailData.img} data-popup="lightbox"
+                                                        <a href={imgBaseUrl+this.detailData.img} data-popup="lightbox"
                                                            className="btn" style={{height: "160px", width: "160px"}}></a>
                                                     </span>
                                                 </div>
@@ -262,10 +262,10 @@ class NoticeListComponent extends Component {
                         <td className="text-center">
                             <div className="thumbnail" style={{margin: "0 auto", width: "35px", padding: 0, border: 0}}>
                                 <div className="thumb">
-                                    <img src={val.img} alt="" style={{height: "30px", width: "30px"}}/>
+                                    <img src={imgBaseUrl+val.img} alt="" style={{height: "30px", width: "30px"}}/>
                                     <div className="caption-overflow" style={{width: "auto"}}>
                                         <span style={{top: 0, marginTop: 0}}>
-                                            <a href={val.img} data-popup="lightbox"
+                                            <a href={imgBaseUrl+val.img} data-popup="lightbox"
                                                className="btn" style={{height: "30px", width: "30px"}}></a>
                                         </span>
                                     </div>

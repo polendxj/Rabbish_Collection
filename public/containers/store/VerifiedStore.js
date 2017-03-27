@@ -11,7 +11,6 @@ import {Loading, NoData, ConfirmModal, ErrorModal, roleApplicationUse} from '../
 export default class VerifiedStore extends Component {
     constructor(props) {
         super(props);
-        this.threshold = 100;
     }
 
     _detail(val) {
@@ -57,7 +56,7 @@ export default class VerifiedStore extends Component {
                         <td className="text-center">{val.address}</td>
                         <td className="text-center">
                             <div className="text-muted text-size-small">
-                                {val.points >= this.threshold ? <span className="label bg-success">{"可兑换"}</span> :
+                                {val.points >= thresholdValue ? <span className="label bg-success">{"可兑换"}</span> :
                                     ""}
                             </div>
                         </td>
@@ -74,7 +73,7 @@ export default class VerifiedStore extends Component {
                                                 className=" icon-office"></i>
                                                 {"详情"}</a>
                                         </li>
-                                        <li style={{display: val.points >= this.threshold ? 'block' : "none"}}
+                                        <li style={{display: val.points >= thresholdValue ? 'block' : "none"}}
                                             onClick={this._detail.bind(this, val)}>
                                             <a href="javascript:void(0)" data-toggle="modal"
                                                data-target="#storeSettlementModal"><i className=" icon-office"></i>

@@ -13,11 +13,14 @@ import {
     ConfirmModal,
     ErrorModal,
     roleApplicationUse,
-    timeStamp2Time
+    timeStamp2Time,
+    correctionType
 } from '../../components/Tool/Tool';
 import {
     CORRECTION_LIST_START,
     CORRECTION_LIST_END,
+    CORRECTIONITEMS_START,
+    CORRECTIONITEMS_END,
     ORGANIZATION_LIST_START,
     ORGANIZATION_LIST_END
 } from '../../constants/index.js'
@@ -50,6 +53,7 @@ export default class CorrectionListContainer extends Component {
         var organizationParams = {page: 0, size: 10000};
         this.props.dispatch(getListByMutilpCondition(params, CORRECTION_LIST_START, CORRECTION_LIST_END, correction_list));
         this.props.dispatch(getListByMutilpCondition(organizationParams, ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, organization_list));
+        this.props.dispatch(getListByMutilpCondition(organizationParams, CORRECTIONITEMS_START, CORRECTIONITEMS_END, correction_items));
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
@@ -65,6 +69,8 @@ export default class CorrectionListContainer extends Component {
             opens: "left",
             applyClass: 'bg-slate-600',
             cancelClass: 'btn-default',
+            startDate: '01/01/2016',
+            endDate: moment(),
             ranges: rangesLocale,
             locale: dateLocale
         });
@@ -75,22 +81,14 @@ export default class CorrectionListContainer extends Component {
     }
 
     _search() {
-        var params = "";
-        if (this.searchColumn == "ORGANIZATION") {
-            params = {
-                page: 0,
-                size: page_size,
-                organizationid: $("#organizationSelect").val()
-            };
-        } else {
-            var rangeTime = $(".daterange-organization").val();
-            params = {
-                page: 0,
-                size: page_size,
-                startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
-                endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
-            };
-        }
+        var rangeTime = $(".daterange-organization").val();
+        var params = {
+            page: 0,
+            size: page_size,
+            organizationid: $("#organizationSelect").val(),
+            startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
+            endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+        };
         this.props.dispatch(getListByMutilpCondition(params, CORRECTION_LIST_START, CORRECTION_LIST_END, correction_list));
     }
 
@@ -139,9 +137,13 @@ export default class CorrectionListContainer extends Component {
     }
 
     render() {
-        const {fetching, data, organizationList} =this.props;
+        const {fetching, data, correctionItems, organizationList} =this.props;
+        console.log("correctionItems",correctionItems);
         var organizationOptions = [];
         if (organizationList) {
+            organizationOptions.push(
+                <option key={"organization--1"} value={""}>{"所有小区"}</option>
+            );
             if (organizationList.status) {
                 organizationList.data.content.forEach(function (organization, idx) {
                     organizationOptions.push(
@@ -162,30 +164,13 @@ export default class CorrectionListContainer extends Component {
                         <legend className="text-bold">{Current_Lang.label.searching}</legend>
                         <ul className="list-inline list-inline-condensed no-margin-bottom"
                             style={{textAlign: 'right', marginTop: '-59px'}}>
-                            <li className="dropdown"
-                                style={{borderBottom: '0 lightgray solid'}}>
-                                <a href="#" className="btn btn-link btn-sm dropdown-toggle"
-                                   data-toggle="dropdown" aria-expanded="false" style={{
-                                    paddingLeft: '0',
-                                    paddingRight: '0',
-                                    fontWeight: 'bold',
-                                    color: '#193153'
-                                }}><span
-                                    style={{color: '#193153'}} id="search_way">{"按单位/小区搜索"}</span> <span
-                                    className="caret"></span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a href="#">{"按单位/小区搜索"}</a></li>
-                                    <li><a href="#">{"按时间范围搜索"}</a></li>
-                                </ul>
-                            </li>
 
-                            <li style={{display: this.searchColumn == "ORGANIZATION" ? "inline-block" : "none"}}>
+                            <li>
                                 <select id="organizationSelect" className="form-control">
                                     {organizationOptions}
                                 </select>
                             </li>
-                            <li style={{display: this.searchColumn == "ORGANIZATION" ? "none" : "inline-block"}}>
+                            <li>
                                 <input type="text" className="form-control daterange-organization"/>
                             </li>
                             <li>
@@ -204,6 +189,7 @@ export default class CorrectionListContainer extends Component {
                                         _nextPage={this._nextPage}/>
                         </div>
                         <CorrectionListComponent data={data} fetching={fetching}
+                                                 correctionItems={correctionItems}
                                                  _delete={this._delete}
                                                  _updateStatus={this._updateStatus}/>
 
@@ -228,15 +214,15 @@ class CorrectionListComponent extends Component {
     }
 
     render() {
-        const {data, fetching}=this.props;
+        const {data,correctionItems, fetching}=this.props;
         let tb = [];
-        if (data) {
-            if (data.data.content.length > 0) {
+        if (data&&correctionItems) {
+            if (data.data&&data.data.content.length > 0) {
                 data.data.content.forEach(function (val, key) {
                     tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
                         <td className="text-center">{val.userName}</td>
-                        <td className="text-center">{val.type}</td>
+                        <td className="text-center">{correctionType(correctionItems,val.type)}</td>
                         <td className="text-center">{val.weight}</td>
                         <td className="text-left">{val.description}</td>
                         <td className="text-center">{timeStamp2Time(val.createTime)}</td>
@@ -282,10 +268,11 @@ class CorrectionListComponent extends Component {
 }
 
 function mapStateToProps(state) {
-    const {getOrganizationList, getCorrectionList, commonReducer}=state;
+    const {getOrganizationList, getCorrectionList,getCorrectionItems, commonReducer}=state;
     return {
         fetching: getCorrectionList.fetching,
         data: getCorrectionList.data,
+        correctionItems: getCorrectionItems.data,
         organizationList: getOrganizationList.data,
         refresh: commonReducer.refresh
     }

@@ -49,7 +49,7 @@ import {getCityList,getCityOfOrganizationList} from '../reducers/CitySettingRedu
 import {getClassConfList,getClassConfDetail} from '../reducers/ClassConfReducer'
 import {getManualRecordList} from '../reducers/ManualRecordReducer'
 import {getTransitLineList} from '../reducers/TransitLineReducer'
-import {getCorrectionList} from '../reducers/CorrectionReducer'
+import {getCorrectionList,getCorrectionItems} from '../reducers/CorrectionReducer'
 import {getComplaintList} from '../reducers/ComplaintReducer'
 import {getStoreSettlementList} from '../reducers/StoreSettlementReducer'
 import {getStoreList} from '../reducers/StoreReducer'
@@ -136,6 +136,7 @@ const rootReducer = combineReducers({
     getManualRecordList,
     getTransitLineList,
     getCorrectionList,
+    getCorrectionItems,
     getComplaintList,
     getStoreSettlementList,
     getStoreList,

@@ -61,14 +61,6 @@ export default class OrganizationListContainer extends Component {
         this.props.dispatch(getListByMutilpCondition(params, ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, organization_list));
         this.props.dispatch(getListByMutilpCondition(params, CITY_LIST_START, CITY_LIST_END, city_list));
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
-        $("#search_way").parent().parent().on('click', 'li', function () {
-            $("#search_way").text($(this).find('a').text());
-            if ($(this).find('a').text().trim() == "按类别搜索") {
-                self.searchColumn = "TYPE";
-            } else {
-                self.searchColumn = "ADMIN_NAME";
-            }
-        })
     }
     componentWillUnmount(){
         clearInterval(this.progressInterval);//停止计时器
@@ -194,7 +186,7 @@ export default class OrganizationListContainer extends Component {
         var countryOptions = [];
         if (cityList) {
             countryOptions.push(
-                <option key={"country--1"} value={""}>{"所有"}</option>
+                <option key={"country--1"} value={""}>{"所有区县"}</option>
             );
             if (cityList.status) {
                 cityList.data.forEach(function (city, idx) {
@@ -204,8 +196,8 @@ export default class OrganizationListContainer extends Component {
                 });
                 if (this.currentCity == "") {
                     var idx = getInitialCityIdx(this.currentCityId, cityList.data);
-                    if (cityList.data[0].country) {
-                        cityList.data[0].country.forEach(function (val, index) {
+                    if (cityList.data[idx].country) {
+                        cityList.data[idx].country.forEach(function (val, index) {
                             countryOptions.push(
                                 <option key={"country-" + index} value={val.id}>{val.name}</option>
                             )
@@ -351,13 +343,13 @@ export default class OrganizationListContainer extends Component {
                         <ul className="list-inline list-inline-condensed no-margin-bottom"
                             style={{textAlign: 'right', marginTop: '-59px'}}>
                             <li style={{display: "inline-block"}}>
-                                <select id="citySelect" className="form-control" style={{width: "150px"}}
+                                <select id="citySelect" className="form-control"
                                         value={this.currentCityId} onChange={this._changeCity}>
                                     {cityOptions}
                                 </select>
                             </li>
                             <li style={{display: "inline-block"}}>
-                                <select id="countrySelect" className="form-control" style={{width: "150px"}}>
+                                <select id="countrySelect" className="form-control">
                                     {countryOptions}
                                 </select>
                             </li>

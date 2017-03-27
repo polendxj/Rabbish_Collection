@@ -4,9 +4,13 @@
 
 var node_service = '';
 
-var page_size = 50
+var page_size = 50;
 
-var timeout_time = 5
+var timeout_time = 5;
+
+var thresholdValue = 100;
+
+var imgBaseUrl = "http://dev.xysy.tech";
 
 var city_list = node_service + "/rsapp/city";
 var cityOfOrganization_list = node_service + "/rsapp/cityOfOrganization";
@@ -43,6 +47,7 @@ var reply_register = node_service + "/rsapp/reply/register";
 var complaint_list = node_service + "/rsapp/complaint";
 var complaint_update = node_service + "/rsapp/complaint/update";
 var correction_list = node_service + "/rsapp/correction";
+var correction_items = node_service + "/rsapp/configureItem/correctionItems";
 var store_list = node_service + "/rsapp/store";
 var store_approve = node_service + "/rsapp/store/approved";
 var storeSettlement_list = node_service + "/rsapp/storeSettlement";

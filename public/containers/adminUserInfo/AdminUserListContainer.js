@@ -233,8 +233,8 @@ export default class AdminUserListContainer extends Component {
                         <ul className="list-inline list-inline-condensed no-margin-bottom"
                             style={{textAlign: 'right', marginTop: '-59px'}}>
                             <li>
-                                <select id="typeSelect" className="form-control" style={{width: "150px"}}>
-                                    <option value={""}>所有</option>
+                                <select id="typeSelect" className="form-control">
+                                    <option value={""}>所有管理员</option>
                                     <option value={1}>管理员</option>
                                     <option value={2}>回收员</option>
                                 </select>
