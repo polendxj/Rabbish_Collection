@@ -23,10 +23,13 @@ export default class TransitLineListContainer extends Component {
         this.operation = [
             {icon: "icon-add-to-list", text: Current_Lang.others.add, action: "/DataManage/TransitLine/Register"}
         ];
+        this._changePage=this._changePage.bind(this);
+        this._prePage=this._prePage.bind(this);
+        this._nextPage=this._nextPage.bind(this);
     }
 
     componentDidMount() {
-        var params = {page: 0, size: 20};
+        var params = {page: 0, size: page_size};
         this.props.dispatch(getListByMutilpCondition(params, TRANSITLINE_LIST_START, TRANSITLINE_LIST_END, transitLine_list));
     }
 
@@ -48,17 +51,20 @@ export default class TransitLineListContainer extends Component {
 
     _changePage(page) {
         this.page = page;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {page: this.page, size: page_size};
+        this.props.dispatch(getListByMutilpCondition(params, TRANSITLINE_LIST_START, TRANSITLINE_LIST_END, transitLine_list));
     }
 
     _prePage(page) {
         this.page = this.page - 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {page: this.page, size: page_size};
+        this.props.dispatch(getListByMutilpCondition(params, TRANSITLINE_LIST_START, TRANSITLINE_LIST_END, transitLine_list));
     }
 
     _nextPage(page) {
         this.page = this.page + 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {page: this.page, size: page_size};
+        this.props.dispatch(getListByMutilpCondition(params, TRANSITLINE_LIST_START, TRANSITLINE_LIST_END, transitLine_list));
     }
 
     render() {
@@ -75,7 +81,7 @@ export default class TransitLineListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"车辆运输列表区"}</legend>
                         <div style={{marginTop:'-80px'}}>
-                            <Pagenation counts={data&&data.status ? data.data.content.length : 0} page={this.page}
+                            <Pagenation counts={data&&data.status ? data.data.totalElements : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>

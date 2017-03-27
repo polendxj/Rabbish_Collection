@@ -45,6 +45,9 @@ export default class StoreListContainer extends Component {
         this._showVerify = this._showVerify.bind(this);
         this._changeCity = this._changeCity.bind(this);
         this._startRefresh = this._startRefresh.bind(this);
+        this._changePage=this._changePage.bind(this);
+        this._prePage=this._prePage.bind(this);
+        this._nextPage=this._nextPage.bind(this);
     }
 
     componentDidMount() {
@@ -87,7 +90,7 @@ export default class StoreListContainer extends Component {
             approved: 2,
             storeid: userid
         };
-        var listParams = {page: 0, size: 20};
+        var listParams = {page: 0, size: page_size};
         this.props.dispatch(saveObject(params,"","",store_approve,"/CustomerService/StoreManage","noAlert",function () {
             that.props.dispatch(getListByMutilpCondition(listParams, STORE_LIST_START, STORE_LIST_END, store_list));
         }));
@@ -99,7 +102,7 @@ export default class StoreListContainer extends Component {
             approved: 1,
             storeid: userid
         };
-        var listParams = {page: 0, size: 20};
+        var listParams = {page: 0, size: page_size};
         this.props.dispatch(saveObject(params,"","",store_approve,"/CustomerService/StoreManage","noAlert",function () {
             that.props.dispatch(getListByMutilpCondition(listParams, STORE_LIST_START, STORE_LIST_END, store_list));
         }));
@@ -126,7 +129,7 @@ export default class StoreListContainer extends Component {
         params['amount'] = parseInt($("#settlementPoints").val());
         $("#storeSettlementModal").modal("hide");
         this.props.dispatch(saveObject(params,"","",storeSettlement_register,"","x",function(){
-            var param = {page: 0, size: 20};
+            var param = {page: 0, size: page_size};
             that.props.dispatch(getListByMutilpCondition(param, STORE_LIST_START, STORE_LIST_END, store_list));
         }));
     }
@@ -134,7 +137,7 @@ export default class StoreListContainer extends Component {
     _search() {
         var params = {
             page: 0,
-            size: 20,
+            size: page_size,
             cityid: $("#citySelect").val(),
             countyid: $("#countrySelect").val()
         };
@@ -143,17 +146,35 @@ export default class StoreListContainer extends Component {
 
     _changePage(page) {
         this.page = page;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {
+            page: this.page,
+            size: page_size,
+            cityid: $("#citySelect").val(),
+            countyid: $("#countrySelect").val()
+        };
+        this.props.dispatch(getListByMutilpCondition(params, STORE_LIST_START, STORE_LIST_END, store_list));
     }
 
     _prePage(page) {
         this.page = this.page - 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {
+            page: this.page,
+            size: page_size,
+            cityid: $("#citySelect").val(),
+            countyid: $("#countrySelect").val()
+        };
+        this.props.dispatch(getListByMutilpCondition(params, STORE_LIST_START, STORE_LIST_END, store_list));
     }
 
     _nextPage(page) {
         this.page = this.page + 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {
+            page: this.page,
+            size: page_size,
+            cityid: $("#citySelect").val(),
+            countyid: $("#countrySelect").val()
+        };
+        this.props.dispatch(getListByMutilpCondition(params, STORE_LIST_START, STORE_LIST_END, store_list));
     }
 
     render() {
@@ -455,7 +476,7 @@ export default class StoreListContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"加盟商列表"}</legend>
                         <div style={{marginTop: '-80px'}}>
-                            <Pagenation counts={3} page={this.page}
+                            <Pagenation counts={data ? data.data.totalElements : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>

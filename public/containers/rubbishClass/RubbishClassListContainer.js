@@ -25,10 +25,13 @@ export default class RubbishClassListContainer extends Component {
         ];
         this.searchColumn="TYPE";
         this._delete = this._delete.bind(this);
+        this._changePage=this._changePage.bind(this);
+        this._prePage=this._prePage.bind(this);
+        this._nextPage=this._nextPage.bind(this);
     }
 
     componentDidMount() {
-        var params = {page: 0, size: 20};
+        var params = {page: 0, size: page_size};
         this.props.dispatch(getListByMutilpCondition(params, CLASSCONF_LIST_START, CLASSCONF_LIST_END, classConf_list));
     }
 
@@ -45,17 +48,20 @@ export default class RubbishClassListContainer extends Component {
 
     _changePage(page) {
         this.page = page;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {page: this.page, size: page_size};
+        this.props.dispatch(getListByMutilpCondition(params, CLASSCONF_LIST_START, CLASSCONF_LIST_END, classConf_list));
     }
 
     _prePage(page) {
         this.page = this.page - 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {page: this.page, size: page_size};
+        this.props.dispatch(getListByMutilpCondition(params, CLASSCONF_LIST_START, CLASSCONF_LIST_END, classConf_list));
     }
 
     _nextPage(page) {
         this.page = this.page + 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        var params = {page: this.page, size: page_size};
+        this.props.dispatch(getListByMutilpCondition(params, CLASSCONF_LIST_START, CLASSCONF_LIST_END, classConf_list));
     }
 
     render() {

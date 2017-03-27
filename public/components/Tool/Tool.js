@@ -906,12 +906,15 @@ export function filterCountryById(currentCity, id) {
 }
 export function getInitialCityIdx(id, cityList) {
     var idx = -1;
-    for (var i = 0; i < cityList.length; i++) {
-        if (cityList[i].id == id) {
-            idx = i;
-            break;
+    if(cityList){
+        for (var i = 0; i < cityList.length; i++) {
+            if (cityList[i].id == id) {
+                idx = i;
+                break;
+            }
         }
     }
+
     return idx;
 }
 export function mergeClassify(classifyList, classifyData) {
