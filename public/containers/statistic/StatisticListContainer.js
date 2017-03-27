@@ -485,7 +485,16 @@ export default class StatisticListContainer extends Component {
         }
         var showOperation = "正在计算中...";
         var showTotal = "正在计算中...";
+        var showTotalOfCity = "正在计算中...";
         console.log("totalData", totalData);
+        if (cityData) {
+            console.log("showTotalOfCity",cityData.totalCityData.count);
+            if (cityData.totalCityData) {
+                showTotalOfCity = "ok";
+            } else {
+                showTotalOfCity = "无数据";
+            }
+        }
         if (totalData) {
             if (totalData.status) {
                 if (totalData.data) {
@@ -677,7 +686,10 @@ export default class StatisticListContainer extends Component {
 
                                                             <div className="media-left">
                                                                 <h5 className="text-semibold no-margin">
-                                                                    崇州 - 投放次数 ：1,132 次 / 投放重量：10248 吨<small className="display-block no-margin">2017.3.6 - 2017.3.8</small>
+                                                                    {showTotalOfCity=="ok"?cityData.totalCityData.cityName:showTotalOfCity}
+                                                                     - 投放次数 ：{showTotalOfCity=="ok"?cityData.totalCityData.count:showTotalOfCity}
+                                                                    次 / 投放重量：{showTotalOfCity=="ok"?cityData.totalCityData.weight.toFixed(2):showTotalOfCity} 吨
+                                                                    <small className="display-block no-margin">{showTotalOfCity=="ok"?cityData.totalCityData.rangeDate:showTotalOfCity}</small>
                                                                 </h5>
                                                             </div>
                                                         </td>

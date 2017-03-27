@@ -20,7 +20,7 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
     RequestApi.Request(baseURL + '/rsapp/statistic/classifying/city' + "?" + data, 'GET', "", req, resp, function (cityData) {
         if (cityData.status) {
             var totalCityData = {
-                cityid: jsonData.cityid, count: 0, weight: 0, rangeDate: jsonData.startday + "/" + jsonData.endday
+                cityid: jsonData.cityid, count: 0, weight: 0, rangeDate: jsonData.startday.replace(/-/g, ".") + " - " + jsonData.endday.replace(/-/g, ".")
             };
             RequestApi.Request(baseURL + '/rsapp/city/'+jsonData.cityid, 'GET', "", req, resp, function (city) {
                 totalCityData.cityName = city.data.name;
@@ -44,7 +44,7 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
                                 RequestApi.Request(baseURL + '/rsapp/statistic/classifying/organization' + "?" + querystring.stringify(jsonData), 'GET', "", req, resp, function (organizationData) {
                                     if(organizationData.status){
                                         if(organizationData.data.content.length>0){
-                                            organizationData.data.content[0].rangeDate = jsonData.startday + "/" + jsonData.endday;
+                                            organizationData.data.content[0].rangeDate = jsonData.startday.replace(/-/g, ".") + " - " + jsonData.endday.replace(/-/g, ".");
                                             organizationData.data.content[0].organizationName = m.name;
                                             response.organizationData[k]=organizationData.data.content[0];
                                             console.log("response",response);
