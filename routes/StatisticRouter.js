@@ -9,11 +9,38 @@ var RequestApi = require('../utils/RequestApi')
 var router = express()
 
 router.post('/rsapp/statistic/classifying/class', function (req, resp) {
-    var data = querystring.stringify(JSON.parse(req.body.data));
-    RequestApi.Request(baseURL + '/rsapp/statistic/classifying/class' + "?" + data, 'GET', "", req, resp);
+    var jsonData = JSON.parse(req.body.data);
+    var cityName = jsonData.cityName;
+    var organizationName = jsonData.organizationName;
+    delete jsonData.cityName
+    delete jsonData.organizationName
+    var data = querystring.stringify(jsonData);
+    RequestApi.Request(baseURL + '/rsapp/statistic/classifying/class' + "?" + data, 'GET', "", req, resp,function (classifyData) {
+        if(classifyData.status){
+            console.log(cityName);
+            if(classifyData.data&&classifyData.data.length>0){
+                if(organizationName){
+                    classifyData.data.forEach(function (val,idx) {
+                        val.organizationName = organizationName;
+                    })
+                }else{
+                    classifyData.data.forEach(function (val,idx) {
+                        val.cityName = cityName;
+                    })
+                }
+                resp.send(classifyData);
+            }else{
+                resp.send(classifyData);
+            }
+        }else{
+            resp.send(classifyData);
+        }
+    });
 });
 router.post('/rsapp/statistic/classifying/city', function (req, resp) {
     var jsonData = JSON.parse(req.body.data);
+    delete jsonData.cityName
+    delete jsonData.organizationName
     var data = querystring.stringify(jsonData);
     var response = {};
     RequestApi.Request(baseURL + '/rsapp/statistic/classifying/city' + "?" + data, 'GET', "", req, resp, function (cityData) {
@@ -34,9 +61,8 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
             response['organizationData'] =[];
             RequestApi.Request(baseURL + '/rsapp/organization' + "?cityid=" + jsonData.cityid, 'GET', "", req, resp, function (organizations) {
                 if(organizations.status){
-                    if (organizations.data.content.length > 0) {
+                    if (organizations.data&&organizations.data.content.length > 0) {
                         var count = 0;
-                        var organizationName = "";
                         organizations.data.content.forEach(function (mk, k) {
                             (function (m,kIndex) {
                                 var organizationTotalData = {organizationName:m.name,count:0,weight:0};
@@ -77,8 +103,46 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
     });
 });
 router.post('/rsapp/statistic/classifying/organization', function (req, resp) {
-    var data = querystring.stringify(JSON.parse(req.body.data));
-    RequestApi.Request(baseURL + '/rsapp/statistic/classifying/organization' + "?" + data, 'GET', "", req, resp);
+    var jsonData = JSON.parse(req.body.data);
+    delete jsonData.cityName
+    delete jsonData.organizationName
+    var data = querystring.stringify(jsonData);
+    RequestApi.Request(baseURL + '/rsapp/statistic/classifying/organization' + "?" + data, 'GET', "", req, resp,function (orgaDataList) {
+        if(orgaDataList.status){
+            RequestApi.Request(baseURL + '/rsapp/city/'+jsonData.cityid, 'GET', "", req, resp, function (city) {
+                orgaDataList.data.cityName = city.data.name;
+            });
+            orgaDataList.data.rangeDate = jsonData.startday.replace(/-/g, ".") + " - " + jsonData.endday.replace(/-/g, ".");
+            if (orgaDataList.data&&orgaDataList.data.content.length > 0) {
+                var count = 0;
+                orgaDataList.data.content.forEach(function (m, k) {
+                    (function (m) {
+                        var params={page:jsonData.page,size:jsonData.size,cityid:jsonData.cityid,organizationid:jsonData.organizationid};
+                        if(jsonData.organizationid){
+                            params.monthday = ExceptionUtils.timeStamp2Time(m.monthday);
+                        }else{
+                            params.startday = jsonData.startday;
+                            params.endday = jsonData.endday;
+                        }
+
+                        RequestApi.Request(baseURL + '/rsapp/statistic/classifying/class'+ "?"  + querystring.stringify(params), 'GET', "", req, resp, function (classifyData) {
+                            if(classifyData.status&&classifyData.data){
+                                m["classifyData"]=classifyData.data;
+                            }
+                            count++;
+                            if (count == orgaDataList.data.content.length) {
+                                resp.send(orgaDataList);
+                            }
+                        })
+                    })(m)
+                })
+            } else {
+                resp.send(orgaDataList);
+            }
+        } else {
+            resp.send(orgaDataList)
+        }
+    });
 });
 router.post('/rsapp/statistic/total', function (req, resp) {
     var data = querystring.stringify(JSON.parse(req.body.data));

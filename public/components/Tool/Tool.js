@@ -795,11 +795,11 @@ export function timeStamp2Time(time) {
     }
     return timeStr;
 }
-export function correctionType(correctionItems,type){
+export function correctionType(correctionItems, type) {
     var typeName = "";
-    if(correctionItems&&correctionItems.data&&correctionItems.data.length>0){
-        for(var item of correctionItems.data){
-            if(item.type == type){
+    if (correctionItems && correctionItems.data && correctionItems.data.length > 0) {
+        for (var item of correctionItems.data) {
+            if (item.type == type) {
                 typeName = item.descrip;
                 break;
             }
@@ -882,7 +882,7 @@ function isNumber(value) {
 }
 export function filterCityById(cityList, id) {
     var city = "";
-    if(cityList&&cityList.length>0){
+    if (cityList && cityList.length > 0) {
         for (var val of cityList) {
             if (val.id == id) {
                 city = val;
@@ -894,7 +894,7 @@ export function filterCityById(cityList, id) {
 }
 export function filterCountryById(currentCity, id) {
     var country = "";
-    if (id!=""&&currentCity.country) {
+    if (id != "" && currentCity.country) {
         for (var val of currentCity.country) {
             if (val.id == id) {
                 country = val;
@@ -906,7 +906,7 @@ export function filterCountryById(currentCity, id) {
 }
 export function getInitialCityIdx(id, cityList) {
     var idx = -1;
-    if(cityList){
+    if (cityList) {
         for (var i = 0; i < cityList.length; i++) {
             if (cityList[i].id == id) {
                 idx = i;
@@ -919,13 +919,13 @@ export function getInitialCityIdx(id, cityList) {
 }
 export function mergeClassify(classifyList, classifyData) {
     var mergeList = [];
-    if(classifyList&&classifyData&&classifyList.length>0&&classifyData.length>0){
+    if (classifyList && classifyData && classifyList.length > 0 && classifyData.length > 0) {
         classifyList.forEach(function (classify, idx) {
             mergeList[idx] = {className: classify.name, count: 0, weight: 0};
             classifyData.forEach(function (val, i) {
                 if (classify.name == val.className) {
-                    mergeList[idx].count = mergeList[idx].count+val.count;
-                    mergeList[idx].weight = mergeList[idx].weight+val.weight;
+                    mergeList[idx].count = mergeList[idx].count + val.count;
+                    mergeList[idx].weight = mergeList[idx].weight + val.weight;
                     // mergeList[idx].classifyData.push(val);
                 }
             });
@@ -933,6 +933,19 @@ export function mergeClassify(classifyList, classifyData) {
     }
     return mergeList;
 }
+export function mergeOrgTotal(organizationData) {
+    var mergeTotal = {count: 0, weight: 0};
+    if (organizationData && organizationData.data && organizationData.data.content.length > 0) {
+        mergeTotal.cityName = organizationData.data.cityName;
+        mergeTotal.rangeDate = organizationData.data.rangeDate;
+        organizationData.data.content.forEach(function (val, i) {
+            mergeTotal.count = mergeTotal.count + val.count;
+            mergeTotal.weight = mergeTotal.weight + val.weight;
+        });
+    }
+    return mergeTotal;
+}
+
 export function filterByApprove(data, approved) {
     var list = [];
     data.forEach(function (val, key) {
@@ -944,9 +957,9 @@ export function filterByApprove(data, approved) {
 }
 
 export function moneyFormat(num) {
-    var result=num.toString().split("").reverse().join("").replace(/(\d{3})/g, "$1,").split("").reverse().join("");
-    if(result.indexOf(",")==0){
-        result=result.substring(1);
+    var result = num.toString().split("").reverse().join("").replace(/(\d{3})/g, "$1,").split("").reverse().join("");
+    if (result.indexOf(",") == 0) {
+        result = result.substring(1);
     }
     return result;
 }

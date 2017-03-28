@@ -17,7 +17,8 @@ import {
     filterCityById,
     getInitialCityIdx,
     mergeClassify,
-    moneyFormat
+    moneyFormat,
+    mergeOrgTotal
 } from '../../components/Tool/Tool';
 import {
     STATISTICBYCLASSIFY_LIST_START,
@@ -52,8 +53,11 @@ export default class StatisticListContainer extends Component {
         this.operation = [
             {icon: "", text: "", action: ""}
         ];
+        this.searchOfOrganizationid = "";
+        this.currentClassifyOrganizationid = "";
         this.organizationList = "";
         this.cityEveryData = "";
+        this.orgaEveryAndTotalData = "";
         this.searchColumn = "CLASSIFY";
         this.currentCityId = 1;
         this.cityOfcurrentCityId = 1;
@@ -63,6 +67,8 @@ export default class StatisticListContainer extends Component {
         this.totalCurrentCityId = 1;
         this.currentCity = "";
         this.currentCityOfCounty = "";
+        this.currentOrgaCity = "崇州";
+        this.currentOrgaOrganization = "";
         this._search = this._search.bind(this);
         this._changeCity = this._changeCity.bind(this);
         this._changeCityOfCity = this._changeCityOfCity.bind(this);
@@ -79,6 +85,8 @@ export default class StatisticListContainer extends Component {
             cityid: self.currentCityId,
             page: 0,
             size: 20,
+            cityName:"崇州",
+            organizationName:"",
             startday: "2016-01-01",
             endday: timeStamp2Time(new Date().getTime())
         };
@@ -121,10 +129,13 @@ export default class StatisticListContainer extends Component {
 
     _search(type) {
         if (type == "CLASSIFY") {
+            this.currentClassifyOrganizationid = $("#ofClassifySelect").val();
             var classifyParams = {
                 page: 0,
                 size: 20,
                 cityid: $("#citySelect").val(),
+                cityName:$("#citySelect").find("option:selected").text(),
+                organizationName:this.currentClassifyOrganizationid?$("#ofClassifySelect").find("option:selected").text():"",
                 organizationid: $("#ofClassifySelect").val(),
                 monthday: timeStamp2Time(new Date($('.daterange-single').val()))
             };
@@ -140,6 +151,10 @@ export default class StatisticListContainer extends Component {
             };
             this.props.dispatch(getListByMutilpCondition(cityParams, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
         } else if (type == "ORGANIZATION") {
+            this.searchOfOrganizationid = $("#ofOrganizationSelect").val();
+            this.currentOrgaCity = $("#cityOfOrganizationSelect").find("option:selected").text();
+            this.currentOrgaOrganization = $("#ofOrganizationSelect").find("option:selected").text();
+            this.OrgaRangeDate = $("#daterange-two-3").val();
             var rangeTime = $("#daterange-two-3").val();
             var organizationParams = {
                 page: 0,
@@ -226,6 +241,18 @@ export default class StatisticListContainer extends Component {
         console.log("cityEveryData",this.cityEveryData);
         this._startRefresh();
     }
+    _orgaTotalDetail(organizationData){
+        if(!this.searchOfOrganizationid){
+            if(organizationData.status&&organizationData.data&&organizationData.data.content.length>0){
+                this.orgaEveryAndTotalData = organizationData.data.content[0];
+            }
+            this._startRefresh();
+        }
+    }
+    _orgaEveryDetail(orgaData){
+        this.orgaEveryAndTotalData=orgaData;
+        this._startRefresh();
+    }
     _changePage(page) {
         this.page = page;
         this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
@@ -245,6 +272,7 @@ export default class StatisticListContainer extends Component {
         const {fetching, classifyData, cityData, organizationData, rangeDateData, settlementData, operationData, cityList, cityOfCountyList, totalData, classifyList} =this.props;
         console.log("organizationData", organizationData);
         console.log("cityData", cityData);
+        console.log("classifyData", classifyData);
         var data = "";
         var showCity = "city";
         var classifyDataMerge = [];
@@ -253,6 +281,7 @@ export default class StatisticListContainer extends Component {
         let organizationTb = [];
         let daterangeTb = [];
         let settlementTb = [];
+        var totalOrga = mergeOrgTotal(organizationData);
         if (classifyData && classifyList) {
             if (classifyData.status && classifyList.status) {
                 classifyDataMerge = mergeClassify(classifyList.data, classifyData.data);
@@ -262,10 +291,10 @@ export default class StatisticListContainer extends Component {
                             <td className="text-center">{key + 1}</td>
                             <td className="text-center">{val.className}</td>
                             <td className="text-center">
-                                {$("#ofClassifySelect").val() ? $("#ofClassifySelect").find("option:selected").text() : $("#citySelect").find("option:selected").text()}
+                                {this.currentClassifyOrganizationid ? $("#ofClassifySelect").find("option:selected").text() : $("#citySelect").find("option:selected").text()}
                             </td>
-                            <td className="text-center">{val.count}</td>
-                            <td className="text-center">{val.weight.toFixed(0)}</td>
+                            <td className="text-center">{moneyFormat(val.count)}</td>
+                            <td className="text-center">{moneyFormat(val.weight.toFixed(0))}</td>
                         </tr>)
                     }.bind(this));
                 } else {
@@ -291,8 +320,8 @@ export default class StatisticListContainer extends Component {
                     cityTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
                         <td className="text-center">{val.organizationTotal.organizationName}</td>
-                        <td className="text-center">{val.organizationTotal.count}</td>
-                        <td className="text-center">{val.organizationTotal.weight.toFixed(0)}</td>
+                        <td className="text-center">{moneyFormat(val.organizationTotal.count)}</td>
+                        <td className="text-center">{moneyFormat(val.organizationTotal.weight.toFixed(0))}</td>
                         <td className="text-center">{val.organizationTotal.rangeDate}</td>
                         <td className="text-center">
                             {<ul className="icons-list">
@@ -343,9 +372,27 @@ export default class StatisticListContainer extends Component {
                         organizationTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                             <td className="text-center">{key + 1}</td>
                             <td className="text-center">{val.organizationName}</td>
-                            <td className="text-center">{val.count}</td>
-                            <td className="text-center">{val.weight.toFixed(0)}</td>
+                            <td className="text-center">{moneyFormat(val.count)}</td>
+                            <td className="text-center">{moneyFormat(val.weight.toFixed(0))}</td>
                             <td className="text-center">{timeStamp2Time(val.monthday)}</td>
+                            <td className="text-center">
+                                {<ul className="icons-list">
+                                    <li className="dropdown">
+                                        <a href="#" className="dropdown-toggle"
+                                           data-toggle="dropdown" aria-expanded="false"><i
+                                            className="icon-menu7"></i></a>
+                                        <ul className="dropdown-menu dropdown-menu-right">
+                                            <li>
+                                                <a href="javascript:void(0)" data-toggle="modal"
+                                                   data-target="#orgaEveryDetailModal" onClick={this._orgaEveryDetail.bind(this, val)}><i
+                                                    className=" icon-office"></i>
+                                                    {"详情"}</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>}
+
+                            </td>
                         </tr>)
                     }.bind(this));
                 } else {
@@ -539,6 +586,7 @@ export default class StatisticListContainer extends Component {
                 showOperation = "获取数据失败";
             }
         }
+        var showOrgaEvery = "获取中...";
         var detailOrganizationTb = [];
         if(this.organizationList==""){
             detailOrganizationTb.push(<tr key={'loading'}>
@@ -551,8 +599,8 @@ export default class StatisticListContainer extends Component {
                 detailOrganizationTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                     <td className="text-center">{key + 1}</td>
                     <td className="text-center">{val.organizationName}</td>
-                    <td className="text-center">{val.count}</td>
-                    <td className="text-center">{val.weight.toFixed(0)}</td>
+                    <td className="text-center">{moneyFormat(val.count)}</td>
+                    <td className="text-center">{moneyFormat(val.weight.toFixed(0))}</td>
                     <td className="text-center">{timeStamp2Time(val.monthday)}</td>
                 </tr>)
             }.bind(this));
@@ -587,8 +635,8 @@ export default class StatisticListContainer extends Component {
                     detailCityEveryTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
                         <td className="text-center">{val.cityName}</td>
-                        <td className="text-center">{val.count}</td>
-                        <td className="text-center">{val.weight.toFixed(2)}</td>
+                        <td className="text-center">{moneyFormat(val.count)}</td>
+                        <td className="text-center">{moneyFormat(val.weight.toFixed(0))}</td>
                         <td className="text-center">{timeStamp2Time(val.monthday)}</td>
                     </tr>)
                 }.bind(this));
@@ -615,7 +663,91 @@ export default class StatisticListContainer extends Component {
                 {detailCityEveryTb}
                 </tbody>
             </table>
-        </div>
+        </div>;
+        var detailorgaEveryTb = [];
+        if(this.orgaEveryAndTotalData==""){
+            detailorgaEveryTb.push(<tr key={'loading'}>
+                <td colSpan="100" style={{textAlign: 'center'}}>
+                    <Loading />
+                </td>
+            </tr>)
+        }else{
+            this.orgaEveryAndTotalData.classifyData = mergeClassify(classifyList.data,this.orgaEveryAndTotalData.classifyData);
+            console.log("orgaEveryAndTotalData.classifyData",this.orgaEveryAndTotalData.classifyData);
+            if(this.orgaEveryAndTotalData.classifyData.length>0){
+                this.orgaEveryAndTotalData.classifyData.forEach(function (val, key) {
+                    detailorgaEveryTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
+                        <td className="text-center">{key + 1}</td>
+                        <td className="text-center">{val.className}</td>
+                        <td className="text-center">{moneyFormat(val.count)}</td>
+                        <td className="text-center">{moneyFormat(val.weight.toFixed(0))}</td>
+                    </tr>)
+                }.bind(this));
+            }else{
+                detailorgaEveryTb.push(<tr key={'noData'}>
+                    <td colSpan="100" style={{textAlign: 'center'}}>
+                        <NoData />
+                    </td>
+                </tr>)
+            }
+        }
+        var detailorgaEveryInfo = <div>
+            <table className="table table-bordered table-striped text-center">
+                <thead>
+                <tr style={{fontWeight: 'bold'}}>
+                    <th className="text-center" style={{width: "20px"}}></th>
+                    <th className="col-md-4 text-center text-bold">{"分类名称"}</th>
+                    <th className="col-md-4 text-center text-bold">{"投放次数"}</th>
+                    <th className="col-md-4 text-center text-bold">{"投放重量"}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {detailorgaEveryTb}
+                </tbody>
+            </table>
+        </div>;
+        var detailorgaTotalTb = [];
+        if(this.orgaEveryAndTotalData==""){
+            detailorgaTotalTb.push(<tr key={'loading'}>
+                <td colSpan="100" style={{textAlign: 'center'}}>
+                    <Loading />
+                </td>
+            </tr>)
+        }else{
+            this.orgaEveryAndTotalData.classifyData = mergeClassify(classifyList.data,this.orgaEveryAndTotalData.classifyData);
+            console.log("orgaEveryAndTotalData",this.orgaEveryAndTotalData.classifyData);
+            if(this.orgaEveryAndTotalData.classifyData.length>0){
+                this.orgaEveryAndTotalData.classifyData.forEach(function (val, key) {
+                    detailorgaTotalTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
+                        <td className="text-center">{key + 1}</td>
+                        <td className="text-center">{val.className}</td>
+                        <td className="text-center">{moneyFormat(val.count)}</td>
+                        <td className="text-center">{moneyFormat(val.weight.toFixed(0))}</td>
+                    </tr>)
+                }.bind(this));
+            }else{
+                detailorgaTotalTb.push(<tr key={'noData'}>
+                    <td colSpan="100" style={{textAlign: 'center'}}>
+                        <NoData />
+                    </td>
+                </tr>)
+            }
+        }
+        var detailorgaTotalInfo = <div>
+            <table className="table table-bordered table-striped text-center">
+                <thead>
+                <tr style={{fontWeight: 'bold'}}>
+                    <th className="text-center" style={{width: "20px"}}></th>
+                    <th className="col-md-4 text-center text-bold">{"分类名称"}</th>
+                    <th className="col-md-4 text-center text-bold">{"投放次数"}</th>
+                    <th className="col-md-4 text-center text-bold">{"投放重量"}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {detailorgaTotalTb}
+                </tbody>
+            </table>
+        </div>;
 
         var tableHeight = ($(window).height() - 410);
         return (
@@ -626,7 +758,7 @@ export default class StatisticListContainer extends Component {
                             <div className="col-lg-3 col-md-6">
                                 <div className="panel bg-teal-400">
                                     <div className="panel-body">
-                                        <h3 className="no-margin">{showTotal == "ok" ? moneyFormat(totalData.data.weight) : showTotal}
+                                        <h3 className="no-margin">{showTotal == "ok" ? moneyFormat(totalData.data.weight.toFixed(0)) : showTotal}
                                             &nbsp;/ {showTotal == "ok" ? moneyFormat(totalData.data.count) : showTotal}</h3>
                                         <select id="cityOfTotalSelect" className="form-control pull-right input-xs"
                                                 style={{position: "absolute", width: "100px", right: "5px", top: "5px"}}
@@ -655,7 +787,7 @@ export default class StatisticListContainer extends Component {
                                 <div className="panel bg-pink-400">
                                     <div className="panel-body">
 
-                                        <h3 className="no-margin">{showOperation == "ok" ? moneyFormat(operationData.data.totalXAmount) : showOperation}</h3>
+                                        <h3 className="no-margin">{showOperation == "ok" ? moneyFormat(operationData.data.totalXAmount.toFixed(0)) : showOperation}</h3>
                                         兑换总金额
                                         <div className="text-muted text-size-small">单位：元</div>
                                         <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
@@ -791,8 +923,8 @@ export default class StatisticListContainer extends Component {
                                                             <div className="media-left">
                                                                 <h5 className="text-semibold no-margin">
                                                                     {showTotalOfCity=="ok"?cityData.totalCityData.cityName:showTotalOfCity}
-                                                                     - 投放次数 ：{showTotalOfCity=="ok"?cityData.totalCityData.count:showTotalOfCity}
-                                                                    次 / 投放重量：{showTotalOfCity=="ok"?cityData.totalCityData.weight.toFixed(0):showTotalOfCity} 吨
+                                                                     - 投放次数 ：{showTotalOfCity=="ok"?moneyFormat(cityData.totalCityData.count):showTotalOfCity}
+                                                                    次 / 投放重量：{showTotalOfCity=="ok"?moneyFormat(cityData.totalCityData.weight.toFixed(0)):showTotalOfCity} 吨
                                                                     <small className="display-block no-margin">{showTotalOfCity=="ok"?cityData.totalCityData.rangeDate:showTotalOfCity}</small>
                                                                 </h5>
                                                             </div>
@@ -861,12 +993,39 @@ export default class StatisticListContainer extends Component {
                                     </fieldset>
                                     <fieldset className="content-group">
                                         <div style={{marginTop: '-20px'}}>
-                                            <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
+                                            <div className="table-responsive" style={{width:"600px",position:"absolute"}}>
+                                                <table className="table table-xlg text-nowrap">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td className="col-md-12" style={{borderTop:"0"}}>
+                                                            <div className="media-left media-middle">
+                                                                <a href="javascript:void(0)" data-toggle="modal" data-target={this.searchOfOrganizationid?"":"#orgaTotalDetailModal"}
+                                                                   className="btn border-purple-800 text-purple-800 btn-flat btn-rounded btn-xs btn-icon"
+                                                                   onClick={this._orgaTotalDetail.bind(this, organizationData)}>
+                                                                    <i className=" icon-city"></i>
+                                                                </a>
+                                                            </div>
+
+                                                            <div className="media-left">
+                                                                <h5 className="text-semibold no-margin">
+                                                                    {totalOrga.cityName?totalOrga.cityName:"获取中..."}
+                                                                    - 投放次数 ：{moneyFormat(totalOrga.count)}
+                                                                    次 / 投放重量：{moneyFormat(totalOrga.weight.toFixed(0))} 吨
+                                                                    <small className="display-block no-margin">{totalOrga.rangeDate?totalOrga.rangeDate:"获取中..."}</small>
+                                                                </h5>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <Pagenation show={this.searchOfOrganizationid} counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
                                                         _changePage={this._changePage} _prePage={this._prePage}
                                                         _nextPage={this._nextPage}/>
                                         </div>
                                         <div className="table-responsive"
-                                             style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+                                             style={{display:this.searchOfOrganizationid?"block":"none",height: tableHeight + 'px', overflowY: 'scroll'}}>
                                             <table className="table table-bordered table-hover"
                                                    style={{marginBottom: '85px'}}>
                                                 <thead>
@@ -876,6 +1035,8 @@ export default class StatisticListContainer extends Component {
                                                     <th className="col-md-3 text-bold text-center">{"投放次数"}</th>
                                                     <th className="col-md-3 text-bold text-center">{"投放重量"}</th>
                                                     <th className="col-md-3 text-bold text-center">{"日期"}</th>
+                                                    <th className="text-center" style={{width: "20px"}}><i
+                                                        className="icon-arrow-down12"></i></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -1004,10 +1165,16 @@ export default class StatisticListContainer extends Component {
                                 </div>
                                 <ListMiddleModal id="organizationDetailModal" content={detailOrganizationInfo}
                                                  doAction={""}
-                                                 tip={"详情 ("+(showTotalOfCity=="ok"?cityData.totalCityData.cityName:showTotalOfCity)+(this.organizationList && this.organizationList.length>0?"-"+this.organizationList[0].organizationName:"") +")"} actionText="单位/小区统计详情" hide="true" hideCancel="true"/>
+                                                 tip={"详情 ("+(showTotalOfCity=="ok"?cityData.totalCityData.cityName:"获取中...")+(this.organizationList && this.organizationList.length>0?"-"+this.organizationList[0].organizationName:"") +")"} actionText="统计详情" hide="true" hideCancel="true"/>
                                 <ListMiddleModal id="cityDataDetailModal" content={detailCityEveryInfo}
                                                  doAction={""}
-                                                 tip={"城市统计详情展示"} actionText="城市统计详情" hide="true" hideCancel="true"/>
+                                                 tip={"详情 ("+(showTotalOfCity=="ok"?cityData.totalCityData.cityName:"获取中...") +")"} actionText="单位/小区统计详情" hide="true" hideCancel="true"/>
+                                <ListMiddleModal id="orgaEveryDetailModal" content={detailorgaEveryInfo}
+                                                 doAction={""}
+                                                 tip={"详情 ("+(this.currentOrgaCity?this.currentOrgaCity:"获取中...")+(this.currentOrgaOrganization?"-"+this.currentOrgaOrganization:"") +")"} actionText="统计详情" hide="true" hideCancel="true"/>
+                                <ListMiddleModal id="orgaTotalDetailModal" content={detailorgaTotalInfo}
+                                                 doAction={""}
+                                                 tip={"详情 ("+(this.currentOrgaCity?this.currentOrgaCity:"获取中...") +")"} actionText="统计详情" hide="true" hideCancel="true"/>
                             </div>
                         </div>
                     </div>

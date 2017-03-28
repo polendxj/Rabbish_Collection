@@ -73,10 +73,14 @@ export default class Pagenation extends Component {
             }
         }
         $("#" + (this.props.inputNumberID ? this.props.inputNumberID : "numberInput" )).val(cpage);
+        var show = true;
+        if(this.props.show==""){
+            show = false;
+        }
         return (
 
             <div className="datatable-footer"
-                 style={{opacity: this.props.counts != 0 ? '1' : '0', borderTop: '0 red solid'}}>
+                 style={{display:show?"block":"none",opacity: this.props.counts != 0 ? '1' : '0', borderTop: '0 red solid'}}>
                 <div style={{display:this.props.operation==false?"none":"inline-block"}} className="dataTables_paginate paging_simple_numbers" id="DataTables_Table_2_paginate">
                     <div className="btn-group">
                         <button className="btn btn-default btn-xs" disabled={this.props.page == 0 ? "disabled" : false}
