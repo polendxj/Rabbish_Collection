@@ -34,4 +34,29 @@ router.post('/rsapp/qrcode/export', function (req, resp) {
     RequestApi.Request(baseURL + '/rsapp/qrcode/export' + "?" + data, 'GET', "", req, resp);
 });
 
+router.post('/rsapp/country/register', function (req, resp) {
+    var data = JSON.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/county', 'POST',data, req, resp);
+});
+
+router.post('/rsapp/country/delete', function (req, resp) {
+    var data = JSON.parse(req.body.data);
+    RequestApi.Request(baseURL + '/rsapp/county/'+data.id+"?cityid="+data.cityid, 'DELETE',data, req, resp);
+});
+
+router.post('/rsapp/organization/delete', function (req, resp) {
+    var data = JSON.parse(req.body.data);
+    RequestApi.Request(baseURL + '/rsapp/organization/'+data.id+"?cityid="+data.cityid+"&countyid="+data.countyid, 'DELETE',data, req, resp);
+});
+
+router.post('/rsapp/city/register', function (req, resp) {
+    var data = JSON.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/city', 'POST',data, req, resp);
+});
+
+router.post('/rsapp/city/delete', function (req, resp) {
+    var data = JSON.parse(req.body.data);
+    RequestApi.Request(baseURL + '/rsapp/city/'+data.id, 'DELETE',data, req, resp);
+});
+
 module.exports = router;

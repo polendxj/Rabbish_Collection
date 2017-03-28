@@ -7,6 +7,7 @@ import {bindActionCreators} from 'redux'
 import {Loading, NoData, ConfirmModal, ListMiddleModal} from '../components/Tool/Tool'
 import BreadCrumbs from '../components/right/breadCrumbs'
 import Pagenation from '../components/right/Pagenation'
+import {getListByMutilpCondition, saveObject, deleteObject} from '../actions/CommonActions'
 
 export default class CitySettingRegisterContainer extends Component {
     constructor(props) {
@@ -20,6 +21,16 @@ export default class CitySettingRegisterContainer extends Component {
         this.operation = [
             {icon: "icon-add-to-list", text: "返回区域列表", action: "/DataManage/CitySetting"}
         ]
+        this._addCity=this._addCity.bind(this);
+    }
+
+    _addCity() {
+        var params = {
+            name: $("#name").val(),
+            description: $("#description").val()
+        }
+        var self = this;
+        this.props.dispatch(saveObject(params, "", "", city_register, "/DataManage/CitySetting"));
     }
 
     render() {
@@ -32,7 +43,7 @@ export default class CitySettingRegisterContainer extends Component {
                 <div className="content" style={{marginTop: '20px'}}>
                     <fieldset className="content-group">
                         <legend className="text-bold">{"添加城市"}</legend>
-                        <CitySettingRegisterComponent />
+                        <CitySettingRegisterComponent _addCity={this._addCity}/>
 
                     </fieldset>
                 </div>
@@ -54,7 +65,7 @@ class CitySettingRegisterComponent extends Component {
                         <div className="form-group">
                             <label className="col-lg-3 control-label" style={{textAlign: 'center'}}>{"城市名称"}<span style={{color:'red'}}>*</span></label>
                             <div className="col-lg-9">
-                                <input className="form-control" name="adminId" type="text"
+                                <input id="name" className="form-control" name="name" type="text"
                                        placeholder={"城市名称"}/>
                             </div>
                         </div>
@@ -62,13 +73,13 @@ class CitySettingRegisterComponent extends Component {
                         <div className="form-group">
                             <label className="col-lg-3 control-label" style={{textAlign: 'center'}}>{"描 述"}<span style={{color:'red'}}>*</span></label>
                             <div className="col-lg-9">
-                                <textarea className="form-control" name="adminId"
+                                <textarea id="description" className="form-control" name="description"
                                        placeholder={"描 述"}></textarea>
                             </div>
                         </div>
 
                         <div className="text-right">
-                            <button type="button" className="btn btn-primary" >{Current_Lang.label.save}</button>
+                            <button type="button" className="btn btn-primary" onClick={this.props._addCity.bind(this)}>{Current_Lang.label.save}</button>
                         </div>
                     </div>
                 </div>
