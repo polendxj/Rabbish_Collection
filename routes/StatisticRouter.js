@@ -42,8 +42,8 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
                     if (organizations.data.content.length > 0) {
                         var count = 0;
                         var organizationName = "";
-                        organizations.data.content.forEach(function (m, k) {
-                            (function (m) {
+                        organizations.data.content.forEach(function (mk, k) {
+                            (function (m,kIndex) {
                                 var organizationTotalData = {organizationName:m.name,count:0,weight:0};
                                 jsonData.organizationid = m.id;
                                 console.log("jsonData",jsonData);
@@ -58,7 +58,7 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
                                             organizationTotalData.rangeDate = jsonData.startday.replace(/-/g, ".") + " - " + jsonData.endday.replace(/-/g, ".");
                                             organizationAllData.organizationTotal = organizationTotalData;
                                             organizationAllData.organizationEveryData = organizationData.data.content;
-                                            response.organizationData[k] = organizationAllData;
+                                            response.organizationData[kIndex] = organizationAllData;
                                             console.log("response",response);
                                         }
                                     }
@@ -67,7 +67,7 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
                                         resp.send(response);
                                     }
                                 })
-                            })(m)
+                            })(mk,k)
                         })
                     } else {
                         resp.send(response);

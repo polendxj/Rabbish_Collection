@@ -926,6 +926,7 @@ export function mergeClassify(classifyList, classifyData) {
                 if (classify.name == val.className) {
                     mergeList[idx].count = mergeList[idx].count+val.count;
                     mergeList[idx].weight = mergeList[idx].weight+val.weight;
+                    // mergeList[idx].classifyData.push(val);
                 }
             });
         });
