@@ -941,3 +941,11 @@ export function filterByApprove(data, approved) {
     });
     return list;
 }
+
+export function moneyFormat(num) {
+    var result=num.toString().split("").reverse().join("").replace(/(\d{3})/g, "$1,").split("").reverse().join("");
+    if(result.indexOf(",")==0){
+        result=result.substring(1);
+    }
+    return result;
+}

@@ -14,7 +14,6 @@ router.post('/rsapp/statistic/classifying/class', function (req, resp) {
 });
 router.post('/rsapp/statistic/classifying/city', function (req, resp) {
     var jsonData = JSON.parse(req.body.data);
-    console.log("jsonData",jsonData);
     var data = querystring.stringify(jsonData);
     var response = {};
     RequestApi.Request(baseURL + '/rsapp/statistic/classifying/city' + "?" + data, 'GET', "", req, resp, function (cityData) {
@@ -32,22 +31,21 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
             });
             response['totalCityData'] = totalCityData;
             response['cityData'] = cityData.data;
-            response.organizationData =[];
-            var organizationAllData = {
-                organizationTotal:{},
-                organizationEveryData:[]
-            };
+            response['organizationData'] =[];
             RequestApi.Request(baseURL + '/rsapp/organization' + "?cityid=" + jsonData.cityid, 'GET', "", req, resp, function (organizations) {
                 if(organizations.status){
                     if (organizations.data.content.length > 0) {
                         var count = 0;
                         var organizationName = "";
-                        organizations.data.content.forEach(function (m, k) {
-                            (function (m) {
+                        organizations.data.content.forEach(function (mk, k) {
+                            (function (m,kIndex) {
                                 var organizationTotalData = {organizationName:m.name,count:0,weight:0};
                                 jsonData.organizationid = m.id;
-                                console.log("jsonData",jsonData);
                                 RequestApi.Request(baseURL + '/rsapp/statistic/classifying/organization' + "?" + querystring.stringify(jsonData), 'GET', "", req, resp, function (organizationData) {
+                                    var organizationAllData = {
+                                        organizationTotal:{},
+                                        organizationEveryData:[]
+                                    };
                                     if(organizationData.status){
                                         if(organizationData.data.content.length>0){
                                             organizationData.data.content.forEach(function (val,idx) {
@@ -58,8 +56,7 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
                                             organizationTotalData.rangeDate = jsonData.startday.replace(/-/g, ".") + " - " + jsonData.endday.replace(/-/g, ".");
                                             organizationAllData.organizationTotal = organizationTotalData;
                                             organizationAllData.organizationEveryData = organizationData.data.content;
-                                            response.organizationData[k] = organizationAllData;
-                                            console.log("response",response);
+                                            response.organizationData[kIndex] = organizationAllData;
                                         }
                                     }
                                     count++;
@@ -67,7 +64,7 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
                                         resp.send(response);
                                     }
                                 })
-                            })(m)
+                            })(mk,k)
                         })
                     } else {
                         resp.send(response);

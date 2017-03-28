@@ -16,7 +16,8 @@ import {
     timeStamp2Time,
     filterCityById,
     getInitialCityIdx,
-    mergeClassify
+    mergeClassify,
+    moneyFormat
 } from '../../components/Tool/Tool';
 import {
     STATISTICBYCLASSIFY_LIST_START,
@@ -262,7 +263,7 @@ export default class StatisticListContainer extends Component {
                                 {$("#ofClassifySelect").val() ? $("#ofClassifySelect").find("option:selected").text() : $("#citySelect").find("option:selected").text()}
                             </td>
                             <td className="text-center">{val.count}</td>
-                            <td className="text-center">{val.weight.toFixed(2)}</td>
+                            <td className="text-center">{val.weight.toFixed(0)}</td>
                         </tr>)
                     }.bind(this));
                 } else {
@@ -289,7 +290,7 @@ export default class StatisticListContainer extends Component {
                         <td className="text-center">{key + 1}</td>
                         <td className="text-center">{val.organizationTotal.organizationName}</td>
                         <td className="text-center">{val.organizationTotal.count}</td>
-                        <td className="text-center">{val.organizationTotal.weight.toFixed(2)}</td>
+                        <td className="text-center">{val.organizationTotal.weight.toFixed(0)}</td>
                         <td className="text-center">{val.organizationTotal.rangeDate}</td>
                         <td className="text-center">
                             {<ul className="icons-list">
@@ -341,7 +342,7 @@ export default class StatisticListContainer extends Component {
                             <td className="text-center">{key + 1}</td>
                             <td className="text-center">{val.organizationName}</td>
                             <td className="text-center">{val.count}</td>
-                            <td className="text-center">{val.weight.toFixed(2)}</td>
+                            <td className="text-center">{val.weight.toFixed(0)}</td>
                             <td className="text-center">{timeStamp2Time(val.monthday)}</td>
                         </tr>)
                     }.bind(this));
@@ -547,7 +548,7 @@ export default class StatisticListContainer extends Component {
                     <td className="text-center">{key + 1}</td>
                     <td className="text-center">{val.organizationName}</td>
                     <td className="text-center">{val.count}</td>
-                    <td className="text-center">{val.weight.toFixed(2)}</td>
+                    <td className="text-center">{val.weight.toFixed(0)}</td>
                     <td className="text-center">{timeStamp2Time(val.monthday)}</td>
                 </tr>)
             }.bind(this));
@@ -578,14 +579,14 @@ export default class StatisticListContainer extends Component {
                             <div className="col-lg-3 col-md-6">
                                 <div className="panel bg-teal-400">
                                     <div className="panel-body">
-                                        <h3 className="no-margin">{showTotal == "ok" ? totalData.data.weight : showTotal}
-                                            / {showTotal == "ok" ? totalData.data.count : showTotal}</h3>
+                                        <h3 className="no-margin">{showTotal == "ok" ? moneyFormat(totalData.data.weight) : showTotal}
+                                            &nbsp;/ {showTotal == "ok" ? moneyFormat(totalData.data.count) : showTotal}</h3>
                                         <select id="cityOfTotalSelect" className="form-control pull-right input-xs"
                                                 style={{position: "absolute", width: "100px", right: "5px", top: "5px"}}
                                                 value={this.totalCurrentCityId} onChange={this._changeCityOfTotal}>
                                             {cityOptions}
                                         </select>
-                                        垃圾投放总量 / 垃圾投放次数
+                                        垃圾投放总量 &nbsp;/ 垃圾投放次数
                                         <div className="text-muted text-size-small">单位：吨</div>
                                         <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
 
@@ -595,7 +596,7 @@ export default class StatisticListContainer extends Component {
                             <div className="col-lg-3  col-md-6">
                                 <div className="panel bg-blue-400" style={{position: "static", zoom: "1"}}>
                                     <div className="panel-body">
-                                        <h3 className="no-margin">{showOperation == "ok" ? operationData.data.totalUser : showOperation}</h3>
+                                        <h3 className="no-margin">{showOperation == "ok" ? moneyFormat(operationData.data.totalUser) : showOperation}</h3>
                                         激活用户总数
                                         <div className="text-muted text-size-small">单位：个</div>
                                         <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
@@ -607,7 +608,7 @@ export default class StatisticListContainer extends Component {
                                 <div className="panel bg-pink-400">
                                     <div className="panel-body">
 
-                                        <h3 className="no-margin">{showOperation == "ok" ? operationData.data.totalXAmount : showOperation}</h3>
+                                        <h3 className="no-margin">{showOperation == "ok" ? moneyFormat(operationData.data.totalXAmount) : showOperation}</h3>
                                         兑换总金额
                                         <div className="text-muted text-size-small">单位：元</div>
                                         <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
@@ -619,7 +620,7 @@ export default class StatisticListContainer extends Component {
                                 <div className="panel bg-grey-400">
                                     <div className="panel-body">
 
-                                        <h3 className="no-margin">{showOperation == "ok" ? operationData.data.requestPerDay : showOperation}</h3>
+                                        <h3 className="no-margin">{showOperation == "ok" ? moneyFormat(operationData.data.requestPerDay) : showOperation}</h3>
                                         每日请求数
                                         <div className="text-muted text-size-small">单位：次/平均</div>
                                         <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
@@ -631,9 +632,9 @@ export default class StatisticListContainer extends Component {
                     <div className="row" style={{padding: "20px"}}>
                         <div className="tabbable">
                             <ul className="nav nav-tabs nav-justified nav-tabs-highlight">
-                                <li className="active"><a href="#basic-justified-tab1" data-toggle="tab"
+                                <li className=""><a href="#basic-justified-tab1" data-toggle="tab"
                                                           aria-expanded="true">垃圾分类统计</a></li>
-                                <li className=""><a href="#basic-justified-tab2" data-toggle="tab"
+                                <li className="active"><a href="#basic-justified-tab2" data-toggle="tab"
                                                     aria-expanded="false">城市垃圾统计</a></li>
                                 <li className=""><a href="#basic-justified-tab3" data-toggle="tab"
                                                     aria-expanded="false">小区/单位垃圾统计</a></li>
@@ -644,7 +645,7 @@ export default class StatisticListContainer extends Component {
                             </ul>
 
                             <div className="tab-content">
-                                <div className="tab-pane active" id="basic-justified-tab1">
+                                <div className="tab-pane" id="basic-justified-tab1">
                                     <fieldset className="content-group">
                                         <legend className="text-bold">搜索区</legend>
                                         <ul className="list-inline list-inline-condensed no-margin-bottom"
@@ -700,7 +701,7 @@ export default class StatisticListContainer extends Component {
                                     </fieldset>
                                 </div>
 
-                                <div className="tab-pane" id="basic-justified-tab2">
+                                <div className="tab-pane active" id="basic-justified-tab2">
                                     <fieldset className="content-group">
                                         <legend className="text-bold">搜索区</legend>
                                         <ul className="list-inline list-inline-condensed no-margin-bottom"
@@ -740,7 +741,7 @@ export default class StatisticListContainer extends Component {
                                                                 <h5 className="text-semibold no-margin">
                                                                     {showTotalOfCity=="ok"?cityData.totalCityData.cityName:showTotalOfCity}
                                                                      - 投放次数 ：{showTotalOfCity=="ok"?cityData.totalCityData.count:showTotalOfCity}
-                                                                    次 / 投放重量：{showTotalOfCity=="ok"?cityData.totalCityData.weight.toFixed(2):showTotalOfCity} 吨
+                                                                    次 / 投放重量：{showTotalOfCity=="ok"?cityData.totalCityData.weight.toFixed(0):showTotalOfCity} 吨
                                                                     <small className="display-block no-margin">{showTotalOfCity=="ok"?cityData.totalCityData.rangeDate:showTotalOfCity}</small>
                                                                 </h5>
                                                             </div>
@@ -952,7 +953,7 @@ export default class StatisticListContainer extends Component {
                                 </div>
                                 <ListMiddleModal id="organizationDetailModal" content={detailOrganizationInfo}
                                                  doAction={""}
-                                                 tip={"详情展示"} actionText="单位/小区统计详情" hide="true" hideCancel="true"/>
+                                                 tip={"详情 ("+(showTotalOfCity=="ok"?cityData.totalCityData.cityName:showTotalOfCity)+(this.organizationList && this.organizationList.length>0?"-"+this.organizationList[0].organizationName:"") +")"} actionText="单位/小区统计详情" hide="true" hideCancel="true"/>
                             </div>
                         </div>
                     </div>
