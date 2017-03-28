@@ -13,9 +13,14 @@ var thresholdValue = 100;
 var imgBaseUrl = "http://dev.xysy.tech";
 
 var city_list = node_service + "/rsapp/city";
+var city_register = node_service + "/rsapp/city/register";
 var cityOfOrganization_list = node_service + "/rsapp/cityOfOrganization";
 var organization_list = node_service + "/rsapp/organization";
 var organization_register = node_service + "/rsapp/organization/register";
+var country_register = node_service + "/rsapp/country/register";
+var country_delete = node_service + "/rsapp/country/delete";
+var city_delete = node_service + "/rsapp/city/delete";
+var organization_delete = node_service + "/rsapp/organization/delete";
 var organization_detail = node_service + "/rsapp/organization/detail";
 var organization_update = node_service + "/rsapp/organization/update";
 var classConf_list = node_service + "/rsapp/classConf";
