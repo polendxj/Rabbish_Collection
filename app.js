@@ -75,30 +75,10 @@ app.use(StatisticRouter)
 app.use(SystemMonitorRouter)
 
 app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static('resues-sorting-home-file'));
 app.set('port', require('./config/config').node_port);
 app.get('*', function (request, response, next) {
     response.sendFile(__dirname + '/build/index.html');
-});
-
-app.post('/jabriel/appList', function (req, resp) {
-    var data = querystring.stringify(JSON.parse(req.body.data))
-    RequestApi.Request(baseURL + '/subApp/list.do', 'POST', '', req, resp, function (json) {
-        resp.send('OK')
-        allApp = json;
-        json.subAppList.forEach(function (val) {
-            exec("./phantomjs snapshot.js " + val.webUrl + " " + val.appId);
-        })
-    })
-});
-
-app.post('/jabriel/makeAppSnapshot', function (req, resp) {
-    var data = JSON.parse(req.body.data);
-    console.log(data.webURL);
-    console.log(data.appId);
-    exec("./phantomjs snapshot.js " + data.webURL + " " + data.appId);
-    setTimeout(function () {
-        resp.send({result:"ok"});
-    }, 1000)
 });
 var server = app.listen(app.get('port'), function (req, res) {
     console.log('服务器启动了...');

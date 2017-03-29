@@ -17,9 +17,10 @@ argv.p && plugins.push(new webpack.optimize.UglifyJsPlugin({
 }));
 
 plugins.push(new HtmlWebpackPlugin({
-    template: './index.html',
+    template: './management.html',
     hash: true,
-    inject: 'body'
+    inject: 'body',
+    filename:'management.html'
 }));
 
 plugins.push(new CopyWebpackPlugin([

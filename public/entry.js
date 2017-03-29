@@ -38,6 +38,7 @@ import OrganizationListContainer from './containers/organization/OrganizationLis
 import OrganizationRegisterContainer from './containers/organization/OrganizationRegisterContainer';
 import OrganizationUpdateContainer from './containers/organization/OrganizationUpdateContainer';
 import SystemMonitorContainer from './containers/systemMonitor/SystemMonitorContainer';
+import Home from './containers/Home';
 
 let store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
@@ -45,9 +46,11 @@ const history = syncHistoryWithStore(browserHistory, store);
 render(
     <Provider store={store}>
         <Router history={history}>
-            <Route path="/" component={App}>
+            <Route path="/management.html" component={App}>
                 <IndexRoute component={StatisticListContainer}/>
-                <Route path="dashboard" component={StatisticListContainer}/>
+                <Route path="/dashboard" component={StatisticListContainer}/>
+                <Route path="/index.html" component={Home}/>
+                <Route path="/" component={Home}/>
                 <Route path="/Developing" component={Developing}/>
                 <Route path="/login" component={LoginContainer}/>
                 <Route path="/DataManage/CitySetting" component={CitySettingContainer}/>

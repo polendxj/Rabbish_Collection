@@ -8,6 +8,7 @@ import MainMenu from '../components/left/menu'
 import Login from './Login'
 import {commonRefresh} from '../actions/Common'
 import {login} from '../actions/CommonActions';
+import Home from '../containers/Home';
 
 import {EncodeBase64, ErrorModal, deleteCookie, Loading} from '../components/Tool/Tool'
 
@@ -60,7 +61,6 @@ class App extends Component {
 
         browserHistory.push('/login')
     }
-
     componentDidUpdate() {
 
     }
@@ -70,11 +70,13 @@ class App extends Component {
         node_service = document.location.origin;
         // sessionStorage['check'] = "";
         sessionStorage['timeout_time'] = 0;
+
     }
 
 
     render() {
         // sessionStorage['auth']=""
+
         const {fetching}=this.props
         var token = sessionStorage['token'];
 
@@ -98,7 +100,11 @@ class App extends Component {
 
 
         } else {
-            result = <Login _checkAuth={this._checkAuth} fetching={fetching}/>
+            if(document.location.pathname!="/"){
+                result = <Login _checkAuth={this._checkAuth} fetching={fetching}/>
+            }else{
+                result = <Home />
+            }
         }
         return (
             <div>
