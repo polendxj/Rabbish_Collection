@@ -55,15 +55,20 @@ export default class StoreListContainer extends Component {
         var params = {page: 0, size: 20};
         this.props.dispatch(getListByMutilpCondition(params, STORE_LIST_START, STORE_LIST_END, store_list));
         this.props.dispatch(getListByMutilpCondition(params, CITY_LIST_START, CITY_LIST_END, city_list));
-        //this.props.dispatch(getAdminList(0, 'ALL', ''));
-        $("#search_way").parent().parent().on('click', 'li', function () {
-            $("#search_way").text($(this).find('a').text());
-            if ($(this).find('a').text().trim() == "按姓名搜索") {
-                self.searchColumn = "DRIVER";
-            } else {
-                self.searchColumn = "LINE";
-            }
-        })
+    }
+    componentDidUpdate(){
+        console.log("this.detailData",this.detailData);
+        if(this.detailData){
+            $("#settlementPoints").blur(function () {
+                var amount = parseInt($("#settlementPoints").val());
+                var max = this.detailData.points - this.detailData.points%10;
+                if(amount > max){
+                    $("#settlementPoints").val(max);
+                }else{
+                    $("#settlementPoints").val(amount-amount%10);
+                }
+            }.bind(this));
+        }
     }
 
     _startRefresh() {
@@ -395,17 +400,24 @@ export default class StoreListContainer extends Component {
                     </div>
                     <div className="form-group">
                         <label className="col-lg-2 control-label"
-                               style={{textAlign: 'center'}}>{"结算金额"}</label>
-                        <div className="col-lg-9">
-                            <input id="settlementAmount" type="text" className="form-control" placeholder="输入结算金额"
-                                   autoComplete="off"/>
+                               style={{textAlign: 'center'}}>{"可用积分 "}</label>
+                        <div className="col-lg-9" style={{lineHeight:"34px"}}>
+                            {this.detailData.points}
                         </div>
                     </div>
                     <div className="form-group">
                         <label className="col-lg-2 control-label"
                                style={{textAlign: 'center'}}>{"结算积分"}</label>
                         <div className="col-lg-9">
-                            <input id="settlementPoints" type="text" className="form-control" placeholder="输入结算积分"
+                            <input id="settlementPoints" type="number" className="form-control" placeholder="输入结算积分"
+                                   autoComplete="off"/>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="col-lg-2 control-label"
+                               style={{textAlign: 'center'}}>{"结算金额"}</label>
+                        <div className="col-lg-9">
+                            <input id="settlementAmount" type="number" className="form-control" placeholder="输入结算金额"
                                    autoComplete="off"/>
                         </div>
                     </div>

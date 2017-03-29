@@ -73,7 +73,7 @@ export default class VerifiedStore extends Component {
                                                 className=" icon-office"></i>
                                                 {"详情"}</a>
                                         </li>
-                                        <li style={{display: val.points >= thresholdValue ? 'block' : "none"}}
+                                        <li style={{display: sessionStorage['type']==10&&val.points >= thresholdValue ? 'block' : "none"}}
                                             onClick={this._detail.bind(this, val)}>
                                             <a href="javascript:void(0)" data-toggle="modal"
                                                data-target="#storeSettlementModal"><i className=" icon-office"></i>

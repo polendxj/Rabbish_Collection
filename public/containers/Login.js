@@ -59,10 +59,6 @@ export default class LoginContainer extends Component {
                                     <div className="form-group has-feedback has-feedback-left">
                                         <select className="form-control" name="type">
                                             <option value={1}>{"管理员"}</option>
-                                            <option value={2}>{"扫码称重人员"}</option>
-                                            <option value={3}>{"商户用户"}</option>
-                                            <option value={4}>{"住宅用户"}</option>
-                                            <option value={5}>{"单位"}</option>
                                             <option value={10}>{"超级管理员"}</option>
                                         </select>
                                         <div className="form-control-feedback">

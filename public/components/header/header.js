@@ -15,7 +15,7 @@ export default class Header extends Component {
                     <div id="topMenuBottomLine"
                          style={{height: '2px', position: 'absolute', borderBottom: '3px solid #F5F5F5'}}></div>
                     <TopMenus changeTopMenu={this.props.changeTopMenu}/>
-                    <RightPanel _changeLang={this.props._changeLang} _logOut={this.props._logOut}/>
+                    <RightPanel _changeLang={this.props._changeLang} _logOut={this.props._logOut} _showModal={this.props._showModal}/>
                 </div>
             </div>
         )
@@ -222,7 +222,7 @@ class RightPanel extends Component {
                 <li className="dropdown dropdown-user">
                     <a className="dropdown-toggle" data-toggle="dropdown">
                         <img src="/assets/images/userimg.png" alt=""/>
-                        <span>超级管理员</span>
+                        <span>{sessionStorage['type']==10?"超级管理员":"管理员"}</span>
                         <i className="caret"></i>
                     </a>
 
@@ -234,6 +234,8 @@ class RightPanel extends Component {
                          <li><a href="#"><i className="icon-cog5"></i> 账号设置</a></li>*/}
                         <li onClick={this.props._logOut}><a href="javascript:void(0)"><i className="icon-switch2"></i>
                             {Current_Lang.label.deregiester}</a></li>
+                        <li onClick={this.props._showModal}><a href="javascript:void(0)" data-toggle="modal" data-target="#modifyPwdModal"><i className="icon-switch2"></i>
+                            {"修改密码"}</a></li>
                     </ul>
                 </li>
             </ul>
