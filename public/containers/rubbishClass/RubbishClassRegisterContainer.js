@@ -123,6 +123,18 @@ class RegisterRubbishClassComponent extends Component{
                                                autoComplete="off"/>
                                     </div>
                                 </div>
+                                <div className="form-group">
+                                    <label className="col-lg-2 control-label"
+                                           style={{
+                                               textAlign: 'center'
+                                           }}>{"计分方式"}</label>
+                                    <div className="col-lg-9">
+                                        <select name="pointsType" defaultValue={1} className="form-control">
+                                            <option value={1}>按重量计分</option>
+                                            <option value={2}>按次数计分</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div className="form-group" >
                                     <label className="col-lg-2 control-label"
                                            style={{

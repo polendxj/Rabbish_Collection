@@ -863,6 +863,20 @@ export function organizationType(type) {
     }
     return organizationType;
 }
+export function pointsType(type){
+    var pointsType = "";
+    switch (type) {
+        case 1:
+            pointsType = "按重量计分";
+            break;
+        case 2:
+            pointsType = "按次数计分";
+            break;
+        default:
+            break;
+    }
+    return pointsType;
+}
 export function array2Json(list) {
     var params = {};
     list.forEach(function (val) {

@@ -135,6 +135,18 @@ class UpdateRubbishClassComponent extends Component {
                                 <label className="col-lg-2 control-label"
                                        style={{
                                            textAlign: 'center'
+                                       }}>{"计分方式"}</label>
+                                <div className="col-lg-9">
+                                    <select name="pointsType" defaultValue={data.data.pointsType} className="form-control">
+                                        <option value={1}>按重量计分</option>
+                                        <option value={2}>按次数计分</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{
+                                           textAlign: 'center'
                                        }}>{"分类描述"}</label>
                                 <div className="col-lg-9">
                                     <textarea name="description" rows="5" cols="5" className="form-control"

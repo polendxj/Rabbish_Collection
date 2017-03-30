@@ -11,21 +11,29 @@ var router = express()
 router.post('/rsapp/store', function (req, resp) {
     var data = querystring.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/store/account' + "?" + data, 'GET', "", req, resp, function (stores) {
+        console.log(stores);
         if (stores.status) {
             if (stores.data.content.length > 0) {
                 var count = 0;
                 stores.data.content.forEach(function (m, k) {
                     (function (m) {
-                        RequestApi.Request(baseURL + '/rsapp/city/' + m.cityid, 'GET', "", req, resp, function (city) {
-                            m["city"]=city.data.name;
-                            RequestApi.Request(baseURL + '/rsapp/county/' + m.countyid, 'GET', "", req, resp, function (county) {
-                                m["county"]=county.data.name;
-                                count++;
-                                if (count == stores.data.content.length) {
-                                    resp.send(stores);
-                                }
-                            });
-                        })
+                        if(m.cityid){
+                            RequestApi.Request(baseURL + '/rsapp/city/' + m.cityid, 'GET', "", req, resp, function (city) {
+                                m["city"]=city.data.name;
+                                RequestApi.Request(baseURL + '/rsapp/county/' + m.countyid, 'GET', "", req, resp, function (county) {
+                                    m["county"]=county.data.name;
+                                    count++;
+                                    if (count == stores.data.content.length) {
+                                        resp.send(stores);
+                                    }
+                                });
+                            })
+                        }else{
+                            count++;
+                            if (count == stores.data.content.length) {
+                                resp.send(stores);
+                            }
+                        }
                     })(m)
                 })
             } else {

@@ -189,9 +189,9 @@ export default class StoreListContainer extends Component {
         var unauthorizedData = "";
         var unverifiedData = "";
         if (data.data) {
-            verifiedData = filterByApprove(data.data.content, 2);
-            unauthorizedData = filterByApprove(data.data.content, 0);
-            unverifiedData = filterByApprove(data.data.content, 1);
+            verifiedData = filterByApprove(data.data.content, 3);
+            unauthorizedData = filterByApprove(data.data.content, 1);
+            unverifiedData = filterByApprove(data.data.content, 2);
         }
         var cityOptions = [];
         var countryOptions = [];
