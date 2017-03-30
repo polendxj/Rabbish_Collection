@@ -38,5 +38,9 @@ router.post('/rsapp/password/reset', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/password/reset', 'PUT',data, req, resp);
 });
+router.post('/rsapp/password', function (req, resp) {
+    var data = JSON.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/password', 'PUT',data, req, resp);
+});
 
 module.exports = router;

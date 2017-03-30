@@ -11,9 +11,7 @@ import BreadCrumbs from '../../components/right/breadCrumbs';
 import {saveServiceGroup} from '../../actions/SystemManagerServiceGroupAction';
 import {saveObject,getDetail} from '../../actions/CommonActions';
 import {commonRefresh} from '../../actions/Common';
-import {ADMINUSER_UPDATE_START, ADMINUSER_UPDATE_END} from '../../constants/index.js'
-var sha1 = require('js-sha1');
-
+import {ADMINUSER_UPDATE_START, ADMINUSER_UPDATE_END} from '../../constants/index.js';
 export default class AdminUserRegisterContainer extends Component {
     constructor(props) {
         super(props)
@@ -63,7 +61,6 @@ class UpdateAdminUserComponent extends Component{
         var params = {
             name: $("#name").val(),
             phone: $("#phone").val(),
-            password: sha1.hex($("#password").val()),
             type: parseInt($("#type").val()),
             id:userid
         };
@@ -86,14 +83,6 @@ class UpdateAdminUserComponent extends Component{
             validClass: "validation-valid-label",
             success: function(label) {
                 label.addClass("validation-valid-label").text("Success.")
-            },
-            rules: {
-                password: {
-                    minlength: 6
-                },
-                repeat_password: {
-                    equalTo: "#password"
-                }
             }
         });
     }
@@ -128,26 +117,6 @@ class UpdateAdminUserComponent extends Component{
                                 <div className="col-lg-9">
                                     <input id="name" type="text" className="form-control"
                                            defaultValue={data.data.name} required="required" autoComplete="off"/>
-                                </div>
-                            </div>
-
-                            <div className="form-group">
-                                <label className="col-lg-2 control-label"
-                                       style={{textAlign: 'center'}}>{"密码"}
-                                </label>
-                                <div className="col-lg-9">
-                                    <input id="password" type="password" name="password" className="form-control"
-                                           defaultValue={data.data.password} required="required" autoComplete="off"/>
-                                </div>
-                            </div>
-
-                            <div className="form-group">
-                                <label className="col-lg-2 control-label"
-                                       style={{textAlign: 'center'}}>{"确认密码"}
-                                </label>
-                                <div className="col-lg-9">
-                                    <input id="confirmPassword" name="repeat_password" type="password" className="form-control"
-                                           placeholder={"确认密码"} required="required" autoComplete="off"/>
                                 </div>
                             </div>
 

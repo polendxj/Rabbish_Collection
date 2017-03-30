@@ -264,6 +264,7 @@ export function login(data, startDispatch, endDispatch, interfaceURL, listRouter
                     sessionStorage['token'] = json.data.token;
                     sessionStorage['type'] = json.data.type;
                     sessionStorage['phone'] = json.data.phone;
+                    sessionStorage['userid'] = json.data.id;
                     sessionStorage['user'] = json.data.user ? json.data.user : "";
                     sessionStorage['count'] = -1;
                     sessionStorage['messageTime'] = "";

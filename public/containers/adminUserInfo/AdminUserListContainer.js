@@ -293,13 +293,15 @@ class AdminUserListComponent extends Component {
 
     render() {
         const {data, fetching}=this.props;
+        var loginUserid = sessionStorage['userid'];
         var loginUserType = sessionStorage['type'];
+        console.log("loginUserid",loginUserid);
         let tb = [];
         if (data) {
             if (data.status) {
                 if (data.data.content.length > 0) {
                     data.data.content.forEach(function (val, key) {
-                        tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
+                        tb.push(<tr key={key} style={{backgroundColor: loginUserid == val.userid ? "#F8F8F8" : ""}}>
                             <td className="text-center">{key + 1}</td>
                             <td className="text-center">{val.name}</td>
                             <td className="text-center">{userType(val.type)}</td>
@@ -313,15 +315,15 @@ class AdminUserListComponent extends Component {
                                            data-toggle="dropdown" aria-expanded="false"><i
                                             className="icon-menu7"></i></a>
                                         <ul className="dropdown-menu dropdown-menu-right">
-                                            <li style={{display:loginUserType==10? 'block':'none'}}
+                                            <li style={{display:val.type!=10&&(loginUserid==val.userid||loginUserType==10)? 'block':'none'}}
                                                 onClick={this._detail.bind(this, '/CustomerService/AdminUserManage/Update/:' + val.userid)}>
                                                 <a href="javascript:void(0)"><i className="icon-pencil5"></i>
-                                                    {"修改"}</a></li>
-                                            <li style={{display:loginUserType==10? 'block':'none'}}
+                                                    {"编辑"}</a></li>
+                                            <li style={{display:val.type!=10&&(loginUserid==val.userid||loginUserType==10)? 'block':'none'}}
                                                 onClick={this._delete.bind(this, val.userid, val.name)}><a
                                                 href="javascript:void(0)"><i className="icon-trash"></i>
                                                 {"删除"}</a></li>
-                                            <li>
+                                            <li style={{display:val.type!=10&&(loginUserid==val.userid||loginUserType==10)? 'block':'none'}}>
                                                 <a href="javascript:void(0)" data-toggle="modal"
                                                    data-target="#getAuthcodeModal"
                                                    onClick={this._showGetAuthcode.bind(this,val)}><i

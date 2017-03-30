@@ -272,7 +272,7 @@ export default class StatisticListContainer extends Component {
         const {fetching, classifyData, cityData, organizationData, rangeDateData, settlementData, operationData, cityList, cityOfCountyList, totalData, classifyList} =this.props;
         console.log("organizationData", organizationData);
         console.log("cityData", cityData);
-        console.log("classifyData", classifyData);
+        console.log("cityOfCountyList", cityOfCountyList);
         var data = "";
         var showCity = "city";
         var classifyDataMerge = [];
@@ -502,7 +502,7 @@ export default class StatisticListContainer extends Component {
                     )
                 });
                 if (this.currentCityOfCounty == "") {
-                    var idx = getInitialCityIdx(this.settlementOfcurrentCityId, cityList.data);
+                    var idx = getInitialCityIdx(this.settlementOfcurrentCityId, cityOfCountyList.data);
                     if (cityOfCountyList.data[idx].country) {
                         cityOfCountyList.data[idx].country.forEach(function (val, index) {
                             countyOptions.push(

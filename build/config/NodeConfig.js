@@ -39,6 +39,7 @@ var adminUser_register = node_service + "/rsapp/adminUser/register";
 var adminUser_delete = node_service + "/rsapp/adminUser/delete";
 var adminUser_detail = node_service + "/rsapp/adminUser/detail";
 var adminUser_update = node_service + "/rsapp/adminUser/update";
+var modify_password = node_service + "/rsapp/password";
 var get_authcode = node_service + "/rsapp/authcode/admin";
 var generalUser_list = node_service + "/rsapp/generalUser";
 var generalUser_detail = node_service + "/rsapp/generalUser/detail";
