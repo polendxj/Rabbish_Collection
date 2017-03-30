@@ -46,11 +46,11 @@ const history = syncHistoryWithStore(browserHistory, store);
 render(
     <Provider store={store}>
         <Router history={history}>
-            <Route path="/management.html" component={App}>
+            <Route path="/" component={App}>
                 <IndexRoute component={StatisticListContainer}/>
                 <Route path="/dashboard" component={StatisticListContainer}/>
                 <Route path="/index.html" component={Home}/>
-                <Route path="/" component={Home}/>
+                <Route path="/management.html" component={Home}/>
                 <Route path="/Developing" component={Developing}/>
                 <Route path="/login" component={LoginContainer}/>
                 <Route path="/DataManage/CitySetting" component={CitySettingContainer}/>

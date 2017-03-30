@@ -75,7 +75,7 @@ app.use(StatisticRouter)
 app.use(SystemMonitorRouter)
 
 app.use(express.static(path.join(__dirname, 'build')));
-app.use(express.static('resues-sorting-home-file'));
+//app.use(express.static('resues-sorting-home-file'));
 app.set('port', require('./config/config').node_port);
 app.get('*', function (request, response, next) {
     response.sendFile(__dirname + '/build/index.html');

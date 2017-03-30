@@ -35,9 +35,9 @@ export default class LoginContainer extends Component {
                             <form id="loginForm" action="index.html">
                                 <div className="panel panel-body login-form">
                                     <div className="text-center">
-                                        <img src="../assets/images/logo_login.png"/>
+                                        {/*<img src="../assets/images/logo_light.png"/>*/}
                                         <h5 className="content-group">
-                                            流化平台管理系统
+                                            垃圾分拣与回收管理平台
                                         </h5>
                                     </div>
 
@@ -77,16 +77,15 @@ export default class LoginContainer extends Component {
                                             className="icon-circle-right2 position-right"></i></button>
                                     </div>
 
-                                    <div className="text-center">
+                                    {/*<div className="text-center">
                                         <a href="login_password_recover.html">忘记密码?</a>
-                                    </div>
+                                    </div>*/}
                                 </div>
                             </form>
 
-
                             <div className="footer text-muted">
                                 © 2015. <a href="#">CS Management</a> by <a
-                                href="http://themeforest.net/user/Kopyov" target="_blank">Entrix, V_0.8.3.1.20</a>
+                                href="http://themeforest.net/user/Kopyov" target="_blank">ReuseSorting, V_0.8.3.1.20</a>
                             </div>
 
                         </div>

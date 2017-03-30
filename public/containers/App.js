@@ -21,7 +21,8 @@ class App extends Component {
         this._logOut = this._logOut.bind(this);
         this._changeLang = this._changeLang.bind(this);
         this.loadingLang = 2;
-        Current_Lang = window.navigator.language.indexOf("CN") >= 0 ? CN_Lang : EN_Lang;
+        // Current_Lang = window.navigator.language.indexOf("CN") >= 0 ? CN_Lang : EN_Lang;
+        Current_Lang = CN_Lang;
     }
 
     _changeTopMenu(menu) {
@@ -61,6 +62,7 @@ class App extends Component {
 
         browserHistory.push('/login')
     }
+
     componentDidUpdate() {
 
     }
@@ -98,13 +100,13 @@ class App extends Component {
                     </div>
             }
 
-
         } else {
-            if(document.location.pathname!="/"){
-                result = <Login _checkAuth={this._checkAuth} fetching={fetching}/>
-            }else{
-                result = <Home />
-            }
+            // if(document.location.pathname!="/"){
+            result = <Login _checkAuth={this._checkAuth} fetching={fetching}/>
+            // }
+            // else{
+            //     result = <Home />
+            // }
         }
         return (
             <div>
@@ -130,7 +132,8 @@ class ContentPanel extends Component {
         return (
             <div className="page-container" style={{height: "2000px"}}>
                 <div className="page-content" style={{backgroundColor: "white"}}>
-                    <div className="sidebar sidebar-main" style={{borderRight: 'thin #F5F5F5 solid',width:this.props.selected!=""?"200px":0}}>
+                    <div className="sidebar sidebar-main"
+                         style={{borderRight: 'thin #F5F5F5 solid', width: this.props.selected != "" ? "200px" : 0}}>
                         <MainMenu selected={this.props.selected} _changeLeftMenu={this._changeLeftMenu}/>
                     </div>
                     <div className="content-wrapper">
