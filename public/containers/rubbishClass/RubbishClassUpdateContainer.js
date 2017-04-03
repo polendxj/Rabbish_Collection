@@ -121,14 +121,14 @@ class UpdateRubbishClassComponent extends Component {
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label className="col-lg-2 control-label"
-                                       style={{
-                                           textAlign: 'center'
-                                       }}>{"奖励积分"}</label>
+                                <label className="control-label col-lg-2" style={{textAlign: 'center'}}>{"奖励积分"}</label>
                                 <div className="col-lg-9">
-                                    <input name="rewardPoints" type="text" className="form-control"
-                                           defaultValue={data.data.rewardPoints}
-                                           autoComplete="off"/>
+                                    <div className="input-group">
+                                        <input name="rewardPoints" type="text" className="form-control"
+                                               defaultValue={data.data.rewardPoints}
+                                               autoComplete="off"/>
+                                        <span className="input-group-addon">每次/每千克</span>
+                                    </div>
                                 </div>
                             </div>
                             <div className="form-group">

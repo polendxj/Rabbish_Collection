@@ -252,7 +252,7 @@ class CorrectionListComponent extends Component {
                         <th className="text-center" style={{width: "20px"}}></th>
                         <th className="col-md-2 text-bold text-center">{"纠错用户"}</th>
                         <th className="col-md-2 text-bold text-center">{"错误类型"}</th>
-                        <th className="col-md-2 text-bold text-center">{"重量"}</th>
+                        <th className="col-md-2 text-bold text-center">{"重量（吨）"}</th>
                         <th className="col-md-4 text-bold text-left">{"错误描述"}</th>
                         <th className="col-md-2 text-bold text-center">{"创建时间"}</th>
                     </tr>

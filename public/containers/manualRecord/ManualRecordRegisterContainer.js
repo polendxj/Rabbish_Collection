@@ -18,7 +18,7 @@ import BreadCrumbs from '../../components/right/breadCrumbs';
 import {saveServiceGroup} from '../../actions/SystemManagerServiceGroupAction';
 import {commonRefresh} from '../../actions/Common';
 import {CLASSCONF_LIST_START, CLASSCONF_LIST_END} from '../../constants/index.js';
-import {getListByMutilpCondition,saveObject} from '../../actions/CommonActions';
+import {getListByMutilpCondition, saveObject} from '../../actions/CommonActions';
 
 export default class ManualRecordRegisterContainer extends Component {
     constructor(props) {
@@ -46,7 +46,7 @@ export default class ManualRecordRegisterContainer extends Component {
 
     _save(params) {
         console.log(params);
-        this.props.dispatch(saveObject(params,"","",manualRecord_register,"/DataManage/ManualRecord"));
+        this.props.dispatch(saveObject(params, "", "", manualRecord_register, "/DataManage/ManualRecord"));
     }
 
     render() {
@@ -78,10 +78,10 @@ class RegisterManualRecordComponent extends Component {
             classid: parseInt($("#classify").val()),
             weight: parseInt($("#weight").val()),
             startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
-            endTime:  new Date(rangeTime.split("-")[1].trim()).getTime(),
+            endTime: new Date(rangeTime.split("-")[1].trim()).getTime(),
             description: $("#description").val()
         };
-        if($("#registerManualForm").validate().form()){
+        if ($("#registerManualForm").validate().form()) {
             this.props._save(params);
         }
     }
@@ -102,15 +102,15 @@ class RegisterManualRecordComponent extends Component {
             ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
             errorClass: 'validation-error-label',
             successClass: 'validation-valid-label',
-            highlight: function(element, errorClass) {
+            highlight: function (element, errorClass) {
                 $(element).removeClass(errorClass);
             },
-            unhighlight: function(element, errorClass) {
+            unhighlight: function (element, errorClass) {
                 $(element).removeClass(errorClass);
             },
 
             validClass: "validation-valid-label",
-            success: function(label) {
+            success: function (label) {
                 label.addClass("validation-valid-label").text("Success.")
             }
         });
@@ -119,13 +119,13 @@ class RegisterManualRecordComponent extends Component {
 
     render() {
         const {data}=this.props;
-        console.log("manualOfClass",data);
+        console.log("manualOfClass", data);
         const options = [];
         if (data) {
-            if(data.status){
+            if (data.status) {
                 data.data.forEach(function (val, key) {
                     options.push(
-                        <option key={"option"+key} value={val.id}>{val.name}</option>
+                        <option key={"option" + key} value={val.id}>{val.name}</option>
                     )
                 })
             }
@@ -153,14 +153,14 @@ class RegisterManualRecordComponent extends Component {
                                 </div>
 
                                 <div className="form-group">
-                                    <label className="col-lg-2 control-label"
-                                           style={{
-                                               textAlign: 'center'
-                                           }}>{"重量"}</label>
+                                    <label className="control-label col-lg-2" style={{textAlign: 'center'}}>{"重量"}</label>
                                     <div className="col-lg-9">
-                                        <input id="weight" type="text" className="form-control"
-                                               placeholder={"重量"} required="required"
-                                               autoComplete="off"/>
+                                        <div className="input-group">
+                                            <input id="weight" type="text" className="form-control"
+                                                   placeholder={"重量"} required="required"
+                                                   autoComplete="off"/>
+                                                <span className="input-group-addon">吨</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="form-group">

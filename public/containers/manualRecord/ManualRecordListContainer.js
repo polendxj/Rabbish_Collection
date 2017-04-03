@@ -47,6 +47,16 @@ export default class ManualRecordListContainer extends Component {
 
     }
 
+    _search(){
+        var sort = $("#sortSelect").val()+","+$("#descOrAscSelect").val();
+        var params = {
+            page: this.page,
+            size: page_size,
+            sort: sort
+        };
+        this.props.dispatch(getListByMutilpCondition(params, MANUALRECORD_LIST_START, MANUALRECORD_LIST_END, manualRecord_list));
+    }
+
     _changePage(page) {
         this.page = page;
         var params = {page: this.page, size: page_size};
@@ -75,6 +85,29 @@ export default class ManualRecordListContainer extends Component {
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>
+                    <fieldset className="content-group">
+                        <legend className="text-bold">{Current_Lang.label.searching}</legend>
+                        <ul className="list-inline list-inline-condensed no-margin-bottom"
+                            style={{textAlign: 'right', marginTop: '-59px'}}>
+                            <li>
+                                <select id="sortSelect" className="form-control">
+                                    <option value={"start_time"}>按起始时间排序</option>
+                                    <option value={"end_time"}>按结束时间排序</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select id="descOrAscSelect" className="form-control">
+                                    <option value={"desc"}>递减</option>
+                                    <option value={"asc"}>递增</option>
+                                </select>
+                            </li>
+                            <li>
+                                <button onClick={this._search.bind(this)} type="button"
+                                        className="btn btn-primary btn-icon"><i
+                                    className="icon-search4"></i></button>
+                            </li>
+                        </ul>
+                    </fieldset>
                     <fieldset className="content-group">
                         <legend className="text-bold">{"垃圾称量列表区"}</legend>
                         <div style={{marginTop:'-80px'}}>
@@ -145,7 +178,7 @@ class ManualRecordListComponent extends Component{
                     <tr style={{fontWeight:'bold'}}>
                         <th className="text-center" style={{width: "20px"}}></th>
                         <th className="col-md-2 text-bold text-center">{"分类名称"}</th>
-                        <th className="col-md-2 text-bold text-center">{"重量"}</th>
+                        <th className="col-md-2 text-bold text-center">{"重量（吨）"}</th>
                         <th className="col-md-2 text-bold text-center">{"起始时间"}</th>
                         <th className="col-md-2 text-bold text-center">{"结束时间"}</th>
                         <th className="col-md-4 text-bold text-center">{"错误描述"}</th>

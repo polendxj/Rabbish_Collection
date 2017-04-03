@@ -29,7 +29,11 @@ export default class TransitLineListContainer extends Component {
     }
 
     componentDidMount() {
-        var params = {page: 0, size: page_size};
+        var params = {
+            page: 0,
+            size: page_size,
+            sort: "create_time,desc"
+        };
         this.props.dispatch(getListByMutilpCondition(params, TRANSITLINE_LIST_START, TRANSITLINE_LIST_END, transitLine_list));
     }
 
@@ -46,7 +50,13 @@ export default class TransitLineListContainer extends Component {
     }
 
     _search(){
-
+        var sort = $("#sortSelect").val()+","+$("#descOrAscSelect").val();
+        var params = {
+            page: this.page,
+            size: page_size,
+            sort: sort
+        };
+        this.props.dispatch(getListByMutilpCondition(params, TRANSITLINE_LIST_START, TRANSITLINE_LIST_END, transitLine_list));
     }
 
     _changePage(page) {
@@ -78,6 +88,29 @@ export default class TransitLineListContainer extends Component {
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>
+                    <fieldset className="content-group">
+                        <legend className="text-bold">{Current_Lang.label.searching}</legend>
+                        <ul className="list-inline list-inline-condensed no-margin-bottom"
+                            style={{textAlign: 'right', marginTop: '-59px'}}>
+                            <li>
+                                <select id="sortSelect" className="form-control">
+                                    <option value={"create_time"}>按记录时间排序</option>
+                                    <option value={"license_plate_num"}>按牌照排序</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select id="descOrAscSelect" className="form-control">
+                                    <option value={"desc"}>递减</option>
+                                    <option value={"asc"}>递增</option>
+                                </select>
+                            </li>
+                            <li>
+                                <button onClick={this._search.bind(this)} type="button"
+                                        className="btn btn-primary btn-icon"><i
+                                    className="icon-search4"></i></button>
+                            </li>
+                        </ul>
+                    </fieldset>
                     <fieldset className="content-group">
                         <legend className="text-bold">{"车辆运输列表区"}</legend>
                         <div style={{marginTop:'-80px'}}>
