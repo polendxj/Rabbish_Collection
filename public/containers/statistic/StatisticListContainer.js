@@ -412,7 +412,7 @@ export default class StatisticListContainer extends Component {
         console.log("organizationData", organizationData);
         console.log("cityData", cityData);
         console.log("cityOfCountyList", cityOfCountyList);
-        console.log("operationData", operationData);
+        console.log("settlementData", settlementData);
         var data = "";
         var showCity = "city";
         var classifyDataMerge = [];
@@ -695,9 +695,9 @@ export default class StatisticListContainer extends Component {
                 }
             }
         }
-        var showOperation = "正在计算中...";
-        var showTotal = "正在计算中...";
-        var showTotalOfCity = "正在计算中...";
+        var showOperation = "获取中...";
+        var showTotal = "获取中...";
+        var showTotalOfCity = "获取中...";
         console.log("totalData", totalData);
         if (cityData) {
             if (cityData.totalCityData) {

@@ -58,10 +58,9 @@ export default class ReviewListContainer extends Component {
         }));
     }
 
-    _delete(id, replyid, title) {
+    _delete(id, title) {
         var that = this;
         ConfirmModal(Current_Lang.status.minor, Current_Lang.alertTip.confirmDelete + title + Current_Lang.alertTip.confirmMa, function () {
-            that.props.dispatch(deleteObject(replyid, "", "", "", "", "", "", "", reply_delete, review_list));
             that.props.dispatch(deleteObject(id, "", "", "", "", "", REVIEW_LIST_START, REVIEW_LIST_END, review_delete, review_list));
         })
     }
@@ -151,8 +150,8 @@ class ReviewListComponent extends Component {
         this.props._reply(params);
     }
 
-    _delete(id, replyid, title) {
-        this.props._delete(id, replyid, title)
+    _delete(id, title) {
+        this.props._delete(id, title)
     }
 
     componentWillUpdate(){
@@ -173,7 +172,7 @@ class ReviewListComponent extends Component {
             if (data.status) {
                 if (data.data.content.length > 0) {
                     data.data.content.forEach(function (val, key) {
-                        var replyFlag = (val.reply == ""||typeof val.reply.replyContent=="undefined");
+                        var replyFlag = (val.replyUserid == null||val.replyUserid == "");
                         tb.push(
                             <div key={key} className="panel panel-white text-left">
                                 <div className="panel-heading" style={{padding: "15px 20px 10px 20px"}}>
@@ -197,7 +196,7 @@ class ReviewListComponent extends Component {
                                     <div className="heading-elements"
                                          style={{height: "18px", top: "25px", right: "10px"}}>
                                         <i className="icon-cross" style={{fontSize: "18px", cursor: "pointer"}}
-                                           onClick={this._delete.bind(this, val.id, val.reply.id, val.title)}></i>
+                                           onClick={this._delete.bind(this, val.id, val.title)}></i>
                                     </div>
                                 </div>
                                 <div id={"collapse-" + val.id}
@@ -224,14 +223,14 @@ class ReviewListComponent extends Component {
                                             </div> :
                                             <div>
                                                 <div>
-                                                    {val.reply.replyContent}
+                                                    {val.replyContent}
                                                 </div>
                                                 <div style={{height: "10px"}}></div>
                                                 <small className="display-block" style={{fontSize: "6px"}}>
-                                                    {val.reply.replyUserName}&nbsp;&nbsp;
+                                                    {val.replyUserName}&nbsp;&nbsp;
                                                     <i className="icon-alarm" style={{fontSize: "3px"}}></i>
                                                     &nbsp;
-                                                    {timeStamp2Time(val.reply.replyTime)}
+                                                    {timeStamp2Time(val.replyTime)}
                                                 </small>
                                             </div>}
                                     </div>
