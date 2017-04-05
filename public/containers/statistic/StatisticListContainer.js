@@ -916,7 +916,10 @@ export default class StatisticListContainer extends Component {
                                         <div style={{marginTop: '-20px'}}>
                                             <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
                                                         _changePage={this._classifyChangePage.bind(this)} _prePage={this._classifyPrePage.bind(this)}
-                                                        _nextPage={this._classifyNextPage.bind(this)}/>
+                                                        _nextPage={this._classifyNextPage.bind(this)}
+                                                        inputNumberID="inputNumber1"
+                                                        perPageID="perPageID1"
+                                            />
                                         </div>
                                         <div className="table-responsive"
                                              style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
@@ -996,7 +999,10 @@ export default class StatisticListContainer extends Component {
                                             </div>
                                             <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
                                                         _changePage={this._cityChangePage.bind(this)} _prePage={this._cityPrePage.bind(this)}
-                                                        _nextPage={this._cityNextPage.bind(this)}/>
+                                                        _nextPage={this._cityNextPage.bind(this)}
+                                                        inputNumberID="inputNumber2"
+                                                        perPageID="perPageID2"
+                                            />
                                         </div>
                                         <div className="table-responsive"
                                              style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
@@ -1082,7 +1088,10 @@ export default class StatisticListContainer extends Component {
                                             </div>
                                             <Pagenation show={this.searchOfOrganizationid} counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
                                                         _changePage={this._organizationChangePage.bind(this)} _prePage={this._organizationPrePage.bind(this)}
-                                                        _nextPage={this._organizationNextPage.bind(this)}/>
+                                                        _nextPage={this._organizationNextPage.bind(this)}
+                                                        inputNumberID="inputNumber3"
+                                                        perPageID="perPageID3"
+                                            />
                                         </div>
                                         <div className="table-responsive"
                                              style={{display:this.searchOfOrganizationid?"block":"none",height: tableHeight + 'px', overflowY: 'scroll'}}>
@@ -1145,7 +1154,10 @@ export default class StatisticListContainer extends Component {
                                         <div style={{marginTop: '-20px'}}>
                                             <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
                                                         _changePage={this._settlementChangePage.bind(this)} _prePage={this._settlementPrePage.bind(this)}
-                                                        _nextPage={this._settlementNextPage.bind(this)}/>
+                                                        _nextPage={this._settlementNextPage.bind(this)}
+                                                        inputNumberID="inputNumber4"
+                                                        perPageID="perPageID4"
+                                            />
                                         </div>
                                         <div className="table-responsive"
                                              style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
@@ -1201,7 +1213,10 @@ export default class StatisticListContainer extends Component {
                                         <div style={{marginTop: '-20px'}}>
                                             <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
                                                         _changePage={this._totalChangePage.bind(this)} _prePage={this._totalPrePage.bind(this)}
-                                                        _nextPage={this._totalNextPage.bind(this)}/>
+                                                        _nextPage={this._totalNextPage.bind(this)}
+                                                        inputNumberID="inputNumber5"
+                                                        perPageID="perPageID5"
+                                            />
                                         </div>
                                         <div className="table-responsive"
                                              style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
