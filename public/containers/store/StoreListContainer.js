@@ -58,9 +58,11 @@ export default class StoreListContainer extends Component {
     }
     componentDidUpdate(){
         if(this.detailData){
+            var max = this.detailData.points - this.detailData.points%10;
+            $("#settlementPoints").val(max);
+            $("#settlementAmount").val("");
             $("#settlementPoints").blur(function () {
                 var amount = parseInt($("#settlementPoints").val());
-                var max = this.detailData.points;
                 if(amount > max){
                     $("#settlementPoints").val(max);
                 }

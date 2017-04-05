@@ -129,7 +129,7 @@ class RegisterUserComponent extends Component {
             browseIcon: '<i class="icon-folder-open"></i>&nbsp;',
             removeIcon: '<i class="icon-trash"></i>',
             enctype: 'multipart/form-data',
-            allowedFileExtensions: ['jpg', 'png', 'gif']
+            allowedFileExtensions: ['jpg', 'png']
         });
         $('#file-input').on("fileuploaded", function (event, data) {
             console.log("img", data);

@@ -176,10 +176,10 @@ class ComplaintListComponent extends Component {
                                                     <div >
                                                         <div className="thumbnail" style={{marginBottom:0,width:"85px"}}>
                                                             <div className="thumb">
-                                                                <img src={val.photo} alt="" style={{height:"80px",width:"80px"}}/>
+                                                                <img src={imgBaseUrl+val.photo} alt="" style={{height:"80px",width:"80px"}}/>
                                                                 <div className="caption-overflow">
                                                                 <span style={{top:0,marginTop:0}}>
-                                                                    <a href={val.photo} data-popup="lightbox"
+                                                                    <a href={imgBaseUrl+val.photo} data-popup="lightbox"
                                                                        className="btn" style={{height:"80px",width:"80px"}}></a>
                                                                 </span>
                                                                 </div>
