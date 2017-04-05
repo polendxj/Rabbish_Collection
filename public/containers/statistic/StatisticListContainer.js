@@ -333,6 +333,7 @@ export default class StatisticListContainer extends Component {
         console.log("organizationData", organizationData);
         console.log("cityData", cityData);
         console.log("cityOfCountyList", cityOfCountyList);
+        console.log("operationData", operationData);
         var data = "";
         var showCity = "city";
         var classifyDataMerge = [];

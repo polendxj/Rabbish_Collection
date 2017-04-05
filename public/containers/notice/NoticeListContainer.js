@@ -202,7 +202,7 @@ export default class NoticeListContainer extends Component {
                             <div className="form-group">
                                 <div className="col-lg-12">
                                     <label className="col-lg-2 control-label"
-                                           style={{textAlign: 'center'}}>{"创建时间"}</label>
+                                           style={{textAlign: 'center'}}>{"修改时间"}</label>
                                     <div className="col-lg-4">
                                         <input type="text" value={timeStamp2Time(this.detailData.updateTime)} className="form-control"
                                                autoComplete="off"/>

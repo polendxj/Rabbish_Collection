@@ -17,7 +17,7 @@ router.post('/rsapp/review', function (req, resp) {
                 reviews.data.content.forEach(function (m, k) {
                     (function (m) {
                         console.log("m", m.id);
-                        RequestApi.Request(baseURL + '/rsapp/review/'+ m.id, 'GET', "", req, resp, function (reply) {
+                        RequestApi.Request(baseURL + '/rsapp/review/'+ m.userid, 'GET', "", req, resp, function (reply) {
                             if (reply.data) {
                                 m["reply"] = reply.data;
                             } else {
