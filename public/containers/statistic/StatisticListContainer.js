@@ -80,6 +80,7 @@ export default class StatisticListContainer extends Component {
 
         this.classifyPage = 0;
         this.orgPage = 0;
+        this.cityPage = 0;
     }
 
     componentDidMount() {
@@ -307,18 +308,45 @@ export default class StatisticListContainer extends Component {
     }
 
     _cityChangePage(page) {
-        this.page = page;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        this.cityPage=page;
+        var rangeTime = $("#daterange-two-2").val();
+        var cityParams = {
+            page: this.cityPage,
+            size: page_size,
+            cityid: $("#cityOfCitySelect").val(),
+            startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+            endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
+        };
+        this.props.dispatch(getListByMutilpCondition(cityParams, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
+
     }
 
     _cityPrePage(page) {
-        this.page = this.page - 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        this.cityPage=page-1;
+        var rangeTime = $("#daterange-two-2").val();
+        var cityParams = {
+            page: this.cityPage,
+            size: page_size,
+            cityid: $("#cityOfCitySelect").val(),
+            startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+            endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
+        };
+        this.props.dispatch(getListByMutilpCondition(cityParams, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
+
     }
 
     _cityNextPage(page) {
-        this.page = this.page + 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        this.cityPage=page+1;
+        var rangeTime = $("#daterange-two-2").val();
+        var cityParams = {
+            page: this.cityPage,
+            size: page_size,
+            cityid: $("#cityOfCitySelect").val(),
+            startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+            endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
+        };
+        this.props.dispatch(getListByMutilpCondition(cityParams, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
+
     }
 
     _organizationChangePage(page) {
@@ -1089,7 +1117,7 @@ export default class StatisticListContainer extends Component {
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
+                                            <Pagenation counts={cityData ? cityData.totalElements : 0} page={this.page}
                                                         _changePage={this._cityChangePage.bind(this)}
                                                         _prePage={this._cityPrePage.bind(this)}
                                                         _nextPage={this._cityNextPage.bind(this)}
@@ -1255,7 +1283,7 @@ export default class StatisticListContainer extends Component {
                                     </fieldset>
                                     <fieldset className="content-group">
                                         <div style={{marginTop: '-20px'}}>
-                                            <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
+                                            <Pagenation counts={1} page={this.page}
                                                         _changePage={this._settlementChangePage.bind(this)}
                                                         _prePage={this._settlementPrePage.bind(this)}
                                                         _nextPage={this._settlementNextPage.bind(this)}
@@ -1315,7 +1343,7 @@ export default class StatisticListContainer extends Component {
                                     </fieldset>
                                     <fieldset className="content-group">
                                         <div style={{marginTop: '-20px'}}>
-                                            <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
+                                            <Pagenation counts={1} page={this.page}
                                                         _changePage={this._totalChangePage.bind(this)}
                                                         _prePage={this._totalPrePage.bind(this)}
                                                         _nextPage={this._totalNextPage.bind(this)}

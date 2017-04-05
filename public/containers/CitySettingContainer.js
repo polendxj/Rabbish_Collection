@@ -72,7 +72,6 @@ export default class CitySettingContainer extends Component {
     }
 
     _deleteCountry(id) {
-        console.log(this.selectedCity)
         var params = {
             cityid: this.selectedCity.id,
             id: id
