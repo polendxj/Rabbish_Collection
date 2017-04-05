@@ -232,10 +232,11 @@ class RightPanel extends Component {
                          className="icon-comment-discussion"></i> 系统消息</a></li>
                          <li className="divider"></li>
                          <li><a href="#"><i className="icon-cog5"></i> 账号设置</a></li>*/}
+                        <li onClick={this.props._showModal}><a href="javascript:void(0)" data-toggle="modal" data-target="#modifyPwdModal"><i className="icon-database-edit2"></i>
+                            {"修改密码"}</a></li>
                         <li onClick={this.props._logOut}><a href="javascript:void(0)"><i className="icon-switch2"></i>
                             {Current_Lang.label.deregiester}</a></li>
-                        <li onClick={this.props._showModal}><a href="javascript:void(0)" data-toggle="modal" data-target="#modifyPwdModal"><i className="icon-switch2"></i>
-                            {"修改密码"}</a></li>
+
                     </ul>
                 </li>
             </ul>

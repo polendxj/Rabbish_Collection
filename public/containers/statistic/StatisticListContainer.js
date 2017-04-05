@@ -77,6 +77,10 @@ export default class StatisticListContainer extends Component {
         this._changeCityOfSettlement = this._changeCityOfSettlement.bind(this);
         this._changeCityOfTotal = this._changeCityOfTotal.bind(this);
         this._startRefresh = this._startRefresh.bind(this);
+
+        this.classifyPage = 0;
+        this.orgPage = 0;
+        this.cityPage = 0;
     }
 
     componentDidMount() {
@@ -84,9 +88,9 @@ export default class StatisticListContainer extends Component {
         var params = {
             cityid: self.currentCityId,
             page: 0,
-            size: 20,
-            cityName:"崇州",
-            organizationName:"",
+            size: page_size,
+            cityName: "崇州",
+            organizationName: "",
             startday: "2016-01-01",
             endday: timeStamp2Time(new Date().getTime())
         };
@@ -134,10 +138,10 @@ export default class StatisticListContainer extends Component {
             this.currentClassifyOrganizationid = $("#ofClassifySelect").val();
             var classifyParams = {
                 page: 0,
-                size: 20,
+                size: page_size,
                 cityid: $("#citySelect").val(),
-                cityName:$("#citySelect").find("option:selected").text(),
-                organizationName:this.currentClassifyOrganizationid?$("#ofClassifySelect").find("option:selected").text():"",
+                cityName: $("#citySelect").find("option:selected").text(),
+                organizationName: this.currentClassifyOrganizationid ? $("#ofClassifySelect").find("option:selected").text() : "",
                 organizationid: $("#ofClassifySelect").val(),
                 monthday: timeStamp2Time(new Date($('.daterange-single').val()))
             };
@@ -146,7 +150,7 @@ export default class StatisticListContainer extends Component {
             var rangeTime = $("#daterange-two-2").val();
             var cityParams = {
                 page: 0,
-                size: 20,
+                size: page_size,
                 cityid: $("#cityOfCitySelect").val(),
                 startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
                 endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
@@ -160,7 +164,7 @@ export default class StatisticListContainer extends Component {
             var rangeTime = $("#daterange-two-3").val();
             var organizationParams = {
                 page: 0,
-                size: 20,
+                size: page_size,
                 cityid: $("#cityOfOrganizationSelect").val(),
                 organizationid: $("#ofOrganizationSelect").val(),
                 startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
@@ -181,7 +185,7 @@ export default class StatisticListContainer extends Component {
             var rangeTime = $("#daterange-two-5").val();
             var rangeDateParams = {
                 page: 0,
-                size: 20,
+                size: page_size,
                 cityid: $("#cityOfDateRangeSelect").val(),
                 organizationid: $("#ofDaterangeSelect").val(),
                 startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
@@ -233,71 +237,174 @@ export default class StatisticListContainer extends Component {
         this.settlementOfcurrentCityId = citieid;
         this._startRefresh();
     }
-    _detail(list){
-        console.log("list",list);
+
+    _detail(list) {
+        console.log("list", list);
         this.organizationList = list;
         this._startRefresh();
     }
-    _cityDetail(cityData){
+
+    _cityDetail(cityData) {
         this.cityEveryData = cityData;
-        console.log("cityEveryData",this.cityEveryData);
+        console.log("cityEveryData", this.cityEveryData);
         this._startRefresh();
     }
-    _orgaTotalDetail(organizationData){
-        if(!this.searchOfOrganizationid){
-            if(organizationData.status&&organizationData.data&&organizationData.data.content.length>0){
+
+    _orgaTotalDetail(organizationData) {
+        if (!this.searchOfOrganizationid) {
+            if (organizationData.status && organizationData.data && organizationData.data.content.length > 0) {
                 this.orgaEveryAndTotalData = organizationData.data.content[0];
             }
             this._startRefresh();
         }
     }
-    _orgaEveryDetail(orgaData){
-        this.orgaEveryAndTotalData=orgaData;
+
+    _orgaEveryDetail(orgaData) {
+        this.orgaEveryAndTotalData = orgaData;
         this._startRefresh();
     }
+
     _classifyChangePage(page) {
-        this.page = page;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        this.classifyPage = page;
+        this.currentClassifyOrganizationid = $("#ofClassifySelect").val();
+        var classifyParams = {
+            page: this.classifyPage,
+            size: page_size,
+            cityid: $("#citySelect").val(),
+            cityName: $("#citySelect").find("option:selected").text(),
+            organizationName: this.currentClassifyOrganizationid ? $("#ofClassifySelect").find("option:selected").text() : "",
+            organizationid: $("#ofClassifySelect").val(),
+            monthday: timeStamp2Time(new Date($('.daterange-single').val()))
+        };
+        this.props.dispatch(getListByMutilpCondition(classifyParams, STATISTICBYCLASSIFY_LIST_START, STATISTICBYCLASSIFY_LIST_END, statisticByClassify_list));
     }
 
     _classifyPrePage(page) {
-        this.page = this.page - 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        this.classifyPage = page - 1;
+        this.currentClassifyOrganizationid = $("#ofClassifySelect").val();
+        var classifyParams = {
+            page: this.classifyPage,
+            size: page_size,
+            cityid: $("#citySelect").val(),
+            cityName: $("#citySelect").find("option:selected").text(),
+            organizationName: this.currentClassifyOrganizationid ? $("#ofClassifySelect").find("option:selected").text() : "",
+            organizationid: $("#ofClassifySelect").val(),
+            monthday: timeStamp2Time(new Date($('.daterange-single').val()))
+        };
+        this.props.dispatch(getListByMutilpCondition(classifyParams, STATISTICBYCLASSIFY_LIST_START, STATISTICBYCLASSIFY_LIST_END, statisticByClassify_list));
     }
 
     _classifyNextPage(page) {
-        this.page = this.page + 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        this.classifyPage = page + 1;
+        this.currentClassifyOrganizationid = $("#ofClassifySelect").val();
+        var classifyParams = {
+            page: this.classifyPage,
+            size: page_size,
+            cityid: $("#citySelect").val(),
+            cityName: $("#citySelect").find("option:selected").text(),
+            organizationName: this.currentClassifyOrganizationid ? $("#ofClassifySelect").find("option:selected").text() : "",
+            organizationid: $("#ofClassifySelect").val(),
+            monthday: timeStamp2Time(new Date($('.daterange-single').val()))
+        };
+        this.props.dispatch(getListByMutilpCondition(classifyParams, STATISTICBYCLASSIFY_LIST_START, STATISTICBYCLASSIFY_LIST_END, statisticByClassify_list));
     }
 
     _cityChangePage(page) {
-        this.page = page;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        this.cityPage=page;
+        var rangeTime = $("#daterange-two-2").val();
+        var cityParams = {
+            page: this.cityPage,
+            size: page_size,
+            cityid: $("#cityOfCitySelect").val(),
+            startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+            endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
+        };
+        this.props.dispatch(getListByMutilpCondition(cityParams, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
+
     }
 
     _cityPrePage(page) {
-        this.page = this.page - 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        this.cityPage=page-1;
+        var rangeTime = $("#daterange-two-2").val();
+        var cityParams = {
+            page: this.cityPage,
+            size: page_size,
+            cityid: $("#cityOfCitySelect").val(),
+            startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+            endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
+        };
+        this.props.dispatch(getListByMutilpCondition(cityParams, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
+
     }
 
     _cityNextPage(page) {
-        this.page = this.page + 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        this.cityPage=page+1;
+        var rangeTime = $("#daterange-two-2").val();
+        var cityParams = {
+            page: this.cityPage,
+            size: page_size,
+            cityid: $("#cityOfCitySelect").val(),
+            startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+            endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
+        };
+        this.props.dispatch(getListByMutilpCondition(cityParams, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
+
     }
 
     _organizationChangePage(page) {
-        this.page = page;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        this.orgPage = page;
+        this.searchOfOrganizationid = $("#ofOrganizationSelect").val();
+        this.currentOrgaCity = $("#cityOfOrganizationSelect").find("option:selected").text();
+        this.currentOrgaOrganization = $("#ofOrganizationSelect").find("option:selected").text();
+        this.OrgaRangeDate = $("#daterange-two-3").val();
+        var rangeTime = $("#daterange-two-3").val();
+        var organizationParams = {
+            page: this.orgPage,
+            size: page_size,
+            cityid: $("#cityOfOrganizationSelect").val(),
+            organizationid: $("#ofOrganizationSelect").val(),
+            startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+            endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
+        };
+        this.props.dispatch(getListByMutilpCondition(organizationParams, STATISTICBYORGANIZATION_LIST_START, STATISTICBYORGANIZATION_LIST_END, statisticByOrganization_list));
     }
 
     _organizationPrePage(page) {
-        this.page = this.page - 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        this.orgPage = page-1;
+        this.searchOfOrganizationid = $("#ofOrganizationSelect").val();
+        this.currentOrgaCity = $("#cityOfOrganizationSelect").find("option:selected").text();
+        this.currentOrgaOrganization = $("#ofOrganizationSelect").find("option:selected").text();
+        this.OrgaRangeDate = $("#daterange-two-3").val();
+        var rangeTime = $("#daterange-two-3").val();
+        var organizationParams = {
+            page: this.orgPage,
+            size: page_size,
+            cityid: $("#cityOfOrganizationSelect").val(),
+            organizationid: $("#ofOrganizationSelect").val(),
+            startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+            endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
+        };
+        this.props.dispatch(getListByMutilpCondition(organizationParams, STATISTICBYORGANIZATION_LIST_START, STATISTICBYORGANIZATION_LIST_END, statisticByOrganization_list));
+
     }
 
     _organizationNextPage(page) {
-        this.page = this.page + 1;
-        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+        this.orgPage = page+1;
+        this.searchOfOrganizationid = $("#ofOrganizationSelect").val();
+        this.currentOrgaCity = $("#cityOfOrganizationSelect").find("option:selected").text();
+        this.currentOrgaOrganization = $("#ofOrganizationSelect").find("option:selected").text();
+        this.OrgaRangeDate = $("#daterange-two-3").val();
+        var rangeTime = $("#daterange-two-3").val();
+        var organizationParams = {
+            page: this.orgPage,
+            size: page_size,
+            cityid: $("#cityOfOrganizationSelect").val(),
+            organizationid: $("#ofOrganizationSelect").val(),
+            startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+            endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
+        };
+        this.props.dispatch(getListByMutilpCondition(organizationParams, STATISTICBYORGANIZATION_LIST_START, STATISTICBYORGANIZATION_LIST_END, statisticByOrganization_list));
+
     }
 
     _settlementChangePage(page) {
@@ -395,7 +502,8 @@ export default class StatisticListContainer extends Component {
                                     <ul className="dropdown-menu dropdown-menu-right">
                                         <li>
                                             <a href="javascript:void(0)" data-toggle="modal"
-                                               data-target="#organizationDetailModal" onClick={this._detail.bind(this, val.organizationEveryData)}><i
+                                               data-target="#organizationDetailModal"
+                                               onClick={this._detail.bind(this, val.organizationEveryData)}><i
                                                 className=" icon-office"></i>
                                                 {"详情"}</a>
                                         </li>
@@ -447,7 +555,8 @@ export default class StatisticListContainer extends Component {
                                         <ul className="dropdown-menu dropdown-menu-right">
                                             <li>
                                                 <a href="javascript:void(0)" data-toggle="modal"
-                                                   data-target="#orgaEveryDetailModal" onClick={this._orgaEveryDetail.bind(this, val)}><i
+                                                   data-target="#orgaEveryDetailModal"
+                                                   onClick={this._orgaEveryDetail.bind(this, val)}><i
                                                     className=" icon-office"></i>
                                                     {"详情"}</a>
                                             </li>
@@ -651,13 +760,13 @@ export default class StatisticListContainer extends Component {
         }
         var showOrgaEvery = "获取中...";
         var detailOrganizationTb = [];
-        if(this.organizationList==""){
+        if (this.organizationList == "") {
             detailOrganizationTb.push(<tr key={'loading'}>
                 <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />
                 </td>
             </tr>)
-        }else{
+        } else {
             this.organizationList.forEach(function (val, key) {
                 detailOrganizationTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                     <td className="text-center">{key + 1}</td>
@@ -686,14 +795,14 @@ export default class StatisticListContainer extends Component {
         </div>
 
         var detailCityEveryTb = [];
-        if(this.cityEveryData==""||typeof this.cityEveryData=="undefined"){
+        if (this.cityEveryData == "" || typeof this.cityEveryData == "undefined") {
             detailCityEveryTb.push(<tr key={'loading'}>
                 <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />
                 </td>
             </tr>)
-        }else{
-            if(this.cityEveryData.content.length>0){
+        } else {
+            if (this.cityEveryData.content.length > 0) {
                 this.cityEveryData.content.forEach(function (val, key) {
                     detailCityEveryTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
@@ -703,7 +812,7 @@ export default class StatisticListContainer extends Component {
                         <td className="text-center">{timeStamp2Time(val.monthday)}</td>
                     </tr>)
                 }.bind(this));
-            }else{
+            } else {
                 detailCityEveryTb.push(<tr key={'noData'}>
                     <td colSpan="100" style={{textAlign: 'center'}}>
                         <NoData />
@@ -728,16 +837,16 @@ export default class StatisticListContainer extends Component {
             </table>
         </div>;
         var detailorgaEveryTb = [];
-        if(this.orgaEveryAndTotalData==""){
+        if (this.orgaEveryAndTotalData == "") {
             detailorgaEveryTb.push(<tr key={'loading'}>
                 <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />
                 </td>
             </tr>)
-        }else{
-            this.orgaEveryAndTotalData.classifyData = mergeClassify(classifyList.data,this.orgaEveryAndTotalData.classifyData);
-            console.log("orgaEveryAndTotalData.classifyData",this.orgaEveryAndTotalData.classifyData);
-            if(this.orgaEveryAndTotalData.classifyData.length>0){
+        } else {
+            this.orgaEveryAndTotalData.classifyData = mergeClassify(classifyList.data, this.orgaEveryAndTotalData.classifyData);
+            console.log("orgaEveryAndTotalData.classifyData", this.orgaEveryAndTotalData.classifyData);
+            if (this.orgaEveryAndTotalData.classifyData.length > 0) {
                 this.orgaEveryAndTotalData.classifyData.forEach(function (val, key) {
                     detailorgaEveryTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
@@ -746,7 +855,7 @@ export default class StatisticListContainer extends Component {
                         <td className="text-center">{moneyFormat(val.weight.toFixed(0))}</td>
                     </tr>)
                 }.bind(this));
-            }else{
+            } else {
                 detailorgaEveryTb.push(<tr key={'noData'}>
                     <td colSpan="100" style={{textAlign: 'center'}}>
                         <NoData />
@@ -770,16 +879,16 @@ export default class StatisticListContainer extends Component {
             </table>
         </div>;
         var detailorgaTotalTb = [];
-        if(this.orgaEveryAndTotalData==""){
+        if (this.orgaEveryAndTotalData == "") {
             detailorgaTotalTb.push(<tr key={'loading'}>
                 <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />
                 </td>
             </tr>)
-        }else{
-            this.orgaEveryAndTotalData.classifyData = mergeClassify(classifyList.data,this.orgaEveryAndTotalData.classifyData);
-            console.log("orgaEveryAndTotalData",this.orgaEveryAndTotalData.classifyData);
-            if(this.orgaEveryAndTotalData.classifyData.length>0){
+        } else {
+            this.orgaEveryAndTotalData.classifyData = mergeClassify(classifyList.data, this.orgaEveryAndTotalData.classifyData);
+            console.log("orgaEveryAndTotalData", this.orgaEveryAndTotalData.classifyData);
+            if (this.orgaEveryAndTotalData.classifyData.length > 0) {
                 this.orgaEveryAndTotalData.classifyData.forEach(function (val, key) {
                     detailorgaTotalTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
@@ -788,7 +897,7 @@ export default class StatisticListContainer extends Component {
                         <td className="text-center">{moneyFormat(val.weight.toFixed(0))}</td>
                     </tr>)
                 }.bind(this));
-            }else{
+            } else {
                 detailorgaTotalTb.push(<tr key={'noData'}>
                     <td colSpan="100" style={{textAlign: 'center'}}>
                         <NoData />
@@ -822,7 +931,8 @@ export default class StatisticListContainer extends Component {
                                 <div className="panel bg-teal-400">
                                     <div className="panel-body">
                                         <h3 className="no-margin">{showTotal == "ok" ? moneyFormat(totalData.data.weight.toFixed(0)) : showTotal}
-                                            &nbsp;/ {showTotal == "ok" ? moneyFormat(totalData.data.count) : showTotal}</h3>
+                                            &nbsp;
+                                            / {showTotal == "ok" ? moneyFormat(totalData.data.count) : showTotal}</h3>
                                         <select id="cityOfTotalSelect" className="form-control pull-right input-xs"
                                                 style={{position: "absolute", width: "100px", right: "5px", top: "5px"}}
                                                 value={this.totalCurrentCityId} onChange={this._changeCityOfTotal}>
@@ -875,9 +985,9 @@ export default class StatisticListContainer extends Component {
                         <div className="tabbable">
                             <ul className="nav nav-tabs nav-justified nav-tabs-highlight">
                                 <li className=""><a href="#basic-justified-tab1" data-toggle="tab"
-                                                          aria-expanded="true">垃圾分类统计</a></li>
+                                                    aria-expanded="true">垃圾分类统计</a></li>
                                 <li className="active"><a href="#basic-justified-tab2" data-toggle="tab"
-                                                    aria-expanded="false">城市垃圾统计</a></li>
+                                                          aria-expanded="false">城市垃圾统计</a></li>
                                 <li className=""><a href="#basic-justified-tab3" data-toggle="tab"
                                                     aria-expanded="false">小区/单位垃圾统计</a></li>
                                 <li className=""><a href="#basic-justified-tab4" data-toggle="tab"
@@ -917,9 +1027,15 @@ export default class StatisticListContainer extends Component {
                                     </fieldset>
                                     <fieldset className="content-group">
                                         <div style={{marginTop: '-20px'}}>
-                                            <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
-                                                        _changePage={this._classifyChangePage.bind(this)} _prePage={this._classifyPrePage.bind(this)}
-                                                        _nextPage={this._classifyNextPage.bind(this)}/>
+                                            <Pagenation counts={classifyDataMerge ? classifyDataMerge.length : 0}
+                                                        page={this.page}
+                                                        _changePage={this._classifyChangePage.bind(this)}
+                                                        _prePage={this._classifyPrePage.bind(this)}
+                                                        _nextPage={this._classifyNextPage.bind(this)}
+                                                        inputNumberID="inputNumber1"
+                                                        perPageID="perPageID1"
+                                                        operation={false}
+                                            />
                                         </div>
                                         <div className="table-responsive"
                                              style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
@@ -970,13 +1086,15 @@ export default class StatisticListContainer extends Component {
                                     </fieldset>
                                     <fieldset className="content-group">
                                         <div style={{marginTop: '-20px'}}>
-                                            <div className="table-responsive" style={{width:"600px",position:"absolute"}}>
+                                            <div className="table-responsive"
+                                                 style={{width: "600px", position: "absolute"}}>
                                                 <table className="table table-xlg text-nowrap">
                                                     <tbody>
                                                     <tr>
-                                                        <td className="col-md-12" style={{borderTop:"0"}}>
+                                                        <td className="col-md-12" style={{borderTop: "0"}}>
                                                             <div className="media-left media-middle">
-                                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#cityDataDetailModal"
+                                                                <a href="javascript:void(0)" data-toggle="modal"
+                                                                   data-target="#cityDataDetailModal"
                                                                    className="btn border-purple-800 text-purple-800 btn-flat btn-rounded btn-xs btn-icon"
                                                                    onClick={this._cityDetail.bind(this, cityData.cityData)}>
                                                                     <i className=" icon-city"></i>
@@ -985,10 +1103,14 @@ export default class StatisticListContainer extends Component {
 
                                                             <div className="media-left">
                                                                 <h5 className="text-semibold no-margin">
-                                                                    {showTotalOfCity=="ok"?cityData.totalCityData.cityName:showTotalOfCity}
-                                                                     - 投放次数 ：{showTotalOfCity=="ok"?moneyFormat(cityData.totalCityData.count):showTotalOfCity}
-                                                                    次 / 投放重量：{showTotalOfCity=="ok"?moneyFormat(cityData.totalCityData.weight.toFixed(0)):showTotalOfCity} 吨
-                                                                    <small className="display-block no-margin">{showTotalOfCity=="ok"?cityData.totalCityData.rangeDate:showTotalOfCity}</small>
+                                                                    {showTotalOfCity == "ok" ? cityData.totalCityData.cityName : showTotalOfCity}
+                                                                    - 投放次数
+                                                                    ：{showTotalOfCity == "ok" ? moneyFormat(cityData.totalCityData.count) : showTotalOfCity}
+                                                                    次 /
+                                                                    投放重量：{showTotalOfCity == "ok" ? moneyFormat(cityData.totalCityData.weight.toFixed(0)) : showTotalOfCity}
+                                                                    吨
+                                                                    <small
+                                                                        className="display-block no-margin">{showTotalOfCity == "ok" ? cityData.totalCityData.rangeDate : showTotalOfCity}</small>
                                                                 </h5>
                                                             </div>
                                                         </td>
@@ -997,9 +1119,13 @@ export default class StatisticListContainer extends Component {
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
-                                                        _changePage={this._cityChangePage.bind(this)} _prePage={this._cityPrePage.bind(this)}
-                                                        _nextPage={this._cityNextPage.bind(this)}/>
+                                            <Pagenation counts={cityData ? cityData.totalElements : 0} page={this.page}
+                                                        _changePage={this._cityChangePage.bind(this)}
+                                                        _prePage={this._cityPrePage.bind(this)}
+                                                        _nextPage={this._cityNextPage.bind(this)}
+                                                        inputNumberID="inputNumber2"
+                                                        perPageID="perPageID2"
+                                            />
                                         </div>
                                         <div className="table-responsive"
                                              style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
@@ -1056,13 +1182,15 @@ export default class StatisticListContainer extends Component {
                                     </fieldset>
                                     <fieldset className="content-group">
                                         <div style={{marginTop: '-20px'}}>
-                                            <div className="table-responsive" style={{width:"600px",position:"absolute"}}>
+                                            <div className="table-responsive"
+                                                 style={{width: "600px", position: "absolute"}}>
                                                 <table className="table table-xlg text-nowrap">
                                                     <tbody>
                                                     <tr>
-                                                        <td className="col-md-12" style={{borderTop:"0"}}>
+                                                        <td className="col-md-12" style={{borderTop: "0"}}>
                                                             <div className="media-left media-middle">
-                                                                <a href="javascript:void(0)" data-toggle="modal" data-target={this.searchOfOrganizationid?"":"#orgaTotalDetailModal"}
+                                                                <a href="javascript:void(0)" data-toggle="modal"
+                                                                   data-target={this.searchOfOrganizationid ? "" : "#orgaTotalDetailModal"}
                                                                    className="btn border-purple-800 text-purple-800 btn-flat btn-rounded btn-xs btn-icon"
                                                                    onClick={this._orgaTotalDetail.bind(this, organizationData)}>
                                                                     <i className=" icon-city"></i>
@@ -1071,10 +1199,12 @@ export default class StatisticListContainer extends Component {
 
                                                             <div className="media-left">
                                                                 <h5 className="text-semibold no-margin">
-                                                                    {totalOrga.cityName?totalOrga.cityName:"获取中..."}
+                                                                    {totalOrga.cityName ? totalOrga.cityName : "获取中..."}
                                                                     - 投放次数 ：{moneyFormat(totalOrga.count)}
-                                                                    次 / 投放重量：{moneyFormat(totalOrga.weight.toFixed(0))} 吨
-                                                                    <small className="display-block no-margin">{totalOrga.rangeDate?totalOrga.rangeDate:"获取中..."}</small>
+                                                                    次 / 投放重量：{moneyFormat(totalOrga.weight.toFixed(0))}
+                                                                    吨
+                                                                    <small
+                                                                        className="display-block no-margin">{totalOrga.rangeDate ? totalOrga.rangeDate : "获取中..."}</small>
                                                                 </h5>
                                                             </div>
                                                         </td>
@@ -1083,12 +1213,21 @@ export default class StatisticListContainer extends Component {
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <Pagenation show={this.searchOfOrganizationid} counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
-                                                        _changePage={this._organizationChangePage.bind(this)} _prePage={this._organizationPrePage.bind(this)}
-                                                        _nextPage={this._organizationNextPage.bind(this)}/>
+                                            <Pagenation show={this.searchOfOrganizationid}
+                                                        counts={data?data.totalElements : 0} page={this.orgPage}
+                                                        _changePage={this._organizationChangePage.bind(this)}
+                                                        _prePage={this._organizationPrePage.bind(this)}
+                                                        _nextPage={this._organizationNextPage.bind(this)}
+                                                        inputNumberID="inputNumber3"
+                                                        perPageID="perPageID3"
+                                            />
                                         </div>
                                         <div className="table-responsive"
-                                             style={{display:this.searchOfOrganizationid?"block":"none",height: tableHeight + 'px', overflowY: 'scroll'}}>
+                                             style={{
+                                                 display: this.searchOfOrganizationid ? "block" : "none",
+                                                 height: tableHeight + 'px',
+                                                 overflowY: 'scroll'
+                                             }}>
                                             <table className="table table-bordered table-hover"
                                                    style={{marginBottom: '85px'}}>
                                                 <thead>
@@ -1146,9 +1285,13 @@ export default class StatisticListContainer extends Component {
                                     </fieldset>
                                     <fieldset className="content-group">
                                         <div style={{marginTop: '-20px'}}>
-                                            <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
-                                                        _changePage={this._settlementChangePage.bind(this)} _prePage={this._settlementPrePage.bind(this)}
-                                                        _nextPage={this._settlementNextPage.bind(this)}/>
+                                            <Pagenation counts={1} page={this.page}
+                                                        _changePage={this._settlementChangePage.bind(this)}
+                                                        _prePage={this._settlementPrePage.bind(this)}
+                                                        _nextPage={this._settlementNextPage.bind(this)}
+                                                        inputNumberID="inputNumber4"
+                                                        perPageID="perPageID4"
+                                            />
                                         </div>
                                         <div className="table-responsive"
                                              style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
@@ -1202,9 +1345,13 @@ export default class StatisticListContainer extends Component {
                                     </fieldset>
                                     <fieldset className="content-group">
                                         <div style={{marginTop: '-20px'}}>
-                                            <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
-                                                        _changePage={this._totalChangePage.bind(this)} _prePage={this._totalPrePage.bind(this)}
-                                                        _nextPage={this._totalNextPage.bind(this)}/>
+                                            <Pagenation counts={1} page={this.page}
+                                                        _changePage={this._totalChangePage.bind(this)}
+                                                        _prePage={this._totalPrePage.bind(this)}
+                                                        _nextPage={this._totalNextPage.bind(this)}
+                                                        inputNumberID="inputNumber5"
+                                                        perPageID="perPageID5"
+                                            />
                                         </div>
                                         <div className="table-responsive"
                                              style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
@@ -1228,16 +1375,20 @@ export default class StatisticListContainer extends Component {
                                 </div>
                                 <ListMiddleModal id="organizationDetailModal" content={detailOrganizationInfo}
                                                  doAction={""}
-                                                 tip={"详情 ("+(showTotalOfCity=="ok"?cityData.totalCityData.cityName:"获取中...")+(this.organizationList && this.organizationList.length>0?"-"+this.organizationList[0].organizationName:"") +")"} actionText="统计详情" hide="true" hideCancel="true"/>
+                                                 tip={"详情 (" + (showTotalOfCity == "ok" ? cityData.totalCityData.cityName : "获取中...") + (this.organizationList && this.organizationList.length > 0 ? "-" + this.organizationList[0].organizationName : "") + ")"}
+                                                 actionText="统计详情" hide="true" hideCancel="true"/>
                                 <ListMiddleModal id="cityDataDetailModal" content={detailCityEveryInfo}
                                                  doAction={""}
-                                                 tip={"详情 ("+(showTotalOfCity=="ok"?cityData.totalCityData.cityName:"获取中...") +")"} actionText="单位/小区统计详情" hide="true" hideCancel="true"/>
+                                                 tip={"详情 (" + (showTotalOfCity == "ok" ? cityData.totalCityData.cityName : "获取中...") + ")"}
+                                                 actionText="单位/小区统计详情" hide="true" hideCancel="true"/>
                                 <ListMiddleModal id="orgaEveryDetailModal" content={detailorgaEveryInfo}
                                                  doAction={""}
-                                                 tip={"详情 ("+(this.currentOrgaCity?this.currentOrgaCity:"获取中...")+(this.currentOrgaOrganization?"-"+this.currentOrgaOrganization:"") +")"} actionText="统计详情" hide="true" hideCancel="true"/>
+                                                 tip={"详情 (" + (this.currentOrgaCity ? this.currentOrgaCity : "获取中...") + (this.currentOrgaOrganization ? "-" + this.currentOrgaOrganization : "") + ")"}
+                                                 actionText="统计详情" hide="true" hideCancel="true"/>
                                 <ListMiddleModal id="orgaTotalDetailModal" content={detailorgaTotalInfo}
                                                  doAction={""}
-                                                 tip={"详情 ("+(this.currentOrgaCity?this.currentOrgaCity:"获取中...") +")"} actionText="统计详情" hide="true" hideCancel="true"/>
+                                                 tip={"详情 (" + (this.currentOrgaCity ? this.currentOrgaCity : "获取中...") + ")"}
+                                                 actionText="统计详情" hide="true" hideCancel="true"/>
                             </div>
                         </div>
                     </div>

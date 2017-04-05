@@ -32,6 +32,8 @@ export default class CitySettingContainer extends Component {
         this._startRefresh = this._startRefresh.bind(this);
         this._changeCountry = this._changeCountry.bind(this);
         this._deleteCity = this._deleteCity.bind(this);
+        this._deleteCountry=this._deleteCountry.bind(this);
+        this._deleteOrz=this._deleteOrz.bind(this);
     }
 
     _search() {
@@ -39,6 +41,7 @@ export default class CitySettingContainer extends Component {
     }
 
     _addOrz() {
+        var self=this;
         var params = {
             cityid: this.selectedCity.id,
             countyid: this.selectedCountry.id,
@@ -48,6 +51,8 @@ export default class CitySettingContainer extends Component {
         }
         this.props.dispatch(saveObject(params, "", "", organization_register, "", "add", function () {
             var params = {page: 0, size: page_size};
+            $("#orgName").val("");
+            $("#description").val("");
             self.props.dispatch(getListByMutilpCondition(params, CITY_LIST_START, CITY_LIST_END, city_list));
         }));
     }
@@ -107,6 +112,8 @@ export default class CitySettingContainer extends Component {
         var self = this;
         this.props.dispatch(saveObject(params, "", "", country_register, "", "add", function () {
             var params = {page: 0, size: page_size};
+            $("#countryName").val("");
+            $("#countryDescription").val("");
             self.props.dispatch(getListByMutilpCondition(params, CITY_LIST_START, CITY_LIST_END, city_list));
         }));
     }
@@ -127,6 +134,8 @@ export default class CitySettingContainer extends Component {
         var self = this;
         this.selectedCity = city;
         this.selectedCountry = country;
+        console.log("---")
+        console.log(this.selectedCity)
         this._startRefresh();
         if (flag == 0) {
             this.props.data.data.forEach(function (val, key) {
@@ -364,9 +373,9 @@ export default class CitySettingContainer extends Component {
                             </div>
                             <div className="form-group">
                                 <label className="col-lg-2 control-label"
-                                       style={{textAlign: 'center'}}>{"描 述"}</label>
+                                       style={{textAlign: 'center'}}>{"地 址"}</label>
                                 <div className="col-lg-9">
-                                    <textarea id="description" type="text" className="form-control" placeholder="描 述"
+                                    <textarea id="description" type="text" className="form-control" placeholder="地 址"
                                               autoComplete="off"></textarea>
                                 </div>
                             </div>

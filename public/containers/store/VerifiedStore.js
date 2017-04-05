@@ -76,7 +76,7 @@ export default class VerifiedStore extends Component {
                                         <li style={{display: sessionStorage['type']==10&&val.points >= thresholdValue ? 'block' : "none"}}
                                             onClick={this._detail.bind(this, val)}>
                                             <a href="javascript:void(0)" data-toggle="modal"
-                                               data-target="#storeSettlementModal"><i className=" icon-office"></i>
+                                               data-target="#storeSettlementModal"><i className=" icon-coin-yen"></i>
                                                 {"兑账"}</a>
                                         </li>
                                     </ul>
