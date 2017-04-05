@@ -109,10 +109,12 @@ export default class StatisticListContainer extends Component {
             applyClass: 'bg-slate-600',
             cancelClass: 'btn-default',
             autoUpdateInput: false,
+            format: "yyyy-mm-dd",
             locale: dateLocale
         });
         $('.daterange-two').daterangepicker({
             maxDate: moment(), //最大时间
+            format: "yyyy-mm-dd",
             opens: "left",
             applyClass: 'bg-slate-600',
             cancelClass: 'btn-default',

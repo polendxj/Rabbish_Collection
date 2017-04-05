@@ -260,7 +260,7 @@ class RegisterUserComponent extends Component {
                                                textAlign: 'center'
                                            }}>{"密码"}</label>
                                     <div className="col-lg-9">
-                                        <input name="password" type="password" className="form-control"
+                                        <input id="password" name="password" type="password" className="form-control"
                                                placeholder={"密码"} required="required"
                                                autoComplete="off"/>
                                     </div>

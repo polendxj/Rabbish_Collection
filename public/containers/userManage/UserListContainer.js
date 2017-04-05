@@ -242,6 +242,7 @@ export default class UserListContainer extends Component {
     render() {
         const {fetching, data,detailUser, cityList} =this.props;
         const detailData = detailUser.data;
+        console.log("detailData",detailData);
         var cityOptions = [];
         var countryOptions = [];
         var organizationOptions = [];
@@ -323,6 +324,7 @@ export default class UserListContainer extends Component {
         if(detailUser== ""){
             detailUserInfo = <Loading />;
         }else{
+            var hasHttp = detailData.headimg.indexOf("http")>-1;
             detailUserInfo =
                 <div>
                     <div className="form-horizontal">
@@ -338,11 +340,11 @@ export default class UserListContainer extends Component {
                                         <div className="thumbnail"
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
                                             <div className="thumb">
-                                                <img src={imgBaseUrl+detailData.headimg} alt=""
+                                                <img src={hasHttp?detailData.headimg:imgBaseUrl+detailData.headimg} alt=""
                                                      style={{height: "160px", width: "160px"}}/>
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                                     <span style={{top: 0, marginTop: 0}}>
-                                                        <a href={imgBaseUrl+detailData.headimg} data-popup="lightbox"
+                                                        <a href={hasHttp?detailData.headimg:imgBaseUrl+detailData.headimg} data-popup="lightbox"
                                                            className="btn"
                                                            style={{height: "160px", width: "160px"}}></a>
                                                     </span>
@@ -358,11 +360,11 @@ export default class UserListContainer extends Component {
                                         <div className="thumbnail"
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
                                             <div className="thumb">
-                                                <img src={imgBaseUrl+detailData.idcardimg} alt=""
+                                                <img src={hasHttp?detailData.idcardimg:(imgBaseUrl+detailData.idcardimg)} alt=""
                                                      style={{height: "160px", width: "160px"}}/>
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                                     <span style={{top: 0, marginTop: 0}}>
-                                                        <a href={imgBaseUrl+detailData.idcardimg} data-popup="lightbox"
+                                                        <a href={hasHttp?detailData.idcardimg:(imgBaseUrl+detailData.idcardimg)} data-popup="lightbox"
                                                            className="btn"
                                                            style={{height: "160px", width: "160px"}}></a>
                                                     </span>

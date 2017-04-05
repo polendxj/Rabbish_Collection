@@ -142,12 +142,14 @@ class ComplaintListComponent extends Component {
 
     render() {
         const {data, fetching}=this.props;
+        console.log("complaint",data);
         let tb = [];
         if (data) {
             if(data.status){
                 if (data.data.content.length > 0) {
                     data.data.content.forEach(function (val, key) {
                         var dealFlag = (val.suggestion == "" || val.suggestion==null);
+                        var hasHttp = val.photo.indexOf("http")>-1;
                         tb.push(
                             <div key={key} className="panel panel-white text-left">
                                 <div className="panel-heading" style={{padding: "15px 20px 10px 20px"}}>
@@ -176,10 +178,10 @@ class ComplaintListComponent extends Component {
                                                     <div >
                                                         <div className="thumbnail" style={{marginBottom:0,width:"85px"}}>
                                                             <div className="thumb">
-                                                                <img src={imgBaseUrl+val.photo} alt="" style={{height:"80px",width:"80px"}}/>
+                                                                <img src={hasHttp?val.photo:imgBaseUrl+val.photo} alt="" style={{height:"80px",width:"80px"}}/>
                                                                 <div className="caption-overflow">
                                                                 <span style={{top:0,marginTop:0}}>
-                                                                    <a href={imgBaseUrl+val.photo} data-popup="lightbox"
+                                                                    <a href={hasHttp?val.photo:imgBaseUrl+val.photo} data-popup="lightbox"
                                                                        className="btn" style={{height:"80px",width:"80px"}}></a>
                                                                 </span>
                                                                 </div>
