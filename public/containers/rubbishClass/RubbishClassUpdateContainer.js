@@ -121,14 +121,26 @@ class UpdateRubbishClassComponent extends Component {
                                 </div>
                             </div>
                             <div className="form-group">
+                                <label className="control-label col-lg-2" style={{textAlign: 'center'}}>{"奖励积分"}</label>
+                                <div className="col-lg-9">
+                                    <div className="input-group">
+                                        <input name="rewardPoints" type="text" className="form-control"
+                                               defaultValue={data.data.rewardPoints}
+                                               autoComplete="off"/>
+                                        <span className="input-group-addon">每次/每千克</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
                                 <label className="col-lg-2 control-label"
                                        style={{
                                            textAlign: 'center'
-                                       }}>{"奖励积分"}</label>
+                                       }}>{"计分方式"}</label>
                                 <div className="col-lg-9">
-                                    <input name="rewardPoints" type="text" className="form-control"
-                                           defaultValue={data.data.rewardPoints}
-                                           autoComplete="off"/>
+                                    <select name="pointsType" defaultValue={data.data.pointsType} className="form-control">
+                                        <option value={1}>按重量计分</option>
+                                        <option value={2}>按次数计分</option>
+                                    </select>
                                 </div>
                             </div>
                             <div className="form-group">

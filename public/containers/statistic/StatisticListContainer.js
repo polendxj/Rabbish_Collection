@@ -253,17 +253,77 @@ export default class StatisticListContainer extends Component {
         this.orgaEveryAndTotalData=orgaData;
         this._startRefresh();
     }
-    _changePage(page) {
+    _classifyChangePage(page) {
         this.page = page;
         this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
     }
 
-    _prePage(page) {
+    _classifyPrePage(page) {
         this.page = this.page - 1;
         this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
     }
 
-    _nextPage(page) {
+    _classifyNextPage(page) {
+        this.page = this.page + 1;
+        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+    }
+
+    _cityChangePage(page) {
+        this.page = page;
+        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+    }
+
+    _cityPrePage(page) {
+        this.page = this.page - 1;
+        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+    }
+
+    _cityNextPage(page) {
+        this.page = this.page + 1;
+        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+    }
+
+    _organizationChangePage(page) {
+        this.page = page;
+        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+    }
+
+    _organizationPrePage(page) {
+        this.page = this.page - 1;
+        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+    }
+
+    _organizationNextPage(page) {
+        this.page = this.page + 1;
+        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+    }
+
+    _settlementChangePage(page) {
+        this.page = page;
+        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+    }
+
+    _settlementPrePage(page) {
+        this.page = this.page - 1;
+        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+    }
+
+    _settlementNextPage(page) {
+        this.page = this.page + 1;
+        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+    }
+
+    _totalChangePage(page) {
+        this.page = page;
+        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+    }
+
+    _totalPrePage(page) {
+        this.page = this.page - 1;
+        this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
+    }
+
+    _totalNextPage(page) {
         this.page = this.page + 1;
         this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
     }
@@ -855,8 +915,8 @@ export default class StatisticListContainer extends Component {
                                     <fieldset className="content-group">
                                         <div style={{marginTop: '-20px'}}>
                                             <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
-                                                        _changePage={this._changePage} _prePage={this._prePage}
-                                                        _nextPage={this._nextPage}/>
+                                                        _changePage={this._classifyChangePage.bind(this)} _prePage={this._classifyPrePage.bind(this)}
+                                                        _nextPage={this._classifyNextPage.bind(this)}/>
                                         </div>
                                         <div className="table-responsive"
                                              style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
@@ -935,8 +995,8 @@ export default class StatisticListContainer extends Component {
                                                 </table>
                                             </div>
                                             <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
-                                                        _changePage={this._changePage} _prePage={this._prePage}
-                                                        _nextPage={this._nextPage}/>
+                                                        _changePage={this._cityChangePage.bind(this)} _prePage={this._cityPrePage.bind(this)}
+                                                        _nextPage={this._cityNextPage.bind(this)}/>
                                         </div>
                                         <div className="table-responsive"
                                              style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
@@ -1021,8 +1081,8 @@ export default class StatisticListContainer extends Component {
                                                 </table>
                                             </div>
                                             <Pagenation show={this.searchOfOrganizationid} counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
-                                                        _changePage={this._changePage} _prePage={this._prePage}
-                                                        _nextPage={this._nextPage}/>
+                                                        _changePage={this._organizationChangePage.bind(this)} _prePage={this._organizationPrePage.bind(this)}
+                                                        _nextPage={this._organizationNextPage.bind(this)}/>
                                         </div>
                                         <div className="table-responsive"
                                              style={{display:this.searchOfOrganizationid?"block":"none",height: tableHeight + 'px', overflowY: 'scroll'}}>
@@ -1084,8 +1144,8 @@ export default class StatisticListContainer extends Component {
                                     <fieldset className="content-group">
                                         <div style={{marginTop: '-20px'}}>
                                             <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
-                                                        _changePage={this._changePage} _prePage={this._prePage}
-                                                        _nextPage={this._nextPage}/>
+                                                        _changePage={this._settlementChangePage.bind(this)} _prePage={this._settlementPrePage.bind(this)}
+                                                        _nextPage={this._settlementNextPage.bind(this)}/>
                                         </div>
                                         <div className="table-responsive"
                                              style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
@@ -1140,8 +1200,8 @@ export default class StatisticListContainer extends Component {
                                     <fieldset className="content-group">
                                         <div style={{marginTop: '-20px'}}>
                                             <Pagenation counts={data.nTotCnt ? data.nTotCnt : 6} page={this.page}
-                                                        _changePage={this._changePage} _prePage={this._prePage}
-                                                        _nextPage={this._nextPage}/>
+                                                        _changePage={this._totalChangePage.bind(this)} _prePage={this._totalPrePage.bind(this)}
+                                                        _nextPage={this._totalNextPage.bind(this)}/>
                                         </div>
                                         <div className="table-responsive"
                                              style={{height: tableHeight + 'px', overflowY: 'scroll'}}>

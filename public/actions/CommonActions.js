@@ -43,6 +43,7 @@ export function deleteObject(obj, startRow, searchColumns, searchValues, sortCol
             })
             .then(response=>response.json())
             .then(function (json) {
+                console.log("delete",json);
                 if (json.status) {
                     if (startDispatch) {
                         dispatch(startFetch(startDispatch))

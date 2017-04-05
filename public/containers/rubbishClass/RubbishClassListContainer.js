@@ -7,7 +7,7 @@ import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
-import {Loading, NoData, ConfirmModal,ErrorModal,roleApplicationUse,timeStamp2Time} from '../../components/Tool/Tool';
+import {Loading, NoData, ConfirmModal,ErrorModal,pointsType,timeStamp2Time} from '../../components/Tool/Tool';
 import {CLASSCONF_LIST_START, CLASSCONF_LIST_END} from '../../constants/index.js'
 import {getListByMutilpCondition, deleteObject} from '../../actions/CommonActions';
 
@@ -116,6 +116,7 @@ class RubbishClassListComponent extends Component{
                         <td className="text-center">{key+1}</td>
                         <td className="text-center">{val.name}</td>
                         <td className="text-center">{val.rewardPoints}</td>
+                        <td className="text-center">{pointsType(val.pointsType)}</td>
                         <td className="text-left">{val.description}</td>
                         <td className="text-center">{timeStamp2Time(val.updateTime)}</td>
                         <td className="text-center">
@@ -166,7 +167,8 @@ class RubbishClassListComponent extends Component{
                         <th className="text-center" style={{width: "20px"}}></th>
                         <th className="col-md-2 text-bold text-center">{"分类名称"}</th>
                         <th className="col-md-2 text-bold text-center">{"奖励积分"}</th>
-                        <th className="col-md-6 text-bold text-left">{"分类描述"}</th>
+                        <th className="col-md-2 text-bold text-center">{"计分方式"}</th>
+                        <th className="col-md-4 text-bold text-left">{"分类描述"}</th>
                         <th className="col-md-2 text-bold text-center">{"更新时间"}</th>
                         <th className="text-center" style={{width: "20px"}}><i
                             className="icon-arrow-down12"></i></th>
