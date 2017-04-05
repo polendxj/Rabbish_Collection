@@ -57,15 +57,12 @@ export default class StoreListContainer extends Component {
         this.props.dispatch(getListByMutilpCondition(params, CITY_LIST_START, CITY_LIST_END, city_list));
     }
     componentDidUpdate(){
-        console.log("this.detailData",this.detailData);
         if(this.detailData){
             $("#settlementPoints").blur(function () {
                 var amount = parseInt($("#settlementPoints").val());
-                var max = this.detailData.points - this.detailData.points%10;
+                var max = this.detailData.points;
                 if(amount > max){
                     $("#settlementPoints").val(max);
-                }else{
-                    $("#settlementPoints").val(amount-amount%10);
                 }
             }.bind(this));
         }
@@ -184,7 +181,6 @@ export default class StoreListContainer extends Component {
 
     render() {
         const {fetching, data,cityList} =this.props;
-        console.log("data",data);
         var verifiedData = "";
         var unauthorizedData = "";
         var unverifiedData = "";
@@ -229,7 +225,8 @@ export default class StoreListContainer extends Component {
         var detailStoreInfo = "";
         if(this.detailData==""){
             detailStoreInfo = <Loading />;
-        }else{
+        }else if(this.detailData.points){
+            $("#settlementPoints").val(this.detailData.points-this.detailData.points%10);
             detailStoreInfo =
                 <div>
                     <div className="form-horizontal">
@@ -410,7 +407,7 @@ export default class StoreListContainer extends Component {
                                style={{textAlign: 'center'}}>{"结算积分"}</label>
                         <div className="col-lg-9">
                             <input id="settlementPoints" type="number" className="form-control" placeholder="输入结算积分"
-                                   autoComplete="off"/>
+                                    defaultValue={this.detailData.points-this.detailData.points%10}/>
                         </div>
                     </div>
                     <div className="form-group">
