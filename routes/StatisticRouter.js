@@ -60,8 +60,13 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
             response['cityData'] = cityData.data;
             response['organizationData'] =[];
             RequestApi.Request(baseURL + '/rsapp/organization' + "?cityid=" + jsonData.cityid, 'GET', "", req, resp, function (organizations) {
-                console.log("organizations",organizations.data.content.length);
+                console.log("organizations",organizations);
                 if(organizations.status){
+                    if (organizations.data&&organizations.data.totalElements) {
+                        response['totalElements'] = organizations.data.totalElements;
+                    }else{
+                        response['totalElements'] = 0;
+                    }
                     if (organizations.data&&organizations.data.content.length > 0) {
                         var count = 0;
                         organizations.data.content.forEach(function (mk, k) {
