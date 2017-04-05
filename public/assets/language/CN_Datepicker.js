@@ -2,6 +2,8 @@
  * Created by Captain on 2017/3/12.
  */
 dateLocale = {
+    format: 'YYYY/MM/DD',
+    separator: ' - ',
     applyLabel: '确定',
     cancelLabel: '取消',
     startLabel: '起始时间',

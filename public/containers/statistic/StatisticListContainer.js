@@ -114,12 +114,12 @@ export default class StatisticListContainer extends Component {
         });
         $('.daterange-two').daterangepicker({
             maxDate: moment(), //最大时间
-            format: "yyyy-mm-dd",
+            format: "YYYY-MM-DD",
             opens: "left",
             applyClass: 'bg-slate-600',
             cancelClass: 'btn-default',
             ranges: rangesLocale,
-            startDate: '01/01/2016',
+            startDate: '2016/01/01',
             endDate: moment(),
             locale: dateLocale
         });

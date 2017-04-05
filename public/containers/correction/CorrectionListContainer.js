@@ -69,7 +69,7 @@ export default class CorrectionListContainer extends Component {
             opens: "left",
             applyClass: 'bg-slate-600',
             cancelClass: 'btn-default',
-            startDate: '01/01/2016',
+            startDate: '2016/01/01',
             endDate: moment(),
             ranges: rangesLocale,
             locale: dateLocale
