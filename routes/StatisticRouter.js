@@ -60,6 +60,7 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
             response['cityData'] = cityData.data;
             response['organizationData'] =[];
             RequestApi.Request(baseURL + '/rsapp/organization' + "?cityid=" + jsonData.cityid, 'GET', "", req, resp, function (organizations) {
+                console.log("organizations",organizations.data.content.length);
                 if(organizations.status){
                     if (organizations.data&&organizations.data.content.length > 0) {
                         var count = 0;
@@ -68,6 +69,7 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
                                 var organizationTotalData = {organizationName:m.name,count:0,weight:0};
                                 jsonData.organizationid = m.id;
                                 RequestApi.Request(baseURL + '/rsapp/statistic/classifying/organization' + "?" + querystring.stringify(jsonData), 'GET', "", req, resp, function (organizationData) {
+                                    console.log(organizationData);
                                     var organizationAllData = {
                                         organizationTotal:{},
                                         organizationEveryData:[]
@@ -80,6 +82,10 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
                                                 organizationTotalData.weight = organizationTotalData.weight+val.weight;
                                             });
                                             organizationTotalData.rangeDate = jsonData.startday.replace(/-/g, ".") + " - " + jsonData.endday.replace(/-/g, ".");
+                                            organizationAllData.organizationTotal = organizationTotalData;
+                                            organizationAllData.organizationEveryData = organizationData.data.content;
+                                            response.organizationData[kIndex] = organizationAllData;
+                                        }else{
                                             organizationAllData.organizationTotal = organizationTotalData;
                                             organizationAllData.organizationEveryData = organizationData.data.content;
                                             response.organizationData[kIndex] = organizationAllData;

@@ -17,7 +17,7 @@ router.post('/rsapp/store', function (req, resp) {
                 var count = 0;
                 stores.data.content.forEach(function (m, k) {
                     (function (m) {
-                        if(m.cityid){
+                        if(m.cityid&&m.countyid){
                             RequestApi.Request(baseURL + '/rsapp/city/' + m.cityid, 'GET', "", req, resp, function (city) {
                                 m["city"]=city.data.name;
                                 RequestApi.Request(baseURL + '/rsapp/county/' + m.countyid, 'GET', "", req, resp, function (county) {
