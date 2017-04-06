@@ -96,7 +96,8 @@ class RegisterManualRecordComponent extends Component {
             timePicker: true,
             opens: "left",
             applyClass: 'bg-slate-600',
-            cancelClass: 'btn-default'
+            cancelClass: 'btn-default',
+            locale: dateLocale
         });
         $("#registerManualForm").validate({
             ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
@@ -112,6 +113,11 @@ class RegisterManualRecordComponent extends Component {
             validClass: "validation-valid-label",
             success: function (label) {
                 label.addClass("validation-valid-label").text("Success.")
+            },
+            rules: {
+                weight: {
+                    number:true
+                }
             }
         });
 
@@ -156,7 +162,7 @@ class RegisterManualRecordComponent extends Component {
                                     <label className="control-label col-lg-2" style={{textAlign: 'center'}}>{"重量"}</label>
                                     <div className="col-lg-9">
                                         <div className="input-group">
-                                            <input id="weight" type="text" className="form-control"
+                                            <input id="weight" name="weight" type="text" className="form-control"
                                                    placeholder={"重量"} required="required"
                                                    autoComplete="off"/>
                                                 <span className="input-group-addon">吨</span>

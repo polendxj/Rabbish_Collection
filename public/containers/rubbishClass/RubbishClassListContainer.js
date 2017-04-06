@@ -129,9 +129,9 @@ class RubbishClassListComponent extends Component{
                                         <li style={{display:'block'}} onClick={this._detail.bind(this, '/DataManage/RubbishClass/Update/:' + val.id)}>
                                             <a href="javascript:void(0)"><i className="icon-pencil5"></i>
                                                 {"修改"}</a></li>
-                                        <li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.name)}><a
-                                            href="javascript:void(0)"><i className="icon-trash"></i>
-                                            {"删除"}</a></li>
+                                        {/*<li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.name)}><a*/}
+                                            {/*href="javascript:void(0)"><i className="icon-trash"></i>*/}
+                                            {/*{"删除"}</a></li>*/}
                                     </ul>
                                 </li>
                             </ul>}

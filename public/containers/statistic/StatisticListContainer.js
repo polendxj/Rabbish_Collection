@@ -58,7 +58,7 @@ export default class StatisticListContainer extends Component {
         this.organizationList = "";
         this.cityEveryData = "";
         this.orgaEveryAndTotalData = "";
-        this.searchColumn = "CLASSIFY";
+        this.searchColumn = "CITY";
         this.currentCityId = 1;
         this.cityOfcurrentCityId = 1;
         this.organizationOfcurrentCityId = 1;
@@ -134,19 +134,7 @@ export default class StatisticListContainer extends Component {
     }
 
     _search(type) {
-        if (type == "CLASSIFY") {
-            this.currentClassifyOrganizationid = $("#ofClassifySelect").val();
-            var classifyParams = {
-                page: 0,
-                size: page_size,
-                cityid: $("#citySelect").val(),
-                cityName: $("#citySelect").find("option:selected").text(),
-                organizationName: this.currentClassifyOrganizationid ? $("#ofClassifySelect").find("option:selected").text() : "",
-                organizationid: $("#ofClassifySelect").val(),
-                monthday: timeStamp2Time(new Date($('.daterange-single').val()))
-            };
-            this.props.dispatch(getListByMutilpCondition(classifyParams, STATISTICBYCLASSIFY_LIST_START, STATISTICBYCLASSIFY_LIST_END, statisticByClassify_list));
-        } else if (type == "CITY") {
+        if (type == "CITY") {
             var rangeTime = $("#daterange-two-2").val();
             var cityParams = {
                 page: 0,
@@ -238,16 +226,12 @@ export default class StatisticListContainer extends Component {
         this._startRefresh();
     }
 
-    _detail(list) {
-        console.log("list", list);
-        this.organizationList = list;
-        this._startRefresh();
-    }
-
-    _cityDetail(cityData) {
-        this.cityEveryData = cityData;
-        console.log("cityEveryData", this.cityEveryData);
-        this._startRefresh();
+    _cityDetail(val) {
+        var params = {
+            cityid: val.cityid,
+            monthday: timeStamp2Time(val.monthday)
+        };
+        this.props.dispatch(getListByMutilpCondition(params, STATISTICBYCLASSIFY_LIST_START, STATISTICBYCLASSIFY_LIST_END, statisticByClassify_list));
     }
 
     _orgaTotalDetail(organizationData) {
@@ -262,51 +246,6 @@ export default class StatisticListContainer extends Component {
     _orgaEveryDetail(orgaData) {
         this.orgaEveryAndTotalData = orgaData;
         this._startRefresh();
-    }
-
-    _classifyChangePage(page) {
-        this.classifyPage = page;
-        this.currentClassifyOrganizationid = $("#ofClassifySelect").val();
-        var classifyParams = {
-            page: this.classifyPage,
-            size: page_size,
-            cityid: $("#citySelect").val(),
-            cityName: $("#citySelect").find("option:selected").text(),
-            organizationName: this.currentClassifyOrganizationid ? $("#ofClassifySelect").find("option:selected").text() : "",
-            organizationid: $("#ofClassifySelect").val(),
-            monthday: timeStamp2Time(new Date($('.daterange-single').val()))
-        };
-        this.props.dispatch(getListByMutilpCondition(classifyParams, STATISTICBYCLASSIFY_LIST_START, STATISTICBYCLASSIFY_LIST_END, statisticByClassify_list));
-    }
-
-    _classifyPrePage(page) {
-        this.classifyPage = page - 1;
-        this.currentClassifyOrganizationid = $("#ofClassifySelect").val();
-        var classifyParams = {
-            page: this.classifyPage,
-            size: page_size,
-            cityid: $("#citySelect").val(),
-            cityName: $("#citySelect").find("option:selected").text(),
-            organizationName: this.currentClassifyOrganizationid ? $("#ofClassifySelect").find("option:selected").text() : "",
-            organizationid: $("#ofClassifySelect").val(),
-            monthday: timeStamp2Time(new Date($('.daterange-single').val()))
-        };
-        this.props.dispatch(getListByMutilpCondition(classifyParams, STATISTICBYCLASSIFY_LIST_START, STATISTICBYCLASSIFY_LIST_END, statisticByClassify_list));
-    }
-
-    _classifyNextPage(page) {
-        this.classifyPage = page + 1;
-        this.currentClassifyOrganizationid = $("#ofClassifySelect").val();
-        var classifyParams = {
-            page: this.classifyPage,
-            size: page_size,
-            cityid: $("#citySelect").val(),
-            cityName: $("#citySelect").find("option:selected").text(),
-            organizationName: this.currentClassifyOrganizationid ? $("#ofClassifySelect").find("option:selected").text() : "",
-            organizationid: $("#ofClassifySelect").val(),
-            monthday: timeStamp2Time(new Date($('.daterange-single').val()))
-        };
-        this.props.dispatch(getListByMutilpCondition(classifyParams, STATISTICBYCLASSIFY_LIST_START, STATISTICBYCLASSIFY_LIST_END, statisticByClassify_list));
     }
 
     _cityChangePage(page) {
@@ -324,7 +263,7 @@ export default class StatisticListContainer extends Component {
     }
 
     _cityPrePage(page) {
-        this.cityPage=page-1;
+        this.cityPage=this.cityPage-1;
         var rangeTime = $("#daterange-two-2").val();
         var cityParams = {
             page: this.cityPage,
@@ -338,7 +277,7 @@ export default class StatisticListContainer extends Component {
     }
 
     _cityNextPage(page) {
-        this.cityPage=page+1;
+        this.cityPage=this.cityPage+1;
         var rangeTime = $("#daterange-two-2").val();
         var cityParams = {
             page: this.cityPage,
@@ -370,7 +309,7 @@ export default class StatisticListContainer extends Component {
     }
 
     _organizationPrePage(page) {
-        this.orgPage = page-1;
+        this.orgPage = this.orgPage-1;
         this.searchOfOrganizationid = $("#ofOrganizationSelect").val();
         this.currentOrgaCity = $("#cityOfOrganizationSelect").find("option:selected").text();
         this.currentOrgaOrganization = $("#ofOrganizationSelect").find("option:selected").text();
@@ -389,7 +328,7 @@ export default class StatisticListContainer extends Component {
     }
 
     _organizationNextPage(page) {
-        this.orgPage = page+1;
+        this.orgPage = this.orgPage+1;
         this.searchOfOrganizationid = $("#ofOrganizationSelect").val();
         this.currentOrgaCity = $("#cityOfOrganizationSelect").find("option:selected").text();
         this.currentOrgaOrganization = $("#ofOrganizationSelect").find("option:selected").text();
@@ -445,54 +384,19 @@ export default class StatisticListContainer extends Component {
         console.log("settlementData", settlementData);
         var data = "";
         var showCity = "city";
-        var classifyDataMerge = [];
-        let classifyTb = [];
         let cityTb = [];
         let organizationTb = [];
         let daterangeTb = [];
         let settlementTb = [];
         var totalOrga = mergeOrgTotal(organizationData);
-        if (classifyData && classifyList) {
-            if (classifyData.status && classifyList.status) {
-                classifyDataMerge = mergeClassify(classifyList.data, classifyData.data);
-                if (classifyDataMerge.length > 0) {
-                    classifyDataMerge.forEach(function (val, key) {
-                        classifyTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
-                            <td className="text-center">{key + 1}</td>
-                            <td className="text-center">{val.className}</td>
-                            <td className="text-center">
-                                {this.currentClassifyOrganizationid ? $("#ofClassifySelect").find("option:selected").text() : $("#citySelect").find("option:selected").text()}
-                            </td>
-                            <td className="text-center">{moneyFormat(val.count)}</td>
-                            <td className="text-center">{moneyFormat(val.weight.toFixed(0))}</td>
-                        </tr>)
-                    }.bind(this));
-                } else {
-                    classifyTb.push(<tr key={'noData'}>
-                        <td colSpan="100" style={{textAlign: 'center'}}>
-                            <NoData />
-                        </td>
-                    </tr>)
-                }
-            } else {
-                classifyTb.push(ErrorModal(Current_Lang.status.minor, "获取数据错误"));
-            }
-        } else {
-            classifyTb.push(<tr key={'loading'}>
-                <td colSpan="100" style={{textAlign: 'center'}}>
-                    <Loading />
-                </td>
-            </tr>)
-        }
-        if (cityData) {
-            if (cityData.organizationData && cityData.organizationData.length > 0) {
-                cityData.organizationData.forEach(function (val, key) {
+        if (cityData.cityData) {
+            if (cityData.cityData.content.length > 0) {
+                cityData.cityData.content.forEach(function (val, key) {
                     cityTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
-                        <td className="text-center">{val.organizationTotal.organizationName}</td>
-                        <td className="text-center">{moneyFormat(val.organizationTotal.count)}</td>
-                        <td className="text-center">{moneyFormat(val.organizationTotal.weight.toFixed(0))}</td>
-                        <td className="text-center">{val.organizationTotal.rangeDate}</td>
+                        <td className="text-center">{timeStamp2Time(val.monthday)}</td>
+                        <td className="text-center">{moneyFormat(val.weight.toFixed(2))}</td>
+                        <td className="text-center">{moneyFormat(val.count)}</td>
                         <td className="text-center">
                             {<ul className="icons-list">
                                 <li className="dropdown">
@@ -502,8 +406,8 @@ export default class StatisticListContainer extends Component {
                                     <ul className="dropdown-menu dropdown-menu-right">
                                         <li>
                                             <a href="javascript:void(0)" data-toggle="modal"
-                                               data-target="#organizationDetailModal"
-                                               onClick={this._detail.bind(this, val.organizationEveryData)}><i
+                                               data-target="#cityDataDetailModal"
+                                               onClick={this._cityDetail.bind(this, val)}><i
                                                 className=" icon-office"></i>
                                                 {"详情"}</a>
                                         </li>
@@ -543,9 +447,9 @@ export default class StatisticListContainer extends Component {
                         organizationTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                             <td className="text-center">{key + 1}</td>
                             <td className="text-center">{val.organizationName}</td>
-                            <td className="text-center">{moneyFormat(val.count)}</td>
-                            <td className="text-center">{moneyFormat(val.weight.toFixed(0))}</td>
                             <td className="text-center">{timeStamp2Time(val.monthday)}</td>
+                            <td className="text-center">{moneyFormat(val.weight.toFixed(2))}</td>
+                            <td className="text-center">{moneyFormat(val.count)}</td>
                             <td className="text-center">
                                 {<ul className="icons-list">
                                     <li className="dropdown">
@@ -759,57 +663,16 @@ export default class StatisticListContainer extends Component {
             }
         }
         var showOrgaEvery = "获取中...";
-        var detailOrganizationTb = [];
-        if (this.organizationList == "") {
-            detailOrganizationTb.push(<tr key={'loading'}>
-                <td colSpan="100" style={{textAlign: 'center'}}>
-                    <Loading />
-                </td>
-            </tr>)
-        } else {
-            this.organizationList.forEach(function (val, key) {
-                detailOrganizationTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
-                    <td className="text-center">{key + 1}</td>
-                    <td className="text-center">{val.organizationName}</td>
-                    <td className="text-center">{moneyFormat(val.count)}</td>
-                    <td className="text-center">{moneyFormat(val.weight.toFixed(0))}</td>
-                    <td className="text-center">{timeStamp2Time(val.monthday)}</td>
-                </tr>)
-            }.bind(this));
-        }
-        var detailOrganizationInfo = <div>
-            <table className="table table-bordered table-striped text-center">
-                <thead>
-                <tr style={{fontWeight: 'bold'}}>
-                    <th className="text-center" style={{width: "20px"}}></th>
-                    <th className="col-md-3 text-center text-bold">{"单位/小区"}</th>
-                    <th className="col-md-3 text-center text-bold">{"投放次数"}</th>
-                    <th className="col-md-3 text-center text-bold">{"投放重量"}</th>
-                    <th className="col-md-3 text-center text-bold">{"日期"}</th>
-                </tr>
-                </thead>
-                <tbody>
-                {detailOrganizationTb}
-                </tbody>
-            </table>
-        </div>
 
         var detailCityEveryTb = [];
-        if (this.cityEveryData == "" || typeof this.cityEveryData == "undefined") {
-            detailCityEveryTb.push(<tr key={'loading'}>
-                <td colSpan="100" style={{textAlign: 'center'}}>
-                    <Loading />
-                </td>
-            </tr>)
-        } else {
-            if (this.cityEveryData.content.length > 0) {
-                this.cityEveryData.content.forEach(function (val, key) {
+        if(classifyData.status){
+            if (classifyData.data.length > 0) {
+                classifyData.data.forEach(function (val, key) {
                     detailCityEveryTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
-                        <td className="text-center">{val.cityName}</td>
+                        <td className="text-center">{val.className}</td>
+                        <td className="text-center">{moneyFormat(val.weight.toFixed(2))}</td>
                         <td className="text-center">{moneyFormat(val.count)}</td>
-                        <td className="text-center">{moneyFormat(val.weight.toFixed(0))}</td>
-                        <td className="text-center">{timeStamp2Time(val.monthday)}</td>
                     </tr>)
                 }.bind(this));
             } else {
@@ -819,16 +682,21 @@ export default class StatisticListContainer extends Component {
                     </td>
                 </tr>)
             }
+        }else{
+            detailCityEveryTb.push(<tr key={'loading'}>
+                <td colSpan="100" style={{textAlign: 'center'}}>
+                    <Loading />
+                </td>
+            </tr>)
         }
         var detailCityEveryInfo = <div>
             <table className="table table-bordered table-striped text-center">
                 <thead>
                 <tr style={{fontWeight: 'bold'}}>
                     <th className="text-center" style={{width: "20px"}}></th>
-                    <th className="col-md-3 text-center text-bold">{"城市"}</th>
-                    <th className="col-md-3 text-center text-bold">{"投放次数"}</th>
-                    <th className="col-md-3 text-center text-bold">{"投放重量"}</th>
-                    <th className="col-md-3 text-center text-bold">{"日期"}</th>
+                    <th className="col-md-4 text-center text-bold">{"垃圾分类"}</th>
+                    <th className="col-md-4 text-center text-bold">{"重量（千克）"}</th>
+                    <th className="col-md-4 text-center text-bold">{"次数"}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -848,12 +716,14 @@ export default class StatisticListContainer extends Component {
             console.log("orgaEveryAndTotalData.classifyData", this.orgaEveryAndTotalData.classifyData);
             if (this.orgaEveryAndTotalData.classifyData.length > 0) {
                 this.orgaEveryAndTotalData.classifyData.forEach(function (val, key) {
-                    detailorgaEveryTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
-                        <td className="text-center">{key + 1}</td>
-                        <td className="text-center">{val.className}</td>
-                        <td className="text-center">{moneyFormat(val.count)}</td>
-                        <td className="text-center">{moneyFormat(val.weight.toFixed(0))}</td>
-                    </tr>)
+                    if(val.count>0 || val.weight>0){
+                        detailorgaEveryTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
+                            <td className="text-center">{key + 1}</td>
+                            <td className="text-center">{val.className}</td>
+                            <td className="text-center">{moneyFormat(val.weight.toFixed(2))}</td>
+                            <td className="text-center">{moneyFormat(val.count)}</td>
+                        </tr>)
+                    }
                 }.bind(this));
             } else {
                 detailorgaEveryTb.push(<tr key={'noData'}>
@@ -869,8 +739,8 @@ export default class StatisticListContainer extends Component {
                 <tr style={{fontWeight: 'bold'}}>
                     <th className="text-center" style={{width: "20px"}}></th>
                     <th className="col-md-4 text-center text-bold">{"分类名称"}</th>
-                    <th className="col-md-4 text-center text-bold">{"投放次数"}</th>
-                    <th className="col-md-4 text-center text-bold">{"投放重量"}</th>
+                    <th className="col-md-4 text-center text-bold">{"重量（千克）"}</th>
+                    <th className="col-md-4 text-center text-bold">{"次数"}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -890,12 +760,14 @@ export default class StatisticListContainer extends Component {
             console.log("orgaEveryAndTotalData", this.orgaEveryAndTotalData.classifyData);
             if (this.orgaEveryAndTotalData.classifyData.length > 0) {
                 this.orgaEveryAndTotalData.classifyData.forEach(function (val, key) {
-                    detailorgaTotalTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
-                        <td className="text-center">{key + 1}</td>
-                        <td className="text-center">{val.className}</td>
-                        <td className="text-center">{moneyFormat(val.count)}</td>
-                        <td className="text-center">{moneyFormat(val.weight.toFixed(0))}</td>
-                    </tr>)
+                    if(val.count>0 || val.weight>0){
+                        detailorgaTotalTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
+                            <td className="text-center">{key + 1}</td>
+                            <td className="text-center">{val.className}</td>
+                            <td className="text-center">{moneyFormat(val.weight.toFixed(2))}</td>
+                            <td className="text-center">{moneyFormat(val.count)}</td>
+                        </tr>)
+                    }
                 }.bind(this));
             } else {
                 detailorgaTotalTb.push(<tr key={'noData'}>
@@ -911,8 +783,8 @@ export default class StatisticListContainer extends Component {
                 <tr style={{fontWeight: 'bold'}}>
                     <th className="text-center" style={{width: "20px"}}></th>
                     <th className="col-md-4 text-center text-bold">{"分类名称"}</th>
-                    <th className="col-md-4 text-center text-bold">{"投放次数"}</th>
-                    <th className="col-md-4 text-center text-bold">{"投放重量"}</th>
+                    <th className="col-md-4 text-center text-bold">{"重量（千克）"}</th>
+                    <th className="col-md-4 text-center text-bold">{"次数"}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -922,6 +794,7 @@ export default class StatisticListContainer extends Component {
         </div>;
 
         var tableHeight = ($(window).height() - 410);
+        var style = {width:"175px"};
         return (
             <div>
                 <div className="content" style={{marginTop: '5px'}}>
@@ -984,8 +857,6 @@ export default class StatisticListContainer extends Component {
                     <div className="row" style={{padding: "20px"}}>
                         <div className="tabbable">
                             <ul className="nav nav-tabs nav-justified nav-tabs-highlight">
-                                <li className=""><a href="#basic-justified-tab1" data-toggle="tab"
-                                                    aria-expanded="true">垃圾分类统计</a></li>
                                 <li className="active"><a href="#basic-justified-tab2" data-toggle="tab"
                                                           aria-expanded="false">城市垃圾统计</a></li>
                                 <li className=""><a href="#basic-justified-tab3" data-toggle="tab"
@@ -997,67 +868,6 @@ export default class StatisticListContainer extends Component {
                             </ul>
 
                             <div className="tab-content">
-                                <div className="tab-pane" id="basic-justified-tab1">
-                                    <fieldset className="content-group">
-                                        <legend className="text-bold">搜索区</legend>
-                                        <ul className="list-inline list-inline-condensed no-margin-bottom"
-                                            style={{textAlign: 'right', marginTop: '-59px'}}>
-                                            <li >
-                                                <select id="citySelect" className="form-control"
-                                                        value={this.currentCityId} onChange={this._changeCity}>
-                                                    {cityOptions}
-                                                </select>
-                                            </li>
-                                            <li >
-                                                <select id="ofClassifySelect" className="form-control">
-                                                    {organizationOptions}
-                                                </select>
-                                            </li>
-                                            <li >
-                                                <input type="text" className="form-control daterange-single"
-                                                       placeholder="选择日期"/>
-                                            </li>
-                                            <li>
-                                                <button onClick={this._search.bind(this, "CLASSIFY")} type="button"
-                                                        className="btn btn-primary btn-icon"><i
-                                                    className="icon-search4"></i></button>
-                                            </li>
-
-                                        </ul>
-                                    </fieldset>
-                                    <fieldset className="content-group">
-                                        <div style={{marginTop: '-20px'}}>
-                                            <Pagenation counts={classifyDataMerge ? classifyDataMerge.length : 0}
-                                                        page={this.page}
-                                                        _changePage={this._classifyChangePage.bind(this)}
-                                                        _prePage={this._classifyPrePage.bind(this)}
-                                                        _nextPage={this._classifyNextPage.bind(this)}
-                                                        inputNumberID="inputNumber1"
-                                                        perPageID="perPageID1"
-                                                        operation={false}
-                                            />
-                                        </div>
-                                        <div className="table-responsive"
-                                             style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
-                                            <table className="table table-bordered table-hover"
-                                                   style={{marginBottom: '85px'}}>
-                                                <thead>
-                                                <tr style={{fontWeight: 'bold'}}>
-                                                    <th className="text-center" style={{width: "20px"}}></th>
-                                                    <th className="col-md-3 text-bold text-center">{"垃圾分类名称"}</th>
-                                                    <th className="col-md-3 text-bold text-center">{$("#ofClassifySelect").val() ? "单位/小区" : "城市"}</th>
-                                                    <th className="col-md-3 text-bold text-center">{"投放次数"}</th>
-                                                    <th className="col-md-3 text-bold text-center">{"投放重量"}</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                {classifyTb}
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                    </fieldset>
-                                </div>
 
                                 <div className="tab-pane active" id="basic-justified-tab2">
                                     <fieldset className="content-group">
@@ -1074,7 +884,7 @@ export default class StatisticListContainer extends Component {
                                             <li >
                                                 <input id="daterange-two-2" type="text"
                                                        className="form-control daterange-two"
-                                                       placeholder="选择日期"/>
+                                                       placeholder="选择日期" style={style}/>
                                             </li>
                                             <li>
                                                 <button onClick={this._search.bind(this, "CITY")} type="button"
@@ -1093,10 +903,8 @@ export default class StatisticListContainer extends Component {
                                                     <tr>
                                                         <td className="col-md-12" style={{borderTop: "0"}}>
                                                             <div className="media-left media-middle">
-                                                                <a href="javascript:void(0)" data-toggle="modal"
-                                                                   data-target="#cityDataDetailModal"
-                                                                   className="btn border-purple-800 text-purple-800 btn-flat btn-rounded btn-xs btn-icon"
-                                                                   onClick={this._cityDetail.bind(this, cityData.cityData)}>
+                                                                <a
+                                                                   className="btn border-purple-800 text-purple-800 btn-flat btn-rounded btn-xs btn-icon">
                                                                     <i className=" icon-city"></i>
                                                                 </a>
                                                             </div>
@@ -1119,7 +927,7 @@ export default class StatisticListContainer extends Component {
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <Pagenation counts={cityData ? cityData.totalElements : 0} page={this.page}
+                                            <Pagenation counts={cityData.cityData ? cityData.cityData.totalElements : 0} page={this.cityPage}
                                                         _changePage={this._cityChangePage.bind(this)}
                                                         _prePage={this._cityPrePage.bind(this)}
                                                         _nextPage={this._cityNextPage.bind(this)}
@@ -1134,10 +942,9 @@ export default class StatisticListContainer extends Component {
                                                 <thead>
                                                 <tr style={{fontWeight: 'bold'}}>
                                                     <th className="text-center" style={{width: "20px"}}></th>
-                                                    <th className="col-md-3 text-bold text-center">{"单位/小区"}</th>
-                                                    <th className="col-md-3 text-bold text-center">{"投放次数"}</th>
-                                                    <th className="col-md-3 text-bold text-center">{"投放重量"}</th>
-                                                    <th className="col-md-3 text-bold text-center">{"时间段"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{"垃圾分类"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{"重量（千克）"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{"次数"}</th>
                                                     <th className="text-center" style={{width: "20px"}}><i
                                                         className="icon-arrow-down12"></i></th>
                                                 </tr>
@@ -1170,7 +977,7 @@ export default class StatisticListContainer extends Component {
                                             <li >
                                                 <input id="daterange-two-3" type="text"
                                                        className="form-control daterange-two"
-                                                       placeholder="选择日期"/>
+                                                       placeholder="选择日期" style={style}/>
                                             </li>
                                             <li>
                                                 <button onClick={this._search.bind(this, "ORGANIZATION")} type="button"
@@ -1213,8 +1020,7 @@ export default class StatisticListContainer extends Component {
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <Pagenation show={this.searchOfOrganizationid}
-                                                        counts={data?data.totalElements : 0} page={this.orgPage}
+                                            <Pagenation counts={organizationData?organizationData.data.totalElements : 0} page={this.orgPage}
                                                         _changePage={this._organizationChangePage.bind(this)}
                                                         _prePage={this._organizationPrePage.bind(this)}
                                                         _nextPage={this._organizationNextPage.bind(this)}
@@ -1224,7 +1030,6 @@ export default class StatisticListContainer extends Component {
                                         </div>
                                         <div className="table-responsive"
                                              style={{
-                                                 display: this.searchOfOrganizationid ? "block" : "none",
                                                  height: tableHeight + 'px',
                                                  overflowY: 'scroll'
                                              }}>
@@ -1234,9 +1039,9 @@ export default class StatisticListContainer extends Component {
                                                 <tr style={{fontWeight: 'bold'}}>
                                                     <th className="text-center" style={{width: "20px"}}></th>
                                                     <th className="col-md-3 text-bold text-center">{"小区/单位名称"}</th>
-                                                    <th className="col-md-3 text-bold text-center">{"投放次数"}</th>
-                                                    <th className="col-md-3 text-bold text-center">{"投放重量"}</th>
                                                     <th className="col-md-3 text-bold text-center">{"日期"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{"重量（千克）"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{"次数"}</th>
                                                     <th className="text-center" style={{width: "20px"}}><i
                                                         className="icon-arrow-down12"></i></th>
                                                 </tr>
@@ -1269,7 +1074,7 @@ export default class StatisticListContainer extends Component {
                                             <li >
                                                 <input id="daterange-two-4" type="text"
                                                        className="form-control daterange-two"
-                                                       placeholder="选择日期"/>
+                                                       placeholder="选择日期" style={style}/>
                                             </li>
                                             <li >
                                                 <input id="userid" type="text" className="form-control"
@@ -1333,7 +1138,7 @@ export default class StatisticListContainer extends Component {
                                             <li >
                                                 <input id="daterange-two-5" type="text"
                                                        className="form-control daterange-two"
-                                                       placeholder="选择日期"/>
+                                                       placeholder="选择日期" style={style}/>
                                             </li>
                                             <li>
                                                 <button onClick={this._search.bind(this, "DATERANGE")} type="button"
@@ -1373,14 +1178,10 @@ export default class StatisticListContainer extends Component {
 
                                     </fieldset>
                                 </div>
-                                <ListMiddleModal id="organizationDetailModal" content={detailOrganizationInfo}
-                                                 doAction={""}
-                                                 tip={"详情 (" + (showTotalOfCity == "ok" ? cityData.totalCityData.cityName : "获取中...") + (this.organizationList && this.organizationList.length > 0 ? "-" + this.organizationList[0].organizationName : "") + ")"}
-                                                 actionText="统计详情" hide="true" hideCancel="true"/>
                                 <ListMiddleModal id="cityDataDetailModal" content={detailCityEveryInfo}
                                                  doAction={""}
                                                  tip={"详情 (" + (showTotalOfCity == "ok" ? cityData.totalCityData.cityName : "获取中...") + ")"}
-                                                 actionText="单位/小区统计详情" hide="true" hideCancel="true"/>
+                                                 actionText="统计详情" hide="true" hideCancel="true"/>
                                 <ListMiddleModal id="orgaEveryDetailModal" content={detailorgaEveryInfo}
                                                  doAction={""}
                                                  tip={"详情 (" + (this.currentOrgaCity ? this.currentOrgaCity : "获取中...") + (this.currentOrgaOrganization ? "-" + this.currentOrgaOrganization : "") + ")"}

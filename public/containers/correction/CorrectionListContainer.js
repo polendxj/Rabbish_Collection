@@ -152,6 +152,7 @@ export default class CorrectionListContainer extends Component {
                 })
             }
         }
+        var style = {width:"175px"};
         return (
             <div>
                 <BreadCrumbs
@@ -171,7 +172,7 @@ export default class CorrectionListContainer extends Component {
                                 </select>
                             </li>
                             <li>
-                                <input type="text" className="form-control daterange-organization"/>
+                                <input type="text" className="form-control daterange-organization" style={style}/>
                             </li>
                             <li>
                                 <button onClick={this._search.bind(this)} type="button"

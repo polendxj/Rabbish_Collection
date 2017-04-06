@@ -9,38 +9,13 @@ var RequestApi = require('../utils/RequestApi')
 var router = express()
 
 router.post('/rsapp/statistic/classifying/class', function (req, resp) {
-    var jsonData = JSON.parse(req.body.data);
-    var cityName = jsonData.cityName;
-    var organizationName = jsonData.organizationName;
-    delete jsonData.cityName
-    delete jsonData.organizationName
-    var data = querystring.stringify(jsonData);
-    RequestApi.Request(baseURL + '/rsapp/statistic/classifying/class' + "?" + data, 'GET', "", req, resp,function (classifyData) {
-        if(classifyData.status){
-            console.log(cityName);
-            if(classifyData.data&&classifyData.data.length>0){
-                if(organizationName){
-                    classifyData.data.forEach(function (val,idx) {
-                        val.organizationName = organizationName;
-                    })
-                }else{
-                    classifyData.data.forEach(function (val,idx) {
-                        val.cityName = cityName;
-                    })
-                }
-                resp.send(classifyData);
-            }else{
-                resp.send(classifyData);
-            }
-        }else{
-            resp.send(classifyData);
-        }
-    });
+    var data = querystring.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/statistic/classifying/class' + "?" + data, 'GET', "", req, resp);
 });
 router.post('/rsapp/statistic/classifying/city', function (req, resp) {
     var jsonData = JSON.parse(req.body.data);
-    delete jsonData.cityName
-    delete jsonData.organizationName
+    delete jsonData.cityName;
+    delete jsonData.organizationName;
     var data = querystring.stringify(jsonData);
     var response = {};
     RequestApi.Request(baseURL + '/rsapp/statistic/classifying/city' + "?" + data, 'GET', "", req, resp, function (cityData) {
