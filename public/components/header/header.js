@@ -65,7 +65,7 @@ class TopMenus extends Component {
 
     _moveTopMenuBottomLine(idx, flag) {
         var width = $(".topmenu").eq(idx).width();
-        var top = $(".topmenu").eq(idx).offset().top + 41;
+        var top = $(".topmenu").eq(idx).offset().top + 42;
         var left = $(".topmenu").eq(idx).offset().left;
         if (flag) {
             $("#topMenuBottomLine").css({width: width, top: top, left: left}, 500);
@@ -150,7 +150,7 @@ class RightPanel extends Component {
     _moveTopMenuBottomLine(idx, flag) {
         if (!idx) idx = 0;
         var width = $(".topmenu").eq(idx).width();
-        var top = $(".topmenu").eq(idx).offset().top + 41;
+        var top = $(".topmenu").eq(idx).offset().top + 42;
         var left = $(".topmenu").eq(idx).offset().left;
         if (flag) {
             $("#topMenuBottomLine").css({width: width, top: top, left: left}, 500);
