@@ -579,7 +579,7 @@ export default class StatisticListContainer extends Component {
                 });
                 if (this.currentCityOfCounty == "") {
                     var idx = getInitialCityIdx(this.settlementOfcurrentCityId, cityOfCountyList.data);
-                    if (cityOfCountyList.data[idx].country) {
+                    if (cityOfCountyList.data[idx] && cityOfCountyList.data[idx].country) {
                         cityOfCountyList.data[idx].country.forEach(function (val, index) {
                             countyOptions.push(
                                 <option key={"country-" + index} value={val.id}>{val.name}</option>
@@ -610,7 +610,7 @@ export default class StatisticListContainer extends Component {
                 });
                 if (this.currentCity == "") {
                     var idx = getInitialCityIdx(this.currentCityId, cityList.data);
-                    if (cityList.data[idx].organization.content.length > 0) {
+                    if (cityList.data[idx] && cityList.data[idx].organization.content.length > 0) {
                         cityList.data[idx].organization.content.forEach(function (val, index) {
                             organizationOptions.push(
                                 <option key={"organization-" + index} value={val.id}>{val.name}</option>
