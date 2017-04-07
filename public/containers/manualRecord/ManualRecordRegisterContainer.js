@@ -165,7 +165,7 @@ class RegisterManualRecordComponent extends Component {
                                             <input id="weight" name="weight" type="text" className="form-control"
                                                    placeholder={"重量"} required="required"
                                                    autoComplete="off"/>
-                                                <span className="input-group-addon">吨</span>
+                                                <span className="input-group-addon">千克</span>
                                         </div>
                                     </div>
                                 </div>

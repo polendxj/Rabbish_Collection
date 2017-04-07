@@ -1,7 +1,7 @@
 ER="root"
 NODE_ENV="production"
-PORT="80"
-APP_DIR="/app/node_csm_frontend/CSMFrotend"
+PORT="81"
+APP_DIR="/Users/Rabbish_Collection"
 NODE_APP="app.js"
 KWARGS=""
 CONFIG_DIR="$APP_DIR"
@@ -10,7 +10,7 @@ PID_FILE="$PID_DIR/app.pid"
 LOG_DIR="$APP_DIR/log"
 LOG_FILE="$LOG_DIR/app.log"
 NODE_EXEC=$(which node)
-APP_NAME="CSM Frontend Service"
+APP_NAME="Rubbish Collection Service"
 
 ###############
 
