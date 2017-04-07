@@ -20,8 +20,15 @@ import {
     filterCountryById,
     getInitialCityIdx
 } from '../../components/Tool/Tool';
-import {GENERALUSER_LIST_START, GENERALUSER_LIST_END,GENNERALUSER_DETAIL_START,GENNERALUSER_DETAIL_END, CITY_LIST_START, CITY_LIST_END} from '../../constants/index.js'
-import {getListByMutilpCondition, deleteObject, saveObject,getAuthcode,getDetail} from '../../actions/CommonActions';
+import {
+    GENERALUSER_LIST_START,
+    GENERALUSER_LIST_END,
+    GENNERALUSER_DETAIL_START,
+    GENNERALUSER_DETAIL_END,
+    CITY_LIST_START,
+    CITY_LIST_END
+} from '../../constants/index.js'
+import {getListByMutilpCondition, deleteObject, saveObject, getAuthcode, getDetail} from '../../actions/CommonActions';
 var sha1 = require('js-sha1');
 
 export default class UserListContainer extends Component {
@@ -52,9 +59,9 @@ export default class UserListContainer extends Component {
         this._lockOrUnlockUser = this._lockOrUnlockUser.bind(this);
         this._sendMessage = this._sendMessage.bind(this);
         this.setRemainTime = this.setRemainTime.bind(this);
-        this._changePage=this._changePage.bind(this);
-        this._prePage=this._prePage.bind(this);
-        this._nextPage=this._nextPage.bind(this);
+        this._changePage = this._changePage.bind(this);
+        this._prePage = this._prePage.bind(this);
+        this._nextPage = this._nextPage.bind(this);
     }
 
     componentDidMount() {
@@ -64,17 +71,18 @@ export default class UserListContainer extends Component {
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
         });
-        if(sessionStorage['messageTime']!=""){
-            var duringTime = new Date().getTime()-sessionStorage['messageTime'];
-            if(duringTime < 30*1000){
-                sessionStorage['count'] = Math.round((30*1000 - duringTime)/1000);
+        if (sessionStorage['messageTime'] != "") {
+            var duringTime = new Date().getTime() - sessionStorage['messageTime'];
+            if (duringTime < 30 * 1000) {
+                sessionStorage['count'] = Math.round((30 * 1000 - duringTime) / 1000);
                 $("#btnSendCode").attr("disabled", "true");
                 $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
                 this.interValObj = setInterval(this.setRemainTime, 1000);
             }
         }
     }
-    componentWillUnmount(){
+
+    componentWillUnmount() {
         clearInterval(this.interValObj);//停止计时器
         sessionStorage['messageTime'] = "";
         $("#btnSendCode").removeAttr("disabled");//启用按钮
@@ -97,27 +105,28 @@ export default class UserListContainer extends Component {
 
     _changeCountry() {
         var countyid = $("#countrySelect").val();
-        if(this.currentCity==""){
+        if (this.currentCity == "") {
             this.currentCity = filterCityById(this.props.cityList.data, this.currentCityId);
         }
         this.currentCountry = filterCountryById(this.currentCity, countyid);
         this._startRefresh();
     }
 
-    _detail(val,type) {
-        if(type=="detail"){
-            this.props.dispatch(getDetail(val.userid,GENNERALUSER_DETAIL_START, GENNERALUSER_DETAIL_END,generalUser_detail));
-        }else{
+    _detail(val, type) {
+        if (type == "detail") {
+            this.props.dispatch(getDetail(val.userid, GENNERALUSER_DETAIL_START, GENNERALUSER_DETAIL_END, generalUser_detail));
+        } else {
             this.detailData = val;
             this._startRefresh();
         }
     }
-    _showGetAuthcode(val){
+
+    _showGetAuthcode(val) {
         this.detailData = val;
-        if(sessionStorage['messageTime']!=""){
-            var duringTime = new Date().getTime()-sessionStorage['messageTime'];
-            if(duringTime < 30*1000){
-                sessionStorage['count'] = Math.round((30*1000 - duringTime)/1000);
+        if (sessionStorage['messageTime'] != "") {
+            var duringTime = new Date().getTime() - sessionStorage['messageTime'];
+            if (duringTime < 30 * 1000) {
+                sessionStorage['count'] = Math.round((30 * 1000 - duringTime) / 1000);
             }
         }
         this._startRefresh();
@@ -167,6 +176,7 @@ export default class UserListContainer extends Component {
         };
         this.props.dispatch(getListByMutilpCondition(params, GENERALUSER_LIST_START, GENERALUSER_LIST_END, generalUser_list));
     }
+
     _sendMessage() {
         var that = this;
         var phone = sessionStorage['phone'];
@@ -182,13 +192,14 @@ export default class UserListContainer extends Component {
         };
         // this.props.dispatch(getAuthcode(params, "", "", get_authcode));
     }
+
     setRemainTime() {
         var that = this;
         var curCount = sessionStorage['count'];
-        if(!$("#getAuthcodeModal").hasClass("in")){
+        if (!$("#getAuthcodeModal").hasClass("in")) {
             clearInterval(that.interValObj);//停止计时器
             $("#btnSendCode").text("获取验证码");
-        }else{
+        } else {
             if (curCount == 0) {
                 clearInterval(that.interValObj);//停止计时器
                 $("#btnSendCode").removeAttr("disabled");//启用按钮
@@ -240,9 +251,9 @@ export default class UserListContainer extends Component {
     }
 
     render() {
-        const {fetching, data,detailUser, cityList} =this.props;
+        const {fetching, data, detailUser, cityList} =this.props;
         const detailData = detailUser.data;
-        console.log("detailData",detailData);
+        console.log("detailData", detailData);
         var cityOptions = [];
         var countryOptions = [];
         var organizationOptions = [];
@@ -321,14 +332,14 @@ export default class UserListContainer extends Component {
         var detailUserInfo = "";
         var bindQrcodeInfo = "";
         var getAuthcodeInfo = "";
-        if(detailUser== ""){
+        if (detailUser == "") {
             detailUserInfo = <Loading />;
-        }else{
-            var hasHttp = detailData.headimg.indexOf("http")>-1;
+        } else {
+            var hasHttp = detailData.headimg.indexOf("http") > -1;
             detailUserInfo =
                 <div>
                     <div className="form-horizontal">
-                        <fieldset className="content-group" >
+                        <fieldset className="content-group">
                             <legend className="text-bold">
                                 {"详细信息"}
                             </legend>
@@ -340,11 +351,14 @@ export default class UserListContainer extends Component {
                                         <div className="thumbnail"
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
                                             <div className="thumb">
-                                                <img src={hasHttp?detailData.headimg:imgBaseUrl+detailData.headimg} alt=""
-                                                     style={{height: "160px", width: "160px"}}/>
+                                                <img
+                                                    src={detailData.headimg ? (hasHttp ? detailData.headimg : imgBaseUrl + detailData.headimg) : "../assets/images/no_photo.gif"}
+                                                    alt=""
+                                                    style={{height: "160px", width: "160px"}}/>
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                                     <span style={{top: 0, marginTop: 0}}>
-                                                        <a href={hasHttp?detailData.headimg:imgBaseUrl+detailData.headimg} data-popup="lightbox"
+                                                        <a href={detailData.headimg ? (hasHttp ? detailData.headimg : imgBaseUrl + detailData.headimg) : "../assets/images/no_photo.gif"}
+                                                           data-popup="lightbox"
                                                            className="btn"
                                                            style={{height: "160px", width: "160px"}}></a>
                                                     </span>
@@ -360,11 +374,14 @@ export default class UserListContainer extends Component {
                                         <div className="thumbnail"
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
                                             <div className="thumb">
-                                                <img src={hasHttp?detailData.idcardimg:(imgBaseUrl+detailData.idcardimg)} alt=""
-                                                     style={{height: "160px", width: "160px"}}/>
+                                                <img
+                                                    src={detailData.idcardimg ? (hasHttp ? detailData.idcardimg : imgBaseUrl + detailData.idcardimg) : "../assets/images/no_photo.gif"}
+                                                    alt=""
+                                                    style={{height: "160px", width: "160px"}}/>
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                                     <span style={{top: 0, marginTop: 0}}>
-                                                        <a href={hasHttp?detailData.idcardimg:(imgBaseUrl+detailData.idcardimg)} data-popup="lightbox"
+                                                        <a href={detailData.idcardimg ? (hasHttp ? detailData.idcardimg : imgBaseUrl + detailData.idcardimg) : "../assets/images/no_photo.gif"}
+                                                           data-popup="lightbox"
                                                            className="btn"
                                                            style={{height: "160px", width: "160px"}}></a>
                                                     </span>
@@ -374,12 +391,12 @@ export default class UserListContainer extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="form-group" >
+                            <div className="form-group">
                                 <div className="col-lg-6">
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"真实姓名"}</label>
                                     <div className="col-lg-8">
-                                        <input disabled  type="text" value={detailData.realName} className="form-control"
+                                        <input disabled type="text" value={detailData.realName} className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -393,7 +410,7 @@ export default class UserListContainer extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="form-group" >
+                            <div className="form-group">
                                 <div className="col-lg-6">
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"别名"}</label>
@@ -412,7 +429,7 @@ export default class UserListContainer extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="form-group" >
+                            <div className="form-group">
                                 <div className="col-lg-6">
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"地址"}</label>
@@ -431,7 +448,7 @@ export default class UserListContainer extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="form-group" >
+                            <div className="form-group">
                                 <div className="col-lg-6">
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"是否实名认证"}</label>
@@ -446,19 +463,19 @@ export default class UserListContainer extends Component {
                                     </div>
                                 </div>
                                 {/*<div className="col-lg-6">*/}
-                                    {/*<label className="col-lg-4 control-label"*/}
-                                           {/*style={{textAlign: 'center'}}>{"用户状态"}</label>*/}
-                                    {/*<div className="col-lg-8">*/}
-                                        {/*<div className="text-muted text-size-small">*/}
-                                            {/*{detailData.status == 1 ?*/}
-                                                {/*<span className="label bg-success"*/}
-                                                      {/*style={{marginTop: "6px"}}>{"有效"}</span> :*/}
-                                                {/*<span className="label bg-danger"*/}
-                                                      {/*style={{marginTop: "6px"}}>{"冻结"}</span>}*/}
-                                        {/*</div>*/}
-                                    {/*</div>*/}
+                                {/*<label className="col-lg-4 control-label"*/}
+                                {/*style={{textAlign: 'center'}}>{"用户状态"}</label>*/}
+                                {/*<div className="col-lg-8">*/}
+                                {/*<div className="text-muted text-size-small">*/}
+                                {/*{detailData.status == 1 ?*/}
+                                {/*<span className="label bg-success"*/}
+                                {/*style={{marginTop: "6px"}}>{"有效"}</span> :*/}
+                                {/*<span className="label bg-danger"*/}
+                                {/*style={{marginTop: "6px"}}>{"冻结"}</span>}*/}
                                 {/*</div>*/}
-                                <div className="col-lg-6" >
+                                {/*</div>*/}
+                                {/*</div>*/}
+                                <div className="col-lg-6">
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"用户积分"}</label>
                                     <div className="col-lg-8">
@@ -468,7 +485,7 @@ export default class UserListContainer extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="form-group" >
+                            <div className="form-group">
                                 <div className="col-lg-6">
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"创建时间"}</label>
@@ -478,7 +495,7 @@ export default class UserListContainer extends Component {
                                                autoComplete="off"/>
                                     </div>
                                 </div>
-                                <div className="col-lg-6" >
+                                <div className="col-lg-6">
                                     <label className="col-lg-4 control-label"
                                            style={{textAlign: 'center'}}>{"更新时间"}</label>
                                     <div className="col-lg-8">
@@ -513,7 +530,8 @@ export default class UserListContainer extends Component {
                                         <input type="text" id="authcode" name="authcode" className="form-control"
                                                placeholder="输入验证码"/>
                                         <span className="input-group-btn">
-                                                <button id="btnSendCode" className="btn bg-primary" type="button" onClick={this._sendMessage}>
+                                                <button id="btnSendCode" className="btn bg-primary" type="button"
+                                                        onClick={this._sendMessage}>
                                                     获取验证码
                                                 </button>
                                             </span>
@@ -656,7 +674,7 @@ class UserListComponent extends Component {
         this.props._lockOrUnlockUser(params);
     }
 
-    _showGetAuthcode(val){
+    _showGetAuthcode(val) {
         this.props._showGetAuthcode(val);
     }
 
@@ -668,8 +686,8 @@ class UserListComponent extends Component {
 
     }
 
-    _detail(val,type) {
-        this.props._detail(val,type);
+    _detail(val, type) {
+        this.props._detail(val, type);
     }
 
     _delete(userid, realName) {
@@ -688,7 +706,7 @@ class UserListComponent extends Component {
                             <td className="text-center">{val.realName}</td>
                             <td className="text-center">{userType(val.type)}</td>
                             <td className="text-center">{val.organizationName}</td>
-                            <td className="text-center">{val.number?val.number:"- -"}</td>
+                            <td className="text-center">{val.number ? val.number : "- -"}</td>
                             <td className="text-center">{val.phone}</td>
                             <td className="text-center">{val.address}</td>
 
@@ -714,7 +732,7 @@ class UserListComponent extends Component {
                                             <li>
                                                 <a href="javascript:void(0)" data-toggle="modal"
                                                    data-target="#userDetailModal"
-                                                   onClick={this._detail.bind(this, val,"detail")}><i
+                                                   onClick={this._detail.bind(this, val, "detail")}><i
                                                     className=" icon-pencil5"></i>
                                                     {"详 情"}</a>
                                             </li>
@@ -725,7 +743,7 @@ class UserListComponent extends Component {
                                             <li>
                                                 <a href="javascript:void(0)" data-toggle="modal"
                                                    data-target="#getAuthcodeModal"
-                                                   onClick={this._showGetAuthcode.bind(this,val)}><i
+                                                   onClick={this._showGetAuthcode.bind(this, val)}><i
                                                     className="icon-history"></i>
                                                     {"重置密码"}</a>
                                             </li>
@@ -741,7 +759,7 @@ class UserListComponent extends Component {
                                             <li>
                                                 <a href="javascript:void(0)" data-toggle="modal"
                                                    data-target="#bindQrcodeModal"
-                                                   onClick={this._detail.bind(this, val,"other")}><i
+                                                   onClick={this._detail.bind(this, val, "other")}><i
                                                     className="icon-qrcode"></i>
                                                     {"绑定二维码"}</a>
                                             </li>
@@ -801,7 +819,7 @@ class UserListComponent extends Component {
 }
 
 function mapStateToProps(state) {
-    const {getGeneralUserList,getGeneralUserDetail, getCityList, commonReducer}=state;
+    const {getGeneralUserList, getGeneralUserDetail, getCityList, commonReducer}=state;
     return {
         fetching: getGeneralUserList.fetching,
         data: getGeneralUserList.data,

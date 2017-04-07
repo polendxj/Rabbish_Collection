@@ -181,12 +181,12 @@ export default class NoticeListContainer extends Component {
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
                                             <div className="thumb">
                                                 <img
-                                                    src={hasHttp ? this.detailData.img : imgBaseUrl + this.detailData.img}
+                                                    src={this.detailData.img ? (hasHttp ? this.detailData.img : imgBaseUrl + this.detailData.img) : "../assets/images/no_photo.gif"}
                                                     alt=""
                                                     style={{height: "160px", width: "160px"}}/>
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                                     <span style={{top: 0, marginTop: 0}}>
-                                                        <a href={hasHttp ? this.detailData.img : imgBaseUrl + this.detailData.img}
+                                                        <a href={this.detailData.img ? (hasHttp ? this.detailData.img : imgBaseUrl + this.detailData.img) : "../assets/images/no_photo.gif"}
                                                            data-popup="lightbox"
                                                            className="btn"
                                                            style={{height: "160px", width: "160px"}}></a>
@@ -302,11 +302,14 @@ class NoticeListComponent extends Component {
                         <td className="text-center">
                             <div className="thumbnail" style={{margin: "0 auto", width: "35px", padding: 0, border: 0}}>
                                 <div className="thumb">
-                                    <img src={hasHttp ? val.img : imgBaseUrl + val.img} alt=""
-                                         style={{height: "30px", width: "30px"}}/>
+                                    <img
+                                        src={val.img ? (hasHttp ? val.img : imgBaseUrl + val.img) : "../assets/images/no_photo.gif"}
+                                        alt=""
+                                        style={{height: "30px", width: "30px"}}/>
                                     <div className="caption-overflow" style={{width: "auto"}}>
                                         <span style={{top: 0, marginTop: 0}}>
-                                            <a href={hasHttp ? val.img : imgBaseUrl + val.img} data-popup="lightbox"
+                                            <a href={val.img ? (hasHttp ? val.img : imgBaseUrl + val.img) : "../assets/images/no_photo.gif"}
+                                               data-popup="lightbox"
                                                className="btn" style={{height: "30px", width: "30px"}}></a>
                                         </span>
                                     </div>

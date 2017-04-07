@@ -228,8 +228,8 @@ export default class StoreListContainer extends Component {
         var detailStoreInfo = "";
         if(this.detailData==""){
             detailStoreInfo = <Loading />;
-        }else if(this.detailData.points){
-            $("#settlementPoints").val(this.detailData.points-this.detailData.points%10);
+        }else if(this.detailData){
+            var hasHttp = this.detailData.logo.indexOf("http") > -1;
             detailStoreInfo =
                 <div>
                     <div className="form-horizontal">
@@ -245,11 +245,11 @@ export default class StoreListContainer extends Component {
                                         <div className="thumbnail"
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
                                             <div className="thumb">
-                                                <img src={imgBaseUrl+this.detailData.logo} alt=""
+                                                <img src={this.detailData.logo?(hasHttp?this.detailData.logo:imgBaseUrl+this.detailData.logo):"../assets/images/no_photo.gif"} alt=""
                                                      style={{height: "160px", width: "160px"}}/>
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                         <span style={{top: 0, marginTop: 0}}>
-                                            <a href={imgBaseUrl+this.detailData.logo} data-popup="lightbox"
+                                            <a href={this.detailData.logo?(hasHttp?this.detailData.logo:imgBaseUrl+this.detailData.logo):"../assets/images/no_photo.gif"} data-popup="lightbox"
                                                className="btn" style={{height: "160px", width: "160px"}}></a>
                                         </span>
                                                 </div>
@@ -264,11 +264,11 @@ export default class StoreListContainer extends Component {
                                         <div className="thumbnail"
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
                                             <div className="thumb">
-                                                <img src={imgBaseUrl+this.detailData.license} alt=""
+                                                <img src={this.detailData.license?(hasHttp?this.detailData.license:imgBaseUrl+this.detailData.license):"../assets/images/no_photo.gif"} alt=""
                                                      style={{height: "160px", width: "160px"}}/>
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                         <span style={{top: 0, marginTop: 0}}>
-                                            <a href={imgBaseUrl+this.detailData.license} data-popup="lightbox"
+                                            <a href={this.detailData.license?(hasHttp?this.detailData.license:imgBaseUrl+this.detailData.license):"../assets/images/no_photo.gif"} data-popup="lightbox"
                                                className="btn" style={{height: "160px", width: "160px"}}></a>
                                         </span>
                                                 </div>

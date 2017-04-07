@@ -181,11 +181,11 @@ class ComplaintListComponent extends Component {
                                                              style={{marginBottom: 0, width: "85px"}}>
                                                             <div className="thumb">
                                                                 <img
-                                                                    src={hasHttp ? (val.photo ? val.photo : imgBaseUrl + val.photo) : "../assets/images/no_photo.gif"}
+                                                                    src={val.photo ? (hasHttp ? val.photo : imgBaseUrl + val.photo) : "../assets/images/no_photo.gif"}
                                                                     alt="" style={{height: "80px", width: "80px"}}/>
                                                                 <div className="caption-overflow">
                                                                 <span style={{top: 0, marginTop: 0}}>
-                                                                    <a href={hasHttp ? (val.photo ? val.photo : imgBaseUrl + val.photo) : "../assets/images/no_photo.gif"}
+                                                                    <a href={val.photo ? (hasHttp ? val.photo : imgBaseUrl + val.photo) : "../assets/images/no_photo.gif"}
                                                                        data-popup="lightbox"
                                                                        className="btn"
                                                                        style={{height: "80px", width: "100px"}}></a>

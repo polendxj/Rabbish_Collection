@@ -31,15 +31,16 @@ export default class VerifiedStore extends Component {
         if (data) {
             if (data.length > 0) {
                 data.forEach(function (val, key) {
+                    var hasHttp = val.logo.indexOf("http") > -1;
                     tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
                         <td className="text-center">
                             <div className="thumbnail" style={{margin: "0 auto", width: "35px", padding: 0, border: 0}}>
                                 <div className="thumb">
-                                    <img src={imgBaseUrl+val.logo} alt="" style={{height: "30px", width: "30px"}}/>
+                                    <img src={val.logo ? (hasHttp ? val.logo : imgBaseUrl + val.logo) : "../assets/images/no_photo.gif"} alt="" style={{height: "30px", width: "30px"}}/>
                                     <div className="caption-overflow" style={{width: "auto"}}>
                                         <span style={{top: 0, marginTop: 0}}>
-                                            <a href={imgBaseUrl+val.logo} data-popup="lightbox"
+                                            <a href={val.logo ? (hasHttp ? val.logo : imgBaseUrl + val.logo) : "../assets/images/no_photo.gif"} data-popup="lightbox"
                                                className="btn" style={{height: "30px", width: "30px"}}></a>
                                         </span>
                                     </div>
