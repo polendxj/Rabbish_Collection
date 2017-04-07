@@ -143,10 +143,10 @@ class ReviewListComponent extends Component {
         var params = {
             userid: userid,
             reviewid: id,
-            content: $("#reply").val(),
+            content: $("#reply"+id).val(),
             createTime: date
         };
-        console.log("reply",$("#reply").val());
+        console.log("reply",$("#reply"+id).val());
         this.props._reply(params);
     }
 
@@ -207,7 +207,7 @@ class ReviewListComponent extends Component {
                                         {replyFlag ?
                                             <div>
                                                 <div className="form-group has-feedback" style={{margin: 0}}>
-                                                    <input id="reply" style={{border: 0}} type="text"
+                                                    <input id={"reply"+val.id} style={{border: 0}} type="text"
                                                            className="form-control"
                                                            placeholder={"回复该评论"} autoComplete="off"/>
                                                     <div className="form-control-feedback"

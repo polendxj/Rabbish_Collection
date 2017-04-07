@@ -77,11 +77,11 @@ export default class RubbishClassListContainer extends Component {
                 <div className="content" style={{marginTop: '20px'}}>
                     <fieldset className="content-group">
                         <legend className="text-bold">{"垃圾分类列表区"}</legend>
-                        <div style={{marginTop:'-80px'}}>
-                            <Pagenation counts={data ? data.data.length : 0} page={this.page}
-                                        _changePage={this._changePage} _prePage={this._prePage}
-                                        _nextPage={this._nextPage}/>
-                        </div>
+                        {/*<div style={{marginTop:'-80px'}}>*/}
+                            {/*<Pagenation counts={data ? data.data.length : 0} page={this.page}*/}
+                                        {/*_changePage={this._changePage} _prePage={this._prePage}*/}
+                                        {/*_nextPage={this._nextPage}/>*/}
+                        {/*</div>*/}
                         <RubbishClassListComponent data={data} fetching={fetching}
                                             _delete={this._delete}
                                             _updateStatus={this._updateStatus}/>
@@ -129,9 +129,9 @@ class RubbishClassListComponent extends Component{
                                         <li style={{display:'block'}} onClick={this._detail.bind(this, '/DataManage/RubbishClass/Update/:' + val.id)}>
                                             <a href="javascript:void(0)"><i className="icon-pencil5"></i>
                                                 {"修改"}</a></li>
-                                        <li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.name)}><a
-                                            href="javascript:void(0)"><i className="icon-trash"></i>
-                                            {"删除"}</a></li>
+                                        {/*<li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.name)}><a*/}
+                                            {/*href="javascript:void(0)"><i className="icon-trash"></i>*/}
+                                            {/*{"删除"}</a></li>*/}
                                     </ul>
                                 </li>
                             </ul>}

@@ -89,7 +89,7 @@ export default class StoreSettlementListContainer extends Component {
                 />
                 <div className="content" style={{marginTop: '20px'}}>
                     <fieldset className="content-group">
-                        <legend className="text-bold">{"纠错记录列表区"}</legend>
+                        <legend className="text-bold">{"兑账记录列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
                             <Pagenation counts={data ? data.data.totalElements : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}

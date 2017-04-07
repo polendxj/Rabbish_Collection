@@ -170,6 +170,7 @@ export default class CitySettingContainer extends Component {
 
     render() {
         const {fetching, data}=this.props;
+        var loginUserType = sessionStorage['type'];
         console.log("citySetting", data);
         var countryTRS = [];
         var self=this;
@@ -180,8 +181,8 @@ export default class CitySettingContainer extends Component {
                         <td>{ck + 1}</td>
                         <td>{c.name}</td>
                         <td>{c.description}</td>
-                        <td>
-                            <ul className="icons-list">
+                        <td style={{display:loginUserType==10? 'block':'none'}}>
+                            <ul className="icons-list" style={{display:loginUserType==10? 'block':'none'}}>
                                 <li className="dropdown">
                                     <a href="#" className="dropdown-toggle"
                                        data-toggle="dropdown" aria-expanded="false"><i
@@ -207,7 +208,7 @@ export default class CitySettingContainer extends Component {
                         <td>{v.name}</td>
                         <td>{organizationType(v.type)}</td>
                         <td>
-                            <ul className="icons-list">
+                            <ul className="icons-list" style={{display:loginUserType==10? 'block':'none'}}>
                                 <li className="dropdown">
                                     <a href="#" className="dropdown-toggle"
                                        data-toggle="dropdown" aria-expanded="false"><i
@@ -451,6 +452,7 @@ class CitySettingComponent extends Component {
     render() {
         const {data, _changeCountry,_deleteCity}=this.props;
         var self = this;
+        var loginUserType = sessionStorage['type'];
         var tableHeight = ($(window).height() - 240);
         var tbody = [];
         var count = 0;
@@ -547,7 +549,7 @@ class CitySettingComponent extends Component {
                                                    onClick={self.props._selectObj.bind(self, val, val.country ? val.country[val.countryIndex] : -1, 1)}><i
                                                     className="icon-home4"></i>
                                                     {"小区设置"}</a></li>
-                                            <li>
+                                            <li style={{display:loginUserType==10? 'block':'none'}}>
                                                 <a href="javascript:void(0)" onClick={_deleteCity.bind(self,val.id)}><i className=" icon-trash"></i>
                                                     {"删除城市"}</a></li>
                                         </ul>

@@ -60,6 +60,21 @@ class RegisterNoticeComponent extends Component{
     }
     componentDidMount() {
         var self = this;
+        $("#noticeForm").validate({
+            ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
+            errorClass: 'validation-error-label',
+            successClass: 'validation-valid-label',
+            highlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+            unhighlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+            validClass: "validation-valid-label",
+            success: function(label) {
+                label.addClass("validation-valid-label").text("Success.")
+            }
+        });
         $('#file-input').fileinput({
             uploadUrl: 'http://dev.xysy.tech/rsapp/file/news',
             language: 'zh',
@@ -78,7 +93,13 @@ class RegisterNoticeComponent extends Component{
         });
     }
     _uploadImg() {
-        $('#file-input').fileinput('upload');
+        console.log("aaa",$('#file-input').prop("files"));
+        var files = $('#file-input').prop("files");
+        if(files.length > 0){
+            $('#file-input').fileinput('upload');
+        }else {
+            this._save("");
+        }
     }
     _search() {
         this.props._startRefresh();
@@ -136,7 +157,7 @@ class RegisterNoticeComponent extends Component{
                                            }}>{"图片URL"}</label>
                                     <div className="col-lg-9">
                                         <input type="file" name="file" id="file-input"
-                                               multiple data-min-file-count="1"/>
+                                               multiple/>
                                     </div>
                                 </div>
                                 <div className="form-group" >
@@ -146,7 +167,7 @@ class RegisterNoticeComponent extends Component{
                                            }}>{"内容"}</label>
                                     <div className="col-lg-9">
                                     <textarea name="content" rows="5" cols="5" className="form-control"
-                                              placeholder={"内容"}></textarea>
+                                              placeholder={"内容"} required="required"></textarea>
                                     </div>
                                 </div>
 

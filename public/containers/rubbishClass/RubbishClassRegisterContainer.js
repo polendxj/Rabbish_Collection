@@ -116,7 +116,7 @@ class RegisterRubbishClassComponent extends Component{
                                     <label className="control-label col-lg-2" style={{textAlign: 'center'}}>{"奖励积分"}</label>
                                     <div className="col-lg-9">
                                         <div className="input-group">
-                                            <input name="rewardPoints" type="text" className="form-control"
+                                            <input name="rewardPoints" type="number" className="form-control"
                                                    placeholder={"奖励积分"}
                                                    autoComplete="off"/>
                                             <span className="input-group-addon">每次/每千克</span>
