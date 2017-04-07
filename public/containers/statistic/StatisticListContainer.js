@@ -939,7 +939,7 @@ export default class StatisticListContainer extends Component {
                                             {cityOptions}
                                         </select>
                                         垃圾投放总量 &nbsp;/ 垃圾投放次数
-                                        <div className="text-muted text-size-small">单位：吨</div>
+                                        <div className="text-muted text-size-small">单位：千克</div>
                                         <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
 
                                 </div>
@@ -1108,7 +1108,7 @@ export default class StatisticListContainer extends Component {
                                                                     ：{showTotalOfCity == "ok" ? moneyFormat(cityData.totalCityData.count) : showTotalOfCity}
                                                                     次 /
                                                                     投放重量：{showTotalOfCity == "ok" ? moneyFormat(cityData.totalCityData.weight.toFixed(0)) : showTotalOfCity}
-                                                                    吨
+                                                                    千克
                                                                     <small
                                                                         className="display-block no-margin">{showTotalOfCity == "ok" ? cityData.totalCityData.rangeDate : showTotalOfCity}</small>
                                                                 </h5>
@@ -1202,7 +1202,7 @@ export default class StatisticListContainer extends Component {
                                                                     {totalOrga.cityName ? totalOrga.cityName : "获取中..."}
                                                                     - 投放次数 ：{moneyFormat(totalOrga.count)}
                                                                     次 / 投放重量：{moneyFormat(totalOrga.weight.toFixed(0))}
-                                                                    吨
+                                                                    千克
                                                                     <small
                                                                         className="display-block no-margin">{totalOrga.rangeDate ? totalOrga.rangeDate : "获取中..."}</small>
                                                                 </h5>
