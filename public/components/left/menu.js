@@ -139,7 +139,19 @@ class Business extends Component {
                 </li>
                 <li className="left active" onClick={this._leftMenuClick.bind(this, '/CustomerService/UserManage')}><a
                     href="javascript:void(0)"><i
-                    className=" icon-user"></i> <span>{"用户管理"}</span></a></li>
+                    className=" icon-user"></i> <span>{"普通用户"}</span></a></li>
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/StoreManage')}><a
+                    href="javascript:void(0)"><i
+                    className=" icon-home9"></i> <span>{"兑换商家"}</span></a></li>
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/AdminUserManage')}><a
+                    href="javascript:void(0)"><i
+                    className=" icon-user-tie"></i> <span>{"管理员 & 扫码员"}</span></a></li>
+                <li className="navigation-header left"><span>{"其他服务"}</span> <i className="icon-menu" title=""
+                                                                                data-original-title="商家管理"></i>
+                </li>
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/StoreSettlementManage')}><a
+                    href="javascript:void(0)"><i
+                    className="icon-coin-yen"></i> <span>{"兑账记录"}</span></a></li>
                 <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/ReviewManage')}><a
                     href="javascript:void(0)"><i
                     className=" icon-feed"></i> <span>{"评价管理"}</span></a></li>
@@ -155,19 +167,7 @@ class Business extends Component {
                 <li style={{display:"none"}} className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
                     href="javascript:void(0)"><i
                     className="icon-qrcode"></i> <span>{"二维码管理"}</span></a></li>
-                <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/AdminUserManage')}><a
-                    href="javascript:void(0)"><i
-                    className=" icon-user-tie"></i> <span>{"管理/扫码员"}</span></a></li>
 
-                <li className="navigation-header left"><span>{"商家管理"}</span> <i className="icon-menu" title=""
-                                                                                data-original-title="商家管理"></i>
-                </li>
-                <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/StoreSettlementManage')}><a
-                    href="javascript:void(0)"><i
-                    className="icon-coin-yen"></i> <span>{"兑账记录"}</span></a></li>
-                <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/StoreManage')}><a
-                    href="javascript:void(0)"><i
-                    className=" icon-home9"></i> <span>{"加盟商管理"}</span></a></li>
 
 
             </ul>

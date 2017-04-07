@@ -454,7 +454,7 @@ export default class StoreListContainer extends Component {
                         style={{fontWeight: 'bold'}}><a
                         href="#unauthorizedStore"
                         data-toggle="tab">{"待审核"}
-                        <span className="badge bg-warning-400">{unauthorizedCount}</span></a>
+                        <span className="badge bg-warning-400" style={{position:"relative",top:"-11px"}}>{unauthorizedCount}</span></a>
                     </li>
                     <li
                         style={{fontWeight: 'bold'}}><a

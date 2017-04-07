@@ -83,10 +83,13 @@ export default class CitySettingContainer extends Component {
     }
 
     _deleteCity(id) {
+        var self=this;
         var params = {
             id: id
         }
-        this.props.dispatch(deleteObject(params,0,"","","","",CITY_LIST_START, CITY_LIST_END,city_delete,city_list));
+        ConfirmModal("告警！","确认删除该城市吗？",function () {
+            self.props.dispatch(deleteObject(params,0,"","","","",CITY_LIST_START, CITY_LIST_END,city_delete,city_list));
+        });
 
     }
     _changeCountry(city, country) {
