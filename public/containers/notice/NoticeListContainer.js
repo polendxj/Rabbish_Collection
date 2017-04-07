@@ -131,6 +131,7 @@ export default class NoticeListContainer extends Component {
         if(this.detailData==""){
             detailNoticeInfo = <Loading />;
         }else{
+            var hasHttp = this.detailData.img.indexOf("http")>-1;
             detailNoticeInfo =
                 <div>
                     <div className="form-horizontal">
@@ -176,11 +177,11 @@ export default class NoticeListContainer extends Component {
                                         <div className="thumbnail"
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
                                             <div className="thumb">
-                                                <img src={imgBaseUrl+this.detailData.img} alt=""
+                                                <img src={hasHttp?this.detailData.img:imgBaseUrl+this.detailData.img} alt=""
                                                      style={{height: "160px", width: "160px"}}/>
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                                     <span style={{top: 0, marginTop: 0}}>
-                                                        <a href={imgBaseUrl+this.detailData.img} data-popup="lightbox"
+                                                        <a href={hasHttp?this.detailData.img:imgBaseUrl+this.detailData.img} data-popup="lightbox"
                                                            className="btn" style={{height: "160px", width: "160px"}}></a>
                                                     </span>
                                                 </div>
@@ -282,6 +283,7 @@ class NoticeListComponent extends Component {
         if (data) {
             if (data.data&&data.data.content.length > 0) {
                 data.data.content.forEach(function (val, key) {
+                    var hasHttp = val.img.indexOf("http")>-1;
                     tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
                         <td className="text-center">{noticeType(val.type)}</td>
@@ -289,10 +291,10 @@ class NoticeListComponent extends Component {
                         <td className="text-center">
                             <div className="thumbnail" style={{margin: "0 auto", width: "35px", padding: 0, border: 0}}>
                                 <div className="thumb">
-                                    <img src={imgBaseUrl+val.img} alt="" style={{height: "30px", width: "30px"}}/>
+                                    <img src={hasHttp?val.img:imgBaseUrl+val.img} alt="" style={{height: "30px", width: "30px"}}/>
                                     <div className="caption-overflow" style={{width: "auto"}}>
                                         <span style={{top: 0, marginTop: 0}}>
-                                            <a href={imgBaseUrl+val.img} data-popup="lightbox"
+                                            <a href={hasHttp?val.img:imgBaseUrl+val.img} data-popup="lightbox"
                                                className="btn" style={{height: "30px", width: "30px"}}></a>
                                         </span>
                                     </div>
