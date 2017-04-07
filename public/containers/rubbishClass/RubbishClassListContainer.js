@@ -77,11 +77,11 @@ export default class RubbishClassListContainer extends Component {
                 <div className="content" style={{marginTop: '20px'}}>
                     <fieldset className="content-group">
                         <legend className="text-bold">{"垃圾分类列表区"}</legend>
-                        <div style={{marginTop:'-80px'}}>
-                            <Pagenation counts={data ? data.data.length : 0} page={this.page}
-                                        _changePage={this._changePage} _prePage={this._prePage}
-                                        _nextPage={this._nextPage}/>
-                        </div>
+                        {/*<div style={{marginTop:'-80px'}}>*/}
+                            {/*<Pagenation counts={data ? data.data.length : 0} page={this.page}*/}
+                                        {/*_changePage={this._changePage} _prePage={this._prePage}*/}
+                                        {/*_nextPage={this._nextPage}/>*/}
+                        {/*</div>*/}
                         <RubbishClassListComponent data={data} fetching={fetching}
                                             _delete={this._delete}
                                             _updateStatus={this._updateStatus}/>

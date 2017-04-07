@@ -127,7 +127,7 @@ class ComplaintListComponent extends Component {
 
     _deal(id){
         var params = {
-            suggestion:$("#suggestion").val()
+            suggestion:$("#suggestion"+id).val()
         };
         this.props._deal(id,params);
     }
@@ -201,7 +201,7 @@ class ComplaintListComponent extends Component {
                                         {dealFlag ?
                                             <div>
                                                 <div className="form-group has-feedback" style={{margin: 0}}>
-                                                    <input id="suggestion" style={{border: 0}} type="text"
+                                                    <input id={"suggestion"+val.id} style={{border: 0}} type="text"
                                                            className="form-control"
                                                            placeholder={"回复该投诉"} autoComplete="off"/>
                                                     <div className="form-control-feedback" style={{pointerEvents: "auto"}}

@@ -191,6 +191,7 @@ export default class StoreListContainer extends Component {
             unauthorizedData = filterByApprove(data.data.content, 1);
             unverifiedData = filterByApprove(data.data.content, 2);
         }
+        var unauthorizedCount = unauthorizedData ? unauthorizedData.length:0;
         var cityOptions = [];
         var countryOptions = [];
         if (cityList) {
@@ -452,7 +453,8 @@ export default class StoreListContainer extends Component {
                     <li
                         style={{fontWeight: 'bold'}}><a
                         href="#unauthorizedStore"
-                        data-toggle="tab">{"审核中"}</a>
+                        data-toggle="tab">{"待审核"}
+                        <span className="badge bg-warning-400">{unauthorizedCount}</span></a>
                     </li>
                     <li
                         style={{fontWeight: 'bold'}}><a

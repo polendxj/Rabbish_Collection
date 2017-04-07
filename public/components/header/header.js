@@ -118,7 +118,7 @@ class TopMenus extends Component {
                 <li className="dropdown dropdown-user topmenu" onClick={this._menuChange.bind(this, 3, false)}>
                     <a className="dropdown-toggle" data-toggle="dropdown">
                         <i className="icon-bubble-notification" style={{fontSize: "12px"}}> </i> <span
-                        style={this.span_style}>{"系统通知"}</span>
+                        style={this.span_style}>{"公告发布"}</span>
                     </a>
                 </li>
             </ul>

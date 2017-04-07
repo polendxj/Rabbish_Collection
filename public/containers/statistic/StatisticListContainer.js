@@ -847,7 +847,7 @@ export default class StatisticListContainer extends Component {
 
                                         <h3 className="no-margin">{showOperation == "ok" ? moneyFormat(operationData.data.requestPerDay) : showOperation}</h3>
                                         每日请求数
-                                        <div className="text-muted text-size-small">单位：次/平均</div>
+                                        <div className="text-muted text-size-small">单位：次</div>
                                         <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
 
                                 </div>
