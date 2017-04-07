@@ -85,6 +85,8 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
                     resp.send(response)
                 }
             })
+        }else{
+            resp.send(response)
         }
     });
 });
@@ -96,35 +98,39 @@ router.post('/rsapp/statistic/classifying/organization', function (req, resp) {
     RequestApi.Request(baseURL + '/rsapp/statistic/classifying/organization' + "?" + data, 'GET', "", req, resp,function (orgaDataList) {
         if(orgaDataList.status){
             RequestApi.Request(baseURL + '/rsapp/city/'+jsonData.cityid, 'GET', "", req, resp, function (city) {
-                orgaDataList.data.cityName = city.data.name;
-            });
-            orgaDataList.data.rangeDate = jsonData.startday.replace(/-/g, ".") + " - " + jsonData.endday.replace(/-/g, ".");
-            if (orgaDataList.data&&orgaDataList.data.content.length > 0) {
-                var count = 0;
-                orgaDataList.data.content.forEach(function (m, k) {
-                    (function (m) {
-                        var params={page:jsonData.page,size:jsonData.size,cityid:jsonData.cityid,organizationid:jsonData.organizationid};
-                        if(jsonData.organizationid){
-                            params.monthday = ExceptionUtils.timeStamp2Time(m.monthday);
-                        }else{
-                            params.startday = jsonData.startday;
-                            params.endday = jsonData.endday;
-                        }
+                if(city.status){
+                    orgaDataList.data.cityName = city.data.name;
+                    orgaDataList.data.rangeDate = jsonData.startday.replace(/-/g, ".") + " - " + jsonData.endday.replace(/-/g, ".");
+                    if (orgaDataList.data&&orgaDataList.data.content.length > 0) {
+                        var count = 0;
+                        orgaDataList.data.content.forEach(function (m, k) {
+                            (function (m) {
+                                var params={page:jsonData.page,size:jsonData.size,cityid:jsonData.cityid,organizationid:jsonData.organizationid};
+                                if(jsonData.organizationid){
+                                    params.monthday = ExceptionUtils.timeStamp2Time(m.monthday);
+                                }else{
+                                    params.startday = jsonData.startday;
+                                    params.endday = jsonData.endday;
+                                }
 
-                        RequestApi.Request(baseURL + '/rsapp/statistic/classifying/class'+ "?"  + querystring.stringify(params), 'GET', "", req, resp, function (classifyData) {
-                            if(classifyData.status&&classifyData.data){
-                                m["classifyData"]=classifyData.data;
-                            }
-                            count++;
-                            if (count == orgaDataList.data.content.length) {
-                                resp.send(orgaDataList);
-                            }
+                                RequestApi.Request(baseURL + '/rsapp/statistic/classifying/class'+ "?"  + querystring.stringify(params), 'GET', "", req, resp, function (classifyData) {
+                                    if(classifyData.status&&classifyData.data){
+                                        m["classifyData"]=classifyData.data;
+                                    }
+                                    count++;
+                                    if (count == orgaDataList.data.content.length) {
+                                        resp.send(orgaDataList);
+                                    }
+                                })
+                            })(m)
                         })
-                    })(m)
-                })
-            } else {
-                resp.send(orgaDataList);
-            }
+                    } else {
+                        resp.send(orgaDataList);
+                    }
+                }else{
+                    resp.send(orgaDataList);
+                }
+            });
         } else {
             resp.send(orgaDataList)
         }
