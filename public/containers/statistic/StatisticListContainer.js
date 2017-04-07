@@ -952,7 +952,7 @@ export default class StatisticListContainer extends Component {
                                                 <thead>
                                                 <tr style={{fontWeight: 'bold'}}>
                                                     <th className="text-center" style={{width: "20px"}}></th>
-                                                    <th className="col-md-4 text-bold text-center">{"垃圾分类"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{"时间"}</th>
                                                     <th className="col-md-4 text-bold text-center">{"重量（千克）"}</th>
                                                     <th className="col-md-4 text-bold text-center">{"次数"}</th>
                                                     <th className="text-center" style={{width: "20px"}}><i
