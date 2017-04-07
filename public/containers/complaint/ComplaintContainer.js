@@ -7,7 +7,7 @@ import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
-import {Loading, NoData, ConfirmModal, ErrorModal, roleApplicationUse,timeStamp2Time} from '../../components/Tool/Tool'
+import {Loading, NoData, ConfirmModal, ErrorModal, roleApplicationUse, timeStamp2Time} from '../../components/Tool/Tool'
 import {COMPLAINT_LIST_START, COMPLAINT_LIST_END} from '../../constants/index.js'
 import {getListByMutilpCondition, saveObject} from '../../actions/CommonActions';
 
@@ -29,9 +29,9 @@ export default class ComplaintContainer extends Component {
         ];
         this.searchColumn = "DRIVER";
         this._deal = this._deal.bind(this);
-        this._changePage=this._changePage.bind(this);
-        this._prePage=this._prePage.bind(this);
-        this._nextPage=this._nextPage.bind(this);
+        this._changePage = this._changePage.bind(this);
+        this._prePage = this._prePage.bind(this);
+        this._nextPage = this._nextPage.bind(this);
     }
 
     componentDidMount() {
@@ -49,10 +49,10 @@ export default class ComplaintContainer extends Component {
         })
     }
 
-    _deal(id,params){
+    _deal(id, params) {
         var that = this;
         var listParams = {page: 0, size: page_size};
-        this.props.dispatch(saveObject(params,"","",complaint_update+"?id="+id,"/CustomerService/ComplaintManage","noAlert",function () {
+        this.props.dispatch(saveObject(params, "", "", complaint_update + "?id=" + id, "/CustomerService/ComplaintManage", "noAlert", function () {
             that.props.dispatch(getListByMutilpCondition(listParams, COMPLAINT_LIST_START, COMPLAINT_LIST_END, complaint_list));
         }));
     }
@@ -100,7 +100,7 @@ export default class ComplaintContainer extends Component {
                     <fieldset className="content-group">
                         <legend className="text-bold">{"投诉举报列表区"}</legend>
                         <div style={{marginTop: '-80px'}}>
-                            <Pagenation counts={data&&data.status ? data.data.totalElements : 0} page={this.page}
+                            <Pagenation counts={data && data.status ? data.data.totalElements : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
                         </div>
@@ -125,11 +125,11 @@ class ComplaintListComponent extends Component {
 
     }
 
-    _deal(id){
+    _deal(id) {
         var params = {
-            suggestion:$("#suggestion"+id).val()
+            suggestion: $("#suggestion" + id).val()
         };
-        this.props._deal(id,params);
+        this.props._deal(id, params);
     }
 
     _detail(path) {
@@ -142,18 +142,18 @@ class ComplaintListComponent extends Component {
 
     render() {
         const {data, fetching}=this.props;
-        console.log("complaint",data);
+        console.log("complaint", data);
         let tb = [];
         if (data) {
-            if(data.status){
+            if (data.status) {
                 if (data.data.content.length > 0) {
                     data.data.content.forEach(function (val, key) {
-                        var dealFlag = (val.suggestion == "" || val.suggestion==null);
-                        var hasHttp = val.photo.indexOf("http")>-1;
+                        var dealFlag = (val.suggestion == "" || val.suggestion == null);
+                        var hasHttp = val.photo.indexOf("http") > -1;
                         tb.push(
                             <div key={key} className="panel panel-white text-left">
                                 <div className="panel-heading" style={{padding: "15px 20px 10px 20px"}}>
-                                    <table style={{width:"100%"}}>
+                                    <table style={{width: "100%"}}>
                                         <tr>
                                             <td>
                                                 <div className="panel-title">
@@ -166,23 +166,29 @@ class ComplaintListComponent extends Component {
                                                         <i className="icon-alarm" style={{fontSize: "3px"}}/>
                                                         &nbsp;
                                                         {timeStamp2Time(val.commitTime)}&nbsp;&nbsp;
-                                                        <a className="collapsed" data-toggle="collapse" href={"#collapse-" + val.id}>
+                                                        <a className="collapsed" data-toggle="collapse"
+                                                           href={"#collapse-" + val.id}>
                                                             <i className="icon-bubble2" style={{fontSize: "4px"}}></i>
                                                             &nbsp;
                                                             {dealFlag ? "回复投诉举报" : "已处理"}</a>
                                                     </small>
                                                 </div>
                                             </td>
-                                            <td style={{width:"85px"}}>
+                                            <td style={{width: "85px"}}>
                                                 <div>
                                                     <div >
-                                                        <div className="thumbnail" style={{marginBottom:0,width:"85px"}}>
+                                                        <div className="thumbnail"
+                                                             style={{marginBottom: 0, width: "85px"}}>
                                                             <div className="thumb">
-                                                                <img src={hasHttp?val.photo:imgBaseUrl+val.photo} alt="" style={{height:"80px",width:"80px"}}/>
+                                                                <img
+                                                                    src={hasHttp ? (val.photo ? val.photo : imgBaseUrl + val.photo) : "../assets/images/no_photo.gif"}
+                                                                    alt="" style={{height: "80px", width: "80px"}}/>
                                                                 <div className="caption-overflow">
-                                                                <span style={{top:0,marginTop:0}}>
-                                                                    <a href={hasHttp?val.photo:imgBaseUrl+val.photo} data-popup="lightbox"
-                                                                       className="btn" style={{height:"80px",width:"80px"}}></a>
+                                                                <span style={{top: 0, marginTop: 0}}>
+                                                                    <a href={hasHttp ? (val.photo ? val.photo : imgBaseUrl + val.photo) : "../assets/images/no_photo.gif"}
+                                                                       data-popup="lightbox"
+                                                                       className="btn"
+                                                                       style={{height: "80px", width: "100px"}}></a>
                                                                 </span>
                                                                 </div>
                                                             </div>
@@ -201,10 +207,11 @@ class ComplaintListComponent extends Component {
                                         {dealFlag ?
                                             <div>
                                                 <div className="form-group has-feedback" style={{margin: 0}}>
-                                                    <input id={"suggestion"+val.id} style={{border: 0}} type="text"
+                                                    <input id={"suggestion" + val.id} style={{border: 0}} type="text"
                                                            className="form-control"
                                                            placeholder={"回复该投诉"} autoComplete="off"/>
-                                                    <div className="form-control-feedback" style={{pointerEvents: "auto"}}
+                                                    <div className="form-control-feedback"
+                                                         style={{pointerEvents: "auto"}}
                                                          onClick={this._deal.bind(this, val.id)}>
                                                         <i className="icon-arrow-right8" style={{
                                                             fontWeight: "bold",
@@ -231,17 +238,17 @@ class ComplaintListComponent extends Component {
                             </div>
                         )
                     }.bind(this));
-                }else{
+                } else {
                     tb.push(<tr key={'noData'}>
                         <td colSpan="100" style={{textAlign: 'center'}}>
                             <NoData />
                         </td>
                     </tr>)
                 }
-            }else{
-                tb.push(ErrorModal(Current_Lang.status.minor,"获取数据错误"))
+            } else {
+                tb.push(ErrorModal(Current_Lang.status.minor, "获取数据错误"))
             }
-        }else{
+        } else {
             tb.push(<tr key={'loading'}>
                 <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />

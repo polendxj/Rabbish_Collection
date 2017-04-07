@@ -20,7 +20,7 @@ import {
     NOTICE_LIST_START,
     NOTICE_LIST_END,
 } from '../../constants/index.js'
-import {getListByMutilpCondition,deleteObject} from '../../actions/CommonActions';
+import {getListByMutilpCondition, deleteObject} from '../../actions/CommonActions';
 import {commonRefresh} from '../../actions/Common';
 
 export default class NoticeListContainer extends Component {
@@ -40,9 +40,9 @@ export default class NoticeListContainer extends Component {
         this._search = this._search.bind(this);
         this._detail = this._detail.bind(this);
         this._delete = this._delete.bind(this);
-        this._changePage=this._changePage.bind(this);
-        this._prePage=this._prePage.bind(this);
-        this._nextPage=this._nextPage.bind(this);
+        this._changePage = this._changePage.bind(this);
+        this._prePage = this._prePage.bind(this);
+        this._nextPage = this._nextPage.bind(this);
     }
 
     componentDidMount() {
@@ -58,6 +58,7 @@ export default class NoticeListContainer extends Component {
             }
         });
     }
+
     _startRefresh() {
         this.props.dispatch(commonRefresh())
     }
@@ -73,7 +74,8 @@ export default class NoticeListContainer extends Component {
         }
         this.props.dispatch(getListByMutilpCondition(params, NOTICE_LIST_START, NOTICE_LIST_END, notice_list));
     }
-    _detail(val){
+
+    _detail(val) {
         this.detailData = val;
         this._startRefresh();
     }
@@ -81,7 +83,7 @@ export default class NoticeListContainer extends Component {
     _delete(id, title) {
         var that = this;
         ConfirmModal(Current_Lang.status.minor, Current_Lang.alertTip.confirmDelete + title + Current_Lang.alertTip.confirmMa, function () {
-            that.props.dispatch(deleteObject(id, "", "", "", "", "",NOTICE_LIST_START, NOTICE_LIST_END, notice_delete, notice_list))
+            that.props.dispatch(deleteObject(id, "", "", "", "", "", NOTICE_LIST_START, NOTICE_LIST_END, notice_delete, notice_list))
         })
 
     }
@@ -128,10 +130,10 @@ export default class NoticeListContainer extends Component {
     render() {
         const {fetching, data} =this.props;
         var detailNoticeInfo = "";
-        if(this.detailData==""){
+        if (this.detailData == "") {
             detailNoticeInfo = <Loading />;
-        }else{
-            var hasHttp = this.detailData.img.indexOf("http")>-1;
+        } else {
+            var hasHttp = this.detailData.img.indexOf("http") > -1;
             detailNoticeInfo =
                 <div>
                     <div className="form-horizontal">
@@ -144,7 +146,8 @@ export default class NoticeListContainer extends Component {
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"公告类型"}</label>
                                     <div className="col-lg-4">
-                                        <input type="text" value={noticeType(this.detailData.type)} className="form-control"
+                                        <input type="text" value={noticeType(this.detailData.type)}
+                                               className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -177,12 +180,16 @@ export default class NoticeListContainer extends Component {
                                         <div className="thumbnail"
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
                                             <div className="thumb">
-                                                <img src={hasHttp?this.detailData.img:imgBaseUrl+this.detailData.img} alt=""
-                                                     style={{height: "160px", width: "160px"}}/>
+                                                <img
+                                                    src={hasHttp ? this.detailData.img : imgBaseUrl + this.detailData.img}
+                                                    alt=""
+                                                    style={{height: "160px", width: "160px"}}/>
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                                     <span style={{top: 0, marginTop: 0}}>
-                                                        <a href={hasHttp?this.detailData.img:imgBaseUrl+this.detailData.img} data-popup="lightbox"
-                                                           className="btn" style={{height: "160px", width: "160px"}}></a>
+                                                        <a href={hasHttp ? this.detailData.img : imgBaseUrl + this.detailData.img}
+                                                           data-popup="lightbox"
+                                                           className="btn"
+                                                           style={{height: "160px", width: "160px"}}></a>
                                                     </span>
                                                 </div>
                                             </div>
@@ -195,7 +202,8 @@ export default class NoticeListContainer extends Component {
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"创建时间"}</label>
                                     <div className="col-lg-4">
-                                        <input type="text" value={timeStamp2Time(this.detailData.createTime)} className="form-control"
+                                        <input type="text" value={timeStamp2Time(this.detailData.createTime)}
+                                               className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -205,7 +213,8 @@ export default class NoticeListContainer extends Component {
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"修改时间"}</label>
                                     <div className="col-lg-4">
-                                        <input type="text" value={timeStamp2Time(this.detailData.updateTime)} className="form-control"
+                                        <input type="text" value={timeStamp2Time(this.detailData.updateTime)}
+                                               className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -229,7 +238,7 @@ export default class NoticeListContainer extends Component {
                             style={{textAlign: 'right', marginTop: '-59px'}}>
 
                             <li>
-                                <select id="typeSelect" className="form-control" >
+                                <select id="typeSelect" className="form-control">
                                     <option value={""}>所有类型</option>
                                     <option value={1}>公告</option>
                                     <option value={2}>新闻</option>
@@ -269,21 +278,23 @@ class NoticeListComponent extends Component {
     constructor(props) {
         super(props)
     }
+
     _detail(val) {
         this.props._detail(val);
     }
+
     _delete(id, title) {
         this.props._delete(id, title)
     }
 
     render() {
         const {data, fetching}=this.props;
-        console.log("noticeData",data);
+        console.log("noticeData", data);
         let tb = [];
         if (data) {
-            if (data.data&&data.data.content.length > 0) {
+            if (data.data && data.data.content.length > 0) {
                 data.data.content.forEach(function (val, key) {
-                    var hasHttp = val.img.indexOf("http")>-1;
+                    var hasHttp = val.img.indexOf("http") > -1;
                     tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
                         <td className="text-center">{noticeType(val.type)}</td>
@@ -291,10 +302,11 @@ class NoticeListComponent extends Component {
                         <td className="text-center">
                             <div className="thumbnail" style={{margin: "0 auto", width: "35px", padding: 0, border: 0}}>
                                 <div className="thumb">
-                                    <img src={hasHttp?val.img:imgBaseUrl+val.img} alt="" style={{height: "30px", width: "30px"}}/>
+                                    <img src={hasHttp ? val.img : imgBaseUrl + val.img} alt=""
+                                         style={{height: "30px", width: "30px"}}/>
                                     <div className="caption-overflow" style={{width: "auto"}}>
                                         <span style={{top: 0, marginTop: 0}}>
-                                            <a href={hasHttp?val.img:imgBaseUrl+val.img} data-popup="lightbox"
+                                            <a href={hasHttp ? val.img : imgBaseUrl + val.img} data-popup="lightbox"
                                                className="btn" style={{height: "30px", width: "30px"}}></a>
                                         </span>
                                     </div>
@@ -313,7 +325,8 @@ class NoticeListComponent extends Component {
                                     <ul className="dropdown-menu dropdown-menu-right">
                                         <li>
                                             <a href="javascript:void(0)" data-toggle="modal"
-                                               data-target="#noticeDetailModal" onClick={this._detail.bind(this, val)}><i
+                                               data-target="#noticeDetailModal"
+                                               onClick={this._detail.bind(this, val)}><i
                                                 className=" icon-office"></i>
                                                 {"详情"}</a>
                                         </li>
