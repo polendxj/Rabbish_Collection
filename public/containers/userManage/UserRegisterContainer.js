@@ -100,7 +100,7 @@ class RegisterUserComponent extends Component {
         $("#btnSendCode").attr("disabled", "true");
         $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
         this.interValObj = setInterval(that.setRemainTime, 1000);
-        // this.props._sendMessage(phone);
+        this.props._sendMessage(phone);
     }
     setRemainTime() {
         var curCount = sessionStorage['count'];

@@ -137,8 +137,22 @@ router.post('/rsapp/statistic/classifying/organization', function (req, resp) {
     });
 });
 router.post('/rsapp/statistic/total', function (req, resp) {
-    var data = querystring.stringify(JSON.parse(req.body.data));
-    RequestApi.Request(baseURL + '/rsapp/statistic/total' + "?" + data, 'GET', "", req, resp);
+    var jsonData = JSON.parse(req.body.data);
+    var data = querystring.stringify(jsonData);
+    RequestApi.Request(baseURL + '/rsapp/statistic/total' + "?" + data, 'GET', "", req, resp,function (totalData) {
+        if(totalData.status){
+            RequestApi.Request(baseURL + '/rsapp/city/'+jsonData.cityid, 'GET', "", req, resp, function (city) {
+                if(city.status){
+                    totalData.data.cityName = city.data.name;
+                    resp.send(totalData);
+                }else{
+                    resp.send(totalData);
+                }
+            });
+        }else {
+            resp.send(totalData);
+        }
+    });
 });
 router.post('/rsapp/statistic/settlement', function (req, resp) {
     var data = querystring.stringify(JSON.parse(req.body.data));

@@ -63,7 +63,7 @@ export default class StoreListContainer extends Component {
             $("#settlementAmount").val("");
             $("#settlementPoints").blur(function () {
                 var amount = parseInt($("#settlementPoints").val());
-                if(amount > max){
+                if(amount >= max){
                     $("#settlementPoints").val(max);
                 }
             }.bind(this));

@@ -504,8 +504,8 @@ export default class StatisticListContainer extends Component {
                         <td className="text-center">
                             {$("#ofDaterangeSelect").val() ? $("#ofDaterangeSelect").find("option:selected").text() : $("#cityOfDateRangeSelect").find("option:selected").text()}
                         </td>
+                        <td className="text-center">{moneyFormat(rangeDateDataList.weight.toFixed(2))}</td>
                         <td className="text-center">{rangeDateDataList.count}</td>
-                        <td className="text-center">{rangeDateDataList.weight}</td>
                     </tr>)
                 } else {
                     daterangeTb.push(<tr key={'noData'}>
@@ -1176,8 +1176,8 @@ export default class StatisticListContainer extends Component {
                                                 <tr style={{fontWeight: 'bold'}}>
                                                     <th className="text-center" style={{width: "20px"}}></th>
                                                     <th className="col-md-4 text-bold text-center">{$("#ofDaterangeSelect").val() ? "单位/小区" : "城市"}</th>
-                                                    <th className="col-md-4 text-bold text-center">{"投放次数"}</th>
-                                                    <th className="col-md-4 text-bold text-center">{"投放重量"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{"重量（千克）"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{"次数"}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
