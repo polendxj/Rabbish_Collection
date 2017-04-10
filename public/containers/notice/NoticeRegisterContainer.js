@@ -10,6 +10,7 @@ import {Loading, ListModal, ErrorModal, array2Json} from '../../components/Tool/
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import {saveObject} from '../../actions/CommonActions';
 import {commonRefresh} from '../../actions/Common';
+import RichText from './RichText';
 
 export default class NoticeRegisterContainer extends Component {
     constructor(props) {
@@ -107,9 +108,13 @@ class RegisterNoticeComponent extends Component{
     _save(imgUrl) {
         console.log("imgUrl", imgUrl);
         console.log("form", $("#noticeForm").validate().form());
+        var content = UE.getEditor("content").getContent();
+        console.log("content",content);
         var formFields = $("#noticeForm").serializeArray();
         var params = array2Json(formFields);
         params.img = imgUrl;
+        params.content = content;
+        console.log("params",params);
         if($("#noticeForm").validate().form()){
             this.props._save(params);
         }
@@ -166,8 +171,7 @@ class RegisterNoticeComponent extends Component{
                                                textAlign: 'center'
                                            }}>{"内容"}</label>
                                     <div className="col-lg-9">
-                                    <textarea name="content" rows="5" cols="5" className="form-control"
-                                              placeholder={"内容"} required="required"></textarea>
+                                        <RichText id="content" height="200" value={""} disabled={false}/>
                                     </div>
                                 </div>
 

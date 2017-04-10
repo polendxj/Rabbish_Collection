@@ -80,11 +80,13 @@ class TopMenus extends Component {
         this.props.changeTopMenu(idx);
         if (idx == 0) {
             browserHistory.push("/Statistic/RubbishPutIn");
-        } else if (idx == 1) {
+        }else if (idx == 1) {
             browserHistory.push("/CustomerService/UserManage");
         } else if (idx == 2) {
-            browserHistory.push("/DataManage/RubbishClass");
+            browserHistory.push("/CustomerService/StoreSettlementManage");
         } else if (idx == 3) {
+            browserHistory.push("/DataManage/RubbishClass");
+        } else if (idx == 4) {
             browserHistory.push("/SystemNotice/NoticeManage");
         }
     }
@@ -106,16 +108,23 @@ class TopMenus extends Component {
                     className="dropdown dropdown-user topmenu" onClick={this._menuChange.bind(this, 1, false)}>
                     <a className="dropdown-toggle" data-toggle="dropdown">
                         <i className="icon-people" style={{fontSize: "12px"}}></i> <span
-                        style={this.span_style}>{"客户服务"}</span>
+                        style={this.span_style}>{"用户中心"}</span>
                     </a>
                 </li>
-                <li className="dropdown dropdown-user topmenu" onClick={this._menuChange.bind(this, 2, false)}>
+                <li
+                    className="dropdown dropdown-user topmenu" onClick={this._menuChange.bind(this, 2, false)}>
+                    <a className="dropdown-toggle" data-toggle="dropdown">
+                        <i className="icon-hammer-wrench" style={{fontSize: "12px"}}></i> <span
+                        style={this.span_style}>{"运营管理"}</span>
+                    </a>
+                </li>
+                <li className="dropdown dropdown-user topmenu" onClick={this._menuChange.bind(this, 3, false)}>
                     <a className="dropdown-toggle" data-toggle="dropdown">
                         <i className="icon-database-insert" style={{fontSize: "12px"}}> </i> <span
                         style={this.span_style}>{"数据管理"}</span>
                     </a>
                 </li>
-                <li className="dropdown dropdown-user topmenu" onClick={this._menuChange.bind(this, 3, false)}>
+                <li className="dropdown dropdown-user topmenu" onClick={this._menuChange.bind(this, 4, false)}>
                     <a className="dropdown-toggle" data-toggle="dropdown">
                         <i className="icon-bubble-notification" style={{fontSize: "12px"}}> </i> <span
                         style={this.span_style}>{"公告发布"}</span>

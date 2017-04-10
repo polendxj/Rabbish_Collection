@@ -33,7 +33,7 @@ export default class NoticeListContainer extends Component {
             {text: "新闻政策列表", link: ''}
         ];
         this.operation = [
-            {icon: "icon-add-to-list", text: Current_Lang.others.add, action: "/SystemNotice/NoticeManage/Register"}
+            {icon: "icon-add-to-list", text: "发 布", action: "/SystemNotice/NoticeManage/Register"}
         ];
         this.searchColumn = "ORGANIZATION";
         this.detailData = "";

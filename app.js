@@ -52,6 +52,7 @@ var ReplyRouter = require('./routes/ReplyRouter');
 var NoticeRouter = require('./routes/NoticeRouter');
 var StatisticRouter = require('./routes/StatisticRouter');
 var SystemMonitorRouter = require('./routes/SystemMonitorRouter');
+var VersionControlRouter = require('./routes/VersionControlRouter');
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
@@ -73,6 +74,7 @@ app.use(ReplyRouter)
 app.use(NoticeRouter)
 app.use(StatisticRouter)
 app.use(SystemMonitorRouter)
+app.use(VersionControlRouter)
 
 app.use(express.static(path.join(__dirname, 'build')));
 //app.use(express.static('resues-sorting-home-file'));

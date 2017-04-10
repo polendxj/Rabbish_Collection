@@ -38,6 +38,7 @@ import OrganizationListContainer from './containers/organization/OrganizationLis
 import OrganizationRegisterContainer from './containers/organization/OrganizationRegisterContainer';
 import OrganizationUpdateContainer from './containers/organization/OrganizationUpdateContainer';
 import SystemMonitorContainer from './containers/systemMonitor/SystemMonitorContainer';
+import VersionControlListContainer from './containers/versionControl/VersionControlListContainer';
 import Home from './containers/Home';
 
 let store = configureStore();
@@ -79,6 +80,7 @@ render(
                 <Route path="/CustomerService/OrganizationManage" component={OrganizationListContainer}/>
                 <Route path="/CustomerService/OrganizationManage/Register" component={OrganizationRegisterContainer}/>
                 <Route path="/CustomerService/OrganizationManage/Update/:id" component={OrganizationUpdateContainer}/>
+                <Route path="/CustomerService/VersionControl" component={VersionControlListContainer}/>
             </Route>
         </Router>
     </Provider>,
