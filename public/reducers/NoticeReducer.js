@@ -4,7 +4,8 @@
 import {combineReducers} from 'redux'
 import {audioCodes, videoCodes, DecodeBase64} from '../components/Tool/Tool'
 import {
-    NOTICE_LIST_START, NOTICE_LIST_END
+    NOTICE_LIST_START, NOTICE_LIST_END,
+    NOTICE_DETAIL_START, NOTICE_DETAIL_END
 } from '../constants/index'
 
 export function getNoticeList(state = {data: "", fetching: false}, action) {
@@ -13,6 +14,18 @@ export function getNoticeList(state = {data: "", fetching: false}, action) {
             state = {...state, fetching: true};
             return state;
         case NOTICE_LIST_END:
+            state = {data: action.json, fetching: false};
+            return state;
+        default:
+            return state;
+    }
+}
+export function getNoticeDetail(state = {data: "", fetching: false}, action) {
+    switch (action.type) {
+        case NOTICE_DETAIL_START:
+            state = {...state, fetching: true};
+            return state;
+        case NOTICE_DETAIL_END:
             state = {data: action.json, fetching: false};
             return state;
         default:

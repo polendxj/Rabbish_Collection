@@ -19,6 +19,8 @@ import {
 import {
     NOTICE_LIST_START,
     NOTICE_LIST_END,
+    NOTICE_DETAIL_START,
+    NOTICE_DETAIL_END
 } from '../../constants/index.js'
 import {getListByMutilpCondition, deleteObject} from '../../actions/CommonActions';
 import {commonRefresh} from '../../actions/Common';
@@ -76,8 +78,7 @@ export default class NoticeListContainer extends Component {
     }
 
     _detail(val) {
-        this.detailData = val;
-        this._startRefresh();
+        this.props.dispatch(getListByMutilpCondition(val.id, NOTICE_DETAIL_START, NOTICE_DETAIL_END, notice_detail));
     }
 
     _delete(id, title) {
@@ -128,12 +129,11 @@ export default class NoticeListContainer extends Component {
     }
 
     render() {
-        const {fetching, data} =this.props;
+        const {fetching, data,detailData} =this.props;
+        console.log("detailData",detailData);
         var detailNoticeInfo = "";
-        if (this.detailData == "") {
-            detailNoticeInfo = <Loading />;
-        } else {
-            var hasHttp = this.detailData.img.indexOf("http") > -1;
+        if (detailData.status) {
+            var hasHttp = detailData.data.img.indexOf("http") > -1;
             detailNoticeInfo =
                 <div>
                     <div className="form-horizontal">
@@ -146,7 +146,7 @@ export default class NoticeListContainer extends Component {
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"公告类型"}</label>
                                     <div className="col-lg-4">
-                                        <input type="text" value={noticeType(this.detailData.type)}
+                                        <input type="text" value={noticeType(detailData.data.type)}
                                                className="form-control"
                                                autoComplete="off"/>
                                     </div>
@@ -157,7 +157,7 @@ export default class NoticeListContainer extends Component {
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"标 题"}</label>
                                     <div className="col-lg-4">
-                                        <input type="text" value={this.detailData.title} className="form-control"
+                                        <input type="text" value={detailData.data.title} className="form-control"
                                                autoComplete="off"/>
                                     </div>
                                 </div>
@@ -167,7 +167,7 @@ export default class NoticeListContainer extends Component {
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"内 容"}</label>
                                     <div className="col-lg-10">
-                                    <textarea type="text" value={this.detailData.content} className="form-control"
+                                    <textarea type="text" value={detailData.data.content} className="form-control"
                                               autoComplete="off"></textarea>
                                     </div>
                                 </div>
@@ -181,12 +181,12 @@ export default class NoticeListContainer extends Component {
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
                                             <div className="thumb">
                                                 <img
-                                                    src={this.detailData.img ? (hasHttp ? this.detailData.img : imgBaseUrl + this.detailData.img) : "../assets/images/no_photo.gif"}
+                                                    src={detailData.data.img ? (hasHttp ? detailData.data.img : imgBaseUrl + detailData.data.img) : "../assets/images/no_photo.gif"}
                                                     alt=""
                                                     style={{height: "160px", width: "160px"}}/>
                                                 <div className="caption-overflow" style={{width: "auto"}}>
                                                     <span style={{top: 0, marginTop: 0}}>
-                                                        <a href={this.detailData.img ? (hasHttp ? this.detailData.img : imgBaseUrl + this.detailData.img) : "../assets/images/no_photo.gif"}
+                                                        <a href={detailData.data.img ? (hasHttp ? detailData.data.img : imgBaseUrl + detailData.data.img) : "../assets/images/no_photo.gif"}
                                                            data-popup="lightbox"
                                                            className="btn"
                                                            style={{height: "160px", width: "160px"}}></a>
@@ -202,7 +202,7 @@ export default class NoticeListContainer extends Component {
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"创建时间"}</label>
                                     <div className="col-lg-4">
-                                        <input type="text" value={timeStamp2Time(this.detailData.createTime)}
+                                        <input type="text" value={timeStamp2Time(detailData.data.createTime)}
                                                className="form-control"
                                                autoComplete="off"/>
                                     </div>
@@ -213,7 +213,7 @@ export default class NoticeListContainer extends Component {
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"修改时间"}</label>
                                     <div className="col-lg-4">
-                                        <input type="text" value={timeStamp2Time(this.detailData.updateTime)}
+                                        <input type="text" value={timeStamp2Time(detailData.data.updateTime)}
                                                className="form-control"
                                                autoComplete="off"/>
                                     </div>
@@ -223,6 +223,8 @@ export default class NoticeListContainer extends Component {
                     </div>
 
                 </div>;
+        } else {
+            detailNoticeInfo = <Loading />;
         }
         return (
             <div>
@@ -387,10 +389,11 @@ class NoticeListComponent extends Component {
 }
 
 function mapStateToProps(state) {
-    const {getNoticeList, commonReducer}=state;
+    const {getNoticeList,getNoticeDetail, commonReducer}=state;
     return {
         fetching: getNoticeList.fetching,
         data: getNoticeList.data,
+        detailData: getNoticeDetail.data,
         refresh: commonReducer.refresh
     }
 }
