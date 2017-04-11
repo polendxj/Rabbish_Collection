@@ -442,7 +442,7 @@ export default class StatisticListContainer extends Component {
         const {fetching, classifyData, detailData, cityData, organizationData, rangeDateData, settlementData, operationData, cityList, cityOfCountyList, totalData, classifyList} =this.props;
         console.log("organizationData", organizationData);
         console.log("cityData", cityData);
-        console.log("cityOfCountyList", cityOfCountyList);
+        console.log("rangeDateData", rangeDateData);
         console.log("detailData", detailData);
         var data = "";
         var showCity = "city";
@@ -550,6 +550,7 @@ export default class StatisticListContainer extends Component {
                 </td>
             </tr>)
         }
+        var cityOftotalFlag = true;
         if (rangeDateData) {
             if (rangeDateData.status) {
                 var rangeDateDataList = null;
@@ -561,10 +562,11 @@ export default class StatisticListContainer extends Component {
                     }
                 }
                 if (rangeDateDataList) {
+                    cityOftotalFlag = typeof rangeDateDataList.organizationName =="undefined";
                     daterangeTb.push(<tr key={"rangeDate"}>
                         <td className="text-center">{1}</td>
                         <td className="text-center">
-                            {$("#ofDaterangeSelect").val() ? $("#ofDaterangeSelect").find("option:selected").text() : $("#cityOfDateRangeSelect").find("option:selected").text()}
+                            {rangeDateDataList.organizationName?rangeDateDataList.organizationName:rangeDateDataList.cityName}
                         </td>
                         <td className="text-center">{moneyFormat(rangeDateDataList.weight.toFixed(2))}</td>
                         <td className="text-center">{rangeDateDataList.count}</td>
@@ -601,8 +603,8 @@ export default class StatisticListContainer extends Component {
                     detailDataList.forEach(function (val, key) {
                         detailTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                             <td className="text-center">{key + 1}</td>
-                            <td className="text-center">{val.className}</td>
                             <td className="text-center">{val.name}</td>
+                            <td className="text-center">{val.className}</td>
                             <td className="text-center">{moneyFormat(val.weight.toFixed(2))}</td>
                             <td className="text-center">{moneyFormat(val.points)}</td>
                             <td className="text-center">{timeStamp2Time(val.createTime)}</td>
@@ -1038,7 +1040,7 @@ export default class StatisticListContainer extends Component {
                                                     <th className="col-md-3 text-bold text-center">{"分类名称"}</th>
                                                     <th className="col-md-2 text-bold text-center">{"重量（千克）"}</th>
                                                     <th className="col-md-2 text-bold text-center">{"回馈积分"}</th>
-                                                    <th className="col-md-3 text-bold text-center">{"创建时间"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{"回收时间"}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -1345,7 +1347,7 @@ export default class StatisticListContainer extends Component {
                                                 <thead>
                                                 <tr style={{fontWeight: 'bold'}}>
                                                     <th className="text-center" style={{width: "20px"}}></th>
-                                                    <th className="col-md-4 text-bold text-center">{$("#ofDaterangeSelect").val() ? "单位/小区" : "城市"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{cityOftotalFlag ? "单位/小区" : "城市"}</th>
                                                     <th className="col-md-4 text-bold text-center">{"重量（千克）"}</th>
                                                     <th className="col-md-4 text-bold text-center">{"次数"}</th>
                                                 </tr>
