@@ -12,7 +12,7 @@ import {
     NoData,
     ConfirmModal,
     ErrorModal,
-    ListMiddleModal,
+    ListModal,
     timeStamp2Time,
     noticeType
 } from '../../components/Tool/Tool';
@@ -128,9 +128,14 @@ export default class NoticeListContainer extends Component {
         this.props.dispatch(getListByMutilpCondition(params, NOTICE_LIST_START, NOTICE_LIST_END, notice_list));
     }
 
+    componentDidUpdate(){
+        if(this.props.detailData){
+            $("#jqRenderContent").html(this.props.detailData.data.content);
+        }
+    }
+
     render() {
         const {fetching, data,detailData} =this.props;
-        console.log("detailData",detailData);
         var detailNoticeInfo = "";
         if (detailData.status) {
             var hasHttp = detailData.data.img.indexOf("http") > -1;
@@ -144,38 +149,24 @@ export default class NoticeListContainer extends Component {
                             <div className="form-group">
                                 <div className="col-lg-12">
                                     <label className="col-lg-2 control-label"
-                                           style={{textAlign: 'center'}}>{"公告类型"}</label>
-                                    <div className="col-lg-4">
+                                           style={{textAlign: 'center'}}>{"标 题"}</label>
+                                    <div className="col-lg-3">
+                                        <input type="text" value={detailData.data.title} className="form-control"
+                                               autoComplete="off" disabled="disabled"/>
+                                    </div>
+                                    <label className="col-lg-2 control-label"
+                                           style={{textAlign: 'center'}}>{"类型"}</label>
+                                    <div className="col-lg-3">
                                         <input type="text" value={noticeType(detailData.data.type)}
                                                className="form-control"
-                                               autoComplete="off"/>
+                                               autoComplete="off" disabled="disabled"/>
                                     </div>
                                 </div>
                             </div>
                             <div className="form-group">
                                 <div className="col-lg-12">
                                     <label className="col-lg-2 control-label"
-                                           style={{textAlign: 'center'}}>{"标 题"}</label>
-                                    <div className="col-lg-4">
-                                        <input type="text" value={detailData.data.title} className="form-control"
-                                               autoComplete="off"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <div className="col-lg-12">
-                                    <label className="col-lg-2 control-label"
-                                           style={{textAlign: 'center'}}>{"内 容"}</label>
-                                    <div className="col-lg-10">
-                                    <textarea type="text" value={detailData.data.content} className="form-control"
-                                              autoComplete="off"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <div className="col-lg-12">
-                                    <label className="col-lg-2 control-label"
-                                           style={{textAlign: 'center'}}>{"图 片"}</label>
+                                           style={{textAlign: 'center'}}>{"标题图标"}</label>
                                     <div className="col-lg-4">
                                         <div className="thumbnail"
                                              style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
@@ -197,25 +188,35 @@ export default class NoticeListContainer extends Component {
                                     </div>
                                 </div>
                             </div>
+
+
                             <div className="form-group">
                                 <div className="col-lg-12">
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"创建时间"}</label>
-                                    <div className="col-lg-4">
+                                    <div className="col-lg-3">
                                         <input type="text" value={timeStamp2Time(detailData.data.createTime)}
                                                className="form-control"
-                                               autoComplete="off"/>
+                                               autoComplete="off" disabled="disabled"/>
+                                    </div>
+                                    <label className="col-lg-2 control-label"
+                                           style={{textAlign: 'center'}}>{"修改时间"}</label>
+                                    <div className="col-lg-3">
+                                        <input type="text" value={timeStamp2Time(detailData.data.updateTime)}
+                                               className="form-control"
+                                               autoComplete="off" disabled="disabled"/>
                                     </div>
                                 </div>
                             </div>
+
                             <div className="form-group">
                                 <div className="col-lg-12">
                                     <label className="col-lg-2 control-label"
-                                           style={{textAlign: 'center'}}>{"修改时间"}</label>
-                                    <div className="col-lg-4">
-                                        <input type="text" value={timeStamp2Time(detailData.data.updateTime)}
-                                               className="form-control"
-                                               autoComplete="off"/>
+                                           style={{textAlign: 'center'}}>{"内 容"}</label>
+                                    <div className="col-lg-8" >
+                                        <pre className=" content-group language-markup" id="jqRenderContent" style={{wordBreak:"break-all"}}>
+
+                                        </pre>
                                     </div>
                                 </div>
                             </div>
@@ -267,7 +268,7 @@ export default class NoticeListContainer extends Component {
                                              _detail={this._detail}/>
 
                     </fieldset>
-                    <ListMiddleModal id="noticeDetailModal" content={detailNoticeInfo}
+                    <ListModal  content={detailNoticeInfo}
                                      doAction={""}
                                      tip={"公告信息"} actionText="公告详情" hide="true" hideCancel="true"/>
                 </div>
@@ -330,7 +331,7 @@ class NoticeListComponent extends Component {
                                     <ul className="dropdown-menu dropdown-menu-right">
                                         <li>
                                             <a href="javascript:void(0)" data-toggle="modal"
-                                               data-target="#noticeDetailModal"
+                                               data-target="#ListModal"
                                                onClick={this._detail.bind(this, val)}><i
                                                 className=" icon-office"></i>
                                                 {"详情"}</a>

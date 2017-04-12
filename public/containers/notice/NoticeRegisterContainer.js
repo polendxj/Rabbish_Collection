@@ -106,15 +106,12 @@ class RegisterNoticeComponent extends Component{
         this.props._startRefresh();
     }
     _save(imgUrl) {
-        console.log("imgUrl", imgUrl);
-        console.log("form", $("#noticeForm").validate().form());
         var content = UE.getEditor("content").getContent();
-        console.log("content",content);
         var formFields = $("#noticeForm").serializeArray();
         var params = array2Json(formFields);
         params.img = imgUrl;
-        params.content = content;
-        console.log("params",params);
+        params.content = content.replace(new RegExp(/(")/g),"'").replace(new RegExp(/(&)/g),"-----");
+        console.log(params.content);
         if($("#noticeForm").validate().form()){
             this.props._save(params);
         }

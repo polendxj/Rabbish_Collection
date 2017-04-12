@@ -16,7 +16,7 @@ router.post('/rsapp/notice', function (req, resp) {
                 var count = 0;
                 notices.data.content.forEach(function (m, k) {
                     (function (m) {
-                        RequestApi.Request(baseURL + '/rsapp/adminUser/'+ m.userid, 'GET', "", req, resp, function (user) {
+                        RequestApi.Request(baseURL + '/rsapp/adminUser/' + m.userid, 'GET', "", req, resp, function (user) {
                             if (user.data) {
                                 m["userName"] = user.data.name;
                             } else {
@@ -36,18 +36,21 @@ router.post('/rsapp/notice', function (req, resp) {
             resp.send(notices)
         }
     });
-    router.post('/rsapp/notice/register', function (req, resp) {
-        var data = JSON.stringify(JSON.parse(req.body.data));
-        RequestApi.Request(baseURL + '/rsapp/notice', 'POST',data, req, resp);
-    });
-    router.post('/rsapp/notice/detail', function (req, resp) {
-        var data = req.body.data;
-        RequestApi.Request(baseURL + '/rsapp/notice/'+data, 'GET',"", req, resp);
-    });
-    router.post('/rsapp/notice/delete', function (req, resp) {
-        var data = JSON.stringify(JSON.parse(req.body.data));
-        RequestApi.Request(baseURL + '/rsapp/notice/'+data, 'DELETE',"", req, resp);
-    });
+
+});
+
+router.post('/rsapp/notice/register', function (req, resp) {
+    var data = JSON.stringify(JSON.parse(req.body.data));
+    data=data.replace(new RegExp(/(-----)/g),"&");
+    RequestApi.Request(baseURL + '/rsapp/notice', 'POST', data, req, resp);
+});
+router.post('/rsapp/notice/detail', function (req, resp) {
+    var data = req.body.data;
+    RequestApi.Request(baseURL + '/rsapp/notice/' + data, 'GET', "", req, resp);
+});
+router.post('/rsapp/notice/delete', function (req, resp) {
+    var data = JSON.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/notice/' + data, 'DELETE', "", req, resp);
 });
 
 module.exports = router;
