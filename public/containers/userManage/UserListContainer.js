@@ -163,7 +163,17 @@ export default class UserListContainer extends Component {
             userid: userid,
             number: $("#qrcid").val()
         };
-        this.props.dispatch(saveObject(params, "", "", bind_qrcode, "/CustomerService/UserManage", "bindQrcode"));
+        this.props.dispatch(saveObject(params, "", "", bind_qrcode, "/CustomerService/UserManage", "bindQrcode",function () {
+            var params = {
+                page: this.page,
+                size: page_size,
+                cityid: $("#citySelect").val(),
+                countyid: $("#countrySelect").val(),
+                organizationid: $("#organizationSelect").val()
+            };
+            this.props.dispatch(getListByMutilpCondition(params, GENERALUSER_LIST_START, GENERALUSER_LIST_END, generalUser_list));
+            $("#bindQrcodeModal").modal('hide');
+        }));
     }
 
     _search() {

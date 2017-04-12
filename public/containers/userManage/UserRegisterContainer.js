@@ -74,17 +74,23 @@ class RegisterUserComponent extends Component {
     }
 
     _uploadImg() {
-        $('#file-input').fileinput('upload');
+        var files = $('#file-input').prop("files");
+        if(files.length > 0){
+            $('#file-input').fileinput('upload');
+        }else {
+            this._save("");
+        }
     }
 
     _save(imgUrl) {
         console.log("imgUrl", imgUrl);
+        var address = $("#address").val()+$("#building").val()+"栋"+$("#unit").val()+"单元"+$("#floor").val()+"楼";
         console.log("form", $("#generalUserForm").validate().form());
         var formFields = $("#generalUserForm").serializeArray();
         var params = array2Json(formFields);
-        var password = sha1.hex(params.password);
-        params.password = password;
         params.headimg = imgUrl;
+        params.address = address;
+        console.log(params);
         if($("#generalUserForm").validate().form()){
             this.props._save(params);
         }
@@ -100,7 +106,7 @@ class RegisterUserComponent extends Component {
         $("#btnSendCode").attr("disabled", "true");
         $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
         this.interValObj = setInterval(that.setRemainTime, 1000);
-        // this.props._sendMessage(phone);
+        this.props._sendMessage(phone);
     }
     setRemainTime() {
         var curCount = sessionStorage['count'];
@@ -138,7 +144,7 @@ class RegisterUserComponent extends Component {
             }
         });
         $("#generalUserForm").validate({
-            ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
+            ignore: 'input[type=hidden],input[type=number], .select2-input', // ignore hidden fields
             errorClass: 'validation-error-label',
             successClass: 'validation-valid-label',
             highlight: function(element, errorClass) {
@@ -151,14 +157,6 @@ class RegisterUserComponent extends Component {
             validClass: "validation-valid-label",
             success: function(label) {
                 label.addClass("validation-valid-label").text("Success.")
-            },
-            rules: {
-                password: {
-                    minlength: 6
-                },
-                repeat_password: {
-                    equalTo: "#password"
-                }
             }
         });
         if(sessionStorage['messageTime']!=""){
@@ -176,161 +174,235 @@ class RegisterUserComponent extends Component {
         sessionStorage['messageTime'] = "";
         $("#btnSendCode").removeAttr("disabled");//启用按钮
     }
+    _changeOrg(){
+        $("#address").val($("#organizationid").find("option:selected").attr("id").split("-")[1])
+    }
     render() {
         const {data}=this.props;
+        var defaultAddress = "";
         console.log("orgina", data);
         const options = [];
         if (data) {
             if (data.status) {
+                defaultAddress = data.data.content[0].address;
                 data.data.content.forEach(function (val, key) {
                     options.push(
-                        <option key={"option" + key} value={val.id}>{val.name}</option>
+                        <option key={"option" + key} value={val.id} id={key+"-"+val.address}>{val.name}</option>
                     )
                 })
             }
         }
         var tableHeight = ($(window).height() - 130);
-        return (
-            <div>
-                <form id="generalUserForm" className="form-horizontal" encType="multipart/form-data">
-                    <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
-                        <div className="col-sm-8 col-sm-offset-2">
-                            <fieldset className="content-group">
-                                <legend className="text-bold">
-                                    {"用户基础信息"}
-                                </legend>
-                                <div className="form-group">
-                                    <label className="col-lg-2 control-label"
-                                           style={{textAlign: 'center'}}>{"用户类型"}</label>
-                                    <div className="col-lg-9">
-                                        <select className="form-control" name="type" defaultValue={4}>
-                                            <option value={3}>{"商户用户"}</option>
-                                            <option value={4}>{"住宅用户"}</option>
-                                            <option value={5}>{"机关单位、学校"}</option>
-                                        </select>
+        console.log(defaultAddress);
+        if(defaultAddress!==""){
+            return (
+                <div>
+                    <form id="generalUserForm" className="form-horizontal" encType="multipart/form-data">
+                        <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+                            <div className="col-sm-8 col-sm-offset-2">
+                                <fieldset className="content-group">
+                                    <legend className="text-bold">
+                                        {"用户基础信息"}
+                                    </legend>
+                                    <div className="form-group">
+                                        <label className="col-lg-2 control-label"
+                                               style={{textAlign: 'center'}}>{"用户类型"}</label>
+                                        <div className="col-lg-9">
+                                            <select className="form-control" name="type" defaultValue={4}>
+                                                <option value={3}>{"商户用户"}</option>
+                                                <option value={4}>{"住宅用户"}</option>
+                                                <option value={5}>{"机关单位、学校"}</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-lg-2 control-label"
-                                           style={{textAlign: 'center'}}>{"单位、小区"}</label>
-                                    <div className="col-lg-9">
-                                        <select className="form-control" name="organizationid">
-                                            {options}
-                                        </select>
+                                    <div className="form-group">
+                                        <label className="col-lg-2 control-label"
+                                               style={{textAlign: 'center'}}>{"单位、小区"}</label>
+                                        <div className="col-lg-9">
+                                            <select className="form-control" id="organizationid" name="organizationid" onChange={this._changeOrg.bind(this)}>
+                                                {options}
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-lg-2 control-label"
-                                           style={{
-                                               textAlign: 'center'
-                                           }}>{"真实姓名"}</label>
-                                    <div className="col-lg-9">
-                                        <input name="realName" type="text" className="form-control"
-                                               placeholder={"真实姓名"} required="required"
-                                               autoComplete="off"/>
+                                    <div className="form-group">
+                                        <label className="col-lg-2 control-label"
+                                               style={{
+                                                   textAlign: 'center'
+                                               }}>{"真实姓名"}</label>
+                                        <div className="col-lg-9">
+                                            <input name="realName" type="text" className="form-control"
+                                                   placeholder={"真实姓名"} required="required"
+                                                   autoComplete="off"/>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="form-group">
-                                    <label className="col-lg-2 control-label"
-                                           style={{
-                                               textAlign: 'center'
-                                           }}>{"身份证号码"}</label>
-                                    <div className="col-lg-9">
-                                        <input name="idno" type="text" className="form-control"
-                                               placeholder={"身份证号码"} required="required"
-                                               autoComplete="off"/>
+                                    <div className="form-group">
+                                        <label className="col-lg-2 control-label"
+                                               style={{
+                                                   textAlign: 'center'
+                                               }}>{"身份证号码"}</label>
+                                        <div className="col-lg-9">
+                                            <input name="idno" type="text" className="form-control"
+                                                   placeholder={"身份证号码"} required="required"
+                                                   autoComplete="off"/>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="form-group">
-                                    <label className="col-lg-2 control-label"
-                                           style={{
-                                               textAlign: 'center'
-                                           }}>{"头像URL"}</label>
-                                    <div className="col-lg-9">
-                                        <input type="file" name="file" id="file-input"
-                                               multiple data-min-file-count="1"/>
+                                    <div className="form-group">
+                                        <label className="col-lg-2 control-label"
+                                               style={{
+                                                   textAlign: 'center'
+                                               }}>{"头像URL"}</label>
+                                        <div className="col-lg-9">
+                                            <input type="file" name="file" id="file-input"
+                                                   multiple data-min-file-count="0"/>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="form-group">
-                                    <label className="col-lg-2 control-label"
-                                           style={{
-                                               textAlign: 'center'
-                                           }}>{"密码"}</label>
-                                    <div className="col-lg-9">
-                                        <input id="password" name="password" type="password" className="form-control"
-                                               placeholder={"密码"} required="required"
-                                               autoComplete="off"/>
+                                    <div className="form-group">
+                                        <label className="col-lg-2 control-label"
+                                               style={{
+                                                   textAlign: 'center'
+                                               }}>{"手机号"}</label>
+                                        <div className="col-lg-9">
+                                            <input name="phone" type="text" className="form-control"
+                                                   placeholder={"手机号"} required="required"
+                                                   autoComplete="off"/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-lg-2 control-label"
-                                           style={{
-                                               textAlign: 'center'
-                                           }}>{"确认密码"}</label>
-                                    <div className="col-lg-9">
-                                        <input id="confirmPassword" name="repeat_password" type="password" className="form-control"
-                                               placeholder={"确认密码"} required="required"
-                                               autoComplete="off"/>
+                                    <div className="form-group has-feedback">
+                                        <label className="col-lg-2 control-label"
+                                               style={{
+                                                   textAlign: 'center'
+                                               }}>{"地址"}</label>
+                                        <div className="col-lg-3">
+                                            <input id="address" type="text" className="form-control"
+                                                   defaultValue={defaultAddress} placeholder={"地址"}
+                                                   autoComplete="off"/>
+                                        </div>
+                                        <div className="col-lg-2">
+                                            <input id="building" type="number" className="form-control"/>
+                                            <div className="form-control-feedback">
+                                                栋
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-2">
+                                            <input id="unit" type="number" className="form-control" />
+                                            <div className="form-control-feedback">
+                                                单元
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-2">
+                                            <input id="floor" type="number" className="form-control" />
+                                            <div className="form-control-feedback">
+                                                楼
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-lg-2 control-label"
-                                           style={{
-                                               textAlign: 'center'
-                                           }}>{"手机号"}</label>
-                                    <div className="col-lg-9">
-                                        <input name="phone" type="text" className="form-control"
-                                               placeholder={"手机号"} required="required"
-                                               autoComplete="off"/>
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-lg-2 control-label"
-                                           style={{
-                                               textAlign: 'center'
-                                           }}>{"地址"}</label>
-                                    <div className="col-lg-9">
-                                        <input name="address" type="text" className="form-control"
-                                               placeholder={"地址"} required="required"
-                                               autoComplete="off"/>
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-lg-2 control-label"
-                                           style={{
-                                               textAlign: 'center'
-                                           }}>{"获取验证码"}</label>
-                                    <div className="col-lg-9">
-                                        <div className="input-group">
-                                            <input type="text" name="authcode" className="form-control"
-                                                   placeholder="输入验证码" required="required"/>
-                                            <span className="input-group-btn">
+                                    <div className="form-group">
+                                        <label className="col-lg-2 control-label"
+                                               style={{
+                                                   textAlign: 'center'
+                                               }}>{"获取验证码"}</label>
+                                        <div className="col-lg-9">
+                                            <div className="input-group">
+                                                <input type="text" name="authcode" className="form-control"
+                                                       placeholder="输入验证码" required="required"/>
+                                                <span className="input-group-btn">
                                                 <button id="btnSendCode" className="btn bg-primary" type="button" onClick={this._sendMessage}>
                                                     获取验证码
                                                 </button>
                                             </span>
+                                            </div>
                                         </div>
+                                    </div>
+
+                                </fieldset>
+
+                                <div className="form-group">
+                                    <div className="col-lg-11 text-right" style={{marginTop: "50px"}}>
+                                        <button type="button" className="btn btn-primary"
+                                                onClick={this._uploadImg.bind(this)}>{"保存"}
+                                        </button>
                                     </div>
                                 </div>
 
-                            </fieldset>
-
-                            <div className="form-group">
-                                <div className="col-lg-11 text-right" style={{marginTop: "50px"}}>
-                                    <button type="button" className="btn btn-primary"
-                                            onClick={this._uploadImg.bind(this)}>{"保存"}
-                                    </button>
-                                </div>
                             </div>
-
                         </div>
-                    </div>
-                </form>
-            </div>
-        )
+                    </form>
+                </div>
+            )
+        }else{
+            return (
+                <div>
+                    <form id="generalUserForm" className="form-horizontal" encType="multipart/form-data">
+                        <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+                            <div className="col-sm-8 col-sm-offset-2">
+                                <fieldset className="content-group">
+                                    <legend className="text-bold">
+                                        {"用户基础信息"}
+                                    </legend>
+                                    <div className="form-group">
+                                        <label className="col-lg-2 control-label"
+                                               style={{textAlign: 'center'}}>{"用户类型"}</label>
+                                        <div className="col-lg-9">
+                                            <select className="form-control" name="type" defaultValue={4}>
+                                                <option value={3}>{"商户用户"}</option>
+                                                <option value={4}>{"住宅用户"}</option>
+                                                <option value={5}>{"机关单位、学校"}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="col-lg-2 control-label"
+                                               style={{textAlign: 'center'}}>{"单位、小区"}</label>
+                                        <div className="col-lg-9">
+                                            <select className="form-control" id="organizationid" name="organizationid" onChange={this._changeOrg.bind(this)}>
+                                                {options}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="col-lg-2 control-label"
+                                               style={{
+                                                   textAlign: 'center'
+                                               }}>{"真实姓名"}</label>
+                                        <div className="col-lg-9">
+                                            <input name="realName" type="text" className="form-control"
+                                                   placeholder={"真实姓名"} required="required"
+                                                   autoComplete="off"/>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="col-lg-2 control-label"
+                                               style={{
+                                                   textAlign: 'center'
+                                               }}>{"身份证号码"}</label>
+                                        <div className="col-lg-9">
+                                            <input name="idno" type="text" className="form-control"
+                                                   placeholder={"身份证号码"} required="required"
+                                                   autoComplete="off"/>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="col-lg-2 control-label"
+                                               style={{
+                                                   textAlign: 'center'
+                                               }}>{"头像URL"}</label>
+                                        <div className="col-lg-9">
+                                            <input type="file" name="file" id="file-input"
+                                                   multiple data-min-file-count="0"/>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            )
+        }
 
     }
 }

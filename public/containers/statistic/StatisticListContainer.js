@@ -22,6 +22,8 @@ import {
 } from '../../components/Tool/Tool';
 import {
     STATISTICBYCLASSIFY_LIST_START,
+    STATISTICBYDETAIL_LIST_START,
+    STATISTICBYDETAIL_LIST_END,
     STATISTICBYCLASSIFY_LIST_END,
     STATISTICBYCITY_LIST_START,
     STATISTICBYCITY_LIST_END,
@@ -60,6 +62,7 @@ export default class StatisticListContainer extends Component {
         this.orgaEveryAndTotalData = "";
         this.searchColumn = "CITY";
         this.currentCityId = 1;
+        this.detailOfcurrentCityId = 1;
         this.cityOfcurrentCityId = 1;
         this.organizationOfcurrentCityId = 1;
         this.daterangeOfcurrentCityId = 1;
@@ -70,6 +73,7 @@ export default class StatisticListContainer extends Component {
         this.currentOrgaCity = "崇州";
         this.currentOrgaOrganization = "";
         this._search = this._search.bind(this);
+        this._changeCityOfDetail = this._changeCityOfDetail.bind(this);
         this._changeCity = this._changeCity.bind(this);
         this._changeCityOfCity = this._changeCityOfCity.bind(this);
         this._changeCityOfOrganization = this._changeCityOfOrganization.bind(this);
@@ -81,6 +85,7 @@ export default class StatisticListContainer extends Component {
         this.classifyPage = 0;
         this.orgPage = 0;
         this.cityPage = 0;
+        this.detailPage = 0;
     }
 
     componentDidMount() {
@@ -94,10 +99,12 @@ export default class StatisticListContainer extends Component {
             startday: "2016-01-01",
             endday: timeStamp2Time(new Date().getTime())
         };
+        var detailParams = {page: 0, size: page_size, organizationid: 1, startTime: new Date("2016-01-01").getTime(), endTime: new Date().getTime()};
         var defaultParams = {page: 0, size: 10000};
         var cityParams = {page: 0, size: 100};
         var monitorParams = {origin: 1};
         this.props.dispatch(getListByMutilpCondition(params, STATISTICBYCLASSIFY_LIST_START, STATISTICBYCLASSIFY_LIST_END, statisticByClassify_list));
+        this.props.dispatch(getListByMutilpCondition(detailParams, STATISTICBYDETAIL_LIST_START, STATISTICBYDETAIL_LIST_END, statisticByDetail_list));
         this.props.dispatch(getListByMutilpCondition(params, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
         this.props.dispatch(getListByMutilpCondition(params, STATISTICBYORGANIZATION_LIST_START, STATISTICBYORGANIZATION_LIST_END, statisticByOrganization_list));
         this.props.dispatch(getListByMutilpCondition({cityid: self.currentCityId}, STATISTICBYRANGEDATE_LIST_START, STATISTICBYRANGEDATE_LIST_END, statisticByRangeDate_list));
@@ -144,6 +151,16 @@ export default class StatisticListContainer extends Component {
                 endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
             };
             this.props.dispatch(getListByMutilpCondition(cityParams, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
+        } else if (type == "DETAIL") {
+            var rangeTime = $("#daterange-two-1").val();
+            var detailParams = {
+                page: 0,
+                size: page_size,
+                organizationid: $("#ofDetailSelect").val(),
+                startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
+                endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+            };
+            this.props.dispatch(getListByMutilpCondition(detailParams, STATISTICBYDETAIL_LIST_START, STATISTICBYDETAIL_LIST_END, statisticByDetail_list));
         } else if (type == "ORGANIZATION") {
             this.searchOfOrganizationid = $("#ofOrganizationSelect").val();
             this.currentOrgaCity = $("#cityOfOrganizationSelect").find("option:selected").text();
@@ -182,7 +199,12 @@ export default class StatisticListContainer extends Component {
             this.props.dispatch(getListByMutilpCondition(rangeDateParams, STATISTICBYRANGEDATE_LIST_START, STATISTICBYRANGEDATE_LIST_END, statisticByRangeDate_list));
         }
     }
-
+    _changeCityOfDetail() {
+        var citieid = $("#cityOfDetailSelect").val();
+        this.currentCity = filterCityById(this.props.cityList.data, citieid);
+        this.detailOfcurrentCityId = citieid;
+        this._startRefresh();
+    }
     _changeCity() {
         var citieid = $("#citySelect").val();
         this.currentCity = filterCityById(this.props.cityList.data, citieid);
@@ -248,6 +270,47 @@ export default class StatisticListContainer extends Component {
         this._startRefresh();
     }
 
+    _detailChangePage(page) {
+        this.detailPage=page;
+        var rangeTime = $("#daterange-two-1").val();
+        var detailParams = {
+            page: this.detailPage,
+            size: page_size,
+            organizationid: $("#ofDetailSelect").val(),
+            startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
+            endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+        };
+        this.props.dispatch(getListByMutilpCondition(detailParams, STATISTICBYDETAIL_LIST_START, STATISTICBYDETAIL_LIST_END, statisticByDetail_list));
+    }
+
+    _detailPrePage(page) {
+        this.detailPage=this.detailPage-1;
+        var rangeTime = $("#daterange-two-1").val();
+        var detailParams = {
+            page: this.detailPage,
+            size: page_size,
+            organizationid: $("#ofDetailSelect").val(),
+            startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
+            endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+        };
+        this.props.dispatch(getListByMutilpCondition(detailParams, STATISTICBYDETAIL_LIST_START, STATISTICBYDETAIL_LIST_END, statisticByDetail_list));
+
+    }
+
+    _detailNextPage(page) {
+        this.detailPage=this.detailPage+1;
+        var rangeTime = $("#daterange-two-1").val();
+        var detailParams = {
+            page: this.detailPage,
+            size: page_size,
+            organizationid: $("#ofDetailSelect").val(),
+            startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
+            endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+        };
+        this.props.dispatch(getListByMutilpCondition(detailParams, STATISTICBYDETAIL_LIST_START, STATISTICBYDETAIL_LIST_END, statisticByDetail_list));
+
+    }
+
     _cityChangePage(page) {
         this.cityPage=page;
         var rangeTime = $("#daterange-two-2").val();
@@ -259,7 +322,6 @@ export default class StatisticListContainer extends Component {
             endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
         };
         this.props.dispatch(getListByMutilpCondition(cityParams, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
-
     }
 
     _cityPrePage(page) {
@@ -377,11 +439,11 @@ export default class StatisticListContainer extends Component {
     }
 
     render() {
-        const {fetching, classifyData, cityData, organizationData, rangeDateData, settlementData, operationData, cityList, cityOfCountyList, totalData, classifyList} =this.props;
+        const {fetching, classifyData, detailData, cityData, organizationData, rangeDateData, settlementData, operationData, cityList, cityOfCountyList, totalData, classifyList} =this.props;
         console.log("organizationData", organizationData);
         console.log("cityData", cityData);
-        console.log("cityOfCountyList", cityOfCountyList);
-        console.log("settlementData", settlementData);
+        console.log("rangeDateData", rangeDateData);
+        console.log("detailData", detailData);
         var data = "";
         var showCity = "city";
         let cityTb = [];
@@ -488,6 +550,7 @@ export default class StatisticListContainer extends Component {
                 </td>
             </tr>)
         }
+        var cityOftotalFlag = true;
         if (rangeDateData) {
             if (rangeDateData.status) {
                 var rangeDateDataList = null;
@@ -499,13 +562,14 @@ export default class StatisticListContainer extends Component {
                     }
                 }
                 if (rangeDateDataList) {
+                    cityOftotalFlag = typeof rangeDateDataList.organizationName =="undefined";
                     daterangeTb.push(<tr key={"rangeDate"}>
                         <td className="text-center">{1}</td>
                         <td className="text-center">
-                            {$("#ofDaterangeSelect").val() ? $("#ofDaterangeSelect").find("option:selected").text() : $("#cityOfDateRangeSelect").find("option:selected").text()}
+                            {rangeDateDataList.organizationName?rangeDateDataList.organizationName:rangeDateDataList.cityName}
                         </td>
+                        <td className="text-center">{moneyFormat(rangeDateDataList.weight.toFixed(2))}</td>
                         <td className="text-center">{rangeDateDataList.count}</td>
-                        <td className="text-center">{rangeDateDataList.weight}</td>
                     </tr>)
                 } else {
                     daterangeTb.push(<tr key={'noData'}>
@@ -519,6 +583,45 @@ export default class StatisticListContainer extends Component {
             }
         } else {
             daterangeTb.push(<tr key={'loading'}>
+                <td colSpan="100" style={{textAlign: 'center'}}>
+                    <Loading />
+                </td>
+            </tr>)
+        }
+        var detailTb = [];
+        if (detailData) {
+            if (detailData.status) {
+                var detailDataList = null;
+                if (detailData.data) {
+                    if (typeof detailData.data.content == "undefined") {
+                        detailDataList = detailData.data;
+                    } else {
+                        detailDataList = detailData.data.content;
+                    }
+                }
+                if (detailDataList) {
+                    detailDataList.forEach(function (val, key) {
+                        detailTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
+                            <td className="text-center">{key + 1}</td>
+                            <td className="text-center">{val.name}</td>
+                            <td className="text-center">{val.className}</td>
+                            <td className="text-center">{moneyFormat(val.weight.toFixed(2))}</td>
+                            <td className="text-center">{moneyFormat(val.points)}</td>
+                            <td className="text-center">{timeStamp2Time(val.createTime)}</td>
+                        </tr>)
+                    }.bind(this));
+                } else {
+                    detailTb.push(<tr key={'noData'}>
+                        <td colSpan="100" style={{textAlign: 'center'}}>
+                            <NoData />
+                        </td>
+                    </tr>)
+                }
+            } else {
+                detailTb.push(ErrorModal(Current_Lang.status.minor, "获取数据错误"));
+            }
+        } else {
+            detailTb.push(<tr key={'loading'}>
                 <td colSpan="100" style={{textAlign: 'center'}}>
                     <Loading />
                 </td>
@@ -565,6 +668,7 @@ export default class StatisticListContainer extends Component {
         }
         var cityOptions = [];
         var organizationOptions = [];
+        var organizationOfDetailOptions = [];
         var cityOfCountyOptions = [];
         var countyOptions = [];
         if (cityOfCountyList) {
@@ -624,15 +728,21 @@ export default class StatisticListContainer extends Component {
                         cityList.data[idx].organization.content.forEach(function (val, index) {
                             organizationOptions.push(
                                 <option key={"organization-" + index} value={val.id}>{val.name}</option>
-                            )
-                        })
+                            );
+                            organizationOfDetailOptions.push(
+                                <option key={"organization-" + index} value={val.id}>{val.name}</option>
+                            );
+                        });
                     }
                 } else {
                     if (this.currentCity.organization.content.length > 0) {
                         this.currentCity.organization.content.forEach(function (val, index) {
                             organizationOptions.push(
                                 <option key={"organization-" + index} value={val.id}>{val.name}</option>
-                            )
+                            );
+                            organizationOfDetailOptions.push(
+                                <option key={"organization-" + index} value={val.id}>{val.name}</option>
+                            );
                         })
                     }
 
@@ -642,7 +752,6 @@ export default class StatisticListContainer extends Component {
         var showOperation = "获取中...";
         var showTotal = "获取中...";
         var showTotalOfCity = "获取中...";
-        console.log("totalData", totalData);
         if (cityData) {
             if (cityData.totalCityData) {
                 showTotalOfCity = "ok";
@@ -821,8 +930,8 @@ export default class StatisticListContainer extends Component {
                                                 value={this.totalCurrentCityId} onChange={this._changeCityOfTotal}>
                                             {cityOptions}
                                         </select>
-                                        垃圾投放总量 &nbsp;/ 垃圾投放次数
-                                        <div className="text-muted text-size-small">单位：千克</div>
+                                        垃圾投放总量（吨） &nbsp;/ 垃圾投放次数（次）
+                                        <div className="text-muted text-size-small">单位：吨</div>
                                         <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
 
                                 </div>
@@ -875,10 +984,73 @@ export default class StatisticListContainer extends Component {
                                                     aria-expanded="false">结算记录统计</a></li>
                                 <li className=""><a href="#basic-justified-tab5" data-toggle="tab"
                                                     aria-expanded="false">总量数据统计</a></li>
+                                <li className=""><a href="#basic-justified-tab1" data-toggle="tab"
+                                                          aria-expanded="false">垃圾回收记录</a></li>
                             </ul>
 
                             <div className="tab-content">
+                                <div className="tab-pane" id="basic-justified-tab1">
+                                    <fieldset className="content-group">
+                                        <legend className="text-bold">搜索区</legend>
+                                        <ul className="list-inline list-inline-condensed no-margin-bottom"
+                                            style={{textAlign: 'right', marginTop: '-59px'}}>
+                                            <li >
+                                                <select id="cityOfDetailSelect" className="form-control"
+                                                        value={this.detailOfcurrentCityId}
+                                                        onChange={this._changeCityOfDetail}>
+                                                    {cityOptions}
+                                                </select>
+                                            </li>
+                                            <li >
+                                                <select id="ofDetailSelect" className="form-control">
+                                                    {organizationOfDetailOptions}
+                                                </select>
+                                            </li>
+                                            <li >
+                                                <input id="daterange-two-1" type="text"
+                                                       className="form-control daterange-two"
+                                                       placeholder="选择日期" style={style}/>
+                                            </li>
+                                            <li>
+                                                <button onClick={this._search.bind(this, "DETAIL")} type="button"
+                                                        className="btn btn-primary btn-icon"><i
+                                                    className="icon-search4"></i></button>
+                                            </li>
 
+                                        </ul>
+                                    </fieldset>
+                                    <fieldset className="content-group">
+                                        <div style={{marginTop: '-20px'}}>
+                                            <Pagenation counts={detailData.status&&detailData.data ? detailData.data.totalElements : 0} page={this.detailPage}
+                                                        _changePage={this._detailChangePage.bind(this)}
+                                                        _prePage={this._detailPrePage.bind(this)}
+                                                        _nextPage={this._detailNextPage.bind(this)}
+                                                        inputNumberID="inputNumber1"
+                                                        perPageID="perPageID1"
+                                            />
+                                        </div>
+                                        <div className="table-responsive"
+                                             style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+                                            <table className="table table-bordered table-hover"
+                                                   style={{marginBottom: '85px'}}>
+                                                <thead>
+                                                <tr style={{fontWeight: 'bold'}}>
+                                                    <th className="text-center" style={{width: "20px"}}></th>
+                                                    <th className="col-md-2 text-bold text-center">{"姓名"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{"分类名称"}</th>
+                                                    <th className="col-md-2 text-bold text-center">{"重量（千克）"}</th>
+                                                    <th className="col-md-2 text-bold text-center">{"回馈积分"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{"回收时间"}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {detailTb}
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </fieldset>
+                                </div>
                                 <div className="tab-pane active" id="basic-justified-tab2">
                                     <fieldset className="content-group">
                                         <legend className="text-bold">搜索区</legend>
@@ -1175,9 +1347,9 @@ export default class StatisticListContainer extends Component {
                                                 <thead>
                                                 <tr style={{fontWeight: 'bold'}}>
                                                     <th className="text-center" style={{width: "20px"}}></th>
-                                                    <th className="col-md-4 text-bold text-center">{$("#ofDaterangeSelect").val() ? "单位/小区" : "城市"}</th>
-                                                    <th className="col-md-4 text-bold text-center">{"投放次数"}</th>
-                                                    <th className="col-md-4 text-bold text-center">{"投放重量"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{cityOftotalFlag ? "单位/小区" : "城市"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{"重量（千克）"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{"次数"}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -1211,13 +1383,14 @@ export default class StatisticListContainer extends Component {
 
 function mapStateToProps(state) {
     const {
-        getCityOfOrganizationList, getStatisticByClassifyList, getStatisticByCityList,
+        getStatisticByDetailList,getCityOfOrganizationList, getStatisticByClassifyList, getStatisticByCityList,
         getStatisticByOrganizationList, getStatisticByRangeDateList, getStatisticSettlementDate,
         getClassConfList, getCityList, getOperationMonitor, getStatisticByTotalList, commonReducer
     }=state;
     return {
         fetching: getStatisticByClassifyList.fetching,
         classifyData: getStatisticByClassifyList.data,
+        detailData: getStatisticByDetailList.data,
         cityData: getStatisticByCityList.data,
         organizationData: getStatisticByOrganizationList.data,
         rangeDateData: getStatisticByRangeDateList.data,

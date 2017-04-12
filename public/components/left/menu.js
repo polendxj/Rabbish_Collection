@@ -51,10 +51,14 @@ class MainMenu extends Component {
                 $(".sidebar-main").show();
                 break;
             case 2:
-                mainMenu = <DataManager _changeLeftMenu={this.props._changeLeftMenu}/>;
+                mainMenu = <OperationManage _changeLeftMenu={this.props._changeLeftMenu}/>;
                 $(".sidebar-main").show();
                 break;
             case 3:
+                mainMenu = <DataManager _changeLeftMenu={this.props._changeLeftMenu}/>;
+                $(".sidebar-main").show();
+                break;
+            case 4:
                 mainMenu = <NotifyManager _changeLeftMenu={this.props._changeLeftMenu}/>;
                 $(".sidebar-main").show();
                 break;
@@ -134,9 +138,6 @@ class Business extends Component {
     render() {
         return (
             <ul className="navigation navigation-main navigation-accordion">
-                <li className="navigation-header left"><span>{"用户中心"}</span> <i className="icon-menu" title=""
-                                                                                data-original-title="用户中心"></i>
-                </li>
                 <li className="left active" onClick={this._leftMenuClick.bind(this, '/CustomerService/UserManage')}><a
                     href="javascript:void(0)"><i
                     className=" icon-user"></i> <span>{"普通用户"}</span></a></li>
@@ -146,9 +147,33 @@ class Business extends Component {
                 <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/AdminUserManage')}><a
                     href="javascript:void(0)"><i
                     className=" icon-user-tie"></i> <span>{"管理员 & 扫码员"}</span></a></li>
-                <li className="navigation-header left"><span>{"其他服务"}</span> <i className="icon-menu" title=""
-                                                                                data-original-title="商家管理"></i>
-                </li>
+            </ul>
+        )
+    }
+}
+
+class OperationManage extends Component {
+    _leftMenuClick(path) {
+        browserHistory.push(path)
+    }
+
+    componentDidMount() {
+        $('.navigation-main').find('li').has('ul').children('a').on('click', function (e) {
+            e.preventDefault();
+
+            // Collapsible
+            $(this).parent('li').not('.disabled').not($('.sidebar-xs').not('.sidebar-xs-indicator').find('.navigation-main').children('li')).toggleClass('active').children('ul').slideToggle(250);
+
+            // Accordion
+            if ($('.navigation-main').hasClass('navigation-accordion')) {
+                $(this).parent('li').not('.disabled').not($('.sidebar-xs').not('.sidebar-xs-indicator').find('.navigation-main').children('li')).siblings(':has(.has-ul)').removeClass('active').children('ul').slideUp(250);
+            }
+        });
+    }
+
+    render() {
+        return (
+            <ul className="navigation navigation-main navigation-accordion">
                 <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/StoreSettlementManage')}><a
                     href="javascript:void(0)"><i
                     className="icon-coin-yen"></i> <span>{"兑账记录"}</span></a></li>
@@ -164,6 +189,9 @@ class Business extends Component {
                 <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/OrganizationManage')}><a
                     href="javascript:void(0)"><i
                     className="icon-office"></i> <span>{"小区/单位"}</span></a></li>
+                <li className="left" onClick={this._leftMenuClick.bind(this, '/CustomerService/VersionControl')}><a
+                    href="javascript:void(0)"><i
+                    className="icon-versions"></i> <span>{"版本控制"}</span></a></li>
                 <li style={{display:"none"}} className="left" onClick={this._leftMenuClick.bind(this, '/dashboard')}><a
                     href="javascript:void(0)"><i
                     className="icon-qrcode"></i> <span>{"二维码管理"}</span></a></li>

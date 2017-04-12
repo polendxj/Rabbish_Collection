@@ -10,6 +10,7 @@ var router = express()
 
 router.post('/rsapp/authcode/admin', function (req, resp) {
     var data = JSON.parse(req.body.data).phone;
+    console.log(data);
     RequestApi.Request(baseURL + '/rsapp/authcode/admin/' + data, 'GET', "", req, resp);
 });
 router.post('/rsapp/generalUser', function (req, resp) {

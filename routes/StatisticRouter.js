@@ -12,6 +12,10 @@ router.post('/rsapp/statistic/classifying/class', function (req, resp) {
     var data = querystring.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/statistic/classifying/class' + "?" + data, 'GET', "", req, resp);
 });
+router.post('/rsapp/statistic/detail', function (req, resp) {
+    var data = querystring.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/statistic/detail' + "?" + data, 'GET', "", req, resp);
+});
 router.post('/rsapp/statistic/classifying/city', function (req, resp) {
     var jsonData = JSON.parse(req.body.data);
     delete jsonData.cityName;
@@ -49,7 +53,6 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
                                 var organizationTotalData = {organizationName:m.name,count:0,weight:0};
                                 jsonData.organizationid = m.id;
                                 RequestApi.Request(baseURL + '/rsapp/statistic/classifying/organization' + "?" + querystring.stringify(jsonData), 'GET', "", req, resp, function (organizationData) {
-                                    console.log(organizationData);
                                     var organizationAllData = {
                                         organizationTotal:{},
                                         organizationEveryData:[]
@@ -137,8 +140,45 @@ router.post('/rsapp/statistic/classifying/organization', function (req, resp) {
     });
 });
 router.post('/rsapp/statistic/total', function (req, resp) {
-    var data = querystring.stringify(JSON.parse(req.body.data));
-    RequestApi.Request(baseURL + '/rsapp/statistic/total' + "?" + data, 'GET', "", req, resp);
+    var jsonData = JSON.parse(req.body.data);
+    var data = querystring.stringify(jsonData);
+    RequestApi.Request(baseURL + '/rsapp/statistic/total' + "?" + data, 'GET', "", req, resp,function (totalData) {
+        if(totalData.status){
+            var count = 0;
+            RequestApi.Request(baseURL + '/rsapp/city/'+jsonData.cityid, 'GET', "", req, resp, function (city) {
+                if(city.status){
+                    count++;
+                    totalData.data.cityName = city.data.name;
+                    if(jsonData.organizationid){
+                        if(count == 2){
+                            resp.send(totalData);
+                        }
+                    }else{
+                        if(count == 1){
+                            resp.send(totalData);
+                        }
+                    }
+                }else{
+                    resp.send(totalData);
+                }
+            });
+            if(jsonData.organizationid){
+                RequestApi.Request(baseURL + '/rsapp/organization/' + jsonData.organizationid, 'GET', "", req, resp, function (organization) {
+                    if(organization.status){
+                        count++;
+                        totalData.data.organizationName = organization.data.name;
+                        if(count == 2){
+                            resp.send(totalData);
+                        }
+                    }else{
+                        resp.send(totalData);
+                    }
+                });
+            }
+        }else {
+            resp.send(totalData);
+        }
+    });
 });
 router.post('/rsapp/statistic/settlement', function (req, resp) {
     var data = querystring.stringify(JSON.parse(req.body.data));

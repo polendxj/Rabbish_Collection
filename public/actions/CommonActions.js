@@ -198,6 +198,38 @@ export function getAuthcode(data, startDispatch, endDispatch, interfaceURL, call
     }
 }
 
+export function getVersionControl(data, startDispatch, endDispatch, interfaceURL, callback) {
+    return dispatch=> {
+        if (startDispatch) {
+            dispatch(startFetch(startDispatch))
+        }
+        fetch(interfaceURL,
+            {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "data=" + JSON.stringify(data)
+            })
+            .then(function(response){
+                console.log("aaa",response);
+                return response.json();
+            })
+            .then(function (json) {
+                if (json.status) {
+                    dispatch(endFetch(endDispatch, json))
+                    if (callback) {
+                        callback();
+                    }
+                } else {
+                    ErrorModal(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message)
+                }
+            })
+
+    }
+}
+
 export function saveObject(data, startDispatch, endDispatch, interfaceURL, listRouter, flag, callback) {
     return dispatch=> {
         if (startDispatch) {

@@ -57,8 +57,8 @@ import {getReviewList} from '../reducers/ReviewReducer'
 import {getGeneralUserList,getGeneralUserDetail} from '../reducers/GeneralUserReducer'
 import {getOrganizationList,getOrganizationDetail,getProgressData} from '../reducers/OrganizationReducer'
 import {getAdminUserList,getAdminUserDetail} from '../reducers/AdminUserReducer'
-import {getNoticeList} from '../reducers/NoticeReducer'
-import {getStatisticByClassifyList,getStatisticByCityList,getStatisticByOrganizationList,getStatisticByRangeDateList,getStatisticSettlementDate,getStatisticByTotalList} from '../reducers/StatisticReducer'
+import {getNoticeList,getNoticeDetail} from '../reducers/NoticeReducer'
+import {getStatisticByClassifyList,getStatisticByDetailList,getStatisticByCityList,getStatisticByOrganizationList,getStatisticByRangeDateList,getStatisticSettlementDate,getStatisticByTotalList} from '../reducers/StatisticReducer'
 import {getOperationMonitor,getOrganizationMonitor} from '../reducers/SystemMonitorReducer'
 /*end*/
 
@@ -147,7 +147,9 @@ const rootReducer = combineReducers({
     getAdminUserList,
     getAdminUserDetail,
     getNoticeList,
+    getNoticeDetail,
     getStatisticByClassifyList,
+    getStatisticByDetailList,
     getStatisticByCityList,
     getStatisticByOrganizationList,
     getStatisticByRangeDateList,
