@@ -72,25 +72,25 @@ class VersionControlListComponent extends Component{
         this.data.forEach(function (val, key) {
             tb.push(<tr key={key} style={{backgroundColor:key%2==0?"#F8F8F8":""}}>
                 <td className="text-center">{key+1}</td>
+                <td className="text-center">{val.value}</td>
+                <td className="text-center">{imgBaseUrl+"/rsapp/latestVersion/"+val.appType}</td>
                 <td className="text-center">
-                    <div className="thumbnail" style={{margin: "0 auto", width: "35px", padding: 0, border: 0}}>
+                    <div className="thumbnail" style={{margin: "0 auto", width: "100px", padding: 0, border: 0}}>
                         <div className="thumb">
                             <img
                                 src={"../assets/appImage/"+val.appType+".png"}
                                 alt=""
-                                style={{height: "30px", width: "30px"}}/>
+                                style={{height: "100px", width: "100px"}}/>
                             <div className="caption-overflow" style={{width: "auto"}}>
                                         <span style={{top: 0, marginTop: 0}}>
                                             <a href={"../assets/appImage/"+val.appType+".png"}
                                                data-popup="lightbox"
-                                               className="btn" style={{height: "30px", width: "30px"}}></a>
+                                               className="btn" style={{height: "100px", width: "100px"}}></a>
                                         </span>
                             </div>
                         </div>
                     </div>
                 </td>
-                <td className="text-center">{val.value}</td>
-                <td className="text-center">{imgBaseUrl+"/rsapp/latestVersion/"+val.appType}</td>
                 <td className="text-center">
                     {<ul className="icons-list">
                         <li className="dropdown">
@@ -115,9 +115,9 @@ class VersionControlListComponent extends Component{
                     <thead>
                     <tr style={{fontWeight:'bold'}}>
                         <th className="text-center" style={{width: "20px"}}></th>
-                        <th className="col-md-2 text-bold text-center">{"二维码"}</th>
-                        <th className="col-md-4 text-bold text-center">{"APP类型"}</th>
-                        <th className="col-md-6 text-bold text-center">{"下载链接"}</th>
+                        <th className="col-md-3 text-bold text-center">{"APP类型"}</th>
+                        <th className="col-md-5 text-bold text-center">{"下载链接"}</th>
+                        <th className="col-md-4 text-bold text-center">{"下载链接二维码"}</th>
                         <th className="text-center" style={{width: "20px"}}><i
                             className="icon-arrow-down12"></i></th>
                     </tr>
