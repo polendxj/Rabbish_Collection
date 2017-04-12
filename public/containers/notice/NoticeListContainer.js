@@ -292,7 +292,6 @@ class NoticeListComponent extends Component {
 
     render() {
         const {data, fetching}=this.props;
-        console.log("noticeData", data);
         let tb = [];
         if (data) {
             if (data.data && data.data.content.length > 0) {

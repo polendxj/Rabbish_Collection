@@ -39,7 +39,6 @@ router.post('/rsapp/statistic/classifying/city', function (req, resp) {
             response['cityData'] = cityData.data;
             response['organizationData'] =[];
             RequestApi.Request(baseURL + '/rsapp/organization' + "?cityid=" + jsonData.cityid, 'GET', "", req, resp, function (organizations) {
-                console.log("organizations",organizations);
                 if(organizations.status){
                     if (organizations.data&&organizations.data.totalElements) {
                         response['totalElements'] = organizations.data.totalElements;

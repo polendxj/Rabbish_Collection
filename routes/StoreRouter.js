@@ -11,7 +11,6 @@ var router = express()
 router.post('/rsapp/store', function (req, resp) {
     var data = querystring.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/store/account' + "?" + data, 'GET', "", req, resp, function (stores) {
-        console.log(stores);
         if (stores.status) {
             if (stores.data.content.length > 0) {
                 var count = 0;
@@ -46,7 +45,6 @@ router.post('/rsapp/store', function (req, resp) {
 });
 router.post('/rsapp/store/approved', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));
-    console.log("approvedData",data);
     RequestApi.Request(baseURL + '/rsapp/store/approved', 'PUT',data, req, resp);
 });
 

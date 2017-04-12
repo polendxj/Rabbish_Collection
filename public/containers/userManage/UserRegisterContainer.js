@@ -83,14 +83,11 @@ class RegisterUserComponent extends Component {
     }
 
     _save(imgUrl) {
-        console.log("imgUrl", imgUrl);
         var address = $("#address").val()+$("#building").val()+"栋"+$("#unit").val()+"单元"+$("#floor").val()+"楼";
-        console.log("form", $("#generalUserForm").validate().form());
         var formFields = $("#generalUserForm").serializeArray();
         var params = array2Json(formFields);
         params.headimg = imgUrl;
         params.address = address;
-        console.log(params);
         if($("#generalUserForm").validate().form()){
             this.props._save(params);
         }
@@ -102,7 +99,6 @@ class RegisterUserComponent extends Component {
         var count = 30;
         sessionStorage['count'] = count;
         sessionStorage['messageTime'] = new Date().getTime();
-        console.log("phone", phone);
         $("#btnSendCode").attr("disabled", "true");
         $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
         this.interValObj = setInterval(that.setRemainTime, 1000);
@@ -110,17 +106,14 @@ class RegisterUserComponent extends Component {
     }
     setRemainTime() {
         var curCount = sessionStorage['count'];
-        console.log($("#getAuthcodeModal").hasClass("in"));
         if (curCount == 0) {
             clearInterval(this.interValObj);//停止计时器
-            console.log("aaa");
             $("#btnSendCode").removeAttr("disabled");//启用按钮
             $("#btnSendCode").text("重新发送验证码");
         }
         else {
             curCount--;
             sessionStorage['count'] = curCount;
-            console.log(sessionStorage['count']);
             $("#btnSendCode").text(curCount + "秒后重新发送");
         }
     }
@@ -138,7 +131,6 @@ class RegisterUserComponent extends Component {
             allowedFileExtensions: ['jpg', 'png']
         });
         $('#file-input').on("fileuploaded", function (event, data) {
-            console.log("img", data);
             if (data.response && data.response.status) {
                 self._save(data.response.data);
             }
@@ -180,7 +172,6 @@ class RegisterUserComponent extends Component {
     render() {
         const {data}=this.props;
         var defaultAddress = "";
-        console.log("orgina", data);
         const options = [];
         if (data) {
             if (data.status) {
@@ -193,7 +184,6 @@ class RegisterUserComponent extends Component {
             }
         }
         var tableHeight = ($(window).height() - 130);
-        console.log(defaultAddress);
         if(defaultAddress!==""){
             return (
                 <div>

@@ -87,14 +87,12 @@ class RegisterNoticeComponent extends Component{
             allowedFileExtensions: ['jpg', 'png']
         });
         $('#file-input').on("fileuploaded", function (event, data) {
-            console.log("img", data);
             if (data.response && data.response.status) {
                 self._save(data.response.data);
             }
         });
     }
     _uploadImg() {
-        console.log("aaa",$('#file-input').prop("files"));
         var files = $('#file-input').prop("files");
         if(files.length > 0){
             $('#file-input').fileinput('upload');
@@ -111,7 +109,6 @@ class RegisterNoticeComponent extends Component{
         var params = array2Json(formFields);
         params.img = imgUrl;
         params.content = content.replace(new RegExp(/(")/g),"'").replace(new RegExp(/(&)/g),"-----");
-        console.log(params.content);
         if($("#noticeForm").validate().form()){
             this.props._save(params);
         }

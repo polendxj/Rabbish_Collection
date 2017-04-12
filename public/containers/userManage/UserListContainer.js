@@ -97,7 +97,6 @@ export default class UserListContainer extends Component {
         this.currentCity = filterCityById(this.props.cityList.data, cityid);
         if (this.currentCity.country) {
             this.currentCountry = this.currentCity.country[0];
-            console.log("this.currentCountry", this.currentCountry);
         }
         this.currentCityId = cityid;
         this._startRefresh();
@@ -193,7 +192,6 @@ export default class UserListContainer extends Component {
         var count = 30;
         sessionStorage['count'] = count;
         sessionStorage['messageTime'] = new Date().getTime();
-        console.log("phone", phone);
         $("#btnSendCode").attr("disabled", "true");
         $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
         this.interValObj = setInterval(that.setRemainTime, 1000);
@@ -218,7 +216,6 @@ export default class UserListContainer extends Component {
             else {
                 curCount--;
                 sessionStorage['count'] = curCount;
-                console.log(sessionStorage['count']);
                 $("#btnSendCode").text(curCount + "秒后重新发送");
             }
         }
@@ -263,7 +260,6 @@ export default class UserListContainer extends Component {
     render() {
         const {fetching, data, detailUser, cityList} =this.props;
         const detailData = detailUser.data;
-        console.log("detailData", detailData);
         var cityOptions = [];
         var countryOptions = [];
         var organizationOptions = [];

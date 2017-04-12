@@ -89,7 +89,6 @@ class UpdateAdminUserComponent extends Component{
 
     render() {
         const {fetching, data}=this.props;
-        console.log("detailData",data);
         var tableHeight = ($(window).height() - 130);
         var detail="";
         if(data){

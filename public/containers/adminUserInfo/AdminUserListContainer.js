@@ -108,7 +108,6 @@ export default class AdminUserListContainer extends Component {
         var count = 30;
         sessionStorage['count'] = count;
         sessionStorage['messageTime'] = new Date().getTime();
-        console.log("phone", phone);
         $("#btnSendCode").attr("disabled", "true");
         $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
         this.interValObj = setInterval(this.setRemainTime, 1000);
@@ -131,7 +130,6 @@ export default class AdminUserListContainer extends Component {
             else {
                 curCount--;
                 sessionStorage['count'] = curCount;
-                console.log(sessionStorage['count']);
                 $("#btnSendCode").text(curCount + "秒后重新发送");
             }
         }
@@ -219,7 +217,6 @@ export default class AdminUserListContainer extends Component {
                 </div>
 
             </div>;
-        console.log("adminuser", data);
         return (
             <div>
                 <BreadCrumbs
@@ -295,7 +292,6 @@ class AdminUserListComponent extends Component {
         const {data, fetching}=this.props;
         var loginUserid = sessionStorage['userid'];
         var loginUserType = sessionStorage['type'];
-        console.log("loginUserid",loginUserid);
         let tb = [];
         if (data) {
             if (data.status) {

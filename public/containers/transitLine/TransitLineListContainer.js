@@ -79,7 +79,6 @@ export default class TransitLineListContainer extends Component {
 
     render() {
         const {fetching, data} =this.props;
-        console.log("transitData",data);
         return (
             <div>
                 <BreadCrumbs

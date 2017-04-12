@@ -102,7 +102,6 @@ export default class OrganizationListContainer extends Component {
         };
         this.progressInterval = setInterval(function () {
             that.props.dispatch(generateQrcode(params,PROGRESS_START,PROGRESS_END,qrcode_generate,function () {
-                console.log("progressData22",that.props.progressData);
                 if(that.props.progressData.data==100){
                     clearInterval(that.progressInterval);
                     setTimeout(function () {
@@ -132,7 +131,6 @@ export default class OrganizationListContainer extends Component {
         };
         this.progressInterval = setInterval(function () {
             that.props.dispatch(exportQrcode(PROGRESS_START,PROGRESS_END,qrcode_export+"?"+querystring.stringify(params),function () {
-                console.log("progressData",that.props.progressData);
                 if(that.props.progressData.data==100){
                     clearInterval(that.progressInterval);
                     setTimeout(function () {
@@ -181,7 +179,6 @@ export default class OrganizationListContainer extends Component {
 
     render() {
         const {fetching, data, cityList,progressData} =this.props;
-        console.log("progressData",progressData);
         var cityOptions = [];
         var countryOptions = [];
         if (cityList) {
@@ -494,7 +491,6 @@ class OrganizationListComponent extends Component {
 
 function mapStateToProps(state) {
     const {getOrganizationList, getCityList, getProgressData, commonReducer}=state;
-    console.log("getProgressData.data",getProgressData.data);
     return {
         fetching: getOrganizationList.fetching,
         data: getOrganizationList.data,

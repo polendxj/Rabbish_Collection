@@ -27,7 +27,6 @@ router.post('/rsapp/classConf/update', function (req, resp) {
 });
 router.post('/rsapp/classConf/delete', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));
-    console.log("id",data);
     RequestApi.Request(baseURL + '/rsapp/classConf/'+data, 'DELETE',"", req, resp);
 });
 

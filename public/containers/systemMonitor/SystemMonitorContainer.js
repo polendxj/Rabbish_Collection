@@ -70,8 +70,6 @@ export default class SystemMonitorContainer extends Component {
 
     render() {
         const {fetching, data, organizationMonitorData} =this.props;
-        console.log("operationMonitorData",data);
-        console.log("organizationMonitorData",organizationMonitorData);
         var organizationOptions = [];
         return (
             <div>

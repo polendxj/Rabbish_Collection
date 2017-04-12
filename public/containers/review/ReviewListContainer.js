@@ -89,7 +89,6 @@ export default class ReviewListContainer extends Component {
 
     render() {
         const {fetching, data} =this.props;
-        console.log("review", data);
         return (
             <div>
                 <BreadCrumbs
@@ -146,7 +145,6 @@ class ReviewListComponent extends Component {
             content: $("#reply"+id).val(),
             createTime: date
         };
-        console.log("reply",$("#reply"+id).val());
         this.props._reply(params);
     }
 
@@ -156,7 +154,6 @@ class ReviewListComponent extends Component {
 
     componentWillUpdate(){
         $(".colpText").on("click",function () {
-            console.log($(this).text())
             if($(this).text()=="收起评论") {
                 $(this).text("展开评论");
             }else if($(this).text()=="展开评论"){

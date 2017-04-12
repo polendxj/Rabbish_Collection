@@ -74,7 +74,6 @@ class RegisterAdminUserComponent extends Component{
     }
 
     _save() {
-        console.log($("#registerAdminUserForm").validate().form());
         var params = {
             name: $("#name").val(),
             phone: $("#phone").val(),

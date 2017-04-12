@@ -10,7 +10,6 @@ var router = express()
 
 router.post('/rsapp/authcode/admin', function (req, resp) {
     var data = JSON.parse(req.body.data).phone;
-    console.log(data);
     RequestApi.Request(baseURL + '/rsapp/authcode/admin/' + data, 'GET', "", req, resp);
 });
 router.post('/rsapp/generalUser', function (req, resp) {
@@ -27,7 +26,6 @@ router.post('/rsapp/generalUser/detail', function (req, resp) {
         if (userDetail.status) {
             if(userDetail.data&&userDetail.data!=null){
                 RequestApi.Request(baseURL + '/rsapp/organization/'+userDetail.data.organizationid, 'GET',data, req, resp,function (organization) {
-                    console.log(organization.data);
                     userDetail['data']['organizationName'] = organization.data.name;
                     resp.send(userDetail);
                 });
@@ -41,12 +39,10 @@ router.post('/rsapp/generalUser/detail', function (req, resp) {
 });
 router.post('/rsapp/generalUser/delete', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));
-    console.log("general",data);
     RequestApi.Request(baseURL + '/rsapp/user/'+data, 'DELETE',"", req, resp);
 });
 router.post('/rsapp/user/lock', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));
-    console.log("lockData",data);
     RequestApi.Request(baseURL + '/rsapp/user/lock', 'PUT',data, req, resp);
 });
 router.post('/rsapp/user/qrcode', function (req, resp) {

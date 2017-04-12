@@ -243,7 +243,6 @@ export default class StatisticListContainer extends Component {
     _changeCityOfSettlement() {
         var citieid = $("#cityOfSettlementSelect").val();
         this.currentCityOfCounty = filterCityById(this.props.cityOfCountyList.data, citieid);
-        console.log("this.currentCityOfCounty", this.currentCityOfCounty);
         this.settlementOfcurrentCityId = citieid;
         this._startRefresh();
     }
@@ -440,10 +439,6 @@ export default class StatisticListContainer extends Component {
 
     render() {
         const {fetching, classifyData, detailData, cityData, organizationData, rangeDateData, settlementData, operationData, cityList, cityOfCountyList, totalData, classifyList} =this.props;
-        console.log("organizationData", organizationData);
-        console.log("cityData", cityData);
-        console.log("rangeDateData", rangeDateData);
-        console.log("detailData", detailData);
         var data = "";
         var showCity = "city";
         let cityTb = [];
@@ -832,7 +827,6 @@ export default class StatisticListContainer extends Component {
             </tr>)
         } else {
             this.orgaEveryAndTotalData.classifyData = mergeClassify(classifyList.data, this.orgaEveryAndTotalData.classifyData);
-            console.log("orgaEveryAndTotalData.classifyData", this.orgaEveryAndTotalData.classifyData);
             if (this.orgaEveryAndTotalData.classifyData.length > 0) {
                 this.orgaEveryAndTotalData.classifyData.forEach(function (val, key) {
                     if(val.count>0 || val.weight>0){
@@ -876,7 +870,6 @@ export default class StatisticListContainer extends Component {
             </tr>)
         } else {
             this.orgaEveryAndTotalData.classifyData = mergeClassify(classifyList.data, this.orgaEveryAndTotalData.classifyData);
-            console.log("orgaEveryAndTotalData", this.orgaEveryAndTotalData.classifyData);
             if (this.orgaEveryAndTotalData.classifyData.length > 0) {
                 this.orgaEveryAndTotalData.classifyData.forEach(function (val, key) {
                     if(val.count>0 || val.weight>0){

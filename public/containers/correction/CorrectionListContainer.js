@@ -138,7 +138,6 @@ export default class CorrectionListContainer extends Component {
 
     render() {
         const {fetching, data, correctionItems, organizationList} =this.props;
-        console.log("correctionItems",correctionItems);
         var organizationOptions = [];
         if (organizationList) {
             organizationOptions.push(

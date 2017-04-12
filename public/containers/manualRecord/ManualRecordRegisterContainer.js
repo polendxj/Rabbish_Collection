@@ -45,7 +45,6 @@ export default class ManualRecordRegisterContainer extends Component {
     }
 
     _save(params) {
-        console.log(params);
         this.props.dispatch(saveObject(params, "", "", manualRecord_register, "/DataManage/ManualRecord"));
     }
 
@@ -125,7 +124,6 @@ class RegisterManualRecordComponent extends Component {
 
     render() {
         const {data}=this.props;
-        console.log("manualOfClass", data);
         const options = [];
         if (data) {
             if (data.status) {

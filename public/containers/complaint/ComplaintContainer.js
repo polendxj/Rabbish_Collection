@@ -142,7 +142,6 @@ class ComplaintListComponent extends Component {
 
     render() {
         const {data, fetching}=this.props;
-        console.log("complaint", data);
         let tb = [];
         if (data) {
             if (data.status) {

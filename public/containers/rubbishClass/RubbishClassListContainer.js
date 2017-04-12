@@ -66,7 +66,6 @@ export default class RubbishClassListContainer extends Component {
 
     render() {
         const {fetching, data} =this.props;
-        console.log("classify",data);
         return (
             <div>
                 <BreadCrumbs

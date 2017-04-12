@@ -142,7 +142,6 @@ class ManualRecordListComponent extends Component{
     render() {
         const {data, fetching}=this.props;
         let tb = [];
-        console.log("recordData",data);
         if (data) {
             if (data.data.content.length > 0) {
                 data.data.content.forEach(function (val, key) {
