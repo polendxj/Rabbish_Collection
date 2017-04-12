@@ -24,7 +24,7 @@ export default class VersionControlListContainer extends Component {
 
     _downloadApp(appType){
         var params = {appType: appType};
-        this.props.dispatch(getVersionControl(params, "", "", versionControl_list));
+        window.open(imgBaseUrl+"/rsapp/latestVersion/"+appType);
         // window.location.href = "http://dev.xysy.tech/rsapp/latestVersion/"+appType;
     }
 
@@ -54,7 +54,8 @@ class VersionControlListComponent extends Component{
     constructor(props) {
         super(props);
         this.data = [
-            {appType:"user_android",value:"用户端"},
+            {appType:"user_android",value:"用户端 (安卓)"},
+            {appType:"user_ios",value:"用户端 (ios)"},
             {appType:"exchange",value:"兑换端"},
             {appType:"manager",value:"管理端"},
             {appType:"scanWeght",value:"扫码称重"},
