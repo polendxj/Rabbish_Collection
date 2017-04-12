@@ -234,7 +234,7 @@ class DataManager extends Component {
                     className="icon-cabinet"></i> <span>{"垃圾分类"}</span></a></li>
                 <li className="left" onClick={this._leftMenuClick.bind(this, '/DataManage/ManualRecord')}><a
                     href="javascript:void(0)"><i
-                    className="icon-piggy-bank"></i> <span>{"垃圾称量"}</span></a></li>
+                    className="icon-piggy-bank"></i> <span>{"线下录入"}</span></a></li>
                 <li className="navigation-header left"><span>{"其他数据"}</span> <i className="icon-menu" title=""
                                                                                 data-original-title="垃圾分类"></i>
                 </li>
