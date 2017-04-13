@@ -807,6 +807,20 @@ export function correctionType(correctionItems, type) {
     }
     return typeName;
 }
+export function recordType(type){
+    var recordType = "";
+    switch (type) {
+        case 0:
+            recordType = "即时添加";
+            break;
+        case 1:
+            recordType = "集中检查";
+            break;
+        default:
+            break;
+    }
+    return recordType;
+}
 export function userType(type) {
     var userType = "";
     switch (type) {

@@ -14,7 +14,8 @@ import {
     ErrorModal,
     roleApplicationUse,
     timeStamp2Time,
-    correctionType
+    correctionType,
+    recordType
 } from '../../components/Tool/Tool';
 import {
     CORRECTION_LIST_START,
@@ -49,7 +50,7 @@ export default class CorrectionListContainer extends Component {
 
     componentDidMount() {
         var self = this;
-        var params = {page: 0, size: page_size};
+        var params = {page: 0, size: page_size,startTime: new Date("2016-01-01").getTime(),endTime:new Date().getTime()};
         var organizationParams = {page: 0, size: 10000};
         this.props.dispatch(getListByMutilpCondition(params, CORRECTION_LIST_START, CORRECTION_LIST_END, correction_list));
         this.props.dispatch(getListByMutilpCondition(organizationParams, ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, organization_list));
@@ -223,6 +224,7 @@ class CorrectionListComponent extends Component {
                         <td className="text-center">{key + 1}</td>
                         <td className="text-center">{val.userName}</td>
                         <td className="text-center">{correctionType(correctionItems,val.type)}</td>
+                        <td className="text-center">{recordType(val.recordType)}</td>
                         <td className="text-center">{val.weight.toFixed(2)}</td>
                         <td className="text-left">{val.description}</td>
                         <td className="text-center">{timeStamp2Time(val.createTime)}</td>
@@ -252,8 +254,9 @@ class CorrectionListComponent extends Component {
                         <th className="text-center" style={{width: "20px"}}></th>
                         <th className="col-md-2 text-bold text-center">{"纠错用户"}</th>
                         <th className="col-md-2 text-bold text-center">{"错误类型"}</th>
-                        <th className="col-md-2 text-bold text-center">{"重量（吨）"}</th>
-                        <th className="col-md-4 text-bold text-left">{"错误描述"}</th>
+                        <th className="col-md-2 text-bold text-center">{"记录类型"}</th>
+                        <th className="col-md-1 text-bold text-center">{"重量（吨）"}</th>
+                        <th className="col-md-3 text-bold text-left">{"错误描述"}</th>
                         <th className="col-md-2 text-bold text-center">{"创建时间"}</th>
                     </tr>
                     </thead>

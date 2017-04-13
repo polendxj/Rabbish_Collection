@@ -26,10 +26,10 @@ export default class RichText extends React.Component {
                 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
                 'simpleupload',
                 'horizontal', 'date', 'time',
-            ]]
-            ,lang:"zh-cn"
+            ]],
+            lang:"zh-cn" ,
             //字体
-            ,'fontfamily':[
+            'fontfamily':[
                 { label:'',name:'songti',val:'宋体,SimSun'},
                 { label:'',name:'kaiti',val:'楷体,楷体_GB2312, SimKai'},
                 { label:'',name:'yahei',val:'微软雅黑,Microsoft YaHei'},
@@ -41,18 +41,18 @@ export default class RichText extends React.Component {
                 { label:'',name:'comicSansMs',val:'comic sans ms'},
                 { label:'',name:'impact',val:'impact,chicago'},
                 { label:'',name:'timesNewRoman',val:'times new roman'}
-            ]
+            ],
             //字号
-            ,'fontsize':[10, 11, 12, 14, 16, 18, 20, 24, 36]
-            , enableAutoSave : false
-            , autoHeightEnabled : false
-            , initialFrameHeight: this.props.height
-            , initialFrameWidth: '100%'
-            ,readonly:this.props.disabled
+            'fontsize':[10, 11, 12, 14, 16, 18, 20, 24, 36],
+            enableAutoSave : false,
+            autoHeightEnabled : false,
+            initialFrameHeight: this.props.height,
+            initialFrameWidth: '100%',
+            readonly:this.props.disabled
         });
-        var me = this;
-        editor.ready( function( ueditor ) {
-            var value = me.props.value?me.props.value:'<p></p>';
+        var that = this;
+        editor.ready(function() {
+            var value = that.props.value?that.props.value:'<p></p>';
             editor.setContent(value);
         });
     }
@@ -61,9 +61,7 @@ export default class RichText extends React.Component {
     }
     render (){
         return (
-            <script id={this.props.id} name="content" type="text/plain">
-
-            </script>
+            <script id={this.props.id} name="content" type="text/plain" />
         )
     }
 }

@@ -138,7 +138,7 @@ export default class NoticeListContainer extends Component {
         const {fetching, data,detailData} =this.props;
         var detailNoticeInfo = "";
         if (detailData.status) {
-            var hasHttp = detailData.data.img.indexOf("http") > -1;
+            var hasHttp =detailData.data.img && detailData.data.img.indexOf("http") > -1;
             detailNoticeInfo =
                 <div>
                     <div className="form-horizontal">
@@ -285,7 +285,9 @@ class NoticeListComponent extends Component {
     _detail(val) {
         this.props._detail(val);
     }
-
+    _update(url){
+        browserHistory.push(url);
+    }
     _delete(id, title) {
         this.props._delete(id, title)
     }
@@ -293,10 +295,11 @@ class NoticeListComponent extends Component {
     render() {
         const {data, fetching}=this.props;
         let tb = [];
+        console.log("aa",data);
         if (data) {
             if (data.data && data.data.content.length > 0) {
                 data.data.content.forEach(function (val, key) {
-                    var hasHttp = val.img.indexOf("http") > -1;
+                    var hasHttp = val.img && val.img.indexOf("http") > -1;
                     tb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
                         <td className="text-center">{noticeType(val.type)}</td>
@@ -335,6 +338,9 @@ class NoticeListComponent extends Component {
                                                 className=" icon-office"></i>
                                                 {"详情"}</a>
                                         </li>
+                                        <li style={{display:'block'}} onClick={this._update.bind(this, '/SystemNotice/NoticeManage/Update/:' + val.id)}>
+                                            <a href="javascript:void(0)"><i className="icon-pencil5"></i>
+                                                {"修改"}</a></li>
                                         <li style={{display: 'block'}}
                                             onClick={this._delete.bind(this, val.id, val.title)}><a
                                             href="javascript:void(0)"><i className="icon-trash"></i>

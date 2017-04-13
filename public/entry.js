@@ -33,6 +33,7 @@ import StoreListContainer from './containers/store/StoreListContainer';
 import StoreSettlementListContainer from './containers/storeSettlement/StoreSettlementListContainer';
 import NoticeListContainer from './containers/notice/NoticeListContainer';
 import NoticeRegisterContainer from './containers/notice/NoticeRegisterContainer';
+import NoticeUpdateContainer from './containers/notice/NoticeUpdateContainer';
 import StatisticListContainer from './containers/statistic/StatisticListContainer';
 import OrganizationListContainer from './containers/organization/OrganizationListContainer';
 import OrganizationRegisterContainer from './containers/organization/OrganizationRegisterContainer';
@@ -75,6 +76,7 @@ render(
                 <Route path="/CustomerService/StoreSettlementManage" component={StoreSettlementListContainer}/>
                 <Route path="/SystemNotice/NoticeManage" component={NoticeListContainer}/>
                 <Route path="/SystemNotice/NoticeManage/Register" component={NoticeRegisterContainer}/>
+                <Route path="/SystemNotice/NoticeManage/Update/:id" component={NoticeUpdateContainer}/>
                 <Route path="/Statistic/RubbishPutIn" component={StatisticListContainer}/>
                 <Route path="/Statistic/OperationData" component={SystemMonitorContainer}/>
                 <Route path="/CustomerService/OrganizationManage" component={OrganizationListContainer}/>

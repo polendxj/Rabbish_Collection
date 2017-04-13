@@ -48,6 +48,11 @@ router.post('/rsapp/notice/detail', function (req, resp) {
     var data = req.body.data;
     RequestApi.Request(baseURL + '/rsapp/notice/' + data, 'GET', "", req, resp);
 });
+router.post('/rsapp/notice/update', function (req, resp) {
+    var data = JSON.stringify(JSON.parse(req.body.data));
+    var id = req.query.id;
+    RequestApi.Request(baseURL + '/rsapp/notice/'+id, 'PUT',data, req, resp);
+});
 router.post('/rsapp/notice/delete', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/notice/' + data, 'DELETE', "", req, resp);

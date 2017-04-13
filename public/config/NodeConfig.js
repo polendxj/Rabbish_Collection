@@ -60,6 +60,7 @@ var storeSettlement_register = node_service + "/rsapp/storeSettlement/register";
 var notice_list = node_service + "/rsapp/notice";
 var notice_detail = node_service + "/rsapp/notice/detail";
 var notice_register = node_service + "/rsapp/notice/register";
+var notice_update = node_service + "/rsapp/notice/update";
 var notice_delete = node_service + "/rsapp/notice/delete";
 var statisticByClassify_list = node_service + "/rsapp/statistic/classifying/class";
 var statisticByDetail_list = node_service + "/rsapp/statistic/detail";
