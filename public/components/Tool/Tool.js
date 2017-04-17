@@ -863,6 +863,20 @@ export function noticeType(type) {
     }
     return noticeType;
 }
+export function homeNotice(type){
+    var homeNotice = "否";
+    switch (type) {
+        case 1:
+            homeNotice = "是";
+            break;
+        case 0:
+            homeNotice = "否";
+            break;
+        default:
+            break;
+    }
+    return homeNotice;
+}
 export function organizationType(type) {
     var organizationType = "";
     switch (type) {
@@ -894,7 +908,7 @@ export function pointsType(type){
 export function array2Json(list) {
     var params = {};
     list.forEach(function (val) {
-        if (isNumber(val.value) && val.value.length < 8) {
+        if (isNumber(val.value) && val.value.length < 6) {
             params[val.name] = parseInt(val.value);
         } else {
             params[val.name] = val.value;

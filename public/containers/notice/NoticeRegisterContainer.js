@@ -91,14 +91,13 @@ class RegisterNoticeComponent extends Component{
                 self._save(data.response.data);
             }
         });
+        $(".styled, .multiselect-container input").uniform({
+            radioClass: 'choice'
+        });
     }
     _uploadImg() {
         var files = $('#file-input').prop("files");
-        if(files.length > 0){
-            $('#file-input').fileinput('upload');
-        }else {
-            this._save("");
-        }
+        $('#file-input').fileinput('upload');
     }
     _search() {
         this.props._startRefresh();
@@ -107,6 +106,9 @@ class RegisterNoticeComponent extends Component{
         var content = UE.getEditor("content").getContent();
         var formFields = $("#noticeForm").serializeArray();
         var params = array2Json(formFields);
+        var homeNotice = parseInt($('.choice .checked input[name="homeNotice"]').val());
+        console.log(homeNotice);
+        params.homeNotice = homeNotice;
         params.img = imgUrl;
         params.content = content.replace(new RegExp(/(")/g),"'").replace(new RegExp(/(&)/g),"-----");
         if($("#noticeForm").validate().form()){
@@ -147,6 +149,30 @@ class RegisterNoticeComponent extends Component{
                                     <div className="col-lg-9">
                                         <input name="title" type="text" className="form-control"
                                                placeholder={"标题"} required="required" autoComplete="off"/>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="col-lg-2 control-label" style={{
+                                        textAlign: 'center'
+                                    }}>首页大图公告</label>
+                                    <div className="col-lg-9">
+                                        <label className="radio-inline">
+                                            <input type="radio" name="homeNotice" value={1} className="styled" checked="checked" />
+                                            是
+                                        </label>
+                                        <label className="radio-inline">
+                                            <input type="radio" name="homeNotice" value={0} className="styled" />
+                                            否
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="form-group" >
+                                    <label className="col-lg-2 control-label"
+                                           style={{
+                                               textAlign: 'center'
+                                           }}>{"摘要"}</label>
+                                    <div className="col-lg-9">
+                                        <textarea name="digest" type="text" className="form-control" autoComplete="off"/>
                                     </div>
                                 </div>
                                 <div className="form-group" >

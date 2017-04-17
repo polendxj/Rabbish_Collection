@@ -54,7 +54,7 @@ import {getComplaintList} from '../reducers/ComplaintReducer'
 import {getStoreSettlementList} from '../reducers/StoreSettlementReducer'
 import {getStoreList} from '../reducers/StoreReducer'
 import {getReviewList} from '../reducers/ReviewReducer'
-import {getGeneralUserList,getGeneralUserDetail} from '../reducers/GeneralUserReducer'
+import {getGeneralUserList,getGeneralUserDetail,getSubtypeList} from '../reducers/GeneralUserReducer'
 import {getOrganizationList,getOrganizationDetail,getProgressData} from '../reducers/OrganizationReducer'
 import {getAdminUserList,getAdminUserDetail} from '../reducers/AdminUserReducer'
 import {getNoticeList,getNoticeDetail} from '../reducers/NoticeReducer'
@@ -159,6 +159,7 @@ const rootReducer = combineReducers({
     getOperationMonitor,
     getOrganizationMonitor,
     getGeneralUserDetail,
+    getSubtypeList,
     getStatisticByTotalList,
     form: reduxFormReducer,
     routing: routerReducer

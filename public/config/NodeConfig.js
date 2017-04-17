@@ -45,6 +45,7 @@ var generalUser_detail = node_service + "/rsapp/generalUser/detail";
 var generalUser_register = node_service + "/rsapp/generalUser/register";
 var generalUser_delete = node_service + "/rsapp/generalUser/delete";
 var generalUser_userStatus = node_service + "/rsapp/user/lock";
+var subtype_list = node_service + "/rsapp/configureItem/userSubtype";
 var review_list = node_service + "/rsapp/review";
 var review_delete = node_service + "/rsapp/review/delete";
 var reply_delete = node_service + "/rsapp/reply/delete";

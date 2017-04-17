@@ -8,7 +8,7 @@ import {browserHistory} from 'react-router'
 import {bindActionCreators} from 'redux'
 import {array2Json} from '../../components/Tool/Tool';
 import BreadCrumbs from '../../components/right/breadCrumbs';
-import {ORGANIZATION_LIST_START, ORGANIZATION_LIST_END} from '../../constants/index.js';
+import {ORGANIZATION_LIST_START, ORGANIZATION_LIST_END,SUBTYPE_LIST_START,SUBTYPE_LIST_END} from '../../constants/index.js';
 import {getListByMutilpCondition, saveObject,getAuthcode} from '../../actions/CommonActions';
 var sha1 = require('js-sha1');
 
@@ -30,6 +30,7 @@ export default class UserRegisterContainer extends Component {
     componentDidMount() {
         var params = {page: 0, size: 10000};
         this.props.dispatch(getListByMutilpCondition(params, ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, organization_list));
+        this.props.dispatch(getListByMutilpCondition(params, SUBTYPE_LIST_START, SUBTYPE_LIST_END, subtype_list));
     }
 
     _save(params) {
@@ -44,7 +45,7 @@ export default class UserRegisterContainer extends Component {
     }
 
     render() {
-        const {data}=this.props;
+        const {data,subtypeData}=this.props;
         return (
             <div>
                 <BreadCrumbs
@@ -54,6 +55,7 @@ export default class UserRegisterContainer extends Component {
                 />
                 <div className="content" style={{marginTop: '20px'}}>
                     <RegisterUserComponent data={data}
+                                           subtypeData={subtypeData}
                                            _save={this._save}
                                            _sendMessage={this._sendMessage}/>
 
@@ -170,15 +172,25 @@ class RegisterUserComponent extends Component {
         $("#address").val($("#organizationid").find("option:selected").attr("id").split("-")[1])
     }
     render() {
-        const {data}=this.props;
+        const {data,subtypeData}=this.props;
         var defaultAddress = "";
         const options = [];
+        const subtypeOptions = [];
         if (data) {
             if (data.status) {
                 defaultAddress = data.data.content[0].address;
                 data.data.content.forEach(function (val, key) {
                     options.push(
                         <option key={"option" + key} value={val.id} id={key+"-"+val.address}>{val.name}</option>
+                    )
+                })
+            }
+        }
+        if (subtypeData) {
+            if (subtypeData.status) {
+                subtypeData.data.forEach(function (val, key) {
+                    subtypeOptions.push(
+                        <option key={"subtypeOption" + key} value={val.type}>{val.descrip}</option>
                     )
                 })
             }
@@ -198,10 +210,8 @@ class RegisterUserComponent extends Component {
                                         <label className="col-lg-2 control-label"
                                                style={{textAlign: 'center'}}>{"用户类型"}</label>
                                         <div className="col-lg-9">
-                                            <select className="form-control" name="type" defaultValue={4}>
-                                                <option value={3}>{"商户用户"}</option>
-                                                <option value={4}>{"住宅用户"}</option>
-                                                <option value={5}>{"机关单位、学校"}</option>
+                                            <select className="form-control" name="subtype" defaultValue={1}>
+                                                {subtypeOptions}
                                             </select>
                                         </div>
                                     </div>
@@ -398,9 +408,10 @@ class RegisterUserComponent extends Component {
 }
 
 function mapStateToProps(state) {
-    const {getOrganizationList}=state;
+    const {getOrganizationList,getSubtypeList}=state;
     return {
-        data: getOrganizationList.data
+        data: getOrganizationList.data,
+        subtypeData: getSubtypeList.data
     }
 }
 

@@ -14,7 +14,8 @@ import {
     ErrorModal,
     ListModal,
     timeStamp2Time,
-    noticeType
+    noticeType,
+    homeNotice
 } from '../../components/Tool/Tool';
 import {
     NOTICE_LIST_START,
@@ -155,7 +156,7 @@ export default class NoticeListContainer extends Component {
                                                autoComplete="off" disabled="disabled"/>
                                     </div>
                                     <label className="col-lg-2 control-label"
-                                           style={{textAlign: 'center'}}>{"类型"}</label>
+                                           style={{textAlign: 'center'}}>{"类 型"}</label>
                                     <div className="col-lg-3">
                                         <input type="text" value={noticeType(detailData.data.type)}
                                                className="form-control"
@@ -165,6 +166,37 @@ export default class NoticeListContainer extends Component {
                             </div>
                             <div className="form-group">
                                 <div className="col-lg-12">
+                                    <label className="col-lg-2 control-label"
+                                           style={{textAlign: 'center'}}>{"摘 要"}</label>
+                                    <div className="col-lg-8">
+                                        <textarea type="text" value={detailData.data.digest} className="form-control"
+                                               autoComplete="off" disabled="disabled"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-lg-12">
+                                    <label className="col-lg-2 control-label" style={{
+                                        textAlign: 'center'
+                                    }}>首页大图公告</label>
+                                    <div className="col-lg-3">
+                                        <label className="radio-inline">
+                                            <div className="choice">
+                                                <span className={detailData.data.homeNotice==1?"checked":""}>
+                                                    <input type="radio" name="homeNotice" value={1} className="styled" disabled/>
+                                                </span>
+                                            </div>
+                                            是
+                                        </label>
+                                        <label className="radio-inline">
+                                            <div className="choice">
+                                                <span className={detailData.data.homeNotice==0?"checked":""}>
+                                                    <input type="radio" name="homeNotice" value={0} className="styled" disabled/>
+                                                </span>
+                                            </div>
+                                            否
+                                        </label>
+                                    </div>
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"标题图标"}</label>
                                     <div className="col-lg-4">
@@ -304,6 +336,7 @@ class NoticeListComponent extends Component {
                         <td className="text-center">{key + 1}</td>
                         <td className="text-center">{noticeType(val.type)}</td>
                         <td className="text-center">{val.title}</td>
+                        <td className="text-center">{homeNotice(val.homeNotice)}</td>
                         <td className="text-center">
                             <div className="thumbnail" style={{margin: "0 auto", width: "35px", padding: 0, border: 0}}>
                                 <div className="thumb">
@@ -374,8 +407,9 @@ class NoticeListComponent extends Component {
                     <thead>
                     <tr style={{fontWeight: 'bold'}}>
                         <th className="text-center" style={{width: "20px"}}></th>
-                        <th className="col-md-2 text-bold text-center">{"公告类型"}</th>
+                        <th className="col-md-1 text-bold text-center">{"公告类型"}</th>
                         <th className="col-md-2 text-bold text-center">{"标题"}</th>
+                        <th className="col-md-1 text-bold text-center">{"首页大图公告"}</th>
                         <th className="col-md-2 text-bold text-center">{"图片"}</th>
                         <th className="col-md-2 text-bold text-center">{"发布人员"}</th>
                         <th className="col-md-2 text-bold text-center">{"创建时间"}</th>

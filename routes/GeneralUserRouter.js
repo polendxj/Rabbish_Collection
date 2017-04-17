@@ -16,6 +16,9 @@ router.post('/rsapp/generalUser', function (req, resp) {
     var data = querystring.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/generalUser' + "?" + data, 'GET', "", req, resp);
 });
+router.post('/rsapp/configureItem/userSubtype', function (req, resp) {
+    RequestApi.Request(baseURL + '/rsapp/configureItem/userSubtype', 'GET', "", req, resp);
+});
 router.post('/rsapp/generalUser/register', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/generalUser', 'POST',data, req, resp);

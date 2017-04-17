@@ -259,6 +259,7 @@ export default class UserListContainer extends Component {
 
     render() {
         const {fetching, data, detailUser, cityList} =this.props;
+        console.log("user",data);
         const detailData = detailUser.data;
         var cityOptions = [];
         var countryOptions = [];

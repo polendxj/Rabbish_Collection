@@ -98,6 +98,9 @@ class UpdateNoticeComponent extends Component{
                 self._save(data.response.data);
             }
         });
+        $(".styled, .multiselect-container input").uniform({
+            radioClass: 'choice'
+        });
     }
     _uploadImg() {
         var files = $('#file-input').prop("files");
@@ -114,19 +117,31 @@ class UpdateNoticeComponent extends Component{
         var content = UE.getEditor("content").getContent();
         var formFields = $("#noticeForm").serializeArray();
         var params = array2Json(formFields);
+        var homeNotice = parseInt($('.choice .checked input[name="homeNotice"]').val());
+        console.log(homeNotice);
+        params.homeNotice = homeNotice;
         params.img = imgUrl;
         params.content = content.replace(new RegExp(/(")/g),"'").replace(new RegExp(/(&)/g),"-----");
         if($("#noticeForm").validate().form()){
             this.props._save(params);
         }
     }
-
+    _setRadioClass(homeNotice){
+        if(homeNotice==1){
+            $('.radio1 .choice span').addClass('checked');
+            $('.radio2 .choice span').removeClass('checked');
+        }else{
+            $('.radio2 .choice span').addClass('checked');
+            $('.radio1 .choice span').removeClass('checked');
+        }
+    }
     render() {
         const {data} = this.props;
         console.log("bb",data);
         var tableHeight = ($(window).height() - 130);
         var detail = "";
         if(data.status){
+            this._setRadioClass(data.data.homeNotice);
             detail = <form id="noticeForm" className="form-horizontal" action="#">
                 <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                     <div className="col-sm-8 col-sm-offset-2">
@@ -152,10 +167,34 @@ class UpdateNoticeComponent extends Component{
                                 <label className="col-lg-2 control-label"
                                        style={{
                                            textAlign: 'center'
-                                       }}>{"标题"}</label>
+                                       }}>{"标 题"}</label>
                                 <div className="col-lg-9">
                                     <input name="title" type="text" className="form-control"
                                            defaultValue={data.data.title} placeholder={"标题"} required="required" autoComplete="off"/>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label" style={{
+                                    textAlign: 'center'
+                                }}>首页大图公告</label>
+                                <div className="col-lg-9">
+                                    <label className="radio-inline radio1">
+                                        <input type="radio" name="homeNotice" value={1} className="styled"/>
+                                        是
+                                    </label>
+                                    <label className="radio-inline radio2">
+                                        <input type="radio" name="homeNotice" value={0} className="styled" checked="checked"/>
+                                        否
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{
+                                           textAlign: 'center'
+                                       }}>{"摘 要"}</label>
+                                <div className="col-lg-9">
+                                    <textarea name="digest" defaultValue={data.data.digest} type="text" className="form-control" autoComplete="off"/>
                                 </div>
                             </div>
                             <div className="form-group" >
@@ -221,6 +260,30 @@ class UpdateNoticeComponent extends Component{
                                 <div className="col-lg-9">
                                     <input name="title" type="text" className="form-control"
                                            placeholder={"标题"} required="required" autoComplete="off"/>
+                                </div>
+                            </div>
+                            <div className="form-group" style={{display:"none"}}>
+                                <label className="col-lg-2 control-label" style={{
+                                    textAlign: 'center'
+                                }}>首页大图公告</label>
+                                <div className="col-lg-9">
+                                    <label className="radio-inline radio1">
+                                        <input type="radio" name="homeNotice" value={1} className="styled"/>
+                                        是
+                                    </label>
+                                    <label className="radio-inline radio2">
+                                        <input type="radio" name="homeNotice" value={0} className="styled"/>
+                                        否
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{
+                                           textAlign: 'center'
+                                       }}>{"摘 要"}</label>
+                                <div className="col-lg-9">
+                                    <textarea name="digest" type="text" className="form-control" autoComplete="off"/>
                                 </div>
                             </div>
                             <div className="form-group" >
