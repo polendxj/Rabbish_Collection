@@ -131,7 +131,7 @@ class UpdateNoticeComponent extends Component{
         var homeNotice = parseInt($('.choice .checked input[name="homeNotice"]').val());
         console.log(homeNotice);
         params.homeNotice = homeNotice;
-        params.img = imgUrl;
+        params.img = imgUrl.replace(new RegExp(/(http:\/\/dev.xysy.tech)/g),"");
         params.content = content.replace(new RegExp(/(")/g),"'").replace(new RegExp(/(&)/g),"-----");
         if($("#noticeForm").validate().form()){
             this.props._save(params);
