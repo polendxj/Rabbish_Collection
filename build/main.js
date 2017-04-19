@@ -176,27 +176,31 @@
 
 	var _containersNoticeNoticeRegisterContainer2 = _interopRequireDefault(_containersNoticeNoticeRegisterContainer);
 
-	var _containersStatisticStatisticListContainer = __webpack_require__(940);
+	var _containersNoticeNoticeUpdateContainer = __webpack_require__(940);
+
+	var _containersNoticeNoticeUpdateContainer2 = _interopRequireDefault(_containersNoticeNoticeUpdateContainer);
+
+	var _containersStatisticStatisticListContainer = __webpack_require__(941);
 
 	var _containersStatisticStatisticListContainer2 = _interopRequireDefault(_containersStatisticStatisticListContainer);
 
-	var _containersOrganizationOrganizationListContainer = __webpack_require__(941);
+	var _containersOrganizationOrganizationListContainer = __webpack_require__(942);
 
 	var _containersOrganizationOrganizationListContainer2 = _interopRequireDefault(_containersOrganizationOrganizationListContainer);
 
-	var _containersOrganizationOrganizationRegisterContainer = __webpack_require__(945);
+	var _containersOrganizationOrganizationRegisterContainer = __webpack_require__(946);
 
 	var _containersOrganizationOrganizationRegisterContainer2 = _interopRequireDefault(_containersOrganizationOrganizationRegisterContainer);
 
-	var _containersOrganizationOrganizationUpdateContainer = __webpack_require__(946);
+	var _containersOrganizationOrganizationUpdateContainer = __webpack_require__(947);
 
 	var _containersOrganizationOrganizationUpdateContainer2 = _interopRequireDefault(_containersOrganizationOrganizationUpdateContainer);
 
-	var _containersSystemMonitorSystemMonitorContainer = __webpack_require__(947);
+	var _containersSystemMonitorSystemMonitorContainer = __webpack_require__(948);
 
 	var _containersSystemMonitorSystemMonitorContainer2 = _interopRequireDefault(_containersSystemMonitorSystemMonitorContainer);
 
-	var _containersVersionControlVersionControlListContainer = __webpack_require__(948);
+	var _containersVersionControlVersionControlListContainer = __webpack_require__(949);
 
 	var _containersVersionControlVersionControlListContainer2 = _interopRequireDefault(_containersVersionControlVersionControlListContainer);
 
@@ -243,6 +247,7 @@
 	            _react2['default'].createElement(_reactRouter.Route, { path: '/CustomerService/StoreSettlementManage', component: _containersStoreSettlementStoreSettlementListContainer2['default'] }),
 	            _react2['default'].createElement(_reactRouter.Route, { path: '/SystemNotice/NoticeManage', component: _containersNoticeNoticeListContainer2['default'] }),
 	            _react2['default'].createElement(_reactRouter.Route, { path: '/SystemNotice/NoticeManage/Register', component: _containersNoticeNoticeRegisterContainer2['default'] }),
+	            _react2['default'].createElement(_reactRouter.Route, { path: '/SystemNotice/NoticeManage/Update/:id', component: _containersNoticeNoticeUpdateContainer2['default'] }),
 	            _react2['default'].createElement(_reactRouter.Route, { path: '/Statistic/RubbishPutIn', component: _containersStatisticStatisticListContainer2['default'] }),
 	            _react2['default'].createElement(_reactRouter.Route, { path: '/Statistic/OperationData', component: _containersSystemMonitorSystemMonitorContainer2['default'] }),
 	            _react2['default'].createElement(_reactRouter.Route, { path: '/CustomerService/OrganizationManage', component: _containersOrganizationOrganizationListContainer2['default'] }),
@@ -35409,8 +35414,10 @@
 	exports.resolutionFilter = resolutionFilter;
 	exports.timeStamp2Time = timeStamp2Time;
 	exports.correctionType = correctionType;
+	exports.recordType = recordType;
 	exports.userType = userType;
 	exports.noticeType = noticeType;
+	exports.homeNotice = homeNotice;
 	exports.organizationType = organizationType;
 	exports.pointsType = pointsType;
 	exports.array2Json = array2Json;
@@ -36460,6 +36467,21 @@
 	    return typeName;
 	}
 
+	function recordType(type) {
+	    var recordType = "";
+	    switch (type) {
+	        case 0:
+	            recordType = "即时添加";
+	            break;
+	        case 1:
+	            recordType = "集中检查";
+	            break;
+	        default:
+	            break;
+	    }
+	    return recordType;
+	}
+
 	function userType(type) {
 	    var userType = "";
 	    switch (type) {
@@ -36504,6 +36526,21 @@
 	    return noticeType;
 	}
 
+	function homeNotice(type) {
+	    var homeNotice = "否";
+	    switch (type) {
+	        case 1:
+	            homeNotice = "是";
+	            break;
+	        case 0:
+	            homeNotice = "否";
+	            break;
+	        default:
+	            break;
+	    }
+	    return homeNotice;
+	}
+
 	function organizationType(type) {
 	    var organizationType = "";
 	    switch (type) {
@@ -36537,7 +36574,7 @@
 	function array2Json(list) {
 	    var params = {};
 	    list.forEach(function (val) {
-	        if (isNumber(val.value) && val.value.length < 8) {
+	        if (isNumber(val.value) && val.value.length < 6) {
 	            params[val.name] = parseInt(val.value);
 	        } else {
 	            params[val.name] = val.value;
@@ -47106,6 +47143,10 @@
 	exports.ORGANIZATION_LIST_START = ORGANIZATION_LIST_START;
 	var ORGANIZATION_LIST_END = 'ORGANIZATION_LIST_END';
 	exports.ORGANIZATION_LIST_END = ORGANIZATION_LIST_END;
+	var SUBTYPE_LIST_START = 'SUBTYPE_LIST_START';
+	exports.SUBTYPE_LIST_START = SUBTYPE_LIST_START;
+	var SUBTYPE_LIST_END = 'SUBTYPE_LIST_END';
+	exports.SUBTYPE_LIST_END = SUBTYPE_LIST_END;
 	var PROGRESS_START = 'PROGRESS_START';
 	exports.PROGRESS_START = PROGRESS_START;
 	var PROGRESS_END = 'PROGRESS_END';
@@ -62381,6 +62422,7 @@
 	    getOperationMonitor: _reducersSystemMonitorReducer.getOperationMonitor,
 	    getOrganizationMonitor: _reducersSystemMonitorReducer.getOrganizationMonitor,
 	    getGeneralUserDetail: _reducersGeneralUserReducer.getGeneralUserDetail,
+	    getSubtypeList: _reducersGeneralUserReducer.getSubtypeList,
 	    getStatisticByTotalList: _reducersStatisticReducer.getStatisticByTotalList,
 	    form: _reduxForm.reducer,
 	    routing: _reactRouterRedux.routerReducer
@@ -64444,6 +64486,7 @@
 
 	exports.getGeneralUserList = getGeneralUserList;
 	exports.getGeneralUserDetail = getGeneralUserDetail;
+	exports.getSubtypeList = getSubtypeList;
 
 	var _redux = __webpack_require__(376);
 
@@ -64474,6 +64517,21 @@
 	            state = _extends({}, state, { fetching: true });
 	            return state;
 	        case _constantsIndex.GENNERALUSER_DETAIL_END:
+	            state = { data: action.json, fetching: false };
+	            return state;
+	        default:
+	            return state;
+	    }
+	}
+
+	function getSubtypeList(state, action) {
+	    if (state === undefined) state = { data: "", fetching: false };
+
+	    switch (action.type) {
+	        case _constantsIndex.SUBTYPE_LIST_START:
+	            state = _extends({}, state, { fetching: true });
+	            return state;
+	        case _constantsIndex.SUBTYPE_LIST_END:
 	            state = { data: action.json, fetching: false };
 	            return state;
 	        default:
@@ -69747,6 +69805,7 @@
 	            var detailUser = _props.detailUser;
 	            var cityList = _props.cityList;
 
+	            console.log("user", data);
 	            var detailData = detailUser.data;
 	            var cityOptions = [];
 	            var countryOptions = [];
@@ -70802,6 +70861,7 @@
 	        value: function componentDidMount() {
 	            var params = { page: 0, size: 10000 };
 	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(params, _constantsIndexJs.ORGANIZATION_LIST_START, _constantsIndexJs.ORGANIZATION_LIST_END, organization_list));
+	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(params, _constantsIndexJs.SUBTYPE_LIST_START, _constantsIndexJs.SUBTYPE_LIST_END, subtype_list));
 	        }
 	    }, {
 	        key: '_save',
@@ -70819,7 +70879,9 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var data = this.props.data;
+	            var _props = this.props;
+	            var data = _props.data;
+	            var subtypeData = _props.subtypeData;
 
 	            return _react2['default'].createElement(
 	                'div',
@@ -70833,6 +70895,7 @@
 	                    'div',
 	                    { className: 'content', style: { marginTop: '20px' } },
 	                    _react2['default'].createElement(RegisterUserComponent, { data: data,
+	                        subtypeData: subtypeData,
 	                        _save: this._save,
 	                        _sendMessage: this._sendMessage })
 	                )
@@ -70916,7 +70979,7 @@
 	                uploadUrl: 'http://dev.xysy.tech/rsapp/file/headimg',
 	                language: 'zh',
 	                showUpload: false,
-	                showPreview: false,
+	                showPreview: true,
 	                browseIcon: '<i class="icon-folder-open"></i>&nbsp;',
 	                removeIcon: '<i class="icon-trash"></i>',
 	                enctype: 'multipart/form-data',
@@ -70968,10 +71031,13 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var data = this.props.data;
+	            var _props2 = this.props;
+	            var data = _props2.data;
+	            var subtypeData = _props2.subtypeData;
 
 	            var defaultAddress = "";
 	            var options = [];
+	            var subtypeOptions = [];
 	            if (data) {
 	                if (data.status) {
 	                    defaultAddress = data.data.content[0].address;
@@ -70980,6 +71046,17 @@
 	                            'option',
 	                            { key: "option" + key, value: val.id, id: key + "-" + val.address },
 	                            val.name
+	                        ));
+	                    });
+	                }
+	            }
+	            if (subtypeData) {
+	                if (subtypeData.status) {
+	                    subtypeData.data.forEach(function (val, key) {
+	                        subtypeOptions.push(_react2['default'].createElement(
+	                            'option',
+	                            { key: "subtypeOption" + key, value: val.type },
+	                            val.descrip
 	                        ));
 	                    });
 	                }
@@ -71020,22 +71097,8 @@
 	                                            { className: 'col-lg-9' },
 	                                            _react2['default'].createElement(
 	                                                'select',
-	                                                { className: 'form-control', name: 'type', defaultValue: 4 },
-	                                                _react2['default'].createElement(
-	                                                    'option',
-	                                                    { value: 3 },
-	                                                    "商户用户"
-	                                                ),
-	                                                _react2['default'].createElement(
-	                                                    'option',
-	                                                    { value: 4 },
-	                                                    "住宅用户"
-	                                                ),
-	                                                _react2['default'].createElement(
-	                                                    'option',
-	                                                    { value: 5 },
-	                                                    "机关单位、学校"
-	                                                )
+	                                                { className: 'form-control', name: 'subtype', defaultValue: 1 },
+	                                                subtypeOptions
 	                                            )
 	                                        )
 	                                    ),
@@ -71375,9 +71438,11 @@
 
 	function mapStateToProps(state) {
 	    var getOrganizationList = state.getOrganizationList;
+	    var getSubtypeList = state.getSubtypeList;
 
 	    return {
-	        data: getOrganizationList.data
+	        data: getOrganizationList.data,
+	        subtypeData: getSubtypeList.data
 	    };
 	}
 
@@ -71455,7 +71520,7 @@
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            var self = this;
-	            var params = { page: 0, size: page_size };
+	            var params = { page: 0, size: page_size, startTime: new Date("2016-01-01").getTime(), endTime: new Date().getTime() };
 	            var organizationParams = { page: 0, size: 10000 };
 	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(params, _constantsIndexJs.CORRECTION_LIST_START, _constantsIndexJs.CORRECTION_LIST_END, correction_list));
 	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(organizationParams, _constantsIndexJs.ORGANIZATION_LIST_START, _constantsIndexJs.ORGANIZATION_LIST_END, organization_list));
@@ -71705,6 +71770,11 @@
 	                            _react2['default'].createElement(
 	                                'td',
 	                                { className: 'text-center' },
+	                                (0, _componentsToolTool.recordType)(val.recordType)
+	                            ),
+	                            _react2['default'].createElement(
+	                                'td',
+	                                { className: 'text-center' },
 	                                val.weight.toFixed(2)
 	                            ),
 	                            _react2['default'].createElement(
@@ -71768,11 +71838,16 @@
 	                            _react2['default'].createElement(
 	                                'th',
 	                                { className: 'col-md-2 text-bold text-center' },
+	                                "记录类型"
+	                            ),
+	                            _react2['default'].createElement(
+	                                'th',
+	                                { className: 'col-md-1 text-bold text-center' },
 	                                "重量（吨）"
 	                            ),
 	                            _react2['default'].createElement(
 	                                'th',
-	                                { className: 'col-md-4 text-bold text-left' },
+	                                { className: 'col-md-3 text-bold text-left' },
 	                                "错误描述"
 	                            ),
 	                            _react2['default'].createElement(
@@ -74119,7 +74194,7 @@
 
 	            var detailNoticeInfo = "";
 	            if (detailData.status) {
-	                var hasHttp = detailData.data.img.indexOf("http") > -1;
+	                var hasHttp = detailData.data.img && detailData.data.img.indexOf("http") > -1;
 	                detailNoticeInfo = _react2['default'].createElement(
 	                    'div',
 	                    null,
@@ -74156,7 +74231,7 @@
 	                                        'label',
 	                                        { className: 'col-lg-2 control-label',
 	                                            style: { textAlign: 'center' } },
-	                                        "类型"
+	                                        "类 型"
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
@@ -74173,6 +74248,65 @@
 	                                _react2['default'].createElement(
 	                                    'div',
 	                                    { className: 'col-lg-12' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "摘 要"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-8' },
+	                                        _react2['default'].createElement('textarea', { type: 'text', value: detailData.data.digest, className: 'form-control',
+	                                            autoComplete: 'off', disabled: 'disabled' })
+	                                    )
+	                                )
+	                            ),
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { className: 'form-group' },
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'col-lg-12' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label', style: {
+	                                                textAlign: 'center'
+	                                            } },
+	                                        '首页大图公告'
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-3' },
+	                                        _react2['default'].createElement(
+	                                            'label',
+	                                            { className: 'radio-inline' },
+	                                            _react2['default'].createElement(
+	                                                'div',
+	                                                { className: 'choice' },
+	                                                _react2['default'].createElement(
+	                                                    'span',
+	                                                    { className: detailData.data.homeNotice == 1 ? "checked" : "" },
+	                                                    _react2['default'].createElement('input', { type: 'radio', name: 'homeNotice', value: 1, className: 'styled', disabled: true })
+	                                                )
+	                                            ),
+	                                            '是'
+	                                        ),
+	                                        _react2['default'].createElement(
+	                                            'label',
+	                                            { className: 'radio-inline' },
+	                                            _react2['default'].createElement(
+	                                                'div',
+	                                                { className: 'choice' },
+	                                                _react2['default'].createElement(
+	                                                    'span',
+	                                                    { className: detailData.data.homeNotice == 0 ? "checked" : "" },
+	                                                    _react2['default'].createElement('input', { type: 'radio', name: 'homeNotice', value: 0, className: 'styled', disabled: true })
+	                                                )
+	                                            ),
+	                                            '否'
+	                                        )
+	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'label',
 	                                        { className: 'col-lg-2 control-label',
@@ -74380,6 +74514,11 @@
 	            this.props._detail(val);
 	        }
 	    }, {
+	        key: '_update',
+	        value: function _update(url) {
+	            _reactRouter.browserHistory.push(url);
+	        }
+	    }, {
 	        key: '_delete',
 	        value: function _delete(id, title) {
 	            this.props._delete(id, title);
@@ -74392,10 +74531,11 @@
 	            var fetching = _props2.fetching;
 
 	            var tb = [];
+	            console.log("aa", data);
 	            if (data) {
 	                if (data.data && data.data.content.length > 0) {
 	                    data.data.content.forEach((function (val, key) {
-	                        var hasHttp = val.img.indexOf("http") > -1;
+	                        var hasHttp = val.img && val.img.indexOf("http") > -1;
 	                        tb.push(_react2['default'].createElement(
 	                            'tr',
 	                            { key: key, style: { backgroundColor: key % 2 == 0 ? "#F8F8F8" : "" } },
@@ -74413,6 +74553,11 @@
 	                                'td',
 	                                { className: 'text-center' },
 	                                val.title
+	                            ),
+	                            _react2['default'].createElement(
+	                                'td',
+	                                { className: 'text-center' },
+	                                (0, _componentsToolTool.homeNotice)(val.homeNotice)
 	                            ),
 	                            _react2['default'].createElement(
 	                                'td',
@@ -74490,6 +74635,16 @@
 	                                            ),
 	                                            _react2['default'].createElement(
 	                                                'li',
+	                                                { style: { display: 'block' }, onClick: this._update.bind(this, '/SystemNotice/NoticeManage/Update/:' + val.id) },
+	                                                _react2['default'].createElement(
+	                                                    'a',
+	                                                    { href: 'javascript:void(0)' },
+	                                                    _react2['default'].createElement('i', { className: 'icon-pencil5' }),
+	                                                    "修改"
+	                                                )
+	                                            ),
+	                                            _react2['default'].createElement(
+	                                                'li',
 	                                                { style: { display: 'block' },
 	                                                    onClick: this._delete.bind(this, val.id, val.title) },
 	                                                _react2['default'].createElement(
@@ -74544,13 +74699,18 @@
 	                            _react2['default'].createElement('th', { className: 'text-center', style: { width: "20px" } }),
 	                            _react2['default'].createElement(
 	                                'th',
-	                                { className: 'col-md-2 text-bold text-center' },
+	                                { className: 'col-md-1 text-bold text-center' },
 	                                "公告类型"
 	                            ),
 	                            _react2['default'].createElement(
 	                                'th',
 	                                { className: 'col-md-2 text-bold text-center' },
 	                                "标题"
+	                            ),
+	                            _react2['default'].createElement(
+	                                'th',
+	                                { className: 'col-md-1 text-bold text-center' },
+	                                "首页大图公告"
 	                            ),
 	                            _react2['default'].createElement(
 	                                'th',
@@ -74744,7 +74904,7 @@
 	                uploadUrl: 'http://dev.xysy.tech/rsapp/file/news',
 	                language: 'zh',
 	                showUpload: false,
-	                showPreview: false,
+	                showPreview: true,
 	                browseIcon: '<i class="icon-folder-open"></i>&nbsp;',
 	                removeIcon: '<i class="icon-trash"></i>',
 	                enctype: 'multipart/form-data',
@@ -74755,16 +74915,15 @@
 	                    self._save(data.response.data);
 	                }
 	            });
+	            $(".styled, .multiselect-container input").uniform({
+	                radioClass: 'choice'
+	            });
 	        }
 	    }, {
 	        key: '_uploadImg',
 	        value: function _uploadImg() {
 	            var files = $('#file-input').prop("files");
-	            if (files.length > 0) {
-	                $('#file-input').fileinput('upload');
-	            } else {
-	                this._save("");
-	            }
+	            $('#file-input').fileinput('upload');
 	        }
 	    }, {
 	        key: '_search',
@@ -74777,6 +74936,9 @@
 	            var content = UE.getEditor("content").getContent();
 	            var formFields = $("#noticeForm").serializeArray();
 	            var params = (0, _componentsToolTool.array2Json)(formFields);
+	            var homeNotice = parseInt($('.choice .checked input[name="homeNotice"]').val());
+	            console.log(homeNotice);
+	            params.homeNotice = homeNotice;
 	            params.img = imgUrl;
 	            params.content = content.replace(new RegExp(/(")/g), "'").replace(new RegExp(/(&)/g), "-----");
 	            if ($("#noticeForm").validate().form()) {
@@ -74858,6 +75020,50 @@
 	                                        { className: 'col-lg-9' },
 	                                        _react2['default'].createElement('input', { name: 'title', type: 'text', className: 'form-control',
 	                                            placeholder: "标题", required: 'required', autoComplete: 'off' })
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label', style: {
+	                                                textAlign: 'center'
+	                                            } },
+	                                        '首页大图公告'
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement(
+	                                            'label',
+	                                            { className: 'radio-inline' },
+	                                            _react2['default'].createElement('input', { type: 'radio', name: 'homeNotice', value: 1, className: 'styled', checked: 'checked' }),
+	                                            '是'
+	                                        ),
+	                                        _react2['default'].createElement(
+	                                            'label',
+	                                            { className: 'radio-inline' },
+	                                            _react2['default'].createElement('input', { type: 'radio', name: 'homeNotice', value: 0, className: 'styled' }),
+	                                            '否'
+	                                        )
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: {
+	                                                textAlign: 'center'
+	                                            } },
+	                                        "摘要"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement('textarea', { name: 'digest', type: 'text', className: 'form-control', autoComplete: 'off' })
 	                                    )
 	                                ),
 	                                _react2['default'].createElement(
@@ -74994,9 +75200,9 @@
 	                initialFrameWidth: '100%',
 	                readonly: this.props.disabled
 	            });
-	            var me = this;
-	            editor.ready(function (ueditor) {
-	                var value = me.props.value ? me.props.value : '<p></p>';
+	            var that = this;
+	            editor.ready(function () {
+	                var value = that.props.value ? that.props.value : '<p></p>';
 	                editor.setContent(value);
 	            });
 	        }
@@ -92700,6 +92906,503 @@
 	/**
 	 * Created by Captain on 2017/3/4.
 	 */
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(193);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(369);
+
+	var _reactRouter = __webpack_require__(399);
+
+	var _redux = __webpack_require__(376);
+
+	var _componentsToolTool = __webpack_require__(467);
+
+	var _componentsRightBreadCrumbs = __webpack_require__(743);
+
+	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
+
+	var _actionsCommonActions = __webpack_require__(736);
+
+	var _actionsCommon = __webpack_require__(733);
+
+	var _RichText = __webpack_require__(811);
+
+	var _RichText2 = _interopRequireDefault(_RichText);
+
+	var _constantsIndexJs = __webpack_require__(668);
+
+	var NoticeUpdateContainer = (function (_Component) {
+	    _inherits(NoticeUpdateContainer, _Component);
+
+	    function NoticeUpdateContainer(props) {
+	        _classCallCheck(this, NoticeUpdateContainer);
+
+	        _get(Object.getPrototypeOf(NoticeUpdateContainer.prototype), 'constructor', this).call(this, props);
+	        this.breadCrumbs = [{ text: "系统通知", link: '' }, { text: "新闻政策", link: '' }, { text: "新闻政策修改", link: '' }];
+	        this.operation = [{ icon: "icon-undo2", text: "返回新闻政策列表", action: "/SystemNotice/NoticeManage" }];
+	        this._save = this._save.bind(this);
+	        this._startRefresh = this._startRefresh.bind(this);
+	    }
+
+	    _createClass(NoticeUpdateContainer, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(parseInt(this.props.params.id.substring(1)), _constantsIndexJs.NOTICE_DETAIL_START, _constantsIndexJs.NOTICE_DETAIL_END, notice_detail));
+	        }
+	    }, {
+	        key: '_startRefresh',
+	        value: function _startRefresh() {
+	            this.props.dispatch((0, _actionsCommon.commonRefresh)());
+	        }
+	    }, {
+	        key: '_save',
+	        value: function _save(params) {
+	            console.log("111", params);
+	            var id = parseInt(this.props.params.id.substring(1));
+	            this.props.dispatch((0, _actionsCommonActions.saveObject)(params, "", "", notice_update + "?id=" + id, "/SystemNotice/NoticeManage", "update"));
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props;
+	            var data = _props.data;
+	            var refresh = _props.refresh;
+
+	            return _react2['default'].createElement(
+	                'div',
+	                null,
+	                _react2['default'].createElement(_componentsRightBreadCrumbs2['default'], {
+	                    breadCrumbs: this.breadCrumbs,
+	                    icon: 'icon-cog6',
+	                    operation: this.operation
+	                }),
+	                _react2['default'].createElement(
+	                    'div',
+	                    { className: 'content', style: { marginTop: '20px' } },
+	                    _react2['default'].createElement(UpdateNoticeComponent, { data: data, _save: this._save, _startRefresh: this._startRefresh })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return NoticeUpdateContainer;
+	})(_react.Component);
+
+	exports['default'] = NoticeUpdateContainer;
+
+	var UpdateNoticeComponent = (function (_Component2) {
+	    _inherits(UpdateNoticeComponent, _Component2);
+
+	    function UpdateNoticeComponent(props) {
+	        _classCallCheck(this, UpdateNoticeComponent);
+
+	        _get(Object.getPrototypeOf(UpdateNoticeComponent.prototype), 'constructor', this).call(this, props);
+	        this.initialFlag = 0;
+	        this._save = this._save.bind(this);
+	        this._uploadImg = this._uploadImg.bind(this);
+	    }
+
+	    _createClass(UpdateNoticeComponent, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var self = this;
+	            $("#noticeForm").validate({
+	                ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
+	                errorClass: 'validation-error-label',
+	                successClass: 'validation-valid-label',
+	                highlight: function highlight(element, errorClass) {
+	                    $(element).removeClass(errorClass);
+	                },
+	                unhighlight: function unhighlight(element, errorClass) {
+	                    $(element).removeClass(errorClass);
+	                },
+	                validClass: "validation-valid-label",
+	                success: function success(label) {
+	                    label.addClass("validation-valid-label").text("Success.");
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate() {
+	            var self = this;
+	            if (this.props.data.status) {
+	                this.initialFlag = this.initialFlag + 1;
+	            }
+	            if (this.props.data.status && this.initialFlag <= 1) {
+	                $('#file-input').fileinput({
+	                    uploadUrl: 'http://dev.xysy.tech/rsapp/file/news',
+	                    language: 'zh',
+	                    showUpload: false,
+	                    showPreview: true,
+	                    browseIcon: '<i class="icon-folder-open"></i>&nbsp;',
+	                    removeIcon: '<i class="icon-trash"></i>',
+	                    enctype: 'multipart/form-data',
+	                    allowedFileExtensions: ['jpg', 'png'],
+	                    initialPreview: ["<img src='" + self.props.data.data.img + "' class='file-preview-image' />"]
+	                });
+	                $('#file-input').on("fileuploaded", function (event, data) {
+	                    if (data.response && data.response.status) {
+	                        self._save(data.response.data);
+	                    }
+	                });
+	            }
+	        }
+	    }, {
+	        key: '_uploadImg',
+	        value: function _uploadImg() {
+	            var files = $('#file-input').prop("files");
+	            if (files.length > 0) {
+	                $('#file-input').fileinput('upload');
+	            } else {
+	                this._save(this.props.data.data.img);
+	            }
+	        }
+	    }, {
+	        key: '_search',
+	        value: function _search() {
+	            this.props._startRefresh();
+	        }
+	    }, {
+	        key: '_save',
+	        value: function _save(imgUrl) {
+	            console.log("222", imgUrl);
+	            var content = UE.getEditor("content").getContent();
+	            var formFields = $("#noticeForm").serializeArray();
+	            var params = (0, _componentsToolTool.array2Json)(formFields);
+	            var homeNotice = parseInt($('.choice .checked input[name="homeNotice"]').val());
+	            console.log(homeNotice);
+	            params.homeNotice = homeNotice;
+	            params.img = imgUrl;
+	            params.content = content.replace(new RegExp(/(")/g), "'").replace(new RegExp(/(&)/g), "-----");
+	            if ($("#noticeForm").validate().form()) {
+	                this.props._save(params);
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var data = this.props.data;
+
+	            console.log("bb", data);
+	            var tableHeight = $(window).height() - 130;
+	            var detail = "";
+	            if (data.status) {
+	                detail = _react2['default'].createElement(
+	                    'form',
+	                    { id: 'noticeForm', className: 'form-horizontal', action: '#' },
+	                    _react2['default'].createElement(
+	                        'div',
+	                        { className: 'row', style: { height: tableHeight + 'px', overflowY: 'scroll' } },
+	                        _react2['default'].createElement(
+	                            'div',
+	                            { className: 'col-sm-8 col-sm-offset-2' },
+	                            _react2['default'].createElement(
+	                                'fieldset',
+	                                { className: 'content-group' },
+	                                _react2['default'].createElement(
+	                                    'legend',
+	                                    { className: 'text-bold' },
+	                                    "公告基础信息"
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: {
+	                                                textAlign: 'center'
+	                                            } },
+	                                        "分类名称"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement(
+	                                            'select',
+	                                            { className: 'form-control', name: 'type', defaultValue: data.data.type },
+	                                            _react2['default'].createElement(
+	                                                'option',
+	                                                { value: 1 },
+	                                                "公告"
+	                                            ),
+	                                            _react2['default'].createElement(
+	                                                'option',
+	                                                { value: 2 },
+	                                                "新闻"
+	                                            ),
+	                                            _react2['default'].createElement(
+	                                                'option',
+	                                                { value: 3 },
+	                                                "政策法规"
+	                                            )
+	                                        )
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: {
+	                                                textAlign: 'center'
+	                                            } },
+	                                        "标 题"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement('input', { name: 'title', type: 'text', className: 'form-control',
+	                                            defaultValue: data.data.title, placeholder: "标题", required: 'required', autoComplete: 'off' })
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label', style: {
+	                                                textAlign: 'center'
+	                                            } },
+	                                        '首页大图公告'
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement(
+	                                            'label',
+	                                            { className: 'radio-inline' },
+	                                            _react2['default'].createElement(
+	                                                'div',
+	                                                { className: 'choice' },
+	                                                _react2['default'].createElement(
+	                                                    'span',
+	                                                    { className: data.data.homeNotice == 1 ? "checked" : "" },
+	                                                    _react2['default'].createElement('input', { type: 'radio', name: 'homeNotice', value: 1, className: 'styled' })
+	                                                )
+	                                            ),
+	                                            '是'
+	                                        ),
+	                                        _react2['default'].createElement(
+	                                            'label',
+	                                            { className: 'radio-inline' },
+	                                            _react2['default'].createElement(
+	                                                'div',
+	                                                { className: 'choice' },
+	                                                _react2['default'].createElement(
+	                                                    'span',
+	                                                    { className: data.data.homeNotice == 0 ? "checked" : "" },
+	                                                    _react2['default'].createElement('input', { type: 'radio', name: 'homeNotice', value: 0, className: 'styled' })
+	                                                )
+	                                            ),
+	                                            '否'
+	                                        )
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: {
+	                                                textAlign: 'center'
+	                                            } },
+	                                        "摘 要"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement('textarea', { name: 'digest', defaultValue: data.data.digest, type: 'text', className: 'form-control', autoComplete: 'off' })
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: {
+	                                                textAlign: 'center'
+	                                            } },
+	                                        "图片URL"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement('input', { type: 'file', name: 'file', id: 'file-input', defaultValue: data.data.img,
+	                                            multiple: true })
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: {
+	                                                textAlign: 'center'
+	                                            } },
+	                                        "内容"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement(_RichText2['default'], { id: 'content', height: '200', value: data.data.content, disabled: false })
+	                                    )
+	                                )
+	                            ),
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { className: 'form-group' },
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'col-lg-11 text-right', style: { marginTop: "50px" } },
+	                                    _react2['default'].createElement(
+	                                        'button',
+	                                        { type: 'button', className: 'btn btn-primary',
+	                                            onClick: this._uploadImg },
+	                                        "发布"
+	                                    )
+	                                )
+	                            )
+	                        )
+	                    )
+	                );
+	            } else {
+	                // detail = <form id="noticeForm" className="form-horizontal" action="#">
+	                //     <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+	                //         <div className="col-sm-8 col-sm-offset-2">
+	                //             <fieldset className="content-group">
+	                //                 <legend className="text-bold">
+	                //                     {"公告基础信息"}
+	                //                 </legend>
+	                //                 <div className="form-group">
+	                //                     <label className="col-lg-2 control-label"
+	                //                            style={{
+	                //                                textAlign: 'center'
+	                //                            }}>{"分类名称"}</label>
+	                //                     <div className="col-lg-9">
+	                //                         <select className="form-control" name="type">
+	                //                             <option value={1}>{"公告"}</option>
+	                //                             <option value={2}>{"新闻"}</option>
+	                //                             <option value={3}>{"政策法规"}</option>
+	                //                         </select>
+	                //                     </div>
+	                //                 </div>
+	                //
+	                //                 <div className="form-group" >
+	                //                     <label className="col-lg-2 control-label"
+	                //                            style={{
+	                //                                textAlign: 'center'
+	                //                            }}>{"标题"}</label>
+	                //                     <div className="col-lg-9">
+	                //                         <input name="title" type="text" className="form-control"
+	                //                                placeholder={"标题"} required="required" autoComplete="off"/>
+	                //                     </div>
+	                //                 </div>
+	                //                 <div className="form-group" style={{display:"none"}}>
+	                //                     <label className="col-lg-2 control-label" style={{
+	                //                         textAlign: 'center'
+	                //                     }}>首页大图公告</label>
+	                //                     <div className="col-lg-9">
+	                //                         <label className="radio-inline radio1">
+	                //                             <input type="radio" name="homeNotice" value={1} className="styled"/>
+	                //                             是
+	                //                         </label>
+	                //                         <label className="radio-inline radio2">
+	                //                             <input type="radio" name="homeNotice" value={0} className="styled"/>
+	                //                             否
+	                //                         </label>
+	                //                     </div>
+	                //                 </div>
+	                //                 <div className="form-group">
+	                //                     <label className="col-lg-2 control-label"
+	                //                            style={{
+	                //                                textAlign: 'center'
+	                //                            }}>{"摘 要"}</label>
+	                //                     <div className="col-lg-9">
+	                //                         <textarea name="digest" type="text" className="form-control" autoComplete="off"/>
+	                //                     </div>
+	                //                 </div>
+	                //                 <div className="form-group" >
+	                //                     <label className="col-lg-2 control-label"
+	                //                            style={{
+	                //                                textAlign: 'center',
+	                //                            }}>{"图片URL"}</label>
+	                //                     <div className="col-lg-9">
+	                //                         <input type="file" name="file" id="file-input"
+	                //                                multiple/>
+	                //                     </div>
+	                //                 </div>
+	                //                 <div className="form-group" >
+	                //                     <label className="col-lg-2 control-label"
+	                //                            style={{
+	                //                                textAlign: 'center'
+	                //                            }}>{"内容"}</label>
+	                //                     <div className="col-lg-9">
+	                //                         <RichText id="content" height="200" value={""} disabled={false}/>
+	                //                     </div>
+	                //                 </div>
+	                //
+	                //             </fieldset>
+	                //
+	                //         </div>
+	                //     </div>
+	                // </form>
+	                detail = _react2['default'].createElement(_componentsToolTool.Loading, null);
+	            }
+	            return _react2['default'].createElement(
+	                'div',
+	                null,
+	                detail
+	            );
+	        }
+	    }]);
+
+	    return UpdateNoticeComponent;
+	})(_react.Component);
+
+	function mapStateToProps(state) {
+	    var getNoticeDetail = state.getNoticeDetail;
+	    var commonReducer = state.commonReducer;
+
+	    return {
+	        data: getNoticeDetail.data,
+	        refresh: commonReducer.refresh
+	    };
+	}
+
+	exports['default'] = (0, _reactRedux.connect)(mapStateToProps)(NoticeUpdateContainer);
+	module.exports = exports['default'];
+
+/***/ },
+/* 941 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by Captain on 2017/3/4.
+	 */
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
@@ -94914,7 +95617,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 941 */
+/* 942 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -94962,7 +95665,7 @@
 
 	var _actionsCommonActions = __webpack_require__(736);
 
-	var querystring = __webpack_require__(942);
+	var querystring = __webpack_require__(943);
 
 	var OrganizationListContainer = (function (_Component) {
 	    _inherits(OrganizationListContainer, _Component);
@@ -95783,17 +96486,17 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 942 */
+/* 943 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	exports.decode = exports.parse = __webpack_require__(943);
-	exports.encode = exports.stringify = __webpack_require__(944);
+	exports.decode = exports.parse = __webpack_require__(944);
+	exports.encode = exports.stringify = __webpack_require__(945);
 
 
 /***/ },
-/* 943 */
+/* 944 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -95879,7 +96582,7 @@
 
 
 /***/ },
-/* 944 */
+/* 945 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -95949,7 +96652,7 @@
 
 
 /***/ },
-/* 945 */
+/* 946 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -96304,7 +97007,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 946 */
+/* 947 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -96666,7 +97369,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 947 */
+/* 948 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -96854,7 +97557,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 948 */
+/* 949 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**

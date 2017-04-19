@@ -38,6 +38,7 @@ export default class NoticeUpdateContainer extends Component {
     }
 
     _save(params) {
+        console.log("111",params);
         var id = parseInt(this.props.params.id.substring(1));
         this.props.dispatch(saveObject(params, "", "", notice_update + "?id=" + id, "/SystemNotice/NoticeManage", "update"));
     }
@@ -63,6 +64,7 @@ export default class NoticeUpdateContainer extends Component {
 class UpdateNoticeComponent extends Component{
     constructor(props) {
         super(props);
+        this.initialFlag = 0;
         this._save = this._save.bind(this);
         this._uploadImg = this._uploadImg.bind(this);
     }
@@ -83,37 +85,46 @@ class UpdateNoticeComponent extends Component{
                 label.addClass("validation-valid-label").text("Success.")
             }
         });
-        $('#file-input').fileinput({
-            uploadUrl: 'http://dev.xysy.tech/rsapp/file/news',
-            language: 'zh',
-            showUpload: false,
-            showPreview: false,
-            browseIcon: '<i class="icon-folder-open"></i>&nbsp;',
-            removeIcon: '<i class="icon-trash"></i>',
-            enctype: 'multipart/form-data',
-            allowedFileExtensions: ['jpg', 'png']
-        });
-        $('#file-input').on("fileuploaded", function (event, data) {
-            if (data.response && data.response.status) {
-                self._save(data.response.data);
-            }
-        });
-        $(".styled, .multiselect-container input").uniform({
-            radioClass: 'choice'
-        });
+    }
+    componentDidUpdate(){
+        var self = this;
+        if(this.props.data.status){
+            this.initialFlag = this.initialFlag+1;
+        }
+        if(this.props.data.status&&this.initialFlag<=1){
+            $('#file-input').fileinput({
+                uploadUrl: 'http://dev.xysy.tech/rsapp/file/news',
+                language: 'zh',
+                showUpload: false,
+                showPreview: true,
+                browseIcon: '<i class="icon-folder-open"></i>&nbsp;',
+                removeIcon: '<i class="icon-trash"></i>',
+                enctype: 'multipart/form-data',
+                allowedFileExtensions: ['jpg', 'png'],
+                initialPreview: [
+                    "<img src='"+ self.props.data.data.img +"' class='file-preview-image' />"
+                ],
+            });
+            $('#file-input').on("fileuploaded", function (event, data) {
+                if (data.response && data.response.status) {
+                    self._save(data.response.data);
+                }
+            });
+        }
     }
     _uploadImg() {
         var files = $('#file-input').prop("files");
         if(files.length > 0){
             $('#file-input').fileinput('upload');
         }else {
-            this._save(this.props.data.img);
+            this._save(this.props.data.data.img);
         }
     }
     _search() {
         this.props._startRefresh();
     }
     _save(imgUrl) {
+        console.log("222",imgUrl);
         var content = UE.getEditor("content").getContent();
         var formFields = $("#noticeForm").serializeArray();
         var params = array2Json(formFields);
@@ -126,22 +137,12 @@ class UpdateNoticeComponent extends Component{
             this.props._save(params);
         }
     }
-    _setRadioClass(homeNotice){
-        if(homeNotice==1){
-            $('.radio1 .choice span').addClass('checked');
-            $('.radio2 .choice span').removeClass('checked');
-        }else{
-            $('.radio2 .choice span').addClass('checked');
-            $('.radio1 .choice span').removeClass('checked');
-        }
-    }
     render() {
         const {data} = this.props;
         console.log("bb",data);
         var tableHeight = ($(window).height() - 130);
         var detail = "";
         if(data.status){
-            this._setRadioClass(data.data.homeNotice);
             detail = <form id="noticeForm" className="form-horizontal" action="#">
                 <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
                     <div className="col-sm-8 col-sm-offset-2">
@@ -178,12 +179,20 @@ class UpdateNoticeComponent extends Component{
                                     textAlign: 'center'
                                 }}>首页大图公告</label>
                                 <div className="col-lg-9">
-                                    <label className="radio-inline radio1">
-                                        <input type="radio" name="homeNotice" value={1} className="styled"/>
+                                    <label className="radio-inline">
+                                        <div className="choice">
+                                            <span className={data.data.homeNotice==1?"checked":""}>
+                                                <input type="radio" name="homeNotice" value={1} className="styled"/>
+                                            </span>
+                                        </div>
                                         是
                                     </label>
-                                    <label className="radio-inline radio2">
-                                        <input type="radio" name="homeNotice" value={0} className="styled" checked="checked"/>
+                                    <label className="radio-inline">
+                                        <div className="choice">
+                                            <span className={data.data.homeNotice==0?"checked":""}>
+                                                <input type="radio" name="homeNotice" value={0} className="styled"/>
+                                            </span>
+                                        </div>
                                         否
                                     </label>
                                 </div>
@@ -231,86 +240,87 @@ class UpdateNoticeComponent extends Component{
                 </div>
             </form>
         }else{
-            detail = <form id="noticeForm" className="form-horizontal" action="#">
-                <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
-                    <div className="col-sm-8 col-sm-offset-2">
-                        <fieldset className="content-group">
-                            <legend className="text-bold">
-                                {"公告基础信息"}
-                            </legend>
-                            <div className="form-group">
-                                <label className="col-lg-2 control-label"
-                                       style={{
-                                           textAlign: 'center'
-                                       }}>{"分类名称"}</label>
-                                <div className="col-lg-9">
-                                    <select className="form-control" name="type">
-                                        <option value={1}>{"公告"}</option>
-                                        <option value={2}>{"新闻"}</option>
-                                        <option value={3}>{"政策法规"}</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div className="form-group" >
-                                <label className="col-lg-2 control-label"
-                                       style={{
-                                           textAlign: 'center'
-                                       }}>{"标题"}</label>
-                                <div className="col-lg-9">
-                                    <input name="title" type="text" className="form-control"
-                                           placeholder={"标题"} required="required" autoComplete="off"/>
-                                </div>
-                            </div>
-                            <div className="form-group" style={{display:"none"}}>
-                                <label className="col-lg-2 control-label" style={{
-                                    textAlign: 'center'
-                                }}>首页大图公告</label>
-                                <div className="col-lg-9">
-                                    <label className="radio-inline radio1">
-                                        <input type="radio" name="homeNotice" value={1} className="styled"/>
-                                        是
-                                    </label>
-                                    <label className="radio-inline radio2">
-                                        <input type="radio" name="homeNotice" value={0} className="styled"/>
-                                        否
-                                    </label>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <label className="col-lg-2 control-label"
-                                       style={{
-                                           textAlign: 'center'
-                                       }}>{"摘 要"}</label>
-                                <div className="col-lg-9">
-                                    <textarea name="digest" type="text" className="form-control" autoComplete="off"/>
-                                </div>
-                            </div>
-                            <div className="form-group" >
-                                <label className="col-lg-2 control-label"
-                                       style={{
-                                           textAlign: 'center',
-                                       }}>{"图片URL"}</label>
-                                <div className="col-lg-9">
-                                    <input type="file" name="file" id="file-input"
-                                           multiple/>
-                                </div>
-                            </div>
-                            <div className="form-group" >
-                                <label className="col-lg-2 control-label"
-                                       style={{
-                                           textAlign: 'center'
-                                       }}>{"内容"}</label>
-                                <div className="col-lg-9">
-                                    <RichText id="content" height="200" value={""} disabled={false}/>
-                                </div>
-                            </div>
-
-                        </fieldset>
-
-                    </div>
-                </div>
-            </form>
+            // detail = <form id="noticeForm" className="form-horizontal" action="#">
+            //     <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+            //         <div className="col-sm-8 col-sm-offset-2">
+            //             <fieldset className="content-group">
+            //                 <legend className="text-bold">
+            //                     {"公告基础信息"}
+            //                 </legend>
+            //                 <div className="form-group">
+            //                     <label className="col-lg-2 control-label"
+            //                            style={{
+            //                                textAlign: 'center'
+            //                            }}>{"分类名称"}</label>
+            //                     <div className="col-lg-9">
+            //                         <select className="form-control" name="type">
+            //                             <option value={1}>{"公告"}</option>
+            //                             <option value={2}>{"新闻"}</option>
+            //                             <option value={3}>{"政策法规"}</option>
+            //                         </select>
+            //                     </div>
+            //                 </div>
+            //
+            //                 <div className="form-group" >
+            //                     <label className="col-lg-2 control-label"
+            //                            style={{
+            //                                textAlign: 'center'
+            //                            }}>{"标题"}</label>
+            //                     <div className="col-lg-9">
+            //                         <input name="title" type="text" className="form-control"
+            //                                placeholder={"标题"} required="required" autoComplete="off"/>
+            //                     </div>
+            //                 </div>
+            //                 <div className="form-group" style={{display:"none"}}>
+            //                     <label className="col-lg-2 control-label" style={{
+            //                         textAlign: 'center'
+            //                     }}>首页大图公告</label>
+            //                     <div className="col-lg-9">
+            //                         <label className="radio-inline radio1">
+            //                             <input type="radio" name="homeNotice" value={1} className="styled"/>
+            //                             是
+            //                         </label>
+            //                         <label className="radio-inline radio2">
+            //                             <input type="radio" name="homeNotice" value={0} className="styled"/>
+            //                             否
+            //                         </label>
+            //                     </div>
+            //                 </div>
+            //                 <div className="form-group">
+            //                     <label className="col-lg-2 control-label"
+            //                            style={{
+            //                                textAlign: 'center'
+            //                            }}>{"摘 要"}</label>
+            //                     <div className="col-lg-9">
+            //                         <textarea name="digest" type="text" className="form-control" autoComplete="off"/>
+            //                     </div>
+            //                 </div>
+            //                 <div className="form-group" >
+            //                     <label className="col-lg-2 control-label"
+            //                            style={{
+            //                                textAlign: 'center',
+            //                            }}>{"图片URL"}</label>
+            //                     <div className="col-lg-9">
+            //                         <input type="file" name="file" id="file-input"
+            //                                multiple/>
+            //                     </div>
+            //                 </div>
+            //                 <div className="form-group" >
+            //                     <label className="col-lg-2 control-label"
+            //                            style={{
+            //                                textAlign: 'center'
+            //                            }}>{"内容"}</label>
+            //                     <div className="col-lg-9">
+            //                         <RichText id="content" height="200" value={""} disabled={false}/>
+            //                     </div>
+            //                 </div>
+            //
+            //             </fieldset>
+            //
+            //         </div>
+            //     </div>
+            // </form>
+            detail = <Loading/>
         }
         return (
             <div>

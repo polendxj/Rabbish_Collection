@@ -80,7 +80,7 @@ class RegisterNoticeComponent extends Component{
             uploadUrl: 'http://dev.xysy.tech/rsapp/file/news',
             language: 'zh',
             showUpload: false,
-            showPreview: false,
+            showPreview: true,
             browseIcon: '<i class="icon-folder-open"></i>&nbsp;',
             removeIcon: '<i class="icon-trash"></i>',
             enctype: 'multipart/form-data',
