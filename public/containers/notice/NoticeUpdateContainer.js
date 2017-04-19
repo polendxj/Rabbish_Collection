@@ -137,6 +137,10 @@ class UpdateNoticeComponent extends Component{
             this.props._save(params);
         }
     }
+    _clickRadio(e){
+        $('.radio-inline .choice span').removeClass("checked");
+        $(e.target).parent("span").addClass("checked");
+    }
     render() {
         const {data} = this.props;
         console.log("bb",data);
@@ -182,7 +186,7 @@ class UpdateNoticeComponent extends Component{
                                     <label className="radio-inline">
                                         <div className="choice">
                                             <span className={data.data.homeNotice==1?"checked":""}>
-                                                <input type="radio" name="homeNotice" value={1} className="styled"/>
+                                                <input type="radio" name="homeNotice" value={1} className="styled" onClick={this._clickRadio.bind(this)}/>
                                             </span>
                                         </div>
                                         是
@@ -190,7 +194,7 @@ class UpdateNoticeComponent extends Component{
                                     <label className="radio-inline">
                                         <div className="choice">
                                             <span className={data.data.homeNotice==0?"checked":""}>
-                                                <input type="radio" name="homeNotice" value={0} className="styled"/>
+                                                <input type="radio" name="homeNotice" value={0} className="styled" onClick={this._clickRadio.bind(this)}/>
                                             </span>
                                         </div>
                                         否
