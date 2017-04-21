@@ -973,12 +973,12 @@ export default class StatisticListContainer extends Component {
                                                           aria-expanded="false">城市垃圾统计</a></li>
                                 <li className=""><a href="#basic-justified-tab3" data-toggle="tab"
                                                     aria-expanded="false">小区/单位垃圾统计</a></li>
+                                <li className=""><a href="#basic-justified-tab1" data-toggle="tab"
+                                                    aria-expanded="false">垃圾回收详情</a></li>
                                 <li className=""><a href="#basic-justified-tab4" data-toggle="tab"
                                                     aria-expanded="false">结算记录统计</a></li>
                                 <li className=""><a href="#basic-justified-tab5" data-toggle="tab"
                                                     aria-expanded="false">总量数据统计</a></li>
-                                <li className=""><a href="#basic-justified-tab1" data-toggle="tab"
-                                                          aria-expanded="false">垃圾回收记录</a></li>
                             </ul>
 
                             <div className="tab-content">

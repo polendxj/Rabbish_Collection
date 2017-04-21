@@ -35047,7 +35047,7 @@
 	                                marginTop: "-22px",
 	                                marginLeft: "30px",
 	                                fontSize: "16px" } },
-	                        '垃圾回收运营平台'
+	                        '垃圾之家运营平台'
 	                    )
 	                ),
 	                _react2['default'].createElement(
@@ -93091,11 +93091,17 @@
 	            var homeNotice = parseInt($('.choice .checked input[name="homeNotice"]').val());
 	            console.log(homeNotice);
 	            params.homeNotice = homeNotice;
-	            params.img = imgUrl;
+	            params.img = imgUrl.replace(new RegExp(/(http:\/\/dev.xysy.tech)/g), "");
 	            params.content = content.replace(new RegExp(/(")/g), "'").replace(new RegExp(/(&)/g), "-----");
 	            if ($("#noticeForm").validate().form()) {
 	                this.props._save(params);
 	            }
+	        }
+	    }, {
+	        key: '_clickRadio',
+	        value: function _clickRadio(e) {
+	            $('.radio-inline .choice span').removeClass("checked");
+	            $(e.target).parent("span").addClass("checked");
 	        }
 	    }, {
 	        key: 'render',
@@ -93198,7 +93204,7 @@
 	                                                _react2['default'].createElement(
 	                                                    'span',
 	                                                    { className: data.data.homeNotice == 1 ? "checked" : "" },
-	                                                    _react2['default'].createElement('input', { type: 'radio', name: 'homeNotice', value: 1, className: 'styled' })
+	                                                    _react2['default'].createElement('input', { type: 'radio', name: 'homeNotice', value: 1, className: 'styled', onClick: this._clickRadio.bind(this) })
 	                                                )
 	                                            ),
 	                                            '是'
@@ -93212,7 +93218,7 @@
 	                                                _react2['default'].createElement(
 	                                                    'span',
 	                                                    { className: data.data.homeNotice == 0 ? "checked" : "" },
-	                                                    _react2['default'].createElement('input', { type: 'radio', name: 'homeNotice', value: 0, className: 'styled' })
+	                                                    _react2['default'].createElement('input', { type: 'radio', name: 'homeNotice', value: 0, className: 'styled', onClick: this._clickRadio.bind(this) })
 	                                                )
 	                                            ),
 	                                            '否'
@@ -94847,6 +94853,16 @@
 	                                    { className: '' },
 	                                    _react2['default'].createElement(
 	                                        'a',
+	                                        { href: '#basic-justified-tab1', 'data-toggle': 'tab',
+	                                            'aria-expanded': 'false' },
+	                                        '垃圾回收详情'
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'li',
+	                                    { className: '' },
+	                                    _react2['default'].createElement(
+	                                        'a',
 	                                        { href: '#basic-justified-tab4', 'data-toggle': 'tab',
 	                                            'aria-expanded': 'false' },
 	                                        '结算记录统计'
@@ -94860,16 +94876,6 @@
 	                                        { href: '#basic-justified-tab5', 'data-toggle': 'tab',
 	                                            'aria-expanded': 'false' },
 	                                        '总量数据统计'
-	                                    )
-	                                ),
-	                                _react2['default'].createElement(
-	                                    'li',
-	                                    { className: '' },
-	                                    _react2['default'].createElement(
-	                                        'a',
-	                                        { href: '#basic-justified-tab1', 'data-toggle': 'tab',
-	                                            'aria-expanded': 'false' },
-	                                        '垃圾回收记录'
 	                                    )
 	                                )
 	                            ),

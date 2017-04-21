@@ -42,7 +42,7 @@ class Logo extends Component {
                         marginRight: "0",
                         marginTop: "-22px",
                         marginLeft: "30px",
-                        fontSize: "16px"}}>垃圾回收运营平台</span>
+                        fontSize: "16px"}}>垃圾之家运营平台</span>
 
                 </a>
                 <ul className="nav navbar-nav visible-xs-block">
