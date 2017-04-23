@@ -108,10 +108,16 @@ class RegisterManualRecordComponent extends Component {
             unhighlight: function (element, errorClass) {
                 $(element).removeClass(errorClass);
             },
-
             validClass: "validation-valid-label",
             success: function (label) {
                 label.addClass("validation-valid-label").text("Success.")
+            },
+            errorPlacement: function(error, element) {
+                if(element.parent().hasClass("input-group")){
+                    error.appendTo(element.parent().parent().parent().find(".errorShow"));
+                }else{
+                    error.appendTo(element.parent().parent().find(".errorShow"));
+                }
             },
             rules: {
                 weight: {
@@ -149,7 +155,7 @@ class RegisterManualRecordComponent extends Component {
                                            style={{
                                                textAlign: 'center'
                                            }}>{"分类"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <select id="classify" className="form-control">
                                             {options}
                                         </select>
@@ -158,7 +164,7 @@ class RegisterManualRecordComponent extends Component {
 
                                 <div className="form-group">
                                     <label className="control-label col-lg-2" style={{textAlign: 'center'}}>{"重量"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <div className="input-group">
                                             <input id="weight" name="weight" type="text" className="form-control"
                                                    placeholder={"重量"} required="required"
@@ -166,11 +172,12 @@ class RegisterManualRecordComponent extends Component {
                                                 <span className="input-group-addon">千克</span>
                                         </div>
                                     </div>
+                                    <div className="col-lg-3 errorShow"></div>
                                 </div>
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"起止时间"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <div className="input-group">
                                             <input type="text" className="form-control daterange-manuRecord"/>
                                             <span className="input-group-addon"><i
@@ -181,8 +188,8 @@ class RegisterManualRecordComponent extends Component {
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"分类描述"}</label>
-                                    <div className="col-lg-9">
-                                    <textarea id="description" rows="5" cols="5" className="form-control"
+                                    <div className="col-lg-6">
+                                        <textarea id="description" rows="5" cols="5" className="form-control"
                                               placeholder={"分类描述"}></textarea>
                                     </div>
                                 </div>
@@ -190,7 +197,7 @@ class RegisterManualRecordComponent extends Component {
                             </fieldset>
 
                             <div className="form-group">
-                                <div className="col-lg-11 text-right" style={{marginTop: "50px"}}>
+                                <div className="col-lg-8 text-right" style={{marginTop: "50px"}}>
                                     <button type="button" className="btn btn-primary"
                                             onClick={this._save.bind(this)}>{"保存"}
                                     </button>

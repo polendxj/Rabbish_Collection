@@ -69,22 +69,7 @@ class UpdateNoticeComponent extends Component{
         this._uploadImg = this._uploadImg.bind(this);
     }
     componentDidMount() {
-        var self = this;
-        $("#noticeForm").validate({
-            ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
-            errorClass: 'validation-error-label',
-            successClass: 'validation-valid-label',
-            highlight: function(element, errorClass) {
-                $(element).removeClass(errorClass);
-            },
-            unhighlight: function(element, errorClass) {
-                $(element).removeClass(errorClass);
-            },
-            validClass: "validation-valid-label",
-            success: function(label) {
-                label.addClass("validation-valid-label").text("Success.")
-            }
-        });
+
     }
     componentDidUpdate(){
         var self = this;
@@ -92,6 +77,24 @@ class UpdateNoticeComponent extends Component{
             this.initialFlag = this.initialFlag+1;
         }
         if(this.props.data.status&&this.initialFlag<=1){
+            $("#noticeForm").validate({
+                ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
+                errorClass: 'validation-error-label',
+                successClass: 'validation-valid-label',
+                highlight: function(element, errorClass) {
+                    $(element).removeClass(errorClass);
+                },
+                unhighlight: function(element, errorClass) {
+                    $(element).removeClass(errorClass);
+                },
+                validClass: "validation-valid-label",
+                success: function(label) {
+                    label.addClass("validation-valid-label").text("Success.")
+                },
+                errorPlacement: function(error, element) {
+                    error.appendTo(element.parent().parent().find(".errorShow"));
+                }
+            });
             $('#file-input').fileinput({
                 uploadUrl: 'http://dev.xysy.tech/rsapp/file/news',
                 language: 'zh',
@@ -100,7 +103,7 @@ class UpdateNoticeComponent extends Component{
                 browseIcon: '<i class="icon-folder-open"></i>&nbsp;',
                 removeIcon: '<i class="icon-trash"></i>',
                 enctype: 'multipart/form-data',
-                allowedFileExtensions: ['jpg', 'png'],
+                allowedFileExtensions: ['jpg', 'png','jpeg'],
                 initialPreview: [
                     "<img src='"+ self.props.data.data.img +"' class='file-preview-image' />"
                 ],
@@ -159,7 +162,7 @@ class UpdateNoticeComponent extends Component{
                                        style={{
                                            textAlign: 'center'
                                        }}>{"分类名称"}</label>
-                                <div className="col-lg-9">
+                                <div className="col-lg-6">
                                     <select className="form-control" name="type" defaultValue={data.data.type}>
                                         <option value={1}>{"公告"}</option>
                                         <option value={2}>{"新闻"}</option>
@@ -173,16 +176,17 @@ class UpdateNoticeComponent extends Component{
                                        style={{
                                            textAlign: 'center'
                                        }}>{"标 题"}</label>
-                                <div className="col-lg-9">
+                                <div className="col-lg-6">
                                     <input name="title" type="text" className="form-control"
                                            defaultValue={data.data.title} placeholder={"标题"} required="required" autoComplete="off"/>
                                 </div>
+                                <div className="col-lg-3 errorShow"></div>
                             </div>
                             <div className="form-group">
                                 <label className="col-lg-2 control-label" style={{
                                     textAlign: 'center'
                                 }}>首页大图公告</label>
-                                <div className="col-lg-9">
+                                <div className="col-lg-6">
                                     <label className="radio-inline">
                                         <div className="choice">
                                             <span className={data.data.homeNotice==1?"checked":""}>
@@ -244,86 +248,6 @@ class UpdateNoticeComponent extends Component{
                 </div>
             </form>
         }else{
-            // detail = <form id="noticeForm" className="form-horizontal" action="#">
-            //     <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
-            //         <div className="col-sm-8 col-sm-offset-2">
-            //             <fieldset className="content-group">
-            //                 <legend className="text-bold">
-            //                     {"公告基础信息"}
-            //                 </legend>
-            //                 <div className="form-group">
-            //                     <label className="col-lg-2 control-label"
-            //                            style={{
-            //                                textAlign: 'center'
-            //                            }}>{"分类名称"}</label>
-            //                     <div className="col-lg-9">
-            //                         <select className="form-control" name="type">
-            //                             <option value={1}>{"公告"}</option>
-            //                             <option value={2}>{"新闻"}</option>
-            //                             <option value={3}>{"政策法规"}</option>
-            //                         </select>
-            //                     </div>
-            //                 </div>
-            //
-            //                 <div className="form-group" >
-            //                     <label className="col-lg-2 control-label"
-            //                            style={{
-            //                                textAlign: 'center'
-            //                            }}>{"标题"}</label>
-            //                     <div className="col-lg-9">
-            //                         <input name="title" type="text" className="form-control"
-            //                                placeholder={"标题"} required="required" autoComplete="off"/>
-            //                     </div>
-            //                 </div>
-            //                 <div className="form-group" style={{display:"none"}}>
-            //                     <label className="col-lg-2 control-label" style={{
-            //                         textAlign: 'center'
-            //                     }}>首页大图公告</label>
-            //                     <div className="col-lg-9">
-            //                         <label className="radio-inline radio1">
-            //                             <input type="radio" name="homeNotice" value={1} className="styled"/>
-            //                             是
-            //                         </label>
-            //                         <label className="radio-inline radio2">
-            //                             <input type="radio" name="homeNotice" value={0} className="styled"/>
-            //                             否
-            //                         </label>
-            //                     </div>
-            //                 </div>
-            //                 <div className="form-group">
-            //                     <label className="col-lg-2 control-label"
-            //                            style={{
-            //                                textAlign: 'center'
-            //                            }}>{"摘 要"}</label>
-            //                     <div className="col-lg-9">
-            //                         <textarea name="digest" type="text" className="form-control" autoComplete="off"/>
-            //                     </div>
-            //                 </div>
-            //                 <div className="form-group" >
-            //                     <label className="col-lg-2 control-label"
-            //                            style={{
-            //                                textAlign: 'center',
-            //                            }}>{"图片URL"}</label>
-            //                     <div className="col-lg-9">
-            //                         <input type="file" name="file" id="file-input"
-            //                                multiple/>
-            //                     </div>
-            //                 </div>
-            //                 <div className="form-group" >
-            //                     <label className="col-lg-2 control-label"
-            //                            style={{
-            //                                textAlign: 'center'
-            //                            }}>{"内容"}</label>
-            //                     <div className="col-lg-9">
-            //                         <RichText id="content" height="200" value={""} disabled={false}/>
-            //                     </div>
-            //                 </div>
-            //
-            //             </fieldset>
-            //
-            //         </div>
-            //     </div>
-            // </form>
             detail = <Loading/>
         }
         return (

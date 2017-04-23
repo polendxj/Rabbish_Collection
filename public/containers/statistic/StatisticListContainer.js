@@ -72,6 +72,13 @@ export default class StatisticListContainer extends Component {
         this.currentCityOfCounty = "";
         this.currentOrgaCity = "崇州";
         this.currentOrgaOrganization = "";
+        this.cityOfDateSort = false;
+        this.cityOfWeightSort = true;
+        this.cityOfCountSort = true;
+        this.orgaOfOrgaSort = false;
+        this.orgaOfDateSort = true;
+        this.orgaOfWeightSort = true;
+        this.orgaOfCountSort = true;
         this._search = this._search.bind(this);
         this._changeCityOfDetail = this._changeCityOfDetail.bind(this);
         this._changeCity = this._changeCity.bind(this);
@@ -436,7 +443,74 @@ export default class StatisticListContainer extends Component {
         this.page = this.page + 1;
         this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
     }
-
+    _changeCitySort(type,e){
+        var rangeTime = $("#daterange-two-2").val();
+        var cityParams = {
+            page: 0,
+            size: page_size,
+            cityid: $("#cityOfCitySelect").val(),
+            startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+            endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
+        };
+        if(type=="date"){
+            this.cityOfDateSort = !this.cityOfDateSort;
+            this.cityOfWeightSort = true;
+            this.cityOfCountSort = true;
+            cityParams.sort = this.cityOfDateSort?"monthday,desc":"monthday,asc";
+        }else if(type=="weight"){
+            this.cityOfWeightSort = !this.cityOfWeightSort;
+            this.cityOfDateSort = true;
+            this.cityOfCountSort = true;
+            cityParams.sort = this.cityOfWeightSort?"weight,desc":"weight,asc";
+        }else{
+            this.cityOfCountSort = !this.cityOfCountSort;
+            this.cityOfDateSort = true;
+            this.cityOfWeightSort = true;
+            cityParams.sort = this.cityOfCountSort?"count,desc":"count,asc";
+        }
+        $(e.target).css("color","red");
+        $(".citySort").not(e.target).css("color","black");
+        this.props.dispatch(getListByMutilpCondition(cityParams, STATISTICBYCITY_LIST_START, STATISTICBYCITY_LIST_END, statisticByCity_list));
+    }
+    _changeOrganizationSort(type,e){
+        var rangeTime = $("#daterange-two-3").val();
+        var orgaParams = {
+            page: this.orgPage,
+            size: page_size,
+            cityid: $("#cityOfOrganizationSelect").val(),
+            organizationid: $("#ofOrganizationSelect").val(),
+            startday: timeStamp2Time(new Date(rangeTime.split("-")[0].trim()).getTime()),
+            endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
+        };
+        if(type=="organization"){
+            this.orgaOfOrgaSort = !this.orgaOfOrgaSort;
+            this.orgaOfDateSort = true;
+            this.orgaOfWeightSort = true;
+            this.orgaOfCountSort = true;
+            orgaParams.sort = this.orgaOfOrgaSort?"organizationid,desc":"organizationid,asc";
+        }else if(type=="date"){
+            this.orgaOfDateSort = !this.orgaOfDateSort;
+            this.orgaOfOrgaSort = true;
+            this.orgaOfWeightSort = true;
+            this.orgaOfCountSort = true;
+            orgaParams.sort = this.orgaOfDateSort?"monthday,desc":"monthday,asc";
+        }else if(type=="weight"){
+            this.orgaOfWeightSort = !this.orgaOfWeightSort;
+            this.orgaOfOrgaSort = true;
+            this.orgaOfDateSort = true;
+            this.orgaOfCountSort = true;
+            orgaParams.sort = this.orgaOfWeightSort?"weight,desc":"weight,asc";
+        }else{
+            this.orgaOfCountSort = !this.orgaOfCountSort;
+            this.orgaOfOrgaSort = true;
+            this.orgaOfDateSort = true;
+            this.orgaOfWeightSort = true;
+            orgaParams.sort = this.orgaOfCountSort?"count,desc":"count,asc";
+        }
+        $(e.target).css("color","red");
+        $(".orgaSort").not(e.target).css("color","black");
+        this.props.dispatch(getListByMutilpCondition(orgaParams, STATISTICBYORGANIZATION_LIST_START, STATISTICBYORGANIZATION_LIST_END, statisticByOrganization_list));
+    }
     render() {
         const {fetching, classifyData, detailData, cityData, organizationData, rangeDateData, settlementData, operationData, cityList, cityOfCountyList, totalData, classifyList} =this.props;
         var data = "";
@@ -906,10 +980,11 @@ export default class StatisticListContainer extends Component {
         </div>;
 
         var tableHeight = ($(window).height() - 410);
+        var contentHeight = $(window).height();
         var style = {width:"175px"};
         return (
             <div>
-                <div className="content" style={{marginTop: '5px'}}>
+                <div className="content" style={{marginTop: '5px',height:contentHeight+"px",overflowY:"auto"}}>
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-lg-3 col-md-6">
@@ -1023,7 +1098,7 @@ export default class StatisticListContainer extends Component {
                                             />
                                         </div>
                                         <div className="table-responsive"
-                                             style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+                                             >
                                             <table className="table table-bordered table-hover"
                                                    style={{marginBottom: '85px'}}>
                                                 <thead>
@@ -1072,7 +1147,7 @@ export default class StatisticListContainer extends Component {
                                     <fieldset className="content-group">
                                         <div style={{marginTop: '-20px'}}>
                                             <div className="table-responsive"
-                                                 style={{width: "600px", position: "absolute"}}>
+                                                 style={{width: "600px", position: "relative",float:"left"}}>
                                                 <table className="table table-xlg text-nowrap">
                                                     <tbody>
                                                     <tr>
@@ -1091,7 +1166,7 @@ export default class StatisticListContainer extends Component {
                                                                     ：{showTotalOfCity == "ok" ? moneyFormat(cityData.totalCityData.count) : showTotalOfCity}
                                                                     次 /
                                                                     投放重量：{showTotalOfCity == "ok" ? moneyFormat(cityData.totalCityData.weight.toFixed(0)) : showTotalOfCity}
-                                                                    千克
+                                                                    吨
                                                                     <small
                                                                         className="display-block no-margin">{showTotalOfCity == "ok" ? cityData.totalCityData.rangeDate : showTotalOfCity}</small>
                                                                 </h5>
@@ -1111,15 +1186,21 @@ export default class StatisticListContainer extends Component {
                                             />
                                         </div>
                                         <div className="table-responsive"
-                                             style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+                                             >
                                             <table className="table table-bordered table-hover"
                                                    style={{marginBottom: '85px'}}>
                                                 <thead>
                                                 <tr style={{fontWeight: 'bold'}}>
                                                     <th className="text-center" style={{width: "20px"}}></th>
-                                                    <th className="col-md-4 text-bold text-center">{"日期"}</th>
-                                                    <th className="col-md-4 text-bold text-center">{"重量（千克）"}</th>
-                                                    <th className="col-md-4 text-bold text-center">{"次数"}</th>
+                                                    <th className="col-md-4 text-bold text-center">{"日期"}
+                                                        <i className={this.cityOfDateSort?"icon icon-arrow-down5 citySort":"icon icon-arrow-up5 citySort"} style={{color:"red"}} onClick={this._changeCitySort.bind(this,"date")} />
+                                                    </th>
+                                                    <th className="col-md-4 text-bold text-center">{"重量（吨）"}
+                                                        <i className={this.cityOfWeightSort?"icon icon-arrow-down5 citySort":"icon icon-arrow-up5 citySort"} style={{color:"black"}} onClick={this._changeCitySort.bind(this,"weight")} />
+                                                    </th>
+                                                    <th className="col-md-4 text-bold text-center">{"次数"}
+                                                        <i className={this.cityOfCountSort?"icon icon-arrow-down5 citySort":"icon icon-arrow-up5 citySort"} style={{color:"black"}} onClick={this._changeCitySort.bind(this,"count")} />
+                                                    </th>
                                                     <th className="text-center" style={{width: "20px"}}><i
                                                         className="icon-arrow-down12"></i></th>
                                                 </tr>
@@ -1128,6 +1209,13 @@ export default class StatisticListContainer extends Component {
                                                 {cityTb}
                                                 </tbody>
                                             </table>
+                                            <Pagenation counts={cityData.cityData ? cityData.cityData.totalElements : 0} page={this.cityPage}
+                                                        _changePage={this._cityChangePage.bind(this)}
+                                                        _prePage={this._cityPrePage.bind(this)}
+                                                        _nextPage={this._cityNextPage.bind(this)}
+                                                        inputNumberID="inputNumber2"
+                                                        perPageID="perPageID2"
+                                            />
                                         </div>
 
                                     </fieldset>
@@ -1165,7 +1253,7 @@ export default class StatisticListContainer extends Component {
                                     <fieldset className="content-group">
                                         <div style={{marginTop: '-20px'}}>
                                             <div className="table-responsive"
-                                                 style={{width: "600px", position: "absolute"}}>
+                                                 style={{width: "600px", position: "relative",float:"left"}}>
                                                 <table className="table table-xlg text-nowrap">
                                                     <tbody>
                                                     <tr>
@@ -1184,7 +1272,7 @@ export default class StatisticListContainer extends Component {
                                                                     {totalOrga.cityName ? totalOrga.cityName : "获取中..."}
                                                                     - 投放次数 ：{moneyFormat(totalOrga.count)}
                                                                     次 / 投放重量：{moneyFormat(totalOrga.weight.toFixed(0))}
-                                                                    千克
+                                                                    吨
                                                                     <small
                                                                         className="display-block no-margin">{totalOrga.rangeDate ? totalOrga.rangeDate : "获取中..."}</small>
                                                                 </h5>
@@ -1203,20 +1291,24 @@ export default class StatisticListContainer extends Component {
                                                         perPageID="perPageID3"
                                             />
                                         </div>
-                                        <div className="table-responsive"
-                                             style={{
-                                                 height: tableHeight + 'px',
-                                                 overflowY: 'scroll'
-                                             }}>
+                                        <div className="table-responsive">
                                             <table className="table table-bordered table-hover"
                                                    style={{marginBottom: '85px'}}>
                                                 <thead>
                                                 <tr style={{fontWeight: 'bold'}}>
                                                     <th className="text-center" style={{width: "20px"}}></th>
-                                                    <th className="col-md-3 text-bold text-center">{"小区/单位名称"}</th>
-                                                    <th className="col-md-3 text-bold text-center">{"日期"}</th>
-                                                    <th className="col-md-3 text-bold text-center">{"重量（千克）"}</th>
-                                                    <th className="col-md-3 text-bold text-center">{"次数"}</th>
+                                                    <th className="col-md-3 text-bold text-center">{"小区/单位名称"}
+                                                        <i className={this.orgaOfOrgaSort?"icon icon-arrow-down5 orgaSort":"icon icon-arrow-up5 orgaSort"} style={{color:"red"}} onClick={this._changeOrganizationSort.bind(this,"organization")} />
+                                                    </th>
+                                                    <th className="col-md-3 text-bold text-center">{"日期"}
+                                                        <i className={this.orgaOfDateSort?"icon icon-arrow-down5 orgaSort":"icon icon-arrow-up5 orgaSort"} style={{color:"black"}} onClick={this._changeOrganizationSort.bind(this,"date")} />
+                                                    </th>
+                                                    <th className="col-md-3 text-bold text-center">{"重量（吨）"}
+                                                        <i className={this.orgaOfWeightSort?"icon icon-arrow-down5 orgaSort":"icon icon-arrow-up5 orgaSort"} style={{color:"black"}} onClick={this._changeOrganizationSort.bind(this,"weight")} />
+                                                    </th>
+                                                    <th className="col-md-3 text-bold text-center">{"次数"}
+                                                        <i className={this.orgaOfCountSort?"icon icon-arrow-down5 orgaSort":"icon icon-arrow-up5 orgaSort"} style={{color:"black"}} onClick={this._changeOrganizationSort.bind(this,"count")} />
+                                                    </th>
                                                     <th className="text-center" style={{width: "20px"}}><i
                                                         className="icon-arrow-down12"></i></th>
                                                 </tr>
@@ -1273,8 +1365,7 @@ export default class StatisticListContainer extends Component {
                                                         perPageID="perPageID4"
                                             />
                                         </div>
-                                        <div className="table-responsive"
-                                             style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+                                        <div className="table-responsive">
                                             <table className="table table-bordered table-hover"
                                                    style={{marginBottom: '85px'}}>
                                                 <thead>
@@ -1334,7 +1425,7 @@ export default class StatisticListContainer extends Component {
                                             />
                                         </div>
                                         <div className="table-responsive"
-                                             style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+                                             >
                                             <table className="table table-bordered table-hover"
                                                    style={{marginBottom: '85px'}}>
                                                 <thead>

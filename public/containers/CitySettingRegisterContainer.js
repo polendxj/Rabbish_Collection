@@ -32,7 +32,6 @@ export default class CitySettingRegisterContainer extends Component {
         var self = this;
         this.props.dispatch(saveObject(params, "", "", city_register, "/DataManage/CitySetting"));
     }
-
     render() {
         const {data}=this.props;
         return (
@@ -55,24 +54,47 @@ export default class CitySettingRegisterContainer extends Component {
 }
 
 class CitySettingRegisterComponent extends Component {
+    componentDidMount() {
+        var self = this;
+        $("#citySettingForm").validate({
+            ignore: 'input[type=hidden],input[type=number], .select2-input', // ignore hidden fields
+            errorClass: 'validation-error-label',
+            successClass: 'validation-valid-label',
+            highlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+            unhighlight: function(element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+
+            validClass: "validation-valid-label",
+            success: function(label) {
+                label.addClass("validation-valid-label").text("Success.")
+            },
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent().parent().find(".errorShow"));
+            }
+        });
+    }
     render() {
         var tableHeight = ($(window).height() - 240);
 
         return (
-            <form className="form-horizontal" action="#">
+            <form id="citySettingForm" className="form-horizontal" action="#">
                 <div className="row" style={{height:tableHeight+"px",overflowY:"scroll"}}>
                     <div className="col-md-6 col-md-offset-2">
                         <div className="form-group">
                             <label className="col-lg-3 control-label" style={{textAlign: 'center'}}>{"城市名称"}<span style={{color:'red'}}>*</span></label>
-                            <div className="col-lg-9">
+                            <div className="col-lg-6">
                                 <input id="name" className="form-control" name="name" type="text"
-                                       placeholder={"城市名称"}/>
+                                       placeholder={"城市名称"} required="required"/>
                             </div>
+                            <div className="col-lg-3 errorShow"></div>
                         </div>
 
                         <div className="form-group">
-                            <label className="col-lg-3 control-label" style={{textAlign: 'center'}}>{"描 述"}<span style={{color:'red'}}>*</span></label>
-                            <div className="col-lg-9">
+                            <label className="col-lg-3 control-label" style={{textAlign: 'center'}}>{"描 述"}</label>
+                            <div className="col-lg-6">
                                 <textarea id="description" className="form-control" name="description"
                                        placeholder={"描 述"}></textarea>
                             </div>
