@@ -91,9 +91,11 @@ export default class StoreListContainer extends Component {
     }
     _verifyBtn(userid){
         var that = this;
+        console.log($("#failedDescription").val());
         var params={
             approved: 3,
-            storeid: userid
+            storeid: userid,
+            description: $("#failedDescription").val()
         };
         var listParams = {page: 0, size: page_size};
         this.props.dispatch(saveObject(params,"","",store_approve,"/CustomerService/StoreManage","noAlert",function () {
@@ -105,7 +107,8 @@ export default class StoreListContainer extends Component {
         var that = this;
         var params={
             approved: 2,
-            storeid: userid
+            storeid: userid,
+            description: $("#failedDescription").val()
         };
         var listParams = {page: 0, size: page_size};
         this.props.dispatch(saveObject(params,"","",store_approve,"/CustomerService/StoreManage","noAlert",function () {
@@ -365,6 +368,16 @@ export default class StoreListContainer extends Component {
                                 </div>
                             </div>
                             <div className="form-group">
+                                <div className="col-lg-12">
+                                    <label className="col-lg-2 control-label"
+                                           style={{textAlign: 'center'}}>{"审核结果描述"}</label>
+                                    <div className="col-lg-10">
+                                        <textarea id="failedDescription" type="text" className="form-control"
+                                                  autoComplete="off" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
                                 <label className="col-lg-2 control-label"
                                        style={{textAlign: 'center'}}></label>
                                 <div className="col-lg-10">
@@ -541,7 +554,7 @@ export default class StoreListContainer extends Component {
                                      doAction={""}
                                      tip={"加盟商信息"} actionText="加盟商详情" hide="true" hideCancel="true"/>
                     <VerifyModal id="verifyModal" content={detailStoreInfo}
-                                     tip={"未认证商户信息"}/>
+                                     tip={"待审核商户信息"}/>
                     <ListMiddleModal id="storeSettlementModal" content={storeSettlementInfo}
                                      doAction={""}
                                      tip={"兑账信息"} actionText="兑账信息" hide="true" hideCancel="true"/>
