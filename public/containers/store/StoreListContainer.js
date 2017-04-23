@@ -23,6 +23,7 @@ import {STORE_LIST_START, STORE_LIST_END,CITY_LIST_START,CITY_LIST_END} from '..
 import VerifiedStore from './VerifiedStore';
 import UnauthorizedStore from './UnauthorizedStore';
 import UnVerifiedStore from './UnVerifiedStore';
+import WaitingVerifyStore from './WaitingVerifyStore';
 import {commonRefresh} from '../../actions/Common';
 import {getListByMutilpCondition,saveObject} from '../../actions/CommonActions';
 
@@ -91,7 +92,7 @@ export default class StoreListContainer extends Component {
     _verifyBtn(userid){
         var that = this;
         var params={
-            approved: 2,
+            approved: 3,
             storeid: userid
         };
         var listParams = {page: 0, size: page_size};
@@ -103,7 +104,7 @@ export default class StoreListContainer extends Component {
     _unverifyBtn(userid){
         var that = this;
         var params={
-            approved: 1,
+            approved: 2,
             storeid: userid
         };
         var listParams = {page: 0, size: page_size};
@@ -183,15 +184,18 @@ export default class StoreListContainer extends Component {
 
     render() {
         const {fetching, data,cityList} =this.props;
+        console.log(data);
         var verifiedData = "";
         var unauthorizedData = "";
+        var waitingVerifyData = "";
         var unverifiedData = "";
         if (data.data) {
             verifiedData = filterByApprove(data.data.content, 3);
-            unauthorizedData = filterByApprove(data.data.content, 1);
+            waitingVerifyData = filterByApprove(data.data.content, 1);
+            unauthorizedData = filterByApprove(data.data.content, 0);
             unverifiedData = filterByApprove(data.data.content, 2);
         }
-        var unauthorizedCount = unauthorizedData ? unauthorizedData.length:0;
+        var waitingVerifyCount = waitingVerifyData ? waitingVerifyData.length:0;
         var cityOptions = [];
         var countryOptions = [];
         if (cityList) {
@@ -452,9 +456,14 @@ export default class StoreListContainer extends Component {
                     </li>
                     <li
                         style={{fontWeight: 'bold'}}><a
-                        href="#unauthorizedStore"
+                        href="#waitingVerifyStore"
                         data-toggle="tab">{"待审核"}
-                        <span className="badge bg-warning-400" style={{position:"relative",top:"-11px"}}>{unauthorizedCount}</span></a>
+                        <span className="badge bg-warning-400" style={{position:"relative",top:"-11px"}}>{waitingVerifyCount}</span></a>
+                    </li>
+                    <li
+                        style={{fontWeight: 'bold'}}><a
+                        href="#unauthorizedStore"
+                        data-toggle="tab">{"未认证"}</a>
                     </li>
                     <li
                         style={{fontWeight: 'bold'}}><a
@@ -501,6 +510,14 @@ export default class StoreListContainer extends Component {
                                                _detail={this._detail}
                                                _saveStoreSettlement = {this._saveStoreSettlement}
                                                _updateStatus={this._updateStatus}/>
+                            </div>
+                            <div className="tab-pane"
+                                 id="waitingVerifyStore">
+                                <WaitingVerifyStore data={waitingVerifyData} fetching={fetching}
+                                                   _detail={this._detail}
+                                                   _showVerify={this._showVerify}
+                                                   _delete={this._delete}
+                                                   _updateStatus={this._updateStatus}/>
                             </div>
                             <div className="tab-pane"
                                  id="unauthorizedStore">

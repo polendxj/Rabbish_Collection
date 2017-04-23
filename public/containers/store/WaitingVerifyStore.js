@@ -1,5 +1,5 @@
 /**
- * Created by Captain on 2017/3/5.
+ * Created by Captain on 2017/4/23.
  */
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
@@ -8,7 +8,7 @@ import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
 import {Loading, NoData, ConfirmModal, ErrorModal, roleApplicationUse} from '../../components/Tool/Tool';
-export default class UnauthorizedStore extends Component {
+export default class WaitingVerifyStore extends Component {
     constructor(props) {
         super(props);
         this._detail = this._detail.bind(this);
@@ -82,6 +82,12 @@ export default class UnauthorizedStore extends Component {
                                                data-target="#detailModal" onClick={this._detail.bind(this, val)}><i
                                                 className=" icon-office"></i>
                                                 {"详情"}</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)" data-toggle="modal"
+                                               data-target="#verifyModal" onClick={this._showVerify.bind(this, val)}><i
+                                                className=" icon-office"></i>
+                                                {"审核"}</a>
                                         </li>
                                     </ul>
                                 </li>
