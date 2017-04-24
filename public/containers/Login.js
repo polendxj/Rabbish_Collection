@@ -17,7 +17,9 @@ export default class LoginContainer extends Component {
         params.password = password;
         this.props._checkAuth(params)
     }
-
+    _forgetPassword(){
+        browserHistory.push("/forgetPassword");
+    }
     componentDidMount() {
         deleteCookie("JSESSIONID");
     }
@@ -73,9 +75,9 @@ export default class LoginContainer extends Component {
                                             className="icon-circle-right2 position-right"></i></button>
                                     </div>
 
-                                    {/*<div className="text-center">
-                                        <a href="login_password_recover.html">忘记密码?</a>
-                                    </div>*/}
+                                    <div className="text-center">
+                                        <a onClick={this._forgetPassword.bind(this)}>忘记密码?</a>
+                                    </div>
                                 </div>
                             </form>
 
