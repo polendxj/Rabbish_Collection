@@ -148,7 +148,7 @@ class ComplaintListComponent extends Component {
                 if (data.data.content.length > 0) {
                     data.data.content.forEach(function (val, key) {
                         var dealFlag = (val.suggestion == "" || val.suggestion == null);
-                        var hasHttp = val.photo.indexOf("http") > -1;
+                        var hasHttp = val.photo&&val.photo.indexOf("http") > -1;
                         tb.push(
                             <div key={key} className="panel panel-white text-left">
                                 <div className="panel-heading" style={{padding: "15px 20px 10px 20px"}}>
@@ -156,7 +156,7 @@ class ComplaintListComponent extends Component {
                                         <tr>
                                             <td>
                                                 <div className="panel-title">
-                                                    <div style={{paddingRight: "10px"}}>
+                                                    <div style={{paddingRight: "10px",color:dealFlag?"red":""}}>
                                                         {"[" + val.title + "] " + val.content}
                                                     </div>
                                                     <div style={{height: "10px"}}></div>

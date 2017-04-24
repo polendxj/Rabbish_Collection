@@ -83,6 +83,9 @@ class UpdateAdminUserComponent extends Component{
             validClass: "validation-valid-label",
             success: function(label) {
                 label.addClass("validation-valid-label").text("Success.")
+            },
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent().parent().find(".errorShow"));
             }
         });
     }
@@ -102,8 +105,8 @@ class UpdateAdminUserComponent extends Component{
                             <div className="form-group">
                                 <label className="col-lg-2 control-label"
                                        style={{textAlign: 'center'}}>{"用户类型"}</label>
-                                <div className="col-lg-9">
-                                    <select className="form-control" name="userType" id="type" defaultValue={data.data.type}>
+                                <div className="col-lg-6">
+                                    <select className="form-control" name="userType" id="type" defaultValue={data.data.type} disabled>
                                         <option value={1}>{"管理员"}</option>
                                         <option value={2}>{"扫码员"}</option>
                                     </select>
@@ -113,10 +116,11 @@ class UpdateAdminUserComponent extends Component{
                                 <label className="col-lg-2 control-label"
                                        style={{textAlign: 'center'}}>{"昵称"}
                                 </label>
-                                <div className="col-lg-9">
+                                <div className="col-lg-6">
                                     <input id="name" type="text" className="form-control"
                                            defaultValue={data.data.name} required="required" autoComplete="off"/>
                                 </div>
+                                <div className="col-lg-3 errorShow"></div>
                             </div>
 
                             <div className="form-group" >
@@ -124,15 +128,16 @@ class UpdateAdminUserComponent extends Component{
                                        style={{
                                            textAlign: 'center',
                                        }}>{"手机号码"}</label>
-                                <div className="col-lg-9">
+                                <div className="col-lg-6">
                                     <input id="phone" name="phone" type="text" className="form-control"
                                            defaultValue={data.data.phone} required="required" autoComplete="off"/>
                                 </div>
+                                <div className="col-lg-3 errorShow"></div>
                             </div>
                         </fieldset>
 
                         <div className="form-group" >
-                            <div className="col-lg-11 text-right" style={{marginTop: "50px"}}>
+                            <div className="col-lg-8 text-right" style={{marginTop: "50px"}}>
                                 <button type="button" className="btn btn-primary"
                                         onClick={this._save.bind(this,data.data.id,data.data.userid)}>{"保存"}
                                 </button>

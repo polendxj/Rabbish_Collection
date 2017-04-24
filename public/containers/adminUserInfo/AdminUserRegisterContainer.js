@@ -106,6 +106,9 @@ class RegisterAdminUserComponent extends Component{
             success: function(label) {
                 label.addClass("validation-valid-label").text("Success.")
             },
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent().parent().find(".errorShow"));
+            },
             rules: {
                 password: {
                     minlength: 6
@@ -133,7 +136,7 @@ class RegisterAdminUserComponent extends Component{
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"用户类型"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <select className="form-control" name="userType" id="type">
                                             <option value={1}>{"管理员"}</option>
                                             <option value={2}>{"扫码员"}</option>
@@ -144,30 +147,33 @@ class RegisterAdminUserComponent extends Component{
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"昵称"}
                                     </label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <input id="name" type="text" className="form-control"
                                                placeholder={"昵称"} required="required" autoComplete="off"/>
                                     </div>
+                                    <div className="col-lg-3 errorShow"></div>
                                 </div>
 
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"密码"}
                                     </label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <input id="password" type="password" name="password" className="form-control"
                                                placeholder={"密码"} required="required" autoComplete="off"/>
                                     </div>
+                                    <div className="col-lg-3 errorShow"></div>
                                 </div>
 
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"确认密码"}
                                     </label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <input id="confirmPassword" name="repeat_password" type="password" className="form-control"
                                                placeholder={"确认密码"} required="required" autoComplete="off"/>
                                     </div>
+                                    <div className="col-lg-3 errorShow"></div>
                                 </div>
 
                                 <div className="form-group" >
@@ -175,15 +181,16 @@ class RegisterAdminUserComponent extends Component{
                                            style={{
                                                textAlign: 'center',
                                            }}>{"手机号码"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <input id="phone" name="phone" type="text" className="form-control"
                                                placeholder={"手机号码"} required="required" autoComplete="off"/>
                                     </div>
+                                    <div className="col-lg-3 errorShow"></div>
                                 </div>
                             </fieldset>
 
                             <div className="form-group" >
-                                <div className="col-lg-11 text-right" style={{marginTop: "50px"}}>
+                                <div className="col-lg-8 text-right" style={{marginTop: "50px"}}>
                                     <button type="button" className="btn btn-primary"
                                             onClick={this._save.bind(this)}>{"保存"}
                                     </button>

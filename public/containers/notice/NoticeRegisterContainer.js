@@ -74,6 +74,9 @@ class RegisterNoticeComponent extends Component{
             validClass: "validation-valid-label",
             success: function(label) {
                 label.addClass("validation-valid-label").text("Success.")
+            },
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent().parent().find(".errorShow"));
             }
         });
         $('#file-input').fileinput({
@@ -84,7 +87,7 @@ class RegisterNoticeComponent extends Component{
             browseIcon: '<i class="icon-folder-open"></i>&nbsp;',
             removeIcon: '<i class="icon-trash"></i>',
             enctype: 'multipart/form-data',
-            allowedFileExtensions: ['jpg', 'png']
+            allowedFileExtensions: ['jpg', 'png','jpeg']
         });
         $('#file-input').on("fileuploaded", function (event, data) {
             if (data.response && data.response.status) {
@@ -132,7 +135,7 @@ class RegisterNoticeComponent extends Component{
                                            style={{
                                                textAlign: 'center'
                                            }}>{"分类名称"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <select className="form-control" name="type">
                                             <option value={1}>{"公告"}</option>
                                             <option value={2}>{"新闻"}</option>
@@ -146,16 +149,17 @@ class RegisterNoticeComponent extends Component{
                                            style={{
                                                textAlign: 'center'
                                            }}>{"标题"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <input name="title" type="text" className="form-control"
                                                placeholder={"标题"} required="required" autoComplete="off"/>
                                     </div>
+                                    <div className="col-lg-3 errorShow"></div>
                                 </div>
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label" style={{
                                         textAlign: 'center'
                                     }}>首页大图公告</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <label className="radio-inline">
                                             <input type="radio" name="homeNotice" value={1} className="styled" checked="checked" />
                                             是

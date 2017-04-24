@@ -78,6 +78,9 @@ class RegisterOrganizationComponent extends Component{
             validClass: "validation-valid-label",
             success: function (label) {
                 label.addClass("validation-valid-label").text("Success.")
+            },
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent().parent().find(".errorShow"));
             }
         });
     }
@@ -140,7 +143,7 @@ class RegisterOrganizationComponent extends Component{
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"城市"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <select id="citySelect" className="form-control" name="cityid" value={this.currentCityId} onChange={this._changeCity}>
                                             {cityOptions}
                                         </select>
@@ -149,7 +152,7 @@ class RegisterOrganizationComponent extends Component{
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"区县"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <select id="coutrySelect" className="form-control" name="countyid">
                                             {countryOptions}
                                         </select>
@@ -160,16 +163,17 @@ class RegisterOrganizationComponent extends Component{
                                            style={{
                                                textAlign: 'center'
                                            }}>{"名称"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <input name="name" type="text" className="form-control"
                                                placeholder={"名称"} required="required"
                                                autoComplete="off"/>
                                     </div>
+                                    <div className="col-lg-3 errorShow"></div>
                                 </div>
                                 <div className="form-group">
                                     <label className="col-lg-2 control-label"
                                            style={{textAlign: 'center'}}>{"类型"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <select id="typeSelect" className="form-control" name="type">
                                             <option value={1}>小区</option>
                                             <option value={2}>政府机构/学校</option>
@@ -181,11 +185,12 @@ class RegisterOrganizationComponent extends Component{
                                            style={{
                                                textAlign: 'center'
                                            }}>{"地址"}</label>
-                                    <div className="col-lg-9">
+                                    <div className="col-lg-6">
                                         <input name="address" type="text" className="form-control"
                                                placeholder={"地址"} required="required"
                                                autoComplete="off"/>
                                     </div>
+                                    <div className="col-lg-3 errorShow"></div>
                                 </div>
                             </fieldset>
 

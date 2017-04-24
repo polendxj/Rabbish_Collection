@@ -69,6 +69,7 @@ class RegisterUserComponent extends Component {
     constructor(props) {
         super(props);
         this.interValObj = "";
+        this.initialFlag = 0;
         this._save = this._save.bind(this);
         this._uploadImg = this._uploadImg.bind(this);
         this._sendMessage = this._sendMessage.bind(this);
@@ -97,7 +98,7 @@ class RegisterUserComponent extends Component {
 
     _sendMessage() {
         var that = this;
-        var phone = sessionStorage['phone'];
+        var phone = $("#phone").val();
         var count = 30;
         sessionStorage['count'] = count;
         sessionStorage['messageTime'] = new Date().getTime();
@@ -130,7 +131,7 @@ class RegisterUserComponent extends Component {
             browseIcon: '<i class="icon-folder-open"></i>&nbsp;',
             removeIcon: '<i class="icon-trash"></i>',
             enctype: 'multipart/form-data',
-            allowedFileExtensions: ['jpg', 'png']
+            allowedFileExtensions: ['jpg', 'png','jpeg']
         });
         $('#file-input').on("fileuploaded", function (event, data) {
             if (data.response && data.response.status) {
@@ -151,6 +152,13 @@ class RegisterUserComponent extends Component {
             validClass: "validation-valid-label",
             success: function(label) {
                 label.addClass("validation-valid-label").text("Success.")
+            },
+            errorPlacement: function(error, element) {
+                if(element.parent().hasClass("input-group")){
+                    error.appendTo(element.parent().parent().parent().find(".errorShow"));
+                }else{
+                    error.appendTo(element.parent().parent().find(".errorShow"));
+                }
             }
         });
         if(sessionStorage['messageTime']!=""){
@@ -161,6 +169,19 @@ class RegisterUserComponent extends Component {
                 $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
                 this.interValObj = setInterval(this.setRemainTime, 1000);
             }
+        }
+    }
+    componentDidUpdate(){
+        var self = this;
+        if(this.props.data.status){
+            this.initialFlag = this.initialFlag+1;
+        }
+        if(this.props.data.status&&this.initialFlag<=1){
+            $(".building").keyup(function () {
+                $(this).val($(this).val().replace(/[^0-9.]/g, ''));
+            }).bind("paste", function () {  //CTR+V事件处理
+                $(this).val($(this).val().replace(/[^0-9.]/g, ''));
+            }).css("ime-mode", "disabled"); //CSS设置输入法不可用
         }
     }
     componentWillUnmount(){
@@ -209,7 +230,7 @@ class RegisterUserComponent extends Component {
                                     <div className="form-group">
                                         <label className="col-lg-2 control-label"
                                                style={{textAlign: 'center'}}>{"用户类型"}</label>
-                                        <div className="col-lg-9">
+                                        <div className="col-lg-6">
                                             <select className="form-control" name="subtype" defaultValue={1}>
                                                 {subtypeOptions}
                                             </select>
@@ -218,7 +239,7 @@ class RegisterUserComponent extends Component {
                                     <div className="form-group">
                                         <label className="col-lg-2 control-label"
                                                style={{textAlign: 'center'}}>{"单位、小区"}</label>
-                                        <div className="col-lg-9">
+                                        <div className="col-lg-6">
                                             <select className="form-control" id="organizationid" name="organizationid" onChange={this._changeOrg.bind(this)}>
                                                 {options}
                                             </select>
@@ -229,11 +250,12 @@ class RegisterUserComponent extends Component {
                                                style={{
                                                    textAlign: 'center'
                                                }}>{"真实姓名"}</label>
-                                        <div className="col-lg-9">
+                                        <div className="col-lg-6">
                                             <input name="realName" type="text" className="form-control"
                                                    placeholder={"真实姓名"} required="required"
                                                    autoComplete="off"/>
                                         </div>
+                                        <div className="col-lg-3 errorShow"></div>
                                     </div>
 
                                     <div className="form-group">
@@ -241,11 +263,12 @@ class RegisterUserComponent extends Component {
                                                style={{
                                                    textAlign: 'center'
                                                }}>{"身份证号码"}</label>
-                                        <div className="col-lg-9">
+                                        <div className="col-lg-6">
                                             <input name="idno" type="text" className="form-control"
                                                    placeholder={"身份证号码"} required="required"
                                                    autoComplete="off"/>
                                         </div>
+                                        <div className="col-lg-3 errorShow"></div>
                                     </div>
 
                                     <div className="form-group">
@@ -253,7 +276,7 @@ class RegisterUserComponent extends Component {
                                                style={{
                                                    textAlign: 'center'
                                                }}>{"头像URL"}</label>
-                                        <div className="col-lg-9">
+                                        <div className="col-lg-6">
                                             <input type="file" name="file" id="file-input"
                                                    multiple data-min-file-count="0"/>
                                         </div>
@@ -264,11 +287,12 @@ class RegisterUserComponent extends Component {
                                                style={{
                                                    textAlign: 'center'
                                                }}>{"手机号"}</label>
-                                        <div className="col-lg-9">
-                                            <input name="phone" type="text" className="form-control"
+                                        <div className="col-lg-6">
+                                            <input id="phone" name="phone" type="text" className="form-control"
                                                    placeholder={"手机号"} required="required"
                                                    autoComplete="off"/>
                                         </div>
+                                        <div className="col-lg-3 errorShow"></div>
                                     </div>
                                     <div className="form-group has-feedback">
                                         <label className="col-lg-2 control-label"
@@ -278,49 +302,51 @@ class RegisterUserComponent extends Component {
                                         <div className="col-lg-3">
                                             <input id="address" type="text" className="form-control"
                                                    defaultValue={defaultAddress} placeholder={"地址"}
-                                                   autoComplete="off"/>
+                                                   autoComplete="off" required="required"/>
                                         </div>
-                                        <div className="col-lg-2">
-                                            <input id="building" type="number" className="form-control"/>
+                                        <div className="col-lg-1">
+                                            <input id="building" type="text" className="form-control building"/>
                                             <div className="form-control-feedback">
                                                 栋
                                             </div>
                                         </div>
-                                        <div className="col-lg-2">
-                                            <input id="unit" type="number" className="form-control" />
+                                        <div className="col-lg-1">
+                                            <input id="unit" type="text" className="form-control building" />
                                             <div className="form-control-feedback">
                                                 单元
                                             </div>
                                         </div>
-                                        <div className="col-lg-2">
-                                            <input id="floor" type="number" className="form-control" />
+                                        <div className="col-lg-1">
+                                            <input id="floor" type="text" className="form-control building" />
                                             <div className="form-control-feedback">
                                                 楼
                                             </div>
                                         </div>
+                                        <div className="col-lg-3 errorShow"></div>
                                     </div>
                                     <div className="form-group">
                                         <label className="col-lg-2 control-label"
                                                style={{
                                                    textAlign: 'center'
                                                }}>{"获取验证码"}</label>
-                                        <div className="col-lg-9">
+                                        <div className="col-lg-6">
                                             <div className="input-group">
                                                 <input type="text" name="authcode" className="form-control"
                                                        placeholder="输入验证码" required="required"/>
-                                                <span className="input-group-btn">
-                                                <button id="btnSendCode" className="btn bg-primary" type="button" onClick={this._sendMessage}>
-                                                    获取验证码
-                                                </button>
-                                            </span>
+                                                <div className="input-group-btn">
+                                                    <button id="btnSendCode" className="btn bg-primary" type="button" onClick={this._sendMessage}>
+                                                        获取验证码
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div className="col-lg-3 errorShow"></div>
                                     </div>
 
                                 </fieldset>
 
                                 <div className="form-group">
-                                    <div className="col-lg-11 text-right" style={{marginTop: "50px"}}>
+                                    <div className="col-lg-8 text-right" style={{marginTop: "50px"}}>
                                         <button type="button" className="btn btn-primary"
                                                 onClick={this._uploadImg.bind(this)}>{"保存"}
                                         </button>
@@ -345,7 +371,7 @@ class RegisterUserComponent extends Component {
                                     <div className="form-group">
                                         <label className="col-lg-2 control-label"
                                                style={{textAlign: 'center'}}>{"用户类型"}</label>
-                                        <div className="col-lg-9">
+                                        <div className="col-lg-6">
                                             <select className="form-control" name="type" defaultValue={4}>
                                                 <option value={3}>{"商户用户"}</option>
                                                 <option value={4}>{"住宅用户"}</option>
@@ -356,7 +382,7 @@ class RegisterUserComponent extends Component {
                                     <div className="form-group">
                                         <label className="col-lg-2 control-label"
                                                style={{textAlign: 'center'}}>{"单位、小区"}</label>
-                                        <div className="col-lg-9">
+                                        <div className="col-lg-6">
                                             <select className="form-control" id="organizationid" name="organizationid" onChange={this._changeOrg.bind(this)}>
                                                 {options}
                                             </select>
@@ -367,7 +393,7 @@ class RegisterUserComponent extends Component {
                                                style={{
                                                    textAlign: 'center'
                                                }}>{"真实姓名"}</label>
-                                        <div className="col-lg-9">
+                                        <div className="col-lg-6">
                                             <input name="realName" type="text" className="form-control"
                                                    placeholder={"真实姓名"} required="required"
                                                    autoComplete="off"/>
@@ -379,7 +405,7 @@ class RegisterUserComponent extends Component {
                                                style={{
                                                    textAlign: 'center'
                                                }}>{"身份证号码"}</label>
-                                        <div className="col-lg-9">
+                                        <div className="col-lg-6">
                                             <input name="idno" type="text" className="form-control"
                                                    placeholder={"身份证号码"} required="required"
                                                    autoComplete="off"/>
@@ -391,7 +417,7 @@ class RegisterUserComponent extends Component {
                                                style={{
                                                    textAlign: 'center'
                                                }}>{"头像URL"}</label>
-                                        <div className="col-lg-9">
+                                        <div className="col-lg-6">
                                             <input type="file" name="file" id="file-input"
                                                    multiple data-min-file-count="0"/>
                                         </div>

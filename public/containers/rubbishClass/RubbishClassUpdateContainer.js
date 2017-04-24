@@ -88,10 +88,16 @@ class UpdateRubbishClassComponent extends Component {
             unhighlight: function (element, errorClass) {
                 $(element).removeClass(errorClass);
             },
-
             validClass: "validation-valid-label",
             success: function (label) {
                 label.addClass("validation-valid-label").text("Success.")
+            },
+            errorPlacement: function(error, element) {
+                if(element.parent().hasClass("input-group")){
+                    error.appendTo(element.parent().parent().parent().find(".errorShow"));
+                }else{
+                    error.appendTo(element.parent().parent().find(".errorShow"));
+                }
             }
         });
     }
@@ -113,29 +119,31 @@ class UpdateRubbishClassComponent extends Component {
                                        style={{
                                            textAlign: 'center'
                                        }}>{"分类名称"}</label>
-                                <div className="col-lg-9">
+                                <div className="col-lg-6">
                                     <input name="name" type="text" className="form-control"
                                            defaultValue={data.data.name} required="required"
                                            autoComplete="off"/>
                                 </div>
+                                <div className="col-lg-3 errorShow"></div>
                             </div>
                             <div className="form-group">
                                 <label className="control-label col-lg-2" style={{textAlign: 'center'}}>{"奖励积分"}</label>
-                                <div className="col-lg-9">
+                                <div className="col-lg-6">
                                     <div className="input-group">
-                                        <input name="rewardPoints" type="text" className="form-control"
+                                        <input name="rewardPoints" type="number" className="form-control"
                                                defaultValue={data.data.rewardPoints}
-                                               autoComplete="off"/>
+                                               autoComplete="off" required="required"/>
                                         <span className="input-group-addon">每次/每千克</span>
                                     </div>
                                 </div>
+                                <div className="col-lg-3 errorShow"></div>
                             </div>
                             <div className="form-group">
                                 <label className="col-lg-2 control-label"
                                        style={{
                                            textAlign: 'center'
                                        }}>{"计分方式"}</label>
-                                <div className="col-lg-9">
+                                <div className="col-lg-6">
                                     <select name="pointsType" defaultValue={data.data.pointsType} className="form-control">
                                         <option value={1}>按重量计分</option>
                                         <option value={2}>按次数计分</option>
@@ -147,7 +155,7 @@ class UpdateRubbishClassComponent extends Component {
                                        style={{
                                            textAlign: 'center'
                                        }}>{"分类描述"}</label>
-                                <div className="col-lg-9">
+                                <div className="col-lg-6">
                                     <textarea name="description" rows="5" cols="5" className="form-control"
                                               defaultValue={data.data.description}></textarea>
                                 </div>
