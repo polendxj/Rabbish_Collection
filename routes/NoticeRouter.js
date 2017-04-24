@@ -50,6 +50,7 @@ router.post('/rsapp/notice/detail', function (req, resp) {
 });
 router.post('/rsapp/notice/update', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));
+    data=data.replace(new RegExp(/(-----)/g),"&");
     var id = req.query.id;
     RequestApi.Request(baseURL + '/rsapp/notice/'+id, 'PUT',data, req, resp);
 });
