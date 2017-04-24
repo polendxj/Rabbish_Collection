@@ -133,7 +133,7 @@ export default class UserListContainer extends Component {
 
     _resetPassword() {
         var params = {
-            password: sha1.hex("88888888"),
+            password: sha1.hex("123456"),
             type: this.detailData.type,
             phone: this.detailData.phone,
             authcode: $("#authcode").val()
@@ -188,7 +188,8 @@ export default class UserListContainer extends Component {
 
     _sendMessage() {
         var that = this;
-        var phone = sessionStorage['phone'];
+        // var phone = sessionStorage['phone'];
+        var phone = this.detailData.phone;
         var count = 30;
         sessionStorage['count'] = count;
         sessionStorage['messageTime'] = new Date().getTime();
@@ -198,7 +199,7 @@ export default class UserListContainer extends Component {
         var params = {
             phone: phone
         };
-        // this.props.dispatch(getAuthcode(params, "", "", get_authcode));
+        this.props.dispatch(getAuthcode(params, "", "", get_authcode));
     }
 
     setRemainTime() {

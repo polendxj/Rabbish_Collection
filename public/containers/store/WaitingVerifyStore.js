@@ -77,12 +77,12 @@ export default class WaitingVerifyStore extends Component {
                                        data-toggle="dropdown" aria-expanded="false"><i
                                         className="icon-menu7"></i></a>
                                     <ul className="dropdown-menu dropdown-menu-right">
-                                        <li>
-                                            <a href="javascript:void(0)" data-toggle="modal"
-                                               data-target="#detailModal" onClick={this._detail.bind(this, val)}><i
-                                                className=" icon-office"></i>
-                                                {"详情"}</a>
-                                        </li>
+                                        {/*<li>*/}
+                                            {/*<a href="javascript:void(0)" data-toggle="modal"*/}
+                                               {/*data-target="#detailModal" onClick={this._detail.bind(this, val)}><i*/}
+                                                {/*className=" icon-office"></i>*/}
+                                                {/*{"详情"}</a>*/}
+                                        {/*</li>*/}
                                         <li>
                                             <a href="javascript:void(0)" data-toggle="modal"
                                                data-target="#verifyModal" onClick={this._showVerify.bind(this, val)}><i

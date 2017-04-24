@@ -63,6 +63,7 @@ export default class StatisticListContainer extends Component {
         this.searchColumn = "CITY";
         this.currentCityId = 1;
         this.detailOfcurrentCityId = 1;
+        this.detailOfOrgaId = 1;
         this.cityOfcurrentCityId = 1;
         this.organizationOfcurrentCityId = 1;
         this.daterangeOfcurrentCityId = 1;
@@ -81,6 +82,7 @@ export default class StatisticListContainer extends Component {
         this.orgaOfCountSort = true;
         this._search = this._search.bind(this);
         this._changeCityOfDetail = this._changeCityOfDetail.bind(this);
+        this._changeOrgaOfDetail = this._changeOrgaOfDetail.bind(this);
         this._changeCity = this._changeCity.bind(this);
         this._changeCityOfCity = this._changeCityOfCity.bind(this);
         this._changeCityOfOrganization = this._changeCityOfOrganization.bind(this);
@@ -210,6 +212,11 @@ export default class StatisticListContainer extends Component {
         var citieid = $("#cityOfDetailSelect").val();
         this.currentCity = filterCityById(this.props.cityList.data, citieid);
         this.detailOfcurrentCityId = citieid;
+        this._startRefresh();
+    }
+    _changeOrgaOfDetail(){
+        var orgaId = $("#ofDetailSelect").val();
+        this.detailOfOrgaId = orgaId;
         this._startRefresh();
     }
     _changeCity() {
@@ -392,7 +399,6 @@ export default class StatisticListContainer extends Component {
             endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
         };
         this.props.dispatch(getListByMutilpCondition(organizationParams, STATISTICBYORGANIZATION_LIST_START, STATISTICBYORGANIZATION_LIST_END, statisticByOrganization_list));
-
     }
 
     _organizationNextPage(page) {
@@ -411,7 +417,6 @@ export default class StatisticListContainer extends Component {
             endday: timeStamp2Time(new Date(rangeTime.split("-")[1].trim()).getTime())
         };
         this.props.dispatch(getListByMutilpCondition(organizationParams, STATISTICBYORGANIZATION_LIST_START, STATISTICBYORGANIZATION_LIST_END, statisticByOrganization_list));
-
     }
 
     _settlementChangePage(page) {
@@ -513,6 +518,7 @@ export default class StatisticListContainer extends Component {
     }
     render() {
         const {fetching, classifyData, detailData, cityData, organizationData, rangeDateData, settlementData, operationData, cityList, cityOfCountyList, totalData, classifyList} =this.props;
+        console.log("detailData",detailData);
         var data = "";
         var showCity = "city";
         let cityTb = [];
@@ -1070,7 +1076,7 @@ export default class StatisticListContainer extends Component {
                                                 </select>
                                             </li>
                                             <li >
-                                                <select id="ofDetailSelect" className="form-control">
+                                                <select id="ofDetailSelect" className="form-control" value={this.detailOfOrgaId} onChange={this._changeOrgaOfDetail}>
                                                     {organizationOfDetailOptions}
                                                 </select>
                                             </li>
@@ -1209,13 +1215,6 @@ export default class StatisticListContainer extends Component {
                                                 {cityTb}
                                                 </tbody>
                                             </table>
-                                            <Pagenation counts={cityData.cityData ? cityData.cityData.totalElements : 0} page={this.cityPage}
-                                                        _changePage={this._cityChangePage.bind(this)}
-                                                        _prePage={this._cityPrePage.bind(this)}
-                                                        _nextPage={this._cityNextPage.bind(this)}
-                                                        inputNumberID="inputNumber2"
-                                                        perPageID="perPageID2"
-                                            />
                                         </div>
 
                                     </fieldset>

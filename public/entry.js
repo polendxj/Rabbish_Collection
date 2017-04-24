@@ -10,6 +10,7 @@ import {syncHistoryWithStore, routerReducer} from 'react-router-redux'
 import App from './containers/App'
 import Dashboard from './containers/Dashboard'
 import LoginContainer from './containers/Login'
+import ForgetPassword from './containers/ForgetPassword'
 import Developing from './containers/Developing'
 import CitySettingContainer from './containers/CitySettingContainer'
 import CitySettingRegisterContainer from './containers/CitySettingRegisterContainer'
@@ -55,6 +56,7 @@ render(
                 <Route path="/management.html" component={Home}/>
                 <Route path="/Developing" component={Developing}/>
                 <Route path="/login" component={LoginContainer}/>
+                <Route path="/forgetPassword" component={ForgetPassword}/>
                 <Route path="/DataManage/CitySetting" component={CitySettingContainer}/>
                 <Route path="/DataManage/CitySetting/Register" component={CitySettingRegisterContainer}/>
                 <Route path="/DataManage/RubbishClass" component={RubbishClassListContainer}/>

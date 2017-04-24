@@ -6,6 +6,7 @@ import Header from '../components/header/header'
 import {changeTopMenu, changeLeftMenu} from '../actions/MenuAction'
 import MainMenu from '../components/left/menu'
 import Login from './Login'
+import ForgetPassword from './ForgetPassword'
 import {commonRefresh} from '../actions/Common'
 import {login,saveObject} from '../actions/CommonActions';
 import Home from '../containers/Home';
@@ -221,7 +222,11 @@ class App extends Component {
 
         } else {
             // if(document.location.pathname!="/"){
-            result = <Login _checkAuth={this._checkAuth} fetching={fetching}/>
+            if(document.location.pathname=="/forgetPassword"){
+                result = <ForgetPassword />
+            }else{
+                result = <Login _checkAuth={this._checkAuth} fetching={fetching}/>
+            }
             // }
             // else{
             //     result = <Home />

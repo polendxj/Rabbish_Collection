@@ -18,7 +18,7 @@ import {
     userType
 } from '../../components/Tool/Tool';
 import {ADMINUSER_LIST_START, ADMINUSER_LIST_END} from '../../constants/index.js';
-import {getListByMutilpCondition,deleteObject,saveObject} from '../../actions/CommonActions';
+import {getListByMutilpCondition,deleteObject,saveObject,getAuthcode} from '../../actions/CommonActions';
 var sha1 = require('js-sha1');
 
 export default class AdminUserListContainer extends Component {
@@ -104,7 +104,7 @@ export default class AdminUserListContainer extends Component {
         this._startRefresh();
     }
     _sendMessage() {
-        var phone = sessionStorage['phone'];
+        var phone = this.detailData.phone;
         var count = 30;
         sessionStorage['count'] = count;
         sessionStorage['messageTime'] = new Date().getTime();
@@ -114,7 +114,7 @@ export default class AdminUserListContainer extends Component {
         var params = {
             phone: phone
         };
-        // this.props.dispatch(getAuthcode(params, "", "", get_authcode));
+        this.props.dispatch(getAuthcode(params, "", "", get_authcode));
     }
     setRemainTime() {
         var curCount = sessionStorage['count'];
@@ -136,7 +136,7 @@ export default class AdminUserListContainer extends Component {
     }
     _resetPassword() {
         var params = {
-            password: sha1.hex("88888888"),
+            password: sha1.hex("123456"),
             type: this.detailData.type,
             phone: this.detailData.phone,
             authcode: $("#authcode").val()

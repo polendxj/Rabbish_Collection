@@ -30,10 +30,6 @@ export default class UnauthorizedStore extends Component {
         this.props._detail(val);
     }
 
-    _showVerify(val) {
-        this.props._showVerify(val);
-    }
-
     _account(path, val) {
         browserHistory.push(path)
     }

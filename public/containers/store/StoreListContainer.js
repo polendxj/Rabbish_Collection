@@ -37,6 +37,7 @@ export default class StoreListContainer extends Component {
             {text: "加盟商列表", link: ''}
         ];
         this.detailData = "";
+        this.verifyDetailData = "";
         this.verifyFlag = false;
         this.currentCity = "";
         this.currentCityId = 1;
@@ -86,7 +87,7 @@ export default class StoreListContainer extends Component {
     }
     _showVerify(val){
         this.verifyFlag = true;
-        this.detailData = val;
+        this.verifyDetailData = val;
         this._startRefresh();
     }
     _verifyBtn(userid){
@@ -367,6 +368,146 @@ export default class StoreListContainer extends Component {
                                     </div>
                                 </div>
                             </div>
+                        </fieldset>
+                    </div>
+                </div>;
+        }
+
+        var waitingVerifyStoreInfo = "";
+        if(this.verifyDetailData==""){
+            waitingVerifyStoreInfo = <Loading />;
+        }else if(this.verifyDetailData){
+            var hasHttp = this.verifyDetailData.logo.indexOf("http") > -1;
+            waitingVerifyStoreInfo =
+                <div>
+                    <div className="form-horizontal">
+                        <fieldset className="content-group">
+                            <legend className="text-bold">
+                                {"详细信息"}
+                            </legend>
+                            <div className="form-group">
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"店铺图标"}</label>
+                                    <div className="col-lg-8">
+                                        <div className="thumbnail"
+                                             style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
+                                            <div className="thumb">
+                                                <img src={this.verifyDetailData.logo?(hasHttp?this.verifyDetailData.logo:imgBaseUrl+this.verifyDetailData.logo):"../assets/images/no_photo.gif"} alt=""
+                                                     style={{height: "160px", width: "160px"}}/>
+                                                <div className="caption-overflow" style={{width: "auto"}}>
+                                        <span style={{top: 0, marginTop: 0}}>
+                                            <a href={this.verifyDetailData.logo?(hasHttp?this.verifyDetailData.logo:imgBaseUrl+this.verifyDetailData.logo):"../assets/images/no_photo.gif"} data-popup="lightbox"
+                                               className="btn" style={{height: "160px", width: "160px"}}></a>
+                                        </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"营业执照"}</label>
+                                    <div className="col-lg-8">
+                                        <div className="thumbnail"
+                                             style={{marginBottom: 0, width: "165px", padding: 0, border: 0}}>
+                                            <div className="thumb">
+                                                <img src={this.verifyDetailData.license?(hasHttp?this.verifyDetailData.license:imgBaseUrl+this.verifyDetailData.license):"../assets/images/no_photo.gif"} alt=""
+                                                     style={{height: "160px", width: "160px"}}/>
+                                                <div className="caption-overflow" style={{width: "auto"}}>
+                                        <span style={{top: 0, marginTop: 0}}>
+                                            <a href={this.verifyDetailData.license?(hasHttp?this.verifyDetailData.license:imgBaseUrl+this.verifyDetailData.license):"../assets/images/no_photo.gif"} data-popup="lightbox"
+                                               className="btn" style={{height: "160px", width: "160px"}}></a>
+                                        </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"店铺名称"}</label>
+                                    <div className="col-lg-8">
+                                        <input disabled id="name" type="text" value={this.verifyDetailData.name} className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"负责人"}</label>
+                                    <div className="col-lg-8">
+                                        <input disabled id="name" type="text" value={this.verifyDetailData.manager} className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"城市"}</label>
+                                    <div className="col-lg-8">
+                                        <input disabled id="name" type="text" value={this.verifyDetailData.city} className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"区县"}</label>
+                                    <div className="col-lg-8">
+                                        <input disabled id="name" type="text" value={this.verifyDetailData.county} className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"地址"}</label>
+                                    <div className="col-lg-8">
+                                        <input disabled id="name" type="text" value={this.verifyDetailData.address} className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"联系方式"}</label>
+                                    <div className="col-lg-8">
+                                        <input disabled id="name" type="text" value={this.verifyDetailData.contact} className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"经度"}</label>
+                                    <div className="col-lg-8">
+                                        <input disabled id="name" type="text" value={this.verifyDetailData.longitude} className="form-control"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <label className="col-lg-4 control-label"
+                                           style={{textAlign: 'center'}}>{"纬度"}</label>
+                                    <div className="col-lg-8">
+                                        <input disabled id="name" type="text" value={this.verifyDetailData.latitude} className="form-control"
+                                               placeholder="行政区名称"
+                                               autoComplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-lg-12">
+                                    <label className="col-lg-2 control-label"
+                                           style={{textAlign: 'center'}}>{"描 述"}</label>
+                                    <div className="col-lg-10">
+                                    <textarea disabled id="name" type="text" value={this.verifyDetailData.description} className="form-control"
+                                              autoComplete="off"></textarea>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="form-group">
                                 <div className="col-lg-12">
                                     <label className="col-lg-2 control-label"
@@ -383,22 +524,18 @@ export default class StoreListContainer extends Component {
                                 <div className="col-lg-10">
                                     <div className="text-right">
                                         <button type="button" className="btn btn-primary"
-                                                style={{display:this.verifyFlag?"inline-block":"none"}}
-                                                onClick={this._unverifyBtn.bind(this,this.detailData.userid)}>
+                                                onClick={this._unverifyBtn.bind(this,this.verifyDetailData.userid)}>
                                             {"不通过"}
                                         </button>
                                         <button type="button" className="btn btn-primary"
-                                                style={{margin:"0 10px",display:this.verifyFlag?"inline-block":"none"}}
-                                                onClick={this._verifyBtn.bind(this,this.detailData.userid)}>{"通过"}
+                                                style={{margin:"0 10px"}}
+                                                onClick={this._verifyBtn.bind(this,this.verifyDetailData.userid)}>{"通过"}
                                         </button>
                                     </div>
                                 </div>
                             </div>
-
-
                         </fieldset>
                     </div>
-
                 </div>;
         }
         var storeSettlementInfo = <div>
@@ -448,8 +585,6 @@ export default class StoreListContainer extends Component {
                             </div>
                         </div>
                     </div>
-
-
                 </fieldset>
             </div>
 
@@ -536,7 +671,6 @@ export default class StoreListContainer extends Component {
                                  id="unauthorizedStore">
                                 <UnauthorizedStore data={unauthorizedData} fetching={fetching}
                                                    _detail={this._detail}
-                                                   _showVerify={this._showVerify}
                                                    _delete={this._delete}
                                                    _updateStatus={this._updateStatus}/>
                             </div>
@@ -553,7 +687,7 @@ export default class StoreListContainer extends Component {
                     <ListMiddleModal id="detailModal" content={detailStoreInfo}
                                      doAction={""}
                                      tip={"加盟商信息"} actionText="加盟商详情" hide="true" hideCancel="true"/>
-                    <VerifyModal id="verifyModal" content={detailStoreInfo}
+                    <VerifyModal id="verifyModal" content={waitingVerifyStoreInfo}
                                      tip={"待审核商户信息"}/>
                     <ListMiddleModal id="storeSettlementModal" content={storeSettlementInfo}
                                      doAction={""}
