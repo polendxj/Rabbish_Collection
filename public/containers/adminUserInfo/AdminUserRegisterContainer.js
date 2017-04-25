@@ -115,6 +115,15 @@ class RegisterAdminUserComponent extends Component{
                 },
                 repeat_password: {
                     equalTo: "#password"
+                },
+                phone : {
+                    required : true,
+                    isMobile : true
+                },
+            },
+            messages : {
+                phone : {
+                    isMobile : "请正确填写手机号码"
                 }
             }
         });

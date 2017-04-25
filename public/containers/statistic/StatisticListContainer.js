@@ -532,7 +532,7 @@ export default class StatisticListContainer extends Component {
                     cityTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
                         <td className="text-center">{timeStamp2Time(val.monthday)}</td>
-                        <td className="text-center">{moneyFormat(val.weight.toFixed(2))}</td>
+                        <td className="text-center">{moneyFormat(val.weight.toFixed(3))}</td>
                         <td className="text-center">{moneyFormat(val.count)}</td>
                         <td className="text-center">
                             {<ul className="icons-list">
@@ -585,7 +585,7 @@ export default class StatisticListContainer extends Component {
                             <td className="text-center">{key + 1}</td>
                             <td className="text-center">{val.organizationName}</td>
                             <td className="text-center">{timeStamp2Time(val.monthday)}</td>
-                            <td className="text-center">{moneyFormat(val.weight.toFixed(2))}</td>
+                            <td className="text-center">{moneyFormat(val.weight.toFixed(3))}</td>
                             <td className="text-center">{moneyFormat(val.count)}</td>
                             <td className="text-center">
                                 {<ul className="icons-list">

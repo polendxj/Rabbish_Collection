@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import {browserHistory} from 'react-router'
 import {commonRefresh} from '../actions/Common';
 import {saveObject,getAuthcode} from '../actions/CommonActions';
-import {array2Json} from '../components/Tool/Tool'
+import {ErrorModal,array2Json} from '../components/Tool/Tool'
 var sha1 = require('js-sha1');
 
 export default class ForgetPassword extends Component {
@@ -35,6 +35,9 @@ export default class ForgetPassword extends Component {
     _startRefresh() {
         this.props.dispatch(commonRefresh())
     }
+    _redirect(){
+        browserHistory.push("/login");
+    }
     _resetPassword() {
         var formFields = $("#forgetPasswordForm").serializeArray();
         var params = array2Json(formFields);
@@ -44,16 +47,24 @@ export default class ForgetPassword extends Component {
     }
     _sendMessage() {
         var phone = $("#phone").val();
-        var count = 30;
-        sessionStorage['count'] = count;
-        sessionStorage['messageTime'] = new Date().getTime();
-        $("#btnSendCode").attr("disabled", "true");
-        $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
-        this.interValObj = setInterval(this.setRemainTime, 1000);
-        var params = {
-            phone: phone
-        };
-        this.props.dispatch(getAuthcode(params, "", "", get_authcode));
+        if(phone){
+            if(/^1[34578]\d{9}$/.test(phone)){
+                var count = 30;
+                sessionStorage['count'] = count;
+                sessionStorage['messageTime'] = new Date().getTime();
+                $("#btnSendCode").attr("disabled", "true");
+                $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
+                this.interValObj = setInterval(this.setRemainTime, 1000);
+                var params = {
+                    phone: phone
+                };
+                this.props.dispatch(getAuthcode(params, "", "", get_authcode));
+            }else{
+                ErrorModal(Current_Lang.status.minor, Current_Lang.status.someError + "手机号码格式不对！");
+            }
+        }else{
+            ErrorModal(Current_Lang.status.minor, Current_Lang.status.someError + "手机号码不能为空！");
+        }
     }
     setRemainTime() {
         var curCount = sessionStorage['count'];
@@ -109,8 +120,8 @@ export default class ForgetPassword extends Component {
                                                 </button>
                                             </span>
                                     </div>
-
-                                    <button type="button" id="btnSendCode" onClick={this._resetPassword} className="btn bg-blue btn-block">重置密码 <i className="icon-arrow-right14 position-right"></i></button>
+                                    <button style={{width:"45%",float:"left"}} type="button" id="btnSendCode" onClick={this._resetPassword} className="btn bg-blue">重置密码 <i className="icon-arrow-right14 position-left"></i></button>
+                                    <button style={{width:"45%",float:"right"}} type="button" onClick={this._redirect} className="btn bg-blue">返回 <i className="icon-undo2 position-right"></i></button>
                                 </div>
                             </form>
 

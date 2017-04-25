@@ -159,6 +159,17 @@ class RegisterUserComponent extends Component {
                 }else{
                     error.appendTo(element.parent().parent().find(".errorShow"));
                 }
+            },
+            rules: {
+                phone : {
+                    required : true,
+                    isMobile : true
+                }
+            },
+            messages : {
+                phone : {
+                    isMobile : "请正确填写手机号码"
+                }
             }
         });
         if(sessionStorage['messageTime']!=""){

@@ -78,6 +78,17 @@ class RegisterTransitLineComponent extends Component{
             },
             errorPlacement: function(error, element) {
                 error.appendTo(element.parent().parent().find(".errorShow"));
+            },
+            rules: {
+                contact : {
+                    required : true,
+                    isMobile : true
+                }
+            },
+            messages : {
+                contact : {
+                    isMobile : "请正确填写手机号码"
+                }
             }
         });
     }

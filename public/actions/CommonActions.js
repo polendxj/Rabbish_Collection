@@ -129,10 +129,12 @@ export function generateQrcode(data,startDispatch, endDispatch, interfaceURL,cal
                 if (json.status) {
                     dispatch(endFetch(endDispatch, json))
                     if (callback) {
-                        callback();
+                        callback(null);
                     }
                 } else {
-                    ErrorModal(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message)
+                    if (callback) {
+                        callback(json);
+                    }
                 }
             })
 
@@ -159,10 +161,12 @@ export function exportQrcode(startDispatch, endDispatch, interfaceURL,callback) 
                     console.log("export1",json);
                     dispatch(endFetch(endDispatch, json))
                     if (callback) {
-                        callback();
+                        callback(null);
                     }
                 } else {
-                    ErrorModal(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message)
+                    if (callback) {
+                        callback(json);
+                    }
                 }
             })
 

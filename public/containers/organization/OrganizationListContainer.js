@@ -101,16 +101,25 @@ export default class OrganizationListContainer extends Component {
             pressOrgName: parseInt($("#generatePressOrgName").val())
         };
         this.progressInterval = setInterval(function () {
-            that.props.dispatch(generateQrcode(params,PROGRESS_START,PROGRESS_END,qrcode_generate,function () {
-                if(that.props.progressData.data==100){
+            that.props.dispatch(generateQrcode(params,PROGRESS_START,PROGRESS_END,qrcode_generate,function (json) {
+                if(json){
+                    ErrorModal(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message)
                     clearInterval(that.progressInterval);
-                    setTimeout(function () {
-                        $("#exportModal").modal("hide");
-                        $(".progressGrouop").hide();
-                        $(".qrcodeLoadingText").text("开始下载二维码文件...");
-                        $(".saveGroup").show();
-                    },2000);
-                    window.location.href = qrcode_generate_download+"?"+querystring.stringify(params);
+                    $(".progressGrouop").hide();
+                    $(".qrcodeLoadingText").text("开始下载二维码文件...");
+                    $(".saveGroup").show();
+                    $("#generateModal").modal("hide");
+                }else{
+                    if(that.props.progressData.data==100){
+                        clearInterval(that.progressInterval);
+                        setTimeout(function () {
+                            $(".progressGrouop").hide();
+                            $(".qrcodeLoadingText").text("开始下载二维码文件...");
+                            $(".saveGroup").show();
+                            $("#generateModal").modal("hide");
+                        },2000);
+                        window.location.href = qrcode_generate_download+"?"+querystring.stringify(params);
+                    }
                 }
             }));
         }, 3000);
@@ -130,16 +139,25 @@ export default class OrganizationListContainer extends Component {
             pressOrgName: parseInt($("#exportPressOrgName").val())
         };
         this.progressInterval = setInterval(function () {
-            that.props.dispatch(exportQrcode(PROGRESS_START,PROGRESS_END,qrcode_export+"?"+querystring.stringify(params),function () {
-                if(that.props.progressData.data==100){
+            that.props.dispatch(exportQrcode(PROGRESS_START,PROGRESS_END,qrcode_export+"?"+querystring.stringify(params),function (json) {
+                if(json){
+                    ErrorModal(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message)
                     clearInterval(that.progressInterval);
-                    setTimeout(function () {
-                        $("#generateModal").modal("hide");
-                        $(".progressGrouop").hide();
-                        $(".qrcodeLoadingText").text("开始下载二维码文件...");
-                        $(".saveGroup").show();
-                    },2000);
-                    window.location.href = qrcode_export_download+"?"+querystring.stringify(params);
+                    $(".progressGrouop").hide();
+                    $(".qrcodeLoadingText").text("开始下载二维码文件...");
+                    $(".saveGroup").show();
+                    $("#exportModal").modal("hide");
+                }else{
+                    if(that.props.progressData.data==100){
+                        clearInterval(that.progressInterval);
+                        setTimeout(function () {
+                            $(".progressGrouop").hide();
+                            $(".qrcodeLoadingText").text("开始下载二维码文件...");
+                            $(".saveGroup").show();
+                            $("#exportModal").modal("hide");
+                        },2000);
+                        window.location.href = qrcode_export_download+"?"+querystring.stringify(params);
+                    }
                 }
             }));
         }, 3000);
