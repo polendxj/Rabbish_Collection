@@ -225,7 +225,7 @@ class CorrectionListComponent extends Component {
                         <td className="text-center">{val.userName}</td>
                         <td className="text-center">{correctionType(correctionItems,val.type)}</td>
                         <td className="text-center">{recordType(val.recordType)}</td>
-                        <td className="text-center">{val.weight.toFixed(2)}</td>
+                        <td className="text-center">{val.weight?val.weight.toFixed(2):"0.00"}</td>
                         <td className="text-left">{val.description}</td>
                         <td className="text-center">{timeStamp2Time(val.createTime)}</td>
                     </tr>)

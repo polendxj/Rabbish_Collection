@@ -82,7 +82,6 @@ export default class AdminUserListContainer extends Component {
         ConfirmModal(Current_Lang.status.minor, Current_Lang.alertTip.confirmDelete + name + Current_Lang.alertTip.confirmMa, function () {
             that.props.dispatch(deleteObject(userid, "", "", "", "", "", ADMINUSER_LIST_START, ADMINUSER_LIST_END, adminUser_delete, adminUser_list))
         })
-
     }
 
     _search() {
