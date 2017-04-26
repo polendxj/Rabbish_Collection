@@ -10,10 +10,10 @@ import {commonRefresh} from '../../actions/Common';
 export default class RichText extends React.Component {
     constructor(props) {
         super(props);
-
+        this.editor = "";
     }
     componentDidMount(){
-        var editor = UE.getEditor(this.props.id, {
+        this.editor = UE.getEditor(this.props.id, {
             //工具栏
             toolbars: [[
                 'fullscreen', 'source', '|', 'undo', 'redo', '|',
@@ -51,12 +51,22 @@ export default class RichText extends React.Component {
             readonly:this.props.disabled
         });
         var that = this;
-        editor.ready(function() {
+        this.editor.ready(function() {
             var value = that.props.value?that.props.value:'<p></p>';
-            editor.setContent(value);
+            console.log("value",that.props.value);
+            that.editor.setContent(value);
+        });
+    }
+    componentDidUpdate(){
+        var that = this;
+        this.editor.ready(function() {
+            var value = that.props.value?that.props.value:'<p></p>';
+            console.log("value2",that.props.value);
+            that.editor.setContent(value);
         });
     }
     componentWillUnmount(){
+        this.editor = "";
         UE.getEditor("content").destroy();
     }
     render (){

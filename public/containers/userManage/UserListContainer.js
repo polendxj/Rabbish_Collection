@@ -744,10 +744,10 @@ class UserListComponent extends Component {
                                                     className=" icon-pencil5"></i>
                                                     {"详 情"}</a>
                                             </li>
-                                            <li style={{display: 'block'}}
-                                                onClick={this._delete.bind(this, val.userid, val.realName)}><a
-                                                href="javascript:void(0)"><i className="icon-trash"></i>
-                                                {"删 除"}</a></li>
+                                            {/*<li style={{display: 'block'}}*/}
+                                                {/*onClick={this._delete.bind(this, val.userid, val.realName)}><a*/}
+                                                {/*href="javascript:void(0)"><i className="icon-trash"></i>*/}
+                                                {/*{"删 除"}</a></li>*/}
                                             <li>
                                                 <a href="javascript:void(0)" data-toggle="modal"
                                                    data-target="#getAuthcodeModal"

@@ -838,6 +838,7 @@ export function userType(type) {
             break;
         case 5:
             userType = "机关单位、学校";
+            break;
         case 10:
             userType = "超级管理员";
             break;
