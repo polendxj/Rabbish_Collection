@@ -80,6 +80,7 @@ export default class StoreSettlementListContainer extends Component {
 
     render() {
         const {fetching, data} =this.props;
+        console.log("settle",data);
         return (
             <div>
                 <BreadCrumbs

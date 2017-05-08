@@ -314,10 +314,10 @@ class AdminUserListComponent extends Component {
                                                 onClick={this._detail.bind(this, '/CustomerService/AdminUserManage/Update/:' + val.userid)}>
                                                 <a href="javascript:void(0)"><i className="icon-pencil5"></i>
                                                     {"编辑"}</a></li>
-                                            <li style={{display:val.type!=10&&(loginUserid==val.userid||loginUserType==10)? 'block':'none'}}
+                                            {/*<li style={{display:val.type!=10&&(loginUserid==val.userid||loginUserType==10)? 'block':'none'}}
                                                 onClick={this._delete.bind(this, val.userid, val.name)}><a
                                                 href="javascript:void(0)"><i className="icon-trash"></i>
-                                                {"删除"}</a></li>
+                                                {"删除"}</a></li>*/}
                                             <li style={{display:val.type!=10&&(loginUserid==val.userid||loginUserType==10)? 'block':'none'}}>
                                                 <a href="javascript:void(0)" data-toggle="modal"
                                                    data-target="#getAuthcodeModal"

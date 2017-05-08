@@ -4,7 +4,7 @@
 import {combineReducers} from 'redux'
 import {audioCodes, videoCodes, DecodeBase64} from '../components/Tool/Tool'
 import {
-    STORE_LIST_START, STORE_LIST_END
+    STORE_LIST_START, STORE_LIST_END,RATE_START,RATE_END
 } from '../constants/index'
 
 export function getStoreList(state = {data: "", fetching: false}, action) {
@@ -13,6 +13,18 @@ export function getStoreList(state = {data: "", fetching: false}, action) {
             state = {...state, fetching: true};
             return state;
         case STORE_LIST_END:
+            state = {data: action.json, fetching: false};
+            return state;
+        default:
+            return state;
+    }
+}
+export function getStoreRate(state = {data: "", fetching: false}, action) {
+    switch (action.type) {
+        case RATE_START:
+            state = {...state, fetching: true};
+            return state;
+        case RATE_END:
             state = {data: action.json, fetching: false};
             return state;
         default:

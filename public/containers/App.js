@@ -273,8 +273,7 @@ class ContentPanel extends Component {
                             width: '100%'
                         }}>
                             <div style={{float: 'left', marginLeft: '14px'}}>
-                                ⓒ 2017. <span style={{color: '#193153'}}>Copyright Powered</span> by <span
-                                style={{color: '#193153'}}>ReuseSorting Co., Ltd. All Rights Reserved.</span>
+                                ⓒ 垃圾之家
                             </div>
                         </div>
                     </div>

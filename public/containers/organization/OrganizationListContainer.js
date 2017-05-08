@@ -19,7 +19,7 @@ import {
     organizationType,
     getInitialCityIdx
 } from '../../components/Tool/Tool';
-import {ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, CITY_LIST_START, CITY_LIST_END,PROGRESS_START,PROGRESS_END} from '../../constants/index.js'
+import {ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, CITY_LIST_START, CITY_LIST_END,PROGRESS_START,PROGRESS_END,QRCODE_COUNT_START,QRCODE_COUNT_END} from '../../constants/index.js'
 import {getListByMutilpCondition, saveObject,exportQrcode,generateQrcode} from '../../actions/CommonActions';
 var querystring = require('querystring');
 
@@ -88,7 +88,8 @@ export default class OrganizationListContainer extends Component {
     }
     _showGenerateModal(val){
         this.currentOrganization = val;
-        this._startRefresh();
+        var params={organizationid : val.id};
+        this.props.dispatch(getListByMutilpCondition(params, QRCODE_COUNT_START, QRCODE_COUNT_END, qrcode_count));
     }
     _generate(id){
         $(".saveGroup").hide();
@@ -110,6 +111,7 @@ export default class OrganizationListContainer extends Component {
                     $(".saveGroup").show();
                     $("#generateModal").modal("hide");
                 }else{
+                    console.log("json",json);
                     if(that.props.progressData.data==100){
                         clearInterval(that.progressInterval);
                         setTimeout(function () {
@@ -126,7 +128,8 @@ export default class OrganizationListContainer extends Component {
     }
     _showExportModal(val){
         this.currentOrganization = val;
-        this._startRefresh();
+        var params={organizationid : val.id};
+        this.props.dispatch(getListByMutilpCondition(params, QRCODE_COUNT_START, QRCODE_COUNT_END, qrcode_count));
     }
     _export(id){
         $(".saveGroup").hide();
@@ -196,7 +199,8 @@ export default class OrganizationListContainer extends Component {
     }
 
     render() {
-        const {fetching, data, cityList,progressData} =this.props;
+        const {fetching, data, cityList,progressData,qrcodeCount} =this.props;
+        console.log("qrcodeCount",qrcodeCount);
         var cityOptions = [];
         var countryOptions = [];
         if (cityList) {
@@ -230,121 +234,168 @@ export default class OrganizationListContainer extends Component {
                 }
             }
         }
-        var generateInfo = <div>
-            <div className="form-horizontal">
-                <fieldset className="content-group">
-                    <legend className="text-bold">
-                        {"批量生成二维码"}
-                    </legend>
-                    <div className="form-group">
-                        <label className="col-lg-2 control-label"
-                               style={{textAlign: 'center'}}>{"小区名称"}</label>
-                        <div className="col-lg-9">
-                            <input id="organizationName" type="text" value={this.currentOrganization.name} className="form-control"
-                                   autoComplete="off" disabled/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label className="col-lg-2 control-label"
-                               style={{textAlign: 'center'}}>{"预估人数"}</label>
-                        <div className="col-lg-9">
-                            <input id="personAmount" type="text" className="form-control" placeholder="输入预估人数"
-                                   autoComplete="off"/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label className="col-lg-2 control-label"
-                               style={{textAlign: 'center'}}>{"是否添加小区名字"}</label>
-                        <div className="col-lg-9">
-                            <select id="generatePressOrgName" className="form-control">
-                                <option value={0}>不添加</option>
-                                <option value={1}>添加</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="form-group saveGroup">
-                        <label className="col-lg-2 control-label"
-                               style={{textAlign: 'center'}}></label>
-                        <div className="col-lg-9">
-                            <div className="text-right">
-                                <button type="button" className="btn btn-primary" onClick={this._generate.bind(this,this.currentOrganization.id)}>{Current_Lang.label.save}
-                                </button>
+        var generateInfo = "";
+        if(qrcodeCount){
+            if(qrcodeCount.status){
+                generateInfo = <div>
+                    <div className="form-horizontal">
+                        <fieldset className="content-group">
+                            <legend className="text-bold">
+                                {"批量生成二维码"}
+                            </legend>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{textAlign: 'center'}}>{"小区名称"}</label>
+                                <div className="col-lg-9">
+                                    <input id="organizationName" type="text" value={this.currentOrganization.name} className="form-control"
+                                           autoComplete="off" disabled/>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div className="form-group progressGrouop" style={{textAlign:"center",display:"none"}}>
-                        <div className="pace-demo" style={{paddingBottom: "30px"}}>
-                            <div className="theme_bar_xs"><div className="pace_progress" data-progress-text={(progressData && progressData.data?progressData.data:"1")+"%"} data-progress={progressData && progressData.data?progressData.data:"1"} style={{width: (progressData && progressData.data?progressData.data:"1")+"%"}}>{(progressData && progressData.data?progressData.data:"1")+"%"}</div></div>
-                        </div>
-                    </div>
-                    <div className="form-group progressGrouop" style={{textAlign:"center",display:"none"}}>
-                        <span className="qrcodeLoadingText">二维码文件准备中，请勿关闭窗口...</span>
-                    </div>
-
-
-
-                </fieldset>
-            </div>
-
-        </div>;
-        var exportInfo = <div>
-            <div className="form-horizontal">
-                <fieldset className="content-group">
-                    <legend className="text-bold">
-                        {"批量导出二维码"}
-                    </legend>
-                    <div className="form-group">
-                        <label className="col-lg-2 control-label"
-                               style={{textAlign: 'center'}}>{"是否绑定用户"}</label>
-                        <div className="col-lg-9">
-                            <select id="bindUser" className="form-control">
-                                <option value={1}>是</option>
-                                <option value={0}>否</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label className="col-lg-2 control-label"
-                               style={{textAlign: 'center'}}>{"小区名称"}</label>
-                        <div className="col-lg-9">
-                            <input id="organizationName" type="text" value={this.currentOrganization.name} className="form-control"
-                                   autoComplete="off" disabled/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label className="col-lg-2 control-label"
-                               style={{textAlign: 'center'}}>{"是否添加小区名字"}</label>
-                        <div className="col-lg-9">
-                            <select id="exportPressOrgName" className="form-control">
-                                <option value={0}>不添加</option>
-                                <option value={1}>添加</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="form-group saveGroup">
-                        <label className="col-lg-2 control-label"
-                               style={{textAlign: 'center'}}></label>
-                        <div className="col-lg-9">
-                            <div className="text-right">
-                                <button type="button" className="btn btn-primary" onClick={this._export.bind(this,this.currentOrganization.id)}>{Current_Lang.label.save}
-                                </button>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{textAlign: 'center'}}>{"已绑定二维码数目"}</label>
+                                <div className="col-lg-9">
+                                    <input id="bindCount" type="text" className="form-control"
+                                           autoComplete="off" value={qrcodeCount.data.bindCount} disabled/>
+                                </div>
                             </div>
-                        </div>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{textAlign: 'center'}}>{"空白二维码数目"}</label>
+                                <div className="col-lg-9">
+                                    <input id="blankCount" type="text" className="form-control"
+                                           autoComplete="off" value={qrcodeCount.data.blankCount} disabled/>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{textAlign: 'center'}}>{"预估人数"}</label>
+                                <div className="col-lg-9">
+                                    <input id="personAmount" type="text" className="form-control" placeholder="输入预估人数"
+                                           autoComplete="off"/>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{textAlign: 'center'}}>{"是否添加小区名字"}</label>
+                                <div className="col-lg-9">
+                                    <select id="generatePressOrgName" className="form-control">
+                                        <option value={0}>不添加</option>
+                                        <option value={1}>添加</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-group saveGroup">
+                                <label className="col-lg-2 control-label"
+                                       style={{textAlign: 'center'}}></label>
+                                <div className="col-lg-9">
+                                    <div className="text-right">
+                                        <button type="button" className="btn btn-primary" onClick={this._generate.bind(this,this.currentOrganization.id)}>{Current_Lang.label.save}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group progressGrouop" style={{textAlign:"center",display:"none"}}>
+                                <div className="pace-demo" style={{paddingBottom: "30px"}}>
+                                    <div className="theme_bar_xs"><div className="pace_progress" data-progress-text={(progressData && progressData.data?progressData.data:"1")+"%"} data-progress={progressData && progressData.data?progressData.data:"1"} style={{width: (progressData && progressData.data?progressData.data:"1")+"%"}}>{(progressData && progressData.data?progressData.data:"1")+"%"}</div></div>
+                                </div>
+                            </div>
+                            <div className="form-group progressGrouop" style={{textAlign:"center",display:"none"}}>
+                                <span className="qrcodeLoadingText">二维码文件准备中，请勿关闭窗口...</span>
+                            </div>
+
+                        </fieldset>
                     </div>
-                    <div className="form-group progressGrouop" style={{textAlign:"center",display:"none"}}>
-                        <div className="pace-demo" style={{paddingBottom: "30px"}}>
-                            <div className="theme_bar_xs"><div className="pace_progress" data-progress-text={(progressData && progressData.data?progressData.data:"1")+"%"} data-progress={progressData && progressData.data?progressData.data:"1"} style={{width: (progressData && progressData.data?progressData.data:"1")+"%"}}>{(progressData && progressData.data?progressData.data:"1")+"%"}</div></div>
-                        </div>
-                    </div>
-                    <div className="form-group progressGrouop" style={{textAlign:"center",display:"none"}}>
-                        <span className="qrcodeLoadingText">二维码文件准备中，请勿关闭窗口...</span>
-                    </div>
+                </div>;
+            }else{
+                generateInfo = ErrorModal(Current_Lang.status.minor, "获取数据错误");
+            }
+        }else{
+            generateInfo = <Loading />;
+        }
+        var exportInfo ="";
+        if(qrcodeCount){
+            if(qrcodeCount.status){
+                exportInfo = <div>
+                    <div className="form-horizontal">
+                        <fieldset className="content-group">
+                            <legend className="text-bold">
+                                {"批量导出二维码"}
+                            </legend>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{textAlign: 'center'}}>{"是否绑定用户"}</label>
+                                <div className="col-lg-9">
+                                    <select id="bindUser" className="form-control">
+                                        <option value={1}>是</option>
+                                        <option value={0}>否</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{textAlign: 'center'}}>{"小区名称"}</label>
+                                <div className="col-lg-9">
+                                    <input id="organizationName" type="text" value={this.currentOrganization.name} className="form-control"
+                                           autoComplete="off" disabled/>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{textAlign: 'center'}}>{"已绑定二维码数目"}</label>
+                                <div className="col-lg-9">
+                                    <input id="bindCount" type="text" className="form-control"
+                                           autoComplete="off" value={qrcodeCount.data.bindCount} disabled/>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{textAlign: 'center'}}>{"空白二维码数目"}</label>
+                                <div className="col-lg-9">
+                                    <input id="blankCount" type="text" className="form-control"
+                                           autoComplete="off" value={qrcodeCount.data.blankCount} disabled/>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label className="col-lg-2 control-label"
+                                       style={{textAlign: 'center'}}>{"是否添加小区名字"}</label>
+                                <div className="col-lg-9">
+                                    <select id="exportPressOrgName" className="form-control">
+                                        <option value={0}>不添加</option>
+                                        <option value={1}>添加</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-group saveGroup">
+                                <label className="col-lg-2 control-label"
+                                       style={{textAlign: 'center'}}></label>
+                                <div className="col-lg-9">
+                                    <div className="text-right">
+                                        <button type="button" className="btn btn-primary" onClick={this._export.bind(this,this.currentOrganization.id)}>{Current_Lang.label.save}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group progressGrouop" style={{textAlign:"center",display:"none"}}>
+                                <div className="pace-demo" style={{paddingBottom: "30px"}}>
+                                    <div className="theme_bar_xs"><div className="pace_progress" data-progress-text={(progressData && progressData.data?progressData.data:"1")+"%"} data-progress={progressData && progressData.data?progressData.data:"1"} style={{width: (progressData && progressData.data?progressData.data:"1")+"%"}}>{(progressData && progressData.data?progressData.data:"1")+"%"}</div></div>
+                                </div>
+                            </div>
+                            <div className="form-group progressGrouop" style={{textAlign:"center",display:"none"}}>
+                                <span className="qrcodeLoadingText">二维码文件准备中，请勿关闭窗口...</span>
+                            </div>
 
 
-                </fieldset>
-            </div>
+                        </fieldset>
+                    </div>
 
-        </div>;
+                </div>;
+            }else{
+                exportInfo = ErrorModal(Current_Lang.status.minor, "获取数据错误");
+            }
+        }else{
+            exportInfo = <Loading />;
+        }
         return (
             <div>
                 <BreadCrumbs
@@ -508,11 +559,12 @@ class OrganizationListComponent extends Component {
 }
 
 function mapStateToProps(state) {
-    const {getOrganizationList, getCityList, getProgressData, commonReducer}=state;
+    const {getOrganizationList, getCityList, getProgressData,getQrcodeCount, commonReducer}=state;
     return {
         fetching: getOrganizationList.fetching,
         data: getOrganizationList.data,
         progressData: getProgressData.data,
+        qrcodeCount: getQrcodeCount.data,
         cityList: getCityList.data,
         refresh: commonReducer.refresh
     }

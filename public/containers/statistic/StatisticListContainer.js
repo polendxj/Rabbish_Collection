@@ -14,6 +14,7 @@ import {
     ErrorModal,
     ListMiddleModal,
     timeStamp2Time,
+    timeStamp2Time2Second,
     filterCityById,
     getInitialCityIdx,
     mergeClassify,
@@ -532,7 +533,7 @@ export default class StatisticListContainer extends Component {
                     cityTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
                         <td className="text-center">{timeStamp2Time(val.monthday)}</td>
-                        <td className="text-center">{moneyFormat(val.weight.toFixed(3))}</td>
+                        <td className="text-center">{val.weight?val.weight.toFixed(3):0}</td>
                         <td className="text-center">{moneyFormat(val.count)}</td>
                         <td className="text-center">
                             {<ul className="icons-list">
@@ -585,7 +586,7 @@ export default class StatisticListContainer extends Component {
                             <td className="text-center">{key + 1}</td>
                             <td className="text-center">{val.organizationName}</td>
                             <td className="text-center">{timeStamp2Time(val.monthday)}</td>
-                            <td className="text-center">{moneyFormat(val.weight.toFixed(3))}</td>
+                            <td className="text-center">{val.weight?val.weight.toFixed(3):0}</td>
                             <td className="text-center">{moneyFormat(val.count)}</td>
                             <td className="text-center">
                                 {<ul className="icons-list">
@@ -643,7 +644,7 @@ export default class StatisticListContainer extends Component {
                         <td className="text-center">
                             {rangeDateDataList.organizationName?rangeDateDataList.organizationName:rangeDateDataList.cityName}
                         </td>
-                        <td className="text-center">{moneyFormat(rangeDateDataList.weight.toFixed(2))}</td>
+                        <td className="text-center">{rangeDateDataList.weight?rangeDateDataList.weight.toFixed(2):0}</td>
                         <td className="text-center">{rangeDateDataList.count}</td>
                     </tr>)
                 } else {
@@ -680,9 +681,9 @@ export default class StatisticListContainer extends Component {
                             <td className="text-center">{key + 1}</td>
                             <td className="text-center">{val.name}</td>
                             <td className="text-center">{val.className}</td>
-                            <td className="text-center">{moneyFormat(val.weight.toFixed(2))}</td>
+                            <td className="text-center">{val.weight?val.weight.toFixed(2):0}</td>
                             <td className="text-center">{moneyFormat(val.points)}</td>
-                            <td className="text-center">{timeStamp2Time(val.createTime)}</td>
+                            <td className="text-center">{timeStamp2Time2Second(val.createTime)}</td>
                         </tr>)
                     }.bind(this));
                 } else {
@@ -865,7 +866,7 @@ export default class StatisticListContainer extends Component {
                     detailCityEveryTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                         <td className="text-center">{key + 1}</td>
                         <td className="text-center">{val.className}</td>
-                        <td className="text-center">{moneyFormat(val.weight.toFixed(2))}</td>
+                        <td className="text-center">{val.weight?val.weight.toFixed(2):0}</td>
                         <td className="text-center">{moneyFormat(val.count)}</td>
                     </tr>)
                 }.bind(this));
@@ -913,7 +914,7 @@ export default class StatisticListContainer extends Component {
                         detailorgaEveryTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                             <td className="text-center">{key + 1}</td>
                             <td className="text-center">{val.className}</td>
-                            <td className="text-center">{moneyFormat(val.weight.toFixed(2))}</td>
+                            <td className="text-center">{val.weight?val.weight.toFixed(2):0}</td>
                             <td className="text-center">{moneyFormat(val.count)}</td>
                         </tr>)
                     }
@@ -956,7 +957,7 @@ export default class StatisticListContainer extends Component {
                         detailorgaTotalTb.push(<tr key={key} style={{backgroundColor: key % 2 == 0 ? "#F8F8F8" : ""}}>
                             <td className="text-center">{key + 1}</td>
                             <td className="text-center">{val.className}</td>
-                            <td className="text-center">{moneyFormat(val.weight.toFixed(2))}</td>
+                            <td className="text-center">{val.weight?val.weight.toFixed(2):0}</td>
                             <td className="text-center">{moneyFormat(val.count)}</td>
                         </tr>)
                     }
@@ -996,7 +997,7 @@ export default class StatisticListContainer extends Component {
                             <div className="col-lg-3 col-md-6">
                                 <div className="panel bg-teal-400">
                                     <div className="panel-body">
-                                        <h3 className="no-margin">{showTotal == "ok" ? moneyFormat(totalData.data.weight.toFixed(0)) : showTotal}
+                                        <h3 className="no-margin">{showTotal == "ok" ? (totalData.data.weight?moneyFormat(totalData.data.weight.toFixed(0)):0) : showTotal}
                                             &nbsp;
                                             / {showTotal == "ok" ? moneyFormat(totalData.data.count) : showTotal}</h3>
                                         <select id="cityOfTotalSelect" className="form-control pull-right input-xs"
@@ -1026,7 +1027,7 @@ export default class StatisticListContainer extends Component {
                                 <div className="panel bg-pink-400">
                                     <div className="panel-body">
 
-                                        <h3 className="no-margin">{showOperation == "ok" ? moneyFormat(operationData.data.totalXAmount.toFixed(0)) : showOperation}</h3>
+                                        <h3 className="no-margin">{showOperation == "ok" ? (operationData.data.totalXAmount?moneyFormat(operationData.data.totalXAmount.toFixed(0)):0) : showOperation}</h3>
                                         兑换总金额
                                         <div className="text-muted text-size-small">单位：元</div>
                                         <a className="heading-elements-toggle"><i className="icon-menu"></i></a></div>
@@ -1171,7 +1172,7 @@ export default class StatisticListContainer extends Component {
                                                                     - 投放次数
                                                                     ：{showTotalOfCity == "ok" ? moneyFormat(cityData.totalCityData.count) : showTotalOfCity}
                                                                     次 /
-                                                                    投放重量：{showTotalOfCity == "ok" ? moneyFormat(cityData.totalCityData.weight.toFixed(0)) : showTotalOfCity}
+                                                                    投放重量：{showTotalOfCity == "ok" ? (cityData.totalCityData.weight?moneyFormat(cityData.totalCityData.weight.toFixed(0)):0) : showTotalOfCity}
                                                                     吨
                                                                     <small
                                                                         className="display-block no-margin">{showTotalOfCity == "ok" ? cityData.totalCityData.rangeDate : showTotalOfCity}</small>
@@ -1270,7 +1271,7 @@ export default class StatisticListContainer extends Component {
                                                                 <h5 className="text-semibold no-margin">
                                                                     {totalOrga.cityName ? totalOrga.cityName : "获取中..."}
                                                                     - 投放次数 ：{moneyFormat(totalOrga.count)}
-                                                                    次 / 投放重量：{moneyFormat(totalOrga.weight.toFixed(0))}
+                                                                    次 / 投放重量：{totalOrga.weight?moneyFormat(totalOrga.weight.toFixed(0)):0}
                                                                     吨
                                                                     <small
                                                                         className="display-block no-margin">{totalOrga.rangeDate ? totalOrga.rangeDate : "获取中..."}</small>

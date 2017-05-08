@@ -47,5 +47,8 @@ router.post('/rsapp/store/approved', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/store/approved', 'PUT',data, req, resp);
 });
+router.post('/rsapp/storeSettlement/rate', function (req, resp) {
+    RequestApi.Request(baseURL + '/rsapp/storeSettlement/rate', 'GET', "", req, resp);
+});
 
 module.exports = router;

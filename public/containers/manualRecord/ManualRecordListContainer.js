@@ -180,7 +180,7 @@ class ManualRecordListComponent extends Component{
                         <th className="col-md-2 text-bold text-center">{"重量（吨）"}</th>
                         <th className="col-md-2 text-bold text-center">{"起始时间"}</th>
                         <th className="col-md-2 text-bold text-center">{"结束时间"}</th>
-                        <th className="col-md-4 text-bold text-center">{"错误描述"}</th>
+                        <th className="col-md-4 text-bold text-center">{"详情描述"}</th>
                     </tr>
                     </thead>
                     <tbody>

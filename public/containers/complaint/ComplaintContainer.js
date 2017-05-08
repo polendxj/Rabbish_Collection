@@ -7,7 +7,7 @@ import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
-import {Loading, NoData, ConfirmModal, ErrorModal, roleApplicationUse, timeStamp2Time} from '../../components/Tool/Tool'
+import {Loading, NoData, ConfirmModal, ErrorModal, roleApplicationUse, timeStamp2Time,getUnDealCount} from '../../components/Tool/Tool'
 import {COMPLAINT_LIST_START, COMPLAINT_LIST_END} from '../../constants/index.js'
 import {getListByMutilpCondition, saveObject} from '../../actions/CommonActions';
 
@@ -89,6 +89,16 @@ export default class ComplaintContainer extends Component {
 
     render() {
         const {fetching, data} =this.props;
+        var unDealCount = -1;
+        console.log(data);
+        if (data) {
+            if (data.status) {
+                if (data.data.content.length > 0) {
+                    unDealCount = getUnDealCount(data.data.content);
+                }
+            }
+        }
+        console.log(unDealCount);
         return (
             <div>
                 <BreadCrumbs
@@ -98,7 +108,9 @@ export default class ComplaintContainer extends Component {
                 />
                 <div className="content" style={{marginTop: '20px'}}>
                     <fieldset className="content-group">
-                        <legend className="text-bold">{"投诉举报列表区"}</legend>
+                        <legend className="text-bold">{"投诉举报列表区"}
+                            <span className="label label-danger" style={{display:unDealCount>0?"":"none",marginLeft:"10px"}}>{"未处理："+unDealCount+"条"}</span>
+                        </legend>
                         <div style={{marginTop: '-80px'}}>
                             <Pagenation counts={data && data.status ? data.data.totalElements : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}

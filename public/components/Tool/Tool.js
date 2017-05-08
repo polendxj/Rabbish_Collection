@@ -795,6 +795,20 @@ export function timeStamp2Time(time) {
     }
     return timeStr;
 }
+export function timeStamp2Time2Second(time) {
+    var timeStr = "";
+    if (time) {
+        var date = new Date(time);
+        var Y = date.getFullYear() + '-';
+        var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+        var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate())+" ";
+        var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+        var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+        var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+        timeStr = Y + M + D + h + m + s;
+    }
+    return timeStr;
+}
 export function correctionType(correctionItems, type) {
     var typeName = "";
     if (correctionItems && correctionItems.data && correctionItems.data.length > 0) {
@@ -916,6 +930,15 @@ export function array2Json(list) {
         }
     });
     return params;
+}
+export function getUnDealCount(list){
+    var count = 0;
+    list.forEach(function (val) {
+        if(!val.dealUserid){
+            count++;
+        }
+    });
+    return count;
 }
 function isNumber(value) {
     var patrn = /^(-)?\d+(\.\d+)?$/;

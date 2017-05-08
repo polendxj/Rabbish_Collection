@@ -216,6 +216,8 @@ class CorrectionListComponent extends Component {
 
     render() {
         const {data,correctionItems, fetching}=this.props;
+        console.log("correction",data);
+        console.log("correctionItems",correctionItems);
         let tb = [];
         if (data&&correctionItems) {
             if (data.data&&data.data.content.length > 0) {

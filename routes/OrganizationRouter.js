@@ -34,6 +34,12 @@ router.post('/rsapp/qrcode/export', function (req, resp) {
     RequestApi.Request(baseURL + '/rsapp/qrcode/export' + "?" + data, 'GET', "", req, resp);
 });
 
+router.post('/rsapp/qrcode/count', function (req, resp) {
+    var data = querystring.stringify(JSON.parse(req.body.data));
+    console.log(data);
+    RequestApi.Request(baseURL + '/rsapp/qrcode/count' + "?" + data, 'GET', "", req, resp);
+});
+
 router.post('/rsapp/country/register', function (req, resp) {
     var data = JSON.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/county', 'POST',data, req, resp);

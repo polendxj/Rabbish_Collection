@@ -39,7 +39,7 @@ export default class LoginContainer extends Component {
                                     <div className="text-center">
                                         {/*<img src="../assets/images/logo_light.png"/>*/}
                                         <h5 className="content-group">
-                                            垃圾分拣与回收管理平台
+                                            垃圾之家运营平台
                                         </h5>
                                     </div>
 
@@ -82,8 +82,7 @@ export default class LoginContainer extends Component {
                             </form>
 
                             <div className="footer text-muted">
-                                © 2015. <a href="#">CS Management</a> by <a
-                                href="http://themeforest.net/user/Kopyov" target="_blank">ReuseSorting, V_0.8.3.1.20</a>
+                                © 垃圾之家
                             </div>
 
                         </div>

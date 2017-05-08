@@ -19,7 +19,7 @@ import {
     filterCityById,
     getInitialCityIdx
 } from '../../components/Tool/Tool';
-import {STORE_LIST_START, STORE_LIST_END,CITY_LIST_START,CITY_LIST_END} from '../../constants/index.js'
+import {STORE_LIST_START, STORE_LIST_END,CITY_LIST_START,CITY_LIST_END,RATE_START,RATE_END} from '../../constants/index.js'
 import VerifiedStore from './VerifiedStore';
 import UnauthorizedStore from './UnauthorizedStore';
 import UnVerifiedStore from './UnVerifiedStore';
@@ -57,16 +57,24 @@ export default class StoreListContainer extends Component {
         var params = {page: 0, size: 20};
         this.props.dispatch(getListByMutilpCondition(params, STORE_LIST_START, STORE_LIST_END, store_list));
         this.props.dispatch(getListByMutilpCondition(params, CITY_LIST_START, CITY_LIST_END, city_list));
+        this.props.dispatch(getListByMutilpCondition({}, RATE_START, RATE_END, store_rate));
     }
     componentDidUpdate(){
-        if(this.detailData){
+        if(this.detailData&&this.props.rateData.status){
+            console.log(this.props.rateData);
+            var rate = this.props.rateData.data;
             var max = this.detailData.points - this.detailData.points%10;
             $("#settlementPoints").val(max);
-            $("#settlementAmount").val("");
+            $("#settlementAmount").val(max/rate);
             $("#settlementPoints").blur(function () {
                 var amount = parseInt($("#settlementPoints").val());
+                amount = amount - amount%10;
                 if(amount >= max){
                     $("#settlementPoints").val(max);
+                    $("#settlementAmount").val(max/rate);
+                }else{
+                    $("#settlementPoints").val(amount);
+                    $("#settlementAmount").val(amount/rate);
                 }
             }.bind(this));
         }
@@ -187,7 +195,7 @@ export default class StoreListContainer extends Component {
     }
 
     render() {
-        const {fetching, data,cityList} =this.props;
+        const {fetching, data,rateData, cityList} =this.props;
         console.log(data);
         var verifiedData = "";
         var unauthorizedData = "";
@@ -547,7 +555,7 @@ export default class StoreListContainer extends Component {
                     <div className="form-group">
                         <label className="col-lg-2 control-label"
                                style={{textAlign: 'center'}}>{"商户名称"}</label>
-                        <div className="col-lg-9">
+                        <div className="col-lg-5">
                             <input disabled id="storeName" type="text" value={this.detailData.name} className="form-control"
                                    autoComplete="off" />
                         </div>
@@ -555,14 +563,14 @@ export default class StoreListContainer extends Component {
                     <div className="form-group">
                         <label className="col-lg-2 control-label"
                                style={{textAlign: 'center'}}>{"可用积分 "}</label>
-                        <div className="col-lg-9" style={{lineHeight:"34px"}}>
+                        <div className="col-lg-5" style={{lineHeight:"34px"}}>
                             {this.detailData.points}
                         </div>
                     </div>
                     <div className="form-group">
                         <label className="col-lg-2 control-label"
                                style={{textAlign: 'center'}}>{"结算积分"}</label>
-                        <div className="col-lg-9">
+                        <div className="col-lg-5">
                             <input id="settlementPoints" type="number" className="form-control" placeholder="输入结算积分"
                                     defaultValue={this.detailData.points-this.detailData.points%10}/>
                         </div>
@@ -570,10 +578,13 @@ export default class StoreListContainer extends Component {
                     <div className="form-group">
                         <label className="col-lg-2 control-label"
                                style={{textAlign: 'center'}}>{"结算金额"}</label>
-                        <div className="col-lg-9">
+                        <div className="col-lg-5">
                             <input id="settlementAmount" type="number" className="form-control" placeholder="输入结算金额"
                                    autoComplete="off"/>
                         </div>
+                        <label className="col-lg-4 control-label"
+                               style={{textAlign: 'left',color:"#ff5722",fontWeight:700}}>积分结算比率：{rateData.data}（分/元）</label>
+
                     </div>
                     <div className="form-group">
                         <label className="col-lg-2 control-label"
@@ -699,10 +710,11 @@ export default class StoreListContainer extends Component {
 }
 
 function mapStateToProps(state) {
-    const {getStoreList,getCityList, commonReducer}=state;
+    const {getStoreList, getStoreRate, getCityList, commonReducer}=state;
     return {
         fetching: getStoreList.fetching,
         data: getStoreList.data,
+        rateData: getStoreRate.data,
         cityList: getCityList.data,
         refresh: commonReducer.refresh
     }

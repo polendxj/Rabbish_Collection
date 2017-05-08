@@ -52,10 +52,10 @@ import {getTransitLineList} from '../reducers/TransitLineReducer'
 import {getCorrectionList,getCorrectionItems} from '../reducers/CorrectionReducer'
 import {getComplaintList} from '../reducers/ComplaintReducer'
 import {getStoreSettlementList} from '../reducers/StoreSettlementReducer'
-import {getStoreList} from '../reducers/StoreReducer'
+import {getStoreList,getStoreRate} from '../reducers/StoreReducer'
 import {getReviewList} from '../reducers/ReviewReducer'
 import {getGeneralUserList,getGeneralUserDetail,getSubtypeList} from '../reducers/GeneralUserReducer'
-import {getOrganizationList,getOrganizationDetail,getProgressData} from '../reducers/OrganizationReducer'
+import {getOrganizationList,getOrganizationDetail,getProgressData,getQrcodeCount} from '../reducers/OrganizationReducer'
 import {getAdminUserList,getAdminUserDetail} from '../reducers/AdminUserReducer'
 import {getNoticeList,getNoticeDetail} from '../reducers/NoticeReducer'
 import {getStatisticByClassifyList,getStatisticByDetailList,getStatisticByCityList,getStatisticByOrganizationList,getStatisticByRangeDateList,getStatisticSettlementDate,getStatisticByTotalList} from '../reducers/StatisticReducer'
@@ -140,6 +140,7 @@ const rootReducer = combineReducers({
     getComplaintList,
     getStoreSettlementList,
     getStoreList,
+    getStoreRate,
     getClassConfDetail,
     getReviewList,
     getGeneralUserList,
@@ -161,6 +162,7 @@ const rootReducer = combineReducers({
     getGeneralUserDetail,
     getSubtypeList,
     getStatisticByTotalList,
+    getQrcodeCount,
     form: reduxFormReducer,
     routing: routerReducer
 })

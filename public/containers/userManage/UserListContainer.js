@@ -758,12 +758,12 @@ class UserListComponent extends Component {
                                             {val.status == 1 ?
                                                 <li onClick={this._lockOrUnlockUser.bind(this, val.userid, val.status)}>
                                                     <a
-                                                        href="javascript:void(0)"><i className="icon-lock4"></i>锁住账户</a>
+                                                        href="javascript:void(0)"><i className="icon-lock4"></i>冻结用户</a>
                                                 </li> :
                                                 <li onClick={this._lockOrUnlockUser.bind(this, val.userid, val.status)}>
                                                     <a
                                                         href="javascript:void(0)"><i
-                                                        className="icon-unlocked"></i>解锁账户</a></li>}
+                                                        className="icon-unlocked"></i>解冻用户</a></li>}
                                             <li>
                                                 <a href="javascript:void(0)" data-toggle="modal"
                                                    data-target="#bindQrcodeModal"
