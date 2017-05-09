@@ -8,7 +8,7 @@ import {browserHistory} from 'react-router'
 import {bindActionCreators} from 'redux'
 import {Loading, ListModal, ErrorModal, array2Json} from '../../components/Tool/Tool';
 import BreadCrumbs from '../../components/right/breadCrumbs';
-import {saveObject,getListByMutilpCondition} from '../../actions/CommonActions';
+import {saveObject,getDetail} from '../../actions/CommonActions';
 import {commonRefresh} from '../../actions/Common';
 import RichText from './RichText';
 import {
@@ -31,7 +31,7 @@ export default class NoticeUpdateContainer extends Component {
         this._startRefresh=this._startRefresh.bind(this);
     }
     componentDidMount() {
-        this.props.dispatch(getListByMutilpCondition(parseInt(this.props.params.id.substring(1)), NOTICE_DETAIL_START, NOTICE_DETAIL_END, notice_detail));
+        this.props.dispatch(getDetail(parseInt(this.props.params.id.substring(1)), NOTICE_DETAIL_START, NOTICE_DETAIL_END, notice_detail));
     }
     _startRefresh(){
         this.props.dispatch(commonRefresh())
@@ -44,7 +44,7 @@ export default class NoticeUpdateContainer extends Component {
     }
 
     render() {
-        const {data,refresh}=this.props;
+        const {data,fetching,refresh}=this.props;
         return (
             <div>
                 <BreadCrumbs
@@ -53,7 +53,7 @@ export default class NoticeUpdateContainer extends Component {
                     operation={this.operation}
                 />
                 <div className="content" style={{marginTop: '20px'}}>
-                    <UpdateNoticeComponent data={data} _save={this._save} _startRefresh={this._startRefresh}/>
+                    <UpdateNoticeComponent data={data} fetching={fetching} _save={this._save} _startRefresh={this._startRefresh}/>
 
                 </div>
             </div>
@@ -145,108 +145,112 @@ class UpdateNoticeComponent extends Component{
         $(e.target).parent("span").addClass("checked");
     }
     render() {
-        const {data} = this.props;
+        const {data,fetching} = this.props;
         console.log("bb",data);
         var tableHeight = ($(window).height() - 130);
         var detail = "";
-        if(data.status){
-            detail = <form id="noticeForm" className="form-horizontal" action="#">
-                <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
-                    <div className="col-sm-8 col-sm-offset-2">
-                        <fieldset className="content-group">
-                            <legend className="text-bold">
-                                {"公告基础信息"}
-                            </legend>
-                            <div className="form-group">
-                                <label className="col-lg-2 control-label"
-                                       style={{
-                                           textAlign: 'center'
-                                       }}>{"分类名称"}</label>
-                                <div className="col-lg-6">
-                                    <select className="form-control" name="type" defaultValue={data.data.type}>
-                                        <option value={1}>{"公告"}</option>
-                                        <option value={2}>{"新闻"}</option>
-                                        <option value={3}>{"政策法规"}</option>
-                                    </select>
+        if(data){
+            if(data.status){
+                detail = <form id="noticeForm" className="form-horizontal" action="#">
+                    <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
+                        <div className="col-sm-8 col-sm-offset-2">
+                            <fieldset className="content-group">
+                                <legend className="text-bold">
+                                    {"公告基础信息"}
+                                </legend>
+                                <div className="form-group">
+                                    <label className="col-lg-2 control-label"
+                                           style={{
+                                               textAlign: 'center'
+                                           }}>{"分类名称"}</label>
+                                    <div className="col-lg-6">
+                                        <select className="form-control" name="type" defaultValue={data.data.type}>
+                                            <option value={1}>{"公告"}</option>
+                                            <option value={2}>{"新闻"}</option>
+                                            <option value={3}>{"政策法规"}</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="form-group" >
-                                <label className="col-lg-2 control-label"
-                                       style={{
-                                           textAlign: 'center'
-                                       }}>{"标 题"}</label>
-                                <div className="col-lg-6">
-                                    <input name="title" type="text" className="form-control"
-                                           defaultValue={data.data.title} placeholder={"标题"} required="required" autoComplete="off"/>
+                                <div className="form-group" >
+                                    <label className="col-lg-2 control-label"
+                                           style={{
+                                               textAlign: 'center'
+                                           }}>{"标 题"}</label>
+                                    <div className="col-lg-6">
+                                        <input name="title" type="text" className="form-control"
+                                               defaultValue={data.data.title} placeholder={"标题"} required="required" autoComplete="off"/>
+                                    </div>
+                                    <div className="col-lg-3 errorShow"></div>
                                 </div>
-                                <div className="col-lg-3 errorShow"></div>
-                            </div>
-                            <div className="form-group">
-                                <label className="col-lg-2 control-label" style={{
-                                    textAlign: 'center'
-                                }}>首页大图公告</label>
-                                <div className="col-lg-6">
-                                    <label className="radio-inline">
-                                        <div className="choice">
+                                <div className="form-group">
+                                    <label className="col-lg-2 control-label" style={{
+                                        textAlign: 'center'
+                                    }}>首页大图公告</label>
+                                    <div className="col-lg-6">
+                                        <label className="radio-inline">
+                                            <div className="choice">
                                             <span className={data.data.homeNotice==1?"checked":""}>
                                                 <input type="radio" name="homeNotice" value={1} className="styled" onClick={this._clickRadio.bind(this)}/>
                                             </span>
-                                        </div>
-                                        是
-                                    </label>
-                                    <label className="radio-inline">
-                                        <div className="choice">
+                                            </div>
+                                            是
+                                        </label>
+                                        <label className="radio-inline">
+                                            <div className="choice">
                                             <span className={data.data.homeNotice==0?"checked":""}>
                                                 <input type="radio" name="homeNotice" value={0} className="styled" onClick={this._clickRadio.bind(this)}/>
                                             </span>
-                                        </div>
-                                        否
-                                    </label>
+                                            </div>
+                                            否
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="form-group">
-                                <label className="col-lg-2 control-label"
-                                       style={{
-                                           textAlign: 'center'
-                                       }}>{"摘 要"}</label>
-                                <div className="col-lg-9">
-                                    <textarea name="digest" defaultValue={data.data.digest} type="text" className="form-control" autoComplete="off"/>
+                                <div className="form-group">
+                                    <label className="col-lg-2 control-label"
+                                           style={{
+                                               textAlign: 'center'
+                                           }}>{"摘 要"}</label>
+                                    <div className="col-lg-9">
+                                        <textarea name="digest" defaultValue={data.data.digest} type="text" className="form-control" autoComplete="off"/>
+                                    </div>
                                 </div>
-                            </div>
+                                <div className="form-group" >
+                                    <label className="col-lg-2 control-label"
+                                           style={{
+                                               textAlign: 'center',
+                                           }}>{"图片URL"}</label>
+                                    <div className="col-lg-9">
+                                        <input type="file" name="file" id="file-input" defaultValue={data.data.img}
+                                               multiple/>
+                                    </div>
+                                </div>
+                                <div className="form-group" >
+                                    <label className="col-lg-2 control-label"
+                                           style={{
+                                               textAlign: 'center'
+                                           }}>{"内容"}</label>
+                                    <div className="col-lg-9">
+                                        <RichText id="content" height="200" value={data.data.content} disabled={false}/>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+
                             <div className="form-group" >
-                                <label className="col-lg-2 control-label"
-                                       style={{
-                                           textAlign: 'center',
-                                       }}>{"图片URL"}</label>
-                                <div className="col-lg-9">
-                                    <input type="file" name="file" id="file-input" defaultValue={data.data.img}
-                                           multiple/>
-                                </div>
-                            </div>
-                            <div className="form-group" >
-                                <label className="col-lg-2 control-label"
-                                       style={{
-                                           textAlign: 'center'
-                                       }}>{"内容"}</label>
-                                <div className="col-lg-9">
-                                    <RichText id="content" height="200" value={data.data.content} disabled={false}/>
+                                <div className="col-lg-11 text-right" style={{marginTop: "50px"}}>
+                                    <button type="button" className="btn btn-primary"
+                                            onClick={this._uploadImg}>{"发布"}
+                                    </button>
                                 </div>
                             </div>
 
-                        </fieldset>
-
-                        <div className="form-group" >
-                            <div className="col-lg-11 text-right" style={{marginTop: "50px"}}>
-                                <button type="button" className="btn btn-primary"
-                                        onClick={this._uploadImg}>{"发布"}
-                                </button>
-                            </div>
                         </div>
-
                     </div>
-                </div>
-            </form>
+                </form>
+            }else{
+                detail =  ErrorModal(Current_Lang.status.minor, "获取数据错误");
+            }
         }else{
             detail = <Loading/>
         }
@@ -263,6 +267,7 @@ function mapStateToProps(state) {
     const {getNoticeDetail,commonReducer}=state;
     return {
         data: getNoticeDetail.data,
+        fetching: getNoticeDetail.fetching,
         refresh: commonReducer.refresh
     }
 }

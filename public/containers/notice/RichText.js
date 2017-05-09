@@ -61,7 +61,6 @@ export default class RichText extends React.Component {
         var that = this;
         this.editor.ready(function() {
             var value = that.props.value?that.props.value:'<p></p>';
-            console.log("value2",that.props.value);
             that.editor.setContent(value);
         });
     }
