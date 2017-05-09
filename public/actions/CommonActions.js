@@ -3,7 +3,7 @@
  */
 import fetch from 'isomorphic-fetch'
 import {browserHistory} from 'react-router'
-import {ErrorModal, SuccessModal, ConfirmModalSuccess} from '../components/Tool/Tool'
+import {ErrorModal, SuccessModal, ConfirmModalSuccess,deleteCookie} from '../components/Tool/Tool'
 
 /*
  * Function  This function can use multiple condition to search list
@@ -280,6 +280,7 @@ export function saveObject(data, startDispatch, endDispatch, interfaceURL, listR
 
 export function login(data, startDispatch, endDispatch, interfaceURL, listRouter, callback) {
     return dispatch=> {
+        deleteCookie("JSESSIONID");
         if (startDispatch) {
             dispatch(startFetch(startDispatch))
         }
@@ -306,6 +307,13 @@ export function login(data, startDispatch, endDispatch, interfaceURL, listRouter
                     sessionStorage['count'] = -1;
                     sessionStorage['messageTime'] = "";
                     sessionStorage['userMessageTime'] = "";
+
+                    var date = new Date();
+                    date.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000));
+                    var dateString = date.toUTCString();
+                    var cookieString = "JSESSIONID=" + json.data.token + "; expires=" + dateString + "; path=/;";
+                    document.cookie = cookieString;
+
                     browserHistory.push(listRouter);
                     if (callback) {
                         callback();

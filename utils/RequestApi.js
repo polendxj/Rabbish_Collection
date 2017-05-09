@@ -11,9 +11,7 @@ var Request = function (url, method, data, req, resp, callback) {
             {
                 method: method,
                 headers: {
-                    "Content-Type": "application/json",
-                    'Cookie': "JSESSIONID=" + req.cookies.JSESSIONID,
-                    'token': "aaaaa"
+                    "Content-Type": "application/json"
                 },
                 body: data,
                 timeout: 5000

@@ -50,7 +50,7 @@ export default class CorrectionListContainer extends Component {
 
     componentDidMount() {
         var self = this;
-        var params = {page: 0, size: page_size,startTime: new Date("2016-01-01").getTime(),endTime:new Date().getTime()};
+        var params = {page: 0, size: page_size,startTime: new Date("2016-01-01").getTime(),endTime:new Date().getTime(),sort: "create_time,desc"};
         var organizationParams = {page: 0, size: 10000};
         this.props.dispatch(getListByMutilpCondition(params, CORRECTION_LIST_START, CORRECTION_LIST_END, correction_list));
         this.props.dispatch(getListByMutilpCondition(organizationParams, ORGANIZATION_LIST_START, ORGANIZATION_LIST_END, organization_list));
@@ -88,7 +88,8 @@ export default class CorrectionListContainer extends Component {
             size: page_size,
             organizationid: $("#organizationSelect").val(),
             startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
-            endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+            endTime: new Date(rangeTime.split("-")[1].trim()).getTime(),
+            sort: "create_time,desc"
         };
         this.props.dispatch(getListByMutilpCondition(params, CORRECTION_LIST_START, CORRECTION_LIST_END, correction_list));
     }
@@ -108,7 +109,8 @@ export default class CorrectionListContainer extends Component {
             page: this.page,
             size: page_size,
             startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
-            endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+            endTime: new Date(rangeTime.split("-")[1].trim()).getTime(),
+            sort: "create_time,desc"
         };
         this.props.dispatch(getListByMutilpCondition(params, CORRECTION_LIST_START, CORRECTION_LIST_END, correction_list));
     }
@@ -120,7 +122,8 @@ export default class CorrectionListContainer extends Component {
             page: this.page,
             size: page_size,
             startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
-            endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+            endTime: new Date(rangeTime.split("-")[1].trim()).getTime(),
+            sort: "create_time,desc"
         };
         this.props.dispatch(getListByMutilpCondition(params, CORRECTION_LIST_START, CORRECTION_LIST_END, correction_list));
     }
@@ -132,7 +135,8 @@ export default class CorrectionListContainer extends Component {
             page: this.page,
             size: page_size,
             startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
-            endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+            endTime: new Date(rangeTime.split("-")[1].trim()).getTime(),
+            sort: "create_time,desc"
         };
         this.props.dispatch(getListByMutilpCondition(params, CORRECTION_LIST_START, CORRECTION_LIST_END, correction_list));
     }
@@ -227,7 +231,7 @@ class CorrectionListComponent extends Component {
                         <td className="text-center">{val.userName}</td>
                         <td className="text-center">{correctionType(correctionItems,val.type)}</td>
                         <td className="text-center">{recordType(val.recordType)}</td>
-                        <td className="text-center">{val.weight?val.weight.toFixed(2):"0.00"}</td>
+                        <td className="text-center">{val.weight?val.weight.toFixed(2):"0"}</td>
                         <td className="text-left">{val.description}</td>
                         <td className="text-center">{timeStamp2Time(val.createTime)}</td>
                     </tr>)
@@ -257,7 +261,7 @@ class CorrectionListComponent extends Component {
                         <th className="col-md-2 text-bold text-center">{"纠错用户"}</th>
                         <th className="col-md-2 text-bold text-center">{"错误类型"}</th>
                         <th className="col-md-2 text-bold text-center">{"记录类型"}</th>
-                        <th className="col-md-1 text-bold text-center">{"重量（吨）"}</th>
+                        <th className="col-md-1 text-bold text-center">{"重量（千克）"}</th>
                         <th className="col-md-3 text-bold text-left">{"错误描述"}</th>
                         <th className="col-md-2 text-bold text-center">{"创建时间"}</th>
                     </tr>

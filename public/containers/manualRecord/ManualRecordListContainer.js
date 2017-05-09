@@ -31,14 +31,14 @@ export default class ManualRecordListContainer extends Component {
     }
 
     componentDidMount() {
-        var params = {page: 0, size: page_size};
+        var params = {page: 0, size: page_size,sort:"start_time,desc"};
         this.props.dispatch(getListByMutilpCondition(params, MANUALRECORD_LIST_START, MANUALRECORD_LIST_END, manualRecord_list));
     }
 
     _delete(id,classConfName,weight) {
         var that = this;
         if(sessionStorage['adminId']==id){
-            ErrorModal(Current_Lang.status.minor,Current_Lang.alertTip.accountOperating)
+            ErrorModal(Current_Lang.status.minor,Current_Lang.alertTip.accountOperating);
             return
         }
         ConfirmModal(Current_Lang.status.minor, Current_Lang.alertTip.confirmDelete + classConfName + "（"+weight+"）" + Current_Lang.alertTip.confirmMa, function () {

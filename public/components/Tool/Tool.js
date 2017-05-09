@@ -825,10 +825,10 @@ export function recordType(type){
     var recordType = "";
     switch (type) {
         case 0:
-            recordType = "即时添加";
+            recordType = "即时纠错";
             break;
         case 1:
-            recordType = "集中检查";
+            recordType = "复检撤销";
             break;
         default:
             break;

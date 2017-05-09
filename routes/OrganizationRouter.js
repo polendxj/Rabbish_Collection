@@ -27,6 +27,7 @@ router.post('/rsapp/organization/update', function (req, resp) {
 });
 router.post('/rsapp/qrcode/generate', function (req, resp) {
     var data = querystring.stringify(JSON.parse(req.body.data));
+    console.log(req.cookies.JSESSIONID);
     RequestApi.Request(baseURL + '/rsapp/qrcode/generate' + "?" + data, 'GET', "", req, resp);
 });
 router.post('/rsapp/qrcode/export', function (req, resp) {
