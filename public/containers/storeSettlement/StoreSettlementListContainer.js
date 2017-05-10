@@ -134,6 +134,7 @@ class StoreSettlementListComponent extends Component {
                         <td className="text-center">{val.points}</td>
                         <td className="text-center">{val.amount}</td>
                         <td className="text-center">{timeStamp2Time(val.settletime)}</td>
+                        <td className="text-center">{val.adminname}</td>
                         <td className="text-center">{val.manager}</td>
                     </tr>)
                 }.bind(this));
@@ -159,11 +160,12 @@ class StoreSettlementListComponent extends Component {
                         <tr style={{fontWeight: 'bold'}}>
                             <th className="text-center" style={{width: "20px"}}></th>
                             <th className="col-md-2 text-bold text-center">{"商铺名称"}</th>
-                            <th className="col-md-2 text-bold text-center">{"城市"}</th>
-                            <th className="col-md-2 text-bold text-center">{"行政区"}</th>
+                            <th className="col-md-1 text-bold text-center">{"城市"}</th>
+                            <th className="col-md-1 text-bold text-center">{"行政区"}</th>
                             <th className="col-md-1 text-bold text-center">{"结算积分"}</th>
                             <th className="col-md-1 text-bold text-center">{"结算金额"}</th>
                             <th className="col-md-2 text-bold text-center">{"结算时间"}</th>
+                            <th className="col-md-2 text-bold text-center">{"结算人"}</th>
                             <th className="col-md-2 text-bold text-center">{"负责人"}</th>
                         </tr>
                     </thead>

@@ -79,10 +79,7 @@ class UpdateNoticeComponent extends Component {
 
     componentDidUpdate() {
         var self = this;
-        if (this.props.data.status) {
-            this.initialFlag = this.initialFlag + 1;
-        }
-        if (this.props.data.status && this.initialFlag <= 1) {
+        if (this.props.data.status && this.count > 1) {
             $("#noticeForm").validate({
                 ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
                 errorClass: 'validation-error-label',
@@ -163,6 +160,7 @@ class UpdateNoticeComponent extends Component {
 
         if (!fetching) {
             this.count++;
+            console.log("count",this.count);
             if (data && this.count > 1) {
                 detail = <form id="noticeForm" className="form-horizontal" action="#">
                     <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
