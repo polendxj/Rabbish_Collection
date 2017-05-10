@@ -76,7 +76,7 @@
 
 	var _containersApp2 = _interopRequireDefault(_containersApp);
 
-	var _containersDashboard = __webpack_require__(738);
+	var _containersDashboard = __webpack_require__(739);
 
 	var _containersDashboard2 = _interopRequireDefault(_containersDashboard);
 
@@ -84,127 +84,131 @@
 
 	var _containersLogin2 = _interopRequireDefault(_containersLogin);
 
-	var _containersDeveloping = __webpack_require__(741);
+	var _containersForgetPassword = __webpack_require__(733);
+
+	var _containersForgetPassword2 = _interopRequireDefault(_containersForgetPassword);
+
+	var _containersDeveloping = __webpack_require__(742);
 
 	var _containersDeveloping2 = _interopRequireDefault(_containersDeveloping);
 
-	var _containersCitySettingContainer = __webpack_require__(742);
+	var _containersCitySettingContainer = __webpack_require__(743);
 
 	var _containersCitySettingContainer2 = _interopRequireDefault(_containersCitySettingContainer);
 
-	var _containersCitySettingRegisterContainer = __webpack_require__(745);
+	var _containersCitySettingRegisterContainer = __webpack_require__(746);
 
 	var _containersCitySettingRegisterContainer2 = _interopRequireDefault(_containersCitySettingRegisterContainer);
 
-	var _storeConfigureStore = __webpack_require__(746);
+	var _storeConfigureStore = __webpack_require__(747);
 
 	var _storeConfigureStore2 = _interopRequireDefault(_storeConfigureStore);
 
-	var _containersRubbishClassRubbishClassListContainer = __webpack_require__(788);
+	var _containersRubbishClassRubbishClassListContainer = __webpack_require__(789);
 
 	var _containersRubbishClassRubbishClassListContainer2 = _interopRequireDefault(_containersRubbishClassRubbishClassListContainer);
 
-	var _containersRubbishClassRubbishClassRegisterContainer = __webpack_require__(789);
+	var _containersRubbishClassRubbishClassRegisterContainer = __webpack_require__(790);
 
 	var _containersRubbishClassRubbishClassRegisterContainer2 = _interopRequireDefault(_containersRubbishClassRubbishClassRegisterContainer);
 
-	var _containersRubbishClassRubbishClassUpdateContainer = __webpack_require__(790);
+	var _containersRubbishClassRubbishClassUpdateContainer = __webpack_require__(791);
 
 	var _containersRubbishClassRubbishClassUpdateContainer2 = _interopRequireDefault(_containersRubbishClassRubbishClassUpdateContainer);
 
-	var _containersTransitLineTransitLineListContainer = __webpack_require__(791);
+	var _containersTransitLineTransitLineListContainer = __webpack_require__(792);
 
 	var _containersTransitLineTransitLineListContainer2 = _interopRequireDefault(_containersTransitLineTransitLineListContainer);
 
-	var _containersTransitLineTransitLineRegisterContainer = __webpack_require__(792);
+	var _containersTransitLineTransitLineRegisterContainer = __webpack_require__(793);
 
 	var _containersTransitLineTransitLineRegisterContainer2 = _interopRequireDefault(_containersTransitLineTransitLineRegisterContainer);
 
-	var _containersManualRecordManualRecordListContainer = __webpack_require__(793);
+	var _containersManualRecordManualRecordListContainer = __webpack_require__(794);
 
 	var _containersManualRecordManualRecordListContainer2 = _interopRequireDefault(_containersManualRecordManualRecordListContainer);
 
-	var _containersManualRecordManualRecordRegisterContainer = __webpack_require__(794);
+	var _containersManualRecordManualRecordRegisterContainer = __webpack_require__(795);
 
 	var _containersManualRecordManualRecordRegisterContainer2 = _interopRequireDefault(_containersManualRecordManualRecordRegisterContainer);
 
-	var _containersAdminUserInfoAdminUserListContainer = __webpack_require__(796);
+	var _containersAdminUserInfoAdminUserListContainer = __webpack_require__(797);
 
 	var _containersAdminUserInfoAdminUserListContainer2 = _interopRequireDefault(_containersAdminUserInfoAdminUserListContainer);
 
-	var _containersAdminUserInfoAdminUserRegisterContainer = __webpack_require__(797);
+	var _containersAdminUserInfoAdminUserRegisterContainer = __webpack_require__(798);
 
 	var _containersAdminUserInfoAdminUserRegisterContainer2 = _interopRequireDefault(_containersAdminUserInfoAdminUserRegisterContainer);
 
-	var _containersAdminUserInfoAdminUserUpdateContainer = __webpack_require__(798);
+	var _containersAdminUserInfoAdminUserUpdateContainer = __webpack_require__(799);
 
 	var _containersAdminUserInfoAdminUserUpdateContainer2 = _interopRequireDefault(_containersAdminUserInfoAdminUserUpdateContainer);
 
-	var _containersReviewReviewListContainer = __webpack_require__(799);
+	var _containersReviewReviewListContainer = __webpack_require__(800);
 
 	var _containersReviewReviewListContainer2 = _interopRequireDefault(_containersReviewReviewListContainer);
 
-	var _containersComplaintComplaintContainer = __webpack_require__(800);
+	var _containersComplaintComplaintContainer = __webpack_require__(801);
 
 	var _containersComplaintComplaintContainer2 = _interopRequireDefault(_containersComplaintComplaintContainer);
 
-	var _containersUserManageUserListContainer = __webpack_require__(801);
+	var _containersUserManageUserListContainer = __webpack_require__(802);
 
 	var _containersUserManageUserListContainer2 = _interopRequireDefault(_containersUserManageUserListContainer);
 
-	var _containersUserManageUserRegisterContainer = __webpack_require__(802);
+	var _containersUserManageUserRegisterContainer = __webpack_require__(803);
 
 	var _containersUserManageUserRegisterContainer2 = _interopRequireDefault(_containersUserManageUserRegisterContainer);
 
-	var _containersCorrectionCorrectionListContainer = __webpack_require__(803);
+	var _containersCorrectionCorrectionListContainer = __webpack_require__(804);
 
 	var _containersCorrectionCorrectionListContainer2 = _interopRequireDefault(_containersCorrectionCorrectionListContainer);
 
-	var _containersStoreStoreListContainer = __webpack_require__(804);
+	var _containersStoreStoreListContainer = __webpack_require__(805);
 
 	var _containersStoreStoreListContainer2 = _interopRequireDefault(_containersStoreStoreListContainer);
 
-	var _containersStoreSettlementStoreSettlementListContainer = __webpack_require__(808);
+	var _containersStoreSettlementStoreSettlementListContainer = __webpack_require__(810);
 
 	var _containersStoreSettlementStoreSettlementListContainer2 = _interopRequireDefault(_containersStoreSettlementStoreSettlementListContainer);
 
-	var _containersNoticeNoticeListContainer = __webpack_require__(809);
+	var _containersNoticeNoticeListContainer = __webpack_require__(811);
 
 	var _containersNoticeNoticeListContainer2 = _interopRequireDefault(_containersNoticeNoticeListContainer);
 
-	var _containersNoticeNoticeRegisterContainer = __webpack_require__(810);
+	var _containersNoticeNoticeRegisterContainer = __webpack_require__(812);
 
 	var _containersNoticeNoticeRegisterContainer2 = _interopRequireDefault(_containersNoticeNoticeRegisterContainer);
 
-	var _containersNoticeNoticeUpdateContainer = __webpack_require__(940);
+	var _containersNoticeNoticeUpdateContainer = __webpack_require__(942);
 
 	var _containersNoticeNoticeUpdateContainer2 = _interopRequireDefault(_containersNoticeNoticeUpdateContainer);
 
-	var _containersStatisticStatisticListContainer = __webpack_require__(941);
+	var _containersStatisticStatisticListContainer = __webpack_require__(943);
 
 	var _containersStatisticStatisticListContainer2 = _interopRequireDefault(_containersStatisticStatisticListContainer);
 
-	var _containersOrganizationOrganizationListContainer = __webpack_require__(942);
+	var _containersOrganizationOrganizationListContainer = __webpack_require__(944);
 
 	var _containersOrganizationOrganizationListContainer2 = _interopRequireDefault(_containersOrganizationOrganizationListContainer);
 
-	var _containersOrganizationOrganizationRegisterContainer = __webpack_require__(946);
+	var _containersOrganizationOrganizationRegisterContainer = __webpack_require__(948);
 
 	var _containersOrganizationOrganizationRegisterContainer2 = _interopRequireDefault(_containersOrganizationOrganizationRegisterContainer);
 
-	var _containersOrganizationOrganizationUpdateContainer = __webpack_require__(947);
+	var _containersOrganizationOrganizationUpdateContainer = __webpack_require__(949);
 
 	var _containersOrganizationOrganizationUpdateContainer2 = _interopRequireDefault(_containersOrganizationOrganizationUpdateContainer);
 
-	var _containersSystemMonitorSystemMonitorContainer = __webpack_require__(948);
+	var _containersSystemMonitorSystemMonitorContainer = __webpack_require__(950);
 
 	var _containersSystemMonitorSystemMonitorContainer2 = _interopRequireDefault(_containersSystemMonitorSystemMonitorContainer);
 
-	var _containersVersionControlVersionControlListContainer = __webpack_require__(949);
+	var _containersVersionControlVersionControlListContainer = __webpack_require__(951);
 
 	var _containersVersionControlVersionControlListContainer2 = _interopRequireDefault(_containersVersionControlVersionControlListContainer);
 
-	var _containersHome = __webpack_require__(737);
+	var _containersHome = __webpack_require__(738);
 
 	var _containersHome2 = _interopRequireDefault(_containersHome);
 
@@ -226,6 +230,7 @@
 	            _react2['default'].createElement(_reactRouter.Route, { path: '/management.html', component: _containersHome2['default'] }),
 	            _react2['default'].createElement(_reactRouter.Route, { path: '/Developing', component: _containersDeveloping2['default'] }),
 	            _react2['default'].createElement(_reactRouter.Route, { path: '/login', component: _containersLogin2['default'] }),
+	            _react2['default'].createElement(_reactRouter.Route, { path: '/forgetPassword', component: _containersForgetPassword2['default'] }),
 	            _react2['default'].createElement(_reactRouter.Route, { path: '/DataManage/CitySetting', component: _containersCitySettingContainer2['default'] }),
 	            _react2['default'].createElement(_reactRouter.Route, { path: '/DataManage/CitySetting/Register', component: _containersCitySettingRegisterContainer2['default'] }),
 	            _react2['default'].createElement(_reactRouter.Route, { path: '/DataManage/RubbishClass', component: _containersRubbishClassRubbishClassListContainer2['default'] }),
@@ -34566,11 +34571,15 @@
 
 	var _Login2 = _interopRequireDefault(_Login);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _ForgetPassword = __webpack_require__(733);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _ForgetPassword2 = _interopRequireDefault(_ForgetPassword);
 
-	var _containersHome = __webpack_require__(737);
+	var _actionsCommon = __webpack_require__(734);
+
+	var _actionsCommonActions = __webpack_require__(737);
+
+	var _containersHome = __webpack_require__(738);
 
 	var _containersHome2 = _interopRequireDefault(_containersHome);
 
@@ -34837,7 +34846,11 @@
 	                }
 	            } else {
 	                // if(document.location.pathname!="/"){
-	                result = _react2['default'].createElement(_Login2['default'], { _checkAuth: this._checkAuth, fetching: fetching });
+	                if (document.location.pathname == "/forgetPassword") {
+	                    result = _react2['default'].createElement(_ForgetPassword2['default'], null);
+	                } else {
+	                    result = _react2['default'].createElement(_Login2['default'], { _checkAuth: this._checkAuth, fetching: fetching });
+	                }
 	                // }
 	                // else{
 	                //     result = <Home />
@@ -34908,19 +34921,7 @@
 	                            _react2['default'].createElement(
 	                                'div',
 	                                { style: { float: 'left', marginLeft: '14px' } },
-	                                'ⓒ 2017. ',
-	                                _react2['default'].createElement(
-	                                    'span',
-	                                    { style: { color: '#193153' } },
-	                                    'Copyright Powered'
-	                                ),
-	                                ' by ',
-	                                _react2['default'].createElement(
-	                                    'span',
-	                                    {
-	                                        style: { color: '#193153' } },
-	                                    'ReuseSorting Co., Ltd. All Rights Reserved.'
-	                                )
+	                                'ⓒ 垃圾之家'
 	                            )
 	                        )
 	                    )
@@ -35413,6 +35414,7 @@
 	exports.streamingTemplateFilter = streamingTemplateFilter;
 	exports.resolutionFilter = resolutionFilter;
 	exports.timeStamp2Time = timeStamp2Time;
+	exports.timeStamp2Time2Second = timeStamp2Time2Second;
 	exports.correctionType = correctionType;
 	exports.recordType = recordType;
 	exports.userType = userType;
@@ -35421,6 +35423,7 @@
 	exports.organizationType = organizationType;
 	exports.pointsType = pointsType;
 	exports.array2Json = array2Json;
+	exports.getUnDealCount = getUnDealCount;
 	exports.filterCityById = filterCityById;
 	exports.filterCountryById = filterCountryById;
 	exports.getInitialCityIdx = getInitialCityIdx;
@@ -36433,6 +36436,21 @@
 	    return timeStr;
 	}
 
+	function timeStamp2Time2Second(time) {
+	    var timeStr = "";
+	    if (time) {
+	        var date = new Date(time);
+	        var Y = date.getFullYear() + '-';
+	        var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+	        var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + " ";
+	        var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+	        var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+	        var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+	        timeStr = Y + M + D + h + m + s;
+	    }
+	    return timeStr;
+	}
+
 	function correctionType(correctionItems, type) {
 	    var typeName = "";
 	    if (correctionItems && correctionItems.data && correctionItems.data.length > 0) {
@@ -36471,10 +36489,10 @@
 	    var recordType = "";
 	    switch (type) {
 	        case 0:
-	            recordType = "即时添加";
+	            recordType = "即时纠错";
 	            break;
 	        case 1:
-	            recordType = "集中检查";
+	            recordType = "复检撤销";
 	            break;
 	        default:
 	            break;
@@ -36499,6 +36517,7 @@
 	            break;
 	        case 5:
 	            userType = "机关单位、学校";
+	            break;
 	        case 10:
 	            userType = "超级管理员";
 	            break;
@@ -36581,6 +36600,16 @@
 	        }
 	    });
 	    return params;
+	}
+
+	function getUnDealCount(list) {
+	    var count = 0;
+	    list.forEach(function (val) {
+	        if (!val.dealUserid) {
+	            count++;
+	        }
+	    });
+	    return count;
 	}
 
 	function isNumber(value) {
@@ -47143,6 +47172,10 @@
 	exports.ORGANIZATION_LIST_START = ORGANIZATION_LIST_START;
 	var ORGANIZATION_LIST_END = 'ORGANIZATION_LIST_END';
 	exports.ORGANIZATION_LIST_END = ORGANIZATION_LIST_END;
+	var QRCODE_COUNT_START = 'QRCODE_COUNT_START';
+	exports.QRCODE_COUNT_START = QRCODE_COUNT_START;
+	var QRCODE_COUNT_END = 'QRCODE_COUNT_END';
+	exports.QRCODE_COUNT_END = QRCODE_COUNT_END;
 	var SUBTYPE_LIST_START = 'SUBTYPE_LIST_START';
 	exports.SUBTYPE_LIST_START = SUBTYPE_LIST_START;
 	var SUBTYPE_LIST_END = 'SUBTYPE_LIST_END';
@@ -47191,6 +47224,10 @@
 	exports.STORE_LIST_START = STORE_LIST_START;
 	var STORE_LIST_END = 'STORE_LIST_END';
 	exports.STORE_LIST_END = STORE_LIST_END;
+	var RATE_START = 'RATE_START';
+	exports.RATE_START = RATE_START;
+	var RATE_END = 'RATE_END';
+	exports.RATE_END = RATE_END;
 	var NOTICE_LIST_START = 'NOTICE_LIST_START';
 	exports.NOTICE_LIST_START = NOTICE_LIST_START;
 	var NOTICE_LIST_END = 'NOTICE_LIST_END';
@@ -48138,6 +48175,11 @@
 	            this.props._checkAuth(params);
 	        }
 	    }, {
+	        key: '_forgetPassword',
+	        value: function _forgetPassword() {
+	            _reactRouter.browserHistory.push("/forgetPassword");
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            (0, _componentsToolTool.deleteCookie)("JSESSIONID");
@@ -48169,7 +48211,7 @@
 	                                        _react2['default'].createElement(
 	                                            'h5',
 	                                            { className: 'content-group' },
-	                                            '垃圾分拣与回收管理平台'
+	                                            '垃圾之家运营平台'
 	                                        )
 	                                    ),
 	                                    _react2['default'].createElement(
@@ -48229,25 +48271,22 @@
 	                                            _react2['default'].createElement('i', {
 	                                                className: 'icon-circle-right2 position-right' })
 	                                        )
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'text-center' },
+	                                        _react2['default'].createElement(
+	                                            'a',
+	                                            { onClick: this._forgetPassword.bind(this) },
+	                                            '忘记密码?'
+	                                        )
 	                                    )
 	                                )
 	                            ),
 	                            _react2['default'].createElement(
 	                                'div',
 	                                { className: 'footer text-muted' },
-	                                '© 2015. ',
-	                                _react2['default'].createElement(
-	                                    'a',
-	                                    { href: '#' },
-	                                    'CS Management'
-	                                ),
-	                                ' by ',
-	                                _react2['default'].createElement(
-	                                    'a',
-	                                    {
-	                                        href: 'http://themeforest.net/user/Kopyov', target: '_blank' },
-	                                    'ReuseSorting, V_0.8.3.1.20'
-	                                )
+	                                '© 垃圾之家'
 	                            )
 	                        )
 	                    )
@@ -48273,9 +48312,7 @@
 
 	exports['default'] = (0, _reactRedux.connect)(mapStateToProps)(LoginContainer);
 	module.exports = exports['default'];
-	/*<img src="../assets/images/logo_light.png"/>*/ /*<div className="text-center">
-	                                                    <a href="login_password_recover.html">忘记密码?</a>
-	                                                 </div>*/
+	/*<img src="../assets/images/logo_light.png"/>*/
 
 /***/ },
 /* 671 */
@@ -58422,6 +58459,269 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
+	 * Created by Administrator on 2016/9/22.
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(193);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(369);
+
+	var _reactRouter = __webpack_require__(399);
+
+	var _actionsCommon = __webpack_require__(734);
+
+	var _actionsCommonActions = __webpack_require__(737);
+
+	var _componentsToolTool = __webpack_require__(467);
+
+	var sha1 = __webpack_require__(671);
+
+	var ForgetPassword = (function (_Component) {
+	    _inherits(ForgetPassword, _Component);
+
+	    function ForgetPassword(props) {
+	        _classCallCheck(this, ForgetPassword);
+
+	        _get(Object.getPrototypeOf(ForgetPassword.prototype), 'constructor', this).call(this, props);
+	        this.interValObj = "";
+	        this._sendMessage = this._sendMessage.bind(this);
+	        this._resetPassword = this._resetPassword.bind(this);
+	    }
+
+	    _createClass(ForgetPassword, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            if (sessionStorage['messageTime'] != "") {
+	                var duringTime = new Date().getTime() - sessionStorage['messageTime'];
+	                if (duringTime < 30 * 1000) {
+	                    sessionStorage['count'] = Math.round((30 * 1000 - duringTime) / 1000);
+	                    $("#btnSendCode").attr("disabled", "true");
+	                    $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
+	                    this.interValObj = setInterval(this.setRemainTime, 1000);
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            clearInterval(this.interValObj); //停止计时器
+	            sessionStorage['messageTime'] = "";
+	            $("#btnSendCode").removeAttr("disabled"); //启用按钮
+	        }
+	    }, {
+	        key: '_startRefresh',
+	        value: function _startRefresh() {
+	            this.props.dispatch((0, _actionsCommon.commonRefresh)());
+	        }
+	    }, {
+	        key: '_redirect',
+	        value: function _redirect() {
+	            _reactRouter.browserHistory.push("/login");
+	        }
+	    }, {
+	        key: '_resetPassword',
+	        value: function _resetPassword() {
+	            var formFields = $("#forgetPasswordForm").serializeArray();
+	            var params = (0, _componentsToolTool.array2Json)(formFields);
+	            params.password = sha1.hex("123456");
+	            console.log(params);
+	            this.props.dispatch((0, _actionsCommonActions.saveObject)(params, "", "", reset_password, "/login", "update"));
+	        }
+	    }, {
+	        key: '_sendMessage',
+	        value: function _sendMessage() {
+	            var phone = $("#phone").val();
+	            if (phone) {
+	                if (/^1[34578]\d{9}$/.test(phone)) {
+	                    var count = 30;
+	                    sessionStorage['count'] = count;
+	                    sessionStorage['messageTime'] = new Date().getTime();
+	                    $("#btnSendCode").attr("disabled", "true");
+	                    $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
+	                    this.interValObj = setInterval(this.setRemainTime, 1000);
+	                    var params = {
+	                        phone: phone
+	                    };
+	                    this.props.dispatch((0, _actionsCommonActions.getAuthcode)(params, "", "", get_authcode));
+	                } else {
+	                    (0, _componentsToolTool.ErrorModal)(Current_Lang.status.minor, Current_Lang.status.someError + "手机号码格式不对！");
+	                }
+	            } else {
+	                (0, _componentsToolTool.ErrorModal)(Current_Lang.status.minor, Current_Lang.status.someError + "手机号码不能为空！");
+	            }
+	        }
+	    }, {
+	        key: 'setRemainTime',
+	        value: function setRemainTime() {
+	            var curCount = sessionStorage['count'];
+	            if (document.location.pathname != "/forgetPassword") {
+	                clearInterval(this.interValObj); //停止计时器
+	                $("#btnSendCode").text("获取验证码");
+	            } else {
+	                if (curCount == 0) {
+	                    clearInterval(this.interValObj); //停止计时器
+	                    $("#btnSendCode").removeAttr("disabled"); //启用按钮
+	                    $("#btnSendCode").text("重新发送验证码");
+	                } else {
+	                    curCount--;
+	                    sessionStorage['count'] = curCount;
+	                    $("#btnSendCode").text(curCount + "秒后重新发送");
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2['default'].createElement(
+	                'div',
+	                { className: 'page-container login-container', style: { minHeight: '533px' } },
+	                _react2['default'].createElement(
+	                    'div',
+	                    { className: 'page-content' },
+	                    _react2['default'].createElement(
+	                        'div',
+	                        { className: 'content-wrapper' },
+	                        _react2['default'].createElement(
+	                            'div',
+	                            { className: 'content' },
+	                            _react2['default'].createElement(
+	                                'form',
+	                                { id: 'forgetPasswordForm', action: 'index.html' },
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'panel panel-body login-form' },
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'text-center' },
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'icon-object border-warning text-warning' },
+	                                            _react2['default'].createElement('i', { className: 'icon-spinner11' })
+	                                        ),
+	                                        _react2['default'].createElement(
+	                                            'h5',
+	                                            { className: 'content-group' },
+	                                            '密码重置'
+	                                        )
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'form-group has-feedback has-feedback-left' },
+	                                        _react2['default'].createElement(
+	                                            'select',
+	                                            { className: 'form-control', name: 'type' },
+	                                            _react2['default'].createElement(
+	                                                'option',
+	                                                { value: 1 },
+	                                                "管理员"
+	                                            ),
+	                                            _react2['default'].createElement(
+	                                                'option',
+	                                                { value: 10 },
+	                                                "超级管理员"
+	                                            )
+	                                        ),
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'form-control-feedback' },
+	                                            _react2['default'].createElement('i', { className: 'icon-vcard text-muted' })
+	                                        )
+	                                    ),
+	                                    _react2['default'].createElement('input', { type: 'text', id: 'phone', name: 'phone', className: 'form-control',
+	                                        placeholder: '输入手机号' }),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'input-group', style: { marginTop: "10px", marginBottom: "10px" } },
+	                                        _react2['default'].createElement('input', { type: 'text', id: 'authcode', name: 'authcode', className: 'form-control',
+	                                            placeholder: '输入验证码' }),
+	                                        _react2['default'].createElement(
+	                                            'span',
+	                                            { className: 'input-group-btn' },
+	                                            _react2['default'].createElement(
+	                                                'button',
+	                                                { id: 'btnSendCode', className: 'btn bg-primary', type: 'button', onClick: this._sendMessage },
+	                                                '获取验证码'
+	                                            )
+	                                        )
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'button',
+	                                        { style: { width: "45%", float: "left" }, type: 'button', id: 'btnSendCode', onClick: this._resetPassword, className: 'btn bg-blue' },
+	                                        '重置密码 ',
+	                                        _react2['default'].createElement('i', { className: 'icon-arrow-right14 position-left' })
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'button',
+	                                        { style: { width: "45%", float: "right" }, type: 'button', onClick: this._redirect, className: 'btn bg-blue' },
+	                                        '返回 ',
+	                                        _react2['default'].createElement('i', { className: 'icon-undo2 position-right' })
+	                                    )
+	                                )
+	                            ),
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { className: 'footer text-muted' },
+	                                '© 2015. ',
+	                                _react2['default'].createElement(
+	                                    'a',
+	                                    { href: '#' },
+	                                    'CS Management'
+	                                ),
+	                                ' by ',
+	                                _react2['default'].createElement(
+	                                    'a',
+	                                    {
+	                                        href: 'http://themeforest.net/user/Kopyov', target: '_blank' },
+	                                    'ReuseSorting, V_0.8.3.1.20'
+	                                )
+	                            )
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return ForgetPassword;
+	})(_react.Component);
+
+	exports['default'] = ForgetPassword;
+
+	function mapStateToProps(state) {
+	    // const {changeSearch1Type, form, getSysManagerSOList}=state
+	    return {
+	        // selected: changeSearch1Type.selected,
+	        // form: form,
+	        // fetching: getSysManagerSOList.fetching,
+	        // data: getSysManagerSOList.data
+	    };
+	}
+
+	exports['default'] = (0, _reactRedux.connect)(mapStateToProps)(ForgetPassword);
+	module.exports = exports['default'];
+
+/***/ },
+/* 734 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
 	 * Created by Administrator on 2016/8/19.
 	 */
 	'use strict';
@@ -58435,7 +58735,7 @@
 
 	var _constantsIndex = __webpack_require__(668);
 
-	var _isomorphicFetch = __webpack_require__(734);
+	var _isomorphicFetch = __webpack_require__(735);
 
 	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
@@ -58463,19 +58763,19 @@
 	}
 
 /***/ },
-/* 734 */
+/* 735 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// the whatwg-fetch polyfill installs the fetch() function
 	// on the global object (window or self)
 	//
 	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(735);
+	__webpack_require__(736);
 	module.exports = self.fetch.bind(self);
 
 
 /***/ },
-/* 735 */
+/* 736 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -58942,7 +59242,7 @@
 
 
 /***/ },
-/* 736 */
+/* 737 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -58966,7 +59266,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _isomorphicFetch = __webpack_require__(734);
+	var _isomorphicFetch = __webpack_require__(735);
 
 	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
@@ -59097,10 +59397,12 @@
 	            if (json.status) {
 	                dispatch(endFetch(endDispatch, json));
 	                if (callback) {
-	                    callback();
+	                    callback(null);
 	                }
 	            } else {
-	                (0, _componentsToolTool.ErrorModal)(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message);
+	                if (callback) {
+	                    callback(json);
+	                }
 	            }
 	        });
 	    };
@@ -59124,10 +59426,12 @@
 	                console.log("export1", json);
 	                dispatch(endFetch(endDispatch, json));
 	                if (callback) {
-	                    callback();
+	                    callback(null);
 	                }
 	            } else {
-	                (0, _componentsToolTool.ErrorModal)(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message);
+	                if (callback) {
+	                    callback(json);
+	                }
 	            }
 	        });
 	    };
@@ -59232,6 +59536,7 @@
 
 	function login(data, startDispatch, endDispatch, interfaceURL, listRouter, callback) {
 	    return function (dispatch) {
+	        (0, _componentsToolTool.deleteCookie)("JSESSIONID");
 	        if (startDispatch) {
 	            dispatch(startFetch(startDispatch));
 	        }
@@ -59257,6 +59562,13 @@
 	                sessionStorage['count'] = -1;
 	                sessionStorage['messageTime'] = "";
 	                sessionStorage['userMessageTime'] = "";
+
+	                var date = new Date();
+	                date.setTime(date.getTime() + 1 * 24 * 60 * 60 * 1000);
+	                var dateString = date.toUTCString();
+	                var cookieString = "JSESSIONID=" + json.data.token + "; expires=" + dateString + "; path=/;";
+	                document.cookie = cookieString;
+
 	                _reactRouter.browserHistory.push(listRouter);
 	                if (callback) {
 	                    callback();
@@ -59317,7 +59629,7 @@
 	}
 
 /***/ },
-/* 737 */
+/* 738 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59362,9 +59674,9 @@
 
 	var _Login2 = _interopRequireDefault(_Login);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var _componentsToolTool = __webpack_require__(467);
 
@@ -59404,7 +59716,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 738 */
+/* 739 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -59434,15 +59746,15 @@
 
 	var _redux = __webpack_require__(376);
 
-	var _highcharts = __webpack_require__(739);
+	var _highcharts = __webpack_require__(740);
 
 	var _highcharts2 = _interopRequireDefault(_highcharts);
 
-	var _componentsChartsSessionAndUsersChartsComponent = __webpack_require__(740);
+	var _componentsChartsSessionAndUsersChartsComponent = __webpack_require__(741);
 
 	var _componentsChartsSessionAndUsersChartsComponent2 = _interopRequireDefault(_componentsChartsSessionAndUsersChartsComponent);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var _componentsToolTool = __webpack_require__(467);
 
@@ -59520,7 +59832,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 739 */
+/* 740 */
 /***/ function(module, exports) {
 
 	/*
@@ -59912,7 +60224,7 @@
 
 
 /***/ },
-/* 740 */
+/* 741 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -60482,7 +60794,7 @@
 	                                                                                                                                                                            </div>*/
 
 /***/ },
-/* 741 */
+/* 742 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60546,7 +60858,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 742 */
+/* 743 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -60578,15 +60890,15 @@
 
 	var _componentsToolTool = __webpack_require__(467);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var _constantsIndexJs = __webpack_require__(668);
 
@@ -60594,7 +60906,7 @@
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var CitySettingContainer = (function (_Component) {
 	    _inherits(CitySettingContainer, _Component);
@@ -61594,7 +61906,7 @@
 	                账户详情</a></li>*/
 
 /***/ },
-/* 743 */
+/* 744 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -61733,7 +62045,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 744 */
+/* 745 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -61965,7 +62277,7 @@
 	/*{filterPages}*/
 
 /***/ },
-/* 745 */
+/* 746 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -61999,15 +62311,15 @@
 
 	var _componentsToolTool = __webpack_require__(467);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var CitySettingRegisterContainer = (function (_Component) {
 	    _inherits(CitySettingRegisterContainer, _Component);
@@ -62076,13 +62388,37 @@
 	    }
 
 	    _createClass(CitySettingRegisterComponent, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var self = this;
+	            $("#citySettingForm").validate({
+	                ignore: 'input[type=hidden],input[type=number], .select2-input', // ignore hidden fields
+	                errorClass: 'validation-error-label',
+	                successClass: 'validation-valid-label',
+	                highlight: function highlight(element, errorClass) {
+	                    $(element).removeClass(errorClass);
+	                },
+	                unhighlight: function unhighlight(element, errorClass) {
+	                    $(element).removeClass(errorClass);
+	                },
+
+	                validClass: "validation-valid-label",
+	                success: function success(label) {
+	                    label.addClass("validation-valid-label").text("Success.");
+	                },
+	                errorPlacement: function errorPlacement(error, element) {
+	                    error.appendTo(element.parent().parent().find(".errorShow"));
+	                }
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var tableHeight = $(window).height() - 240;
 
 	            return _react2['default'].createElement(
 	                'form',
-	                { className: 'form-horizontal', action: '#' },
+	                { id: 'citySettingForm', className: 'form-horizontal', action: '#' },
 	                _react2['default'].createElement(
 	                    'div',
 	                    { className: 'row', style: { height: tableHeight + "px", overflowY: "scroll" } },
@@ -62104,10 +62440,11 @@
 	                            ),
 	                            _react2['default'].createElement(
 	                                'div',
-	                                { className: 'col-lg-9' },
+	                                { className: 'col-lg-6' },
 	                                _react2['default'].createElement('input', { id: 'name', className: 'form-control', name: 'name', type: 'text',
-	                                    placeholder: "城市名称" })
-	                            )
+	                                    placeholder: "城市名称", required: 'required' })
+	                            ),
+	                            _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                        ),
 	                        _react2['default'].createElement(
 	                            'div',
@@ -62115,16 +62452,11 @@
 	                            _react2['default'].createElement(
 	                                'label',
 	                                { className: 'col-lg-3 control-label', style: { textAlign: 'center' } },
-	                                "描 述",
-	                                _react2['default'].createElement(
-	                                    'span',
-	                                    { style: { color: 'red' } },
-	                                    '*'
-	                                )
+	                                "描 述"
 	                            ),
 	                            _react2['default'].createElement(
 	                                'div',
-	                                { className: 'col-lg-9' },
+	                                { className: 'col-lg-6' },
 	                                _react2['default'].createElement('textarea', { id: 'description', className: 'form-control', name: 'description',
 	                                    placeholder: "描 述" })
 	                            )
@@ -62157,7 +62489,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 746 */
+/* 747 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62171,7 +62503,7 @@
 
 	var _redux = __webpack_require__(376);
 
-	var _reduxThunk = __webpack_require__(747);
+	var _reduxThunk = __webpack_require__(748);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -62179,7 +62511,7 @@
 
 	var _reactRouterRedux = __webpack_require__(460);
 
-	var _reducersIndex = __webpack_require__(748);
+	var _reducersIndex = __webpack_require__(749);
 
 	var _reducersIndex2 = _interopRequireDefault(_reducersIndex);
 
@@ -62202,7 +62534,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 747 */
+/* 748 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -62230,7 +62562,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 748 */
+/* 749 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62243,85 +62575,85 @@
 
 	var _reactRouterRedux = __webpack_require__(460);
 
-	var _reducersMenuReducer = __webpack_require__(749);
+	var _reducersMenuReducer = __webpack_require__(750);
 
-	var _reducersSearchReducer = __webpack_require__(750);
+	var _reducersSearchReducer = __webpack_require__(751);
 
-	var _reducersSystemManagerCSRReducer = __webpack_require__(751);
+	var _reducersSystemManagerCSRReducer = __webpack_require__(752);
 
-	var _reducersSystemManagerSOReducer = __webpack_require__(752);
+	var _reducersSystemManagerSOReducer = __webpack_require__(753);
 
-	var _reducersLoginReducer = __webpack_require__(753);
+	var _reducersLoginReducer = __webpack_require__(754);
 
-	var _reducersSystemManagerGroupReducer = __webpack_require__(754);
+	var _reducersSystemManagerGroupReducer = __webpack_require__(755);
 
-	var _reducersSystemManagerCSEReducer = __webpack_require__(755);
+	var _reducersSystemManagerCSEReducer = __webpack_require__(756);
 
-	var _reducersSystemManagerGWReducer = __webpack_require__(756);
+	var _reducersSystemManagerGWReducer = __webpack_require__(757);
 
-	var _reducersSystemManagerSubappReducer = __webpack_require__(757);
+	var _reducersSystemManagerSubappReducer = __webpack_require__(758);
 
-	var _reducersStreamingTemplateReducer = __webpack_require__(758);
+	var _reducersStreamingTemplateReducer = __webpack_require__(759);
 
-	var _reducersAppManagementByConsulReducer = __webpack_require__(759);
+	var _reducersAppManagementByConsulReducer = __webpack_require__(760);
 
-	var _reducersSystemManagerDedicatedReducer = __webpack_require__(760);
+	var _reducersSystemManagerDedicatedReducer = __webpack_require__(761);
 
-	var _reducersSystemManagerPermissionReducer = __webpack_require__(761);
+	var _reducersSystemManagerPermissionReducer = __webpack_require__(762);
 
-	var _reducersMonitorReducer = __webpack_require__(762);
+	var _reducersMonitorReducer = __webpack_require__(763);
 
-	var _reducersAdminReducer = __webpack_require__(763);
+	var _reducersAdminReducer = __webpack_require__(764);
 
-	var _reducersAlarmReducer = __webpack_require__(764);
+	var _reducersAlarmReducer = __webpack_require__(765);
 
-	var _reducersSystemManagerSEDReducer = __webpack_require__(765);
+	var _reducersSystemManagerSEDReducer = __webpack_require__(766);
 
-	var _reducersSystemManagerThresholdReducer = __webpack_require__(766);
+	var _reducersSystemManagerThresholdReducer = __webpack_require__(767);
 
-	var _reducersCommonReducer = __webpack_require__(767);
+	var _reducersCommonReducer = __webpack_require__(768);
 
-	var _reducersJobHistoryReducer = __webpack_require__(768);
+	var _reducersJobHistoryReducer = __webpack_require__(769);
 
-	var _reducersDeviceTypeReducer = __webpack_require__(769);
+	var _reducersDeviceTypeReducer = __webpack_require__(770);
 
-	var _reducersSystemManagerCSEGroupReducer = __webpack_require__(770);
+	var _reducersSystemManagerCSEGroupReducer = __webpack_require__(771);
 
-	var _reducersSystemManagerServiceGroupReducer = __webpack_require__(771);
+	var _reducersSystemManagerServiceGroupReducer = __webpack_require__(772);
 
-	var _reducersTerminalPositionReducer = __webpack_require__(772);
+	var _reducersTerminalPositionReducer = __webpack_require__(773);
 
 	/*rebish reducer start*/
 
-	var _reducersCitySettingReducer = __webpack_require__(773);
+	var _reducersCitySettingReducer = __webpack_require__(774);
 
-	var _reducersClassConfReducer = __webpack_require__(774);
+	var _reducersClassConfReducer = __webpack_require__(775);
 
-	var _reducersManualRecordReducer = __webpack_require__(775);
+	var _reducersManualRecordReducer = __webpack_require__(776);
 
-	var _reducersTransitLineReducer = __webpack_require__(776);
+	var _reducersTransitLineReducer = __webpack_require__(777);
 
-	var _reducersCorrectionReducer = __webpack_require__(777);
+	var _reducersCorrectionReducer = __webpack_require__(778);
 
-	var _reducersComplaintReducer = __webpack_require__(778);
+	var _reducersComplaintReducer = __webpack_require__(779);
 
-	var _reducersStoreSettlementReducer = __webpack_require__(779);
+	var _reducersStoreSettlementReducer = __webpack_require__(780);
 
-	var _reducersStoreReducer = __webpack_require__(780);
+	var _reducersStoreReducer = __webpack_require__(781);
 
-	var _reducersReviewReducer = __webpack_require__(781);
+	var _reducersReviewReducer = __webpack_require__(782);
 
-	var _reducersGeneralUserReducer = __webpack_require__(782);
+	var _reducersGeneralUserReducer = __webpack_require__(783);
 
-	var _reducersOrganizationReducer = __webpack_require__(783);
+	var _reducersOrganizationReducer = __webpack_require__(784);
 
-	var _reducersAdminUserReducer = __webpack_require__(784);
+	var _reducersAdminUserReducer = __webpack_require__(785);
 
-	var _reducersNoticeReducer = __webpack_require__(785);
+	var _reducersNoticeReducer = __webpack_require__(786);
 
-	var _reducersStatisticReducer = __webpack_require__(786);
+	var _reducersStatisticReducer = __webpack_require__(787);
 
-	var _reducersSystemMonitorReducer = __webpack_require__(787);
+	var _reducersSystemMonitorReducer = __webpack_require__(788);
 
 	/*end*/
 
@@ -62403,6 +62735,7 @@
 	    getComplaintList: _reducersComplaintReducer.getComplaintList,
 	    getStoreSettlementList: _reducersStoreSettlementReducer.getStoreSettlementList,
 	    getStoreList: _reducersStoreReducer.getStoreList,
+	    getStoreRate: _reducersStoreReducer.getStoreRate,
 	    getClassConfDetail: _reducersClassConfReducer.getClassConfDetail,
 	    getReviewList: _reducersReviewReducer.getReviewList,
 	    getGeneralUserList: _reducersGeneralUserReducer.getGeneralUserList,
@@ -62424,6 +62757,7 @@
 	    getGeneralUserDetail: _reducersGeneralUserReducer.getGeneralUserDetail,
 	    getSubtypeList: _reducersGeneralUserReducer.getSubtypeList,
 	    getStatisticByTotalList: _reducersStatisticReducer.getStatisticByTotalList,
+	    getQrcodeCount: _reducersOrganizationReducer.getQrcodeCount,
 	    form: _reduxForm.reducer,
 	    routing: _reactRouterRedux.routerReducer
 	});
@@ -62432,7 +62766,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 749 */
+/* 750 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -62479,7 +62813,7 @@
 	// export {changeTopMenu}
 
 /***/ },
-/* 750 */
+/* 751 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -62511,7 +62845,7 @@
 	// export {changeTopMenu}
 
 /***/ },
-/* 751 */
+/* 752 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -62603,7 +62937,7 @@
 	// export {changeTopMenu}
 
 /***/ },
-/* 752 */
+/* 753 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -62676,7 +63010,7 @@
 	}
 
 /***/ },
-/* 753 */
+/* 754 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -62716,7 +63050,7 @@
 	// export {changeTopMenu}
 
 /***/ },
-/* 754 */
+/* 755 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -62790,7 +63124,7 @@
 	}
 
 /***/ },
-/* 755 */
+/* 756 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -62902,7 +63236,7 @@
 	}
 
 /***/ },
-/* 756 */
+/* 757 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -62975,7 +63309,7 @@
 	}
 
 /***/ },
-/* 757 */
+/* 758 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63048,7 +63382,7 @@
 	}
 
 /***/ },
-/* 758 */
+/* 759 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63099,7 +63433,7 @@
 	}
 
 /***/ },
-/* 759 */
+/* 760 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63150,7 +63484,7 @@
 	}
 
 /***/ },
-/* 760 */
+/* 761 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63315,7 +63649,7 @@
 	}
 
 /***/ },
-/* 761 */
+/* 762 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63375,7 +63709,7 @@
 	}
 
 /***/ },
-/* 762 */
+/* 763 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63415,7 +63749,7 @@
 	// export {changeTopMenu}
 
 /***/ },
-/* 763 */
+/* 764 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63488,7 +63822,7 @@
 	}
 
 /***/ },
-/* 764 */
+/* 765 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63520,7 +63854,7 @@
 	}
 
 /***/ },
-/* 765 */
+/* 766 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63594,7 +63928,7 @@
 	}
 
 /***/ },
-/* 766 */
+/* 767 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63688,7 +64022,7 @@
 	}
 
 /***/ },
-/* 767 */
+/* 768 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63749,7 +64083,7 @@
 	}
 
 /***/ },
-/* 768 */
+/* 769 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63787,7 +64121,7 @@
 	}
 
 /***/ },
-/* 769 */
+/* 770 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63857,7 +64191,7 @@
 	}
 
 /***/ },
-/* 770 */
+/* 771 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63943,7 +64277,7 @@
 	}
 
 /***/ },
-/* 771 */
+/* 772 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64013,7 +64347,7 @@
 	}
 
 /***/ },
-/* 772 */
+/* 773 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64080,7 +64414,7 @@
 	}
 
 /***/ },
-/* 773 */
+/* 774 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64134,7 +64468,7 @@
 	}
 
 /***/ },
-/* 774 */
+/* 775 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64188,7 +64522,7 @@
 	}
 
 /***/ },
-/* 775 */
+/* 776 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64226,7 +64560,7 @@
 	}
 
 /***/ },
-/* 776 */
+/* 777 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64264,7 +64598,7 @@
 	}
 
 /***/ },
-/* 777 */
+/* 778 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64318,7 +64652,7 @@
 	}
 
 /***/ },
-/* 778 */
+/* 779 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64356,7 +64690,7 @@
 	}
 
 /***/ },
-/* 779 */
+/* 780 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64394,7 +64728,7 @@
 	}
 
 /***/ },
-/* 780 */
+/* 781 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64409,6 +64743,7 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	exports.getStoreList = getStoreList;
+	exports.getStoreRate = getStoreRate;
 
 	var _redux = __webpack_require__(376);
 
@@ -64431,8 +64766,23 @@
 	    }
 	}
 
+	function getStoreRate(state, action) {
+	    if (state === undefined) state = { data: "", fetching: false };
+
+	    switch (action.type) {
+	        case _constantsIndex.RATE_START:
+	            state = _extends({}, state, { fetching: true });
+	            return state;
+	        case _constantsIndex.RATE_END:
+	            state = { data: action.json, fetching: false };
+	            return state;
+	        default:
+	            return state;
+	    }
+	}
+
 /***/ },
-/* 781 */
+/* 782 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64470,7 +64820,7 @@
 	}
 
 /***/ },
-/* 782 */
+/* 783 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64540,7 +64890,7 @@
 	}
 
 /***/ },
-/* 783 */
+/* 784 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64557,6 +64907,7 @@
 	exports.getOrganizationList = getOrganizationList;
 	exports.getOrganizationDetail = getOrganizationDetail;
 	exports.getProgressData = getProgressData;
+	exports.getQrcodeCount = getQrcodeCount;
 
 	var _redux = __webpack_require__(376);
 
@@ -64609,8 +64960,23 @@
 	    }
 	}
 
+	function getQrcodeCount(state, action) {
+	    if (state === undefined) state = { data: "", fetching: false };
+
+	    switch (action.type) {
+	        case _constantsIndex.QRCODE_COUNT_START:
+	            state = { fetching: true };
+	            return state;
+	        case _constantsIndex.QRCODE_COUNT_END:
+	            state = { data: action.json, fetching: false };
+	            return state;
+	        default:
+	            return state;
+	    }
+	}
+
 /***/ },
-/* 784 */
+/* 785 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64664,7 +65030,7 @@
 	}
 
 /***/ },
-/* 785 */
+/* 786 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64718,7 +65084,7 @@
 	}
 
 /***/ },
-/* 786 */
+/* 787 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64852,7 +65218,7 @@
 	}
 
 /***/ },
-/* 787 */
+/* 788 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64906,7 +65272,7 @@
 	}
 
 /***/ },
-/* 788 */
+/* 789 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64938,11 +65304,11 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
@@ -64950,7 +65316,7 @@
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var RubbishClassListContainer = (function (_Component) {
 	    _inherits(RubbishClassListContainer, _Component);
@@ -65246,7 +65612,7 @@
 	/*<div style={{marginTop:'-80px'}}>*/ /*<Pagenation counts={data ? data.data.length : 0} page={this.page}*/ /*_changePage={this._changePage} _prePage={this._prePage}*/ /*_nextPage={this._nextPage}/>*/ /*</div>*/ /*<li style={{display:'block'}} onClick={this._delete.bind(this, val.id,val.name)}><a*/ /*href="javascript:void(0)"><i className="icon-trash"></i>*/ /*{"删除"}</a></li>*/
 
 /***/ },
-/* 789 */
+/* 790 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -65281,13 +65647,13 @@
 
 	var _componentsToolTool = __webpack_require__(467);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var RubbishClassRegisterContainer = (function (_Component) {
 	    _inherits(RubbishClassRegisterContainer, _Component);
@@ -65383,6 +65749,13 @@
 	                validClass: "validation-valid-label",
 	                success: function success(label) {
 	                    label.addClass("validation-valid-label").text("Success.");
+	                },
+	                errorPlacement: function errorPlacement(error, element) {
+	                    if (element.parent().hasClass("input-group")) {
+	                        error.appendTo(element.parent().parent().parent().find(".errorShow"));
+	                    } else {
+	                        error.appendTo(element.parent().parent().find(".errorShow"));
+	                    }
 	                }
 	            });
 	        }
@@ -65423,11 +65796,12 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('input', { name: 'name', type: 'text', className: 'form-control',
 	                                            placeholder: "分类名称", required: 'required',
 	                                            autoComplete: 'off' })
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
@@ -65439,20 +65813,21 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement(
 	                                            'div',
 	                                            { className: 'input-group' },
 	                                            _react2['default'].createElement('input', { name: 'rewardPoints', type: 'number', className: 'form-control',
 	                                                placeholder: "奖励积分",
-	                                                autoComplete: 'off' }),
+	                                                autoComplete: 'off', required: 'required' }),
 	                                            _react2['default'].createElement(
 	                                                'span',
 	                                                { className: 'input-group-addon' },
 	                                                '每次/每千克'
 	                                            )
 	                                        )
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
@@ -65467,7 +65842,7 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement(
 	                                            'select',
 	                                            { name: 'pointsType', defaultValue: 1, className: 'form-control' },
@@ -65497,7 +65872,7 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('textarea', { name: 'description', rows: '5', cols: '5', className: 'form-control',
 	                                            placeholder: "分类描述" })
 	                                    )
@@ -65539,7 +65914,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 790 */
+/* 791 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -65574,13 +65949,13 @@
 
 	var _componentsToolTool = __webpack_require__(467);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var _constantsIndexJs = __webpack_require__(668);
 
@@ -65679,10 +66054,16 @@
 	                unhighlight: function unhighlight(element, errorClass) {
 	                    $(element).removeClass(errorClass);
 	                },
-
 	                validClass: "validation-valid-label",
 	                success: function success(label) {
 	                    label.addClass("validation-valid-label").text("Success.");
+	                },
+	                errorPlacement: function errorPlacement(error, element) {
+	                    if (element.parent().hasClass("input-group")) {
+	                        error.appendTo(element.parent().parent().parent().find(".errorShow"));
+	                    } else {
+	                        error.appendTo(element.parent().parent().find(".errorShow"));
+	                    }
 	                }
 	            });
 	        }
@@ -65723,11 +66104,12 @@
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-9' },
+	                                    { className: 'col-lg-6' },
 	                                    _react2['default'].createElement('input', { name: 'name', type: 'text', className: 'form-control',
 	                                        defaultValue: data.data.name, required: 'required',
 	                                        autoComplete: 'off' })
-	                                )
+	                                ),
+	                                _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                            ),
 	                            _react2['default'].createElement(
 	                                'div',
@@ -65739,20 +66121,21 @@
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-9' },
+	                                    { className: 'col-lg-6' },
 	                                    _react2['default'].createElement(
 	                                        'div',
 	                                        { className: 'input-group' },
-	                                        _react2['default'].createElement('input', { name: 'rewardPoints', type: 'text', className: 'form-control',
+	                                        _react2['default'].createElement('input', { name: 'rewardPoints', type: 'number', className: 'form-control',
 	                                            defaultValue: data.data.rewardPoints,
-	                                            autoComplete: 'off' }),
+	                                            autoComplete: 'off', required: 'required' }),
 	                                        _react2['default'].createElement(
 	                                            'span',
 	                                            { className: 'input-group-addon' },
 	                                            '每次/每千克'
 	                                        )
 	                                    )
-	                                )
+	                                ),
+	                                _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                            ),
 	                            _react2['default'].createElement(
 	                                'div',
@@ -65767,7 +66150,7 @@
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-9' },
+	                                    { className: 'col-lg-6' },
 	                                    _react2['default'].createElement(
 	                                        'select',
 	                                        { name: 'pointsType', defaultValue: data.data.pointsType, className: 'form-control' },
@@ -65797,7 +66180,7 @@
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-9' },
+	                                    { className: 'col-lg-6' },
 	                                    _react2['default'].createElement('textarea', { name: 'description', rows: '5', cols: '5', className: 'form-control',
 	                                        defaultValue: data.data.description })
 	                                )
@@ -65846,7 +66229,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 791 */
+/* 792 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -65878,11 +66261,11 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
@@ -65890,7 +66273,7 @@
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var TransitLineListContainer = (function (_Component) {
 	    _inherits(TransitLineListContainer, _Component);
@@ -66256,7 +66639,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 792 */
+/* 793 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -66291,11 +66674,11 @@
 
 	var _componentsToolTool = __webpack_require__(467);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var TransitLineRegisterContainer = (function (_Component) {
 	    _inherits(TransitLineRegisterContainer, _Component);
@@ -66379,6 +66762,20 @@
 	                validClass: "validation-valid-label",
 	                success: function success(label) {
 	                    label.addClass("validation-valid-label").text("Success.");
+	                },
+	                errorPlacement: function errorPlacement(error, element) {
+	                    error.appendTo(element.parent().parent().find(".errorShow"));
+	                },
+	                rules: {
+	                    contact: {
+	                        required: true,
+	                        isMobile: true
+	                    }
+	                },
+	                messages: {
+	                    contact: {
+	                        isMobile: "请正确填写手机号码"
+	                    }
 	                }
 	            });
 	        }
@@ -66420,11 +66817,12 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('input', { id: 'licensePlateNum', name: 'licensePlateNum', type: 'text', className: 'form-control',
 	                                            placeholder: "车牌号", required: 'required',
 	                                            autoComplete: 'off' })
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
@@ -66439,11 +66837,12 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('input', { id: 'driver', name: 'driver', type: 'text', className: 'form-control',
 	                                            placeholder: "司机姓名", required: 'required',
 	                                            autoComplete: 'off' })
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
@@ -66458,11 +66857,12 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('input', { id: 'contact', name: 'contact', type: 'text', className: 'form-control',
 	                                            placeholder: "联系方式", required: 'required',
 	                                            autoComplete: 'off' })
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
@@ -66477,11 +66877,12 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('input', { id: 'drivingLicenseNum', name: 'drivingLicenseNum', type: 'text', className: 'form-control',
 	                                            placeholder: "驾照", required: 'required',
 	                                            autoComplete: 'off' })
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
@@ -66496,11 +66897,12 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('input', { id: 'startLocation', name: 'startLocation', type: 'text', className: 'form-control',
 	                                            placeholder: "起点", required: 'required',
 	                                            autoComplete: 'off' })
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
@@ -66515,11 +66917,12 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('input', { id: 'stoppedLocation', name: 'stoppedLocation', type: 'text', className: 'form-control',
 	                                            placeholder: "经停地点", required: 'required',
 	                                            autoComplete: 'off' })
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
@@ -66534,11 +66937,12 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('input', { id: 'endLocation', name: 'endLocation', type: 'text', className: 'form-control',
 	                                            placeholder: "终点", required: 'required',
 	                                            autoComplete: 'off' })
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                )
 	                            ),
 	                            _react2['default'].createElement(
@@ -66546,7 +66950,7 @@
 	                                { className: 'form-group' },
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-11 text-right', style: { marginTop: "50px" } },
+	                                    { className: 'col-lg-8 text-right', style: { marginTop: "50px" } },
 	                                    _react2['default'].createElement(
 	                                        'button',
 	                                        { type: 'button', className: 'btn btn-primary',
@@ -66581,7 +66985,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 793 */
+/* 794 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -66613,11 +67017,11 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
@@ -66625,7 +67029,7 @@
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var ManualRecordListContainer = (function (_Component) {
 	    _inherits(ManualRecordListContainer, _Component);
@@ -66646,7 +67050,7 @@
 	    _createClass(ManualRecordListContainer, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            var params = { page: 0, size: page_size };
+	            var params = { page: 0, size: page_size, sort: "start_time,desc" };
 	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(params, _constantsIndexJs.MANUALRECORD_LIST_START, _constantsIndexJs.MANUALRECORD_LIST_END, manualRecord_list));
 	        }
 	    }, {
@@ -66925,7 +67329,7 @@
 	                            _react2['default'].createElement(
 	                                'th',
 	                                { className: 'col-md-4 text-bold text-center' },
-	                                "错误描述"
+	                                "详情描述"
 	                            )
 	                        )
 	                    ),
@@ -66955,7 +67359,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 794 */
+/* 795 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -66990,17 +67394,17 @@
 
 	var _componentsToolTool = __webpack_require__(467);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _actionsSystemManagerServiceGroupAction = __webpack_require__(795);
+	var _actionsSystemManagerServiceGroupAction = __webpack_require__(796);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var ManualRecordRegisterContainer = (function (_Component) {
 	    _inherits(ManualRecordRegisterContainer, _Component);
@@ -67109,10 +67513,16 @@
 	                unhighlight: function unhighlight(element, errorClass) {
 	                    $(element).removeClass(errorClass);
 	                },
-
 	                validClass: "validation-valid-label",
 	                success: function success(label) {
 	                    label.addClass("validation-valid-label").text("Success.");
+	                },
+	                errorPlacement: function errorPlacement(error, element) {
+	                    if (element.parent().hasClass("input-group")) {
+	                        error.appendTo(element.parent().parent().parent().find(".errorShow"));
+	                    } else {
+	                        error.appendTo(element.parent().parent().find(".errorShow"));
+	                    }
 	                },
 	                rules: {
 	                    weight: {
@@ -67172,7 +67582,7 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement(
 	                                            'select',
 	                                            { id: 'classify', className: 'form-control' },
@@ -67190,7 +67600,7 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement(
 	                                            'div',
 	                                            { className: 'input-group' },
@@ -67203,7 +67613,8 @@
 	                                                '千克'
 	                                            )
 	                                        )
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
@@ -67216,7 +67627,7 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement(
 	                                            'div',
 	                                            { className: 'input-group' },
@@ -67241,7 +67652,7 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('textarea', { id: 'description', rows: '5', cols: '5', className: 'form-control',
 	                                            placeholder: "分类描述" })
 	                                    )
@@ -67252,7 +67663,7 @@
 	                                { className: 'form-group' },
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-11 text-right', style: { marginTop: "50px" } },
+	                                    { className: 'col-lg-8 text-right', style: { marginTop: "50px" } },
 	                                    _react2['default'].createElement(
 	                                        'button',
 	                                        { type: 'button', className: 'btn btn-primary',
@@ -67283,7 +67694,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 795 */
+/* 796 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -67303,7 +67714,7 @@
 
 	var _constantsIndex = __webpack_require__(668);
 
-	var _isomorphicFetch = __webpack_require__(734);
+	var _isomorphicFetch = __webpack_require__(735);
 
 	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
@@ -67471,7 +67882,7 @@
 	}
 
 /***/ },
-/* 796 */
+/* 797 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -67503,21 +67914,21 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var _componentsToolTool = __webpack_require__(467);
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var sha1 = __webpack_require__(671);
 
@@ -67614,7 +68025,7 @@
 	    }, {
 	        key: '_sendMessage',
 	        value: function _sendMessage() {
-	            var phone = sessionStorage['phone'];
+	            var phone = this.detailData.phone;
 	            var count = 30;
 	            sessionStorage['count'] = count;
 	            sessionStorage['messageTime'] = new Date().getTime();
@@ -67624,7 +68035,7 @@
 	            var params = {
 	                phone: phone
 	            };
-	            // this.props.dispatch(getAuthcode(params, "", "", get_authcode));
+	            this.props.dispatch((0, _actionsCommonActions.getAuthcode)(params, "", "", get_authcode));
 	        }
 	    }, {
 	        key: 'setRemainTime',
@@ -67649,7 +68060,7 @@
 	        key: '_resetPassword',
 	        value: function _resetPassword() {
 	            var params = {
-	                password: sha1.hex("88888888"),
+	                password: sha1.hex("123456"),
 	                type: this.detailData.type,
 	                phone: this.detailData.phone,
 	                authcode: $("#authcode").val()
@@ -67969,18 +68380,6 @@
 	                                                ),
 	                                                _react2['default'].createElement(
 	                                                    'li',
-	                                                    { style: { display: val.type != 10 && (loginUserid == val.userid || loginUserType == 10) ? 'block' : 'none' },
-	                                                        onClick: this._delete.bind(this, val.userid, val.name) },
-	                                                    _react2['default'].createElement(
-	                                                        'a',
-	                                                        {
-	                                                            href: 'javascript:void(0)' },
-	                                                        _react2['default'].createElement('i', { className: 'icon-trash' }),
-	                                                        "删除"
-	                                                    )
-	                                                ),
-	                                                _react2['default'].createElement(
-	                                                    'li',
 	                                                    { style: { display: val.type != 10 && (loginUserid == val.userid || loginUserType == 10) ? 'block' : 'none' } },
 	                                                    _react2['default'].createElement(
 	                                                        'a',
@@ -68096,9 +68495,13 @@
 
 	exports['default'] = (0, _reactRedux.connect)(mapStateToProps)(AdminUserListContainer);
 	module.exports = exports['default'];
+	/*<li style={{display:val.type!=10&&(loginUserid==val.userid||loginUserType==10)? 'block':'none'}}
+	   onClick={this._delete.bind(this, val.userid, val.name)}><a
+	   href="javascript:void(0)"><i className="icon-trash"></i>
+	   {"删除"}</a></li>*/
 
 /***/ },
-/* 797 */
+/* 798 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -68133,15 +68536,15 @@
 
 	var _componentsToolTool = __webpack_require__(467);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _actionsSystemManagerServiceGroupAction = __webpack_require__(795);
+	var _actionsSystemManagerServiceGroupAction = __webpack_require__(796);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var sha1 = __webpack_require__(671);
 
@@ -68261,12 +68664,24 @@
 	                success: function success(label) {
 	                    label.addClass("validation-valid-label").text("Success.");
 	                },
+	                errorPlacement: function errorPlacement(error, element) {
+	                    error.appendTo(element.parent().parent().find(".errorShow"));
+	                },
 	                rules: {
 	                    password: {
 	                        minlength: 6
 	                    },
 	                    repeat_password: {
 	                        equalTo: "#password"
+	                    },
+	                    phone: {
+	                        required: true,
+	                        isMobile: true
+	                    }
+	                },
+	                messages: {
+	                    phone: {
+	                        isMobile: "请正确填写手机号码"
 	                    }
 	                }
 	            });
@@ -68314,7 +68729,7 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement(
 	                                            'select',
 	                                            { className: 'form-control', name: 'userType', id: 'type' },
@@ -68342,10 +68757,11 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('input', { id: 'name', type: 'text', className: 'form-control',
 	                                            placeholder: "昵称", required: 'required', autoComplete: 'off' })
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
@@ -68358,10 +68774,11 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('input', { id: 'password', type: 'password', name: 'password', className: 'form-control',
 	                                            placeholder: "密码", required: 'required', autoComplete: 'off' })
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
@@ -68374,10 +68791,11 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('input', { id: 'confirmPassword', name: 'repeat_password', type: 'password', className: 'form-control',
 	                                            placeholder: "确认密码", required: 'required', autoComplete: 'off' })
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
@@ -68392,10 +68810,11 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('input', { id: 'phone', name: 'phone', type: 'text', className: 'form-control',
 	                                            placeholder: "手机号码", required: 'required', autoComplete: 'off' })
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                )
 	                            ),
 	                            _react2['default'].createElement(
@@ -68403,7 +68822,7 @@
 	                                { className: 'form-group' },
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-11 text-right', style: { marginTop: "50px" } },
+	                                    { className: 'col-lg-8 text-right', style: { marginTop: "50px" } },
 	                                    _react2['default'].createElement(
 	                                        'button',
 	                                        { type: 'button', className: 'btn btn-primary',
@@ -68438,7 +68857,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 798 */
+/* 799 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -68473,15 +68892,15 @@
 
 	var _componentsToolTool = __webpack_require__(467);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _actionsSystemManagerServiceGroupAction = __webpack_require__(795);
+	var _actionsSystemManagerServiceGroupAction = __webpack_require__(796);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var _constantsIndexJs = __webpack_require__(668);
 
@@ -68576,6 +68995,20 @@
 	                validClass: "validation-valid-label",
 	                success: function success(label) {
 	                    label.addClass("validation-valid-label").text("Success.");
+	                },
+	                errorPlacement: function errorPlacement(error, element) {
+	                    error.appendTo(element.parent().parent().find(".errorShow"));
+	                },
+	                rules: {
+	                    phone: {
+	                        required: true,
+	                        isMobile: true
+	                    }
+	                },
+	                messages: {
+	                    phone: {
+	                        isMobile: "请正确填写手机号码"
+	                    }
 	                }
 	            });
 	        }
@@ -68614,10 +69047,10 @@
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-9' },
+	                                    { className: 'col-lg-6' },
 	                                    _react2['default'].createElement(
 	                                        'select',
-	                                        { className: 'form-control', name: 'userType', id: 'type', defaultValue: data.data.type },
+	                                        { className: 'form-control', name: 'userType', id: 'type', defaultValue: data.data.type, disabled: true },
 	                                        _react2['default'].createElement(
 	                                            'option',
 	                                            { value: 1 },
@@ -68642,10 +69075,11 @@
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-9' },
+	                                    { className: 'col-lg-6' },
 	                                    _react2['default'].createElement('input', { id: 'name', type: 'text', className: 'form-control',
 	                                        defaultValue: data.data.name, required: 'required', autoComplete: 'off' })
-	                                )
+	                                ),
+	                                _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                            ),
 	                            _react2['default'].createElement(
 	                                'div',
@@ -68660,10 +69094,11 @@
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-9' },
+	                                    { className: 'col-lg-6' },
 	                                    _react2['default'].createElement('input', { id: 'phone', name: 'phone', type: 'text', className: 'form-control',
 	                                        defaultValue: data.data.phone, required: 'required', autoComplete: 'off' })
-	                                )
+	                                ),
+	                                _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                            )
 	                        ),
 	                        _react2['default'].createElement(
@@ -68671,7 +69106,7 @@
 	                            { className: 'form-group' },
 	                            _react2['default'].createElement(
 	                                'div',
-	                                { className: 'col-lg-11 text-right', style: { marginTop: "50px" } },
+	                                { className: 'col-lg-8 text-right', style: { marginTop: "50px" } },
 	                                _react2['default'].createElement(
 	                                    'button',
 	                                    { type: 'button', className: 'btn btn-primary',
@@ -68709,7 +69144,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 799 */
+/* 800 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -68741,11 +69176,11 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
@@ -68753,7 +69188,7 @@
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var ReviewListContainer = (function (_Component) {
 	    _inherits(ReviewListContainer, _Component);
@@ -68841,6 +69276,7 @@
 	            var fetching = _props.fetching;
 	            var data = _props.data;
 
+	            console.log("review", data);
 	            return _react2['default'].createElement(
 	                'div',
 	                null,
@@ -68934,6 +69370,36 @@
 	            });
 	        }
 	    }, {
+	        key: 'generateStars',
+	        value: function generateStars(score) {
+	            var fullStars = Math.floor(score);
+	            var halfStars = score % 1 === 0 ? 0 : 1;
+	            var emptyStars = 5 - fullStars - halfStars;
+	            var full = [];
+	            var half = [];
+	            var empty = [];
+	            if (fullStars >= 1) {
+	                for (var i = 0; i < fullStars; i++) {
+	                    full.push(_react2['default'].createElement('icon', { key: "full-" + i, className: 'icon icon-star-full2', style: { color: "#FDAA01" } }));
+	                }
+	            }
+	            if (halfStars == 1) {
+	                half.push(_react2['default'].createElement('icon', { key: "half-1", className: 'icon icon-star-half', style: { color: "#FDAA01" } }));
+	            }
+	            if (emptyStars >= 1) {
+	                for (var j = 0; j < emptyStars; j++) {
+	                    empty.push(_react2['default'].createElement('icon', { key: "empty-" + j, className: 'icon icon-star-empty3', style: { color: "#CFCFCF" } }));
+	                }
+	            }
+	            return _react2['default'].createElement(
+	                'div',
+	                null,
+	                full,
+	                half,
+	                empty
+	            );
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _props2 = this.props;
@@ -68946,6 +69412,10 @@
 	                    if (data.data.content.length > 0) {
 	                        data.data.content.forEach((function (val, key) {
 	                            var replyFlag = val.replyUserid == null || val.replyUserid == "";
+	                            var overallScore = this.generateStars(val.overallScore);
+	                            var score1Stars = this.generateStars(val.score1);
+	                            var score2Stars = this.generateStars(val.score2);
+	                            var score3Stars = this.generateStars(val.score3);
 	                            tb.push(_react2['default'].createElement(
 	                                'div',
 	                                { key: key, className: 'panel panel-white text-left' },
@@ -68953,43 +69423,115 @@
 	                                    'div',
 	                                    { className: 'panel-heading', style: { padding: "15px 20px 10px 20px" } },
 	                                    _react2['default'].createElement(
-	                                        'div',
-	                                        { className: 'panel-title' },
+	                                        'table',
+	                                        { style: { width: "100%" } },
 	                                        _react2['default'].createElement(
-	                                            'div',
-	                                            { style: { paddingRight: "50px" } },
-	                                            "[" + val.title + "]" + val.content
-	                                        ),
-	                                        _react2['default'].createElement('div', { style: { height: "10px" } }),
-	                                        _react2['default'].createElement(
-	                                            'small',
-	                                            { className: 'display-block', style: { fontSize: "6px" } },
-	                                            val.userName,
-	                                            '  ',
-	                                            _react2['default'].createElement('i', { className: 'icon-alarm', style: { fontSize: "3px" } }),
-	                                            ' ',
-	                                            (0, _componentsToolTool.timeStamp2Time)(val.createTime),
-	                                            '  ',
+	                                            'tr',
+	                                            null,
 	                                            _react2['default'].createElement(
-	                                                'a',
-	                                                { className: 'collapsed', 'data-toggle': 'collapse',
-	                                                    href: "#collapse-" + val.id },
-	                                                _react2['default'].createElement('i', { className: 'icon-bubble2', style: { fontSize: "4px" } }),
-	                                                ' ',
+	                                                'td',
+	                                                null,
 	                                                _react2['default'].createElement(
-	                                                    'span',
-	                                                    { className: 'colpText' },
-	                                                    replyFlag ? "回复评论" : "已回复"
+	                                                    'div',
+	                                                    { className: 'panel-title' },
+	                                                    "[" + val.title + "]" + val.content,
+	                                                    _react2['default'].createElement('div', { style: { height: "10px" } }),
+	                                                    _react2['default'].createElement(
+	                                                        'small',
+	                                                        { className: 'display-block', style: { fontSize: "6px" } },
+	                                                        val.userName,
+	                                                        '  ',
+	                                                        _react2['default'].createElement('i', { className: 'icon-alarm', style: { fontSize: "3px" } }),
+	                                                        ' ',
+	                                                        (0, _componentsToolTool.timeStamp2Time)(val.createTime),
+	                                                        '  ',
+	                                                        _react2['default'].createElement(
+	                                                            'a',
+	                                                            { className: 'collapsed', 'data-toggle': 'collapse',
+	                                                                href: "#collapse-" + val.id },
+	                                                            _react2['default'].createElement('i', { className: 'icon-bubble2', style: { fontSize: "4px" } }),
+	                                                            ' ',
+	                                                            _react2['default'].createElement(
+	                                                                'span',
+	                                                                { className: 'colpText' },
+	                                                                replyFlag ? "回复评论" : "已回复"
+	                                                            )
+	                                                        )
+	                                                    )
+	                                                )
+	                                            ),
+	                                            _react2['default'].createElement(
+	                                                'td',
+	                                                { style: { width: "250px" } },
+	                                                _react2['default'].createElement(
+	                                                    'div',
+	                                                    null,
+	                                                    _react2['default'].createElement(
+	                                                        'div',
+	                                                        { className: 'row' },
+	                                                        _react2['default'].createElement(
+	                                                            'label',
+	                                                            { style: { width: "100px", float: "left", textAlign: "right" } },
+	                                                            '整体评分：'
+	                                                        ),
+	                                                        _react2['default'].createElement(
+	                                                            'div',
+	                                                            { style: { float: "left" } },
+	                                                            overallScore
+	                                                        )
+	                                                    ),
+	                                                    _react2['default'].createElement(
+	                                                        'div',
+	                                                        { className: 'row' },
+	                                                        _react2['default'].createElement(
+	                                                            'label',
+	                                                            { style: { width: "100px", float: "left", textAlign: "right" } },
+	                                                            '回收频率评分：'
+	                                                        ),
+	                                                        _react2['default'].createElement(
+	                                                            'div',
+	                                                            { style: { float: "left" } },
+	                                                            score1Stars
+	                                                        )
+	                                                    ),
+	                                                    _react2['default'].createElement(
+	                                                        'div',
+	                                                        { className: 'row' },
+	                                                        _react2['default'].createElement(
+	                                                            'label',
+	                                                            { style: { width: "100px", float: "left", textAlign: "right" } },
+	                                                            '礼品兑换评分：'
+	                                                        ),
+	                                                        _react2['default'].createElement(
+	                                                            'div',
+	                                                            { style: { float: "left" } },
+	                                                            score2Stars
+	                                                        )
+	                                                    ),
+	                                                    _react2['default'].createElement(
+	                                                        'div',
+	                                                        { className: 'row' },
+	                                                        _react2['default'].createElement(
+	                                                            'label',
+	                                                            { style: { width: "100px", float: "left", textAlign: "right" } },
+	                                                            '袋子发放评分：'
+	                                                        ),
+	                                                        _react2['default'].createElement(
+	                                                            'div',
+	                                                            { style: { float: "left" } },
+	                                                            score3Stars
+	                                                        )
+	                                                    )
+	                                                ),
+	                                                _react2['default'].createElement(
+	                                                    'div',
+	                                                    { className: 'heading-elements',
+	                                                        style: { height: "18px", top: "25px", right: "10px" } },
+	                                                    _react2['default'].createElement('i', { className: 'icon-cross', style: { fontSize: "18px", cursor: "pointer" },
+	                                                        onClick: this._delete.bind(this, val.id, val.title) })
 	                                                )
 	                                            )
 	                                        )
-	                                    ),
-	                                    _react2['default'].createElement(
-	                                        'div',
-	                                        { className: 'heading-elements',
-	                                            style: { height: "18px", top: "25px", right: "10px" } },
-	                                        _react2['default'].createElement('i', { className: 'icon-cross', style: { fontSize: "18px", cursor: "pointer" },
-	                                            onClick: this._delete.bind(this, val.id, val.title) })
 	                                    )
 	                                ),
 	                                _react2['default'].createElement(
@@ -69100,7 +69642,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 800 */
+/* 801 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -69132,11 +69674,11 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
@@ -69144,7 +69686,7 @@
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var ComplaintContainer = (function (_Component) {
 	    _inherits(ComplaintContainer, _Component);
@@ -69232,6 +69774,16 @@
 	            var fetching = _props.fetching;
 	            var data = _props.data;
 
+	            var unDealCount = -1;
+	            console.log(data);
+	            if (data) {
+	                if (data.status) {
+	                    if (data.data.content.length > 0) {
+	                        unDealCount = (0, _componentsToolTool.getUnDealCount)(data.data.content);
+	                    }
+	                }
+	            }
+	            console.log(unDealCount);
 	            return _react2['default'].createElement(
 	                'div',
 	                null,
@@ -69249,7 +69801,12 @@
 	                        _react2['default'].createElement(
 	                            'legend',
 	                            { className: 'text-bold' },
-	                            "投诉举报列表区"
+	                            "投诉举报列表区",
+	                            _react2['default'].createElement(
+	                                'span',
+	                                { className: 'label label-danger', style: { display: unDealCount > 0 ? "" : "none", marginLeft: "10px" } },
+	                                "未处理：" + unDealCount + "条"
+	                            )
 	                        ),
 	                        _react2['default'].createElement(
 	                            'div',
@@ -69316,7 +69873,7 @@
 	                    if (data.data.content.length > 0) {
 	                        data.data.content.forEach((function (val, key) {
 	                            var dealFlag = val.suggestion == "" || val.suggestion == null;
-	                            var hasHttp = val.photo.indexOf("http") > -1;
+	                            var hasHttp = val.photo && val.photo.indexOf("http") > -1;
 	                            tb.push(_react2['default'].createElement(
 	                                'div',
 	                                { key: key, className: 'panel panel-white text-left' },
@@ -69337,7 +69894,7 @@
 	                                                    { className: 'panel-title' },
 	                                                    _react2['default'].createElement(
 	                                                        'div',
-	                                                        { style: { paddingRight: "10px" } },
+	                                                        { style: { paddingRight: "10px", color: dealFlag ? "red" : "" } },
 	                                                        "[" + val.title + "] " + val.content
 	                                                    ),
 	                                                    _react2['default'].createElement('div', { style: { height: "10px" } }),
@@ -69507,7 +70064,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 801 */
+/* 802 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -69539,21 +70096,21 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var _componentsToolTool = __webpack_require__(467);
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var sha1 = __webpack_require__(671);
 
@@ -69666,7 +70223,7 @@
 	        key: '_resetPassword',
 	        value: function _resetPassword() {
 	            var params = {
-	                password: sha1.hex("88888888"),
+	                password: sha1.hex("123456"),
 	                type: this.detailData.type,
 	                phone: this.detailData.phone,
 	                authcode: $("#authcode").val()
@@ -69725,7 +70282,8 @@
 	        key: '_sendMessage',
 	        value: function _sendMessage() {
 	            var that = this;
-	            var phone = sessionStorage['phone'];
+	            // var phone = sessionStorage['phone'];
+	            var phone = this.detailData.phone;
 	            var count = 30;
 	            sessionStorage['count'] = count;
 	            sessionStorage['messageTime'] = new Date().getTime();
@@ -69735,7 +70293,7 @@
 	            var params = {
 	                phone: phone
 	            };
-	            // this.props.dispatch(getAuthcode(params, "", "", get_authcode));
+	            this.props.dispatch((0, _actionsCommonActions.getAuthcode)(params, "", "", get_authcode));
 	        }
 	    }, {
 	        key: 'setRemainTime',
@@ -70614,18 +71172,6 @@
 	                                                ),
 	                                                _react2['default'].createElement(
 	                                                    'li',
-	                                                    { style: { display: 'block' },
-	                                                        onClick: this._delete.bind(this, val.userid, val.realName) },
-	                                                    _react2['default'].createElement(
-	                                                        'a',
-	                                                        {
-	                                                            href: 'javascript:void(0)' },
-	                                                        _react2['default'].createElement('i', { className: 'icon-trash' }),
-	                                                        "删 除"
-	                                                    )
-	                                                ),
-	                                                _react2['default'].createElement(
-	                                                    'li',
 	                                                    null,
 	                                                    _react2['default'].createElement(
 	                                                        'a',
@@ -70645,7 +71191,7 @@
 	                                                        {
 	                                                            href: 'javascript:void(0)' },
 	                                                        _react2['default'].createElement('i', { className: 'icon-lock4' }),
-	                                                        '锁住账户'
+	                                                        '冻结用户'
 	                                                    )
 	                                                ) : _react2['default'].createElement(
 	                                                    'li',
@@ -70656,7 +71202,7 @@
 	                                                            href: 'javascript:void(0)' },
 	                                                        _react2['default'].createElement('i', {
 	                                                            className: 'icon-unlocked' }),
-	                                                        '解锁账户'
+	                                                        '解冻用户'
 	                                                    )
 	                                                ),
 	                                                _react2['default'].createElement(
@@ -70795,10 +71341,10 @@
 
 	exports['default'] = (0, _reactRedux.connect)(mapStateToProps)(UserListContainer);
 	module.exports = exports['default'];
-	/*<div className="col-lg-6">*/ /*<label className="col-lg-4 control-label"*/ /*style={{textAlign: 'center'}}>{"用户状态"}</label>*/ /*<div className="col-lg-8">*/ /*<div className="text-muted text-size-small">*/ /*{detailData.status == 1 ?*/ /*<span className="label bg-success"*/ /*style={{marginTop: "6px"}}>{"有效"}</span> :*/ /*<span className="label bg-danger"*/ /*style={{marginTop: "6px"}}>{"冻结"}</span>}*/ /*</div>*/ /*</div>*/ /*</div>*/
+	/*<div className="col-lg-6">*/ /*<label className="col-lg-4 control-label"*/ /*style={{textAlign: 'center'}}>{"用户状态"}</label>*/ /*<div className="col-lg-8">*/ /*<div className="text-muted text-size-small">*/ /*{detailData.status == 1 ?*/ /*<span className="label bg-success"*/ /*style={{marginTop: "6px"}}>{"有效"}</span> :*/ /*<span className="label bg-danger"*/ /*style={{marginTop: "6px"}}>{"冻结"}</span>}*/ /*</div>*/ /*</div>*/ /*</div>*/ /*<li style={{display: 'block'}}*/ /*onClick={this._delete.bind(this, val.userid, val.realName)}><a*/ /*href="javascript:void(0)"><i className="icon-trash"></i>*/ /*{"删 除"}</a></li>*/
 
 /***/ },
-/* 802 */
+/* 803 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -70833,13 +71379,13 @@
 
 	var _componentsToolTool = __webpack_require__(467);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var sha1 = __webpack_require__(671);
 
@@ -70916,6 +71462,7 @@
 
 	        _get(Object.getPrototypeOf(RegisterUserComponent.prototype), 'constructor', this).call(this, props);
 	        this.interValObj = "";
+	        this.initialFlag = 0;
 	        this._save = this._save.bind(this);
 	        this._uploadImg = this._uploadImg.bind(this);
 	        this._sendMessage = this._sendMessage.bind(this);
@@ -70948,7 +71495,7 @@
 	        key: '_sendMessage',
 	        value: function _sendMessage() {
 	            var that = this;
-	            var phone = sessionStorage['phone'];
+	            var phone = $("#phone").val();
 	            var count = 30;
 	            sessionStorage['count'] = count;
 	            sessionStorage['messageTime'] = new Date().getTime();
@@ -70983,7 +71530,7 @@
 	                browseIcon: '<i class="icon-folder-open"></i>&nbsp;',
 	                removeIcon: '<i class="icon-trash"></i>',
 	                enctype: 'multipart/form-data',
-	                allowedFileExtensions: ['jpg', 'png']
+	                allowedFileExtensions: ['jpg', 'png', 'jpeg']
 	            });
 	            $('#file-input').on("fileuploaded", function (event, data) {
 	                if (data.response && data.response.status) {
@@ -71004,6 +71551,24 @@
 	                validClass: "validation-valid-label",
 	                success: function success(label) {
 	                    label.addClass("validation-valid-label").text("Success.");
+	                },
+	                errorPlacement: function errorPlacement(error, element) {
+	                    if (element.parent().hasClass("input-group")) {
+	                        error.appendTo(element.parent().parent().parent().find(".errorShow"));
+	                    } else {
+	                        error.appendTo(element.parent().parent().find(".errorShow"));
+	                    }
+	                },
+	                rules: {
+	                    phone: {
+	                        required: true,
+	                        isMobile: true
+	                    }
+	                },
+	                messages: {
+	                    phone: {
+	                        isMobile: "请正确填写手机号码"
+	                    }
 	                }
 	            });
 	            if (sessionStorage['messageTime'] != "") {
@@ -71014,6 +71579,22 @@
 	                    $("#btnSendCode").text(sessionStorage['count'] + "秒后重新发送");
 	                    this.interValObj = setInterval(this.setRemainTime, 1000);
 	                }
+	            }
+	        }
+	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate() {
+	            var self = this;
+	            if (this.props.data.status) {
+	                this.initialFlag = this.initialFlag + 1;
+	            }
+	            if (this.props.data.status && this.initialFlag <= 1) {
+	                $(".building").keyup(function () {
+	                    $(this).val($(this).val().replace(/[^0-9.]/g, ''));
+	                }).bind("paste", function () {
+	                    //CTR+V事件处理
+	                    $(this).val($(this).val().replace(/[^0-9.]/g, ''));
+	                }).css("ime-mode", "disabled"); //CSS设置输入法不可用
 	            }
 	        }
 	    }, {
@@ -71094,7 +71675,7 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'col-lg-9' },
+	                                            { className: 'col-lg-6' },
 	                                            _react2['default'].createElement(
 	                                                'select',
 	                                                { className: 'form-control', name: 'subtype', defaultValue: 1 },
@@ -71113,7 +71694,7 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'col-lg-9' },
+	                                            { className: 'col-lg-6' },
 	                                            _react2['default'].createElement(
 	                                                'select',
 	                                                { className: 'form-control', id: 'organizationid', name: 'organizationid', onChange: this._changeOrg.bind(this) },
@@ -71134,11 +71715,12 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'col-lg-9' },
+	                                            { className: 'col-lg-6' },
 	                                            _react2['default'].createElement('input', { name: 'realName', type: 'text', className: 'form-control',
 	                                                placeholder: "真实姓名", required: 'required',
 	                                                autoComplete: 'off' })
-	                                        )
+	                                        ),
+	                                        _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
@@ -71153,11 +71735,12 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'col-lg-9' },
+	                                            { className: 'col-lg-6' },
 	                                            _react2['default'].createElement('input', { name: 'idno', type: 'text', className: 'form-control',
 	                                                placeholder: "身份证号码", required: 'required',
 	                                                autoComplete: 'off' })
-	                                        )
+	                                        ),
+	                                        _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
@@ -71172,7 +71755,7 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'col-lg-9' },
+	                                            { className: 'col-lg-6' },
 	                                            _react2['default'].createElement('input', { type: 'file', name: 'file', id: 'file-input',
 	                                                multiple: true, 'data-min-file-count': '0' })
 	                                        )
@@ -71190,11 +71773,12 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'col-lg-9' },
-	                                            _react2['default'].createElement('input', { name: 'phone', type: 'text', className: 'form-control',
+	                                            { className: 'col-lg-6' },
+	                                            _react2['default'].createElement('input', { id: 'phone', name: 'phone', type: 'text', className: 'form-control',
 	                                                placeholder: "手机号", required: 'required',
 	                                                autoComplete: 'off' })
-	                                        )
+	                                        ),
+	                                        _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
@@ -71212,12 +71796,12 @@
 	                                            { className: 'col-lg-3' },
 	                                            _react2['default'].createElement('input', { id: 'address', type: 'text', className: 'form-control',
 	                                                defaultValue: defaultAddress, placeholder: "地址",
-	                                                autoComplete: 'off' })
+	                                                autoComplete: 'off', required: 'required' })
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'col-lg-2' },
-	                                            _react2['default'].createElement('input', { id: 'building', type: 'number', className: 'form-control' }),
+	                                            { className: 'col-lg-1' },
+	                                            _react2['default'].createElement('input', { id: 'building', type: 'text', className: 'form-control building' }),
 	                                            _react2['default'].createElement(
 	                                                'div',
 	                                                { className: 'form-control-feedback' },
@@ -71226,8 +71810,8 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'col-lg-2' },
-	                                            _react2['default'].createElement('input', { id: 'unit', type: 'number', className: 'form-control' }),
+	                                            { className: 'col-lg-1' },
+	                                            _react2['default'].createElement('input', { id: 'unit', type: 'text', className: 'form-control building' }),
 	                                            _react2['default'].createElement(
 	                                                'div',
 	                                                { className: 'form-control-feedback' },
@@ -71236,14 +71820,15 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'col-lg-2' },
-	                                            _react2['default'].createElement('input', { id: 'floor', type: 'number', className: 'form-control' }),
+	                                            { className: 'col-lg-1' },
+	                                            _react2['default'].createElement('input', { id: 'floor', type: 'text', className: 'form-control building' }),
 	                                            _react2['default'].createElement(
 	                                                'div',
 	                                                { className: 'form-control-feedback' },
 	                                                '楼'
 	                                            )
-	                                        )
+	                                        ),
+	                                        _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
@@ -71258,14 +71843,14 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'col-lg-9' },
+	                                            { className: 'col-lg-6' },
 	                                            _react2['default'].createElement(
 	                                                'div',
 	                                                { className: 'input-group' },
 	                                                _react2['default'].createElement('input', { type: 'text', name: 'authcode', className: 'form-control',
 	                                                    placeholder: '输入验证码', required: 'required' }),
 	                                                _react2['default'].createElement(
-	                                                    'span',
+	                                                    'div',
 	                                                    { className: 'input-group-btn' },
 	                                                    _react2['default'].createElement(
 	                                                        'button',
@@ -71274,7 +71859,8 @@
 	                                                    )
 	                                                )
 	                                            )
-	                                        )
+	                                        ),
+	                                        _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                    )
 	                                ),
 	                                _react2['default'].createElement(
@@ -71282,7 +71868,7 @@
 	                                    { className: 'form-group' },
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-11 text-right', style: { marginTop: "50px" } },
+	                                        { className: 'col-lg-8 text-right', style: { marginTop: "50px" } },
 	                                        _react2['default'].createElement(
 	                                            'button',
 	                                            { type: 'button', className: 'btn btn-primary',
@@ -71327,7 +71913,7 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'col-lg-9' },
+	                                            { className: 'col-lg-6' },
 	                                            _react2['default'].createElement(
 	                                                'select',
 	                                                { className: 'form-control', name: 'type', defaultValue: 4 },
@@ -71360,7 +71946,7 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'col-lg-9' },
+	                                            { className: 'col-lg-6' },
 	                                            _react2['default'].createElement(
 	                                                'select',
 	                                                { className: 'form-control', id: 'organizationid', name: 'organizationid', onChange: this._changeOrg.bind(this) },
@@ -71381,7 +71967,7 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'col-lg-9' },
+	                                            { className: 'col-lg-6' },
 	                                            _react2['default'].createElement('input', { name: 'realName', type: 'text', className: 'form-control',
 	                                                placeholder: "真实姓名", required: 'required',
 	                                                autoComplete: 'off' })
@@ -71400,7 +71986,7 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'col-lg-9' },
+	                                            { className: 'col-lg-6' },
 	                                            _react2['default'].createElement('input', { name: 'idno', type: 'text', className: 'form-control',
 	                                                placeholder: "身份证号码", required: 'required',
 	                                                autoComplete: 'off' })
@@ -71419,7 +72005,7 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'col-lg-9' },
+	                                            { className: 'col-lg-6' },
 	                                            _react2['default'].createElement('input', { type: 'file', name: 'file', id: 'file-input',
 	                                                multiple: true, 'data-min-file-count': '0' })
 	                                        )
@@ -71450,7 +72036,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 803 */
+/* 804 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -71482,11 +72068,11 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
@@ -71494,9 +72080,9 @@
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var CorrectionListContainer = (function (_Component) {
 	    _inherits(CorrectionListContainer, _Component);
@@ -71520,7 +72106,7 @@
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            var self = this;
-	            var params = { page: 0, size: page_size, startTime: new Date("2016-01-01").getTime(), endTime: new Date().getTime() };
+	            var params = { page: 0, size: page_size, startTime: new Date("2016-01-01").getTime(), endTime: new Date().getTime(), sort: "create_time,desc" };
 	            var organizationParams = { page: 0, size: 10000 };
 	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(params, _constantsIndexJs.CORRECTION_LIST_START, _constantsIndexJs.CORRECTION_LIST_END, correction_list));
 	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(organizationParams, _constantsIndexJs.ORGANIZATION_LIST_START, _constantsIndexJs.ORGANIZATION_LIST_END, organization_list));
@@ -71560,7 +72146,8 @@
 	                size: page_size,
 	                organizationid: $("#organizationSelect").val(),
 	                startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
-	                endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+	                endTime: new Date(rangeTime.split("-")[1].trim()).getTime(),
+	                sort: "create_time,desc"
 	            };
 	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(params, _constantsIndexJs.CORRECTION_LIST_START, _constantsIndexJs.CORRECTION_LIST_END, correction_list));
 	        }
@@ -71581,7 +72168,8 @@
 	                page: this.page,
 	                size: page_size,
 	                startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
-	                endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+	                endTime: new Date(rangeTime.split("-")[1].trim()).getTime(),
+	                sort: "create_time,desc"
 	            };
 	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(params, _constantsIndexJs.CORRECTION_LIST_START, _constantsIndexJs.CORRECTION_LIST_END, correction_list));
 	        }
@@ -71594,7 +72182,8 @@
 	                page: this.page,
 	                size: page_size,
 	                startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
-	                endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+	                endTime: new Date(rangeTime.split("-")[1].trim()).getTime(),
+	                sort: "create_time,desc"
 	            };
 	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(params, _constantsIndexJs.CORRECTION_LIST_START, _constantsIndexJs.CORRECTION_LIST_END, correction_list));
 	        }
@@ -71607,7 +72196,8 @@
 	                page: this.page,
 	                size: page_size,
 	                startTime: new Date(rangeTime.split("-")[0].trim()).getTime(),
-	                endTime: new Date(rangeTime.split("-")[1].trim()).getTime()
+	                endTime: new Date(rangeTime.split("-")[1].trim()).getTime(),
+	                sort: "create_time,desc"
 	            };
 	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(params, _constantsIndexJs.CORRECTION_LIST_START, _constantsIndexJs.CORRECTION_LIST_END, correction_list));
 	        }
@@ -71745,6 +72335,8 @@
 	            var correctionItems = _props2.correctionItems;
 	            var fetching = _props2.fetching;
 
+	            console.log("correction", data);
+	            console.log("correctionItems", correctionItems);
 	            var tb = [];
 	            if (data && correctionItems) {
 	                if (data.data && data.data.content.length > 0) {
@@ -71775,7 +72367,7 @@
 	                            _react2['default'].createElement(
 	                                'td',
 	                                { className: 'text-center' },
-	                                val.weight.toFixed(2)
+	                                val.weight ? val.weight.toFixed(2) : "0"
 	                            ),
 	                            _react2['default'].createElement(
 	                                'td',
@@ -71843,7 +72435,7 @@
 	                            _react2['default'].createElement(
 	                                'th',
 	                                { className: 'col-md-1 text-bold text-center' },
-	                                "重量（吨）"
+	                                "重量（千克）"
 	                            ),
 	                            _react2['default'].createElement(
 	                                'th',
@@ -71889,7 +72481,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 804 */
+/* 805 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -71921,11 +72513,11 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
@@ -71933,21 +72525,25 @@
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _VerifiedStore = __webpack_require__(805);
+	var _VerifiedStore = __webpack_require__(806);
 
 	var _VerifiedStore2 = _interopRequireDefault(_VerifiedStore);
 
-	var _UnauthorizedStore = __webpack_require__(806);
+	var _UnauthorizedStore = __webpack_require__(807);
 
 	var _UnauthorizedStore2 = _interopRequireDefault(_UnauthorizedStore);
 
-	var _UnVerifiedStore = __webpack_require__(807);
+	var _UnVerifiedStore = __webpack_require__(808);
 
 	var _UnVerifiedStore2 = _interopRequireDefault(_UnVerifiedStore);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _WaitingVerifyStore = __webpack_require__(809);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _WaitingVerifyStore2 = _interopRequireDefault(_WaitingVerifyStore);
+
+	var _actionsCommon = __webpack_require__(734);
+
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var StoreListContainer = (function (_Component) {
 	    _inherits(StoreListContainer, _Component);
@@ -71959,6 +72555,7 @@
 	        this.page = 0;
 	        this.breadCrumbs = [{ text: "客户服务", link: '' }, { text: "加盟商管理", link: '' }, { text: "加盟商列表", link: '' }];
 	        this.detailData = "";
+	        this.verifyDetailData = "";
 	        this.verifyFlag = false;
 	        this.currentCity = "";
 	        this.currentCityId = 1;
@@ -71980,18 +72577,26 @@
 	            var params = { page: 0, size: 20 };
 	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(params, _constantsIndexJs.STORE_LIST_START, _constantsIndexJs.STORE_LIST_END, store_list));
 	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(params, _constantsIndexJs.CITY_LIST_START, _constantsIndexJs.CITY_LIST_END, city_list));
+	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)({}, _constantsIndexJs.RATE_START, _constantsIndexJs.RATE_END, store_rate));
 	        }
 	    }, {
 	        key: 'componentDidUpdate',
 	        value: function componentDidUpdate() {
-	            if (this.detailData) {
+	            if (this.detailData && this.props.rateData.status) {
+	                console.log(this.props.rateData);
+	                var rate = this.props.rateData.data;
 	                var max = this.detailData.points - this.detailData.points % 10;
 	                $("#settlementPoints").val(max);
-	                $("#settlementAmount").val("");
+	                $("#settlementAmount").val(max / rate);
 	                $("#settlementPoints").blur((function () {
 	                    var amount = parseInt($("#settlementPoints").val());
+	                    amount = amount - amount % 10;
 	                    if (amount >= max) {
 	                        $("#settlementPoints").val(max);
+	                        $("#settlementAmount").val(max / rate);
+	                    } else {
+	                        $("#settlementPoints").val(amount);
+	                        $("#settlementAmount").val(amount / rate);
 	                    }
 	                }).bind(this));
 	            }
@@ -72019,16 +72624,18 @@
 	        key: '_showVerify',
 	        value: function _showVerify(val) {
 	            this.verifyFlag = true;
-	            this.detailData = val;
+	            this.verifyDetailData = val;
 	            this._startRefresh();
 	        }
 	    }, {
 	        key: '_verifyBtn',
 	        value: function _verifyBtn(userid) {
 	            var that = this;
+	            console.log($("#failedDescription").val());
 	            var params = {
-	                approved: 2,
-	                storeid: userid
+	                approved: 3,
+	                storeid: userid,
+	                description: $("#failedDescription").val()
 	            };
 	            var listParams = { page: 0, size: page_size };
 	            this.props.dispatch((0, _actionsCommonActions.saveObject)(params, "", "", store_approve, "/CustomerService/StoreManage", "noAlert", function () {
@@ -72041,8 +72648,9 @@
 	        value: function _unverifyBtn(userid) {
 	            var that = this;
 	            var params = {
-	                approved: 1,
-	                storeid: userid
+	                approved: 2,
+	                storeid: userid,
+	                description: $("#failedDescription").val()
 	            };
 	            var listParams = { page: 0, size: page_size };
 	            this.props.dispatch((0, _actionsCommonActions.saveObject)(params, "", "", store_approve, "/CustomerService/StoreManage", "noAlert", function () {
@@ -72068,8 +72676,8 @@
 	            var that = this;
 	            var params = {};
 	            params['userid'] = id;
-	            params['points'] = parseInt($("#settlementAmount").val());
-	            params['amount'] = parseInt($("#settlementPoints").val());
+	            params['points'] = parseInt($("#settlementPoints").val());
+	            params['amount'] = parseInt($("#settlementAmount").val());
 	            $("#storeSettlementModal").modal("hide");
 	            this.props.dispatch((0, _actionsCommonActions.saveObject)(params, "", "", storeSettlement_register, "", "x", function () {
 	                var param = { page: 0, size: page_size };
@@ -72129,17 +72737,21 @@
 	            var _props = this.props;
 	            var fetching = _props.fetching;
 	            var data = _props.data;
+	            var rateData = _props.rateData;
 	            var cityList = _props.cityList;
 
+	            console.log(data);
 	            var verifiedData = "";
 	            var unauthorizedData = "";
+	            var waitingVerifyData = "";
 	            var unverifiedData = "";
 	            if (data.data) {
 	                verifiedData = (0, _componentsToolTool.filterByApprove)(data.data.content, 3);
-	                unauthorizedData = (0, _componentsToolTool.filterByApprove)(data.data.content, 1);
+	                waitingVerifyData = (0, _componentsToolTool.filterByApprove)(data.data.content, 1);
+	                unauthorizedData = (0, _componentsToolTool.filterByApprove)(data.data.content, 0);
 	                unverifiedData = (0, _componentsToolTool.filterByApprove)(data.data.content, 2);
 	            }
-	            var unauthorizedCount = unauthorizedData ? unauthorizedData.length : 0;
+	            var waitingVerifyCount = waitingVerifyData ? waitingVerifyData.length : 0;
 	            var cityOptions = [];
 	            var countryOptions = [];
 	            if (cityList) {
@@ -72437,6 +73049,289 @@
 	                                            autoComplete: 'off' })
 	                                    )
 	                                )
+	                            )
+	                        )
+	                    )
+	                );
+	            }
+
+	            var waitingVerifyStoreInfo = "";
+	            if (this.verifyDetailData == "") {
+	                waitingVerifyStoreInfo = _react2['default'].createElement(_componentsToolTool.Loading, null);
+	            } else if (this.verifyDetailData) {
+	                var hasHttp = this.verifyDetailData.logo.indexOf("http") > -1;
+	                waitingVerifyStoreInfo = _react2['default'].createElement(
+	                    'div',
+	                    null,
+	                    _react2['default'].createElement(
+	                        'div',
+	                        { className: 'form-horizontal' },
+	                        _react2['default'].createElement(
+	                            'fieldset',
+	                            { className: 'content-group' },
+	                            _react2['default'].createElement(
+	                                'legend',
+	                                { className: 'text-bold' },
+	                                "详细信息"
+	                            ),
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { className: 'form-group' },
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'col-lg-6' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-4 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "店铺图标"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-8' },
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'thumbnail',
+	                                                style: { marginBottom: 0, width: "165px", padding: 0, border: 0 } },
+	                                            _react2['default'].createElement(
+	                                                'div',
+	                                                { className: 'thumb' },
+	                                                _react2['default'].createElement('img', { src: this.verifyDetailData.logo ? hasHttp ? this.verifyDetailData.logo : imgBaseUrl + this.verifyDetailData.logo : "../assets/images/no_photo.gif", alt: '',
+	                                                    style: { height: "160px", width: "160px" } }),
+	                                                _react2['default'].createElement(
+	                                                    'div',
+	                                                    { className: 'caption-overflow', style: { width: "auto" } },
+	                                                    _react2['default'].createElement(
+	                                                        'span',
+	                                                        { style: { top: 0, marginTop: 0 } },
+	                                                        _react2['default'].createElement('a', { href: this.verifyDetailData.logo ? hasHttp ? this.verifyDetailData.logo : imgBaseUrl + this.verifyDetailData.logo : "../assets/images/no_photo.gif", 'data-popup': 'lightbox',
+	                                                            className: 'btn', style: { height: "160px", width: "160px" } })
+	                                                    )
+	                                                )
+	                                            )
+	                                        )
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'col-lg-6' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-4 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "营业执照"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-8' },
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'thumbnail',
+	                                                style: { marginBottom: 0, width: "165px", padding: 0, border: 0 } },
+	                                            _react2['default'].createElement(
+	                                                'div',
+	                                                { className: 'thumb' },
+	                                                _react2['default'].createElement('img', { src: this.verifyDetailData.license ? hasHttp ? this.verifyDetailData.license : imgBaseUrl + this.verifyDetailData.license : "../assets/images/no_photo.gif", alt: '',
+	                                                    style: { height: "160px", width: "160px" } }),
+	                                                _react2['default'].createElement(
+	                                                    'div',
+	                                                    { className: 'caption-overflow', style: { width: "auto" } },
+	                                                    _react2['default'].createElement(
+	                                                        'span',
+	                                                        { style: { top: 0, marginTop: 0 } },
+	                                                        _react2['default'].createElement('a', { href: this.verifyDetailData.license ? hasHttp ? this.verifyDetailData.license : imgBaseUrl + this.verifyDetailData.license : "../assets/images/no_photo.gif", 'data-popup': 'lightbox',
+	                                                            className: 'btn', style: { height: "160px", width: "160px" } })
+	                                                    )
+	                                                )
+	                                            )
+	                                        )
+	                                    )
+	                                )
+	                            ),
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { className: 'form-group' },
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'col-lg-6' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-4 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "店铺名称"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-8' },
+	                                        _react2['default'].createElement('input', { disabled: true, id: 'name', type: 'text', value: this.verifyDetailData.name, className: 'form-control',
+	                                            autoComplete: 'off' })
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'col-lg-6' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-4 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "负责人"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-8' },
+	                                        _react2['default'].createElement('input', { disabled: true, id: 'name', type: 'text', value: this.verifyDetailData.manager, className: 'form-control',
+	                                            autoComplete: 'off' })
+	                                    )
+	                                )
+	                            ),
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { className: 'form-group' },
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'col-lg-6' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-4 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "城市"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-8' },
+	                                        _react2['default'].createElement('input', { disabled: true, id: 'name', type: 'text', value: this.verifyDetailData.city, className: 'form-control',
+	                                            autoComplete: 'off' })
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'col-lg-6' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-4 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "区县"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-8' },
+	                                        _react2['default'].createElement('input', { disabled: true, id: 'name', type: 'text', value: this.verifyDetailData.county, className: 'form-control',
+	                                            autoComplete: 'off' })
+	                                    )
+	                                )
+	                            ),
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { className: 'form-group' },
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'col-lg-6' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-4 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "地址"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-8' },
+	                                        _react2['default'].createElement('input', { disabled: true, id: 'name', type: 'text', value: this.verifyDetailData.address, className: 'form-control',
+	                                            autoComplete: 'off' })
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'col-lg-6' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-4 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "联系方式"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-8' },
+	                                        _react2['default'].createElement('input', { disabled: true, id: 'name', type: 'text', value: this.verifyDetailData.contact, className: 'form-control',
+	                                            autoComplete: 'off' })
+	                                    )
+	                                )
+	                            ),
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { className: 'form-group' },
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'col-lg-6' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-4 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "经度"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-8' },
+	                                        _react2['default'].createElement('input', { disabled: true, id: 'name', type: 'text', value: this.verifyDetailData.longitude, className: 'form-control',
+	                                            autoComplete: 'off' })
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'col-lg-6' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-4 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "纬度"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-8' },
+	                                        _react2['default'].createElement('input', { disabled: true, id: 'name', type: 'text', value: this.verifyDetailData.latitude, className: 'form-control',
+	                                            placeholder: '行政区名称',
+	                                            autoComplete: 'off' })
+	                                    )
+	                                )
+	                            ),
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { className: 'form-group' },
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'col-lg-12' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "描 述"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-10' },
+	                                        _react2['default'].createElement('textarea', { disabled: true, id: 'name', type: 'text', value: this.verifyDetailData.description, className: 'form-control',
+	                                            autoComplete: 'off' })
+	                                    )
+	                                )
+	                            ),
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { className: 'form-group' },
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'col-lg-12' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "审核结果描述"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-10' },
+	                                        _react2['default'].createElement('textarea', { id: 'failedDescription', type: 'text', className: 'form-control',
+	                                            autoComplete: 'off' })
+	                                    )
+	                                )
 	                            ),
 	                            _react2['default'].createElement(
 	                                'div',
@@ -72452,15 +73347,14 @@
 	                                        _react2['default'].createElement(
 	                                            'button',
 	                                            { type: 'button', className: 'btn btn-primary',
-	                                                style: { display: this.verifyFlag ? "inline-block" : "none" },
-	                                                onClick: this._unverifyBtn.bind(this, this.detailData.userid) },
+	                                                onClick: this._unverifyBtn.bind(this, this.verifyDetailData.userid) },
 	                                            "不通过"
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'button',
 	                                            { type: 'button', className: 'btn btn-primary',
-	                                                style: { margin: "0 10px", display: this.verifyFlag ? "inline-block" : "none" },
-	                                                onClick: this._verifyBtn.bind(this, this.detailData.userid) },
+	                                                style: { margin: "0 10px" },
+	                                                onClick: this._verifyBtn.bind(this, this.verifyDetailData.userid) },
 	                                            "通过"
 	                                        )
 	                                    )
@@ -72495,7 +73389,7 @@
 	                            ),
 	                            _react2['default'].createElement(
 	                                'div',
-	                                { className: 'col-lg-9' },
+	                                { className: 'col-lg-5' },
 	                                _react2['default'].createElement('input', { disabled: true, id: 'storeName', type: 'text', value: this.detailData.name, className: 'form-control',
 	                                    autoComplete: 'off' })
 	                            )
@@ -72511,7 +73405,7 @@
 	                            ),
 	                            _react2['default'].createElement(
 	                                'div',
-	                                { className: 'col-lg-9', style: { lineHeight: "34px" } },
+	                                { className: 'col-lg-5', style: { lineHeight: "34px" } },
 	                                this.detailData.points
 	                            )
 	                        ),
@@ -72526,7 +73420,7 @@
 	                            ),
 	                            _react2['default'].createElement(
 	                                'div',
-	                                { className: 'col-lg-9' },
+	                                { className: 'col-lg-5' },
 	                                _react2['default'].createElement('input', { id: 'settlementPoints', type: 'number', className: 'form-control', placeholder: '输入结算积分',
 	                                    defaultValue: this.detailData.points - this.detailData.points % 10 })
 	                            )
@@ -72542,9 +73436,17 @@
 	                            ),
 	                            _react2['default'].createElement(
 	                                'div',
-	                                { className: 'col-lg-9' },
+	                                { className: 'col-lg-5' },
 	                                _react2['default'].createElement('input', { id: 'settlementAmount', type: 'number', className: 'form-control', placeholder: '输入结算金额',
 	                                    autoComplete: 'off' })
+	                            ),
+	                            _react2['default'].createElement(
+	                                'label',
+	                                { className: 'col-lg-4 control-label',
+	                                    style: { textAlign: 'left', color: "#ff5722", fontWeight: 700 } },
+	                                '积分结算比率：',
+	                                rateData.data,
+	                                '（分/元）'
 	                            )
 	                        ),
 	                        _react2['default'].createElement(
@@ -72599,14 +73501,26 @@
 	                        _react2['default'].createElement(
 	                            'a',
 	                            {
-	                                href: '#unauthorizedStore',
+	                                href: '#waitingVerifyStore',
 	                                'data-toggle': 'tab' },
 	                            "待审核",
 	                            _react2['default'].createElement(
 	                                'span',
 	                                { className: 'badge bg-warning-400', style: { position: "relative", top: "-11px" } },
-	                                unauthorizedCount
+	                                waitingVerifyCount
 	                            )
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        'li',
+	                        {
+	                            style: { fontWeight: 'bold' } },
+	                        _react2['default'].createElement(
+	                            'a',
+	                            {
+	                                href: '#unauthorizedStore',
+	                                'data-toggle': 'tab' },
+	                            "未认证"
 	                        )
 	                    ),
 	                    _react2['default'].createElement(
@@ -72700,10 +73614,19 @@
 	                            _react2['default'].createElement(
 	                                'div',
 	                                { className: 'tab-pane',
+	                                    id: 'waitingVerifyStore' },
+	                                _react2['default'].createElement(_WaitingVerifyStore2['default'], { data: waitingVerifyData, fetching: fetching,
+	                                    _detail: this._detail,
+	                                    _showVerify: this._showVerify,
+	                                    _delete: this._delete,
+	                                    _updateStatus: this._updateStatus })
+	                            ),
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { className: 'tab-pane',
 	                                    id: 'unauthorizedStore' },
 	                                _react2['default'].createElement(_UnauthorizedStore2['default'], { data: unauthorizedData, fetching: fetching,
 	                                    _detail: this._detail,
-	                                    _showVerify: this._showVerify,
 	                                    _delete: this._delete,
 	                                    _updateStatus: this._updateStatus })
 	                            ),
@@ -72721,8 +73644,8 @@
 	                    _react2['default'].createElement(_componentsToolTool.ListMiddleModal, { id: 'detailModal', content: detailStoreInfo,
 	                        doAction: "",
 	                        tip: "加盟商信息", actionText: '加盟商详情', hide: 'true', hideCancel: 'true' }),
-	                    _react2['default'].createElement(_componentsToolTool.VerifyModal, { id: 'verifyModal', content: detailStoreInfo,
-	                        tip: "未认证商户信息" }),
+	                    _react2['default'].createElement(_componentsToolTool.VerifyModal, { id: 'verifyModal', content: waitingVerifyStoreInfo,
+	                        tip: "待审核商户信息" }),
 	                    _react2['default'].createElement(_componentsToolTool.ListMiddleModal, { id: 'storeSettlementModal', content: storeSettlementInfo,
 	                        doAction: "",
 	                        tip: "兑账信息", actionText: '兑账信息', hide: 'true', hideCancel: 'true' })
@@ -72738,12 +73661,14 @@
 
 	function mapStateToProps(state) {
 	    var getStoreList = state.getStoreList;
+	    var getStoreRate = state.getStoreRate;
 	    var getCityList = state.getCityList;
 	    var commonReducer = state.commonReducer;
 
 	    return {
 	        fetching: getStoreList.fetching,
 	        data: getStoreList.data,
+	        rateData: getStoreRate.data,
 	        cityList: getCityList.data,
 	        refresh: commonReducer.refresh
 	    };
@@ -72753,7 +73678,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 805 */
+/* 806 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -72785,11 +73710,11 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
@@ -73075,7 +74000,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 806 */
+/* 807 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -73107,11 +74032,11 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
@@ -73140,11 +74065,6 @@
 	        key: '_detail',
 	        value: function _detail(val) {
 	            this.props._detail(val);
-	        }
-	    }, {
-	        key: '_showVerify',
-	        value: function _showVerify(val) {
-	            this.props._showVerify(val);
 	        }
 	    }, {
 	        key: '_account',
@@ -73262,18 +74182,6 @@
 	                                                        className: ' icon-office' }),
 	                                                    "详情"
 	                                                )
-	                                            ),
-	                                            _react2['default'].createElement(
-	                                                'li',
-	                                                null,
-	                                                _react2['default'].createElement(
-	                                                    'a',
-	                                                    { href: 'javascript:void(0)', 'data-toggle': 'modal',
-	                                                        'data-target': '#verifyModal', onClick: this._showVerify.bind(this, val) },
-	                                                    _react2['default'].createElement('i', {
-	                                                        className: ' icon-office' }),
-	                                                    "审核"
-	                                                )
 	                                            )
 	                                        )
 	                                    )
@@ -73382,7 +74290,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 807 */
+/* 808 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -73414,11 +74322,11 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
@@ -73686,7 +74594,303 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 808 */
+/* 809 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by Captain on 2017/4/23.
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(193);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(369);
+
+	var _redux = __webpack_require__(376);
+
+	var _reactRouter = __webpack_require__(399);
+
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
+
+	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
+
+	var _componentsRightPagenation = __webpack_require__(745);
+
+	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
+
+	var _componentsToolTool = __webpack_require__(467);
+
+	var WaitingVerifyStore = (function (_Component) {
+	    _inherits(WaitingVerifyStore, _Component);
+
+	    function WaitingVerifyStore(props) {
+	        _classCallCheck(this, WaitingVerifyStore);
+
+	        _get(Object.getPrototypeOf(WaitingVerifyStore.prototype), 'constructor', this).call(this, props);
+	        this._detail = this._detail.bind(this);
+	    }
+
+	    _createClass(WaitingVerifyStore, [{
+	        key: '_lockUser',
+	        value: function _lockUser() {}
+	    }, {
+	        key: '_unlockUser',
+	        value: function _unlockUser() {}
+	    }, {
+	        key: '_resetPassword',
+	        value: function _resetPassword() {}
+	    }, {
+	        key: '_detail',
+	        value: function _detail(val) {
+	            this.props._detail(val);
+	        }
+	    }, {
+	        key: '_showVerify',
+	        value: function _showVerify(val) {
+	            this.props._showVerify(val);
+	        }
+	    }, {
+	        key: '_account',
+	        value: function _account(path, val) {
+	            _reactRouter.browserHistory.push(path);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props;
+	            var data = _props.data;
+	            var fetching = _props.fetching;
+
+	            var tb = [];
+	            if (data) {
+	                if (data.length > 0) {
+	                    data.forEach((function (val, key) {
+	                        var hasHttp = val.logo.indexOf("http") > -1;
+	                        tb.push(_react2['default'].createElement(
+	                            'tr',
+	                            { key: key, style: { backgroundColor: key % 2 == 0 ? "#F8F8F8" : "" } },
+	                            _react2['default'].createElement(
+	                                'td',
+	                                { className: 'text-center' },
+	                                key + 1
+	                            ),
+	                            _react2['default'].createElement(
+	                                'td',
+	                                { className: 'text-center' },
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'thumbnail', style: { margin: "0 auto", width: "35px", padding: 0, border: 0 } },
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'thumb' },
+	                                        _react2['default'].createElement('img', {
+	                                            src: val.logo ? hasHttp ? val.logo : imgBaseUrl + val.logo : "../assets/images/no_photo.gif",
+	                                            alt: '', style: { height: "30px", width: "30px" } }),
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'caption-overflow', style: { width: "auto" } },
+	                                            _react2['default'].createElement(
+	                                                'span',
+	                                                { style: { top: 0, marginTop: 0 } },
+	                                                _react2['default'].createElement('a', { href: val.logo ? hasHttp ? val.logo : imgBaseUrl + val.logo : "../assets/images/no_photo.gif",
+	                                                    'data-popup': 'lightbox',
+	                                                    className: 'btn', style: { height: "30px", width: "30px" } })
+	                                            )
+	                                        )
+	                                    )
+	                                )
+	                            ),
+	                            _react2['default'].createElement(
+	                                'td',
+	                                { className: 'text-center' },
+	                                val.name
+	                            ),
+	                            _react2['default'].createElement(
+	                                'td',
+	                                { className: 'text-center' },
+	                                val.manager
+	                            ),
+	                            _react2['default'].createElement(
+	                                'td',
+	                                { className: 'text-center' },
+	                                val.alipayAccount
+	                            ),
+	                            _react2['default'].createElement(
+	                                'td',
+	                                { className: 'text-center' },
+	                                val.city
+	                            ),
+	                            _react2['default'].createElement(
+	                                'td',
+	                                { className: 'text-center' },
+	                                val.county
+	                            ),
+	                            _react2['default'].createElement(
+	                                'td',
+	                                { className: 'text-center' },
+	                                val.contact
+	                            ),
+	                            _react2['default'].createElement(
+	                                'td',
+	                                { className: 'text-center' },
+	                                val.address
+	                            ),
+	                            _react2['default'].createElement(
+	                                'td',
+	                                { className: 'text-center' },
+	                                _react2['default'].createElement(
+	                                    'ul',
+	                                    { className: 'icons-list' },
+	                                    _react2['default'].createElement(
+	                                        'li',
+	                                        { className: 'dropdown' },
+	                                        _react2['default'].createElement(
+	                                            'a',
+	                                            { href: '#', className: 'dropdown-toggle',
+	                                                'data-toggle': 'dropdown', 'aria-expanded': 'false' },
+	                                            _react2['default'].createElement('i', {
+	                                                className: 'icon-menu7' })
+	                                        ),
+	                                        _react2['default'].createElement(
+	                                            'ul',
+	                                            { className: 'dropdown-menu dropdown-menu-right' },
+	                                            _react2['default'].createElement(
+	                                                'li',
+	                                                null,
+	                                                _react2['default'].createElement(
+	                                                    'a',
+	                                                    { href: 'javascript:void(0)', 'data-toggle': 'modal',
+	                                                        'data-target': '#verifyModal', onClick: this._showVerify.bind(this, val) },
+	                                                    _react2['default'].createElement('i', {
+	                                                        className: ' icon-office' }),
+	                                                    "审核"
+	                                                )
+	                                            )
+	                                        )
+	                                    )
+	                                )
+	                            )
+	                        ));
+	                    }).bind(this));
+	                } else {
+	                    tb.push(_react2['default'].createElement(
+	                        'tr',
+	                        { key: 'noData' },
+	                        _react2['default'].createElement(
+	                            'td',
+	                            { colSpan: '100', style: { textAlign: 'center' } },
+	                            _react2['default'].createElement(_componentsToolTool.NoData, null)
+	                        )
+	                    ));
+	                }
+	            } else {
+	                tb.push(_react2['default'].createElement(
+	                    'tr',
+	                    { key: 'loading' },
+	                    _react2['default'].createElement(
+	                        'td',
+	                        { colSpan: '100', style: { textAlign: 'center' } },
+	                        _react2['default'].createElement(_componentsToolTool.Loading, null)
+	                    )
+	                ));
+	            }
+	            var tableHeight = $(window).height() - 240;
+	            return _react2['default'].createElement(
+	                'div',
+	                { className: 'table-responsive', style: { height: tableHeight + 'px', overflowY: 'scroll' } },
+	                _react2['default'].createElement(
+	                    'table',
+	                    { className: 'table table-bordered table-hover', style: { marginBottom: '85px' } },
+	                    _react2['default'].createElement(
+	                        'thead',
+	                        null,
+	                        _react2['default'].createElement(
+	                            'tr',
+	                            { style: { fontWeight: 'bold' } },
+	                            _react2['default'].createElement('th', { className: 'text-center', style: { width: "20px" } }),
+	                            _react2['default'].createElement(
+	                                'th',
+	                                { className: 'col-md-1 text-bold text-center' },
+	                                "店铺图标"
+	                            ),
+	                            _react2['default'].createElement(
+	                                'th',
+	                                { className: 'col-md-2 text-bold text-center' },
+	                                "店铺名称"
+	                            ),
+	                            _react2['default'].createElement(
+	                                'th',
+	                                { className: 'col-md-2 text-bold text-center' },
+	                                "负责人"
+	                            ),
+	                            _react2['default'].createElement(
+	                                'th',
+	                                { className: 'col-md-1 text-bold text-center' },
+	                                "支付宝账号"
+	                            ),
+	                            _react2['default'].createElement(
+	                                'th',
+	                                { className: 'col-md-1 text-bold text-center' },
+	                                "城市"
+	                            ),
+	                            _react2['default'].createElement(
+	                                'th',
+	                                { className: 'col-md-1 text-bold text-center' },
+	                                "区县"
+	                            ),
+	                            _react2['default'].createElement(
+	                                'th',
+	                                { className: 'col-md-2 text-bold text-center' },
+	                                "联系方式"
+	                            ),
+	                            _react2['default'].createElement(
+	                                'th',
+	                                { className: 'col-md-2 text-bold text-center' },
+	                                "地址"
+	                            ),
+	                            _react2['default'].createElement(
+	                                'th',
+	                                { className: 'text-center', style: { width: "20px" } },
+	                                _react2['default'].createElement('i', {
+	                                    className: 'icon-arrow-down12' })
+	                            )
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        'tbody',
+	                        null,
+	                        tb
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return WaitingVerifyStore;
+	})(_react.Component);
+
+	exports['default'] = WaitingVerifyStore;
+	module.exports = exports['default'];
+	/*<li>*/ /*<a href="javascript:void(0)" data-toggle="modal"*/ /*data-target="#detailModal" onClick={this._detail.bind(this, val)}><i*/ /*className=" icon-office"></i>*/ /*{"详情"}</a>*/ /*</li>*/
+
+/***/ },
+/* 810 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -73718,11 +74922,11 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
@@ -73730,7 +74934,7 @@
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var StoreSettlementListContainer = (function (_Component) {
 	    _inherits(StoreSettlementListContainer, _Component);
@@ -73807,6 +75011,7 @@
 	            var fetching = _props.fetching;
 	            var data = _props.data;
 
+	            console.log("settle", data);
 	            return _react2['default'].createElement(
 	                'div',
 	                null,
@@ -73918,6 +75123,11 @@
 	                            _react2['default'].createElement(
 	                                'td',
 	                                { className: 'text-center' },
+	                                val.adminname
+	                            ),
+	                            _react2['default'].createElement(
+	                                'td',
+	                                { className: 'text-center' },
 	                                val.manager
 	                            )
 	                        ));
@@ -73965,12 +75175,12 @@
 	                            ),
 	                            _react2['default'].createElement(
 	                                'th',
-	                                { className: 'col-md-2 text-bold text-center' },
+	                                { className: 'col-md-1 text-bold text-center' },
 	                                "城市"
 	                            ),
 	                            _react2['default'].createElement(
 	                                'th',
-	                                { className: 'col-md-2 text-bold text-center' },
+	                                { className: 'col-md-1 text-bold text-center' },
 	                                "行政区"
 	                            ),
 	                            _react2['default'].createElement(
@@ -73987,6 +75197,11 @@
 	                                'th',
 	                                { className: 'col-md-2 text-bold text-center' },
 	                                "结算时间"
+	                            ),
+	                            _react2['default'].createElement(
+	                                'th',
+	                                { className: 'col-md-2 text-bold text-center' },
+	                                "结算人"
 	                            ),
 	                            _react2['default'].createElement(
 	                                'th',
@@ -74021,7 +75236,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 809 */
+/* 811 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -74053,11 +75268,11 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
@@ -74065,9 +75280,9 @@
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var NoticeListContainer = (function (_Component) {
 	    _inherits(NoticeListContainer, _Component);
@@ -74770,7 +75985,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 810 */
+/* 812 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -74805,15 +76020,15 @@
 
 	var _componentsToolTool = __webpack_require__(467);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
-	var _RichText = __webpack_require__(811);
+	var _RichText = __webpack_require__(813);
 
 	var _RichText2 = _interopRequireDefault(_RichText);
 
@@ -74898,6 +76113,9 @@
 	                validClass: "validation-valid-label",
 	                success: function success(label) {
 	                    label.addClass("validation-valid-label").text("Success.");
+	                },
+	                errorPlacement: function errorPlacement(error, element) {
+	                    error.appendTo(element.parent().parent().find(".errorShow"));
 	                }
 	            });
 	            $('#file-input').fileinput({
@@ -74908,7 +76126,7 @@
 	                browseIcon: '<i class="icon-folder-open"></i>&nbsp;',
 	                removeIcon: '<i class="icon-trash"></i>',
 	                enctype: 'multipart/form-data',
-	                allowedFileExtensions: ['jpg', 'png']
+	                allowedFileExtensions: ['jpg', 'png', 'jpeg']
 	            });
 	            $('#file-input').on("fileuploaded", function (event, data) {
 	                if (data.response && data.response.status) {
@@ -74982,7 +76200,7 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement(
 	                                            'select',
 	                                            { className: 'form-control', name: 'type' },
@@ -75017,10 +76235,11 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('input', { name: 'title', type: 'text', className: 'form-control',
 	                                            placeholder: "标题", required: 'required', autoComplete: 'off' })
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
@@ -75034,7 +76253,7 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement(
 	                                            'label',
 	                                            { className: 'radio-inline' },
@@ -75138,7 +76357,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 811 */
+/* 813 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -75164,7 +76383,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _draftJs = __webpack_require__(812);
+	var _draftJs = __webpack_require__(814);
 
 	var _reactRedux = __webpack_require__(369);
 
@@ -75172,7 +76391,7 @@
 
 	var _redux = __webpack_require__(376);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var RichText = (function (_React$Component) {
 	    _inherits(RichText, _React$Component);
@@ -75181,12 +76400,13 @@
 	        _classCallCheck(this, RichText);
 
 	        _get(Object.getPrototypeOf(RichText.prototype), 'constructor', this).call(this, props);
+	        this.editor = "";
 	    }
 
 	    _createClass(RichText, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            var editor = UE.getEditor(this.props.id, {
+	            this.editor = UE.getEditor(this.props.id, {
 	                //工具栏
 	                toolbars: [['fullscreen', 'source', '|', 'undo', 'redo', '|', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|', 'rowspacingtop', 'rowspacingbottom', 'lineheight', '|', 'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|', 'directionalityltr', 'directionalityrtl', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|', 'simpleupload', 'horizontal', 'date', 'time']],
 	                lang: "zh-cn",
@@ -75201,14 +76421,25 @@
 	                readonly: this.props.disabled
 	            });
 	            var that = this;
-	            editor.ready(function () {
+	            this.editor.ready(function () {
 	                var value = that.props.value ? that.props.value : '<p></p>';
-	                editor.setContent(value);
+	                console.log("value", that.props.value);
+	                that.editor.setContent(value);
+	            });
+	        }
+	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate() {
+	            var that = this;
+	            this.editor.ready(function () {
+	                var value = that.props.value ? that.props.value : '<p></p>';
+	                that.editor.setContent(value);
 	            });
 	        }
 	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
+	            this.editor = "";
 	            UE.getEditor("content").destroy();
 	        }
 	    }, {
@@ -75226,7 +76457,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 812 */
+/* 814 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -75242,30 +76473,30 @@
 
 	'use strict';
 
-	var AtomicBlockUtils = __webpack_require__(813);
-	var BlockMapBuilder = __webpack_require__(814);
-	var CharacterMetadata = __webpack_require__(816);
-	var CompositeDraftDecorator = __webpack_require__(847);
-	var ContentBlock = __webpack_require__(817);
-	var ContentState = __webpack_require__(837);
-	var DefaultDraftBlockRenderMap = __webpack_require__(848);
-	var DefaultDraftInlineStyle = __webpack_require__(850);
-	var DraftEditor = __webpack_require__(851);
-	var DraftEditorBlock = __webpack_require__(857);
-	var DraftEntity = __webpack_require__(838);
-	var DraftModifier = __webpack_require__(819);
-	var DraftEntityInstance = __webpack_require__(839);
-	var EditorState = __webpack_require__(835);
-	var KeyBindingUtil = __webpack_require__(897);
-	var RichTextEditorUtil = __webpack_require__(928);
-	var SelectionState = __webpack_require__(840);
+	var AtomicBlockUtils = __webpack_require__(815);
+	var BlockMapBuilder = __webpack_require__(816);
+	var CharacterMetadata = __webpack_require__(818);
+	var CompositeDraftDecorator = __webpack_require__(849);
+	var ContentBlock = __webpack_require__(819);
+	var ContentState = __webpack_require__(839);
+	var DefaultDraftBlockRenderMap = __webpack_require__(850);
+	var DefaultDraftInlineStyle = __webpack_require__(852);
+	var DraftEditor = __webpack_require__(853);
+	var DraftEditorBlock = __webpack_require__(859);
+	var DraftEntity = __webpack_require__(840);
+	var DraftModifier = __webpack_require__(821);
+	var DraftEntityInstance = __webpack_require__(841);
+	var EditorState = __webpack_require__(837);
+	var KeyBindingUtil = __webpack_require__(899);
+	var RichTextEditorUtil = __webpack_require__(930);
+	var SelectionState = __webpack_require__(842);
 
-	var convertFromDraftStateToRaw = __webpack_require__(930);
-	var convertFromHTMLToContentBlocks = __webpack_require__(920);
-	var convertFromRawToDraftState = __webpack_require__(934);
-	var generateRandomKey = __webpack_require__(827);
-	var getDefaultKeyBinding = __webpack_require__(927);
-	var getVisibleSelectionRect = __webpack_require__(938);
+	var convertFromDraftStateToRaw = __webpack_require__(932);
+	var convertFromHTMLToContentBlocks = __webpack_require__(922);
+	var convertFromRawToDraftState = __webpack_require__(936);
+	var generateRandomKey = __webpack_require__(829);
+	var getDefaultKeyBinding = __webpack_require__(929);
+	var getVisibleSelectionRect = __webpack_require__(940);
 
 	var DraftPublic = {
 	  Editor: DraftEditor,
@@ -75301,7 +76532,7 @@
 	module.exports = DraftPublic;
 
 /***/ },
-/* 813 */
+/* 815 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -75319,14 +76550,14 @@
 
 	'use strict';
 
-	var BlockMapBuilder = __webpack_require__(814);
-	var CharacterMetadata = __webpack_require__(816);
-	var ContentBlock = __webpack_require__(817);
-	var DraftModifier = __webpack_require__(819);
-	var EditorState = __webpack_require__(835);
-	var Immutable = __webpack_require__(815);
+	var BlockMapBuilder = __webpack_require__(816);
+	var CharacterMetadata = __webpack_require__(818);
+	var ContentBlock = __webpack_require__(819);
+	var DraftModifier = __webpack_require__(821);
+	var EditorState = __webpack_require__(837);
+	var Immutable = __webpack_require__(817);
 
-	var generateRandomKey = __webpack_require__(827);
+	var generateRandomKey = __webpack_require__(829);
 
 	var List = Immutable.List;
 	var Repeat = Immutable.Repeat;
@@ -75375,7 +76606,7 @@
 	module.exports = AtomicBlockUtils;
 
 /***/ },
-/* 814 */
+/* 816 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -75392,7 +76623,7 @@
 
 	'use strict';
 
-	var Immutable = __webpack_require__(815);
+	var Immutable = __webpack_require__(817);
 
 	var OrderedMap = Immutable.OrderedMap;
 
@@ -75408,7 +76639,7 @@
 	module.exports = BlockMapBuilder;
 
 /***/ },
-/* 815 */
+/* 817 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -80395,7 +81626,7 @@
 	}));
 
 /***/ },
-/* 816 */
+/* 818 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -80419,7 +81650,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _require = __webpack_require__(815);
+	var _require = __webpack_require__(817);
 
 	var Map = _require.Map;
 	var OrderedSet = _require.OrderedSet;
@@ -80512,7 +81743,7 @@
 	module.exports = CharacterMetadata;
 
 /***/ },
-/* 817 */
+/* 819 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -80535,9 +81766,9 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Immutable = __webpack_require__(815);
+	var Immutable = __webpack_require__(817);
 
-	var findRangesImmutable = __webpack_require__(818);
+	var findRangesImmutable = __webpack_require__(820);
 
 	var List = Immutable.List;
 	var Map = Immutable.Map;
@@ -80637,7 +81868,7 @@
 	module.exports = ContentBlock;
 
 /***/ },
-/* 818 */
+/* 820 */
 /***/ function(module, exports) {
 
 	/**
@@ -80686,7 +81917,7 @@
 	module.exports = findRangesImmutable;
 
 /***/ },
-/* 819 */
+/* 821 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -80704,20 +81935,20 @@
 
 	'use strict';
 
-	var CharacterMetadata = __webpack_require__(816);
-	var ContentStateInlineStyle = __webpack_require__(820);
-	var Immutable = __webpack_require__(815);
+	var CharacterMetadata = __webpack_require__(818);
+	var ContentStateInlineStyle = __webpack_require__(822);
+	var Immutable = __webpack_require__(817);
 
-	var applyEntityToContentState = __webpack_require__(821);
-	var getCharacterRemovalRange = __webpack_require__(823);
-	var getContentStateFragment = __webpack_require__(826);
-	var insertFragmentIntoContentState = __webpack_require__(829);
-	var insertTextIntoContentState = __webpack_require__(831);
+	var applyEntityToContentState = __webpack_require__(823);
+	var getCharacterRemovalRange = __webpack_require__(825);
+	var getContentStateFragment = __webpack_require__(828);
+	var insertFragmentIntoContentState = __webpack_require__(831);
+	var insertTextIntoContentState = __webpack_require__(833);
 	var invariant = __webpack_require__(199);
-	var modifyBlockForContentState = __webpack_require__(832);
-	var removeEntitiesAtEdges = __webpack_require__(828);
-	var removeRangeFromContentState = __webpack_require__(833);
-	var splitBlockInContentState = __webpack_require__(834);
+	var modifyBlockForContentState = __webpack_require__(834);
+	var removeEntitiesAtEdges = __webpack_require__(830);
+	var removeRangeFromContentState = __webpack_require__(835);
+	var splitBlockInContentState = __webpack_require__(836);
 
 	var OrderedSet = Immutable.OrderedSet;
 
@@ -80829,7 +82060,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 820 */
+/* 822 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -80847,9 +82078,9 @@
 
 	'use strict';
 
-	var CharacterMetadata = __webpack_require__(816);
+	var CharacterMetadata = __webpack_require__(818);
 
-	var _require = __webpack_require__(815);
+	var _require = __webpack_require__(817);
 
 	var Map = _require.Map;
 
@@ -80908,7 +82139,7 @@
 	module.exports = ContentStateInlineStyle;
 
 /***/ },
-/* 821 */
+/* 823 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -80926,9 +82157,9 @@
 
 	'use strict';
 
-	var Immutable = __webpack_require__(815);
+	var Immutable = __webpack_require__(817);
 
-	var applyEntityToContentBlock = __webpack_require__(822);
+	var applyEntityToContentBlock = __webpack_require__(824);
 
 	function applyEntityToContentState(contentState, selectionState, entityKey) {
 	  var blockMap = contentState.getBlockMap();
@@ -80957,7 +82188,7 @@
 	module.exports = applyEntityToContentState;
 
 /***/ },
-/* 822 */
+/* 824 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -80975,7 +82206,7 @@
 
 	'use strict';
 
-	var CharacterMetadata = __webpack_require__(816);
+	var CharacterMetadata = __webpack_require__(818);
 
 	function applyEntityToContentBlock(contentBlock, start, end, entityKey) {
 	  var characterList = contentBlock.getCharacterList();
@@ -80989,7 +82220,7 @@
 	module.exports = applyEntityToContentBlock;
 
 /***/ },
-/* 823 */
+/* 825 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -81007,9 +82238,9 @@
 
 	'use strict';
 
-	var DraftEntitySegments = __webpack_require__(824);
+	var DraftEntitySegments = __webpack_require__(826);
 
-	var getRangesForDraftEntity = __webpack_require__(825);
+	var getRangesForDraftEntity = __webpack_require__(827);
 	var invariant = __webpack_require__(199);
 
 	/**
@@ -81071,7 +82302,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 824 */
+/* 826 */
 /***/ function(module, exports) {
 
 	/**
@@ -81175,7 +82406,7 @@
 	module.exports = DraftEntitySegments;
 
 /***/ },
-/* 825 */
+/* 827 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -81220,7 +82451,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 826 */
+/* 828 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -81238,8 +82469,8 @@
 
 	'use strict';
 
-	var generateRandomKey = __webpack_require__(827);
-	var removeEntitiesAtEdges = __webpack_require__(828);
+	var generateRandomKey = __webpack_require__(829);
+	var removeEntitiesAtEdges = __webpack_require__(830);
 
 	function getContentStateFragment(contentState, selectionState) {
 	  var startKey = selectionState.getStartKey();
@@ -81296,7 +82527,7 @@
 	module.exports = getContentStateFragment;
 
 /***/ },
-/* 827 */
+/* 829 */
 /***/ function(module, exports) {
 
 	/**
@@ -81329,7 +82560,7 @@
 	module.exports = generateRandomKey;
 
 /***/ },
-/* 828 */
+/* 830 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -81346,9 +82577,9 @@
 
 	'use strict';
 
-	var CharacterMetadata = __webpack_require__(816);
+	var CharacterMetadata = __webpack_require__(818);
 
-	var findRangesImmutable = __webpack_require__(818);
+	var findRangesImmutable = __webpack_require__(820);
 	var invariant = __webpack_require__(199);
 
 	function removeEntitiesAtEdges(contentState, selectionState) {
@@ -81436,7 +82667,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 829 */
+/* 831 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -81454,10 +82685,10 @@
 
 	'use strict';
 
-	var BlockMapBuilder = __webpack_require__(814);
+	var BlockMapBuilder = __webpack_require__(816);
 
-	var generateRandomKey = __webpack_require__(827);
-	var insertIntoList = __webpack_require__(830);
+	var generateRandomKey = __webpack_require__(829);
+	var insertIntoList = __webpack_require__(832);
 	var invariant = __webpack_require__(199);
 
 	function insertFragmentIntoContentState(contentState, selectionState, fragment) {
@@ -81568,7 +82799,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 830 */
+/* 832 */
 /***/ function(module, exports) {
 
 	/**
@@ -81608,7 +82839,7 @@
 	module.exports = insertIntoList;
 
 /***/ },
-/* 831 */
+/* 833 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -81626,9 +82857,9 @@
 
 	'use strict';
 
-	var Immutable = __webpack_require__(815);
+	var Immutable = __webpack_require__(817);
 
-	var insertIntoList = __webpack_require__(830);
+	var insertIntoList = __webpack_require__(832);
 	var invariant = __webpack_require__(199);
 
 	var Repeat = Immutable.Repeat;
@@ -81668,7 +82899,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 832 */
+/* 834 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -81686,7 +82917,7 @@
 
 	'use strict';
 
-	var Immutable = __webpack_require__(815);
+	var Immutable = __webpack_require__(817);
 
 	var Map = Immutable.Map;
 
@@ -81711,7 +82942,7 @@
 	module.exports = modifyBlockForContentState;
 
 /***/ },
-/* 833 */
+/* 835 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -81728,7 +82959,7 @@
 
 	'use strict';
 
-	var Immutable = __webpack_require__(815);
+	var Immutable = __webpack_require__(817);
 
 	function removeRangeFromContentState(contentState, selectionState) {
 	  if (selectionState.isCollapsed()) {
@@ -81807,7 +83038,7 @@
 	module.exports = removeRangeFromContentState;
 
 /***/ },
-/* 834 */
+/* 836 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -81825,9 +83056,9 @@
 
 	'use strict';
 
-	var Immutable = __webpack_require__(815);
+	var Immutable = __webpack_require__(817);
 
-	var generateRandomKey = __webpack_require__(827);
+	var generateRandomKey = __webpack_require__(829);
 	var invariant = __webpack_require__(199);
 
 	var Map = Immutable.Map;
@@ -81882,7 +83113,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 835 */
+/* 837 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -81905,11 +83136,11 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var BlockTree = __webpack_require__(836);
-	var ContentState = __webpack_require__(837);
-	var EditorBidiService = __webpack_require__(842);
-	var Immutable = __webpack_require__(815);
-	var SelectionState = __webpack_require__(840);
+	var BlockTree = __webpack_require__(838);
+	var ContentState = __webpack_require__(839);
+	var EditorBidiService = __webpack_require__(844);
+	var Immutable = __webpack_require__(817);
+	var SelectionState = __webpack_require__(842);
 
 	var OrderedSet = Immutable.OrderedSet;
 	var Record = Immutable.Record;
@@ -82449,7 +83680,7 @@
 	module.exports = EditorState;
 
 /***/ },
-/* 836 */
+/* 838 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -82466,10 +83697,10 @@
 
 	'use strict';
 
-	var Immutable = __webpack_require__(815);
+	var Immutable = __webpack_require__(817);
 
 	var emptyFunction = __webpack_require__(203);
-	var findRangesImmutable = __webpack_require__(818);
+	var findRangesImmutable = __webpack_require__(820);
 
 	var List = Immutable.List;
 	var Repeat = Immutable.Repeat;
@@ -82566,7 +83797,7 @@
 	module.exports = BlockTree;
 
 /***/ },
-/* 837 */
+/* 839 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -82590,15 +83821,15 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var BlockMapBuilder = __webpack_require__(814);
-	var CharacterMetadata = __webpack_require__(816);
-	var ContentBlock = __webpack_require__(817);
-	var DraftEntity = __webpack_require__(838);
-	var Immutable = __webpack_require__(815);
-	var SelectionState = __webpack_require__(840);
+	var BlockMapBuilder = __webpack_require__(816);
+	var CharacterMetadata = __webpack_require__(818);
+	var ContentBlock = __webpack_require__(819);
+	var DraftEntity = __webpack_require__(840);
+	var Immutable = __webpack_require__(817);
+	var SelectionState = __webpack_require__(842);
 
-	var generateRandomKey = __webpack_require__(827);
-	var sanitizeDraftText = __webpack_require__(841);
+	var generateRandomKey = __webpack_require__(829);
+	var sanitizeDraftText = __webpack_require__(843);
 
 	var List = Immutable.List;
 	var Record = Immutable.Record;
@@ -82763,7 +83994,7 @@
 	module.exports = ContentState;
 
 /***/ },
-/* 838 */
+/* 840 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -82785,8 +84016,8 @@
 	 * 
 	 */
 
-	var DraftEntityInstance = __webpack_require__(839);
-	var Immutable = __webpack_require__(815);
+	var DraftEntityInstance = __webpack_require__(841);
+	var Immutable = __webpack_require__(817);
 
 	var invariant = __webpack_require__(199);
 
@@ -82963,7 +84194,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 839 */
+/* 841 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -82986,7 +84217,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Immutable = __webpack_require__(815);
+	var Immutable = __webpack_require__(817);
 
 	var Record = Immutable.Record;
 
@@ -83036,7 +84267,7 @@
 	module.exports = DraftEntityInstance;
 
 /***/ },
-/* 840 */
+/* 842 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -83060,7 +84291,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Immutable = __webpack_require__(815);
+	var Immutable = __webpack_require__(817);
 
 	var Record = Immutable.Record;
 
@@ -83175,7 +84406,7 @@
 	module.exports = SelectionState;
 
 /***/ },
-/* 841 */
+/* 843 */
 /***/ function(module, exports) {
 
 	/**
@@ -83201,7 +84432,7 @@
 	module.exports = sanitizeDraftText;
 
 /***/ },
-/* 842 */
+/* 844 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -83219,10 +84450,10 @@
 
 	'use strict';
 
-	var Immutable = __webpack_require__(815);
-	var UnicodeBidiService = __webpack_require__(843);
+	var Immutable = __webpack_require__(817);
+	var UnicodeBidiService = __webpack_require__(845);
 
-	var nullthrows = __webpack_require__(846);
+	var nullthrows = __webpack_require__(848);
 
 	var OrderedMap = Immutable.OrderedMap;
 
@@ -83254,7 +84485,7 @@
 	module.exports = EditorBidiService;
 
 /***/ },
-/* 843 */
+/* 845 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -83303,8 +84534,8 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var UnicodeBidi = __webpack_require__(844);
-	var UnicodeBidiDirection = __webpack_require__(845);
+	var UnicodeBidi = __webpack_require__(846);
+	var UnicodeBidiDirection = __webpack_require__(847);
 
 	var invariant = __webpack_require__(199);
 
@@ -83360,7 +84591,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 844 */
+/* 846 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -83385,7 +84616,7 @@
 
 	'use strict';
 
-	var UnicodeBidiDirection = __webpack_require__(845);
+	var UnicodeBidiDirection = __webpack_require__(847);
 
 	var invariant = __webpack_require__(199);
 
@@ -83522,7 +84753,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 845 */
+/* 847 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -83636,7 +84867,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 846 */
+/* 848 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -83662,7 +84893,7 @@
 	module.exports = nullthrows;
 
 /***/ },
-/* 847 */
+/* 849 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -83682,7 +84913,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var Immutable = __webpack_require__(815);
+	var Immutable = __webpack_require__(817);
 
 	var List = Immutable.List;
 
@@ -83781,7 +85012,7 @@
 	module.exports = CompositeDraftDecorator;
 
 /***/ },
-/* 848 */
+/* 850 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -83798,13 +85029,13 @@
 
 	'use strict';
 
-	var _require = __webpack_require__(815);
+	var _require = __webpack_require__(817);
 
 	var Map = _require.Map;
 
 	var React = __webpack_require__(193);
 
-	var cx = __webpack_require__(849);
+	var cx = __webpack_require__(851);
 
 	var UL_WRAP = React.createElement('ul', { className: cx('public/DraftStyleDefault/ul') });
 	var OL_WRAP = React.createElement('ol', { className: cx('public/DraftStyleDefault/ol') });
@@ -83856,7 +85087,7 @@
 	module.exports = DefaultDraftBlockRenderMap;
 
 /***/ },
-/* 849 */
+/* 851 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -83902,7 +85133,7 @@
 	module.exports = cx;
 
 /***/ },
-/* 850 */
+/* 852 */
 /***/ function(module, exports) {
 
 	/**
@@ -83943,7 +85174,7 @@
 	};
 
 /***/ },
-/* 851 */
+/* 853 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -83972,26 +85203,26 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var DefaultDraftBlockRenderMap = __webpack_require__(848);
-	var DefaultDraftInlineStyle = __webpack_require__(850);
-	var DraftEditorCompositionHandler = __webpack_require__(852);
-	var DraftEditorContents = __webpack_require__(856);
-	var DraftEditorDragHandler = __webpack_require__(876);
-	var DraftEditorEditHandler = __webpack_require__(884);
-	var DraftEditorPlaceholder = __webpack_require__(926);
-	var EditorState = __webpack_require__(835);
+	var DefaultDraftBlockRenderMap = __webpack_require__(850);
+	var DefaultDraftInlineStyle = __webpack_require__(852);
+	var DraftEditorCompositionHandler = __webpack_require__(854);
+	var DraftEditorContents = __webpack_require__(858);
+	var DraftEditorDragHandler = __webpack_require__(878);
+	var DraftEditorEditHandler = __webpack_require__(886);
+	var DraftEditorPlaceholder = __webpack_require__(928);
+	var EditorState = __webpack_require__(837);
 	var React = __webpack_require__(193);
 	var ReactDOM = __webpack_require__(223);
-	var Scroll = __webpack_require__(867);
-	var Style = __webpack_require__(868);
-	var UserAgent = __webpack_require__(860);
+	var Scroll = __webpack_require__(869);
+	var Style = __webpack_require__(870);
+	var UserAgent = __webpack_require__(862);
 
-	var cx = __webpack_require__(849);
+	var cx = __webpack_require__(851);
 	var emptyFunction = __webpack_require__(203);
-	var generateRandomKey = __webpack_require__(827);
-	var getDefaultKeyBinding = __webpack_require__(927);
-	var nullthrows = __webpack_require__(846);
-	var getScrollPosition = __webpack_require__(872);
+	var generateRandomKey = __webpack_require__(829);
+	var getDefaultKeyBinding = __webpack_require__(929);
+	var nullthrows = __webpack_require__(848);
+	var getScrollPosition = __webpack_require__(874);
 
 	var isIE = UserAgent.isBrowser('IE');
 
@@ -84384,7 +85615,7 @@
 	module.exports = DraftEditor;
 
 /***/ },
-/* 852 */
+/* 854 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -84401,12 +85632,12 @@
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(819);
-	var EditorState = __webpack_require__(835);
-	var Keys = __webpack_require__(853);
+	var DraftModifier = __webpack_require__(821);
+	var EditorState = __webpack_require__(837);
+	var Keys = __webpack_require__(855);
 
-	var getEntityKeyForSelection = __webpack_require__(854);
-	var isSelectionAtLeafStart = __webpack_require__(855);
+	var getEntityKeyForSelection = __webpack_require__(856);
+	var isSelectionAtLeafStart = __webpack_require__(857);
 
 	/**
 	 * Millisecond delay to allow `compositionstart` to fire again upon
@@ -84558,7 +85789,7 @@
 	module.exports = DraftEditorCompositionHandler;
 
 /***/ },
-/* 853 */
+/* 855 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -84599,7 +85830,7 @@
 	};
 
 /***/ },
-/* 854 */
+/* 856 */
 /***/ function(module, exports) {
 
 	/**
@@ -84659,7 +85890,7 @@
 	module.exports = getEntityKeyForSelection;
 
 /***/ },
-/* 855 */
+/* 857 */
 /***/ function(module, exports) {
 
 	/**
@@ -84712,7 +85943,7 @@
 	module.exports = isSelectionAtLeafStart;
 
 /***/ },
-/* 856 */
+/* 858 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -84740,14 +85971,14 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var DraftEditorBlock = __webpack_require__(857);
-	var DraftOffsetKey = __webpack_require__(866);
-	var EditorState = __webpack_require__(835);
+	var DraftEditorBlock = __webpack_require__(859);
+	var DraftOffsetKey = __webpack_require__(868);
+	var EditorState = __webpack_require__(837);
 	var React = __webpack_require__(193);
 
-	var cx = __webpack_require__(849);
-	var joinClasses = __webpack_require__(875);
-	var nullthrows = __webpack_require__(846);
+	var cx = __webpack_require__(851);
+	var joinClasses = __webpack_require__(877);
+	var nullthrows = __webpack_require__(848);
 
 	/**
 	 * `DraftEditorContents` is the container component for all block components
@@ -84960,7 +86191,7 @@
 	module.exports = DraftEditorContents;
 
 /***/ },
-/* 857 */
+/* 859 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -84988,23 +86219,23 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ContentBlock = __webpack_require__(817);
-	var ContentState = __webpack_require__(837);
-	var DraftEditorLeaf = __webpack_require__(858);
-	var DraftOffsetKey = __webpack_require__(866);
+	var ContentBlock = __webpack_require__(819);
+	var ContentState = __webpack_require__(839);
+	var DraftEditorLeaf = __webpack_require__(860);
+	var DraftOffsetKey = __webpack_require__(868);
 	var React = __webpack_require__(193);
 	var ReactDOM = __webpack_require__(223);
-	var Scroll = __webpack_require__(867);
-	var SelectionState = __webpack_require__(840);
-	var Style = __webpack_require__(868);
-	var UnicodeBidi = __webpack_require__(844);
-	var UnicodeBidiDirection = __webpack_require__(845);
+	var Scroll = __webpack_require__(869);
+	var SelectionState = __webpack_require__(842);
+	var Style = __webpack_require__(870);
+	var UnicodeBidi = __webpack_require__(846);
+	var UnicodeBidiDirection = __webpack_require__(847);
 
-	var cx = __webpack_require__(849);
-	var getElementPosition = __webpack_require__(870);
-	var getScrollPosition = __webpack_require__(872);
-	var getViewportDimensions = __webpack_require__(874);
-	var nullthrows = __webpack_require__(846);
+	var cx = __webpack_require__(851);
+	var getElementPosition = __webpack_require__(872);
+	var getScrollPosition = __webpack_require__(874);
+	var getViewportDimensions = __webpack_require__(876);
+	var nullthrows = __webpack_require__(848);
 
 	var SCROLL_BUFFER = 10;
 
@@ -85173,7 +86404,7 @@
 	module.exports = DraftEditorBlock;
 
 /***/ },
-/* 858 */
+/* 860 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -85199,12 +86430,12 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var DraftEditorTextNode = __webpack_require__(859);
+	var DraftEditorTextNode = __webpack_require__(861);
 	var React = __webpack_require__(193);
 	var ReactDOM = __webpack_require__(223);
-	var SelectionState = __webpack_require__(840);
+	var SelectionState = __webpack_require__(842);
 
-	var setDraftEditorSelection = __webpack_require__(865);
+	var setDraftEditorSelection = __webpack_require__(867);
 
 	/**
 	 * All leaf nodes in the editor are spans with single text nodes. Leaf
@@ -85337,7 +86568,7 @@
 	module.exports = DraftEditorLeaf;
 
 /***/ },
-/* 859 */
+/* 861 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -85363,7 +86594,7 @@
 
 	var React = __webpack_require__(193);
 	var ReactDOM = __webpack_require__(223);
-	var UserAgent = __webpack_require__(860);
+	var UserAgent = __webpack_require__(862);
 
 	// In IE, spans with <br> tags render as two newlines. By rendering a span
 	// with only a newline character, we can be sure to render a single line.
@@ -85450,7 +86681,7 @@
 	module.exports = DraftEditorTextNode;
 
 /***/ },
-/* 860 */
+/* 862 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -85465,10 +86696,10 @@
 
 	'use strict';
 
-	var UserAgentData = __webpack_require__(861);
-	var VersionRange = __webpack_require__(863);
+	var UserAgentData = __webpack_require__(863);
+	var VersionRange = __webpack_require__(865);
 
-	var mapObject = __webpack_require__(864);
+	var mapObject = __webpack_require__(866);
 	var memoizeStringOnly = __webpack_require__(293);
 
 	/**
@@ -85696,7 +86927,7 @@
 	module.exports = mapObject(UserAgent, memoizeStringOnly);
 
 /***/ },
-/* 861 */
+/* 863 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -85722,7 +86953,7 @@
 
 	'use strict';
 
-	var UAParser = __webpack_require__(862);
+	var UAParser = __webpack_require__(864);
 
 	var UNKNOWN = 'Unknown';
 
@@ -85783,7 +87014,7 @@
 	module.exports = uaData;
 
 /***/ },
-/* 862 */
+/* 864 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -86704,7 +87935,7 @@
 
 
 /***/ },
-/* 863 */
+/* 865 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -87092,7 +88323,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 864 */
+/* 866 */
 /***/ function(module, exports) {
 
 	/**
@@ -87147,7 +88378,7 @@
 	module.exports = mapObject;
 
 /***/ },
-/* 865 */
+/* 867 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -87286,7 +88517,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 866 */
+/* 868 */
 /***/ function(module, exports) {
 
 	/**
@@ -87328,7 +88559,7 @@
 	module.exports = DraftOffsetKey;
 
 /***/ },
-/* 867 */
+/* 869 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -87418,7 +88649,7 @@
 	module.exports = Scroll;
 
 /***/ },
-/* 868 */
+/* 870 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87434,7 +88665,7 @@
 	 * @typechecks
 	 */
 
-	var getStyleProperty = __webpack_require__(869);
+	var getStyleProperty = __webpack_require__(871);
 
 	/**
 	 * @param {DOMNode} element [description]
@@ -87486,7 +88717,7 @@
 	module.exports = Style;
 
 /***/ },
-/* 869 */
+/* 871 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87544,7 +88775,7 @@
 	module.exports = getStyleProperty;
 
 /***/ },
-/* 870 */
+/* 872 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87560,7 +88791,7 @@
 	 * @typechecks
 	 */
 
-	var getElementRect = __webpack_require__(871);
+	var getElementRect = __webpack_require__(873);
 
 	/**
 	 * Gets an element's position in pixels relative to the viewport. The returned
@@ -87582,7 +88813,7 @@
 	module.exports = getElementPosition;
 
 /***/ },
-/* 871 */
+/* 873 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87637,7 +88868,7 @@
 	module.exports = getElementRect;
 
 /***/ },
-/* 872 */
+/* 874 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -87653,7 +88884,7 @@
 
 	'use strict';
 
-	var getDocumentScrollElement = __webpack_require__(873);
+	var getDocumentScrollElement = __webpack_require__(875);
 	var getUnboundedScrollPosition = __webpack_require__(334);
 
 	/**
@@ -87689,7 +88920,7 @@
 	module.exports = getScrollPosition;
 
 /***/ },
-/* 873 */
+/* 875 */
 /***/ function(module, exports) {
 
 	/**
@@ -87724,7 +88955,7 @@
 	module.exports = getDocumentScrollElement;
 
 /***/ },
-/* 874 */
+/* 876 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -87788,7 +89019,7 @@
 	module.exports = getViewportDimensions;
 
 /***/ },
-/* 875 */
+/* 877 */
 /***/ function(module, exports) {
 
 	/**
@@ -87832,7 +89063,7 @@
 	module.exports = joinClasses;
 
 /***/ },
-/* 876 */
+/* 878 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -87850,16 +89081,16 @@
 
 	'use strict';
 
-	var DataTransfer = __webpack_require__(877);
-	var DraftModifier = __webpack_require__(819);
-	var EditorState = __webpack_require__(835);
+	var DataTransfer = __webpack_require__(879);
+	var DraftModifier = __webpack_require__(821);
+	var EditorState = __webpack_require__(837);
 
-	var findAncestorOffsetKey = __webpack_require__(879);
-	var getTextContentFromFiles = __webpack_require__(881);
-	var getUpdatedSelectionState = __webpack_require__(882);
-	var nullthrows = __webpack_require__(846);
+	var findAncestorOffsetKey = __webpack_require__(881);
+	var getTextContentFromFiles = __webpack_require__(883);
+	var getUpdatedSelectionState = __webpack_require__(884);
+	var nullthrows = __webpack_require__(848);
 
-	var isEventHandled = __webpack_require__(883);
+	var isEventHandled = __webpack_require__(885);
 
 	/**
 	 * Get a SelectionState for the supplied mouse event.
@@ -87954,7 +89185,7 @@
 	module.exports = DraftEditorDragHandler;
 
 /***/ },
-/* 877 */
+/* 879 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87972,7 +89203,7 @@
 	 * @typechecks
 	 */
 
-	var PhotosMimeType = __webpack_require__(878);
+	var PhotosMimeType = __webpack_require__(880);
 
 	var createArrayFromMixed = __webpack_require__(280);
 	var emptyFunction = __webpack_require__(203);
@@ -88180,7 +89411,7 @@
 	module.exports = DataTransfer;
 
 /***/ },
-/* 878 */
+/* 880 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -88213,7 +89444,7 @@
 	module.exports = PhotosMimeType;
 
 /***/ },
-/* 879 */
+/* 881 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -88231,7 +89462,7 @@
 
 	'use strict';
 
-	var getSelectionOffsetKeyForNode = __webpack_require__(880);
+	var getSelectionOffsetKeyForNode = __webpack_require__(882);
 
 	/**
 	 * Get the key from the node's nearest offset-aware ancestor.
@@ -88251,7 +89482,7 @@
 	module.exports = findAncestorOffsetKey;
 
 /***/ },
-/* 880 */
+/* 882 */
 /***/ function(module, exports) {
 
 	/**
@@ -88293,7 +89524,7 @@
 	module.exports = getSelectionOffsetKeyForNode;
 
 /***/ },
-/* 881 */
+/* 883 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -88374,7 +89605,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 882 */
+/* 884 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -88391,9 +89622,9 @@
 
 	'use strict';
 
-	var DraftOffsetKey = __webpack_require__(866);
+	var DraftOffsetKey = __webpack_require__(868);
 
-	var nullthrows = __webpack_require__(846);
+	var nullthrows = __webpack_require__(848);
 
 	function getUpdatedSelectionState(editorState, anchorKey, anchorOffset, focusKey, focusOffset) {
 	  var selection = nullthrows(editorState.getSelection());
@@ -88455,7 +89686,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 883 */
+/* 885 */
 /***/ function(module, exports) {
 
 	/**
@@ -88484,7 +89715,7 @@
 	module.exports = isEventHandled;
 
 /***/ },
-/* 884 */
+/* 886 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -88501,18 +89732,18 @@
 
 	'use strict';
 
-	var onBeforeInput = __webpack_require__(885);
-	var onBlur = __webpack_require__(887);
-	var onCompositionStart = __webpack_require__(888);
-	var onCopy = __webpack_require__(889);
-	var onCut = __webpack_require__(891);
-	var onDragOver = __webpack_require__(892);
-	var onDragStart = __webpack_require__(893);
-	var onFocus = __webpack_require__(894);
-	var onInput = __webpack_require__(895);
-	var onKeyDown = __webpack_require__(896);
-	var onPaste = __webpack_require__(918);
-	var onSelect = __webpack_require__(924);
+	var onBeforeInput = __webpack_require__(887);
+	var onBlur = __webpack_require__(889);
+	var onCompositionStart = __webpack_require__(890);
+	var onCopy = __webpack_require__(891);
+	var onCut = __webpack_require__(893);
+	var onDragOver = __webpack_require__(894);
+	var onDragStart = __webpack_require__(895);
+	var onFocus = __webpack_require__(896);
+	var onInput = __webpack_require__(897);
+	var onKeyDown = __webpack_require__(898);
+	var onPaste = __webpack_require__(920);
+	var onSelect = __webpack_require__(926);
 
 	var DraftEditorEditHandler = {
 	  onBeforeInput: onBeforeInput,
@@ -88532,7 +89763,7 @@
 	module.exports = DraftEditorEditHandler;
 
 /***/ },
-/* 885 */
+/* 887 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -88549,17 +89780,17 @@
 
 	'use strict';
 
-	var BlockTree = __webpack_require__(836);
-	var DraftModifier = __webpack_require__(819);
-	var EditorState = __webpack_require__(835);
-	var UserAgent = __webpack_require__(860);
+	var BlockTree = __webpack_require__(838);
+	var DraftModifier = __webpack_require__(821);
+	var EditorState = __webpack_require__(837);
+	var UserAgent = __webpack_require__(862);
 
-	var getEntityKeyForSelection = __webpack_require__(854);
-	var isSelectionAtLeafStart = __webpack_require__(855);
-	var nullthrows = __webpack_require__(846);
-	var setImmediate = __webpack_require__(886);
+	var getEntityKeyForSelection = __webpack_require__(856);
+	var isSelectionAtLeafStart = __webpack_require__(857);
+	var nullthrows = __webpack_require__(848);
+	var setImmediate = __webpack_require__(888);
 
-	var isEventHandled = __webpack_require__(883);
+	var isEventHandled = __webpack_require__(885);
 
 	// When nothing is focused, Firefox regards two characters, `'` and `/`, as
 	// commands that should open and focus the "quickfind" search bar. This should
@@ -88672,7 +89903,7 @@
 	module.exports = editOnBeforeInput;
 
 /***/ },
-/* 886 */
+/* 888 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -88695,7 +89926,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 887 */
+/* 889 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -88712,8 +89943,8 @@
 
 	'use strict';
 
-	var EditorState = __webpack_require__(835);
-	var UserAgent = __webpack_require__(860);
+	var EditorState = __webpack_require__(837);
+	var UserAgent = __webpack_require__(862);
 
 	var getActiveElement = __webpack_require__(343);
 
@@ -88745,7 +89976,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 888 */
+/* 890 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -88762,7 +89993,7 @@
 
 	'use strict';
 
-	var EditorState = __webpack_require__(835);
+	var EditorState = __webpack_require__(837);
 
 	/**
 	 * The user has begun using an IME input system. Switching to `composite` mode
@@ -88778,7 +90009,7 @@
 	module.exports = editOnCompositionStart;
 
 /***/ },
-/* 889 */
+/* 891 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -88795,7 +90026,7 @@
 
 	'use strict';
 
-	var getFragmentFromSelection = __webpack_require__(890);
+	var getFragmentFromSelection = __webpack_require__(892);
 
 	/**
 	 * If we have a selection, create a ContentState fragment and store
@@ -88818,7 +90049,7 @@
 	module.exports = editOnCopy;
 
 /***/ },
-/* 890 */
+/* 892 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -88835,7 +90066,7 @@
 
 	'use strict';
 
-	var getContentStateFragment = __webpack_require__(826);
+	var getContentStateFragment = __webpack_require__(828);
 
 	function getFragmentFromSelection(editorState) {
 	  var selectionState = editorState.getSelection();
@@ -88850,7 +90081,7 @@
 	module.exports = getFragmentFromSelection;
 
 /***/ },
-/* 891 */
+/* 893 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -88867,12 +90098,12 @@
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(819);
-	var EditorState = __webpack_require__(835);
-	var Style = __webpack_require__(868);
+	var DraftModifier = __webpack_require__(821);
+	var EditorState = __webpack_require__(837);
+	var Style = __webpack_require__(870);
 
-	var getFragmentFromSelection = __webpack_require__(890);
-	var getScrollPosition = __webpack_require__(872);
+	var getFragmentFromSelection = __webpack_require__(892);
+	var getScrollPosition = __webpack_require__(874);
 
 	/**
 	 * On `cut` events, native behavior is allowed to occur so that the system
@@ -88925,7 +90156,7 @@
 	module.exports = editOnCut;
 
 /***/ },
-/* 892 */
+/* 894 */
 /***/ function(module, exports) {
 
 	/**
@@ -88954,7 +90185,7 @@
 	module.exports = editOnDragOver;
 
 /***/ },
-/* 893 */
+/* 895 */
 /***/ function(module, exports) {
 
 	/**
@@ -88982,7 +90213,7 @@
 	module.exports = editOnDragStart;
 
 /***/ },
-/* 894 */
+/* 896 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -88999,7 +90230,7 @@
 
 	'use strict';
 
-	var EditorState = __webpack_require__(835);
+	var EditorState = __webpack_require__(837);
 
 	function editOnFocus(editor, e) {
 	  var editorState = editor._latestEditorState;
@@ -89023,7 +90254,7 @@
 	module.exports = editOnFocus;
 
 /***/ },
-/* 895 */
+/* 897 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -89040,13 +90271,13 @@
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(819);
-	var DraftOffsetKey = __webpack_require__(866);
-	var EditorState = __webpack_require__(835);
-	var UserAgent = __webpack_require__(860);
+	var DraftModifier = __webpack_require__(821);
+	var DraftOffsetKey = __webpack_require__(868);
+	var EditorState = __webpack_require__(837);
+	var UserAgent = __webpack_require__(862);
 
-	var findAncestorOffsetKey = __webpack_require__(879);
-	var nullthrows = __webpack_require__(846);
+	var findAncestorOffsetKey = __webpack_require__(881);
+	var nullthrows = __webpack_require__(848);
 
 	var isGecko = UserAgent.isEngine('Gecko');
 
@@ -89174,7 +90405,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 896 */
+/* 898 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -89191,25 +90422,25 @@
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(819);
-	var EditorState = __webpack_require__(835);
-	var KeyBindingUtil = __webpack_require__(897);
-	var Keys = __webpack_require__(853);
-	var SecondaryClipboard = __webpack_require__(898);
-	var UserAgent = __webpack_require__(860);
+	var DraftModifier = __webpack_require__(821);
+	var EditorState = __webpack_require__(837);
+	var KeyBindingUtil = __webpack_require__(899);
+	var Keys = __webpack_require__(855);
+	var SecondaryClipboard = __webpack_require__(900);
+	var UserAgent = __webpack_require__(862);
 
-	var keyCommandBackspaceToStartOfLine = __webpack_require__(899);
-	var keyCommandBackspaceWord = __webpack_require__(906);
-	var keyCommandDeleteWord = __webpack_require__(909);
-	var keyCommandInsertNewline = __webpack_require__(911);
-	var keyCommandPlainBackspace = __webpack_require__(912);
-	var keyCommandPlainDelete = __webpack_require__(913);
-	var keyCommandMoveSelectionToEndOfBlock = __webpack_require__(914);
-	var keyCommandMoveSelectionToStartOfBlock = __webpack_require__(915);
-	var keyCommandTransposeCharacters = __webpack_require__(916);
-	var keyCommandUndo = __webpack_require__(917);
+	var keyCommandBackspaceToStartOfLine = __webpack_require__(901);
+	var keyCommandBackspaceWord = __webpack_require__(908);
+	var keyCommandDeleteWord = __webpack_require__(911);
+	var keyCommandInsertNewline = __webpack_require__(913);
+	var keyCommandPlainBackspace = __webpack_require__(914);
+	var keyCommandPlainDelete = __webpack_require__(915);
+	var keyCommandMoveSelectionToEndOfBlock = __webpack_require__(916);
+	var keyCommandMoveSelectionToStartOfBlock = __webpack_require__(917);
+	var keyCommandTransposeCharacters = __webpack_require__(918);
+	var keyCommandUndo = __webpack_require__(919);
 
-	var isEventHandled = __webpack_require__(883);
+	var isEventHandled = __webpack_require__(885);
 
 	var isOptionKeyCommand = KeyBindingUtil.isOptionKeyCommand;
 
@@ -89327,7 +90558,7 @@
 	module.exports = editOnKeyDown;
 
 /***/ },
-/* 897 */
+/* 899 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -89345,7 +90576,7 @@
 
 	'use strict';
 
-	var UserAgent = __webpack_require__(860);
+	var UserAgent = __webpack_require__(862);
 
 	var isOSX = UserAgent.isPlatform('Mac OS X');
 
@@ -89371,7 +90602,7 @@
 	module.exports = KeyBindingUtil;
 
 /***/ },
-/* 898 */
+/* 900 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -89388,11 +90619,11 @@
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(819);
-	var EditorState = __webpack_require__(835);
+	var DraftModifier = __webpack_require__(821);
+	var EditorState = __webpack_require__(837);
 
-	var getContentStateFragment = __webpack_require__(826);
-	var nullthrows = __webpack_require__(846);
+	var getContentStateFragment = __webpack_require__(828);
+	var nullthrows = __webpack_require__(848);
 
 	var clipboard = null;
 
@@ -89445,7 +90676,7 @@
 	module.exports = SecondaryClipboard;
 
 /***/ },
-/* 899 */
+/* 901 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -89462,12 +90693,12 @@
 
 	'use strict';
 
-	var EditorState = __webpack_require__(835);
+	var EditorState = __webpack_require__(837);
 
-	var expandRangeToStartOfLine = __webpack_require__(900);
-	var getDraftEditorSelectionWithNodes = __webpack_require__(903);
-	var moveSelectionBackward = __webpack_require__(904);
-	var removeTextWithStrategy = __webpack_require__(905);
+	var expandRangeToStartOfLine = __webpack_require__(902);
+	var getDraftEditorSelectionWithNodes = __webpack_require__(905);
+	var moveSelectionBackward = __webpack_require__(906);
+	var removeTextWithStrategy = __webpack_require__(907);
 
 	function keyCommandBackspaceToStartOfLine(editorState) {
 	  var afterRemoval = removeTextWithStrategy(editorState, function (strategyState) {
@@ -89494,7 +90725,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 900 */
+/* 902 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -89512,9 +90743,9 @@
 	 * 
 	 */
 
-	var UnicodeUtils = __webpack_require__(901);
+	var UnicodeUtils = __webpack_require__(903);
 
-	var getRangeClientRects = __webpack_require__(902);
+	var getRangeClientRects = __webpack_require__(904);
 	var invariant = __webpack_require__(199);
 
 	/**
@@ -89689,7 +90920,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 901 */
+/* 903 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -89909,7 +91140,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 902 */
+/* 904 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -89927,7 +91158,7 @@
 
 	'use strict';
 
-	var UserAgent = __webpack_require__(860);
+	var UserAgent = __webpack_require__(862);
 
 	var invariant = __webpack_require__(199);
 
@@ -89978,7 +91209,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 903 */
+/* 905 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -89996,11 +91227,11 @@
 
 	'use strict';
 
-	var findAncestorOffsetKey = __webpack_require__(879);
-	var getSelectionOffsetKeyForNode = __webpack_require__(880);
-	var getUpdatedSelectionState = __webpack_require__(882);
+	var findAncestorOffsetKey = __webpack_require__(881);
+	var getSelectionOffsetKeyForNode = __webpack_require__(882);
+	var getUpdatedSelectionState = __webpack_require__(884);
 	var invariant = __webpack_require__(199);
-	var nullthrows = __webpack_require__(846);
+	var nullthrows = __webpack_require__(848);
 
 	/**
 	 * Convert the current selection range to an anchor/focus pair of offset keys
@@ -90163,7 +91394,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 904 */
+/* 906 */
 /***/ function(module, exports) {
 
 	/**
@@ -90220,7 +91451,7 @@
 	module.exports = moveSelectionBackward;
 
 /***/ },
-/* 905 */
+/* 907 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -90237,7 +91468,7 @@
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(819);
+	var DraftModifier = __webpack_require__(821);
 
 	/**
 	 * For a collapsed selection state, remove text based on the specified strategy.
@@ -90267,7 +91498,7 @@
 	module.exports = removeTextWithStrategy;
 
 /***/ },
-/* 906 */
+/* 908 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -90284,11 +91515,11 @@
 
 	'use strict';
 
-	var DraftRemovableWord = __webpack_require__(907);
-	var EditorState = __webpack_require__(835);
+	var DraftRemovableWord = __webpack_require__(909);
+	var EditorState = __webpack_require__(837);
 
-	var moveSelectionBackward = __webpack_require__(904);
-	var removeTextWithStrategy = __webpack_require__(905);
+	var moveSelectionBackward = __webpack_require__(906);
+	var removeTextWithStrategy = __webpack_require__(907);
 
 	/**
 	 * Delete the word that is left of the cursor, as well as any spaces or
@@ -90319,7 +91550,7 @@
 	module.exports = keyCommandBackspaceWord;
 
 /***/ },
-/* 907 */
+/* 909 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -90337,7 +91568,7 @@
 
 	'use strict';
 
-	var TokenizeUtil = __webpack_require__(908);
+	var TokenizeUtil = __webpack_require__(910);
 
 	var punctuation = TokenizeUtil.getPunctuation();
 
@@ -90375,7 +91606,7 @@
 	module.exports = DraftRemovableWord;
 
 /***/ },
-/* 908 */
+/* 910 */
 /***/ function(module, exports) {
 
 	/**
@@ -90417,7 +91648,7 @@
 	};
 
 /***/ },
-/* 909 */
+/* 911 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -90434,11 +91665,11 @@
 
 	'use strict';
 
-	var DraftRemovableWord = __webpack_require__(907);
-	var EditorState = __webpack_require__(835);
+	var DraftRemovableWord = __webpack_require__(909);
+	var EditorState = __webpack_require__(837);
 
-	var moveSelectionForward = __webpack_require__(910);
-	var removeTextWithStrategy = __webpack_require__(905);
+	var moveSelectionForward = __webpack_require__(912);
+	var removeTextWithStrategy = __webpack_require__(907);
 
 	/**
 	 * Delete the word that is right of the cursor, as well as any spaces or
@@ -90467,7 +91698,7 @@
 	module.exports = keyCommandDeleteWord;
 
 /***/ },
-/* 910 */
+/* 912 */
 /***/ function(module, exports) {
 
 	/**
@@ -90516,7 +91747,7 @@
 	module.exports = moveSelectionForward;
 
 /***/ },
-/* 911 */
+/* 913 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -90533,8 +91764,8 @@
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(819);
-	var EditorState = __webpack_require__(835);
+	var DraftModifier = __webpack_require__(821);
+	var EditorState = __webpack_require__(837);
 
 	function keyCommandInsertNewline(editorState) {
 	  var contentState = DraftModifier.splitBlock(editorState.getCurrentContent(), editorState.getSelection());
@@ -90544,7 +91775,7 @@
 	module.exports = keyCommandInsertNewline;
 
 /***/ },
-/* 912 */
+/* 914 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -90561,11 +91792,11 @@
 
 	'use strict';
 
-	var EditorState = __webpack_require__(835);
-	var UnicodeUtils = __webpack_require__(901);
+	var EditorState = __webpack_require__(837);
+	var UnicodeUtils = __webpack_require__(903);
 
-	var moveSelectionBackward = __webpack_require__(904);
-	var removeTextWithStrategy = __webpack_require__(905);
+	var moveSelectionBackward = __webpack_require__(906);
+	var removeTextWithStrategy = __webpack_require__(907);
 
 	/**
 	 * Remove the selected range. If the cursor is collapsed, remove the preceding
@@ -90593,7 +91824,7 @@
 	module.exports = keyCommandPlainBackspace;
 
 /***/ },
-/* 913 */
+/* 915 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -90610,11 +91841,11 @@
 
 	'use strict';
 
-	var EditorState = __webpack_require__(835);
-	var UnicodeUtils = __webpack_require__(901);
+	var EditorState = __webpack_require__(837);
+	var UnicodeUtils = __webpack_require__(903);
 
-	var moveSelectionForward = __webpack_require__(910);
-	var removeTextWithStrategy = __webpack_require__(905);
+	var moveSelectionForward = __webpack_require__(912);
+	var removeTextWithStrategy = __webpack_require__(907);
 
 	/**
 	 * Remove the selected range. If the cursor is collapsed, remove the following
@@ -90643,7 +91874,7 @@
 	module.exports = keyCommandPlainDelete;
 
 /***/ },
-/* 914 */
+/* 916 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -90660,7 +91891,7 @@
 
 	'use strict';
 
-	var EditorState = __webpack_require__(835);
+	var EditorState = __webpack_require__(837);
 
 	/**
 	 * See comment for `moveSelectionToStartOfBlock`.
@@ -90685,7 +91916,7 @@
 	module.exports = keyCommandMoveSelectionToEndOfBlock;
 
 /***/ },
-/* 915 */
+/* 917 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -90702,7 +91933,7 @@
 
 	'use strict';
 
-	var EditorState = __webpack_require__(835);
+	var EditorState = __webpack_require__(837);
 
 	/**
 	 * Collapse selection at the start of the first selected block. This is used
@@ -90727,7 +91958,7 @@
 	module.exports = keyCommandMoveSelectionToStartOfBlock;
 
 /***/ },
-/* 916 */
+/* 918 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -90744,10 +91975,10 @@
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(819);
-	var EditorState = __webpack_require__(835);
+	var DraftModifier = __webpack_require__(821);
+	var EditorState = __webpack_require__(837);
 
-	var getContentStateFragment = __webpack_require__(826);
+	var getContentStateFragment = __webpack_require__(828);
 
 	/**
 	 * Transpose the characters on either side of a collapsed cursor, or
@@ -90810,7 +92041,7 @@
 	module.exports = keyCommandTransposeCharacters;
 
 /***/ },
-/* 917 */
+/* 919 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -90827,7 +92058,7 @@
 
 	'use strict';
 
-	var EditorState = __webpack_require__(835);
+	var EditorState = __webpack_require__(837);
 
 	function keyCommandUndo(e, editorState, updateFn) {
 	  var undoneState = EditorState.undo(editorState);
@@ -90863,7 +92094,7 @@
 	module.exports = keyCommandUndo;
 
 /***/ },
-/* 918 */
+/* 920 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -90880,17 +92111,17 @@
 
 	'use strict';
 
-	var BlockMapBuilder = __webpack_require__(814);
-	var CharacterMetadata = __webpack_require__(816);
-	var DataTransfer = __webpack_require__(877);
-	var DraftModifier = __webpack_require__(819);
-	var DraftPasteProcessor = __webpack_require__(919);
-	var EditorState = __webpack_require__(835);
+	var BlockMapBuilder = __webpack_require__(816);
+	var CharacterMetadata = __webpack_require__(818);
+	var DataTransfer = __webpack_require__(879);
+	var DraftModifier = __webpack_require__(821);
+	var DraftPasteProcessor = __webpack_require__(921);
+	var EditorState = __webpack_require__(837);
 
-	var getEntityKeyForSelection = __webpack_require__(854);
-	var getTextContentFromFiles = __webpack_require__(881);
-	var isEventHandled = __webpack_require__(883);
-	var splitTextIntoTextBlocks = __webpack_require__(923);
+	var getEntityKeyForSelection = __webpack_require__(856);
+	var getTextContentFromFiles = __webpack_require__(883);
+	var isEventHandled = __webpack_require__(885);
+	var splitTextIntoTextBlocks = __webpack_require__(925);
 
 	/**
 	 * Paste content.
@@ -91028,7 +92259,7 @@
 	module.exports = editOnPaste;
 
 /***/ },
-/* 919 */
+/* 921 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -91046,14 +92277,14 @@
 
 	'use strict';
 
-	var CharacterMetadata = __webpack_require__(816);
-	var ContentBlock = __webpack_require__(817);
-	var Immutable = __webpack_require__(815);
+	var CharacterMetadata = __webpack_require__(818);
+	var ContentBlock = __webpack_require__(819);
+	var Immutable = __webpack_require__(817);
 
-	var convertFromHTMLtoContentBlocks = __webpack_require__(920);
-	var generateRandomKey = __webpack_require__(827);
-	var getSafeBodyFromHTML = __webpack_require__(922);
-	var sanitizeDraftText = __webpack_require__(841);
+	var convertFromHTMLtoContentBlocks = __webpack_require__(922);
+	var generateRandomKey = __webpack_require__(829);
+	var getSafeBodyFromHTML = __webpack_require__(924);
+	var sanitizeDraftText = __webpack_require__(843);
 
 	var List = Immutable.List;
 	var Repeat = Immutable.Repeat;
@@ -91079,7 +92310,7 @@
 	module.exports = DraftPasteProcessor;
 
 /***/ },
-/* 920 */
+/* 922 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -91097,20 +92328,20 @@
 
 	'use strict';
 
-	var CharacterMetadata = __webpack_require__(816);
-	var ContentBlock = __webpack_require__(817);
-	var DefaultDraftBlockRenderMap = __webpack_require__(848);
-	var DraftEntity = __webpack_require__(838);
-	var Immutable = __webpack_require__(815);
-	var URI = __webpack_require__(921);
+	var CharacterMetadata = __webpack_require__(818);
+	var ContentBlock = __webpack_require__(819);
+	var DefaultDraftBlockRenderMap = __webpack_require__(850);
+	var DraftEntity = __webpack_require__(840);
+	var Immutable = __webpack_require__(817);
+	var URI = __webpack_require__(923);
 
-	var generateRandomKey = __webpack_require__(827);
-	var getSafeBodyFromHTML = __webpack_require__(922);
+	var generateRandomKey = __webpack_require__(829);
+	var getSafeBodyFromHTML = __webpack_require__(924);
 	var invariant = __webpack_require__(199);
-	var nullthrows = __webpack_require__(846);
-	var sanitizeDraftText = __webpack_require__(841);
+	var nullthrows = __webpack_require__(848);
+	var sanitizeDraftText = __webpack_require__(843);
 
-	var _require = __webpack_require__(815);
+	var _require = __webpack_require__(817);
 
 	var Set = _require.Set;
 	var List = Immutable.List;
@@ -91600,7 +92831,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(192)))
 
 /***/ },
-/* 921 */
+/* 923 */
 /***/ function(module, exports) {
 
 	/**
@@ -91635,7 +92866,7 @@
 	module.exports = URI;
 
 /***/ },
-/* 922 */
+/* 924 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -91652,7 +92883,7 @@
 
 	'use strict';
 
-	var UserAgent = __webpack_require__(860);
+	var UserAgent = __webpack_require__(862);
 
 	var isOldIE = UserAgent.isBrowser('IE <= 9');
 
@@ -91675,7 +92906,7 @@
 	module.exports = getSafeBodyFromHTML;
 
 /***/ },
-/* 923 */
+/* 925 */
 /***/ function(module, exports) {
 
 	/**
@@ -91701,7 +92932,7 @@
 	module.exports = splitTextIntoTextBlocks;
 
 /***/ },
-/* 924 */
+/* 926 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -91718,10 +92949,10 @@
 
 	'use strict';
 
-	var EditorState = __webpack_require__(835);
+	var EditorState = __webpack_require__(837);
 	var ReactDOM = __webpack_require__(223);
 
-	var getDraftEditorSelection = __webpack_require__(925);
+	var getDraftEditorSelection = __webpack_require__(927);
 
 	function editOnSelect(editor) {
 	  if (editor._blockSelectEvents || editor._latestEditorState !== editor.props.editorState) {
@@ -91745,7 +92976,7 @@
 	module.exports = editOnSelect;
 
 /***/ },
-/* 925 */
+/* 927 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -91763,7 +92994,7 @@
 
 	'use strict';
 
-	var getDraftEditorSelectionWithNodes = __webpack_require__(903);
+	var getDraftEditorSelectionWithNodes = __webpack_require__(905);
 
 	/**
 	 * Convert the current selection range to an anchor/focus pair of offset keys
@@ -91787,7 +93018,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 926 */
+/* 928 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -91813,7 +93044,7 @@
 
 	var React = __webpack_require__(193);
 
-	var cx = __webpack_require__(849);
+	var cx = __webpack_require__(851);
 
 	/**
 	 * This component is responsible for rendering placeholder text for the
@@ -91861,7 +93092,7 @@
 	module.exports = DraftEditorPlaceholder;
 
 /***/ },
-/* 927 */
+/* 929 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -91879,9 +93110,9 @@
 
 	'use strict';
 
-	var KeyBindingUtil = __webpack_require__(897);
-	var Keys = __webpack_require__(853);
-	var UserAgent = __webpack_require__(860);
+	var KeyBindingUtil = __webpack_require__(899);
+	var Keys = __webpack_require__(855);
+	var UserAgent = __webpack_require__(862);
 
 	var isOSX = UserAgent.isPlatform('Mac OS X');
 	var isWindows = UserAgent.isPlatform('Windows');
@@ -91990,7 +93221,7 @@
 	module.exports = getDefaultKeyBinding;
 
 /***/ },
-/* 928 */
+/* 930 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -92008,12 +93239,12 @@
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(819);
-	var EditorState = __webpack_require__(835);
-	var SelectionState = __webpack_require__(840);
+	var DraftModifier = __webpack_require__(821);
+	var EditorState = __webpack_require__(837);
+	var SelectionState = __webpack_require__(842);
 
-	var adjustBlockDepthForContentState = __webpack_require__(929);
-	var nullthrows = __webpack_require__(846);
+	var adjustBlockDepthForContentState = __webpack_require__(931);
+	var nullthrows = __webpack_require__(848);
 
 	var RichTextEditorUtil = {
 	  currentBlockContainsLink: function currentBlockContainsLink(editorState) {
@@ -92300,7 +93531,7 @@
 	module.exports = RichTextEditorUtil;
 
 /***/ },
-/* 929 */
+/* 931 */
 /***/ function(module, exports) {
 
 	/**
@@ -92344,7 +93575,7 @@
 	module.exports = adjustBlockDepthForContentState;
 
 /***/ },
-/* 930 */
+/* 932 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -92361,10 +93592,10 @@
 
 	'use strict';
 
-	var DraftStringKey = __webpack_require__(931);
+	var DraftStringKey = __webpack_require__(933);
 
-	var encodeEntityRanges = __webpack_require__(932);
-	var encodeInlineStyleRanges = __webpack_require__(933);
+	var encodeEntityRanges = __webpack_require__(934);
+	var encodeInlineStyleRanges = __webpack_require__(935);
 
 	function convertFromDraftStateToRaw(contentState) {
 	  var entityStorageKey = 0;
@@ -92415,7 +93646,7 @@
 	module.exports = convertFromDraftStateToRaw;
 
 /***/ },
-/* 931 */
+/* 933 */
 /***/ function(module, exports) {
 
 	/**
@@ -92446,7 +93677,7 @@
 	module.exports = DraftStringKey;
 
 /***/ },
-/* 932 */
+/* 934 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -92464,8 +93695,8 @@
 
 	'use strict';
 
-	var DraftStringKey = __webpack_require__(931);
-	var UnicodeUtils = __webpack_require__(901);
+	var DraftStringKey = __webpack_require__(933);
+	var UnicodeUtils = __webpack_require__(903);
 
 	var strlen = UnicodeUtils.strlen;
 
@@ -92493,7 +93724,7 @@
 	module.exports = encodeEntityRanges;
 
 /***/ },
-/* 933 */
+/* 935 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -92510,9 +93741,9 @@
 
 	'use strict';
 
-	var UnicodeUtils = __webpack_require__(901);
+	var UnicodeUtils = __webpack_require__(903);
 
-	var findRangesImmutable = __webpack_require__(818);
+	var findRangesImmutable = __webpack_require__(820);
 
 	var areEqual = function areEqual(a, b) {
 	  return a === b;
@@ -92566,7 +93797,7 @@
 	module.exports = encodeInlineStyleRanges;
 
 /***/ },
-/* 934 */
+/* 936 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -92587,15 +93818,15 @@
 
 	var _extends = _assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var ContentBlock = __webpack_require__(817);
-	var ContentState = __webpack_require__(837);
-	var DraftEntity = __webpack_require__(838);
+	var ContentBlock = __webpack_require__(819);
+	var ContentState = __webpack_require__(839);
+	var DraftEntity = __webpack_require__(840);
 
-	var createCharacterList = __webpack_require__(935);
-	var decodeEntityRanges = __webpack_require__(936);
-	var decodeInlineStyleRanges = __webpack_require__(937);
-	var generateRandomKey = __webpack_require__(827);
-	var Immutable = __webpack_require__(815);
+	var createCharacterList = __webpack_require__(937);
+	var decodeEntityRanges = __webpack_require__(938);
+	var decodeInlineStyleRanges = __webpack_require__(939);
+	var generateRandomKey = __webpack_require__(829);
+	var Immutable = __webpack_require__(817);
 
 	var Map = Immutable.Map;
 
@@ -92654,7 +93885,7 @@
 	module.exports = convertFromRawToDraftState;
 
 /***/ },
-/* 935 */
+/* 937 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -92672,8 +93903,8 @@
 
 	'use strict';
 
-	var CharacterMetadata = __webpack_require__(816);
-	var Immutable = __webpack_require__(815);
+	var CharacterMetadata = __webpack_require__(818);
+	var Immutable = __webpack_require__(817);
 
 	var List = Immutable.List;
 
@@ -92689,7 +93920,7 @@
 	module.exports = createCharacterList;
 
 /***/ },
-/* 936 */
+/* 938 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -92707,7 +93938,7 @@
 
 	'use strict';
 
-	var UnicodeUtils = __webpack_require__(901);
+	var UnicodeUtils = __webpack_require__(903);
 
 	var substr = UnicodeUtils.substr;
 
@@ -92734,7 +93965,7 @@
 	module.exports = decodeEntityRanges;
 
 /***/ },
-/* 937 */
+/* 939 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -92752,9 +93983,9 @@
 
 	'use strict';
 
-	var UnicodeUtils = __webpack_require__(901);
+	var UnicodeUtils = __webpack_require__(903);
 
-	var _require = __webpack_require__(815);
+	var _require = __webpack_require__(817);
 
 	var OrderedSet = _require.OrderedSet;
 	var substr = UnicodeUtils.substr;
@@ -92783,7 +94014,7 @@
 	module.exports = decodeInlineStyleRanges;
 
 /***/ },
-/* 938 */
+/* 940 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -92801,7 +94032,7 @@
 
 	'use strict';
 
-	var getRangeBoundingClientRect = __webpack_require__(939);
+	var getRangeBoundingClientRect = __webpack_require__(941);
 
 	/**
 	 * Return the bounding ClientRect for the visible DOM selection, if any.
@@ -92835,7 +94066,7 @@
 	module.exports = getVisibleSelectionRect;
 
 /***/ },
-/* 939 */
+/* 941 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -92853,7 +94084,7 @@
 
 	'use strict';
 
-	var getRangeClientRects = __webpack_require__(902);
+	var getRangeClientRects = __webpack_require__(904);
 
 	/**
 	 * Like range.getBoundingClientRect() but normalizes for browser bugs.
@@ -92900,7 +94131,7 @@
 	module.exports = getRangeBoundingClientRect;
 
 /***/ },
-/* 940 */
+/* 942 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -92935,15 +94166,15 @@
 
 	var _componentsToolTool = __webpack_require__(467);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
-	var _RichText = __webpack_require__(811);
+	var _RichText = __webpack_require__(813);
 
 	var _RichText2 = _interopRequireDefault(_RichText);
 
@@ -92965,7 +94196,7 @@
 	    _createClass(NoticeUpdateContainer, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(parseInt(this.props.params.id.substring(1)), _constantsIndexJs.NOTICE_DETAIL_START, _constantsIndexJs.NOTICE_DETAIL_END, notice_detail));
+	            this.props.dispatch((0, _actionsCommonActions.getDetail)(parseInt(this.props.params.id.substring(1)), _constantsIndexJs.NOTICE_DETAIL_START, _constantsIndexJs.NOTICE_DETAIL_END, notice_detail));
 	        }
 	    }, {
 	        key: '_startRefresh',
@@ -92985,6 +94216,7 @@
 	            var _props = this.props;
 	            var data = _props.data;
 	            var refresh = _props.refresh;
+	            var fetching = _props.fetching;
 
 	            return _react2['default'].createElement(
 	                'div',
@@ -92997,7 +94229,8 @@
 	                _react2['default'].createElement(
 	                    'div',
 	                    { className: 'content', style: { marginTop: '20px' } },
-	                    _react2['default'].createElement(UpdateNoticeComponent, { data: data, _save: this._save, _startRefresh: this._startRefresh })
+	                    _react2['default'].createElement(UpdateNoticeComponent, { data: data, _save: this._save, _startRefresh: this._startRefresh,
+	                        fetching: fetching })
 	                )
 	            );
 	        }
@@ -93018,36 +94251,35 @@
 	        this.initialFlag = 0;
 	        this._save = this._save.bind(this);
 	        this._uploadImg = this._uploadImg.bind(this);
+	        this.count = 0;
 	    }
 
 	    _createClass(UpdateNoticeComponent, [{
 	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var self = this;
-	            $("#noticeForm").validate({
-	                ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
-	                errorClass: 'validation-error-label',
-	                successClass: 'validation-valid-label',
-	                highlight: function highlight(element, errorClass) {
-	                    $(element).removeClass(errorClass);
-	                },
-	                unhighlight: function unhighlight(element, errorClass) {
-	                    $(element).removeClass(errorClass);
-	                },
-	                validClass: "validation-valid-label",
-	                success: function success(label) {
-	                    label.addClass("validation-valid-label").text("Success.");
-	                }
-	            });
-	        }
+	        value: function componentDidMount() {}
 	    }, {
 	        key: 'componentDidUpdate',
 	        value: function componentDidUpdate() {
 	            var self = this;
-	            if (this.props.data.status) {
-	                this.initialFlag = this.initialFlag + 1;
-	            }
-	            if (this.props.data.status && this.initialFlag <= 1) {
+	            if (this.props.data.status && this.count > 1) {
+	                $("#noticeForm").validate({
+	                    ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
+	                    errorClass: 'validation-error-label',
+	                    successClass: 'validation-valid-label',
+	                    highlight: function highlight(element, errorClass) {
+	                        $(element).removeClass(errorClass);
+	                    },
+	                    unhighlight: function unhighlight(element, errorClass) {
+	                        $(element).removeClass(errorClass);
+	                    },
+	                    validClass: "validation-valid-label",
+	                    success: function success(label) {
+	                        label.addClass("validation-valid-label").text("Success.");
+	                    },
+	                    errorPlacement: function errorPlacement(error, element) {
+	                        error.appendTo(element.parent().parent().find(".errorShow"));
+	                    }
+	                });
 	                $('#file-input').fileinput({
 	                    uploadUrl: 'http://dev.xysy.tech/rsapp/file/news',
 	                    language: 'zh',
@@ -93056,7 +94288,7 @@
 	                    browseIcon: '<i class="icon-folder-open"></i>&nbsp;',
 	                    removeIcon: '<i class="icon-trash"></i>',
 	                    enctype: 'multipart/form-data',
-	                    allowedFileExtensions: ['jpg', 'png'],
+	                    allowedFileExtensions: ['jpg', 'png', 'jpeg'],
 	                    initialPreview: ["<img src='" + self.props.data.data.img + "' class='file-preview-image' />"]
 	                });
 	                $('#file-input').on("fileuploaded", function (event, data) {
@@ -93106,276 +94338,208 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var data = this.props.data;
+	            var _props2 = this.props;
+	            var data = _props2.data;
+	            var fetching = _props2.fetching;
 
-	            console.log("bb", data);
 	            var tableHeight = $(window).height() - 130;
 	            var detail = "";
-	            if (data.status) {
-	                detail = _react2['default'].createElement(
-	                    'form',
-	                    { id: 'noticeForm', className: 'form-horizontal', action: '#' },
-	                    _react2['default'].createElement(
-	                        'div',
-	                        { className: 'row', style: { height: tableHeight + 'px', overflowY: 'scroll' } },
+	            console.log(fetching, data);
+
+	            if (!fetching) {
+	                this.count++;
+	                console.log("count", this.count);
+	                if (data && this.count > 1) {
+	                    detail = _react2['default'].createElement(
+	                        'form',
+	                        { id: 'noticeForm', className: 'form-horizontal', action: '#' },
 	                        _react2['default'].createElement(
 	                            'div',
-	                            { className: 'col-sm-8 col-sm-offset-2' },
-	                            _react2['default'].createElement(
-	                                'fieldset',
-	                                { className: 'content-group' },
-	                                _react2['default'].createElement(
-	                                    'legend',
-	                                    { className: 'text-bold' },
-	                                    "公告基础信息"
-	                                ),
-	                                _react2['default'].createElement(
-	                                    'div',
-	                                    { className: 'form-group' },
-	                                    _react2['default'].createElement(
-	                                        'label',
-	                                        { className: 'col-lg-2 control-label',
-	                                            style: {
-	                                                textAlign: 'center'
-	                                            } },
-	                                        "分类名称"
-	                                    ),
-	                                    _react2['default'].createElement(
-	                                        'div',
-	                                        { className: 'col-lg-9' },
-	                                        _react2['default'].createElement(
-	                                            'select',
-	                                            { className: 'form-control', name: 'type', defaultValue: data.data.type },
-	                                            _react2['default'].createElement(
-	                                                'option',
-	                                                { value: 1 },
-	                                                "公告"
-	                                            ),
-	                                            _react2['default'].createElement(
-	                                                'option',
-	                                                { value: 2 },
-	                                                "新闻"
-	                                            ),
-	                                            _react2['default'].createElement(
-	                                                'option',
-	                                                { value: 3 },
-	                                                "政策法规"
-	                                            )
-	                                        )
-	                                    )
-	                                ),
-	                                _react2['default'].createElement(
-	                                    'div',
-	                                    { className: 'form-group' },
-	                                    _react2['default'].createElement(
-	                                        'label',
-	                                        { className: 'col-lg-2 control-label',
-	                                            style: {
-	                                                textAlign: 'center'
-	                                            } },
-	                                        "标 题"
-	                                    ),
-	                                    _react2['default'].createElement(
-	                                        'div',
-	                                        { className: 'col-lg-9' },
-	                                        _react2['default'].createElement('input', { name: 'title', type: 'text', className: 'form-control',
-	                                            defaultValue: data.data.title, placeholder: "标题", required: 'required', autoComplete: 'off' })
-	                                    )
-	                                ),
-	                                _react2['default'].createElement(
-	                                    'div',
-	                                    { className: 'form-group' },
-	                                    _react2['default'].createElement(
-	                                        'label',
-	                                        { className: 'col-lg-2 control-label', style: {
-	                                                textAlign: 'center'
-	                                            } },
-	                                        '首页大图公告'
-	                                    ),
-	                                    _react2['default'].createElement(
-	                                        'div',
-	                                        { className: 'col-lg-9' },
-	                                        _react2['default'].createElement(
-	                                            'label',
-	                                            { className: 'radio-inline' },
-	                                            _react2['default'].createElement(
-	                                                'div',
-	                                                { className: 'choice' },
-	                                                _react2['default'].createElement(
-	                                                    'span',
-	                                                    { className: data.data.homeNotice == 1 ? "checked" : "" },
-	                                                    _react2['default'].createElement('input', { type: 'radio', name: 'homeNotice', value: 1, className: 'styled', onClick: this._clickRadio.bind(this) })
-	                                                )
-	                                            ),
-	                                            '是'
-	                                        ),
-	                                        _react2['default'].createElement(
-	                                            'label',
-	                                            { className: 'radio-inline' },
-	                                            _react2['default'].createElement(
-	                                                'div',
-	                                                { className: 'choice' },
-	                                                _react2['default'].createElement(
-	                                                    'span',
-	                                                    { className: data.data.homeNotice == 0 ? "checked" : "" },
-	                                                    _react2['default'].createElement('input', { type: 'radio', name: 'homeNotice', value: 0, className: 'styled', onClick: this._clickRadio.bind(this) })
-	                                                )
-	                                            ),
-	                                            '否'
-	                                        )
-	                                    )
-	                                ),
-	                                _react2['default'].createElement(
-	                                    'div',
-	                                    { className: 'form-group' },
-	                                    _react2['default'].createElement(
-	                                        'label',
-	                                        { className: 'col-lg-2 control-label',
-	                                            style: {
-	                                                textAlign: 'center'
-	                                            } },
-	                                        "摘 要"
-	                                    ),
-	                                    _react2['default'].createElement(
-	                                        'div',
-	                                        { className: 'col-lg-9' },
-	                                        _react2['default'].createElement('textarea', { name: 'digest', defaultValue: data.data.digest, type: 'text', className: 'form-control', autoComplete: 'off' })
-	                                    )
-	                                ),
-	                                _react2['default'].createElement(
-	                                    'div',
-	                                    { className: 'form-group' },
-	                                    _react2['default'].createElement(
-	                                        'label',
-	                                        { className: 'col-lg-2 control-label',
-	                                            style: {
-	                                                textAlign: 'center'
-	                                            } },
-	                                        "图片URL"
-	                                    ),
-	                                    _react2['default'].createElement(
-	                                        'div',
-	                                        { className: 'col-lg-9' },
-	                                        _react2['default'].createElement('input', { type: 'file', name: 'file', id: 'file-input', defaultValue: data.data.img,
-	                                            multiple: true })
-	                                    )
-	                                ),
-	                                _react2['default'].createElement(
-	                                    'div',
-	                                    { className: 'form-group' },
-	                                    _react2['default'].createElement(
-	                                        'label',
-	                                        { className: 'col-lg-2 control-label',
-	                                            style: {
-	                                                textAlign: 'center'
-	                                            } },
-	                                        "内容"
-	                                    ),
-	                                    _react2['default'].createElement(
-	                                        'div',
-	                                        { className: 'col-lg-9' },
-	                                        _react2['default'].createElement(_RichText2['default'], { id: 'content', height: '200', value: data.data.content, disabled: false })
-	                                    )
-	                                )
-	                            ),
+	                            { className: 'row', style: { height: tableHeight + 'px', overflowY: 'scroll' } },
 	                            _react2['default'].createElement(
 	                                'div',
-	                                { className: 'form-group' },
+	                                { className: 'col-sm-8 col-sm-offset-2' },
+	                                _react2['default'].createElement(
+	                                    'fieldset',
+	                                    { className: 'content-group' },
+	                                    _react2['default'].createElement(
+	                                        'legend',
+	                                        { className: 'text-bold' },
+	                                        "公告基础信息"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'form-group' },
+	                                        _react2['default'].createElement(
+	                                            'label',
+	                                            { className: 'col-lg-2 control-label',
+	                                                style: {
+	                                                    textAlign: 'center'
+	                                                } },
+	                                            "分类名称"
+	                                        ),
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'col-lg-6' },
+	                                            _react2['default'].createElement(
+	                                                'select',
+	                                                { className: 'form-control', name: 'type', defaultValue: data.data.type },
+	                                                _react2['default'].createElement(
+	                                                    'option',
+	                                                    { value: 1 },
+	                                                    "公告"
+	                                                ),
+	                                                _react2['default'].createElement(
+	                                                    'option',
+	                                                    { value: 2 },
+	                                                    "新闻"
+	                                                ),
+	                                                _react2['default'].createElement(
+	                                                    'option',
+	                                                    { value: 3 },
+	                                                    "政策法规"
+	                                                )
+	                                            )
+	                                        )
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'form-group' },
+	                                        _react2['default'].createElement(
+	                                            'label',
+	                                            { className: 'col-lg-2 control-label',
+	                                                style: {
+	                                                    textAlign: 'center'
+	                                                } },
+	                                            "标 题"
+	                                        ),
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'col-lg-6' },
+	                                            _react2['default'].createElement('input', { name: 'title', type: 'text', className: 'form-control',
+	                                                defaultValue: data.data.title, placeholder: "标题", required: 'required',
+	                                                autoComplete: 'off' })
+	                                        ),
+	                                        _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'form-group' },
+	                                        _react2['default'].createElement(
+	                                            'label',
+	                                            { className: 'col-lg-2 control-label', style: {
+	                                                    textAlign: 'center'
+	                                                } },
+	                                            '首页大图公告'
+	                                        ),
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'col-lg-6' },
+	                                            _react2['default'].createElement(
+	                                                'label',
+	                                                { className: 'radio-inline' },
+	                                                _react2['default'].createElement(
+	                                                    'div',
+	                                                    { className: 'choice' },
+	                                                    _react2['default'].createElement(
+	                                                        'span',
+	                                                        { className: data.data.homeNotice == 1 ? "checked" : "" },
+	                                                        _react2['default'].createElement('input', { type: 'radio', name: 'homeNotice', value: 1, className: 'styled',
+	                                                            onClick: this._clickRadio.bind(this) })
+	                                                    )
+	                                                ),
+	                                                '是'
+	                                            ),
+	                                            _react2['default'].createElement(
+	                                                'label',
+	                                                { className: 'radio-inline' },
+	                                                _react2['default'].createElement(
+	                                                    'div',
+	                                                    { className: 'choice' },
+	                                                    _react2['default'].createElement(
+	                                                        'span',
+	                                                        { className: data.data.homeNotice == 0 ? "checked" : "" },
+	                                                        _react2['default'].createElement('input', { type: 'radio', name: 'homeNotice', value: 0, className: 'styled',
+	                                                            onClick: this._clickRadio.bind(this) })
+	                                                    )
+	                                                ),
+	                                                '否'
+	                                            )
+	                                        )
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'form-group' },
+	                                        _react2['default'].createElement(
+	                                            'label',
+	                                            { className: 'col-lg-2 control-label',
+	                                                style: {
+	                                                    textAlign: 'center'
+	                                                } },
+	                                            "摘 要"
+	                                        ),
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'col-lg-9' },
+	                                            _react2['default'].createElement('textarea', { name: 'digest', defaultValue: data.data.digest, type: 'text',
+	                                                className: 'form-control', autoComplete: 'off' })
+	                                        )
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'form-group' },
+	                                        _react2['default'].createElement(
+	                                            'label',
+	                                            { className: 'col-lg-2 control-label',
+	                                                style: {
+	                                                    textAlign: 'center'
+	                                                } },
+	                                            "图片URL"
+	                                        ),
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'col-lg-9' },
+	                                            _react2['default'].createElement('input', { type: 'file', name: 'file', id: 'file-input', defaultValue: data.data.img,
+	                                                multiple: true })
+	                                        )
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'form-group' },
+	                                        _react2['default'].createElement(
+	                                            'label',
+	                                            { className: 'col-lg-2 control-label',
+	                                                style: {
+	                                                    textAlign: 'center'
+	                                                } },
+	                                            "内容"
+	                                        ),
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'col-lg-9' },
+	                                            _react2['default'].createElement(_RichText2['default'], { id: 'content', height: '200', value: data.data.content, disabled: false })
+	                                        )
+	                                    )
+	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-11 text-right', style: { marginTop: "50px" } },
+	                                    { className: 'form-group' },
 	                                    _react2['default'].createElement(
-	                                        'button',
-	                                        { type: 'button', className: 'btn btn-primary',
-	                                            onClick: this._uploadImg },
-	                                        "发布"
+	                                        'div',
+	                                        { className: 'col-lg-11 text-right', style: { marginTop: "50px" } },
+	                                        _react2['default'].createElement(
+	                                            'button',
+	                                            { type: 'button', className: 'btn btn-primary',
+	                                                onClick: this._uploadImg },
+	                                            "发布"
+	                                        )
 	                                    )
 	                                )
 	                            )
 	                        )
-	                    )
-	                );
+	                    );
+	                }
 	            } else {
-	                // detail = <form id="noticeForm" className="form-horizontal" action="#">
-	                //     <div className="row" style={{height: tableHeight + 'px', overflowY: 'scroll'}}>
-	                //         <div className="col-sm-8 col-sm-offset-2">
-	                //             <fieldset className="content-group">
-	                //                 <legend className="text-bold">
-	                //                     {"公告基础信息"}
-	                //                 </legend>
-	                //                 <div className="form-group">
-	                //                     <label className="col-lg-2 control-label"
-	                //                            style={{
-	                //                                textAlign: 'center'
-	                //                            }}>{"分类名称"}</label>
-	                //                     <div className="col-lg-9">
-	                //                         <select className="form-control" name="type">
-	                //                             <option value={1}>{"公告"}</option>
-	                //                             <option value={2}>{"新闻"}</option>
-	                //                             <option value={3}>{"政策法规"}</option>
-	                //                         </select>
-	                //                     </div>
-	                //                 </div>
-	                //
-	                //                 <div className="form-group" >
-	                //                     <label className="col-lg-2 control-label"
-	                //                            style={{
-	                //                                textAlign: 'center'
-	                //                            }}>{"标题"}</label>
-	                //                     <div className="col-lg-9">
-	                //                         <input name="title" type="text" className="form-control"
-	                //                                placeholder={"标题"} required="required" autoComplete="off"/>
-	                //                     </div>
-	                //                 </div>
-	                //                 <div className="form-group" style={{display:"none"}}>
-	                //                     <label className="col-lg-2 control-label" style={{
-	                //                         textAlign: 'center'
-	                //                     }}>首页大图公告</label>
-	                //                     <div className="col-lg-9">
-	                //                         <label className="radio-inline radio1">
-	                //                             <input type="radio" name="homeNotice" value={1} className="styled"/>
-	                //                             是
-	                //                         </label>
-	                //                         <label className="radio-inline radio2">
-	                //                             <input type="radio" name="homeNotice" value={0} className="styled"/>
-	                //                             否
-	                //                         </label>
-	                //                     </div>
-	                //                 </div>
-	                //                 <div className="form-group">
-	                //                     <label className="col-lg-2 control-label"
-	                //                            style={{
-	                //                                textAlign: 'center'
-	                //                            }}>{"摘 要"}</label>
-	                //                     <div className="col-lg-9">
-	                //                         <textarea name="digest" type="text" className="form-control" autoComplete="off"/>
-	                //                     </div>
-	                //                 </div>
-	                //                 <div className="form-group" >
-	                //                     <label className="col-lg-2 control-label"
-	                //                            style={{
-	                //                                textAlign: 'center',
-	                //                            }}>{"图片URL"}</label>
-	                //                     <div className="col-lg-9">
-	                //                         <input type="file" name="file" id="file-input"
-	                //                                multiple/>
-	                //                     </div>
-	                //                 </div>
-	                //                 <div className="form-group" >
-	                //                     <label className="col-lg-2 control-label"
-	                //                            style={{
-	                //                                textAlign: 'center'
-	                //                            }}>{"内容"}</label>
-	                //                     <div className="col-lg-9">
-	                //                         <RichText id="content" height="200" value={""} disabled={false}/>
-	                //                     </div>
-	                //                 </div>
-	                //
-	                //             </fieldset>
-	                //
-	                //         </div>
-	                //     </div>
-	                // </form>
 	                detail = _react2['default'].createElement(_componentsToolTool.Loading, null);
 	            }
 	            return _react2['default'].createElement(
@@ -93395,6 +94559,7 @@
 
 	    return {
 	        data: getNoticeDetail.data,
+	        fetching: getNoticeDetail.fetching,
 	        refresh: commonReducer.refresh
 	    };
 	}
@@ -93403,7 +94568,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 941 */
+/* 943 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -93435,11 +94600,11 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
@@ -93447,9 +94612,9 @@
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var StatisticListContainer = (function (_Component) {
 	    _inherits(StatisticListContainer, _Component);
@@ -93469,6 +94634,7 @@
 	        this.searchColumn = "CITY";
 	        this.currentCityId = 1;
 	        this.detailOfcurrentCityId = 1;
+	        this.detailOfOrgaId = 1;
 	        this.cityOfcurrentCityId = 1;
 	        this.organizationOfcurrentCityId = 1;
 	        this.daterangeOfcurrentCityId = 1;
@@ -93478,8 +94644,16 @@
 	        this.currentCityOfCounty = "";
 	        this.currentOrgaCity = "崇州";
 	        this.currentOrgaOrganization = "";
+	        this.cityOfDateSort = false;
+	        this.cityOfWeightSort = true;
+	        this.cityOfCountSort = true;
+	        this.orgaOfOrgaSort = false;
+	        this.orgaOfDateSort = true;
+	        this.orgaOfWeightSort = true;
+	        this.orgaOfCountSort = true;
 	        this._search = this._search.bind(this);
 	        this._changeCityOfDetail = this._changeCityOfDetail.bind(this);
+	        this._changeOrgaOfDetail = this._changeOrgaOfDetail.bind(this);
 	        this._changeCity = this._changeCity.bind(this);
 	        this._changeCityOfCity = this._changeCityOfCity.bind(this);
 	        this._changeCityOfOrganization = this._changeCityOfOrganization.bind(this);
@@ -93615,6 +94789,13 @@
 	            var citieid = $("#cityOfDetailSelect").val();
 	            this.currentCity = (0, _componentsToolTool.filterCityById)(this.props.cityList.data, citieid);
 	            this.detailOfcurrentCityId = citieid;
+	            this._startRefresh();
+	        }
+	    }, {
+	        key: '_changeOrgaOfDetail',
+	        value: function _changeOrgaOfDetail() {
+	            var orgaId = $("#ofDetailSelect").val();
+	            this.detailOfOrgaId = orgaId;
 	            this._startRefresh();
 	        }
 	    }, {
@@ -93868,6 +95049,78 @@
 	            this.props.dispatch(getAdminList(this.page, this.searchColumn, $("#search_value").val()));
 	        }
 	    }, {
+	        key: '_changeCitySort',
+	        value: function _changeCitySort(type, e) {
+	            var rangeTime = $("#daterange-two-2").val();
+	            var cityParams = {
+	                page: 0,
+	                size: page_size,
+	                cityid: $("#cityOfCitySelect").val(),
+	                startday: (0, _componentsToolTool.timeStamp2Time)(new Date(rangeTime.split("-")[0].trim()).getTime()),
+	                endday: (0, _componentsToolTool.timeStamp2Time)(new Date(rangeTime.split("-")[1].trim()).getTime())
+	            };
+	            if (type == "date") {
+	                this.cityOfDateSort = !this.cityOfDateSort;
+	                this.cityOfWeightSort = true;
+	                this.cityOfCountSort = true;
+	                cityParams.sort = this.cityOfDateSort ? "monthday,desc" : "monthday,asc";
+	            } else if (type == "weight") {
+	                this.cityOfWeightSort = !this.cityOfWeightSort;
+	                this.cityOfDateSort = true;
+	                this.cityOfCountSort = true;
+	                cityParams.sort = this.cityOfWeightSort ? "weight,desc" : "weight,asc";
+	            } else {
+	                this.cityOfCountSort = !this.cityOfCountSort;
+	                this.cityOfDateSort = true;
+	                this.cityOfWeightSort = true;
+	                cityParams.sort = this.cityOfCountSort ? "count,desc" : "count,asc";
+	            }
+	            $(e.target).css("color", "red");
+	            $(".citySort").not(e.target).css("color", "black");
+	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(cityParams, _constantsIndexJs.STATISTICBYCITY_LIST_START, _constantsIndexJs.STATISTICBYCITY_LIST_END, statisticByCity_list));
+	        }
+	    }, {
+	        key: '_changeOrganizationSort',
+	        value: function _changeOrganizationSort(type, e) {
+	            var rangeTime = $("#daterange-two-3").val();
+	            var orgaParams = {
+	                page: this.orgPage,
+	                size: page_size,
+	                cityid: $("#cityOfOrganizationSelect").val(),
+	                organizationid: $("#ofOrganizationSelect").val(),
+	                startday: (0, _componentsToolTool.timeStamp2Time)(new Date(rangeTime.split("-")[0].trim()).getTime()),
+	                endday: (0, _componentsToolTool.timeStamp2Time)(new Date(rangeTime.split("-")[1].trim()).getTime())
+	            };
+	            if (type == "organization") {
+	                this.orgaOfOrgaSort = !this.orgaOfOrgaSort;
+	                this.orgaOfDateSort = true;
+	                this.orgaOfWeightSort = true;
+	                this.orgaOfCountSort = true;
+	                orgaParams.sort = this.orgaOfOrgaSort ? "organizationid,desc" : "organizationid,asc";
+	            } else if (type == "date") {
+	                this.orgaOfDateSort = !this.orgaOfDateSort;
+	                this.orgaOfOrgaSort = true;
+	                this.orgaOfWeightSort = true;
+	                this.orgaOfCountSort = true;
+	                orgaParams.sort = this.orgaOfDateSort ? "monthday,desc" : "monthday,asc";
+	            } else if (type == "weight") {
+	                this.orgaOfWeightSort = !this.orgaOfWeightSort;
+	                this.orgaOfOrgaSort = true;
+	                this.orgaOfDateSort = true;
+	                this.orgaOfCountSort = true;
+	                orgaParams.sort = this.orgaOfWeightSort ? "weight,desc" : "weight,asc";
+	            } else {
+	                this.orgaOfCountSort = !this.orgaOfCountSort;
+	                this.orgaOfOrgaSort = true;
+	                this.orgaOfDateSort = true;
+	                this.orgaOfWeightSort = true;
+	                orgaParams.sort = this.orgaOfCountSort ? "count,desc" : "count,asc";
+	            }
+	            $(e.target).css("color", "red");
+	            $(".orgaSort").not(e.target).css("color", "black");
+	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(orgaParams, _constantsIndexJs.STATISTICBYORGANIZATION_LIST_START, _constantsIndexJs.STATISTICBYORGANIZATION_LIST_END, statisticByOrganization_list));
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _props = this.props;
@@ -93884,6 +95137,7 @@
 	            var totalData = _props.totalData;
 	            var classifyList = _props.classifyList;
 
+	            console.log("detailData", detailData);
 	            var data = "";
 	            var showCity = "city";
 	            var cityTb = [];
@@ -93910,7 +95164,7 @@
 	                            _react2['default'].createElement(
 	                                'td',
 	                                { className: 'text-center' },
-	                                (0, _componentsToolTool.moneyFormat)(val.weight.toFixed(2))
+	                                val.weight ? val.weight.toFixed(3) : 0
 	                            ),
 	                            _react2['default'].createElement(
 	                                'td',
@@ -94010,7 +95264,7 @@
 	                                _react2['default'].createElement(
 	                                    'td',
 	                                    { className: 'text-center' },
-	                                    (0, _componentsToolTool.moneyFormat)(val.weight.toFixed(2))
+	                                    val.weight ? val.weight.toFixed(3) : 0
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'td',
@@ -94109,7 +95363,7 @@
 	                            _react2['default'].createElement(
 	                                'td',
 	                                { className: 'text-center' },
-	                                (0, _componentsToolTool.moneyFormat)(rangeDateDataList.weight.toFixed(2))
+	                                rangeDateDataList.weight ? rangeDateDataList.weight.toFixed(2) : 0
 	                            ),
 	                            _react2['default'].createElement(
 	                                'td',
@@ -94176,7 +95430,7 @@
 	                                _react2['default'].createElement(
 	                                    'td',
 	                                    { className: 'text-center' },
-	                                    (0, _componentsToolTool.moneyFormat)(val.weight.toFixed(2))
+	                                    val.weight ? val.weight.toFixed(2) : 0
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'td',
@@ -94186,7 +95440,7 @@
 	                                _react2['default'].createElement(
 	                                    'td',
 	                                    { className: 'text-center' },
-	                                    (0, _componentsToolTool.timeStamp2Time)(val.createTime)
+	                                    (0, _componentsToolTool.timeStamp2Time2Second)(val.createTime)
 	                                )
 	                            ));
 	                        }).bind(this));
@@ -94431,7 +95685,7 @@
 	                            _react2['default'].createElement(
 	                                'td',
 	                                { className: 'text-center' },
-	                                (0, _componentsToolTool.moneyFormat)(val.weight.toFixed(2))
+	                                val.weight ? val.weight.toFixed(2) : 0
 	                            ),
 	                            _react2['default'].createElement(
 	                                'td',
@@ -94531,7 +95785,7 @@
 	                                _react2['default'].createElement(
 	                                    'td',
 	                                    { className: 'text-center' },
-	                                    (0, _componentsToolTool.moneyFormat)(val.weight.toFixed(2))
+	                                    val.weight ? val.weight.toFixed(2) : 0
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'td',
@@ -94622,7 +95876,7 @@
 	                                _react2['default'].createElement(
 	                                    'td',
 	                                    { className: 'text-center' },
-	                                    (0, _componentsToolTool.moneyFormat)(val.weight.toFixed(2))
+	                                    val.weight ? val.weight.toFixed(2) : 0
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'td',
@@ -94683,13 +95937,14 @@
 	            );
 
 	            var tableHeight = $(window).height() - 410;
+	            var contentHeight = $(window).height();
 	            var style = { width: "175px" };
 	            return _react2['default'].createElement(
 	                'div',
 	                null,
 	                _react2['default'].createElement(
 	                    'div',
-	                    { className: 'content', style: { marginTop: '5px' } },
+	                    { className: 'content', style: { marginTop: '5px', height: contentHeight + "px", overflowY: "auto" } },
 	                    _react2['default'].createElement(
 	                        'div',
 	                        { className: 'container-fluid' },
@@ -94708,7 +95963,7 @@
 	                                        _react2['default'].createElement(
 	                                            'h3',
 	                                            { className: 'no-margin' },
-	                                            showTotal == "ok" ? (0, _componentsToolTool.moneyFormat)(totalData.data.weight.toFixed(0)) : showTotal,
+	                                            showTotal == "ok" ? totalData.data.weight ? (0, _componentsToolTool.moneyFormat)(totalData.data.weight.toFixed(0)) : 0 : showTotal,
 	                                            '  / ',
 	                                            showTotal == "ok" ? (0, _componentsToolTool.moneyFormat)(totalData.data.count) : showTotal
 	                                        ),
@@ -94773,7 +96028,7 @@
 	                                        _react2['default'].createElement(
 	                                            'h3',
 	                                            { className: 'no-margin' },
-	                                            showOperation == "ok" ? (0, _componentsToolTool.moneyFormat)(operationData.data.totalXAmount.toFixed(0)) : showOperation
+	                                            showOperation == "ok" ? operationData.data.totalXAmount ? (0, _componentsToolTool.moneyFormat)(operationData.data.totalXAmount.toFixed(0)) : 0 : showOperation
 	                                        ),
 	                                        '兑换总金额',
 	                                        _react2['default'].createElement(
@@ -94913,7 +96168,7 @@
 	                                                null,
 	                                                _react2['default'].createElement(
 	                                                    'select',
-	                                                    { id: 'ofDetailSelect', className: 'form-control' },
+	                                                    { id: 'ofDetailSelect', className: 'form-control', value: this.detailOfOrgaId, onChange: this._changeOrgaOfDetail },
 	                                                    organizationOfDetailOptions
 	                                                )
 	                                            ),
@@ -94953,8 +96208,8 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'table-responsive',
-	                                                style: { height: tableHeight + 'px', overflowY: 'scroll' } },
+	                                            { className: 'table-responsive'
+	                                            },
 	                                            _react2['default'].createElement(
 	                                                'table',
 	                                                { className: 'table table-bordered table-hover',
@@ -95057,7 +96312,7 @@
 	                                            _react2['default'].createElement(
 	                                                'div',
 	                                                { className: 'table-responsive',
-	                                                    style: { width: "600px", position: "absolute" } },
+	                                                    style: { width: "600px", position: "relative", float: "left" } },
 	                                                _react2['default'].createElement(
 	                                                    'table',
 	                                                    { className: 'table table-xlg text-nowrap' },
@@ -95090,8 +96345,8 @@
 	                                                                        '- 投放次数 ：',
 	                                                                        showTotalOfCity == "ok" ? (0, _componentsToolTool.moneyFormat)(cityData.totalCityData.count) : showTotalOfCity,
 	                                                                        '次 / 投放重量：',
-	                                                                        showTotalOfCity == "ok" ? (0, _componentsToolTool.moneyFormat)(cityData.totalCityData.weight.toFixed(0)) : showTotalOfCity,
-	                                                                        '千克',
+	                                                                        showTotalOfCity == "ok" ? cityData.totalCityData.weight ? (0, _componentsToolTool.moneyFormat)(cityData.totalCityData.weight.toFixed(0)) : 0 : showTotalOfCity,
+	                                                                        '吨',
 	                                                                        _react2['default'].createElement(
 	                                                                            'small',
 	                                                                            {
@@ -95115,8 +96370,8 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'table-responsive',
-	                                                style: { height: tableHeight + 'px', overflowY: 'scroll' } },
+	                                            { className: 'table-responsive'
+	                                            },
 	                                            _react2['default'].createElement(
 	                                                'table',
 	                                                { className: 'table table-bordered table-hover',
@@ -95131,17 +96386,20 @@
 	                                                        _react2['default'].createElement(
 	                                                            'th',
 	                                                            { className: 'col-md-4 text-bold text-center' },
-	                                                            "日期"
+	                                                            "日期",
+	                                                            _react2['default'].createElement('i', { className: this.cityOfDateSort ? "icon icon-arrow-down5 citySort" : "icon icon-arrow-up5 citySort", style: { color: "red" }, onClick: this._changeCitySort.bind(this, "date") })
 	                                                        ),
 	                                                        _react2['default'].createElement(
 	                                                            'th',
 	                                                            { className: 'col-md-4 text-bold text-center' },
-	                                                            "重量（千克）"
+	                                                            "重量（吨）",
+	                                                            _react2['default'].createElement('i', { className: this.cityOfWeightSort ? "icon icon-arrow-down5 citySort" : "icon icon-arrow-up5 citySort", style: { color: "black" }, onClick: this._changeCitySort.bind(this, "weight") })
 	                                                        ),
 	                                                        _react2['default'].createElement(
 	                                                            'th',
 	                                                            { className: 'col-md-4 text-bold text-center' },
-	                                                            "次数"
+	                                                            "次数",
+	                                                            _react2['default'].createElement('i', { className: this.cityOfCountSort ? "icon icon-arrow-down5 citySort" : "icon icon-arrow-up5 citySort", style: { color: "black" }, onClick: this._changeCitySort.bind(this, "count") })
 	                                                        ),
 	                                                        _react2['default'].createElement(
 	                                                            'th',
@@ -95224,7 +96482,7 @@
 	                                            _react2['default'].createElement(
 	                                                'div',
 	                                                { className: 'table-responsive',
-	                                                    style: { width: "600px", position: "absolute" } },
+	                                                    style: { width: "600px", position: "relative", float: "left" } },
 	                                                _react2['default'].createElement(
 	                                                    'table',
 	                                                    { className: 'table table-xlg text-nowrap' },
@@ -95259,8 +96517,8 @@
 	                                                                        '- 投放次数 ：',
 	                                                                        (0, _componentsToolTool.moneyFormat)(totalOrga.count),
 	                                                                        '次 / 投放重量：',
-	                                                                        (0, _componentsToolTool.moneyFormat)(totalOrga.weight.toFixed(0)),
-	                                                                        '千克',
+	                                                                        totalOrga.weight ? (0, _componentsToolTool.moneyFormat)(totalOrga.weight.toFixed(0)) : 0,
+	                                                                        '吨',
 	                                                                        _react2['default'].createElement(
 	                                                                            'small',
 	                                                                            {
@@ -95284,11 +96542,7 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'table-responsive',
-	                                                style: {
-	                                                    height: tableHeight + 'px',
-	                                                    overflowY: 'scroll'
-	                                                } },
+	                                            { className: 'table-responsive' },
 	                                            _react2['default'].createElement(
 	                                                'table',
 	                                                { className: 'table table-bordered table-hover',
@@ -95303,22 +96557,26 @@
 	                                                        _react2['default'].createElement(
 	                                                            'th',
 	                                                            { className: 'col-md-3 text-bold text-center' },
-	                                                            "小区/单位名称"
+	                                                            "小区/单位名称",
+	                                                            _react2['default'].createElement('i', { className: this.orgaOfOrgaSort ? "icon icon-arrow-down5 orgaSort" : "icon icon-arrow-up5 orgaSort", style: { color: "red" }, onClick: this._changeOrganizationSort.bind(this, "organization") })
 	                                                        ),
 	                                                        _react2['default'].createElement(
 	                                                            'th',
 	                                                            { className: 'col-md-3 text-bold text-center' },
-	                                                            "日期"
+	                                                            "日期",
+	                                                            _react2['default'].createElement('i', { className: this.orgaOfDateSort ? "icon icon-arrow-down5 orgaSort" : "icon icon-arrow-up5 orgaSort", style: { color: "black" }, onClick: this._changeOrganizationSort.bind(this, "date") })
 	                                                        ),
 	                                                        _react2['default'].createElement(
 	                                                            'th',
 	                                                            { className: 'col-md-3 text-bold text-center' },
-	                                                            "重量（千克）"
+	                                                            "重量（吨）",
+	                                                            _react2['default'].createElement('i', { className: this.orgaOfWeightSort ? "icon icon-arrow-down5 orgaSort" : "icon icon-arrow-up5 orgaSort", style: { color: "black" }, onClick: this._changeOrganizationSort.bind(this, "weight") })
 	                                                        ),
 	                                                        _react2['default'].createElement(
 	                                                            'th',
 	                                                            { className: 'col-md-3 text-bold text-center' },
-	                                                            "次数"
+	                                                            "次数",
+	                                                            _react2['default'].createElement('i', { className: this.orgaOfCountSort ? "icon icon-arrow-down5 orgaSort" : "icon icon-arrow-up5 orgaSort", style: { color: "black" }, onClick: this._changeOrganizationSort.bind(this, "count") })
 	                                                        ),
 	                                                        _react2['default'].createElement(
 	                                                            'th',
@@ -95414,8 +96672,7 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'table-responsive',
-	                                                style: { height: tableHeight + 'px', overflowY: 'scroll' } },
+	                                            { className: 'table-responsive' },
 	                                            _react2['default'].createElement(
 	                                                'table',
 	                                                { className: 'table table-bordered table-hover',
@@ -95524,8 +96781,8 @@
 	                                        ),
 	                                        _react2['default'].createElement(
 	                                            'div',
-	                                            { className: 'table-responsive',
-	                                                style: { height: tableHeight + 'px', overflowY: 'scroll' } },
+	                                            { className: 'table-responsive'
+	                                            },
 	                                            _react2['default'].createElement(
 	                                                'table',
 	                                                { className: 'table table-bordered table-hover',
@@ -95623,7 +96880,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 942 */
+/* 944 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -95655,23 +96912,23 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var _componentsToolTool = __webpack_require__(467);
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
-	var querystring = __webpack_require__(943);
+	var querystring = __webpack_require__(945);
 
 	var OrganizationListContainer = (function (_Component) {
 	    _inherits(OrganizationListContainer, _Component);
@@ -95745,7 +97002,8 @@
 	        key: '_showGenerateModal',
 	        value: function _showGenerateModal(val) {
 	            this.currentOrganization = val;
-	            this._startRefresh();
+	            var params = { organizationid: val.id };
+	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(params, _constantsIndexJs.QRCODE_COUNT_START, _constantsIndexJs.QRCODE_COUNT_END, qrcode_count));
 	        }
 	    }, {
 	        key: '_generate',
@@ -95760,16 +97018,26 @@
 	                pressOrgName: parseInt($("#generatePressOrgName").val())
 	            };
 	            this.progressInterval = setInterval(function () {
-	                that.props.dispatch((0, _actionsCommonActions.generateQrcode)(params, _constantsIndexJs.PROGRESS_START, _constantsIndexJs.PROGRESS_END, qrcode_generate, function () {
-	                    if (that.props.progressData.data == 100) {
+	                that.props.dispatch((0, _actionsCommonActions.generateQrcode)(params, _constantsIndexJs.PROGRESS_START, _constantsIndexJs.PROGRESS_END, qrcode_generate, function (json) {
+	                    if (json) {
+	                        (0, _componentsToolTool.ErrorModal)(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message);
 	                        clearInterval(that.progressInterval);
-	                        setTimeout(function () {
-	                            $("#exportModal").modal("hide");
-	                            $(".progressGrouop").hide();
-	                            $(".qrcodeLoadingText").text("开始下载二维码文件...");
-	                            $(".saveGroup").show();
-	                        }, 2000);
-	                        window.location.href = qrcode_generate_download + "?" + querystring.stringify(params);
+	                        $(".progressGrouop").hide();
+	                        $(".qrcodeLoadingText").text("开始下载二维码文件...");
+	                        $(".saveGroup").show();
+	                        $("#generateModal").modal("hide");
+	                    } else {
+	                        console.log("json", json);
+	                        if (that.props.progressData.data == 100) {
+	                            clearInterval(that.progressInterval);
+	                            setTimeout(function () {
+	                                $(".progressGrouop").hide();
+	                                $(".qrcodeLoadingText").text("开始下载二维码文件...");
+	                                $(".saveGroup").show();
+	                                $("#generateModal").modal("hide");
+	                            }, 2000);
+	                            window.location.href = qrcode_generate_download + "?" + querystring.stringify(params);
+	                        }
 	                    }
 	                }));
 	            }, 3000);
@@ -95778,7 +97046,8 @@
 	        key: '_showExportModal',
 	        value: function _showExportModal(val) {
 	            this.currentOrganization = val;
-	            this._startRefresh();
+	            var params = { organizationid: val.id };
+	            this.props.dispatch((0, _actionsCommonActions.getListByMutilpCondition)(params, _constantsIndexJs.QRCODE_COUNT_START, _constantsIndexJs.QRCODE_COUNT_END, qrcode_count));
 	        }
 	    }, {
 	        key: '_export',
@@ -95793,16 +97062,25 @@
 	                pressOrgName: parseInt($("#exportPressOrgName").val())
 	            };
 	            this.progressInterval = setInterval(function () {
-	                that.props.dispatch((0, _actionsCommonActions.exportQrcode)(_constantsIndexJs.PROGRESS_START, _constantsIndexJs.PROGRESS_END, qrcode_export + "?" + querystring.stringify(params), function () {
-	                    if (that.props.progressData.data == 100) {
+	                that.props.dispatch((0, _actionsCommonActions.exportQrcode)(_constantsIndexJs.PROGRESS_START, _constantsIndexJs.PROGRESS_END, qrcode_export + "?" + querystring.stringify(params), function (json) {
+	                    if (json) {
+	                        (0, _componentsToolTool.ErrorModal)(Current_Lang.status.minor, Current_Lang.status.someError + json.error.message);
 	                        clearInterval(that.progressInterval);
-	                        setTimeout(function () {
-	                            $("#generateModal").modal("hide");
-	                            $(".progressGrouop").hide();
-	                            $(".qrcodeLoadingText").text("开始下载二维码文件...");
-	                            $(".saveGroup").show();
-	                        }, 2000);
-	                        window.location.href = qrcode_export_download + "?" + querystring.stringify(params);
+	                        $(".progressGrouop").hide();
+	                        $(".qrcodeLoadingText").text("开始下载二维码文件...");
+	                        $(".saveGroup").show();
+	                        $("#exportModal").modal("hide");
+	                    } else {
+	                        if (that.props.progressData.data == 100) {
+	                            clearInterval(that.progressInterval);
+	                            setTimeout(function () {
+	                                $(".progressGrouop").hide();
+	                                $(".qrcodeLoadingText").text("开始下载二维码文件...");
+	                                $(".saveGroup").show();
+	                                $("#exportModal").modal("hide");
+	                            }, 2000);
+	                            window.location.href = qrcode_export_download + "?" + querystring.stringify(params);
+	                        }
 	                    }
 	                }));
 	            }, 3000);
@@ -95851,7 +97129,9 @@
 	            var data = _props.data;
 	            var cityList = _props.cityList;
 	            var progressData = _props.progressData;
+	            var qrcodeCount = _props.qrcodeCount;
 
+	            console.log("qrcodeCount", qrcodeCount);
 	            var cityOptions = [];
 	            var countryOptions = [];
 	            if (cityList) {
@@ -95892,262 +97172,344 @@
 	                    }
 	                }
 	            }
-	            var generateInfo = _react2['default'].createElement(
-	                'div',
-	                null,
-	                _react2['default'].createElement(
-	                    'div',
-	                    { className: 'form-horizontal' },
-	                    _react2['default'].createElement(
-	                        'fieldset',
-	                        { className: 'content-group' },
-	                        _react2['default'].createElement(
-	                            'legend',
-	                            { className: 'text-bold' },
-	                            "批量生成二维码"
-	                        ),
+	            var generateInfo = "";
+	            if (qrcodeCount) {
+	                if (qrcodeCount.status) {
+	                    generateInfo = _react2['default'].createElement(
+	                        'div',
+	                        null,
 	                        _react2['default'].createElement(
 	                            'div',
-	                            { className: 'form-group' },
+	                            { className: 'form-horizontal' },
 	                            _react2['default'].createElement(
-	                                'label',
-	                                { className: 'col-lg-2 control-label',
-	                                    style: { textAlign: 'center' } },
-	                                "小区名称"
-	                            ),
-	                            _react2['default'].createElement(
-	                                'div',
-	                                { className: 'col-lg-9' },
-	                                _react2['default'].createElement('input', { id: 'organizationName', type: 'text', value: this.currentOrganization.name, className: 'form-control',
-	                                    autoComplete: 'off', disabled: true })
-	                            )
-	                        ),
-	                        _react2['default'].createElement(
-	                            'div',
-	                            { className: 'form-group' },
-	                            _react2['default'].createElement(
-	                                'label',
-	                                { className: 'col-lg-2 control-label',
-	                                    style: { textAlign: 'center' } },
-	                                "预估人数"
-	                            ),
-	                            _react2['default'].createElement(
-	                                'div',
-	                                { className: 'col-lg-9' },
-	                                _react2['default'].createElement('input', { id: 'personAmount', type: 'text', className: 'form-control', placeholder: '输入预估人数',
-	                                    autoComplete: 'off' })
-	                            )
-	                        ),
-	                        _react2['default'].createElement(
-	                            'div',
-	                            { className: 'form-group' },
-	                            _react2['default'].createElement(
-	                                'label',
-	                                { className: 'col-lg-2 control-label',
-	                                    style: { textAlign: 'center' } },
-	                                "是否添加小区名字"
-	                            ),
-	                            _react2['default'].createElement(
-	                                'div',
-	                                { className: 'col-lg-9' },
+	                                'fieldset',
+	                                { className: 'content-group' },
 	                                _react2['default'].createElement(
-	                                    'select',
-	                                    { id: 'generatePressOrgName', className: 'form-control' },
+	                                    'legend',
+	                                    { className: 'text-bold' },
+	                                    "批量生成二维码"
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
 	                                    _react2['default'].createElement(
-	                                        'option',
-	                                        { value: 0 },
-	                                        '不添加'
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "小区名称"
 	                                    ),
-	                                    _react2['default'].createElement(
-	                                        'option',
-	                                        { value: 1 },
-	                                        '添加'
-	                                    )
-	                                )
-	                            )
-	                        ),
-	                        _react2['default'].createElement(
-	                            'div',
-	                            { className: 'form-group saveGroup' },
-	                            _react2['default'].createElement('label', { className: 'col-lg-2 control-label',
-	                                style: { textAlign: 'center' } }),
-	                            _react2['default'].createElement(
-	                                'div',
-	                                { className: 'col-lg-9' },
-	                                _react2['default'].createElement(
-	                                    'div',
-	                                    { className: 'text-right' },
-	                                    _react2['default'].createElement(
-	                                        'button',
-	                                        { type: 'button', className: 'btn btn-primary', onClick: this._generate.bind(this, this.currentOrganization.id) },
-	                                        Current_Lang.label.save
-	                                    )
-	                                )
-	                            )
-	                        ),
-	                        _react2['default'].createElement(
-	                            'div',
-	                            { className: 'form-group progressGrouop', style: { textAlign: "center", display: "none" } },
-	                            _react2['default'].createElement(
-	                                'div',
-	                                { className: 'pace-demo', style: { paddingBottom: "30px" } },
-	                                _react2['default'].createElement(
-	                                    'div',
-	                                    { className: 'theme_bar_xs' },
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'pace_progress', 'data-progress-text': (progressData && progressData.data ? progressData.data : "1") + "%", 'data-progress': progressData && progressData.data ? progressData.data : "1", style: { width: (progressData && progressData.data ? progressData.data : "1") + "%" } },
-	                                        (progressData && progressData.data ? progressData.data : "1") + "%"
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement('input', { id: 'organizationName', type: 'text', value: this.currentOrganization.name, className: 'form-control',
+	                                            autoComplete: 'off', disabled: true })
 	                                    )
-	                                )
-	                            )
-	                        ),
-	                        _react2['default'].createElement(
-	                            'div',
-	                            { className: 'form-group progressGrouop', style: { textAlign: "center", display: "none" } },
-	                            _react2['default'].createElement(
-	                                'span',
-	                                { className: 'qrcodeLoadingText' },
-	                                '二维码文件准备中，请勿关闭窗口...'
-	                            )
-	                        )
-	                    )
-	                )
-	            );
-	            var exportInfo = _react2['default'].createElement(
-	                'div',
-	                null,
-	                _react2['default'].createElement(
-	                    'div',
-	                    { className: 'form-horizontal' },
-	                    _react2['default'].createElement(
-	                        'fieldset',
-	                        { className: 'content-group' },
-	                        _react2['default'].createElement(
-	                            'legend',
-	                            { className: 'text-bold' },
-	                            "批量导出二维码"
-	                        ),
-	                        _react2['default'].createElement(
-	                            'div',
-	                            { className: 'form-group' },
-	                            _react2['default'].createElement(
-	                                'label',
-	                                { className: 'col-lg-2 control-label',
-	                                    style: { textAlign: 'center' } },
-	                                "是否绑定用户"
-	                            ),
-	                            _react2['default'].createElement(
-	                                'div',
-	                                { className: 'col-lg-9' },
-	                                _react2['default'].createElement(
-	                                    'select',
-	                                    { id: 'bindUser', className: 'form-control' },
-	                                    _react2['default'].createElement(
-	                                        'option',
-	                                        { value: 1 },
-	                                        '是'
-	                                    ),
-	                                    _react2['default'].createElement(
-	                                        'option',
-	                                        { value: 0 },
-	                                        '否'
-	                                    )
-	                                )
-	                            )
-	                        ),
-	                        _react2['default'].createElement(
-	                            'div',
-	                            { className: 'form-group' },
-	                            _react2['default'].createElement(
-	                                'label',
-	                                { className: 'col-lg-2 control-label',
-	                                    style: { textAlign: 'center' } },
-	                                "小区名称"
-	                            ),
-	                            _react2['default'].createElement(
-	                                'div',
-	                                { className: 'col-lg-9' },
-	                                _react2['default'].createElement('input', { id: 'organizationName', type: 'text', value: this.currentOrganization.name, className: 'form-control',
-	                                    autoComplete: 'off', disabled: true })
-	                            )
-	                        ),
-	                        _react2['default'].createElement(
-	                            'div',
-	                            { className: 'form-group' },
-	                            _react2['default'].createElement(
-	                                'label',
-	                                { className: 'col-lg-2 control-label',
-	                                    style: { textAlign: 'center' } },
-	                                "是否添加小区名字"
-	                            ),
-	                            _react2['default'].createElement(
-	                                'div',
-	                                { className: 'col-lg-9' },
-	                                _react2['default'].createElement(
-	                                    'select',
-	                                    { id: 'exportPressOrgName', className: 'form-control' },
-	                                    _react2['default'].createElement(
-	                                        'option',
-	                                        { value: 0 },
-	                                        '不添加'
-	                                    ),
-	                                    _react2['default'].createElement(
-	                                        'option',
-	                                        { value: 1 },
-	                                        '添加'
-	                                    )
-	                                )
-	                            )
-	                        ),
-	                        _react2['default'].createElement(
-	                            'div',
-	                            { className: 'form-group saveGroup' },
-	                            _react2['default'].createElement('label', { className: 'col-lg-2 control-label',
-	                                style: { textAlign: 'center' } }),
-	                            _react2['default'].createElement(
-	                                'div',
-	                                { className: 'col-lg-9' },
+	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'text-right' },
+	                                    { className: 'form-group' },
 	                                    _react2['default'].createElement(
-	                                        'button',
-	                                        { type: 'button', className: 'btn btn-primary', onClick: this._export.bind(this, this.currentOrganization.id) },
-	                                        Current_Lang.label.save
-	                                    )
-	                                )
-	                            )
-	                        ),
-	                        _react2['default'].createElement(
-	                            'div',
-	                            { className: 'form-group progressGrouop', style: { textAlign: "center", display: "none" } },
-	                            _react2['default'].createElement(
-	                                'div',
-	                                { className: 'pace-demo', style: { paddingBottom: "30px" } },
-	                                _react2['default'].createElement(
-	                                    'div',
-	                                    { className: 'theme_bar_xs' },
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "已绑定二维码数目"
+	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'pace_progress', 'data-progress-text': (progressData && progressData.data ? progressData.data : "1") + "%", 'data-progress': progressData && progressData.data ? progressData.data : "1", style: { width: (progressData && progressData.data ? progressData.data : "1") + "%" } },
-	                                        (progressData && progressData.data ? progressData.data : "1") + "%"
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement('input', { id: 'bindCount', type: 'text', className: 'form-control',
+	                                            autoComplete: 'off', value: qrcodeCount.data.bindCount, disabled: true })
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "空白二维码数目"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement('input', { id: 'blankCount', type: 'text', className: 'form-control',
+	                                            autoComplete: 'off', value: qrcodeCount.data.blankCount, disabled: true })
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "预估人数"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement('input', { id: 'personAmount', type: 'text', className: 'form-control', placeholder: '输入预估人数',
+	                                            autoComplete: 'off' })
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "是否添加小区名字"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement(
+	                                            'select',
+	                                            { id: 'generatePressOrgName', className: 'form-control' },
+	                                            _react2['default'].createElement(
+	                                                'option',
+	                                                { value: 0 },
+	                                                '不添加'
+	                                            ),
+	                                            _react2['default'].createElement(
+	                                                'option',
+	                                                { value: 1 },
+	                                                '添加'
+	                                            )
+	                                        )
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group saveGroup' },
+	                                    _react2['default'].createElement('label', { className: 'col-lg-2 control-label',
+	                                        style: { textAlign: 'center' } }),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'text-right' },
+	                                            _react2['default'].createElement(
+	                                                'button',
+	                                                { type: 'button', className: 'btn btn-primary', onClick: this._generate.bind(this, this.currentOrganization.id) },
+	                                                Current_Lang.label.save
+	                                            )
+	                                        )
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group progressGrouop', style: { textAlign: "center", display: "none" } },
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'pace-demo', style: { paddingBottom: "30px" } },
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'theme_bar_xs' },
+	                                            _react2['default'].createElement(
+	                                                'div',
+	                                                { className: 'pace_progress', 'data-progress-text': (progressData && progressData.data ? progressData.data : "1") + "%", 'data-progress': progressData && progressData.data ? progressData.data : "1", style: { width: (progressData && progressData.data ? progressData.data : "1") + "%" } },
+	                                                (progressData && progressData.data ? progressData.data : "1") + "%"
+	                                            )
+	                                        )
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group progressGrouop', style: { textAlign: "center", display: "none" } },
+	                                    _react2['default'].createElement(
+	                                        'span',
+	                                        { className: 'qrcodeLoadingText' },
+	                                        '二维码文件准备中，请勿关闭窗口...'
 	                                    )
 	                                )
 	                            )
-	                        ),
+	                        )
+	                    );
+	                } else {
+	                    generateInfo = (0, _componentsToolTool.ErrorModal)(Current_Lang.status.minor, "获取数据错误");
+	                }
+	            } else {
+	                generateInfo = _react2['default'].createElement(_componentsToolTool.Loading, null);
+	            }
+	            var exportInfo = "";
+	            if (qrcodeCount) {
+	                if (qrcodeCount.status) {
+	                    exportInfo = _react2['default'].createElement(
+	                        'div',
+	                        null,
 	                        _react2['default'].createElement(
 	                            'div',
-	                            { className: 'form-group progressGrouop', style: { textAlign: "center", display: "none" } },
+	                            { className: 'form-horizontal' },
 	                            _react2['default'].createElement(
-	                                'span',
-	                                { className: 'qrcodeLoadingText' },
-	                                '二维码文件准备中，请勿关闭窗口...'
+	                                'fieldset',
+	                                { className: 'content-group' },
+	                                _react2['default'].createElement(
+	                                    'legend',
+	                                    { className: 'text-bold' },
+	                                    "批量导出二维码"
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "是否绑定用户"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement(
+	                                            'select',
+	                                            { id: 'bindUser', className: 'form-control' },
+	                                            _react2['default'].createElement(
+	                                                'option',
+	                                                { value: 1 },
+	                                                '是'
+	                                            ),
+	                                            _react2['default'].createElement(
+	                                                'option',
+	                                                { value: 0 },
+	                                                '否'
+	                                            )
+	                                        )
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "小区名称"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement('input', { id: 'organizationName', type: 'text', value: this.currentOrganization.name, className: 'form-control',
+	                                            autoComplete: 'off', disabled: true })
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "已绑定二维码数目"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement('input', { id: 'bindCount', type: 'text', className: 'form-control',
+	                                            autoComplete: 'off', value: qrcodeCount.data.bindCount, disabled: true })
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "空白二维码数目"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement('input', { id: 'blankCount', type: 'text', className: 'form-control',
+	                                            autoComplete: 'off', value: qrcodeCount.data.blankCount, disabled: true })
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2['default'].createElement(
+	                                        'label',
+	                                        { className: 'col-lg-2 control-label',
+	                                            style: { textAlign: 'center' } },
+	                                        "是否添加小区名字"
+	                                    ),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement(
+	                                            'select',
+	                                            { id: 'exportPressOrgName', className: 'form-control' },
+	                                            _react2['default'].createElement(
+	                                                'option',
+	                                                { value: 0 },
+	                                                '不添加'
+	                                            ),
+	                                            _react2['default'].createElement(
+	                                                'option',
+	                                                { value: 1 },
+	                                                '添加'
+	                                            )
+	                                        )
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group saveGroup' },
+	                                    _react2['default'].createElement('label', { className: 'col-lg-2 control-label',
+	                                        style: { textAlign: 'center' } }),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'text-right' },
+	                                            _react2['default'].createElement(
+	                                                'button',
+	                                                { type: 'button', className: 'btn btn-primary', onClick: this._export.bind(this, this.currentOrganization.id) },
+	                                                Current_Lang.label.save
+	                                            )
+	                                        )
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group progressGrouop', style: { textAlign: "center", display: "none" } },
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'pace-demo', style: { paddingBottom: "30px" } },
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'theme_bar_xs' },
+	                                            _react2['default'].createElement(
+	                                                'div',
+	                                                { className: 'pace_progress', 'data-progress-text': (progressData && progressData.data ? progressData.data : "1") + "%", 'data-progress': progressData && progressData.data ? progressData.data : "1", style: { width: (progressData && progressData.data ? progressData.data : "1") + "%" } },
+	                                                (progressData && progressData.data ? progressData.data : "1") + "%"
+	                                            )
+	                                        )
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group progressGrouop', style: { textAlign: "center", display: "none" } },
+	                                    _react2['default'].createElement(
+	                                        'span',
+	                                        { className: 'qrcodeLoadingText' },
+	                                        '二维码文件准备中，请勿关闭窗口...'
+	                                    )
+	                                )
 	                            )
 	                        )
-	                    )
-	                )
-	            );
+	                    );
+	                } else {
+	                    exportInfo = (0, _componentsToolTool.ErrorModal)(Current_Lang.status.minor, "获取数据错误");
+	                }
+	            } else {
+	                exportInfo = _react2['default'].createElement(_componentsToolTool.Loading, null);
+	            }
 	            return _react2['default'].createElement(
 	                'div',
 	                null,
@@ -96477,12 +97839,14 @@
 	    var getOrganizationList = state.getOrganizationList;
 	    var getCityList = state.getCityList;
 	    var getProgressData = state.getProgressData;
+	    var getQrcodeCount = state.getQrcodeCount;
 	    var commonReducer = state.commonReducer;
 
 	    return {
 	        fetching: getOrganizationList.fetching,
 	        data: getOrganizationList.data,
 	        progressData: getProgressData.data,
+	        qrcodeCount: getQrcodeCount.data,
 	        cityList: getCityList.data,
 	        refresh: commonReducer.refresh
 	    };
@@ -96492,17 +97856,17 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 943 */
+/* 945 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	exports.decode = exports.parse = __webpack_require__(944);
-	exports.encode = exports.stringify = __webpack_require__(945);
+	exports.decode = exports.parse = __webpack_require__(946);
+	exports.encode = exports.stringify = __webpack_require__(947);
 
 
 /***/ },
-/* 944 */
+/* 946 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -96588,7 +97952,7 @@
 
 
 /***/ },
-/* 945 */
+/* 947 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -96658,7 +98022,7 @@
 
 
 /***/ },
-/* 946 */
+/* 948 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -96693,15 +98057,15 @@
 
 	var _componentsToolTool = __webpack_require__(467);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var OrganizationRegisterContainer = (function (_Component) {
 	    _inherits(OrganizationRegisterContainer, _Component);
@@ -96789,6 +98153,9 @@
 	                validClass: "validation-valid-label",
 	                success: function success(label) {
 	                    label.addClass("validation-valid-label").text("Success.");
+	                },
+	                errorPlacement: function errorPlacement(error, element) {
+	                    error.appendTo(element.parent().parent().find(".errorShow"));
 	                }
 	            });
 	        }
@@ -96880,7 +98247,7 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement(
 	                                            'select',
 	                                            { id: 'citySelect', className: 'form-control', name: 'cityid', value: this.currentCityId, onChange: this._changeCity },
@@ -96899,7 +98266,7 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement(
 	                                            'select',
 	                                            { id: 'coutrySelect', className: 'form-control', name: 'countyid' },
@@ -96920,11 +98287,12 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('input', { name: 'name', type: 'text', className: 'form-control',
 	                                            placeholder: "名称", required: 'required',
 	                                            autoComplete: 'off' })
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
@@ -96937,7 +98305,7 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement(
 	                                            'select',
 	                                            { id: 'typeSelect', className: 'form-control', name: 'type' },
@@ -96967,11 +98335,12 @@
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
-	                                        { className: 'col-lg-9' },
+	                                        { className: 'col-lg-6' },
 	                                        _react2['default'].createElement('input', { name: 'address', type: 'text', className: 'form-control',
 	                                            placeholder: "地址", required: 'required',
 	                                            autoComplete: 'off' })
-	                                    )
+	                                    ),
+	                                    _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                                )
 	                            ),
 	                            _react2['default'].createElement(
@@ -97013,7 +98382,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 947 */
+/* 949 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -97048,15 +98417,15 @@
 
 	var _componentsToolTool = __webpack_require__(467);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var OrganizationUpdateContainer = (function (_Component) {
 	    _inherits(OrganizationUpdateContainer, _Component);
@@ -97149,6 +98518,9 @@
 	                validClass: "validation-valid-label",
 	                success: function success(label) {
 	                    label.addClass("validation-valid-label").text("Success.");
+	                },
+	                errorPlacement: function errorPlacement(error, element) {
+	                    error.appendTo(element.parent().parent().find(".errorShow"));
 	                }
 	            });
 	        }
@@ -97233,7 +98605,7 @@
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-9' },
+	                                    { className: 'col-lg-6' },
 	                                    _react2['default'].createElement(
 	                                        'select',
 	                                        { id: 'citySelect', className: 'form-control', name: 'cityid',
@@ -97253,7 +98625,7 @@
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-9' },
+	                                    { className: 'col-lg-6' },
 	                                    _react2['default'].createElement(
 	                                        'select',
 	                                        { id: 'coutrySelect', className: 'form-control', name: 'countyid', defaultValue: data.data.countyid },
@@ -97274,11 +98646,12 @@
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-9' },
+	                                    { className: 'col-lg-6' },
 	                                    _react2['default'].createElement('input', { name: 'name', type: 'text', className: 'form-control',
 	                                        defaultValue: data.data.name, required: 'required',
 	                                        autoComplete: 'off' })
-	                                )
+	                                ),
+	                                _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                            ),
 	                            _react2['default'].createElement(
 	                                'div',
@@ -97291,7 +98664,7 @@
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-9' },
+	                                    { className: 'col-lg-6' },
 	                                    _react2['default'].createElement(
 	                                        'select',
 	                                        { id: 'typeSelect', className: 'form-control', name: 'type', defaultValue: data.data.type },
@@ -97321,11 +98694,12 @@
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'col-lg-9' },
+	                                    { className: 'col-lg-6' },
 	                                    _react2['default'].createElement('input', { name: 'address', type: 'text', className: 'form-control',
 	                                        defaultValue: data.data.address, required: 'required',
 	                                        autoComplete: 'off' })
-	                                )
+	                                ),
+	                                _react2['default'].createElement('div', { className: 'col-lg-3 errorShow' })
 	                            )
 	                        ),
 	                        _react2['default'].createElement(
@@ -97375,7 +98749,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 948 */
+/* 950 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -97407,11 +98781,11 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _componentsRightPagenation = __webpack_require__(744);
+	var _componentsRightPagenation = __webpack_require__(745);
 
 	var _componentsRightPagenation2 = _interopRequireDefault(_componentsRightPagenation);
 
@@ -97419,9 +98793,9 @@
 
 	var _constantsIndexJs = __webpack_require__(668);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
-	var _actionsCommon = __webpack_require__(733);
+	var _actionsCommon = __webpack_require__(734);
 
 	var SystemMonitorContainer = (function (_Component) {
 	    _inherits(SystemMonitorContainer, _Component);
@@ -97563,7 +98937,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 949 */
+/* 951 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -97595,11 +98969,11 @@
 
 	var _reactRouter = __webpack_require__(399);
 
-	var _componentsRightBreadCrumbs = __webpack_require__(743);
+	var _componentsRightBreadCrumbs = __webpack_require__(744);
 
 	var _componentsRightBreadCrumbs2 = _interopRequireDefault(_componentsRightBreadCrumbs);
 
-	var _actionsCommonActions = __webpack_require__(736);
+	var _actionsCommonActions = __webpack_require__(737);
 
 	var VersionControlListContainer = (function (_Component) {
 	    _inherits(VersionControlListContainer, _Component);

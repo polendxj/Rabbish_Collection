@@ -73,9 +73,11 @@ var qrcode_generate = node_service + "/rsapp/qrcode/generate";
 var qrcode_export = imgBaseUrl + "/rsapp/qrcode/export";
 var qrcode_export_download = imgBaseUrl + "/rsapp/qrcode/export/download";
 var qrcode_generate_download = imgBaseUrl + "/rsapp/qrcode/generate/download";
+var qrcode_count = node_service + "/rsapp/qrcode/count";
 var bind_qrcode = node_service + "/rsapp/user/qrcode";
 var operation_monitor = node_service + "/rsapp/operationData";
 var operation_organization_total = node_service + "/rsapp/organization/total";
 var versionControl_list = node_service + "/rsapp/latestVersion";
+var store_rate = node_service + "/rsapp/storeSettlement/rate";
 
 
