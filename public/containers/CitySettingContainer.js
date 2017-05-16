@@ -330,7 +330,7 @@ export default class CitySettingContainer extends Component {
                         <thead>
                         <tr style={{color: "black"}}>
                             <th className="text-center text-bold" style={{width: "50px"}}>{"#"}</th>
-                            <th className="text-center  text-bold" style={{width: "150px"}}>{"小区名称"}</th>
+                            <th className="text-center  text-bold" style={{width: "150px"}}>{"小区/单位名称"}</th>
                             <th className="text-center  text-bold" style={{width: "150px"}}>{"小区类型"}</th>
                             <th className="text-center" style={{width: "20px"}}><i
                                 className="icon-arrow-down12"></i></th>
@@ -351,7 +351,7 @@ export default class CitySettingContainer extends Component {
                             </legend>
                             <div className="form-group">
                                 <label className="col-lg-2 control-label"
-                                       style={{textAlign: 'center'}}>{"小区名称"}</label>
+                                       style={{textAlign: 'center'}}>{"小区/单位名称"}</label>
                                 <div className="col-lg-9">
                                     <input id="orgName" type="text" className="form-control" placeholder="名称"
                                            autoComplete="off"/>

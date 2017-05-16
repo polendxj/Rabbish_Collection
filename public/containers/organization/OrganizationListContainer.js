@@ -245,7 +245,7 @@ export default class OrganizationListContainer extends Component {
                             </legend>
                             <div className="form-group">
                                 <label className="col-lg-2 control-label"
-                                       style={{textAlign: 'center'}}>{"小区名称"}</label>
+                                       style={{textAlign: 'center'}}>{"小区/单位名称"}</label>
                                 <div className="col-lg-9">
                                     <input id="organizationName" type="text" value={this.currentOrganization.name} className="form-control"
                                            autoComplete="off" disabled/>
@@ -267,12 +267,18 @@ export default class OrganizationListContainer extends Component {
                                            autoComplete="off" value={qrcodeCount.data.blankCount} disabled/>
                                 </div>
                             </div>
-                            <div className="form-group">
+                            <div className="form-group" style={{marginBottom:"10px"}}>
                                 <label className="col-lg-2 control-label"
                                        style={{textAlign: 'center'}}>{"预估人数"}</label>
                                 <div className="col-lg-9">
                                     <input id="personAmount" type="text" className="form-control" placeholder="输入预估人数"
                                            autoComplete="off"/>
+                                </div>
+                            </div>
+                            <div className="form-group" style={{marginBottom:"10px"}}>
+                                <label className="col-lg-2 control-label"></label>
+                                <div className="col-lg-9">
+                                    <label style={{textAlign: 'left',color:"#ff5722",fontWeight:700}}>提示：机关单位，生成一个二维码即可</label>
                                 </div>
                             </div>
                             <div className="form-group">
@@ -334,7 +340,7 @@ export default class OrganizationListContainer extends Component {
                             </div>
                             <div className="form-group">
                                 <label className="col-lg-2 control-label"
-                                       style={{textAlign: 'center'}}>{"小区名称"}</label>
+                                       style={{textAlign: 'center'}}>{"小区/单位名称"}</label>
                                 <div className="col-lg-9">
                                     <input id="organizationName" type="text" value={this.currentOrganization.name} className="form-control"
                                            autoComplete="off" disabled/>

@@ -61416,7 +61416,7 @@
 	                                    _react2['default'].createElement(
 	                                        'th',
 	                                        { className: 'text-center  text-bold', style: { width: "150px" } },
-	                                        "小区名称"
+	                                        "小区/单位名称"
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'th',
@@ -61460,7 +61460,7 @@
 	                                        'label',
 	                                        { className: 'col-lg-2 control-label',
 	                                            style: { textAlign: 'center' } },
-	                                        "小区名称"
+	                                        "小区/单位名称"
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
@@ -97196,7 +97196,7 @@
 	                                        'label',
 	                                        { className: 'col-lg-2 control-label',
 	                                            style: { textAlign: 'center' } },
-	                                        "小区名称"
+	                                        "小区/单位名称"
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
@@ -97239,7 +97239,7 @@
 	                                ),
 	                                _react2['default'].createElement(
 	                                    'div',
-	                                    { className: 'form-group' },
+	                                    { className: 'form-group', style: { marginBottom: "10px" } },
 	                                    _react2['default'].createElement(
 	                                        'label',
 	                                        { className: 'col-lg-2 control-label',
@@ -97251,6 +97251,20 @@
 	                                        { className: 'col-lg-9' },
 	                                        _react2['default'].createElement('input', { id: 'personAmount', type: 'text', className: 'form-control', placeholder: '输入预估人数',
 	                                            autoComplete: 'off' })
+	                                    )
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'div',
+	                                    { className: 'form-group', style: { marginBottom: "10px" } },
+	                                    _react2['default'].createElement('label', { className: 'col-lg-2 control-label' }),
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'col-lg-9' },
+	                                        _react2['default'].createElement(
+	                                            'label',
+	                                            { style: { textAlign: 'left', color: "#ff5722", fontWeight: 700 } },
+	                                            '提示：机关单位，生成一个二维码即可'
+	                                        )
 	                                    )
 	                                ),
 	                                _react2['default'].createElement(
@@ -97387,7 +97401,7 @@
 	                                        'label',
 	                                        { className: 'col-lg-2 control-label',
 	                                            style: { textAlign: 'center' } },
-	                                        "小区名称"
+	                                        "小区/单位名称"
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'div',
