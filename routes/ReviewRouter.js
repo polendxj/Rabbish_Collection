@@ -11,10 +11,12 @@ var router = express()
 router.post('/rsapp/review', function (req, resp) {
     var data = querystring.stringify(JSON.parse(req.body.data));
     RequestApi.Request(baseURL + '/rsapp/review' + "?" + data, 'GET', "", req, resp);
-    router.post('/rsapp/review/delete', function (req, resp) {
-        var data = JSON.stringify(JSON.parse(req.body.data));
-        RequestApi.Request(baseURL + '/rsapp/review/'+data, 'DELETE',"", req, resp);
-    });
 });
-
+router.post('/rsapp/review/overall', function (req, resp) {
+    RequestApi.Request(baseURL + '/rsapp/review/overall', 'GET', "", req, resp);
+});
+router.post('/rsapp/review/delete', function (req, resp) {
+    var data = JSON.stringify(JSON.parse(req.body.data));
+    RequestApi.Request(baseURL + '/rsapp/review/'+data, 'DELETE',"", req, resp);
+});
 module.exports = router;

@@ -4,7 +4,7 @@
 import {combineReducers} from 'redux'
 import {audioCodes, videoCodes, DecodeBase64} from '../components/Tool/Tool'
 import {
-    REVIEW_LIST_START, REVIEW_LIST_END
+    REVIEW_LIST_START, REVIEW_LIST_END,REVIEW_TOTAL_START,REVIEW_TOTAL_END
 } from '../constants/index'
 
 export function getReviewList(state = {data: "", fetching: false}, action) {
@@ -13,6 +13,18 @@ export function getReviewList(state = {data: "", fetching: false}, action) {
             state = {...state, fetching: true};
             return state;
         case REVIEW_LIST_END:
+            state = {data: action.json, fetching: false};
+            return state;
+        default:
+            return state;
+    }
+}
+export function getReviewTotal(state = {data: "", fetching: false}, action) {
+    switch (action.type) {
+        case REVIEW_TOTAL_START:
+            state = {...state, fetching: true};
+            return state;
+        case REVIEW_TOTAL_END:
             state = {data: action.json, fetching: false};
             return state;
         default:

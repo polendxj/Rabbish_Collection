@@ -8,7 +8,7 @@ import {browserHistory} from 'react-router';
 import BreadCrumbs from '../../components/right/breadCrumbs';
 import Pagenation from '../../components/right/Pagenation';
 import {Loading, NoData, ConfirmModal, ErrorModal, roleApplicationUs, timeStamp2Time} from '../../components/Tool/Tool';
-import {REVIEW_LIST_START, REVIEW_LIST_END} from '../../constants/index.js'
+import {REVIEW_LIST_START, REVIEW_LIST_END,REVIEW_TOTAL_START,REVIEW_TOTAL_END} from '../../constants/index.js'
 import {getListByMutilpCondition, saveObject, deleteObject} from '../../actions/CommonActions';
 
 export default class ReviewListContainer extends Component {
@@ -39,6 +39,7 @@ export default class ReviewListContainer extends Component {
         var self = this;
         var params = {page: 0, size: page_size};
         this.props.dispatch(getListByMutilpCondition(params, REVIEW_LIST_START, REVIEW_LIST_END, review_list));
+        this.props.dispatch(getListByMutilpCondition({}, REVIEW_TOTAL_START, REVIEW_TOTAL_END, review_total));
         //this.props.dispatch(getAdminList(0, 'ALL', ''));
         $("#search_way").parent().parent().on('click', 'li', function () {
             $("#search_way").text($(this).find('a').text());
@@ -86,10 +87,55 @@ export default class ReviewListContainer extends Component {
         var params = {page: this.page, size: page_size};
         this.props.dispatch(getListByMutilpCondition(params, REVIEW_LIST_START, REVIEW_LIST_END, review_list));
     }
-
+    generateStars(score) {
+        var fullStars = Math.floor(score);
+        var halfStars = score % 1 === 0 ? 0 : 1;
+        var emptyStars = 5 - fullStars - halfStars;
+        var full = [];
+        var half = [];
+        var empty = [];
+        if (fullStars >= 1) {
+            for (var i = 0; i < fullStars; i++) {
+                full.push(
+                    <icon key={"full-"+i} className="icon icon-star-full2" style={{color:"#FDAA01"}}></icon>
+                )
+            }
+        }
+        if (halfStars == 1) {
+            half.push(
+                <icon key={"half-1"} className="icon icon-star-half" style={{color:"#FDAA01"}}></icon>
+            )
+        }
+        if (emptyStars >= 1) {
+            for (var j = 0; j < emptyStars; j++) {
+                empty.push(
+                    <icon key={"empty-"+j} className="icon icon-star-empty3" style={{color:"#CFCFCF"}}></icon>
+                )
+            }
+        }
+        return (
+            <span>
+                {full}
+                {half}
+                {empty}
+            </span>
+        )
+    }
     render() {
-        const {fetching, data} =this.props;
-        console.log("review", data);
+        const {fetching, data,overallData} =this.props;
+        console.log("overallData", overallData);
+        var overallScore = "";
+        var score1Stars = "";
+        var score2Stars = "";
+        var score3Stars = "";
+        if (overallData) {
+            if (overallData.status) {
+                overallScore = this.generateStars(overallData.data.overallScore);
+                score1Stars = this.generateStars(overallData.data.avgScore1);
+                score2Stars = this.generateStars(overallData.data.avgScore2);
+                score3Stars = this.generateStars(overallData.data.avgScore3);
+            }
+        }
         return (
             <div>
                 <BreadCrumbs
@@ -104,6 +150,12 @@ export default class ReviewListContainer extends Component {
                             <Pagenation counts={data && data.status ? data.data.totalElements : 0} page={this.page}
                                         _changePage={this._changePage} _prePage={this._prePage}
                                         _nextPage={this._nextPage}/>
+                        </div>
+                        <div className="row" style={{textAlign:"center"}}>
+                            <div className="col-md-3"><label style={{width:"120px",textAlign:"right",fontSize:"15px",fontWeight:700}}>整体总评分：</label>{overallScore}</div>
+                            <div className="col-md-3"><label style={{width:"120px",textAlign:"right",fontSize:"15px",fontWeight:700}}>回收频率总评分：</label>{score1Stars}</div>
+                            <div className="col-md-3"><label style={{width:"120px",textAlign:"right",fontSize:"15px",fontWeight:700}}>礼品兑换总评分：</label>{score2Stars}</div>
+                            <div className="col-md-3"><label style={{width:"120px",textAlign:"right",fontSize:"15px",fontWeight:700}}>袋子发放总评分：</label>{score3Stars}</div>
                         </div>
                         <ReviewListComponent data={data} fetching={fetching}
                                              _reply={this._reply}
@@ -120,18 +172,6 @@ export default class ReviewListContainer extends Component {
 class ReviewListComponent extends Component {
     constructor(props) {
         super(props)
-    }
-
-    _lockUser() {
-
-    }
-
-    _unlockUser() {
-
-    }
-
-    _resetPassword() {
-
     }
 
     _detail(path) {
@@ -320,10 +360,11 @@ class ReviewListComponent extends Component {
 }
 
 function mapStateToProps(state) {
-    const {getReviewList}=state;
+    const {getReviewList,getReviewTotal}=state;
     return {
         fetching: getReviewList.fetching,
-        data: getReviewList.data
+        data: getReviewList.data,
+        overallData:getReviewTotal.data
     }
 }
 

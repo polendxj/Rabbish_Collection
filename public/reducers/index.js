@@ -53,7 +53,7 @@ import {getCorrectionList,getCorrectionItems} from '../reducers/CorrectionReduce
 import {getComplaintList} from '../reducers/ComplaintReducer'
 import {getStoreSettlementList} from '../reducers/StoreSettlementReducer'
 import {getStoreList,getStoreRate} from '../reducers/StoreReducer'
-import {getReviewList} from '../reducers/ReviewReducer'
+import {getReviewList,getReviewTotal} from '../reducers/ReviewReducer'
 import {getGeneralUserList,getGeneralUserDetail,getSubtypeList} from '../reducers/GeneralUserReducer'
 import {getOrganizationList,getOrganizationDetail,getProgressData,getQrcodeCount} from '../reducers/OrganizationReducer'
 import {getAdminUserList,getAdminUserDetail} from '../reducers/AdminUserReducer'
@@ -163,6 +163,7 @@ const rootReducer = combineReducers({
     getSubtypeList,
     getStatisticByTotalList,
     getQrcodeCount,
+    getReviewTotal,
     form: reduxFormReducer,
     routing: routerReducer
 })
